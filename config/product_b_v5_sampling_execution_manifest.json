@@ -5,7 +5,8 @@
   "matching_checklist": "GBIF_Backbone_Taxonomy",
   "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
   "taxonomy_overlay": "registry/obligate_pair_registry_taxonomy_v0_1.csv",
-  "scope_registry": "registry/obligate_pair_registry_scope_v0_1.csv",
+  "scope_registry": "registry/obligate_pair_registry_scope_v0_2.csv",
+  "scope_resolution_contract": "config/product_b_v5_scope_resolution_fig001_v0_2.json",
   "sampling_contract": "config/product_b_v5_sampling_preflight_contract.json",
   "occurrence_preprocessing_contract": "config/product_b_v5_occurrence_preprocessing_contract.json",
   "scope_gate_frozen": true,
@@ -13,10 +14,12 @@
   "taxonomy_eligible_pair_ids": [
     "OPM_FIG_001"
   ],
-  "scope_eligible_pair_ids": [],
+  "scope_eligible_pair_ids": [
+    "OPM_FIG_001"
+  ],
   "execution_authorized": false,
   "occurrence_reads_allowed": false,
-  "authorization_note": "Numeric sampling thresholds remain frozen. The added pre-execution scope and preprocessing gates were specified before any occurrence count/map/availability outcome was opened. OPM_FIG_001 passes taxonomy but currently has unresolved machine-operational geographic scope, so the occurrence execution set is empty.",
+  "authorization_note": "Numeric sampling thresholds remain frozen. OPM_FIG_001 now has a response-blind operational scope derived only from published 2016 China-Thailand population localities using a deterministic no-buffer convex hull. Occurrence execution remains deliberately unauthorized; no occurrence count, map, density or availability result has been opened.",
   "forbidden_until_authorized": [
     "GBIF occurrence search",
     "GBIF occurrence download",
@@ -25,6 +28,6 @@
     "effective-cell counts",
     "occurrence-derived maps",
     "occurrence-derived range summaries",
-    "using occurrence availability to define geographic scope"
+    "using occurrence availability to redefine or widen geographic scope"
   ]
 }

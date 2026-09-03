@@ -1,0 +1,7 @@
+candidate_id,x_taxon_name,y_taxon_name,decision,literature_doi,reason
+EXC_GLO_001,Glochidion obovatum,Epicephala obovatella,excluded_biological_ambiguity,10.3897/zookeys.568.6721,"E. obovatella is documented from both G. obovatum and G. rubrum; a single-host Y_requires_X declaration would overstate host dependence."
+EXC_GLO_002,Glochidion rubrum,Epicephala obovatella,excluded_biological_ambiguity,10.3897/zookeys.568.6721,"E. obovatella is documented from both G. obovatum and G. rubrum; a single-host Y_requires_X declaration would overstate host dependence."
+EXC_GLO_003,Glochidion obovatum,Epicephala corruptrix,excluded_biological_ambiguity,10.3897/zookeys.568.6721,"The moth is documented from more than one Glochidion host and is not treated as equivalent to the four core obligate-pollinating species in the revision."
+EXC_FIG_001,Ficus hispida,Ceratosolen solmsi,excluded_biological_ambiguity,10.1002/ece3.10518,"F. hispida supports geographically replacing Ceratosolen pollinators; a global single-pair invariant is false."
+EXC_YUC_001,Yucca baccata,Tegeticula baccatella,excluded_biological_ambiguity,10.1080/10635150600697325,"Published host-use records are not cleanly restricted to one accepted Yucca taxon across sources; do not force a single-host pair."
+EXC_YUC_002,Yucca rostrata,Tegeticula rostratella,excluded_biological_ambiguity,10.1080/10635150600697325,"T. rostratella is also reported from Y. rigida; the current pair schema cannot encode a required host set."

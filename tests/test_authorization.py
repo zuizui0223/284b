@@ -18,11 +18,13 @@ class AuthorizationGuardTests(unittest.TestCase):
         self.assertTrue(self.manifest["contract_frozen"])
         self.assertTrue(self.manifest["scope_gate_frozen"])
         self.assertTrue(self.manifest["preprocessing_contract_frozen"])
+        self.assertTrue(self.manifest["transport_contract_frozen"])
         self.assertFalse(self.manifest["execution_authorized"])
         self.assertFalse(self.manifest["occurrence_reads_allowed"])
         decision = evaluate_execution_manifest(self.manifest)
         self.assertFalse(decision.authorized)
         self.assertNotIn("no_scope_eligible_pairs", decision.reasons)
+        self.assertNotIn("transport_contract_not_frozen", decision.reasons)
         self.assertIn("execution_not_authorized", decision.reasons)
         self.assertIn("occurrence_reads_not_allowed", decision.reasons)
 
@@ -79,6 +81,15 @@ class AuthorizationGuardTests(unittest.TestCase):
         decision = evaluate_execution_manifest(invalid)
         self.assertFalse(decision.authorized)
         self.assertIn("no_scope_eligible_pairs", decision.reasons)
+
+    def test_unfreezing_transport_contract_fails_closed(self):
+        invalid = dict(self.manifest)
+        invalid["transport_contract_frozen"] = False
+        invalid["execution_authorized"] = True
+        invalid["occurrence_reads_allowed"] = True
+        decision = evaluate_execution_manifest(invalid)
+        self.assertFalse(decision.authorized)
+        self.assertIn("transport_contract_not_frozen", decision.reasons)
 
 
 if __name__ == "__main__":

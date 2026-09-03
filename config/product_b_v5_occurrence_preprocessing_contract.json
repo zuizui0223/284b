@@ -1,6 +1,6 @@
 {
   "status": "predeclared_not_executed",
-  "contract_version": "product_b_v5_occurrence_preprocessing_v0.2",
+  "contract_version": "product_b_v5_occurrence_preprocessing_v0.3",
   "parent_sampling_contract": "config/product_b_v5_sampling_preflight_contract.json",
   "freeze_semantics": "Operational supplement added before any occurrence count, map, sampling-availability outcome, environmental value, invariant metric, or knockout result was opened. Numeric sampling thresholds are unchanged.",
   "partner_labels": ["x", "y"],
@@ -35,7 +35,10 @@
     "crs": "EPSG:6933",
     "edge_m": 10000.0,
     "index_rule": "floor(easting_m / edge_m), floor(northing_m / edge_m)",
-    "projection_boundary": "the pure preprocessing module accepts already-projected EPSG:6933 coordinates and performs no network or CRS lookup"
+    "projection_implementation": "product_b_v5.projection.wgs84_to_epsg6933",
+    "projection_definition": "+proj=cea +lat_ts=30 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m",
+    "projection_area_of_use": "86S_to_86N_fail_closed_outside",
+    "projection_boundary": "raw WGS84 coordinates are projected by the repository's frozen pure EPSG:6933 implementation; no network lookup or runtime CRS-library selection is allowed"
   },
   "audit_requirements": [
     "raw_records_per_partner",
@@ -55,6 +58,7 @@
     "disable_connected_component_closure_to_rescue_a_pair",
     "drop_a_collision_witness_to_rescue_a_pair",
     "add_within_partner_thinning_only_after_seeing_counts",
+    "change_projection_implementation_after_counts_are_opened",
     "change_cell_origin_or_edge_to_rescue_a_pair"
   ],
   "occurrence_reads_allowed": false,

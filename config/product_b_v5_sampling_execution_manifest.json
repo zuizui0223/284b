@@ -8,9 +8,12 @@
   "scope_registry": "registry/obligate_pair_registry_scope_v0_2.csv",
   "scope_resolution_contract": "config/product_b_v5_scope_resolution_fig001_v0_2.json",
   "sampling_contract": "config/product_b_v5_sampling_preflight_contract.json",
+  "gbif_search_contract": "config/product_b_v5_gbif_search_contract.json",
   "occurrence_preprocessing_contract": "config/product_b_v5_occurrence_preprocessing_contract.json",
+  "projection_implementation": "product_b_v5.projection.wgs84_to_epsg6933",
   "scope_gate_frozen": true,
   "preprocessing_contract_frozen": true,
+  "transport_contract_frozen": true,
   "taxonomy_eligible_pair_ids": [
     "OPM_FIG_001"
   ],
@@ -19,7 +22,7 @@
   ],
   "execution_authorized": false,
   "occurrence_reads_allowed": false,
-  "authorization_note": "Numeric sampling thresholds remain frozen. OPM_FIG_001 now has a response-blind operational scope derived only from published 2016 China-Thailand population localities using a deterministic no-buffer convex hull. Occurrence execution remains deliberately unauthorized; no occurrence count, map, density or availability result has been opened.",
+  "authorization_note": "Numeric sampling thresholds remain frozen. OPM_FIG_001 has a response-blind operational scope from published China-Thailand localities. GBIF search serialization, polygon orientation, paging ceilings and WGS84-to-EPSG:6933 projection are now frozen before occurrence execution. Occurrence execution remains deliberately unauthorized; no occurrence count, map, density or availability result has been opened.",
   "forbidden_until_authorized": [
     "GBIF occurrence search",
     "GBIF occurrence download",
@@ -28,6 +31,8 @@
     "effective-cell counts",
     "occurrence-derived maps",
     "occurrence-derived range summaries",
-    "using occurrence availability to redefine or widen geographic scope"
+    "using occurrence availability to redefine or widen geographic scope",
+    "adding unplanned occurrence filters after observing availability",
+    "switching from search to download adaptively after observing a >100000 count"
   ]
 }

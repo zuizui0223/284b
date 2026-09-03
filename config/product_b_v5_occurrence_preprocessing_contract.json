@@ -1,0 +1,62 @@
+{
+  "status": "predeclared_not_executed",
+  "contract_version": "product_b_v5_occurrence_preprocessing_v0.2",
+  "parent_sampling_contract": "config/product_b_v5_sampling_preflight_contract.json",
+  "freeze_semantics": "Operational supplement added before any occurrence count, map, sampling-availability outcome, environmental value, invariant metric, or knockout result was opened. Numeric sampling thresholds are unchanged.",
+  "partner_labels": ["x", "y"],
+  "coordinate_quality": {
+    "require_finite_decimal_latitude_longitude": true,
+    "require_valid_wgs84_ranges": true,
+    "maximum_known_coordinate_uncertainty_m": 10000.0,
+    "missing_coordinate_uncertainty": "retain_and_report",
+    "known_uncertainty_above_ceiling": "exclude_before_collision_graph"
+  },
+  "identity_normalization": {
+    "identifier_fields": "trim_outer_whitespace_and_preserve_case",
+    "recorder_field": "unicode_nfkc_then_collapse_whitespace_then_casefold",
+    "event_day": "use_valid_YYYY-MM-DD_prefix_only; otherwise identity date is unavailable",
+    "coordinate_key": "WGS84 latitude and longitude formatted independently to exactly 5 decimal places",
+    "coordinate_key_note": "The key is only an identity witness when combined with dataset+day or recorder+day; it is not a spatial thinning rule."
+  },
+  "same_record_collision": {
+    "identity_witnesses": [
+      "occurrence_id_lineage",
+      "event_id",
+      "catalog_or_specimen_number",
+      "dataset_key_plus_event_day_plus_coordinate_key",
+      "recorder_plus_event_day_plus_coordinate_key"
+    ],
+    "graph_rule": "build an undirected graph connecting records that share any available identity witness; take connected-component closure across witness types",
+    "cross_partner_action": "exclude every record in every connected component containing both x and y",
+    "single_partner_component_action": "retain; this rule is specifically a cross-partner contamination guard"
+  },
+  "independent_record_semantics": "retained record means independent of the opposite partner under the declared collision graph; it does not claim IID sampling and does not add post hoc within-partner thinning",
+  "sampling_cell": {
+    "crs": "EPSG:6933",
+    "edge_m": 10000.0,
+    "index_rule": "floor(easting_m / edge_m), floor(northing_m / edge_m)",
+    "projection_boundary": "the pure preprocessing module accepts already-projected EPSG:6933 coordinates and performs no network or CRS lookup"
+  },
+  "audit_requirements": [
+    "raw_records_per_partner",
+    "quality_excluded_records_per_partner",
+    "quality_exclusion_reasons",
+    "missing_uncertainty_records_per_partner",
+    "cross_partner_collision_excluded_records_per_partner",
+    "cross_partner_collision_component_count",
+    "collision_witness_types",
+    "retained_records_per_partner",
+    "unique_10km_cells_per_partner",
+    "inverse_simpson_effective_cells_per_partner"
+  ],
+  "forbidden_adaptation": [
+    "change_coordinate_precision_after_counts_are_opened",
+    "change_uncertainty_ceiling_after_counts_are_opened",
+    "disable_connected_component_closure_to_rescue_a_pair",
+    "drop_a_collision_witness_to_rescue_a_pair",
+    "add_within_partner_thinning_only_after_seeing_counts",
+    "change_cell_origin_or_edge_to_rescue_a_pair"
+  ],
+  "occurrence_reads_allowed": false,
+  "execution_authorized": false
+}

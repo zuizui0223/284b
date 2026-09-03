@@ -1,4 +1,6 @@
+import csv
 import unittest
+from pathlib import Path
 
 from product_b_v5.registry import (
     LiteraturePairDeclaration,
@@ -94,6 +96,18 @@ class LiteratureRegistryValidationTests(unittest.TestCase):
         result = validate_literature_registry(())
         self.assertFalse(result.passed)
         self.assertIn("registry_must_not_be_empty", result.errors)
+
+    def test_committed_literature_registry_passes_validator(self):
+        path = Path("registry/obligate_pair_registry_literature_v0_1.csv")
+        with path.open(newline="", encoding="utf-8") as handle:
+            rows = tuple(
+                LiteraturePairDeclaration(**row)
+                for row in csv.DictReader(handle)
+            )
+
+        self.assertEqual(len(rows), 7)
+        result = validate_literature_registry(rows)
+        self.assertTrue(result.passed, result.errors)
 
 
 if __name__ == "__main__":

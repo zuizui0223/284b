@@ -1,8 +1,12 @@
+import json
 import unittest
+from pathlib import Path
 
 from product_b_v5.scope import (
     GeographicScopeDeclaration,
     ScopeState,
+    convex_hull_polygon_wkt,
+    convex_hull_vertices,
     require_scope_resolved,
     validate_scope_declaration,
     validate_scope_registry,
@@ -72,7 +76,7 @@ class GeographicScopeGateTests(unittest.TestCase):
         self.assertTrue(result.passed)
         self.assertEqual(result.execution_eligible_pair_ids, ("OPM_TEST_001",))
 
-    def test_require_scope_resolved_rejects_current_fig_scope(self):
+    def test_require_scope_resolved_rejects_unresolved_declaration(self):
         with self.assertRaisesRegex(ValueError, "operational geographic scope is unresolved"):
             require_scope_resolved((unresolved_row(),), pair_id="OPM_FIG_001")
 
@@ -85,6 +89,38 @@ class GeographicScopeGateTests(unittest.TestCase):
         )
         self.assertFalse(result.passed)
         self.assertIn("row_1:duplicate_pair_id", result.errors)
+
+    def test_fig001_published_points_recompute_frozen_no_buffer_polygon(self):
+        path = Path("config/product_b_v5_scope_resolution_fig001_v0_2.json")
+        contract = json.loads(path.read_text(encoding="utf-8"))
+        points = tuple(
+            (row["longitude"], row["latitude"])
+            for row in contract["source_points_lon_lat"]
+        )
+        self.assertEqual(contract["buffer_degrees"], 0)
+        self.assertFalse(contract["occurrence_information_used_in_derivation"])
+        self.assertEqual(
+            convex_hull_polygon_wkt(points),
+            contract["filter_value"],
+        )
+        self.assertEqual(
+            convex_hull_vertices(points),
+            (
+                (98.0, 24.67),
+                (98.92, 18.75),
+                (100.42, 13.83),
+                (101.27, 21.9),
+                (98.88, 24.9),
+            ),
+        )
+
+    def test_polygon_wkt_scope_requires_polygon_syntax(self):
+        row = resolved_row(
+            filter_type="polygon_wkt",
+            filter_value="not-a-polygon",
+        )
+        errors = validate_scope_declaration(row)
+        self.assertIn("polygon_wkt_filter_is_not_polygon_wkt", errors)
 
 
 if __name__ == "__main__":

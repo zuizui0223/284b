@@ -10,10 +10,14 @@
   "sampling_contract": "config/product_b_v5_sampling_preflight_contract.json",
   "gbif_search_contract": "config/product_b_v5_gbif_search_contract.json",
   "occurrence_preprocessing_contract": "config/product_b_v5_occurrence_preprocessing_contract.json",
+  "negative_control_contract": "config/product_b_v5_negative_control_contract.json",
+  "matched_control_registry_schema": "registry/non_obligate_control_candidate_schema.csv",
+  "shuffled_control_registry_schema": "registry/shuffled_partner_candidate_schema.csv",
   "projection_implementation": "product_b_v5.projection.wgs84_to_epsg6933",
   "scope_gate_frozen": true,
   "preprocessing_contract_frozen": true,
   "transport_contract_frozen": true,
+  "negative_control_contract_frozen": true,
   "taxonomy_eligible_pair_ids": [
     "OPM_FIG_001"
   ],
@@ -22,7 +26,7 @@
   ],
   "execution_authorized": false,
   "occurrence_reads_allowed": false,
-  "authorization_note": "Numeric sampling thresholds remain frozen. OPM_FIG_001 has a response-blind operational scope from published China-Thailand localities. GBIF search serialization, polygon orientation, paging ceilings and WGS84-to-EPSG:6933 projection are now frozen before occurrence execution. Occurrence execution remains deliberately unauthorized; no occurrence count, map, density or availability result has been opened.",
+  "authorization_note": "Numeric sampling thresholds, scope, transport, projection/preprocessing and both mandatory negative-control selection rules are frozen before occurrence execution. OPM_FIG_001 is taxonomy+scope eligible, but occurrence execution remains deliberately unauthorized; no occurrence count, map, density, availability result, control match, invariant result or knockout outcome has been opened.",
   "forbidden_until_authorized": [
     "GBIF occurrence search",
     "GBIF occurrence download",
@@ -33,6 +37,7 @@
     "occurrence-derived range summaries",
     "using occurrence availability to redefine or widen geographic scope",
     "adding unplanned occurrence filters after observing availability",
-    "switching from search to download adaptively after observing a >100000 count"
+    "switching from search to download adaptively after observing a >100000 count",
+    "relaxing negative-control family strata or sampling calipers after observing control availability"
   ]
 }

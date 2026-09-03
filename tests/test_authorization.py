@@ -22,16 +22,19 @@ class AuthorizationGuardTests(unittest.TestCase):
         self.assertFalse(self.manifest["occurrence_reads_allowed"])
         decision = evaluate_execution_manifest(self.manifest)
         self.assertFalse(decision.authorized)
-        self.assertIn("no_scope_eligible_pairs", decision.reasons)
+        self.assertNotIn("no_scope_eligible_pairs", decision.reasons)
         self.assertIn("execution_not_authorized", decision.reasons)
         self.assertIn("occurrence_reads_not_allowed", decision.reasons)
 
-    def test_taxonomy_candidate_is_not_yet_occurrence_eligible(self):
+    def test_fig_pair_passes_taxonomy_and_scope_gates_but_not_execution_gate(self):
         self.assertEqual(
             self.manifest["taxonomy_eligible_pair_ids"],
             ["OPM_FIG_001"],
         )
-        self.assertEqual(self.manifest["scope_eligible_pair_ids"], [])
+        self.assertEqual(
+            self.manifest["scope_eligible_pair_ids"],
+            ["OPM_FIG_001"],
+        )
 
     def test_current_manifest_raises_before_occurrence_access(self):
         with self.assertRaises(ExecutionNotAuthorized):
@@ -39,17 +42,8 @@ class AuthorizationGuardTests(unittest.TestCase):
                 self.manifest, requested_pair_ids=["OPM_FIG_001"]
             )
 
-    def test_flipping_execution_flags_cannot_bypass_unresolved_scope(self):
-        unauthorized = dict(self.manifest)
-        unauthorized["execution_authorized"] = True
-        unauthorized["occurrence_reads_allowed"] = True
-        decision = evaluate_execution_manifest(unauthorized)
-        self.assertFalse(decision.authorized)
-        self.assertIn("no_scope_eligible_pairs", decision.reasons)
-
-    def test_scope_resolved_authorized_copy_accepts_frozen_fig_pair(self):
+    def test_fully_authorized_copy_accepts_only_frozen_fig_pair(self):
         authorized = dict(self.manifest)
-        authorized["scope_eligible_pair_ids"] = ["OPM_FIG_001"]
         authorized["execution_authorized"] = True
         authorized["occurrence_reads_allowed"] = True
         decision = require_execution_authorization(
@@ -58,9 +52,8 @@ class AuthorizationGuardTests(unittest.TestCase):
         self.assertTrue(decision.authorized)
         self.assertEqual(decision.eligible_pair_ids, ("OPM_FIG_001",))
 
-    def test_even_scope_resolved_manifest_rejects_pair_outside_frozen_set(self):
+    def test_authorized_manifest_rejects_pair_outside_frozen_set(self):
         authorized = dict(self.manifest)
-        authorized["scope_eligible_pair_ids"] = ["OPM_FIG_001"]
         authorized["execution_authorized"] = True
         authorized["occurrence_reads_allowed"] = True
 
@@ -77,6 +70,15 @@ class AuthorizationGuardTests(unittest.TestCase):
         decision = evaluate_execution_manifest(invalid)
         self.assertFalse(decision.authorized)
         self.assertIn("scope_pair_not_taxonomy_eligible", decision.reasons)
+
+    def test_removing_scope_pair_fails_closed_even_if_flags_are_true(self):
+        invalid = dict(self.manifest)
+        invalid["scope_eligible_pair_ids"] = []
+        invalid["execution_authorized"] = True
+        invalid["occurrence_reads_allowed"] = True
+        decision = evaluate_execution_manifest(invalid)
+        self.assertFalse(decision.authorized)
+        self.assertIn("no_scope_eligible_pairs", decision.reasons)
 
 
 if __name__ == "__main__":

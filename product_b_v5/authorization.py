@@ -1,8 +1,8 @@
 """Fail-closed authorization guard for Product-B v5 occurrence preflight.
 
 Network/occurrence code must call this guard before constructing any request.
-The committed manifest is intentionally unauthorized and currently has no
-geographic-scope-eligible empirical pair.
+The committed manifest is intentionally unauthorized even though the current
+geographic scope and transport contracts are frozen.
 """
 
 from __future__ import annotations
@@ -61,6 +61,8 @@ def evaluate_execution_manifest(manifest: Mapping[str, object]) -> Authorization
         reasons.append("scope_gate_not_frozen")
     if manifest.get("preprocessing_contract_frozen") is not True:
         reasons.append("preprocessing_contract_not_frozen")
+    if manifest.get("transport_contract_frozen") is not True:
+        reasons.append("transport_contract_not_frozen")
     if manifest.get("checklist_key") != EXPECTED_CHECKLIST_KEY:
         reasons.append("checklist_key_mismatch")
 

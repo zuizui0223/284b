@@ -4,7 +4,9 @@
 
 **Design-only / response-blind preflight.** This document does not freeze or authorize an empirical run.
 
-This line does **not** reopen, rescue, retune, rerun, or reinterpret Product-A v2.8.4. It uses only the pre-existing measurement apparatus that can be defined without depending on a Product-A winner: a common audit space, absolute adequacy semantics, observation-corrected recovery semantics, and set-valued ecological candidate handling.
+This line does **not** reopen, rescue, retune, rerun, or reinterpret Product-A v2.8.4. Product-B v5 is independent of every Product-A outcome, winner, promotion, and ranking.
+
+The only Product-A material reused is outcome-independent measurement apparatus: the model-pool-only audit basis, the four `RECOVERY_DIRECTIONS` axes, the absolute prediction-adequacy gate, `observation_corrected_recovery`, and the set-valued `EcologicalCandidateSets` handling needed to enumerate complete adequate ecologically non-dominated procedures. The audit basis is fitted from model-pool background rows only and must not have seen sealed data. Reuse of this apparatus is therefore not an outcome dependency.
 
 No Product-A scientific experiment is introduced here.
 
@@ -48,7 +50,7 @@ Passing constrains the recovered representation; it does not establish biologica
 
 ## 4. Primary quantities
 
-All quantities are defined on a common set of audit cells/points. Support vectors are non-negative recovered masses normalized internally.
+Compute the following per pair, per admissible procedure, per `M`, and per outer fold in the frozen model-pool audit space (normally PC1-PC2 as in `niche_recovery.py`). All quantities are defined on the same common set of audit cells/points. Support vectors are non-negative recovered masses normalized internally.
 
 1. `directed_containment(Y|X, q)`
    - Construct the predeclared `q` highest-density support region of `X` by descending recovered mass until cumulative mass reaches `q`.
@@ -103,7 +105,8 @@ A broad support for the required partner can make nesting trivial. Therefore:
 
 - `adequacy_both` is mandatory;
 - absolute `breadth_X` is always reported;
-- a predeclared maximum admissible required-partner breadth may convert the pair to `unresolved` rather than reward trivial breadth.
+- a maximum admissible required-partner breadth is mandatory and must be predeclared before outcomes;
+- if `breadth_X` exceeds that guardrail, the pair is `unresolved` rather than rewarded for trivial containment.
 
 ### 5.4 Grain mismatch
 

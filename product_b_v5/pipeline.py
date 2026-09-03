@@ -130,6 +130,11 @@ def validate_returned_rows_against_query(
         raise ValueError("v0.2 post-fetch validation only supports polygon_wkt")
 
     for row in rows:
+        row_id = str(row.get("key", "<missing-key>"))
+        status = row.get("occurrenceStatus")
+        if status is not None and str(status) != "PRESENT":
+            raise ValueError("returned occurrence violates PRESENT filter: " + row_id)
+
         raw_lat = row.get("decimalLatitude")
         raw_lon = row.get("decimalLongitude")
         try:
@@ -142,12 +147,7 @@ def validate_returned_rows_against_query(
         if not (-90.0 <= lat <= 90.0 and -180.0 <= lon <= 180.0):
             continue
         if not point_in_polygon_wkt(lon, lat, query.geographic_filter_value):
-            row_id = str(row.get("key", "<missing-key>"))
             raise ValueError("returned occurrence lies outside frozen query geometry: " + row_id)
-        status = row.get("occurrenceStatus")
-        if status is not None and str(status) != "PRESENT":
-            row_id = str(row.get("key", "<missing-key>"))
-            raise ValueError("returned occurrence violates PRESENT filter: " + row_id)
 
 
 def execute_frozen_pair_sampling_preflight(
@@ -160,8 +160,12 @@ def execute_frozen_pair_sampling_preflight(
     """Execute the complete sampling preflight only after explicit authorization.
 
     No custom thresholds are accepted here: the primary and stricter sensitivity
-    contracts are both computed from the exact same retained records.
+    contracts are both computed from the exact same retained records. The current
+    contract admits exactly OPM_FIG_001; a new pair requires a new frozen version.
     """
+
+    if spec != OPM_FIG_001_SPEC:
+        raise ValueError("execution spec differs from the currently frozen OPM_FIG_001 spec")
 
     authorization = require_execution_authorization(
         manifest,
@@ -188,13 +192,13 @@ def execute_frozen_pair_sampling_preflight(
         query=x_query,
         transport=transport,
     )
+    validate_returned_rows_against_query(x_query, x_rows)
+
     _, y_rows = execute_guarded_occurrence_read(
         manifest=manifest,
         query=y_query,
         transport=transport,
     )
-
-    validate_returned_rows_against_query(x_query, x_rows)
     validate_returned_rows_against_query(y_query, y_rows)
 
     adapted = adapt_gbif_pair_rows(x_rows=x_rows, y_rows=y_rows)

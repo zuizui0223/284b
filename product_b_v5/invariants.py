@@ -209,22 +209,21 @@ def classify_directed_invariant(
     adequacy_dependent: bool,
     minimum_containment: float,
     required_breadth: float | None,
-    maximum_required_breadth: float | None,
+    maximum_required_breadth: float,
     evidence_complete: bool = True,
 ) -> InvariantState:
     """Classify one directed invariant without combining metrics into a score.
 
     A failed adequacy gate, incomplete evidence, missing/non-finite breadth, or a
-    predeclared broad-support guardrail failure is unresolved. Only sufficiently
-    low directed containment with otherwise complete admissible evidence is a
-    directional invariant violation.
+    mandatory predeclared broad-support guardrail failure is unresolved. Only
+    sufficiently low directed containment with otherwise complete admissible
+    evidence is a directional invariant violation.
     """
 
     if not (0.0 <= minimum_containment <= 1.0):
         raise ValueError("minimum_containment must be in [0, 1]")
-    if maximum_required_breadth is not None:
-        if not isfinite(maximum_required_breadth) or maximum_required_breadth < 0.0:
-            raise ValueError("maximum_required_breadth must be finite and non-negative")
+    if not isfinite(maximum_required_breadth) or maximum_required_breadth < 0.0:
+        raise ValueError("maximum_required_breadth must be finite and non-negative")
 
     if not evidence_complete:
         return InvariantState.UNRESOLVED
@@ -236,10 +235,7 @@ def classify_directed_invariant(
         raise ValueError("containment must be in [0, 1]")
     if required_breadth is None or not isfinite(required_breadth) or required_breadth < 0.0:
         return InvariantState.UNRESOLVED
-    if (
-        maximum_required_breadth is not None
-        and required_breadth > maximum_required_breadth
-    ):
+    if required_breadth > maximum_required_breadth:
         return InvariantState.UNRESOLVED
 
     if containment < minimum_containment:

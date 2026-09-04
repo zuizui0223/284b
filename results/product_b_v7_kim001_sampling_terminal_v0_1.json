@@ -1,0 +1,45 @@
+{
+  "result_version": "product_b_v7_kim001_sampling_terminal_v0.1",
+  "pair_id": "KIM001",
+  "terminal_state": "unresolved_host_sampling",
+  "terminal_reasons": [
+    "host_independent_record_floor_failed",
+    "host_unique_cell_floor_failed",
+    "host_effective_cell_floor_failed"
+  ],
+  "execution": {
+    "workflow_run_id": 33863827685,
+    "workflow_conclusion": "success",
+    "workflow_head_sha": "4cd0008f17de225e427b00ad412e28dbae3e60c2",
+    "artifact_id": 9933144242,
+    "artifact_name": "product-b-v7-kim001-sampling-preflight",
+    "artifact_digest": "sha256:eb0ead39e9a19b38a32ebe6dea241d2298f9bd89e3a768f4108b7d4d039891e1",
+    "pre_execution_package_commit": "c38aea5af607213b4b3038dc94df52c1410ab79b"
+  },
+  "focal_host": {
+    "biological_name": "Kirganelia microcarpa",
+    "legacy_transport_name": "Phyllanthus microcarpus",
+    "taxon_key": "5382668",
+    "country_filter": "CN",
+    "raw_records": 6,
+    "retained_records": 6,
+    "quality_excluded": 0,
+    "unique_10km_cells": 4,
+    "effective_10km_cells": 3.5999999999999996,
+    "required_independent_records": 50,
+    "required_unique_10km_cells": 30,
+    "required_effective_10km_cells": 10.0,
+    "sampling_adequate": false
+  },
+  "controls": {
+    "opened": false,
+    "occurrence_reads": 0,
+    "reason": "focal host failed the frozen 50/30/10 gate"
+  },
+  "literature_witness_occurrence_reads_opened": false,
+  "model_fit_reads_opened": false,
+  "invariant_reads_opened": false,
+  "process_knockout_reads_opened": false,
+  "interpretation": "Feasibility terminal only. This is neither a biological violation nor evidence for invariant consistency. The KIM001 focal host cannot support the frozen occurrence-based recovery layer in the independent China frame under the predeclared sampling contract.",
+  "nonretroactivity": "Do not widen the frame, lower the 50/30/10 floor, replace or add controls, substitute another accepted-name occurrence query, or rerun KIM001 to rescue this endpoint."
+}

@@ -13,6 +13,7 @@ from product_b_v7_1.jos001_execution import (
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "config/product_b_v7_1_jos001_execution_manifest_v0_1.json"
+TERMINAL = ROOT / "results/product_b_v7_1_jos001_engineering_terminal_v0_1.json"
 FROZEN_HEAD = "c699a4672eb3b84fb17b00547f966fac05b86908"
 
 
@@ -50,7 +51,7 @@ def occurrence_rows(n, *, prefix="r"):
 
 
 class JOS001ExecutionTests(unittest.TestCase):
-    def test_committed_manifest_is_frozen_engineering_only_and_in_legal_state(self):
+    def test_committed_manifest_is_consumed_closed_and_engineering_only(self):
         payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertTrue(payload["engineering_only"])
         self.assertFalse(payload["confirmatory_promotion_allowed"])
@@ -59,12 +60,28 @@ class JOS001ExecutionTests(unittest.TestCase):
         self.assertFalse(payload["model_fit_reads_allowed"])
         self.assertFalse(payload["invariant_reads_allowed"])
         self.assertFalse(payload["process_knockout_reads_allowed"])
-        state = (
-            payload["execution_authorized"],
-            payload["occurrence_reads_allowed"],
-            payload["execution_consumed"],
+        self.assertFalse(payload["execution_authorized"])
+        self.assertFalse(payload["occurrence_reads_allowed"])
+        self.assertTrue(payload["execution_consumed"])
+        self.assertEqual(payload["execution_terminal_state"], "engineering_execution_unresolved")
+        self.assertEqual(
+            payload["execution_terminal_result"],
+            "results/product_b_v7_1_jos001_engineering_terminal_v0_1.json",
         )
-        self.assertIn(state, {(False, False, False), (True, True, False), (False, False, True)})
+
+    def test_terminal_result_is_transport_unresolved_not_sampling_result(self):
+        result = json.loads(TERMINAL.read_text(encoding="utf-8"))
+        self.assertEqual(result["terminal_state"], "engineering_execution_unresolved")
+        self.assertEqual(result["terminal_gate"], "occurrence_transport")
+        self.assertTrue(result["occurrence_boundary_crossed"])
+        self.assertFalse(result["focal_sampling_decision_available"])
+        self.assertFalse(result["controls_opened"])
+        self.assertFalse(result["model_fit_reads_opened"])
+        self.assertFalse(result["invariant_reads_opened"])
+        self.assertFalse(result["process_knockout_reads_opened"])
+        self.assertTrue(result["rerun_forbidden"])
+        self.assertEqual(result["github_actions_run_id"], 33867091389)
+        self.assertEqual(result["artifact_id"], 9934927281)
 
     def test_synthetic_authorized_copy_passes_guard(self):
         decision = evaluate_jos001_execution_manifest(authorized_manifest())

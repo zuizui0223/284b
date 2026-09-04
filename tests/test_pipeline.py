@@ -36,16 +36,11 @@ class OneShotPipelineTests(unittest.TestCase):
             scope_source_type="primary_literature_methods",
         )
 
-    def _authorized_manifest(self):
+    def _fresh_authorized_manifest(self):
         manifest = dict(self.manifest)
+        manifest["execution_consumed"] = False
         manifest["execution_authorized"] = True
         manifest["occurrence_reads_allowed"] = True
-        return manifest
-
-    def _unauthorized_manifest(self):
-        manifest = dict(self.manifest)
-        manifest["execution_authorized"] = False
-        manifest["occurrence_reads_allowed"] = False
         return manifest
 
     def _inside_points(self, n=50):
@@ -81,7 +76,7 @@ class OneShotPipelineTests(unittest.TestCase):
             )
         return tuple(rows)
 
-    def test_synthetic_unauthorized_manifest_blocks_runner_before_transport(self):
+    def test_committed_consumed_manifest_blocks_runner_before_transport(self):
         calls = []
 
         def transport(query):
@@ -90,13 +85,13 @@ class OneShotPipelineTests(unittest.TestCase):
 
         with self.assertRaises(ExecutionNotAuthorized):
             execute_frozen_pair_sampling_preflight(
-                manifest=self._unauthorized_manifest(),
+                manifest=self.manifest,
                 scope_declarations=(self.scope,),
                 transport=transport,
             )
         self.assertEqual(calls, [])
 
-    def test_committed_authorized_run_computes_primary_and_strict_together(self):
+    def test_synthetic_fresh_authorized_run_computes_primary_and_strict_together(self):
         calls = []
 
         def transport(query):
@@ -104,7 +99,7 @@ class OneShotPipelineTests(unittest.TestCase):
             return self._rows(query.partner)
 
         result = execute_frozen_pair_sampling_preflight(
-            manifest=self._authorized_manifest(),
+            manifest=self._fresh_authorized_manifest(),
             scope_declarations=(self.scope,),
             transport=transport,
         )
@@ -140,7 +135,7 @@ class OneShotPipelineTests(unittest.TestCase):
 
         with self.assertRaisesRegex(ValueError, "outside frozen query geometry"):
             execute_frozen_pair_sampling_preflight(
-                manifest=self._authorized_manifest(),
+                manifest=self._fresh_authorized_manifest(),
                 scope_declarations=(self.scope,),
                 transport=transport,
             )
@@ -166,7 +161,7 @@ class OneShotPipelineTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "differs"):
             execute_frozen_pair_sampling_preflight(
-                manifest=self._authorized_manifest(),
+                manifest=self._fresh_authorized_manifest(),
                 scope_declarations=(self.scope,),
                 transport=lambda query: (),
                 spec=custom,

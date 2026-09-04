@@ -108,7 +108,7 @@ def main() -> int:
         "taxonomy_system": "GBIF current default taxonomy; no legacy checklistKey",
         "resolutions": results,
         "errors": errors,
-        "snapshot_occurrence_rows_opened": false if False else False,
+        "snapshot_occurrence_rows_opened": False,
         "snapshot_occurrence_counts_opened": False,
         "live_occurrence_search_used": False,
     }

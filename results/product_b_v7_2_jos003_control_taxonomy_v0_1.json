@@ -1,0 +1,27 @@
+{
+  "result_version": "product_b_v7_2_jos003_control_taxonomy_v0.1",
+  "pair_id": "JOS003",
+  "status": "control_taxonomy_preflight_passed",
+  "declared_control_count": 8,
+  "minimum_required_control_count": 5,
+  "admitted_count": 8,
+  "workflow_run_id": 33900538457,
+  "artifact_id": 9947448536,
+  "artifact_sha256": "33554f0f760acb65650e5a87addf2ca19c7fbee4200e24a5cbf9c97ad00ff3b3",
+  "admitted": [
+    {"control_id":"JOS3_C01","scientific_name":"Yucca baccata","taxon_key":"2775788","match_type":"EXACT","status":"ACCEPTED","confidence":100},
+    {"control_id":"JOS3_C02","scientific_name":"Yucca schidigera","taxon_key":"2775710","match_type":"EXACT","status":"ACCEPTED","confidence":99},
+    {"control_id":"JOS3_C03","scientific_name":"Yucca elata","taxon_key":"2775775","match_type":"EXACT","status":"ACCEPTED","confidence":100},
+    {"control_id":"JOS3_C04","scientific_name":"Yucca glauca","taxon_key":"2775497","match_type":"EXACT","status":"ACCEPTED","confidence":99},
+    {"control_id":"JOS3_C05","scientific_name":"Yucca rostrata","taxon_key":"2775576","match_type":"EXACT","status":"ACCEPTED","confidence":99},
+    {"control_id":"JOS3_C06","scientific_name":"Yucca harrimaniae","taxon_key":"2775580","match_type":"EXACT","status":"ACCEPTED","confidence":100},
+    {"control_id":"JOS3_C07","scientific_name":"Yucca treculeana","taxon_key":"2775506","match_type":"EXACT","status":"ACCEPTED","confidence":100},
+    {"control_id":"JOS3_C08","scientific_name":"Yucca faxoniana","taxon_key":"2775736","match_type":"EXACT","status":"ACCEPTED","confidence":100}
+  ],
+  "excluded": [],
+  "synonym_rescue_allowed": false,
+  "replacement_after_taxonomy_allowed": false,
+  "snapshot_occurrence_rows_opened": false,
+  "snapshot_occurrence_counts_opened": false,
+  "live_occurrence_search_used": false
+}

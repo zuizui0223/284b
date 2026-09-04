@@ -226,6 +226,10 @@ def _host_result(
     preflight = build_directed_witness_sampling_preflight_from_records(adapted.batch.records)
     summary = preflight.host_summary
     reasons = _host_sampling_reasons(summary)
+    missing_uncertainty = sum(
+        record.partner == "x" and record.coordinate_uncertainty_m is None
+        for record in adapted.batch.records
+    )
     return SnapshotHostSamplingAuditResult(
         taxon_id=taxon_id,
         scientific_name=scientific_name,
@@ -235,7 +239,7 @@ def _host_result(
         unique_cells=summary.unique_cells,
         effective_cells=summary.effective_cells,
         quality_excluded=preflight.audit.quality_excluded_x,
-        missing_uncertainty=preflight.audit.missing_uncertainty_x,
+        missing_uncertainty=missing_uncertainty,
         missing_occurrence_id_rows=adapted.audit.missing_occurrence_id_rows,
         missing_catalog_number_rows=adapted.audit.missing_catalog_number_rows,
         missing_recorder_rows=adapted.audit.missing_recorder_rows,

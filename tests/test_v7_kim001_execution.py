@@ -14,13 +14,12 @@ from product_b_v7.kim001_execution import (
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "config/product_b_v7_kim001_execution_manifest_v0_1.json"
+FROZEN_HEAD = "c38aea5af607213b4b3038dc94df52c1410ab79b"
 
 
 def authorized_manifest():
     payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
     payload.update(
-        contract_frozen=True,
-        pre_execution_package_commit="1" * 40,
         execution_authorized=True,
         occurrence_reads_allowed=True,
         execution_consumed=False,
@@ -52,10 +51,10 @@ def occurrence_rows(n, *, prefix="r"):
 
 
 class KIM001ExecutionTests(unittest.TestCase):
-    def test_committed_manifest_is_closed(self):
+    def test_committed_manifest_is_frozen_but_closed(self):
         payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
-        self.assertFalse(payload["contract_frozen"])
-        self.assertIsNone(payload["pre_execution_package_commit"])
+        self.assertTrue(payload["contract_frozen"])
+        self.assertEqual(payload["pre_execution_package_commit"], FROZEN_HEAD)
         self.assertFalse(payload["execution_authorized"])
         self.assertFalse(payload["occurrence_reads_allowed"])
         self.assertFalse(payload["model_fit_reads_allowed"])

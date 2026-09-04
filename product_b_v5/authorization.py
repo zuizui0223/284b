@@ -1,8 +1,9 @@
 """Fail-closed authorization guard for Product-B v5 occurrence preflight.
 
 Network/occurrence code must call this guard before constructing any request.
-The committed manifest is intentionally unauthorized even though the response-
-blind scope, preprocessing, transport and negative-control contracts are frozen.
+The committed manifest is closed after the consumed OPM_FIG_001 one-shot, even
+though the response-blind scope, preprocessing, transport and negative-control
+contracts remain frozen.
 """
 
 from __future__ import annotations
@@ -67,6 +68,8 @@ def evaluate_execution_manifest(manifest: Mapping[str, object]) -> Authorization
         reasons.append("negative_control_contract_not_frozen")
     if manifest.get("checklist_key") != EXPECTED_CHECKLIST_KEY:
         reasons.append("checklist_key_mismatch")
+    if manifest.get("execution_consumed") is True:
+        reasons.append("execution_already_consumed")
 
     taxonomy_pairs, taxonomy_errors = _pair_list(
         manifest,

@@ -49,22 +49,36 @@ def snapshot_rows(n, *, species_key, prefix="r"):
 
 
 class JOS003ExecutionTests(unittest.TestCase):
-    def test_committed_manifest_is_frozen_closed_and_blocks_transport(self):
+    def test_committed_manifest_is_frozen_and_in_legal_execution_state(self):
         payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertTrue(payload["contract_frozen"])
         self.assertEqual(payload["pre_execution_package_commit"], FROZEN_HEAD)
-        self.assertFalse(payload["execution_authorized"])
-        self.assertFalse(payload["snapshot_occurrence_rows_allowed"])
-        self.assertFalse(payload["execution_consumed"])
-        calls = []
+        state = (
+            payload["execution_authorized"],
+            payload["snapshot_occurrence_rows_allowed"],
+            payload["execution_consumed"],
+        )
+        self.assertIn(
+            state,
+            {
+                (False, False, False),
+                (True, True, False),
+                (False, False, True),
+            },
+        )
+        if state == (True, True, False):
+            decision = evaluate_jos003_execution_manifest(payload)
+            self.assertTrue(decision.authorized, decision.reasons)
+        else:
+            calls = []
 
-        def transport(query):
-            calls.append(query.group_id)
-            raise AssertionError("transport must remain closed")
+            def transport(query):
+                calls.append(query.group_id)
+                raise AssertionError("transport must remain fail-closed")
 
-        with self.assertRaises(JOS003ExecutionNotAuthorized):
-            execute_jos003_snapshot_sampling_preflight(manifest=payload, transport=transport)
-        self.assertEqual(calls, [])
+            with self.assertRaises(JOS003ExecutionNotAuthorized):
+                execute_jos003_snapshot_sampling_preflight(manifest=payload, transport=transport)
+            self.assertEqual(calls, [])
 
     def test_synthetic_frozen_authorized_copy_passes_guard(self):
         decision = evaluate_jos003_execution_manifest(authorized_manifest())

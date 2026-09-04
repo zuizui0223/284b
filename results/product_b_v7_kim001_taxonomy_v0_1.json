@@ -1,0 +1,26 @@
+{
+  "result_version": "product_b_v7_kim001_taxonomy_v0.1",
+  "pair_id": "KIM001",
+  "taxonomy_state": "resolved_manual_homotypic_synonym_bridge_x_plus_direct_exact_y",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "x": {
+    "biological_name": "Kirganelia microcarpa",
+    "legacy_name_usage_key": "3078869",
+    "legacy_name_status": "SYNONYM",
+    "legacy_accepted_name": "Phyllanthus microcarpus",
+    "legacy_transport_taxon_key": "5382668",
+    "bridge_state": "resolved_manual_homotypic_synonym_bridge",
+    "bridge_basis": "Legacy GBIF usage 3078869 directly points by acceptedKey to accepted species usage 5382668. The biological literature name is retained as Kirganelia microcarpa; only occurrence transport uses the legacy accepted key."
+  },
+  "y": {
+    "biological_name": "Epicephala microcarpa",
+    "legacy_transport_taxon_key": "8735258",
+    "match_type": "EXACT",
+    "rank": "SPECIES",
+    "status": "ACCEPTED",
+    "confidence": 100
+  },
+  "occurrence_reads_performed": false,
+  "invariant_reads_performed": false,
+  "nonretroactivity": "Taxonomy resolution did not use occurrence availability and does not modify the predeclared literature witnesses or China ADM0 frame."
+}

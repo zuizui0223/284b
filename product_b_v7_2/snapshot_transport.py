@@ -23,6 +23,9 @@ EXPECTED_CITATION_KEY = "occurrence/2026-08-01/citation.txt"
 EXPECTED_OBJECT_MANIFEST_SHA256 = "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e"
 EXPECTED_OBJECT_COUNT = 9706
 EXPECTED_PARQUET_OBJECT_COUNT = 9705
+EXPECTED_SCHEMA_SOURCE_OBJECT = "occurrence/2026-08-01/occurrence.parquet/000001"
+EXPECTED_SCHEMA_SHA256 = "8298545ad22ddc1e064ae6e2ca8dbc592fcd47ab87f1018e0699fc68474571aa"
+EXPECTED_SCHEMA_FIELD_COUNT = 50
 DOI_RE = re.compile(r"10\.15468/dl\.[A-Za-z0-9]+", re.IGNORECASE)
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
@@ -117,11 +120,7 @@ def object_manifest_sha256(objects: Iterable[SnapshotObject]) -> str:
 
 
 def select_frozen_schema_probe_object(objects: Sequence[SnapshotObject]) -> SnapshotObject:
-    """Select one real Parquet object only after proving listing identity.
-
-    This gate prevents schema inspection from silently moving to a different
-    snapshot object set. It uses metadata only and never inspects Parquet rows.
-    """
+    """Select one real Parquet object only after proving listing identity."""
     if len(objects) != EXPECTED_OBJECT_COUNT:
         raise ValueError("snapshot object count differs from frozen metadata audit")
     digest = object_manifest_sha256(objects)
@@ -173,6 +172,13 @@ def build_metadata_audit(
     )
 
 
+def _schema_digest(fields: Mapping[str, object]) -> str:
+    normalized = {str(name): str(dtype) for name, dtype in fields.items()}
+    return hashlib.sha256(
+        (json.dumps(normalized, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+    ).hexdigest()
+
+
 def evaluate_snapshot_contract(contract: Mapping[str, object]) -> SnapshotContractDecision:
     reasons: list[str] = []
     if contract.get("contract_version") != EXPECTED_CONTRACT_VERSION:
@@ -186,6 +192,7 @@ def evaluate_snapshot_contract(contract: Mapping[str, object]) -> SnapshotContra
     if contract.get("primary_transport") != "gbif_monthly_public_cloud_snapshot":
         reasons.append("primary_transport_mismatch")
 
+    schema_state = "missing"
     snapshot = contract.get("snapshot")
     if not isinstance(snapshot, Mapping):
         reasons.append("snapshot_declaration_missing")
@@ -203,7 +210,9 @@ def evaluate_snapshot_contract(contract: Mapping[str, object]) -> SnapshotContra
             reasons.append("occurrence_prefix_mismatch")
         if snapshot.get("citation_key") != EXPECTED_CITATION_KEY:
             reasons.append("citation_key_mismatch")
-        if snapshot.get("metadata_audit_state") == "completed_frozen":
+        if snapshot.get("metadata_audit_state") != "completed_frozen":
+            reasons.append("snapshot_metadata_not_frozen")
+        else:
             if snapshot.get("object_manifest_sha256") != EXPECTED_OBJECT_MANIFEST_SHA256:
                 reasons.append("frozen_object_manifest_digest_mismatch")
             if snapshot.get("object_count") != EXPECTED_OBJECT_COUNT:
@@ -211,16 +220,45 @@ def evaluate_snapshot_contract(contract: Mapping[str, object]) -> SnapshotContra
             if snapshot.get("parquet_object_count") != EXPECTED_PARQUET_OBJECT_COUNT:
                 reasons.append("frozen_parquet_object_count_mismatch")
 
-    if contract.get("metadata_reads_allowed") is not True:
-        reasons.append("metadata_reads_not_allowed")
+        schema_state = str(snapshot.get("schema_audit_state", "missing"))
+        if schema_state == "completed_frozen":
+            if snapshot.get("schema_source_object") != EXPECTED_SCHEMA_SOURCE_OBJECT:
+                reasons.append("schema_source_object_mismatch")
+            if snapshot.get("schema_sha256") != EXPECTED_SCHEMA_SHA256:
+                reasons.append("schema_digest_mismatch")
+            fields = snapshot.get("schema_fields")
+            if not isinstance(fields, Mapping):
+                reasons.append("schema_fields_missing")
+            else:
+                if len(fields) != EXPECTED_SCHEMA_FIELD_COUNT:
+                    reasons.append("schema_field_count_mismatch")
+                if any(name not in fields for name in REQUIRED_SNAPSHOT_FIELDS):
+                    reasons.append("schema_required_field_missing")
+                if _schema_digest(fields) != EXPECTED_SCHEMA_SHA256:
+                    reasons.append("schema_fields_digest_mismatch")
+        elif schema_state != "pending":
+            reasons.append("schema_audit_state_invalid")
+
     if contract.get("occurrence_row_reads_allowed") is not False:
         reasons.append("occurrence_rows_must_remain_closed")
-    if contract.get("new_pair_selection_allowed") is not False:
-        reasons.append("pair_selection_must_remain_closed_before_schema_audit")
     if contract.get("snapshot_native_taxonomy_bridge_required") is not True:
         reasons.append("snapshot_taxonomy_bridge_not_required")
     if contract.get("authenticated_download_creation_in_ci_forbidden") is not True:
         reasons.append("authenticated_download_ci_boundary_changed")
+
+    # Pair selection is a state transition that is legal only after the schema is
+    # frozen. Metadata/schema reads close when that transition occurs.
+    state = (
+        bool(contract.get("metadata_reads_allowed")),
+        bool(contract.get("snapshot_schema_metadata_reads_allowed")),
+        bool(contract.get("new_pair_selection_allowed")),
+    )
+    if schema_state == "pending":
+        if state != (True, True, False):
+            reasons.append("pre_schema_access_state_invalid")
+    elif schema_state == "completed_frozen":
+        if state != (False, False, True):
+            reasons.append("post_schema_pair_selection_state_invalid")
 
     fields = contract.get("required_snapshot_fields_before_occurrence_execution")
     if not isinstance(fields, list) or tuple(fields) != REQUIRED_SNAPSHOT_FIELDS:
@@ -283,6 +321,8 @@ __all__ = [
     "SnapshotContractDecision",
     "REQUIRED_SNAPSHOT_FIELDS",
     "EXPECTED_OBJECT_MANIFEST_SHA256",
+    "EXPECTED_SCHEMA_SHA256",
+    "EXPECTED_SCHEMA_SOURCE_OBJECT",
     "canonicalize_object_manifest",
     "object_manifest_sha256",
     "select_frozen_schema_probe_object",

@@ -1,6 +1,6 @@
 """Pure validation helpers for Product-B v7.2 GBIF monthly snapshots.
 
-No function in this module downloads or inspects occurrence rows.  It validates
+No function in this module downloads or inspects occurrence rows. It validates
 metadata declarations and canonicalizes anonymous S3 object-listing metadata so a
 snapshot can be frozen before any future pair is selected.
 """
@@ -20,6 +20,9 @@ EXPECTED_BUCKET = "gbif-open-data-us-east-1"
 EXPECTED_SNAPSHOT_DATE = "2026-08-01"
 EXPECTED_OCCURRENCE_PREFIX = "occurrence/2026-08-01/occurrence.parquet/"
 EXPECTED_CITATION_KEY = "occurrence/2026-08-01/citation.txt"
+EXPECTED_OBJECT_MANIFEST_SHA256 = "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e"
+EXPECTED_OBJECT_COUNT = 9706
+EXPECTED_PARQUET_OBJECT_COUNT = 9705
 DOI_RE = re.compile(r"10\.15468/dl\.[A-Za-z0-9]+", re.IGNORECASE)
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
@@ -113,6 +116,28 @@ def object_manifest_sha256(objects: Iterable[SnapshotObject]) -> str:
     return hashlib.sha256(canonicalize_object_manifest(objects)).hexdigest()
 
 
+def select_frozen_schema_probe_object(objects: Sequence[SnapshotObject]) -> SnapshotObject:
+    """Select one real Parquet object only after proving listing identity.
+
+    This gate prevents schema inspection from silently moving to a different
+    snapshot object set. It uses metadata only and never inspects Parquet rows.
+    """
+    if len(objects) != EXPECTED_OBJECT_COUNT:
+        raise ValueError("snapshot object count differs from frozen metadata audit")
+    digest = object_manifest_sha256(objects)
+    if digest != EXPECTED_OBJECT_MANIFEST_SHA256:
+        raise ValueError("snapshot object manifest digest differs from frozen metadata audit")
+    parquet = sorted(
+        (item for item in objects if item.key.startswith(EXPECTED_OCCURRENCE_PREFIX)),
+        key=lambda item: item.key,
+    )
+    if len(parquet) != EXPECTED_PARQUET_OBJECT_COUNT:
+        raise ValueError("snapshot Parquet object count differs from frozen metadata audit")
+    if not parquet:
+        raise ValueError("frozen snapshot has no Parquet object for schema probe")
+    return parquet[0]
+
+
 def citation_sha256(citation_bytes: bytes) -> str:
     if not citation_bytes:
         raise ValueError("citation.txt must not be empty")
@@ -178,13 +203,20 @@ def evaluate_snapshot_contract(contract: Mapping[str, object]) -> SnapshotContra
             reasons.append("occurrence_prefix_mismatch")
         if snapshot.get("citation_key") != EXPECTED_CITATION_KEY:
             reasons.append("citation_key_mismatch")
+        if snapshot.get("metadata_audit_state") == "completed_frozen":
+            if snapshot.get("object_manifest_sha256") != EXPECTED_OBJECT_MANIFEST_SHA256:
+                reasons.append("frozen_object_manifest_digest_mismatch")
+            if snapshot.get("object_count") != EXPECTED_OBJECT_COUNT:
+                reasons.append("frozen_object_count_mismatch")
+            if snapshot.get("parquet_object_count") != EXPECTED_PARQUET_OBJECT_COUNT:
+                reasons.append("frozen_parquet_object_count_mismatch")
 
     if contract.get("metadata_reads_allowed") is not True:
         reasons.append("metadata_reads_not_allowed")
     if contract.get("occurrence_row_reads_allowed") is not False:
         reasons.append("occurrence_rows_must_remain_closed")
     if contract.get("new_pair_selection_allowed") is not False:
-        reasons.append("pair_selection_must_remain_closed_before_metadata_audit")
+        reasons.append("pair_selection_must_remain_closed_before_schema_audit")
     if contract.get("snapshot_native_taxonomy_bridge_required") is not True:
         reasons.append("snapshot_taxonomy_bridge_not_required")
     if contract.get("authenticated_download_creation_in_ci_forbidden") is not True:
@@ -250,8 +282,10 @@ __all__ = [
     "SnapshotMetadataAudit",
     "SnapshotContractDecision",
     "REQUIRED_SNAPSHOT_FIELDS",
+    "EXPECTED_OBJECT_MANIFEST_SHA256",
     "canonicalize_object_manifest",
     "object_manifest_sha256",
+    "select_frozen_schema_probe_object",
     "citation_sha256",
     "extract_citation_doi",
     "build_metadata_audit",

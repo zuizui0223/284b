@@ -99,10 +99,7 @@ class GeographicScopeGateTests(unittest.TestCase):
         )
         self.assertEqual(contract["buffer_degrees"], 0)
         self.assertFalse(contract["occurrence_information_used_in_derivation"])
-        self.assertEqual(
-            convex_hull_polygon_wkt(points),
-            contract["filter_value"],
-        )
+        self.assertEqual(convex_hull_polygon_wkt(points), contract["filter_value"])
         self.assertEqual(
             convex_hull_vertices(points),
             (
@@ -111,6 +108,51 @@ class GeographicScopeGateTests(unittest.TestCase):
                 (100.42, 13.83),
                 (101.27, 21.9),
                 (98.88, 24.9),
+            ),
+        )
+
+    def test_yuc001_four_published_sites_recompute_frozen_no_buffer_polygon(self):
+        contract = json.loads(
+            Path("config/product_b_v5_scope_resolution_yuc001_v0_1.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        points = tuple(
+            (row["longitude"], row["latitude"])
+            for row in contract["published_scope_points_lon_lat"]
+        )
+        self.assertEqual(len(points), 4)
+        self.assertEqual(contract["buffer_degrees"], 0)
+        self.assertEqual(convex_hull_polygon_wkt(points), contract["filter_value"])
+        self.assertEqual(
+            convex_hull_vertices(points),
+            (
+                (-110.3030555556, 31.5544444444),
+                (-103.25, 29.25),
+                (-106.5666666667, 33.9333333333),
+            ),
+        )
+
+    def test_yuc002_four_published_sites_recompute_frozen_no_buffer_polygon(self):
+        contract = json.loads(
+            Path("config/product_b_v5_scope_resolution_yuc002_v0_1.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        points = tuple(
+            (row["longitude"], row["latitude"])
+            for row in contract["published_scope_points_lon_lat"]
+        )
+        self.assertEqual(len(points), 4)
+        self.assertEqual(contract["buffer_degrees"], 0)
+        self.assertEqual(convex_hull_polygon_wkt(points), contract["filter_value"])
+        self.assertEqual(
+            convex_hull_vertices(points),
+            (
+                (-116.5808, 34.0469),
+                (-116.2833, 32.6666),
+                (-115.4442, 35.1646),
+                (-115.5458, 35.472),
             ),
         )
 

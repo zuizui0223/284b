@@ -44,7 +44,7 @@ def frame():
 
 
 class JOS001EngineeringAdmissionTests(unittest.TestCase):
-    def test_pair_is_engineering_only_and_still_occurrence_blind_after_taxonomy(self):
+    def test_pair_is_engineering_only_and_terminal_after_consumed_transport_run(self):
         with PAIR.open("r", encoding="utf-8", newline="") as handle:
             row = list(csv.DictReader(handle))[0]
         self.assertEqual(row["pair_id"], "JOS001")
@@ -54,8 +54,10 @@ class JOS001EngineeringAdmissionTests(unittest.TestCase):
             row["taxonomy_state"],
             "resolved_direct_exact_x_plus_manual_direct_synonym_bridge_y",
         )
-        self.assertEqual(row["occurrence_reads_performed"], "false")
-        self.assertIn("JOS001 remains engineering-only", row["known_boundary"])
+        self.assertEqual(row["occurrence_reads_performed"], "true")
+        self.assertIn("engineering_execution_unresolved", row["known_boundary"])
+        self.assertIn("controls were not opened", row["known_boundary"])
+        self.assertIn("never confirmatory", row["known_boundary"])
 
     def test_fourteen_primary_witnesses_pass_v7_floor(self):
         result = evaluate_witness_frame_preflight(

@@ -1,0 +1,41 @@
+name: v6-sen001-manual-taxonomy-review
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - .github/workflows/v6_sen001_manual_taxonomy_review.yml
+
+permissions:
+  contents: read
+
+jobs:
+  taxonomy-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify repository tests before concept review
+        env:
+          PYTHONPATH: .
+        run: python -m unittest discover -s tests -v
+
+      - name: Validate frozen SEN001 nomenclatural bridge
+        env:
+          PYTHONPATH: .
+        run: python scripts/run_v6_sen001_manual_taxonomy_review.py
+
+      - name: Upload manual taxonomy review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-v6-sen001-manual-taxonomy-review
+          path: artifacts/product_b_v6_sen001_manual_taxonomy_review.json
+          if-no-files-found: error
+          retention-days: 90

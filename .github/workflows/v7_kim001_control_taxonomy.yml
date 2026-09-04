@@ -1,5 +1,7 @@
 name: v7-kim001-control-taxonomy
 
+# Implementation-only retry: the first run stopped in repository tests before any
+# replacement-host taxonomy request. The closed pool and acceptance rule are unchanged.
 on:
   push:
     branches:

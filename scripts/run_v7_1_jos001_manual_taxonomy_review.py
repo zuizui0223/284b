@@ -78,16 +78,22 @@ def main() -> int:
     match_url = GBIF_SPECIES_MATCH_ENDPOINT + "?" + urlencode(dict(build_species_match_params(request)))
     match = _get_json(match_url)
     usage_obj = match.get("usage")
+    diagnostics = match.get("diagnostics")
     if not isinstance(usage_obj, Mapping):
         raise ValueError("GBIF match did not return usage")
+    if not isinstance(diagnostics, Mapping):
+        raise ValueError("GBIF match did not return diagnostics")
 
     usage_key = str(usage_obj.get("key", "")).strip()
     if not usage_key:
         raise ValueError("GBIF match usage key is blank")
     usage = _usage_summary(_get_json(GBIF_SPECIES_USAGE_ENDPOINT.format(usage_key=usage_key)))
 
+    match_type = _text(diagnostics, "matchType").upper()
+    confidence = diagnostics.get("confidence") if isinstance(diagnostics.get("confidence"), int) else None
+
     reasons: list[str] = []
-    if _text(match, "matchType").upper() != "EXACT":
+    if match_type != "EXACT":
         reasons.append("match_not_exact")
     if _text(usage_obj, "rank").upper() != "SPECIES":
         reasons.append("match_usage_not_species")
@@ -129,7 +135,8 @@ def main() -> int:
         "requested_name": REQUESTED_NAME,
         "checklist_key": CHECKLIST_KEY,
         "state": state,
-        "match_type": _text(match, "matchType").upper(),
+        "match_type": match_type,
+        "confidence": confidence,
         "match_usage": dict(usage_obj),
         "legacy_name_usage": usage,
         "legacy_accepted_usage": accepted,

@@ -1,0 +1,53 @@
+{
+  "manifest_version": "product_b_v7_1_jos001_engineering_sampling_v0.1",
+  "pair_id": "JOS001",
+  "engineering_only": true,
+  "confirmatory_promotion_allowed": false,
+  "contract_frozen": false,
+  "pre_execution_package_commit": null,
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "x_biological_name": "Yucca brevifolia",
+  "x_transport_taxon_key": "2775592",
+  "y_literature_witness_taxon": "Tegeticula synthetica",
+  "y_occurrence_reads_planned": false,
+  "frame_id": "USA-ADM0-2327393",
+  "operational_country_filter": "US",
+  "prospective_host_feasibility_prescreen_passed": true,
+  "literature_witness_preflight_passed": true,
+  "literature_witness_count": 14,
+  "independent_frame_preflight_passed": true,
+  "focal_taxonomy_resolved": true,
+  "control_taxonomy_preflight_passed": true,
+  "control_taxonomy_resolved_count": 7,
+  "host_sampling_floor": {
+    "minimum_independent_records": 50,
+    "minimum_unique_10km_cells": 30,
+    "minimum_effective_10km_cells": 10.0
+  },
+  "control_hosts": [
+    {"control_taxon_id": "JOS_C01", "scientific_name": "Yucca baccata", "taxon_key": "2775788"},
+    {"control_taxon_id": "JOS_C02", "scientific_name": "Yucca schidigera", "taxon_key": "2775710"},
+    {"control_taxon_id": "JOS_C03", "scientific_name": "Yucca elata", "taxon_key": "2775775"},
+    {"control_taxon_id": "JOS_C04", "scientific_name": "Yucca glauca", "taxon_key": "2775497"},
+    {"control_taxon_id": "JOS_C05", "scientific_name": "Yucca filamentosa", "taxon_key": "2775561"},
+    {"control_taxon_id": "JOS_C07", "scientific_name": "Yucca rostrata", "taxon_key": "2775576"},
+    {"control_taxon_id": "JOS_C08", "scientific_name": "Yucca harrimaniae", "taxon_key": "2775580"}
+  ],
+  "minimum_sampling_adequate_control_hosts": 5,
+  "execution_authorized": false,
+  "occurrence_reads_allowed": false,
+  "model_fit_reads_allowed": false,
+  "invariant_reads_allowed": false,
+  "process_knockout_reads_allowed": false,
+  "execution_consumed": false,
+  "forbidden_after_occurrence_opening": [
+    "change_US_country_filter",
+    "change_50_30_10_host_sampling_floor",
+    "add_or_replace_control_hosts",
+    "rescue_excluded_Yucca_torreyi",
+    "change_minimum_adequate_control_count",
+    "change_literature_witness_registry",
+    "promote_JOS001_to_confirmatory_evidence",
+    "rerun_JOS001_sampling_to_rescue_a_terminal_result"
+  ]
+}

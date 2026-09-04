@@ -1,7 +1,7 @@
 name: v6-epv001-scope-dataset-audit
 
-# Implementation-only retry: the first run never opened Dataset S1 because a
-# guessed /bin URL returned article HTML. The scope contract and pair are unchanged.
+# Literature-only delivery audit. Prior attempts did not open Dataset S1 bytes;
+# this run records the PMC bridge links if the XLS is still not delivered.
 on:
   push:
     branches:
@@ -18,24 +18,19 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
       - name: Verify repository tests before literature supplement access
         env:
           PYTHONPATH: .
         run: python -m unittest discover -s tests -v
-
       - name: Install XLS reader
         run: python -m pip install --disable-pip-version-check xlrd==2.0.1
-
-      - name: Audit published EPV001 Dataset S1 only
+      - name: Audit published EPV001 Dataset S1 delivery only
         env:
           PYTHONPATH: .
         run: python scripts/audit_v6_epv001_scope_dataset.py
-
       - name: Upload EPV001 literature scope audit
         if: always()
         uses: actions/upload-artifact@v4

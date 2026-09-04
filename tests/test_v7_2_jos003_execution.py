@@ -11,13 +11,12 @@ from product_b_v7_2.jos003_execution import (
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "config/product_b_v7_2_jos003_execution_manifest_v0_1.json"
+FROZEN_HEAD = "bf50327db91500943399d47952ada8fb18122682"
 
 
 def authorized_manifest():
     payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
     payload.update(
-        contract_frozen=True,
-        pre_execution_package_commit="0" * 40,
         execution_authorized=True,
         snapshot_occurrence_rows_allowed=True,
         execution_consumed=False,
@@ -50,12 +49,13 @@ def snapshot_rows(n, *, species_key, prefix="r"):
 
 
 class JOS003ExecutionTests(unittest.TestCase):
-    def test_committed_manifest_is_closed_prefreeze_and_blocks_transport(self):
+    def test_committed_manifest_is_frozen_closed_and_blocks_transport(self):
         payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
-        self.assertFalse(payload["contract_frozen"])
-        self.assertIsNone(payload["pre_execution_package_commit"])
+        self.assertTrue(payload["contract_frozen"])
+        self.assertEqual(payload["pre_execution_package_commit"], FROZEN_HEAD)
         self.assertFalse(payload["execution_authorized"])
         self.assertFalse(payload["snapshot_occurrence_rows_allowed"])
+        self.assertFalse(payload["execution_consumed"])
         calls = []
 
         def transport(query):

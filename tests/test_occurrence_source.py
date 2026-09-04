@@ -33,6 +33,13 @@ class OccurrenceSourceBoundaryTests(unittest.TestCase):
             scope_source_type="primary_literature_supplement",
         )
 
+    def _fresh_authorized_manifest(self):
+        manifest = dict(self.manifest)
+        manifest["execution_consumed"] = False
+        manifest["execution_authorized"] = True
+        manifest["occurrence_reads_allowed"] = True
+        return manifest
+
     def test_query_cannot_be_built_from_unresolved_scope(self):
         with self.assertRaisesRegex(ValueError, "operational geographic scope is unresolved"):
             build_logical_occurrence_query(
@@ -66,16 +73,13 @@ class OccurrenceSourceBoundaryTests(unittest.TestCase):
         ):
             self.assertIn(required, FIXED_REQUIRED_FIELDS)
 
-    def test_synthetic_unauthorized_manifest_blocks_transport_before_it_is_called(self):
+    def test_committed_consumed_manifest_blocks_transport_before_it_is_called(self):
         query = build_logical_occurrence_query(
             pair_id="OPM_FIG_001",
             partner="x",
             taxon_key="5361904",
             scope_declarations=(self.resolved_scope,),
         )
-        blocked = dict(self.manifest)
-        blocked["execution_authorized"] = False
-        blocked["occurrence_reads_allowed"] = False
         calls = []
 
         def transport(value):
@@ -84,13 +88,13 @@ class OccurrenceSourceBoundaryTests(unittest.TestCase):
 
         with self.assertRaises(ExecutionNotAuthorized):
             execute_guarded_occurrence_read(
-                manifest=blocked,
+                manifest=self.manifest,
                 query=query,
                 transport=transport,
             )
         self.assertEqual(calls, [])
 
-    def test_committed_authorized_manifest_invokes_transport_once(self):
+    def test_synthetic_fresh_authorized_manifest_invokes_transport_once(self):
         query = build_logical_occurrence_query(
             pair_id="OPM_FIG_001",
             partner="x",
@@ -104,7 +108,7 @@ class OccurrenceSourceBoundaryTests(unittest.TestCase):
             return ({"key": 101}, {"key": 102})
 
         decision, rows = execute_guarded_occurrence_read(
-            manifest=self.manifest,
+            manifest=self._fresh_authorized_manifest(),
             query=query,
             transport=transport,
         )

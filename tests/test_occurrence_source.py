@@ -66,13 +66,16 @@ class OccurrenceSourceBoundaryTests(unittest.TestCase):
         ):
             self.assertIn(required, FIXED_REQUIRED_FIELDS)
 
-    def test_committed_manifest_blocks_transport_before_it_is_called(self):
+    def test_synthetic_unauthorized_manifest_blocks_transport_before_it_is_called(self):
         query = build_logical_occurrence_query(
             pair_id="OPM_FIG_001",
             partner="x",
             taxon_key="5361904",
             scope_declarations=(self.resolved_scope,),
         )
+        blocked = dict(self.manifest)
+        blocked["execution_authorized"] = False
+        blocked["occurrence_reads_allowed"] = False
         calls = []
 
         def transport(value):
@@ -81,23 +84,19 @@ class OccurrenceSourceBoundaryTests(unittest.TestCase):
 
         with self.assertRaises(ExecutionNotAuthorized):
             execute_guarded_occurrence_read(
-                manifest=self.manifest,
+                manifest=blocked,
                 query=query,
                 transport=transport,
             )
         self.assertEqual(calls, [])
 
-    def test_synthetic_fully_authorized_manifest_invokes_transport_once(self):
+    def test_committed_authorized_manifest_invokes_transport_once(self):
         query = build_logical_occurrence_query(
             pair_id="OPM_FIG_001",
             partner="x",
             taxon_key="5361904",
             scope_declarations=(self.resolved_scope,),
         )
-        authorized = dict(self.manifest)
-        authorized["scope_eligible_pair_ids"] = ["OPM_FIG_001"]
-        authorized["execution_authorized"] = True
-        authorized["occurrence_reads_allowed"] = True
         calls = []
 
         def transport(value):
@@ -105,7 +104,7 @@ class OccurrenceSourceBoundaryTests(unittest.TestCase):
             return ({"key": 101}, {"key": 102})
 
         decision, rows = execute_guarded_occurrence_read(
-            manifest=authorized,
+            manifest=self.manifest,
             query=query,
             transport=transport,
         )

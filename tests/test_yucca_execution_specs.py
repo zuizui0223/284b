@@ -63,12 +63,15 @@ class YuccaFrozenExecutionSpecTests(unittest.TestCase):
         )
         self.assertNotEqual(altered, frozen_pair_spec(altered.pair_id))
 
-    def test_pair_specific_manifests_name_only_their_pair(self):
+    def test_pair_specific_manifests_are_consumed_and_closed(self):
         for pair_id, path in MANIFEST_PATHS.items():
             manifest = json.loads(path.read_text(encoding="utf-8"))
             self.assertEqual(manifest["taxonomy_eligible_pair_ids"], [pair_id])
             self.assertEqual(manifest["scope_eligible_pair_ids"], [pair_id])
-            self.assertFalse(manifest["execution_consumed"])
+            self.assertTrue(manifest["execution_consumed"])
+            self.assertFalse(manifest["execution_authorized"])
+            self.assertFalse(manifest["occurrence_reads_allowed"])
+            self.assertEqual(manifest["terminal_state"], "unresolved_sampling")
 
     def test_each_yucca_scope_is_independently_resolved(self):
         scopes = load_scopes()

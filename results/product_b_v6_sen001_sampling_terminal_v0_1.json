@@ -1,0 +1,73 @@
+{
+  "result_version": "product_b_v6_sen001_sampling_terminal_v0.1",
+  "pair_id": "SEN001",
+  "terminal_state": "unresolved_witness_sampling",
+  "terminal_reasons": [
+    "host_independent_record_floor_failed",
+    "host_unique_cell_floor_failed",
+    "host_effective_cell_floor_failed",
+    "witness_independent_record_floor_failed",
+    "witness_unique_cell_floor_failed"
+  ],
+  "scientific_interpretation": "The predeclared directed-witness answer-check is unresolved because the frozen literature-derived evidence envelope does not contain enough independent GBIF occurrence evidence for either the required host or the dependent witness. This is a sampling-feasibility result, not an invariant violation and not evidence against the obligate biology.",
+  "pre_execution_package_commit": "c33bd3f62721982158f0159eb4fbcefbdcb7f033",
+  "authorization_commit": "7ef3f28f7598762c22758948cf931ea23af209fa",
+  "execution_commit": "2b852777f206996f624c08f4c0b9da54863837bd",
+  "github_actions_run_id": 33850672216,
+  "github_actions_job_id": 100952487560,
+  "artifact_id": 9928201256,
+  "artifact_name": "product-b-v6-sen001-sampling-preflight",
+  "artifact_digest": "sha256:92e55ccf7d8a006881e70f915bebe1eb359d7c2e776b02f3a80e13d48ee6be2e",
+  "focal_transport": {
+    "x": {
+      "biological_name": "Lophocereus schottii",
+      "transport_taxon_key": "3084408",
+      "declared_count": 26,
+      "pages_fetched": 1,
+      "rows_fetched": 26
+    },
+    "y": {
+      "scientific_name": "Upiga virescens",
+      "taxon_key": "1881198",
+      "declared_count": 0,
+      "pages_fetched": 1,
+      "rows_fetched": 0
+    }
+  },
+  "focal_sampling": {
+    "raw_records_x": 26,
+    "raw_records_y": 0,
+    "quality_excluded_x": 25,
+    "quality_excluded_y": 0,
+    "quality_exclusion_reason_counts": {
+      "coordinate_uncertainty_ceiling_failed": 25
+    },
+    "collision_excluded_x": 0,
+    "collision_excluded_y": 0,
+    "retained_records_x": 1,
+    "retained_records_y": 0,
+    "host_unique_cells": 1,
+    "host_effective_cells": 1.0,
+    "witness_unique_cells": 0
+  },
+  "frozen_floors": {
+    "host_min_independent_records": 50,
+    "host_min_unique_cells": 30,
+    "host_min_effective_cells": 10.0,
+    "witness_min_independent_records": 5,
+    "witness_min_unique_cells": 3
+  },
+  "controls_opened": false,
+  "control_occurrence_reads": 0,
+  "invariant_reads_opened": false,
+  "process_knockout_reads_opened": false,
+  "rerun_forbidden": true,
+  "forbidden_rescues": [
+    "widen_scope_polygon_or_add_buffer",
+    "relax_coordinate_uncertainty_ceiling",
+    "change_focal_taxon_keys",
+    "lower_host_or_witness_sampling_floors",
+    "open_controls_after_focal_failure",
+    "rerun_occurrence_preflight_to_seek_a_more_favorable_count"
+  ]
+}

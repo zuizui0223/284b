@@ -10,6 +10,8 @@ on:
 permissions:
   contents: read
 
+# Retrigger after replacing the nonexistent hard-coded probe key with a
+# frozen-manifest-verified real Parquet object selector. No occurrence rows are read.
 jobs:
   snapshot-schema-only:
     runs-on: ubuntu-latest

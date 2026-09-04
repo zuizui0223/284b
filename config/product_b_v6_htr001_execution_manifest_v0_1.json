@@ -2,7 +2,7 @@
   "manifest_version": "product_b_v6_directed_witness_preflight_v0.1",
   "pair_id": "HTR001",
   "contract_frozen": true,
-  "pre_execution_package_commit": "pending_tested_freeze",
+  "pre_execution_package_commit": "29dce70fe840d703d4aedbbf7f0788fe3554826d",
   "primary_registry": "registry/product_b_v6_htr001_registry_v0_2.csv",
   "scope_contract": "config/product_b_v6_scope_resolution_htr001_v0_1.json",
   "witness_contract": "config/product_b_v6_directed_witness_contract_v0_1.json",
@@ -22,11 +22,11 @@
     {"control_taxon_id": "HTR_C06", "scientific_name": "Euphorbia virosa", "taxon_key": "3066685"}
   ],
   "minimum_sampling_adequate_control_hosts": 5,
-  "execution_authorized": false,
-  "occurrence_reads_allowed": false,
+  "execution_authorized": true,
+  "occurrence_reads_allowed": true,
   "execution_consumed": false,
   "invariant_reads_allowed": false,
-  "authorization_note": "Closed pre-execution manifest. Occurrence execution may be authorized only after the full HTR001 package passes repository tests. Invariant/model/process-knockout outcomes remain prohibited during this step.",
+  "authorization_note": "Authorized exactly once after repository tests passed on frozen pre-execution head 29dce70fe840d703d4aedbbf7f0788fe3554826d. This authorization covers sampling/control occurrence reads only. Invariant/model/process-knockout outcomes remain prohibited.",
   "forbidden_after_authorization": [
     "rerun_focal_or_controls_to_rescue_sampling",
     "change_scope_polygon_or_buffer",

@@ -1,0 +1,37 @@
+name: v7-2-snapshot-metadata-audit
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - .github/workflows/v7_2_snapshot_metadata_audit.yml
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot-metadata-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify repository tests before snapshot metadata access
+        env:
+          PYTHONPATH: .
+        run: python -m unittest discover -s tests -v
+      - name: Audit frozen GBIF monthly snapshot metadata only
+        env:
+          PYTHONPATH: .
+        run: python scripts/audit_v7_2_snapshot_metadata.py
+      - name: Upload v7.2 snapshot metadata audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-v7-2-snapshot-metadata-audit
+          path: artifacts/product_b_v7_2_snapshot_metadata_audit.json
+          if-no-files-found: error
+          retention-days: 90

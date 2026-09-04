@@ -117,7 +117,7 @@ def main() -> int:
         "checklist_key": contract["checklist_key"],
         "resolutions": resolutions,
         "pairs": pair_states,
-        "occurrence_reads_performed": false if False else False,
+        "occurrence_reads_performed": False,
     }
     OUTPUT_PATH.write_text(
         json.dumps(outcome, ensure_ascii=False, indent=2, sort_keys=True) + "\n",

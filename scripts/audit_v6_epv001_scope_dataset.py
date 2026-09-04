@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Audit the published EPV001 Dataset S1 delivery path without occurrence access.
 
-The PMC article currently routes supplement hrefs through an HTML bridge. This
-literature-only step records the bridge's machine-readable links if the XLS bytes
-are not delivered directly. It constructs no operational geographic scope.
+If PMC returns its public 'Preparing to download' bridge, this literature-only
+step records script/challenge metadata rather than executing browser code. It
+constructs no geographic scope and never accesses biodiversity occurrence data.
 """
 
 from __future__ import annotations
@@ -25,6 +25,7 @@ ARTICLE_URL = "https://pmc.ncbi.nlm.nih.gov/articles/PMC2947922/"
 EXPECTED_FILENAME = "1006225107_sd01.xls"
 KEYWORDS = ("lat", "latitude", "lon", "long", "longitude", "locality", "location", "site", "population")
 OLE2_MAGIC = bytes.fromhex("D0CF11E0A1B11AE1")
+CHALLENGE_TERMS = ("pow", "proof", "cookie", "cloudpmc", "challenge", "download", "worker", "wasm")
 
 
 def _normalize(value: object) -> str:
@@ -32,15 +33,7 @@ def _normalize(value: object) -> str:
 
 
 def _request_bytes(url: str, *, accept: str, timeout_seconds: float = 90.0) -> tuple[bytes, str, str]:
-    request = Request(
-        url,
-        headers={
-            "Accept": accept,
-            "Referer": ARTICLE_URL,
-            "User-Agent": "zuizui0223-284b-product-b-v6-literature-scope/0.3",
-        },
-        method="GET",
-    )
+    request = Request(url, headers={"Accept": accept, "Referer": ARTICLE_URL, "User-Agent": "zuizui0223-284b-product-b-v6-literature-scope/0.4"}, method="GET")
     with urlopen(request, timeout=timeout_seconds) as response:
         payload = response.read()
         final_url = response.geturl()
@@ -64,49 +57,36 @@ def _bridge_audit(payload: bytes, final_url: str, content_type: str) -> dict[str
     text = html.unescape(payload.decode("utf-8", errors="replace"))
     hrefs = re.findall(r'''href=["']([^"']+)["']''', text, flags=re.I)
     actions = re.findall(r'''action=["']([^"']+)["']''', text, flags=re.I)
-    metas = re.findall(r'''<meta[^>]+(?:http-equiv=["']?refresh["']?[^>]+content=["']([^"']+)|content=["']([^"']+)["'][^>]+http-equiv=["']?refresh["']?)[^>]*>''', text, flags=re.I)
-    meta_values = [a or b for a, b in metas]
-    candidates: list[str] = []
-    for raw in hrefs + actions:
-        absolute = urljoin(final_url, raw)
-        if absolute not in candidates:
-            candidates.append(absolute)
-    refresh_targets: list[str] = []
-    for value in meta_values:
-        match = re.search(r"url\s*=\s*(.+)$", value, flags=re.I)
-        if match:
-            target = urljoin(final_url, match.group(1).strip(" '\""))
-            if target not in refresh_targets:
-                refresh_targets.append(target)
-    interesting = [
-        url for url in candidates + refresh_targets
-        if EXPECTED_FILENAME.lower() in url.lower()
-        or "download" in url.lower()
-        or "supp" in url.lower()
-        or "bin/" in url.lower()
-    ]
+    script_srcs = re.findall(r'''<script[^>]+src=["']([^"']+)["'][^>]*>''', text, flags=re.I)
+    inline_scripts = re.findall(r'''<script(?![^>]+src=)[^>]*>(.*?)</script>''', text, flags=re.I | re.S)
+    link_urls = list(dict.fromkeys(urljoin(final_url, raw) for raw in hrefs + actions))
+    script_urls = list(dict.fromkeys(urljoin(final_url, raw) for raw in script_srcs))
+    challenge_snippets: list[str] = []
+    for script in inline_scripts:
+        compact = re.sub(r"\s+", " ", script).strip()
+        if any(term in compact.lower() for term in CHALLENGE_TERMS):
+            challenge_snippets.append(compact[:4000])
+    interesting = [url for url in link_urls + script_urls if EXPECTED_FILENAME.lower() in url.lower() or any(term in url.lower() for term in CHALLENGE_TERMS)]
+    cookie_tokens = sorted(set(re.findall(r'''[A-Za-z0-9_-]*cookie[A-Za-z0-9_-]*|cloudpmc[A-Za-z0-9_-]*''', text, flags=re.I)))
     return {
         "status": "bridge_unresolved",
         "bridge_final_url": final_url,
         "bridge_content_type": content_type,
         "bridge_sha256": hashlib.sha256(payload).hexdigest(),
-        "bridge_title": (re.search(r"<title[^>]*>(.*?)</title>", text, re.I | re.S).group(1).strip()
-                         if re.search(r"<title[^>]*>(.*?)</title>", text, re.I | re.S) else ""),
+        "bridge_title": (re.search(r"<title[^>]*>(.*?)</title>", text, re.I | re.S).group(1).strip() if re.search(r"<title[^>]*>(.*?)</title>", text, re.I | re.S) else ""),
         "bridge_href_count": len(hrefs),
         "bridge_form_action_count": len(actions),
-        "bridge_meta_refresh_count": len(refresh_targets),
+        "bridge_script_srcs": script_urls,
+        "bridge_inline_script_count": len(inline_scripts),
+        "bridge_challenge_script_snippets": challenge_snippets,
+        "bridge_cookie_or_challenge_tokens": cookie_tokens,
         "interesting_resolved_links": interesting,
     }
 
 
 def _numeric_column_profile(sheet: xlrd.sheet.Sheet, col: int) -> dict[str, object]:
     values = [float(sheet.cell(row, col).value) for row in range(sheet.nrows) if sheet.cell(row, col).ctype == xlrd.XL_CELL_NUMBER]
-    return {
-        "column_index": col,
-        "numeric_count": len(values),
-        "numeric_min": min(values) if values else None,
-        "numeric_max": max(values) if values else None,
-    }
+    return {"column_index": col, "numeric_count": len(values), "numeric_min": min(values) if values else None, "numeric_max": max(values) if values else None}
 
 
 def _workbook_audit(payload: bytes) -> tuple[str, list[dict[str, object]]]:
@@ -121,13 +101,7 @@ def _workbook_audit(payload: bytes) -> tuple[str, list[dict[str, object]]]:
             if hits:
                 candidate_rows.append({"row_index": row, "hit_columns": hits, "row_values": values})
         profiles = [_numeric_column_profile(sheet, col) for col in range(sheet.ncols)]
-        audits.append({
-            "sheet_name": sheet.name,
-            "nrows": sheet.nrows,
-            "ncols": sheet.ncols,
-            "candidate_header_rows": candidate_rows,
-            "coordinate_like_numeric_profiles": [p for p in profiles if p["numeric_count"] >= 3 and p["numeric_min"] is not None and -180 <= float(p["numeric_min"]) <= 180 and -180 <= float(p["numeric_max"]) <= 180],
-        })
+        audits.append({"sheet_name": sheet.name, "nrows": sheet.nrows, "ncols": sheet.ncols, "candidate_header_rows": candidate_rows, "coordinate_like_numeric_profiles": [p for p in profiles if p["numeric_count"] >= 3 and p["numeric_min"] is not None and -180 <= float(p["numeric_min"]) <= 180 and -180 <= float(p["numeric_max"]) <= 180]})
     return digest, audits
 
 
@@ -135,29 +109,12 @@ def main() -> int:
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     asset_url, article_url = _resolve_dataset_asset_url()
     payload, final_asset_url, content_type = _request_bytes(asset_url, accept="application/vnd.ms-excel,application/octet-stream,text/html,*/*")
-    common = {
-        "pair_id": "EPV001",
-        "source_article_doi": "10.1073/pnas.1006225107",
-        "source_pmcid": "PMC2947922",
-        "article_url_resolved": article_url,
-        "source_href_resolved_from_article": asset_url,
-        "source_filename": EXPECTED_FILENAME,
-        "occurrence_reads_performed": False,
-        "operational_scope_constructed": False,
-    }
+    common = {"pair_id": "EPV001", "source_article_doi": "10.1073/pnas.1006225107", "source_pmcid": "PMC2947922", "article_url_resolved": article_url, "source_href_resolved_from_article": asset_url, "source_filename": EXPECTED_FILENAME, "occurrence_reads_performed": False, "operational_scope_constructed": False}
     if payload.startswith(OLE2_MAGIC):
         digest, sheets = _workbook_audit(payload)
-        outcome = {
-            **common,
-            "status": "completed_literature_dataset_audit",
-            "source_asset_url_resolved": final_asset_url,
-            "source_content_type": content_type,
-            "source_sha256": digest,
-            "sheets": sheets,
-        }
+        outcome = {**common, "status": "completed_literature_dataset_audit", "source_asset_url_resolved": final_asset_url, "source_content_type": content_type, "source_sha256": digest, "sheets": sheets}
     else:
         outcome = {**common, **_bridge_audit(payload, final_asset_url, content_type)}
-
     OUTPUT_PATH.write_text(json.dumps(outcome, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(outcome, ensure_ascii=False, indent=2, sort_keys=True))
     return 0

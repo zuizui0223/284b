@@ -14,23 +14,19 @@ class AuthorizationGuardTests(unittest.TestCase):
         path = Path("config/product_b_v5_sampling_execution_manifest.json")
         self.manifest = json.loads(path.read_text(encoding="utf-8"))
 
-    def test_committed_manifest_is_frozen_but_not_authorized(self):
+    def test_committed_manifest_is_frozen_and_authorized_for_fig001(self):
         self.assertTrue(self.manifest["contract_frozen"])
         self.assertTrue(self.manifest["scope_gate_frozen"])
         self.assertTrue(self.manifest["preprocessing_contract_frozen"])
         self.assertTrue(self.manifest["transport_contract_frozen"])
         self.assertTrue(self.manifest["negative_control_contract_frozen"])
-        self.assertFalse(self.manifest["execution_authorized"])
-        self.assertFalse(self.manifest["occurrence_reads_allowed"])
+        self.assertTrue(self.manifest["execution_authorized"])
+        self.assertTrue(self.manifest["occurrence_reads_allowed"])
         decision = evaluate_execution_manifest(self.manifest)
-        self.assertFalse(decision.authorized)
-        self.assertNotIn("no_scope_eligible_pairs", decision.reasons)
-        self.assertNotIn("transport_contract_not_frozen", decision.reasons)
-        self.assertNotIn("negative_control_contract_not_frozen", decision.reasons)
-        self.assertIn("execution_not_authorized", decision.reasons)
-        self.assertIn("occurrence_reads_not_allowed", decision.reasons)
+        self.assertTrue(decision.authorized)
+        self.assertEqual(decision.reasons, ())
 
-    def test_fig_pair_passes_taxonomy_and_scope_gates_but_not_execution_gate(self):
+    def test_fig_pair_passes_taxonomy_scope_and_execution_gates(self):
         self.assertEqual(
             self.manifest["taxonomy_eligible_pair_ids"],
             ["OPM_FIG_001"],
@@ -39,11 +35,22 @@ class AuthorizationGuardTests(unittest.TestCase):
             self.manifest["scope_eligible_pair_ids"],
             ["OPM_FIG_001"],
         )
+        decision = require_execution_authorization(
+            self.manifest, requested_pair_ids=["OPM_FIG_001"]
+        )
+        self.assertTrue(decision.authorized)
 
-    def test_current_manifest_raises_before_occurrence_access(self):
+    def test_synthetic_unauthorized_copy_raises_before_occurrence_access(self):
+        blocked = dict(self.manifest)
+        blocked["execution_authorized"] = False
+        blocked["occurrence_reads_allowed"] = False
+        decision = evaluate_execution_manifest(blocked)
+        self.assertFalse(decision.authorized)
+        self.assertIn("execution_not_authorized", decision.reasons)
+        self.assertIn("occurrence_reads_not_allowed", decision.reasons)
         with self.assertRaises(ExecutionNotAuthorized):
             require_execution_authorization(
-                self.manifest, requested_pair_ids=["OPM_FIG_001"]
+                blocked, requested_pair_ids=["OPM_FIG_001"]
             )
 
     def test_fully_authorized_copy_accepts_only_frozen_fig_pair(self):

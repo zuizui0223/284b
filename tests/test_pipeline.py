@@ -42,6 +42,12 @@ class OneShotPipelineTests(unittest.TestCase):
         manifest["occurrence_reads_allowed"] = True
         return manifest
 
+    def _unauthorized_manifest(self):
+        manifest = dict(self.manifest)
+        manifest["execution_authorized"] = False
+        manifest["occurrence_reads_allowed"] = False
+        return manifest
+
     def _inside_points(self, n=50):
         points = []
         for lat_index in range(70):
@@ -75,7 +81,7 @@ class OneShotPipelineTests(unittest.TestCase):
             )
         return tuple(rows)
 
-    def test_committed_manifest_blocks_runner_before_transport(self):
+    def test_synthetic_unauthorized_manifest_blocks_runner_before_transport(self):
         calls = []
 
         def transport(query):
@@ -84,13 +90,13 @@ class OneShotPipelineTests(unittest.TestCase):
 
         with self.assertRaises(ExecutionNotAuthorized):
             execute_frozen_pair_sampling_preflight(
-                manifest=self.manifest,
+                manifest=self._unauthorized_manifest(),
                 scope_declarations=(self.scope,),
                 transport=transport,
             )
         self.assertEqual(calls, [])
 
-    def test_synthetic_authorized_run_computes_primary_and_strict_together(self):
+    def test_committed_authorized_run_computes_primary_and_strict_together(self):
         calls = []
 
         def transport(query):

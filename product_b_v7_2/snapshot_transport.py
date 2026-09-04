@@ -246,8 +246,6 @@ def evaluate_snapshot_contract(contract: Mapping[str, object]) -> SnapshotContra
     if contract.get("authenticated_download_creation_in_ci_forbidden") is not True:
         reasons.append("authenticated_download_ci_boundary_changed")
 
-    # Pair selection is a state transition that is legal only after the schema is
-    # frozen. Metadata/schema reads close when that transition occurs.
     state = (
         bool(contract.get("metadata_reads_allowed")),
         bool(contract.get("snapshot_schema_metadata_reads_allowed")),
@@ -282,7 +280,17 @@ def evaluate_snapshot_contract(contract: Mapping[str, object]) -> SnapshotContra
         reasons.append("minimum_control_count_changed")
 
     firewalled = contract.get("firewalled_consumed_pairs")
-    required_firewall = {"OPM_FIG_001", "OPM_YUC_001", "OPM_YUC_002", "SEN001", "EPV001", "HTR001", "KIM001", "JOS001"}
+    required_firewall = {
+        "OPM_FIG_001",
+        "OPM_YUC_001",
+        "OPM_YUC_002",
+        "SEN001",
+        "EPV001",
+        "HTR001",
+        "KIM001",
+        "JOS001",
+        "JOS002",
+    }
     if not isinstance(firewalled, list) or set(firewalled) != required_firewall:
         reasons.append("consumed_pair_firewall_changed")
     return SnapshotContractDecision(passed=not reasons, reasons=tuple(reasons))

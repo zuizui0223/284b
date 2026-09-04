@@ -1,0 +1,21 @@
+{
+  "result_version": "product_b_v7_kim001_control_taxonomy_v0.1",
+  "pair_id": "KIM001",
+  "closed_pool_size": 8,
+  "resolved_candidate_count": 8,
+  "minimum_required": 5,
+  "pool_state": "control_taxonomy_preflight_passed",
+  "controls": [
+    {"control_taxon_id": "KIM_C01", "scientific_name": "Phyllanthus glaucus", "taxon_key": "5382151", "confidence": 99},
+    {"control_taxon_id": "KIM_C02", "scientific_name": "Phyllanthus flexuosus", "taxon_key": "5381881", "confidence": 100},
+    {"control_taxon_id": "KIM_C03", "scientific_name": "Phyllanthus emblica", "taxon_key": "5381660", "confidence": 100},
+    {"control_taxon_id": "KIM_C04", "scientific_name": "Breynia fruticosa", "taxon_key": "5383016", "confidence": 99},
+    {"control_taxon_id": "KIM_C05", "scientific_name": "Breynia officinalis", "taxon_key": "5382996", "confidence": 100},
+    {"control_taxon_id": "KIM_C06", "scientific_name": "Flueggea virosa", "taxon_key": "5382823", "confidence": 99},
+    {"control_taxon_id": "KIM_C07", "scientific_name": "Flueggea suffruticosa", "taxon_key": "5382858", "confidence": 100},
+    {"control_taxon_id": "KIM_C08", "scientific_name": "Glochidion wilsonii", "taxon_key": "3080871", "confidence": 100}
+  ],
+  "synonym_rescues_performed": 0,
+  "occurrence_reads_performed": false,
+  "invariant_reads_performed": false
+}

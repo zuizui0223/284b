@@ -1,0 +1,45 @@
+{
+  "result_version": "product_b_v7_2_jos002_host_taxonomy_bridge_v0.1",
+  "pair_id": "JOS002",
+  "requested_name": "Yucca jaegeriana",
+  "taxonomy_system": "GBIF current default taxonomy; no legacy checklistKey",
+  "workflow_run_id": 33896638757,
+  "artifact_id": 9945980876,
+  "artifact_sha256": "eca8bbf2c8e6ee92f3cd4ca04b88e486678b649fe3b719b264e093c990d48de5",
+  "match_synonym": true,
+  "match_type": "EXACT",
+  "match_confidence": 100,
+  "match_usage": {
+    "canonicalName": "Yucca jaegeriana",
+    "key": "2775598",
+    "name": "Yucca jaegeriana (McKelvey) L.W.Lenz",
+    "rank": "SPECIES",
+    "status": "SYNONYM"
+  },
+  "match_accepted_usage": {
+    "canonicalName": "Yucca brevifolia",
+    "key": "2775592",
+    "name": "Yucca brevifolia Engelm.",
+    "rank": "SPECIES"
+  },
+  "direct_usage": {
+    "accepted": "Yucca brevifolia Engelm.",
+    "acceptedKey": 2775592,
+    "canonicalName": "Yucca jaegeriana",
+    "key": 2775598,
+    "rank": "SPECIES",
+    "scientificName": "Yucca jaegeriana (McKelvey) L.W.Lenz",
+    "taxonomicStatus": "SYNONYM"
+  },
+  "accepted_key": "2775592",
+  "direct_accepted_usage": {
+    "canonicalName": "Yucca brevifolia",
+    "key": 2775592,
+    "rank": "SPECIES",
+    "scientificName": "Yucca brevifolia Engelm.",
+    "taxonomicStatus": "ACCEPTED"
+  },
+  "snapshot_occurrence_rows_opened": false,
+  "snapshot_occurrence_counts_opened": false,
+  "live_occurrence_search_used": false
+}

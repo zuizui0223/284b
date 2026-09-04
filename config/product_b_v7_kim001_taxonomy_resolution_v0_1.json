@@ -1,0 +1,17 @@
+{
+  "contract_version": "product_b_v7_kim001_taxonomy_resolution_v0.1",
+  "pair_id": "KIM001",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "requests": [
+    {"partner": "x", "scientific_name": "Kirganelia microcarpa", "kingdom": "Plantae", "expected_key_hint": ""},
+    {"partner": "y", "scientific_name": "Epicephala microcarpa", "kingdom": "Animalia", "expected_key_hint": ""}
+  ],
+  "occurrence_reads_allowed": false,
+  "synonym_policy": "Synonym or non-exact matches require a separate manual nomenclatural concept review before any occurrence access; do not silently substitute a taxon key.",
+  "forbidden": [
+    "opening_occurrence_counts_or_maps",
+    "using_occurrence_availability_to_choose_a_name",
+    "accepting_fuzzy_or_higher_rank_matches",
+    "rewriting_the_literature_witness_taxon_identity_after_taxonomy_results"
+  ]
+}

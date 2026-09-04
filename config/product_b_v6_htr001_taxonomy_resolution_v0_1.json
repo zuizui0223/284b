@@ -1,0 +1,28 @@
+{
+  "contract_version": "product_b_v6_htr001_taxonomy_resolution_v0.1",
+  "pair_id": "HTR001",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "taxonomy_only": true,
+  "occurrence_reads_allowed": false,
+  "requests": [
+    {
+      "partner": "x",
+      "scientific_name": "Euphorbia dregeana",
+      "kingdom": "Plantae",
+      "expected_key_hint": ""
+    },
+    {
+      "partner": "y",
+      "scientific_name": "Hydnora triceps",
+      "kingdom": "Plantae",
+      "expected_key_hint": ""
+    }
+  ],
+  "acceptance_rule": "Both partners must resolve through legacy GBIF Backbone species match as EXACT species-rank accepted usages, and the direct usage pages must agree. Synonyms or concept conflicts require a separately frozen manual review before any occurrence access.",
+  "forbidden": [
+    "inspect_occurrence_counts_or_maps",
+    "change_scientific_names_after_sampling_availability_is_seen",
+    "silently_accept_a_fuzzy_or_higher_rank_match",
+    "use_a_secondary_taxon_key_to_authorize_sampling"
+  ]
+}

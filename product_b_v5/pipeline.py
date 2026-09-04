@@ -1,9 +1,9 @@
 """One-shot Product-B v5 sampling-preflight orchestration.
 
-The committed repository still has no real network transport and the committed
-manifest remains unauthorized. This module makes the later authorized execution
-mechanical: one frozen pair spec, both partner reads, post-fetch scope validation,
-raw alias closure, and simultaneous primary/strict sampling decisions.
+Each empirical pair must appear in the frozen in-code spec registry and must also
+pass its own execution manifest. A pair being known to this module never grants
+execution permission: authorization and one-shot consumption remain manifest-level
+gates.
 """
 
 from __future__ import annotations
@@ -41,6 +41,25 @@ OPM_FIG_001_SPEC = FrozenPairExecutionSpec(
     x_taxon_key="5361904",
     y_taxon_key="1359124",
 )
+OPM_YUC_001_SPEC = FrozenPairExecutionSpec(
+    pair_id="OPM_YUC_001",
+    x_taxon_key="2775775",
+    y_taxon_key="8852308",
+)
+OPM_YUC_002_SPEC = FrozenPairExecutionSpec(
+    pair_id="OPM_YUC_002",
+    x_taxon_key="2775710",
+    y_taxon_key="9143017",
+)
+
+FROZEN_PAIR_SPECS: Mapping[str, FrozenPairExecutionSpec] = {
+    spec.pair_id: spec
+    for spec in (
+        OPM_FIG_001_SPEC,
+        OPM_YUC_001_SPEC,
+        OPM_YUC_002_SPEC,
+    )
+}
 
 
 @dataclass(frozen=True)
@@ -119,12 +138,7 @@ def validate_returned_rows_against_query(
     query: LogicalOccurrenceQuery,
     rows: Sequence[Mapping[str, object]],
 ) -> None:
-    """Detect a transport/query mismatch before sampling preprocessing.
-
-    Malformed/missing coordinates remain quality-audit inputs downstream. A valid
-    coordinate demonstrably outside the frozen polygon, however, means the
-    transport did not honour the frozen geographic query and the execution stops.
-    """
+    """Detect a transport/query mismatch before sampling preprocessing."""
 
     if query.geographic_filter_type != "polygon_wkt":
         raise ValueError("v0.2 post-fetch validation only supports polygon_wkt")
@@ -150,6 +164,15 @@ def validate_returned_rows_against_query(
             raise ValueError("returned occurrence lies outside frozen query geometry: " + row_id)
 
 
+def frozen_pair_spec(pair_id: str) -> FrozenPairExecutionSpec:
+    """Return one predeclared pair spec; unknown pairs cannot be executed."""
+
+    try:
+        return FROZEN_PAIR_SPECS[pair_id]
+    except KeyError as exc:
+        raise ValueError("pair_id is absent from frozen execution spec registry") from exc
+
+
 def execute_frozen_pair_sampling_preflight(
     *,
     manifest: Mapping[str, object],
@@ -157,15 +180,16 @@ def execute_frozen_pair_sampling_preflight(
     transport: OccurrenceTransport,
     spec: FrozenPairExecutionSpec = OPM_FIG_001_SPEC,
 ) -> PairSamplingExecutionResult:
-    """Execute the complete sampling preflight only after explicit authorization.
+    """Execute one complete predeclared sampling preflight after authorization.
 
-    No custom thresholds are accepted here: the primary and stricter sensitivity
-    contracts are both computed from the exact same retained records. The current
-    contract admits exactly OPM_FIG_001; a new pair requires a new frozen version.
+    No custom thresholds are accepted: primary and stricter sensitivity contracts
+    are computed from the same retained records. The supplied spec must exactly
+    equal the registered frozen spec for its pair id.
     """
 
-    if spec != OPM_FIG_001_SPEC:
-        raise ValueError("execution spec differs from the currently frozen OPM_FIG_001 spec")
+    registered = frozen_pair_spec(spec.pair_id)
+    if spec != registered:
+        raise ValueError("execution spec differs from the registered frozen pair spec")
 
     authorization = require_execution_authorization(
         manifest,

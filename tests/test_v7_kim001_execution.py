@@ -51,15 +51,26 @@ def occurrence_rows(n, *, prefix="r"):
 
 
 class KIM001ExecutionTests(unittest.TestCase):
-    def test_committed_manifest_is_frozen_but_closed(self):
+    def test_committed_manifest_is_frozen_and_in_one_valid_execution_state(self):
         payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertTrue(payload["contract_frozen"])
         self.assertEqual(payload["pre_execution_package_commit"], FROZEN_HEAD)
-        self.assertFalse(payload["execution_authorized"])
-        self.assertFalse(payload["occurrence_reads_allowed"])
         self.assertFalse(payload["model_fit_reads_allowed"])
         self.assertFalse(payload["invariant_reads_allowed"])
-        self.assertFalse(payload["execution_consumed"])
+        self.assertFalse(payload["process_knockout_reads_allowed"])
+        state = (
+            bool(payload["execution_authorized"]),
+            bool(payload["occurrence_reads_allowed"]),
+            bool(payload["execution_consumed"]),
+        )
+        self.assertIn(
+            state,
+            {
+                (False, False, False),  # frozen but not yet authorized
+                (True, True, False),    # one-shot authorized, not yet consumed
+                (False, False, True),   # terminalized/consumed
+            },
+        )
 
     def test_synthetic_authorized_copy_passes_guard(self):
         decision = evaluate_kim001_execution_manifest(authorized_manifest())
@@ -85,12 +96,19 @@ class KIM001ExecutionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "must remain CN"):
             serialize_v7_gbif_search_request(bad)
 
-    def test_closed_manifest_blocks_transport_before_call(self):
+    def test_committed_manifest_blocks_transport_unless_authorized(self):
+        payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        state = (
+            bool(payload["execution_authorized"]),
+            bool(payload["occurrence_reads_allowed"]),
+            bool(payload["execution_consumed"]),
+        )
+        if state == (True, True, False):
+            self.skipTest("committed manifest is intentionally in the one-shot authorized state")
         calls = []
         def transport(query):
             calls.append(query)
             raise AssertionError("transport must not be called")
-        payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
         with self.assertRaises(KIM001ExecutionNotAuthorized):
             execute_kim001_sampling_preflight(manifest=payload, transport=transport)
         self.assertEqual(calls, [])

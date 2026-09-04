@@ -1,5 +1,7 @@
 name: v6-epv001-scope-dataset-audit
 
+# Implementation-only retry: the first run never opened Dataset S1 because a
+# guessed /bin URL returned article HTML. The scope contract and pair are unchanged.
 on:
   push:
     branches:

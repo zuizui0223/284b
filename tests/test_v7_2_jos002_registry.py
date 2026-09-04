@@ -10,6 +10,7 @@ PAIR = ROOT / "registry/product_b_v7_2_jos002_pair_registry_v0_1.csv"
 WITNESS = ROOT / "registry/product_b_v7_2_jos002_literature_witnesses_v0_1.csv"
 FRAME = ROOT / "config/product_b_v7_2_jos002_frame_v0_1.json"
 SNAPSHOT_CONTRACT = ROOT / "config/product_b_v7_2_snapshot_transport_contract_v0_1.json"
+TERMINAL = ROOT / "results/product_b_v7_2_jos002_taxonomy_terminal_v0_1.json"
 
 
 def witnesses():
@@ -44,15 +45,30 @@ def frame():
 
 
 class JOS002HeldOutEngineeringAdmissionTests(unittest.TestCase):
-    def test_pair_is_new_engineering_only_and_occurrence_blind(self):
+    def test_pair_is_engineering_only_and_terminal_before_occurrence(self):
         with PAIR.open("r", encoding="utf-8", newline="") as handle:
             row = list(csv.DictReader(handle))[0]
         self.assertEqual(row["pair_id"], "JOS002")
         self.assertEqual(row["direction"], "Y_requires_X")
         self.assertEqual(row["engineering_only"], "true")
-        self.assertEqual(row["taxonomy_state"], "taxonomy_unopened")
+        self.assertEqual(row["taxonomy_state"], "unresolved_snapshot_taxonomy_concept")
         self.assertEqual(row["occurrence_reads_performed"], "false")
-        self.assertIn("No snapshot occurrence row", row["known_boundary"])
+        self.assertIn("SYNONYM", row["known_boundary"])
+        self.assertIn("Yucca brevifolia", row["known_boundary"])
+        self.assertIn("permanently firewalled", row["known_boundary"])
+
+    def test_terminal_result_records_concept_collapse_not_sampling_failure(self):
+        result = json.loads(TERMINAL.read_text(encoding="utf-8"))
+        self.assertEqual(result["terminal_state"], "unresolved_snapshot_taxonomy_concept")
+        self.assertEqual(result["terminal_gate"], "snapshot_native_taxonomy_concept")
+        self.assertFalse(result["host_taxon"]["snapshot_native_species_concept_separable"])
+        self.assertEqual(result["host_taxon"]["current_gbif_accepted_name"], "Yucca brevifolia")
+        self.assertFalse(result["snapshot_occurrence_rows_opened"])
+        self.assertFalse(result["snapshot_occurrence_counts_opened"])
+        self.assertIn(
+            "filter_snapshot_rows_by_scientificname_to_split_the_collapsed_concept",
+            result["forbidden_rescues"],
+        )
 
     def test_seventeen_primary_eastern_sites_pass_unchanged_witness_floor(self):
         result = evaluate_witness_frame_preflight(pair_id="JOS002", witnesses=witnesses(), frame=frame())
@@ -72,13 +88,13 @@ class JOS002HeldOutEngineeringAdmissionTests(unittest.TestCase):
         self.assertFalse(data["witness_coordinates_used_to_derive_geometry"])
         self.assertFalse(data["occurrence_information_used_to_derive_geometry"])
 
-    def test_snapshot_transport_was_frozen_before_pair_selection(self):
+    def test_snapshot_transport_remains_open_only_for_new_pair_selection(self):
         contract = json.loads(SNAPSHOT_CONTRACT.read_text(encoding="utf-8"))
         self.assertEqual(contract["snapshot"]["schema_audit_state"], "completed_frozen")
         self.assertTrue(contract["new_pair_selection_allowed"])
         self.assertFalse(contract["occurrence_row_reads_allowed"])
         self.assertIn("JOS001", contract["firewalled_consumed_pairs"])
-        self.assertNotIn("JOS002", contract["firewalled_consumed_pairs"])
+        self.assertIn("JOS002", contract["firewalled_consumed_pairs"])
 
 
 if __name__ == "__main__":

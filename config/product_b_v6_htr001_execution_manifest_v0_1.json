@@ -22,11 +22,11 @@
     {"control_taxon_id": "HTR_C06", "scientific_name": "Euphorbia virosa", "taxon_key": "3066685"}
   ],
   "minimum_sampling_adequate_control_hosts": 5,
-  "execution_authorized": true,
-  "occurrence_reads_allowed": true,
-  "execution_consumed": false,
+  "execution_authorized": false,
+  "occurrence_reads_allowed": false,
+  "execution_consumed": true,
   "invariant_reads_allowed": false,
-  "authorization_note": "Authorized exactly once after repository tests passed on frozen pre-execution head 29dce70fe840d703d4aedbbf7f0788fe3554826d. This authorization covers sampling/control occurrence reads only. Invariant/model/process-knockout outcomes remain prohibited.",
+  "authorization_note": "One-shot sampling/control authorization was consumed on runtime head da1fcc144b3cb0b9c819391a41de3c98bd465269. HTR001 terminated as unresolved_witness_sampling before any frozen control host occurrence was opened. Re-execution is prohibited.",
   "forbidden_after_authorization": [
     "rerun_focal_or_controls_to_rescue_sampling",
     "change_scope_polygon_or_buffer",

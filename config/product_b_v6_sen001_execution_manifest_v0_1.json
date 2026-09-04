@@ -8,6 +8,7 @@
   "witness_contract": "config/product_b_v6_directed_witness_contract_v0_1.json",
   "host_taxonomy_review": "results/product_b_v6_sen001_manual_taxonomy_review_v0_1.json",
   "control_taxonomy_result": "results/product_b_v6_sen001_control_taxonomy_v0_1.json",
+  "terminal_result": "results/product_b_v6_sen001_sampling_terminal_v0_1.json",
   "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
   "x_biological_name": "Lophocereus schottii",
   "x_transport_taxon_key": "3084408",
@@ -22,11 +23,11 @@
     {"control_taxon_id": "SEN_C08", "scientific_name": "Cylindropuntia fulgida", "taxon_key": "7282673"}
   ],
   "minimum_sampling_adequate_control_hosts": 5,
-  "execution_authorized": true,
-  "occurrence_reads_allowed": true,
-  "execution_consumed": false,
+  "execution_authorized": false,
+  "occurrence_reads_allowed": false,
+  "execution_consumed": true,
   "invariant_reads_allowed": false,
-  "authorization_note": "Authorized on 2026-09-04 after the complete SEN001 v6 preflight package at c33bd3f62721982158f0159eb4fbcefbdcb7f033 passed repository tests. This authorization permits exactly one focal sampling/control preflight. Invariant/model/process-knockout outcomes remain prohibited.",
+  "authorization_note": "One-shot occurrence authorization was consumed by GitHub Actions run 33850672216 at execution commit 2b852777f206996f624c08f4c0b9da54863837bd. The focal gate terminated as unresolved_witness_sampling before any control occurrence reads. Reauthorization or scientific rerun for SEN001 is forbidden; invariant/model/process-knockout outcomes remain unopened.",
   "forbidden_after_authorization": [
     "rerun_focal_or_controls_to_rescue_sampling",
     "change_scope_polygon_or_buffer",
@@ -34,6 +35,8 @@
     "add_control_taxa_after_occurrence_availability_is_seen",
     "drop_a_frozen_control_taxon_because_its_sampling_is_sparse",
     "relax_host_or_witness_sampling_floors",
+    "relax_coordinate_uncertainty_ceiling",
+    "open_controls_after_focal_failure",
     "open_invariant_or_process_knockout_outcomes_during_this_step"
   ]
 }

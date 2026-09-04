@@ -27,10 +27,15 @@
   "scope_eligible_pair_ids": [
     "OPM_FIG_001"
   ],
-  "execution_authorized": true,
-  "occurrence_reads_allowed": true,
-  "authorization_note": "One-shot sampling-availability execution is authorized only for OPM_FIG_001 under the already-frozen taxonomy, scope, transport, preprocessing, sampling and negative-control contracts. No upstream threshold, scope, taxon or filter may be changed in response to the opened occurrence result.",
+  "execution_authorized": false,
+  "occurrence_reads_allowed": false,
+  "execution_consumed": true,
+  "consumed_workflow_run_id": 33829768581,
+  "terminal_result": "results/product_b_v5_fig001_sampling_terminal_v0_1.json",
+  "terminal_state": "unresolved_sampling",
+  "authorization_note": "The authorized one-shot occurrence read for OPM_FIG_001 has been consumed. Frozen raw counts were 42 for Ficus racemosa and 11 for Ceratosolen fusciceps, making the >=50 independent-record primary floor unreachable for both partners. This manifest is permanently closed for repeat occurrence execution of this pair.",
   "forbidden_after_authorization": [
+    "rerunning_OPM_FIG_001_occurrence_search_for_rescue",
     "widening_or_redefining_the_geographic_scope",
     "adding_or_removing_occurrence_filters_to_rescue_the_pair",
     "changing_taxon_keys_or_taxonomic_concepts_to_rescue_the_pair",

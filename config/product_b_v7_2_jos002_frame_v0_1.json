@@ -1,0 +1,22 @@
+{
+  "frame_version": "product_b_v7_2_jos002_frame_v0.1",
+  "pair_id": "JOS002",
+  "frame_id": "USA-ADM0-2327393",
+  "source_type": "preexisting_admin_boundary",
+  "source_authority": "geoBoundaries gbOpen; underlying source United States Census Bureau MAF/TIGER Database",
+  "source_version": "boundaryYearRepresented=2018; geoBoundaries immutable source commit=9469f09",
+  "geometry_type": "admin_codes",
+  "geometry_value": "USA",
+  "operational_snapshot_country_code_iso2": "US",
+  "witness_coordinates_used_to_derive_geometry": false,
+  "occurrence_information_used_to_derive_geometry": false,
+  "boundary_metadata": {
+    "boundary_name": "United States of America",
+    "boundary_iso3": "USA",
+    "boundary_year_represented": "2018",
+    "boundary_source": "United States Census Bureau, MAF/TIGER Database",
+    "boundary_license": "Public Domain",
+    "geoBoundaries_static_commit": "9469f09"
+  },
+  "note": "USA ADM0 is independent of the 17 eastern moth witness coordinates. The witnesses are test-only. JOS002 snapshot occurrence execution, if later authorized, must filter within this frozen USA frame without deriving geometry from witnesses or occurrence rows."
+}

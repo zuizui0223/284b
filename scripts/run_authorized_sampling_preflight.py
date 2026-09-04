@@ -2,8 +2,9 @@
 """Run the single authorized Product-B v5 sampling-availability preflight.
 
 Raw occurrence rows stay in memory. The only persisted output is a compact JSON
-summary/audit. This script is intended to run exactly once from the dedicated
-GitHub Actions workflow after the execution manifest has been authorized.
+summary/audit. This script is now archival for OPM_FIG_001 because that pair's
+one-shot manifest is consumed; future pair lines must use their own authorization
+manifest rather than reopening this one.
 """
 
 from __future__ import annotations
@@ -92,11 +93,11 @@ def main() -> int:
                 "transport_audits": _jsonable(transport.audits),
                 "primary_sampling": _jsonable(result.primary),
                 "strict_sensitivity_sampling": _jsonable(result.strict_sensitivity),
-                "raw_alias_collision_components": _jsonable(
-                    result.adapted_batch.raw_collision_components
+                "raw_records_x": result.adapted_batch.raw_records_x,
+                "raw_records_y": result.adapted_batch.raw_records_y,
+                "raw_identity_components": _jsonable(
+                    result.adapted_batch.identity_components
                 ),
-                "raw_alias_collision_excluded_x": result.adapted_batch.raw_collision_excluded_x,
-                "raw_alias_collision_excluded_y": result.adapted_batch.raw_collision_excluded_y,
             }
         )
     except Exception as exc:  # terminal audit is persisted before failing the workflow

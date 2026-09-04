@@ -48,22 +48,23 @@ def load_frame():
 
 
 class KIM001LiteratureWitnessTests(unittest.TestCase):
-    def test_pair_is_new_and_occurrence_blind_across_taxonomy_transition(self):
+    def test_pair_is_terminal_after_consumed_sampling_without_confirmatory_promotion(self):
         with PAIR_PATH.open("r", encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle))
         self.assertEqual(len(rows), 1)
         row = rows[0]
         self.assertEqual(row["pair_id"], "KIM001")
         self.assertEqual(row["direction"], "Y_requires_X")
-        self.assertEqual(row["occurrence_reads_performed"], "false")
-        self.assertIn(
+        self.assertEqual(row["occurrence_reads_performed"], "true")
+        self.assertEqual(
             row["taxonomy_state"],
-            {
-                "taxonomy_unopened",
-                "resolved_manual_homotypic_synonym_bridge_x_plus_direct_exact_y",
-            },
+            "resolved_manual_homotypic_synonym_bridge_x_plus_direct_exact_y",
         )
+        self.assertEqual(row["frame_state"], "independent_frame_resolved_host_sampling_terminal")
         self.assertEqual(row["confirmatory_eligible"], "false")
+        self.assertIn("unresolved_host_sampling", row["known_boundary"])
+        self.assertIn("6 raw / 6 retained", row["known_boundary"])
+        self.assertIn("Controls were not opened", row["known_boundary"])
 
     def test_thirteen_positive_rearing_sites_pass_unchanged_witness_floor(self):
         result = evaluate_witness_frame_preflight(

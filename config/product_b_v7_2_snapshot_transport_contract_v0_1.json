@@ -1,0 +1,83 @@
+{
+  "contract_version": "product_b_v7_2_snapshot_transport_v0.1",
+  "engineering_only": true,
+  "confirmatory_claims_allowed": false,
+  "live_occurrence_search_forbidden": true,
+  "primary_transport": "gbif_monthly_public_cloud_snapshot",
+  "snapshot": {
+    "provider": "aws_open_data",
+    "region": "us-east-1",
+    "bucket": "gbif-open-data-us-east-1",
+    "snapshot_date": "2026-08-01",
+    "occurrence_prefix": "occurrence/2026-08-01/occurrence.parquet/",
+    "citation_key": "occurrence/2026-08-01/citation.txt",
+    "metadata_audit_state": "pending",
+    "object_manifest_sha256": null,
+    "object_count": null,
+    "total_object_bytes": null,
+    "citation_sha256": null,
+    "citation_doi": null
+  },
+  "metadata_reads_allowed": true,
+  "occurrence_row_reads_allowed": false,
+  "new_pair_selection_allowed": false,
+  "required_metadata_audit": {
+    "anonymous_s3_listing_only": true,
+    "citation_txt_only": true,
+    "require_parquet_object": true,
+    "canonical_object_manifest_fields": ["key", "size", "etag", "last_modified"]
+  },
+  "required_snapshot_fields_before_occurrence_execution": [
+    "gbifid",
+    "datasetkey",
+    "occurrenceid",
+    "institutioncode",
+    "collectioncode",
+    "catalognumber",
+    "recordedby",
+    "eventdate",
+    "countrycode",
+    "occurrencestatus",
+    "decimallatitude",
+    "decimallongitude",
+    "coordinateuncertaintyinmeters",
+    "taxonkey",
+    "specieskey",
+    "scientificname",
+    "issue",
+    "license",
+    "lastinterpreted"
+  ],
+  "future_pair_sampling_floor": {
+    "minimum_independent_records": 50,
+    "minimum_unique_10km_cells": 30,
+    "minimum_effective_10km_cells": 10.0
+  },
+  "future_literature_witness_floor": {
+    "minimum_independent_witnesses": 5,
+    "minimum_unique_10km_cells": 3
+  },
+  "minimum_sampling_adequate_control_hosts": 5,
+  "snapshot_native_taxonomy_bridge_required": true,
+  "authenticated_download_creation_in_ci_forbidden": true,
+  "completed_download_import_allowed_only_if_prefrozen": true,
+  "firewalled_consumed_pairs": [
+    "OPM_FIG_001",
+    "OPM_YUC_001",
+    "OPM_YUC_002",
+    "SEN001",
+    "EPV001",
+    "HTR001",
+    "KIM001",
+    "JOS001"
+  ],
+  "forbidden": [
+    "use_live_occurrence_search_as_fallback",
+    "select_future_pair_from_snapshot_occurrence_counts",
+    "change_snapshot_date_after_future_pair_occurrence_opening",
+    "rerun_JOS001_with_snapshot_transport",
+    "silently_treat_legacy_taxon_key_as_snapshot_native_key",
+    "drop_required_schema_fields_after_rows_are_seen",
+    "store_GBIF_username_or_password_in_repository_or_artifacts"
+  ]
+}

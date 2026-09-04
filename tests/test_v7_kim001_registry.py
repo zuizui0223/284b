@@ -48,7 +48,7 @@ def load_frame():
 
 
 class KIM001LiteratureWitnessTests(unittest.TestCase):
-    def test_pair_is_new_and_occurrence_blind(self):
+    def test_pair_is_new_and_occurrence_blind_across_taxonomy_transition(self):
         with PAIR_PATH.open("r", encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle))
         self.assertEqual(len(rows), 1)
@@ -56,7 +56,13 @@ class KIM001LiteratureWitnessTests(unittest.TestCase):
         self.assertEqual(row["pair_id"], "KIM001")
         self.assertEqual(row["direction"], "Y_requires_X")
         self.assertEqual(row["occurrence_reads_performed"], "false")
-        self.assertEqual(row["taxonomy_state"], "taxonomy_unopened")
+        self.assertIn(
+            row["taxonomy_state"],
+            {
+                "taxonomy_unopened",
+                "resolved_manual_homotypic_synonym_bridge_x_plus_direct_exact_y",
+            },
+        )
         self.assertEqual(row["confirmatory_eligible"], "false")
 
     def test_thirteen_positive_rearing_sites_pass_unchanged_witness_floor(self):

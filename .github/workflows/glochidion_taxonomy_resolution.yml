@@ -1,5 +1,6 @@
 name: glochidion-taxonomy-resolution
 
+# Retriggered after updating Yucca manifests to their consumed terminal state.
 on:
   push:
     branches:

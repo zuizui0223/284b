@@ -126,13 +126,16 @@
     "EPV001",
     "HTR001",
     "KIM001",
-    "JOS001"
+    "JOS001",
+    "JOS002"
   ],
   "forbidden": [
     "use_live_occurrence_search_as_fallback",
     "select_future_pair_from_snapshot_occurrence_counts",
     "change_snapshot_date_after_future_pair_occurrence_opening",
     "rerun_JOS001_with_snapshot_transport",
+    "rerun_or_reuse_JOS002_after_snapshot_taxonomy_concept_failure",
+    "split_JOS002_host_using_scientificname_or_verbatimscientificname_after_taxonomy_failure",
     "silently_treat_legacy_taxon_key_as_snapshot_native_key",
     "drop_required_schema_fields_after_rows_are_seen",
     "store_GBIF_username_or_password_in_repository_or_artifacts"

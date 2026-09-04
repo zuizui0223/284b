@@ -15,6 +15,7 @@ from product_b_v5.occurrence_adapter import AdaptedOccurrenceBatch, adapt_gbif_p
 
 EXPECTED_COUNTRY_CODE = "US"
 EXPECTED_OCCURRENCE_STATUS = "PRESENT"
+EXPECTED_SPECIES_FILTER_FIELD = "specieskey"
 MAX_MATCHED_ROWS_PER_TAXON = 100_000
 SNAPSHOT_IDENTITY_FIELDS_AVAILABLE = (
     "gbifid",
@@ -30,6 +31,7 @@ SNAPSHOT_IDENTITY_FIELDS_UNAVAILABLE = ("eventID", "otherCatalogNumbers")
 class SnapshotTaxonQuery:
     group_id: str
     species_keys: tuple[str, ...]
+    species_filter_field: str = EXPECTED_SPECIES_FILTER_FIELD
     country_code: str = EXPECTED_COUNTRY_CODE
     occurrence_status: str = EXPECTED_OCCURRENCE_STATUS
     max_rows_per_taxon: int = MAX_MATCHED_ROWS_PER_TAXON
@@ -61,6 +63,8 @@ def validate_snapshot_taxon_query(query: SnapshotTaxonQuery) -> tuple[str, ...]:
         reasons.append("query_species_key_blank")
     if len(set(query.species_keys)) != len(query.species_keys):
         reasons.append("query_species_keys_not_unique")
+    if query.species_filter_field != EXPECTED_SPECIES_FILTER_FIELD:
+        reasons.append("query_species_filter_field_mismatch")
     if query.country_code != EXPECTED_COUNTRY_CODE:
         reasons.append("query_country_code_mismatch")
     if query.occurrence_status != EXPECTED_OCCURRENCE_STATUS:
@@ -114,7 +118,7 @@ def normalize_snapshot_occurrence_row(
     if not gbifid:
         raise ValueError("snapshot occurrence row is missing gbifid")
 
-    species_key = _text(row.get("specieskey"))
+    species_key = _text(row.get(EXPECTED_SPECIES_FILTER_FIELD))
     if species_key not in expected:
         raise ValueError("snapshot occurrence row violates frozen specieskey filter: " + gbifid)
     country = _text(row.get("countrycode")).upper()
@@ -179,6 +183,7 @@ def adapt_snapshot_host_rows(
 __all__ = [
     "EXPECTED_COUNTRY_CODE",
     "EXPECTED_OCCURRENCE_STATUS",
+    "EXPECTED_SPECIES_FILTER_FIELD",
     "MAX_MATCHED_ROWS_PER_TAXON",
     "SNAPSHOT_IDENTITY_FIELDS_AVAILABLE",
     "SNAPSHOT_IDENTITY_FIELDS_UNAVAILABLE",

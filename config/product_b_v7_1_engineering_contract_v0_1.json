@@ -1,0 +1,61 @@
+{
+  "contract_version": "product_b_v7_1_engineering_v0.1",
+  "status": "engineering_only_not_confirmatory",
+  "inherits": "product_b_v7_literature_witness_v0.1",
+  "host_sampling_floor": {
+    "minimum_independent_records": 50,
+    "minimum_unique_10km_cells": 30,
+    "minimum_effective_10km_cells": 10.0
+  },
+  "literature_witness_floor": {
+    "minimum_independent_witnesses": 5,
+    "minimum_unique_10km_cells": 3,
+    "maximum_coordinate_uncertainty_m": 10000
+  },
+  "prospective_host_feasibility_screen": {
+    "minimum_direct_primary_literature_host_or_association_localities": 10,
+    "minimum_independent_first_order_admin_or_equivalent_regions": 2,
+    "minimum_predeclared_replacement_host_taxa": 8,
+    "occurrence_counts_maps_or_cell_statistics_allowed_for_candidate_selection": false,
+    "project_geocoding_allowed_for_feasibility_screen": false
+  },
+  "frame_contract": {
+    "witness_coordinates_may_define_frame_geometry": false,
+    "occurrence_availability_may_define_frame_geometry": false,
+    "allowed_source_types": [
+      "preexisting_admin_boundary",
+      "protected_area_boundary",
+      "ecoregion_boundary",
+      "primary_literature_study_region_geometry"
+    ]
+  },
+  "control_contract": {
+    "minimum_taxonomy_and_sampling_adequate_replacement_hosts": 5,
+    "initial_pool_minimum": 8,
+    "pool_expansion_after_taxonomy_or_sampling_results": false,
+    "shuffled_draw_count": 100,
+    "maximum_host_support_fraction": 0.80
+  },
+  "differentiability_contract": {
+    "stage1_structural_minimum_members": 2,
+    "stage1_structural_minimum_distinct_signatures": 2,
+    "stage2_host_specific_minimum_adequate_members": 2,
+    "stage2_host_specific_minimum_distinct_signatures": 2
+  },
+  "engineering_pair_id": "JOS001",
+  "firewalled_from_v7_1_confirmation": [
+    "OPM_FIG_001",
+    "OPM_YUC_001",
+    "OPM_YUC_002",
+    "OPM_GLO_001",
+    "OPM_GLO_002",
+    "OPM_GLO_003",
+    "OPM_GLO_004",
+    "SEN001",
+    "EPV001",
+    "HTR001",
+    "KIM001",
+    "JOS001"
+  ],
+  "claim_boundary": "JOS001 can validate engineering feasibility only. Even if all downstream gates pass, its invariant outcome is not the primary confirmatory endpoint because the v7.1 host-feasibility screen was introduced after observing v5-v7 feasibility failures."
+}

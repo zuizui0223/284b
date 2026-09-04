@@ -1,5 +1,6 @@
 name: v7-2-jos003-control-taxonomy
 
+# Retrigger after syncing the JOS003 focal-taxonomy state fixture.
 on:
   push:
     branches:

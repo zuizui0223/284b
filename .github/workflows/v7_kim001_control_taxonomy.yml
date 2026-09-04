@@ -1,0 +1,37 @@
+name: v7-kim001-control-taxonomy
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - .github/workflows/v7_kim001_control_taxonomy.yml
+
+permissions:
+  contents: read
+
+jobs:
+  taxonomy-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify repository tests before control taxonomy access
+        env:
+          PYTHONPATH: .
+        run: python -m unittest discover -s tests -v
+      - name: Resolve KIM001 replacement-host taxonomy only
+        env:
+          PYTHONPATH: .
+        run: python scripts/run_v7_kim001_control_taxonomy.py
+      - name: Upload KIM001 control taxonomy audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-v7-kim001-control-taxonomy
+          path: artifacts/product_b_v7_kim001_control_taxonomy.json
+          if-no-files-found: error
+          retention-days: 90

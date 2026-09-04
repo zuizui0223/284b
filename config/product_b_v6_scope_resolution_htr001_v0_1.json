@@ -15,7 +15,7 @@
   "derivation": "product_b_v5.scope.convex_hull_polygon_wkt over all five unique explicitly georeferenced Hydnora triceps specimen localities in the 2024 taxonomic revision",
   "buffer_degrees": 0,
   "filter_value": "POLYGON((16.80235 -27.94045,17.130254 -29.19116,17.211111 -29.396389,17.364589 -29.4761,16.855833 -27.890833,16.80235 -27.94045))",
-  "scope_source_type": "primary_taxonomic_revision_specimen_localities",
+  "scope_source_type": "primary_literature_methods",
   "occurrence_information_used_in_derivation": false,
   "host_specificity_review": {
     "state": "resolved_under_2024_revision",

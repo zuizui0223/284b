@@ -1,0 +1,25 @@
+{
+  "contract_version": "product_b_v7_1_jos001_control_taxonomy_v0.1",
+  "pair_id": "JOS001",
+  "engineering_only": true,
+  "control_role": "replacement_host_negative_controls",
+  "selection_basis": "Closed before occurrence access. Tegeticula synthetica is treated biologically as a Yucca brevifolia specialist under the JOS001 literature contract; replacement controls are other Yucca species, selected without occurrence availability.",
+  "minimum_required_exact_accepted_controls": 5,
+  "synonym_rescue_allowed": false,
+  "requests": [
+    {"control_taxon_id": "JOS_C01", "scientific_name": "Yucca baccata", "kingdom": "Plantae"},
+    {"control_taxon_id": "JOS_C02", "scientific_name": "Yucca schidigera", "kingdom": "Plantae"},
+    {"control_taxon_id": "JOS_C03", "scientific_name": "Yucca elata", "kingdom": "Plantae"},
+    {"control_taxon_id": "JOS_C04", "scientific_name": "Yucca glauca", "kingdom": "Plantae"},
+    {"control_taxon_id": "JOS_C05", "scientific_name": "Yucca filamentosa", "kingdom": "Plantae"},
+    {"control_taxon_id": "JOS_C06", "scientific_name": "Yucca torreyi", "kingdom": "Plantae"},
+    {"control_taxon_id": "JOS_C07", "scientific_name": "Yucca rostrata", "kingdom": "Plantae"},
+    {"control_taxon_id": "JOS_C08", "scientific_name": "Yucca harrimaniae", "kingdom": "Plantae"}
+  ],
+  "occurrence_reads_allowed": false,
+  "forbidden": [
+    "add_replacement_taxa_after_taxonomy_or_occurrence_availability_is_seen",
+    "rescue_synonym_controls_manually",
+    "replace_failed_controls_with_better_sampled_species"
+  ]
+}

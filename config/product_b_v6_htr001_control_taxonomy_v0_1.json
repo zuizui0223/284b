@@ -1,0 +1,17 @@
+{
+  "contract_version": "product_b_v6_htr001_control_taxonomy_v0.1",
+  "pair_id": "HTR001",
+  "pool_registry": "registry/product_b_v6_htr001_shuffled_host_pool_literature_v0_1.csv",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "occurrence_reads_allowed": false,
+  "acceptance_rule": "candidate remains in the frozen replacement pool only if its literature name returns an EXACT species-rank ACCEPTED legacy-backbone match and the direct /v1/species/{key} page agrees",
+  "synonym_policy": "unresolved/excluded_for_control_pool; do not perform post-hoc manual synonym rescue for replacement hosts",
+  "minimum_taxonomy_resolved_candidates_before_any_occurrence_query": 5,
+  "pool_is_closed": true,
+  "forbidden": [
+    "adding_new_control_taxa_after_taxonomy_results_are_seen",
+    "opening_occurrence_counts_or_maps_during_taxonomy_resolution",
+    "manual_synonym_bridging_to_reach_the_minimum_control_count",
+    "broadening_from_species_to_genus"
+  ]
+}

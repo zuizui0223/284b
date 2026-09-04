@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
 """Audit the published EPV001 Dataset S1 workbook without occurrence access.
 
-This step is literature-only. It downloads the PNAS supplementary XLS named by
-the article's Associated Data section, hashes it, and reports workbook structure
-and coordinate-column candidates. It does not construct an operational polygon.
+This step is literature-only. It resolves the exact Dataset S1 asset href from the
+PMC article HTML, hashes the published XLS, and reports workbook structure and
+coordinate-column candidates. It does not construct an operational polygon.
 """
 
 from __future__ import annotations
 
 import hashlib
+import html
 import json
 from pathlib import Path
 import re
 import sys
+from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 
 import xlrd
@@ -20,29 +22,51 @@ import xlrd
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_PATH = ROOT / "artifacts/product_b_v6_epv001_scope_dataset_audit.json"
-SOURCE_URL = "https://pmc.ncbi.nlm.nih.gov/articles/PMC2947922/bin/1006225107_sd01.xls"
+ARTICLE_URL = "https://pmc.ncbi.nlm.nih.gov/articles/PMC2947922/"
 EXPECTED_FILENAME = "1006225107_sd01.xls"
 KEYWORDS = ("lat", "latitude", "lon", "long", "longitude", "locality", "location", "site", "population")
+OLE2_MAGIC = bytes.fromhex("D0CF11E0A1B11AE1")
 
 
 def _normalize(value: object) -> str:
     return re.sub(r"\s+", " ", str(value).strip())
 
 
-def _get_bytes(url: str, *, timeout_seconds: float = 90.0) -> bytes:
+def _request_bytes(url: str, *, accept: str, timeout_seconds: float = 90.0) -> tuple[bytes, str, str]:
     request = Request(
         url,
         headers={
-            "Accept": "application/vnd.ms-excel,application/octet-stream,*/*",
-            "User-Agent": "zuizui0223-284b-product-b-v6-literature-scope/0.1",
+            "Accept": accept,
+            "User-Agent": "zuizui0223-284b-product-b-v6-literature-scope/0.2",
         },
         method="GET",
     )
     with urlopen(request, timeout=timeout_seconds) as response:
         payload = response.read()
+        final_url = response.geturl()
+        content_type = response.headers.get("Content-Type", "")
     if not payload:
-        raise ValueError("published Dataset S1 download was empty")
-    return payload
+        raise ValueError(f"published resource download was empty: {url}")
+    return payload, final_url, content_type
+
+
+def _resolve_dataset_asset_url() -> tuple[str, str]:
+    article_bytes, final_article_url, _ = _request_bytes(
+        ARTICLE_URL,
+        accept="text/html,application/xhtml+xml",
+    )
+    article_text = html.unescape(article_bytes.decode("utf-8", errors="replace"))
+    pattern = re.compile(
+        r'''href=["']([^"']*''' + re.escape(EXPECTED_FILENAME) + r'''[^"']*)["']''',
+        flags=re.IGNORECASE,
+    )
+    matches = [match.group(1) for match in pattern.finditer(article_text)]
+    unique = list(dict.fromkeys(matches))
+    if len(unique) != 1:
+        raise ValueError(
+            f"expected exactly one PMC href for {EXPECTED_FILENAME}; found {len(unique)}"
+        )
+    return urljoin(final_article_url, unique[0]), final_article_url
 
 
 def _numeric_column_profile(sheet: xlrd.sheet.Sheet, col: int) -> dict[str, object]:
@@ -61,7 +85,18 @@ def _numeric_column_profile(sheet: xlrd.sheet.Sheet, col: int) -> dict[str, obje
 
 def main() -> int:
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    payload = _get_bytes(SOURCE_URL)
+    asset_url, resolved_article_url = _resolve_dataset_asset_url()
+    payload, final_asset_url, content_type = _request_bytes(
+        asset_url,
+        accept="application/vnd.ms-excel,application/octet-stream,*/*",
+    )
+    if not payload.startswith(OLE2_MAGIC):
+        prefix = payload[:16].hex()
+        raise ValueError(
+            "resolved Dataset S1 asset is not an OLE2 XLS file: "
+            f"content_type={content_type!r}, prefix_hex={prefix}, final_url={final_asset_url}"
+        )
+
     digest = hashlib.sha256(payload).hexdigest()
     workbook = xlrd.open_workbook(file_contents=payload)
 
@@ -114,8 +149,11 @@ def main() -> int:
         "pair_id": "EPV001",
         "source_article_doi": "10.1073/pnas.1006225107",
         "source_pmcid": "PMC2947922",
-        "source_url": SOURCE_URL,
+        "article_url_requested": ARTICLE_URL,
+        "article_url_resolved": resolved_article_url,
+        "source_asset_url_resolved": final_asset_url,
         "source_filename": EXPECTED_FILENAME,
+        "source_content_type": content_type,
         "source_sha256": digest,
         "workbook_sheet_count": workbook.nsheets,
         "sheets": sheet_audits,

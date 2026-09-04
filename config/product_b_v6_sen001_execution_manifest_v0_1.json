@@ -2,7 +2,7 @@
   "manifest_version": "product_b_v6_directed_witness_preflight_v0.1",
   "pair_id": "SEN001",
   "contract_frozen": true,
-  "pre_execution_package_commit": "pending_tested_freeze",
+  "pre_execution_package_commit": "c33bd3f62721982158f0159eb4fbcefbdcb7f033",
   "primary_registry": "registry/product_b_v6_primary_pair_registry_v0_2.csv",
   "scope_contract": "config/product_b_v6_scope_resolution_sen001_v0_1.json",
   "witness_contract": "config/product_b_v6_directed_witness_contract_v0_1.json",
@@ -22,11 +22,11 @@
     {"control_taxon_id": "SEN_C08", "scientific_name": "Cylindropuntia fulgida", "taxon_key": "7282673"}
   ],
   "minimum_sampling_adequate_control_hosts": 5,
-  "execution_authorized": false,
-  "occurrence_reads_allowed": false,
+  "execution_authorized": true,
+  "occurrence_reads_allowed": true,
   "execution_consumed": false,
   "invariant_reads_allowed": false,
-  "authorization_note": "Closed pre-execution manifest. Occurrence execution can be authorized only after the full SEN001 v6 preflight package passes repository tests. Invariant/model outcomes remain prohibited regardless of sampling outcome until a later contract.",
+  "authorization_note": "Authorized on 2026-09-04 after the complete SEN001 v6 preflight package at c33bd3f62721982158f0159eb4fbcefbdcb7f033 passed repository tests. This authorization permits exactly one focal sampling/control preflight. Invariant/model/process-knockout outcomes remain prohibited.",
   "forbidden_after_authorization": [
     "rerun_focal_or_controls_to_rescue_sampling",
     "change_scope_polygon_or_buffer",

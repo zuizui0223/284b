@@ -4,6 +4,7 @@ from pathlib import Path
 import unittest
 
 from product_b_v7_2.snapshot_transport import (
+    EXPECTED_SCHEMA_SHA256,
     REQUIRED_SNAPSHOT_FIELDS,
     SnapshotObject,
     build_metadata_audit,
@@ -42,13 +43,18 @@ def objects():
 
 
 class SnapshotContractTests(unittest.TestCase):
-    def test_committed_contract_is_pre_pair_closed_and_preserves_floors(self):
+    def test_committed_contract_has_frozen_schema_and_opens_only_pair_selection(self):
         contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
         decision = evaluate_snapshot_contract(contract)
         self.assertTrue(decision.passed, decision.reasons)
+        self.assertFalse(contract["metadata_reads_allowed"])
+        self.assertFalse(contract["snapshot_schema_metadata_reads_allowed"])
         self.assertFalse(contract["occurrence_row_reads_allowed"])
-        self.assertFalse(contract["new_pair_selection_allowed"])
+        self.assertTrue(contract["new_pair_selection_allowed"])
         self.assertTrue(contract["live_occurrence_search_forbidden"])
+        self.assertEqual(contract["snapshot"]["schema_audit_state"], "completed_frozen")
+        self.assertEqual(contract["snapshot"]["schema_sha256"], EXPECTED_SCHEMA_SHA256)
+        self.assertEqual(len(contract["snapshot"]["schema_fields"]), 50)
         self.assertEqual(
             contract["future_pair_sampling_floor"],
             {
@@ -87,6 +93,25 @@ class SnapshotContractTests(unittest.TestCase):
         decision = evaluate_snapshot_contract(contract)
         self.assertFalse(decision.passed)
         self.assertIn("required_snapshot_schema_changed", decision.reasons)
+
+    def test_frozen_schema_hash_or_fields_cannot_drift(self):
+        contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
+        contract["snapshot"]["schema_sha256"] = "0" * 64
+        contract["snapshot"]["schema_fields"].pop("taxonkey")
+        decision = evaluate_snapshot_contract(contract)
+        self.assertFalse(decision.passed)
+        self.assertIn("schema_digest_mismatch", decision.reasons)
+        self.assertIn("schema_field_count_mismatch", decision.reasons)
+        self.assertIn("schema_required_field_missing", decision.reasons)
+        self.assertIn("schema_fields_digest_mismatch", decision.reasons)
+
+    def test_pair_selection_state_cannot_open_schema_or_occurrence_reads(self):
+        contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
+        contract["snapshot_schema_metadata_reads_allowed"] = True
+        contract["new_pair_selection_allowed"] = True
+        decision = evaluate_snapshot_contract(contract)
+        self.assertFalse(decision.passed)
+        self.assertIn("post_schema_pair_selection_state_invalid", decision.reasons)
 
 
 class SnapshotMetadataTests(unittest.TestCase):

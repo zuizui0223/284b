@@ -41,10 +41,13 @@ def _get_json(url: str, *, timeout_seconds: float = 60.0) -> Mapping[str, object
     return payload
 
 
-def _resolve(control_id: str, name: str) -> dict[str, object]:
+def _resolve(name: str) -> dict[str, object]:
+    # The shared taxonomy validator deliberately restricts partner labels to x/y.
+    # Control identity is carried outside the request, so use x only as a neutral
+    # validator slot; it has no biological directional meaning here.
     request = TaxonomyResolutionRequest(
-        pair_id="SEN001",
-        partner=control_id,
+        pair_id="SEN001_CONTROL_POOL",
+        partner="x",
         scientific_name=name,
         kingdom="Plantae",
         expected_key_hint="",
@@ -70,7 +73,6 @@ def main() -> int:
     contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
     pool_path = ROOT / contract["pool_registry"]
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    rows = []
     with pool_path.open("r", encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
 
@@ -78,7 +80,7 @@ def main() -> int:
     resolved = 0
     for row in rows:
         try:
-            resolution = _resolve(row["control_taxon_id"], row["scientific_name"])
+            resolution = _resolve(row["scientific_name"])
             results.append(
                 {
                     "control_taxon_id": row["control_taxon_id"],

@@ -53,7 +53,7 @@ class JOS003HeldOutEngineeringAdmissionTests(unittest.TestCase):
             "resolved_direct_exact_current_snapshot_taxonomy",
         )
         self.assertEqual(row["occurrence_reads_performed"], "false")
-        self.assertIn("No snapshot occurrence row", row["known_boundary"])
+        self.assertIn("Snapshot occurrence rows/counts remain unopened", row["known_boundary"])
 
     def test_twelve_primary_positive_sites_pass_unchanged_witness_floor(self):
         result = evaluate_witness_frame_preflight(pair_id="JOS003", witnesses=witnesses(), frame=frame())

@@ -22,7 +22,7 @@
     "schema_sha256": null,
     "schema_fields": null
   },
-  "metadata_reads_allowed": false,
+  "metadata_reads_allowed": true,
   "snapshot_schema_metadata_reads_allowed": true,
   "occurrence_row_reads_allowed": false,
   "new_pair_selection_allowed": false,

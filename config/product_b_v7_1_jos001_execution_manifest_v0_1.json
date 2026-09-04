@@ -34,8 +34,8 @@
     {"control_taxon_id": "JOS_C08", "scientific_name": "Yucca harrimaniae", "taxon_key": "2775580"}
   ],
   "minimum_sampling_adequate_control_hosts": 5,
-  "execution_authorized": false,
-  "occurrence_reads_allowed": false,
+  "execution_authorized": true,
+  "occurrence_reads_allowed": true,
   "model_fit_reads_allowed": false,
   "invariant_reads_allowed": false,
   "process_knockout_reads_allowed": false,

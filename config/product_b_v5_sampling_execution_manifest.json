@@ -2,6 +2,9 @@
   "manifest_version": "product_b_v5_sampling_preflight_v0.2",
   "contract_frozen": true,
   "frozen_numeric_sampling_source_commit": "80e6edac0ac443cde52398faec5eb497edecce6c",
+  "pre_execution_package_commit": "de12a3876c0c942ec0d6207e57ac111bd3851de7",
+  "authorization_date": "2026-09-04",
+  "authorization_basis": "repository owner explicitly instructed continuation after the one-shot occurrence execution boundary was stated",
   "matching_checklist": "GBIF_Backbone_Taxonomy",
   "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
   "taxonomy_overlay": "registry/obligate_pair_registry_taxonomy_v0_1.csv",
@@ -24,20 +27,17 @@
   "scope_eligible_pair_ids": [
     "OPM_FIG_001"
   ],
-  "execution_authorized": false,
-  "occurrence_reads_allowed": false,
-  "authorization_note": "Numeric sampling thresholds, scope, transport, projection/preprocessing and both mandatory negative-control selection rules are frozen before occurrence execution. OPM_FIG_001 is taxonomy+scope eligible, but occurrence execution remains deliberately unauthorized; no occurrence count, map, density, availability result, control match, invariant result or knockout outcome has been opened.",
-  "forbidden_until_authorized": [
-    "GBIF occurrence search",
-    "GBIF occurrence download",
-    "occurrence counts",
-    "unique-cell counts",
-    "effective-cell counts",
-    "occurrence-derived maps",
-    "occurrence-derived range summaries",
-    "using occurrence availability to redefine or widen geographic scope",
-    "adding unplanned occurrence filters after observing availability",
-    "switching from search to download adaptively after observing a >100000 count",
-    "relaxing negative-control family strata or sampling calipers after observing control availability"
+  "execution_authorized": true,
+  "occurrence_reads_allowed": true,
+  "authorization_note": "One-shot sampling-availability execution is authorized only for OPM_FIG_001 under the already-frozen taxonomy, scope, transport, preprocessing, sampling and negative-control contracts. No upstream threshold, scope, taxon or filter may be changed in response to the opened occurrence result.",
+  "forbidden_after_authorization": [
+    "widening_or_redefining_the_geographic_scope",
+    "adding_or_removing_occurrence_filters_to_rescue_the_pair",
+    "changing_taxon_keys_or_taxonomic_concepts_to_rescue_the_pair",
+    "changing_coordinate_precision_or_uncertainty_ceiling",
+    "changing_sampling_cell_edge_or_origin",
+    "relaxing_primary_or_strict_sampling_thresholds",
+    "switching_from_search_to_download_adaptively_after_observing_a_gt100000_count",
+    "relaxing_negative-control family strata or sampling calipers after observing control availability"
   ]
 }

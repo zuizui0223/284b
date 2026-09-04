@@ -1,0 +1,54 @@
+{
+  "result_version": "product_b_v5_yucca_taxonomy_resolution_v0.1",
+  "workflow_run_id": 33830383061,
+  "workflow_head_sha": "0c172c718fc00b78580a228dae2bc2d3715e2789",
+  "artifact_id": 9921454763,
+  "artifact_digest": "sha256:94dad65b9d5cced7703c2cda898ad266163d94d2c368dcbea8a9177baeea467d",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "occurrence_reads_performed": false,
+  "pairs": {
+    "OPM_YUC_001": {
+      "pair_taxonomy_state": "eligible_for_scope_resolution",
+      "x": {
+        "name": "Yucca elata",
+        "legacy_gbif_key": "2775775",
+        "match_type": "EXACT",
+        "confidence": 100,
+        "rank": "SPECIES",
+        "status": "ACCEPTED",
+        "direct_usage_page_agrees": true
+      },
+      "y": {
+        "name": "Tegeticula elatella",
+        "legacy_gbif_key": "8852308",
+        "match_type": "EXACT",
+        "confidence": 100,
+        "rank": "SPECIES",
+        "status": "ACCEPTED",
+        "direct_usage_page_agrees": true
+      }
+    },
+    "OPM_YUC_002": {
+      "pair_taxonomy_state": "eligible_for_scope_resolution",
+      "x": {
+        "name": "Yucca schidigera",
+        "legacy_gbif_key": "2775710",
+        "match_type": "EXACT",
+        "confidence": 99,
+        "rank": "SPECIES",
+        "status": "ACCEPTED",
+        "direct_usage_page_agrees": true
+      },
+      "y": {
+        "name": "Tegeticula mojavella",
+        "legacy_gbif_key": "9143017",
+        "match_type": "EXACT",
+        "confidence": 100,
+        "rank": "SPECIES",
+        "status": "ACCEPTED",
+        "direct_usage_page_agrees": true,
+        "secondary_key_hint_agrees": true
+      }
+    }
+  }
+}

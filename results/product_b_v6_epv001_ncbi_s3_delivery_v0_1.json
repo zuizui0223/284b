@@ -1,0 +1,14 @@
+{
+  "status": "completed_official_ncbi_s3_delivery_audit",
+  "pair_id": "EPV001",
+  "pmcid": "PMC2947922",
+  "bucket": "pmc-oa-opendata",
+  "official_distribution_state": "pmcid_not_available_in_current_pmc_article_dataset_s3",
+  "expected_filename": "1006225107_sd01.xls",
+  "article_version_prefixes": [],
+  "versions": [],
+  "exact_expected_filename_matches": [],
+  "occurrence_reads_performed": false,
+  "operational_scope_constructed": false,
+  "challenge_bypass_attempted": false
+}

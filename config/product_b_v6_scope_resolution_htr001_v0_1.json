@@ -1,0 +1,34 @@
+{
+  "contract_version": "product_b_v6_scope_resolution_htr001_v0.1",
+  "pair_id": "HTR001",
+  "dependency_evidence_doi": "10.1007/s12225-024-10193-5",
+  "scope_evidence_doi": "10.1007/s12225-024-10193-5",
+  "operational_scope_state": "operational_scope_resolved",
+  "filter_type": "polygon_wkt",
+  "source_points_lon_lat": [
+    {"locality": "Farm Namuskluft, Rosh Pinah, Karas Region, Namibia", "longitude": 16.80235, "latitude": -27.94045},
+    {"locality": "Farm Namuskluft 88 / Namian's Saddle, Karas Region, Namibia", "longitude": 16.855833, "latitude": -27.890833},
+    {"locality": "Farm Gemsbokvlei, Port Nolloth, Northern Cape, South Africa", "longitude": 17.211111, "latitude": -29.396389},
+    {"locality": "20 km N along Lekkersing Rd from R382, Northern Cape, South Africa", "longitude": 17.130254, "latitude": -29.19116},
+    {"locality": "7 km N along Wolfberg Rd from R355, Northern Cape, South Africa", "longitude": 17.364589, "latitude": -29.4761}
+  ],
+  "derivation": "product_b_v5.scope.convex_hull_polygon_wkt over all five unique explicitly georeferenced Hydnora triceps specimen localities in the 2024 taxonomic revision",
+  "buffer_degrees": 0,
+  "filter_value": "POLYGON((16.80235 -27.94045,17.130254 -29.19116,17.211111 -29.396389,17.364589 -29.4761,16.855833 -27.890833,16.80235 -27.94045))",
+  "scope_source_type": "primary_taxonomic_revision_specimen_localities",
+  "occurrence_information_used_in_derivation": false,
+  "host_specificity_review": {
+    "state": "resolved_under_2024_revision",
+    "current_revision_statement": "The only known host is Euphorbia dregeana; the revision scores this host relationship high confidence from multiple reports and author observations.",
+    "older_secondary_conflict": "A 2021 review listed Zygophyllum orbiculatum as an additional host, but that assignment is not retained for H. triceps in the 2024 specimen- and literature-based revision.",
+    "execution_rule": "Use the 2024 revision's current species/host circumscription; do not reopen host identity after occurrence availability is seen."
+  },
+  "interpretation_boundary": "This polygon is the no-buffer evidence envelope of explicitly georeferenced specimens in the current revision. It is not asserted to equal the biological range of either host or parasite.",
+  "forbidden": [
+    "widen_scope_after_occurrence_counts_are_opened",
+    "replace_the_revision_specimen_hull_with_an_occurrence_range",
+    "buffer_the_polygon_to_rescue_sampling",
+    "add_ungeoreferenced_revision_specimens_using_hand_assigned_centroids",
+    "reopen_the_host_specificity_circumscription_after_outcomes"
+  ]
+}

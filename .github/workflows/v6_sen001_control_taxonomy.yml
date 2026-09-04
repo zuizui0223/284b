@@ -1,5 +1,6 @@
 name: v6-sen001-control-taxonomy
 
+# Retriggered after fixing the control-id adapter before any taxonomy API outcome opened.
 on:
   push:
     branches:

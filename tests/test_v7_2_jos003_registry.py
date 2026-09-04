@@ -43,12 +43,15 @@ def frame():
 
 
 class JOS003HeldOutEngineeringAdmissionTests(unittest.TestCase):
-    def test_pair_is_new_engineering_only_and_occurrence_blind(self):
+    def test_pair_is_new_engineering_only_taxonomy_resolved_and_occurrence_blind(self):
         with PAIR.open("r", encoding="utf-8", newline="") as handle:
             row = list(csv.DictReader(handle))[0]
         self.assertEqual(row["pair_id"], "JOS003")
         self.assertEqual(row["direction"], "Y_requires_X")
-        self.assertEqual(row["taxonomy_state"], "taxonomy_unopened")
+        self.assertEqual(
+            row["taxonomy_state"],
+            "resolved_direct_exact_current_snapshot_taxonomy",
+        )
         self.assertEqual(row["occurrence_reads_performed"], "false")
         self.assertIn("No snapshot occurrence row", row["known_boundary"])
 

@@ -44,14 +44,18 @@ def frame():
 
 
 class JOS001EngineeringAdmissionTests(unittest.TestCase):
-    def test_pair_is_engineering_only_and_occurrence_blind(self):
+    def test_pair_is_engineering_only_and_still_occurrence_blind_after_taxonomy(self):
         with PAIR.open("r", encoding="utf-8", newline="") as handle:
             row = list(csv.DictReader(handle))[0]
         self.assertEqual(row["pair_id"], "JOS001")
         self.assertEqual(row["direction"], "Y_requires_X")
         self.assertEqual(row["engineering_only"], "true")
-        self.assertEqual(row["taxonomy_state"], "taxonomy_unopened")
+        self.assertEqual(
+            row["taxonomy_state"],
+            "resolved_direct_exact_x_plus_manual_direct_synonym_bridge_y",
+        )
         self.assertEqual(row["occurrence_reads_performed"], "false")
+        self.assertIn("JOS001 remains engineering-only", row["known_boundary"])
 
     def test_fourteen_primary_witnesses_pass_v7_floor(self):
         result = evaluate_witness_frame_preflight(

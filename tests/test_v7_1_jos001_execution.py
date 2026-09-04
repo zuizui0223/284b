@@ -13,13 +13,12 @@ from product_b_v7_1.jos001_execution import (
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "config/product_b_v7_1_jos001_execution_manifest_v0_1.json"
+FROZEN_HEAD = "c699a4672eb3b84fb17b00547f966fac05b86908"
 
 
 def authorized_manifest():
     payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
     payload.update(
-        contract_frozen=True,
-        pre_execution_package_commit="1" * 40,
         execution_authorized=True,
         occurrence_reads_allowed=True,
         execution_consumed=False,
@@ -51,18 +50,21 @@ def occurrence_rows(n, *, prefix="r"):
 
 
 class JOS001ExecutionTests(unittest.TestCase):
-    def test_committed_manifest_is_closed_and_engineering_only(self):
+    def test_committed_manifest_is_frozen_engineering_only_and_in_legal_state(self):
         payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertTrue(payload["engineering_only"])
         self.assertFalse(payload["confirmatory_promotion_allowed"])
-        self.assertFalse(payload["contract_frozen"])
-        self.assertIsNone(payload["pre_execution_package_commit"])
-        self.assertFalse(payload["execution_authorized"])
-        self.assertFalse(payload["occurrence_reads_allowed"])
+        self.assertTrue(payload["contract_frozen"])
+        self.assertEqual(payload["pre_execution_package_commit"], FROZEN_HEAD)
         self.assertFalse(payload["model_fit_reads_allowed"])
         self.assertFalse(payload["invariant_reads_allowed"])
         self.assertFalse(payload["process_knockout_reads_allowed"])
-        self.assertFalse(payload["execution_consumed"])
+        state = (
+            payload["execution_authorized"],
+            payload["occurrence_reads_allowed"],
+            payload["execution_consumed"],
+        )
+        self.assertIn(state, {(False, False, False), (True, True, False), (False, False, True)})
 
     def test_synthetic_authorized_copy_passes_guard(self):
         decision = evaluate_jos001_execution_manifest(authorized_manifest())
@@ -83,15 +85,27 @@ class JOS001ExecutionTests(unittest.TestCase):
         self.assertEqual(params["hasCoordinate"], "true")
         self.assertEqual(params["occurrenceStatus"], "PRESENT")
 
-    def test_closed_manifest_blocks_transport_before_call(self):
+    def test_closed_copy_blocks_transport_before_call(self):
         calls = []
         def transport(query):
             calls.append(query)
             raise AssertionError("transport must remain closed")
         payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        payload.update(
+            execution_authorized=False,
+            occurrence_reads_allowed=False,
+            execution_consumed=False,
+        )
         with self.assertRaises(JOS001ExecutionNotAuthorized):
             execute_jos001_sampling_preflight(manifest=payload, transport=transport)
         self.assertEqual(calls, [])
+
+    def test_consumed_copy_is_fail_closed_even_if_flags_are_reopened(self):
+        payload = authorized_manifest()
+        payload["execution_consumed"] = True
+        decision = evaluate_jos001_execution_manifest(payload)
+        self.assertFalse(decision.authorized)
+        self.assertIn("execution_already_consumed", decision.reasons)
 
     def test_focal_failure_never_opens_controls(self):
         calls = []

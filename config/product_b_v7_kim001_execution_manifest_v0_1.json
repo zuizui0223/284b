@@ -1,8 +1,8 @@
 {
   "manifest_version": "product_b_v7_kim001_sampling_preflight_v0.1",
   "pair_id": "KIM001",
-  "contract_frozen": false,
-  "pre_execution_package_commit": null,
+  "contract_frozen": true,
+  "pre_execution_package_commit": "c38aea5af607213b4b3038dc94df52c1410ab79b",
   "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
   "x_biological_name": "Kirganelia microcarpa",
   "x_legacy_transport_name": "Phyllanthus microcarpus",

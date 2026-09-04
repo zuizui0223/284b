@@ -1,0 +1,39 @@
+name: v7-2-snapshot-schema-audit
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - .github/workflows/v7_2_snapshot_schema_audit.yml
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot-schema-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify repository tests before snapshot schema access
+        env:
+          PYTHONPATH: .
+        run: python -m unittest discover -s tests -v
+      - name: Install schema-only Parquet reader
+        run: python -m pip install --disable-pip-version-check --quiet "pyarrow==21.0.0"
+      - name: Audit frozen Parquet schema metadata only
+        env:
+          PYTHONPATH: .
+        run: python scripts/audit_v7_2_snapshot_schema.py
+      - name: Upload v7.2 snapshot schema audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-v7-2-snapshot-schema-audit
+          path: artifacts/product_b_v7_2_snapshot_schema_audit.json
+          if-no-files-found: error
+          retention-days: 90

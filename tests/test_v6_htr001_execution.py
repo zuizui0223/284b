@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 from types import SimpleNamespace
+import re
 import unittest
 from unittest.mock import patch
 
@@ -31,17 +32,23 @@ def authorized_manifest():
 
 
 class HTR001AuthorizationTests(unittest.TestCase):
-    def test_manifest_structure_and_closed_invariant_layer(self):
+    def test_manifest_state_machine_and_closed_invariant_layer(self):
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
-        self.assertFalse(manifest["execution_authorized"])
-        self.assertFalse(manifest["occurrence_reads_allowed"])
         self.assertFalse(manifest["invariant_reads_allowed"])
-        self.assertFalse(manifest["execution_consumed"])
+        self.assertRegex(manifest["pre_execution_package_commit"], re.compile(r"^[0-9a-f]{40}$"))
         controls = tuple(
             (row["control_taxon_id"], row["scientific_name"], str(row["taxon_key"]))
             for row in manifest["control_hosts"]
         )
         self.assertEqual(controls, EXPECTED_CONTROL_HOSTS)
+        if manifest["execution_consumed"]:
+            self.assertFalse(manifest["execution_authorized"])
+            self.assertFalse(manifest["occurrence_reads_allowed"])
+        else:
+            self.assertEqual(
+                bool(manifest["execution_authorized"]),
+                bool(manifest["occurrence_reads_allowed"]),
+            )
 
     def test_synthetic_authorized_copy_passes(self):
         decision = evaluate_htr001_execution_manifest(authorized_manifest())

@@ -1,0 +1,49 @@
+{
+  "contract_version": "product_b_v6_directed_witness_v0.1",
+  "status": "predeclared_not_executed",
+  "non_retroactivity": {
+    "v5_terminal_result": "results/product_b_v5_phase1_feasibility_terminal_v0_1.json",
+    "confirmatory_v6_excluded_occurrence_opened_pairs": [
+      "OPM_FIG_001",
+      "OPM_YUC_001",
+      "OPM_YUC_002"
+    ],
+    "v5_thresholds_must_not_be_reinterpreted": true
+  },
+  "host_x_sampling": {
+    "minimum_independent_records": 50,
+    "minimum_unique_10km_cells": 30,
+    "minimum_inverse_simpson_effective_cells": 10.0
+  },
+  "dependent_y_witness_sampling": {
+    "minimum_independent_records": 5,
+    "minimum_unique_10km_cells": 3,
+    "one_witness_per_unique_cell_for_scoring": true,
+    "fit_y_niche": false
+  },
+  "breadth_guardrail": {
+    "maximum_host_support_fraction_of_audit_space": 0.8
+  },
+  "shuffled_host_controls": {
+    "minimum_eligible_replacement_hosts": 5,
+    "deterministic_draws": 100,
+    "seed_rule": "SHA256 of frozen panel id + pair id + procedure id",
+    "lower_tail_quantile": 0.05,
+    "upper_tail_quantile": 0.95,
+    "compatible_rule": "actual_containment > empirical_q95",
+    "violation_rule": "actual_containment < empirical_q05",
+    "otherwise": "unresolved"
+  },
+  "process_knockout": {
+    "refit_after_knockout": false,
+    "primary_quantity": "actual_containment_drop_minus_mean_shuffled_containment_drop"
+  },
+  "forbidden_before_primary_panel_freeze": [
+    "GBIF occurrence count for candidate v6 pair",
+    "GBIF occurrence map for candidate v6 pair",
+    "choosing v6 primary pairs based on v5 sparse-count outcomes",
+    "reusing v5 occurrence-opened pairs as confirmatory v6 evidence",
+    "relaxing witness floors after counts are opened",
+    "raising breadth ceiling after support is opened"
+  ]
+}

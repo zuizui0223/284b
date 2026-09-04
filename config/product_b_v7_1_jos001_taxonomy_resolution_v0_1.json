@@ -1,0 +1,22 @@
+{
+  "contract_version": "product_b_v7_1_jos001_taxonomy_v0.1",
+  "pair_id": "JOS001",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "requests": [
+    {
+      "partner": "x",
+      "scientific_name": "Yucca brevifolia",
+      "kingdom": "Plantae",
+      "expected_key_hint": ""
+    },
+    {
+      "partner": "y",
+      "scientific_name": "Tegeticula synthetica",
+      "kingdom": "Animalia",
+      "expected_key_hint": ""
+    }
+  ],
+  "automatic_admission_rule": "EXACT species-level accepted legacy GBIF Backbone usage plus direct usage-page agreement only",
+  "synonym_rule": "Any synonym or non-accepted usage requires a separately frozen manual nomenclatural review; do not choose a transport name from occurrence availability.",
+  "occurrence_reads_allowed": false
+}

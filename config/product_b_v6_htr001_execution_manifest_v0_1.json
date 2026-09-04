@@ -1,0 +1,40 @@
+{
+  "manifest_version": "product_b_v6_directed_witness_preflight_v0.1",
+  "pair_id": "HTR001",
+  "contract_frozen": true,
+  "pre_execution_package_commit": "pending_tested_freeze",
+  "primary_registry": "registry/product_b_v6_htr001_registry_v0_2.csv",
+  "scope_contract": "config/product_b_v6_scope_resolution_htr001_v0_1.json",
+  "witness_contract": "config/product_b_v6_directed_witness_contract_v0_1.json",
+  "focal_taxonomy_result": "results/product_b_v6_htr001_taxonomy_v0_1.json",
+  "control_taxonomy_result": "results/product_b_v6_htr001_control_taxonomy_v0_1.json",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "x_biological_name": "Euphorbia dregeana",
+  "x_transport_taxon_key": "3069738",
+  "y_taxon_name": "Hydnora triceps",
+  "y_taxon_key": "3646101",
+  "control_hosts": [
+    {"control_taxon_id": "HTR_C01", "scientific_name": "Euphorbia mauritanica", "taxon_key": "7926635"},
+    {"control_taxon_id": "HTR_C02", "scientific_name": "Euphorbia gummifera", "taxon_key": "3068472"},
+    {"control_taxon_id": "HTR_C03", "scientific_name": "Euphorbia gregaria", "taxon_key": "3069722"},
+    {"control_taxon_id": "HTR_C04", "scientific_name": "Euphorbia damarana", "taxon_key": "3069701"},
+    {"control_taxon_id": "HTR_C05", "scientific_name": "Euphorbia gariepina", "taxon_key": "3069506"},
+    {"control_taxon_id": "HTR_C06", "scientific_name": "Euphorbia virosa", "taxon_key": "3066685"}
+  ],
+  "minimum_sampling_adequate_control_hosts": 5,
+  "execution_authorized": false,
+  "occurrence_reads_allowed": false,
+  "execution_consumed": false,
+  "invariant_reads_allowed": false,
+  "authorization_note": "Closed pre-execution manifest. Occurrence execution may be authorized only after the full HTR001 package passes repository tests. Invariant/model/process-knockout outcomes remain prohibited during this step.",
+  "forbidden_after_authorization": [
+    "rerun_focal_or_controls_to_rescue_sampling",
+    "change_scope_polygon_or_buffer",
+    "change_focal_or_control_taxon_keys",
+    "add_control_taxa_after_occurrence_availability_is_seen",
+    "drop_a_frozen_control_taxon_because_its_sampling_is_sparse",
+    "relax_host_or_witness_sampling_floors",
+    "reopen_host_specificity_after_occurrence_results",
+    "open_invariant_or_process_knockout_outcomes_during_this_step"
+  ]
+}

@@ -27,5 +27,19 @@
   "current_taxonomy_state": "resolved_direct_exact_current_taxonomy",
   "current_taxonomy_result_path": "results/product_b_v7_3_crot001_current_taxonomy_v0_1.json",
   "snapshot_taxonomy_identity_access_started": false,
-  "snapshot_occurrence_row_access_started": false
+  "snapshot_occurrence_row_access_started": false,
+  "nonretroactive_terminal_overlay": {
+    "terminal_state": "unresolved_dependency_scope",
+    "terminal_stage": "adversarial_replacement_host_interaction_screen",
+    "terminal_result_path": "results/product_b_v7_3_crot001_dependency_scope_terminal_v0_1.json",
+    "original_host_specificity_declaration_preserved_as_historical": true,
+    "dependent_host_specificity_declaration_invalidated_for_downstream_use": true,
+    "invalidated_predeclared_controls": ["CROT_C03", "CROT_C04"],
+    "invalidated_control_taxa": ["Trollius altaicus", "Trollius asiaticus"],
+    "replacement_or_rescue_controls_added": false,
+    "dependency_scope_narrowed_after_conflict": false,
+    "snapshot_taxonomy_identity_access_allowed": false,
+    "snapshot_occurrence_row_access_allowed": false,
+    "downstream_use_allowed": false
+  }
 }

@@ -16,6 +16,9 @@
   "live_occurrence_search_for_pair_selection_forbidden": true,
   "minimum_predeclared_replacement_hosts": 8,
   "minimum_exact_taxonomy_admitted_replacement_hosts": 5,
+  "replacement_hosts_must_pass_adversarial_interaction_screen_before_snapshot_identity": true,
+  "interaction_screen_failure_must_not_be_rescued_by_replacing_controls": true,
+  "interaction_screen_failure_must_not_be_rescued_by_narrowing_dependency_scope": true,
   "sampling_floor_unchanged": {
     "minimum_independent_records": 50,
     "minimum_unique_10km_cells": 30,
@@ -26,6 +29,7 @@
     "independent_frame_freeze",
     "current_taxonomy_review",
     "replacement_host_pool_freeze",
+    "adversarial_replacement_host_interaction_screen",
     "snapshot_internal_taxonomy_identity_gate",
     "separate_sampling_package_freeze_and_authorization"
   ],
@@ -39,6 +43,7 @@
     "KIM001",
     "JOS001",
     "JOS002",
-    "JOS003"
+    "JOS003",
+    "CROT001"
   ]
 }

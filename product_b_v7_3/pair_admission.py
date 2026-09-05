@@ -2,7 +2,9 @@
 
 This module performs no web, taxonomy, snapshot, or occurrence access. It validates
 only declarations frozen from biology/literature before any snapshot taxonomy
-identity scan is permitted.
+identity scan is permitted. Replacement-host interaction evidence is evaluated in
+a separate fail-closed gate after the control pool is frozen; failed controls are
+not replaceable and the dependency scope may not be narrowed after a conflict.
 """
 from __future__ import annotations
 
@@ -16,6 +18,7 @@ MIN_TAXONOMY_ADMITTED_CONTROLS = 5
 FIREWALLED_PAIR_IDS = frozenset({
     "OPM_FIG_001", "OPM_YUC_001", "OPM_YUC_002",
     "SEN001", "EPV001", "HTR001", "KIM001", "JOS001", "JOS002", "JOS003",
+    "CROT001",
 })
 
 
@@ -42,6 +45,21 @@ class PairAdmissionDecision:
     direct_witness_site_count: int
     independent_host_region_count: int
     predeclared_control_count: int
+
+
+@dataclass(frozen=True)
+class ReplacementHostInteractionEvidence:
+    control_taxon: str
+    screen_completed: bool
+    dependent_uses_control_as_host: bool
+
+
+@dataclass(frozen=True)
+class ReplacementHostInteractionDecision:
+    passed: bool
+    reasons: tuple[str, ...]
+    invalid_actual_host_controls: tuple[str, ...]
+    screened_control_count: int
 
 
 def _unique_nonblank(values: Sequence[str]) -> tuple[str, ...]:
@@ -98,6 +116,51 @@ def evaluate_pair_admission(declaration: ProspectivePairDeclaration) -> PairAdmi
     )
 
 
+def evaluate_replacement_host_interaction_screen(
+    *,
+    predeclared_control_taxa: Sequence[str],
+    evidence: Sequence[ReplacementHostInteractionEvidence],
+) -> ReplacementHostInteractionDecision:
+    """Fail closed if any frozen replacement host is a real host of dependent Y.
+
+    Every predeclared control must be screened exactly once before snapshot taxonomy
+    identity access. Missing, duplicate, blank, extra, or incomplete evidence stops
+    the pair. A discovered actual host is terminal for the frozen pair/control design;
+    this function has no mechanism for deleting/replacing controls or narrowing Y.
+    """
+    reasons: list[str] = []
+    declared = _unique_nonblank(predeclared_control_taxa)
+    if len(declared) != len(tuple(predeclared_control_taxa)):
+        reasons.append("control_taxa_blank_or_duplicate")
+    if len(declared) < MIN_PREDECLARED_CONTROLS:
+        reasons.append("predeclared_control_floor_failed")
+
+    names = tuple(str(item.control_taxon).strip() for item in evidence)
+    if any(not name for name in names):
+        reasons.append("interaction_screen_control_blank")
+    if len(set(names)) != len(names):
+        reasons.append("interaction_screen_control_duplicate")
+    if set(names) != set(declared):
+        reasons.append("interaction_screen_not_exactly_frozen_control_pool")
+    if any(item.screen_completed is not True for item in evidence):
+        reasons.append("interaction_screen_incomplete")
+
+    invalid = tuple(sorted({
+        str(item.control_taxon).strip()
+        for item in evidence
+        if item.screen_completed is True and item.dependent_uses_control_as_host is True
+    }))
+    if invalid:
+        reasons.append("predeclared_control_is_actual_host")
+
+    return ReplacementHostInteractionDecision(
+        passed=not reasons,
+        reasons=tuple(reasons),
+        invalid_actual_host_controls=invalid,
+        screened_control_count=len(set(names) & set(declared)),
+    )
+
+
 __all__ = [
     "MIN_DIRECT_WITNESS_SITES",
     "MIN_INDEPENDENT_HOST_REGIONS",
@@ -106,5 +169,8 @@ __all__ = [
     "FIREWALLED_PAIR_IDS",
     "ProspectivePairDeclaration",
     "PairAdmissionDecision",
+    "ReplacementHostInteractionEvidence",
+    "ReplacementHostInteractionDecision",
     "evaluate_pair_admission",
+    "evaluate_replacement_host_interaction_screen",
 ]

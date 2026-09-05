@@ -1,0 +1,19 @@
+{
+  "pair_id": "CROT001",
+  "frame_id": "UN-M49-EUROPE-150",
+  "source_type": "preexisting_admin_boundary",
+  "source_authority": "United Nations Statistics Division M49 geographic regions",
+  "source_version": "UN_M49_online_2026-09-05_region_150",
+  "geometry_type": "admin_codes",
+  "geometry_value": "BY;BG;CZ;HU;PL;MD;RO;RU;SK;UA;AX;DK;EE;FO;FI;GG;IS;IE;IM;JE;LV;LT;NO;SJ;SE;GB;AL;AD;BA;HR;GI;GR;VA;IT;MT;ME;MK;PT;SM;RS;SI;ES;AT;BE;FR;DE;LI;LU;MC;NL;CH",
+  "un_m49_region_code": "150",
+  "operational_snapshot_country_codes_iso2": [
+    "BY","BG","CZ","HU","PL","MD","RO","RU","SK","UA",
+    "AX","DK","EE","FO","FI","GG","IS","IE","IM","JE","LV","LT","NO","SJ","SE","GB",
+    "AL","AD","BA","HR","GI","GR","VA","IT","MT","ME","MK","PT","SM","RS","SI","ES",
+    "AT","BE","FR","DE","LI","LU","MC","NL","CH"
+  ],
+  "witness_coordinates_used_to_derive_geometry": false,
+  "occurrence_information_used_to_derive_geometry": false,
+  "known_boundary": "UN M49 assigns whole countries/areas to Europe for statistical use. Russia therefore enters as country code RU and is not spatially clipped to European Russia at this stage. This conservative broadness is predeclared before snapshot taxonomy or occurrence access."
+}

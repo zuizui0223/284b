@@ -12,6 +12,7 @@ WITNESS = ROOT / "registry/product_b_v7_3_crot001_literature_witnesses_v0_1.csv"
 FRAME = ROOT / "config/product_b_v7_3_crot001_frame_v0_1.json"
 CONTROLS = ROOT / "registry/product_b_v7_3_crot001_control_pool_v0_1.csv"
 ADMISSION = ROOT / "config/product_b_v7_3_crot001_admission_v0_1.json"
+CURRENT_TAXONOMY = ROOT / "results/product_b_v7_3_crot001_current_taxonomy_v0_1.json"
 CANDIDATE_AUDIT = ROOT / "registry/product_b_v7_3_candidate_audit_v0_1.csv"
 
 
@@ -46,7 +47,7 @@ def _frame():
 
 
 class CROT001AdmissionTests(unittest.TestCase):
-    def test_response_blind_pair_admission_passes_twelve_two_eight(self):
+    def test_response_blind_pair_admission_still_passes_after_taxonomy_transition(self):
         data = json.loads(ADMISSION.read_text(encoding="utf-8"))
         declaration = ProspectivePairDeclaration(
             pair_id=data["pair_id"],
@@ -67,9 +68,20 @@ class CROT001AdmissionTests(unittest.TestCase):
         self.assertEqual(result.direct_witness_site_count, 12)
         self.assertEqual(result.independent_host_region_count, 2)
         self.assertEqual(result.predeclared_control_count, 8)
-        self.assertFalse(data["current_taxonomy_access_started"])
+        self.assertTrue(data["current_taxonomy_access_started"])
+        self.assertEqual(data["current_taxonomy_state"], "resolved_direct_exact_current_taxonomy")
         self.assertFalse(data["snapshot_taxonomy_identity_access_started"])
         self.assertFalse(data["snapshot_occurrence_row_access_started"])
+
+    def test_current_taxonomy_result_is_direct_exact_for_both_partners(self):
+        result = json.loads(CURRENT_TAXONOMY.read_text(encoding="utf-8"))
+        self.assertEqual(result["status"], "resolved_direct_exact_current_taxonomy")
+        self.assertEqual(
+            [(item["partner"], item["usage_key"]) for item in result["resolutions"]],
+            [("x", "3033289"), ("y", "1573228")],
+        )
+        self.assertFalse(result["snapshot_taxonomy_identity_rows_opened"])
+        self.assertFalse(result["snapshot_occurrence_rows_opened"])
 
     def test_twelve_primary_coordinates_pass_unchanged_v7_witness_gate(self):
         result = evaluate_witness_frame_preflight(pair_id="CROT001", witnesses=_witnesses(), frame=_frame())
@@ -88,7 +100,7 @@ class CROT001AdmissionTests(unittest.TestCase):
         self.assertFalse(data["witness_coordinates_used_to_derive_geometry"])
         self.assertFalse(data["occurrence_information_used_to_derive_geometry"])
 
-    def test_control_pool_is_frozen_to_exactly_eight_before_taxonomy(self):
+    def test_control_pool_is_still_exactly_eight_and_taxonomy_unopened(self):
         with CONTROLS.open("r", encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle))
         self.assertEqual(len(rows), 8)
@@ -96,11 +108,11 @@ class CROT001AdmissionTests(unittest.TestCase):
         self.assertTrue(all(row["current_taxonomy_state"] == "taxonomy_unopened" for row in rows))
         self.assertTrue(all(row["snapshot_occurrence_rows_opened"] == "false" for row in rows))
 
-    def test_pair_registry_is_taxonomy_and_snapshot_unopened(self):
+    def test_pair_registry_is_current_taxonomy_resolved_but_snapshot_unopened(self):
         with PAIR.open("r", encoding="utf-8", newline="") as handle:
             row = list(csv.DictReader(handle))[0]
         self.assertEqual(row["pair_id"], "CROT001")
-        self.assertEqual(row["current_taxonomy_state"], "taxonomy_unopened")
+        self.assertEqual(row["current_taxonomy_state"], "resolved_direct_exact_current_taxonomy")
         self.assertEqual(row["snapshot_taxonomy_identity_state"], "snapshot_taxonomy_identity_unopened")
         self.assertEqual(row["snapshot_occurrence_rows_opened"], "false")
 

@@ -23,7 +23,9 @@
   ],
   "snapshot_occurrence_information_used_for_selection": false,
   "declaration_frozen": true,
-  "current_taxonomy_access_started": false,
+  "current_taxonomy_access_started": true,
+  "current_taxonomy_state": "resolved_direct_exact_current_taxonomy",
+  "current_taxonomy_result_path": "results/product_b_v7_3_crot001_current_taxonomy_v0_1.json",
   "snapshot_taxonomy_identity_access_started": false,
   "snapshot_occurrence_row_access_started": false
 }

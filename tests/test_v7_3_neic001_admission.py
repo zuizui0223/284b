@@ -4,7 +4,12 @@ from pathlib import Path
 import unittest
 
 from product_b_v7.preflight import FrameDeclaration, LiteratureWitness, evaluate_witness_frame_preflight
-from product_b_v7_3.pair_admission import ProspectivePairDeclaration, evaluate_pair_admission
+from product_b_v7_3.pair_admission import (
+    ProspectivePairDeclaration,
+    ReplacementHostInteractionEvidence,
+    evaluate_pair_admission,
+    evaluate_replacement_host_interaction_screen,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 PAIR = ROOT / "registry/product_b_v7_3_neic001_pair_registry_v0_1.csv"
@@ -12,6 +17,7 @@ WITNESS = ROOT / "registry/product_b_v7_3_neic001_literature_witnesses_v0_1.csv"
 FRAME = ROOT / "config/product_b_v7_3_neic001_frame_v0_1.json"
 ADMISSION = ROOT / "config/product_b_v7_3_neic001_admission_v0_1.json"
 CURRENT_TAXONOMY = ROOT / "results/product_b_v7_3_neic001_current_taxonomy_v0_1.json"
+INTERACTION = ROOT / "config/product_b_v7_3_neic001_control_interaction_evidence_v0_1.json"
 CANDIDATE_AUDIT = ROOT / "registry/product_b_v7_3_candidate_audit_v0_1.csv"
 
 
@@ -129,6 +135,33 @@ class NEIC001AdmissionTests(unittest.TestCase):
         self.assertEqual(result["unresolved_partner"]["partner"], "x")
         self.assertFalse(result["snapshot_taxonomy_identity_rows_opened"])
         self.assertFalse(result["snapshot_occurrence_rows_opened"])
+
+    def test_frozen_control_interaction_evidence_covers_exact_pool_and_passes_host_definition(self):
+        data = json.loads(INTERACTION.read_text(encoding="utf-8"))
+        admission = _admission()
+        evidence = tuple(
+            ReplacementHostInteractionEvidence(
+                control_taxon=item["control_taxon"],
+                screen_completed=item["screen_completed"],
+                dependent_uses_control_as_host=item["dependent_uses_control_as_host"],
+            )
+            for item in data["controls"]
+        )
+        decision = evaluate_replacement_host_interaction_screen(
+            predeclared_control_taxa=admission["predeclared_control_taxa"],
+            evidence=evidence,
+        )
+        self.assertTrue(decision.passed, decision.reasons)
+        self.assertEqual(decision.screened_control_count, 8)
+        self.assertEqual(decision.invalid_actual_host_controls, ())
+        self.assertEqual(data["source_doi"], "10.52997/jad.2.04.2021")
+        self.assertEqual(data["frozen_host_definition"], admission["host_definition"])
+        self.assertEqual(data["screen_state"], "evidence_frozen_pending_focal_taxonomy_bridge_completion")
+        self.assertFalse(data["snapshot_taxonomy_identity_rows_opened"])
+        self.assertFalse(data["snapshot_occurrence_rows_opened"])
+        monochoria = next(item for item in data["controls"] if item["control_taxon"] == "Monochoria hastata")
+        self.assertFalse(monochoria["dependent_uses_control_as_host"])
+        self.assertIn("life cycle not completed", monochoria["reported_interaction"])
 
     def test_pair_registry_is_bridge_pending_and_snapshot_unopened(self):
         with PAIR.open("r", encoding="utf-8", newline="") as handle:

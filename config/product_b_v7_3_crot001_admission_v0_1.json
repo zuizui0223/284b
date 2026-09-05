@@ -1,0 +1,29 @@
+{
+  "pair_id": "CROT001",
+  "x_biological_name": "Trollius europaeus",
+  "y_biological_name": "Chiastocheta rotundiventris",
+  "direction": "Y_requires_X",
+  "dependency_class": "obligate_nursery_pollination_seed_predator",
+  "y_obligately_requires_x": true,
+  "y_host_specificity_supported": true,
+  "direct_primary_witness_site_ids": [
+    "CROT_W01","CROT_W02","CROT_W03","CROT_W04","CROT_W05","CROT_W06",
+    "CROT_W07","CROT_W08","CROT_W09","CROT_W10","CROT_W11","CROT_W12"
+  ],
+  "independent_host_regions": ["Europe", "West Siberia"],
+  "predeclared_control_taxa": [
+    "Trollius acaulis",
+    "Trollius albiflorus",
+    "Trollius altaicus",
+    "Trollius asiaticus",
+    "Trollius chinensis",
+    "Trollius laxus",
+    "Trollius pumilus",
+    "Trollius yunnanensis"
+  ],
+  "snapshot_occurrence_information_used_for_selection": false,
+  "declaration_frozen": true,
+  "current_taxonomy_access_started": false,
+  "snapshot_taxonomy_identity_access_started": false,
+  "snapshot_occurrence_row_access_started": false
+}

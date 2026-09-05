@@ -1,0 +1,53 @@
+{
+  "pair_id": "NEIC001",
+  "x_biological_name": "Eichhornia crassipes",
+  "y_biological_name": "Neochetina eichhorniae",
+  "direction": "Y_requires_X",
+  "dependency_class": "obligate_full_life_cycle_host_specialist",
+  "host_definition": "plant_species_supporting_complete_life_cycle_and_reproduction",
+  "y_obligately_requires_x": true,
+  "y_host_specificity_supported": true,
+  "dependency_evidence": {
+    "primary_or_direct_support": [
+      "10.1111/j.1365-2664.2009.01769.x",
+      "10.52997/jad.2.04.2021"
+    ],
+    "summary": "N. eichhorniae cannot switch to alternative hosts for population reproduction; host-spectrum experiments report complete life-cycle development only on water hyacinth. Minimal or exploratory feeding on some non-target plants does not satisfy the frozen host definition."
+  },
+  "direct_primary_witness_site_ids": [
+    "NEIC_W01","NEIC_W02","NEIC_W03","NEIC_W04","NEIC_W05",
+    "NEIC_W06","NEIC_W07","NEIC_W08","NEIC_W09","NEIC_W10"
+  ],
+  "witness_source_doi": "10.1111/eva.12755",
+  "witness_selection_rule": "Use exactly ten unambiguous single-coordinate Table-1 populations with N_eichhorniae > 0: AU, CH, SI, SAG, SAW, SAK, UG, UR, FL, TX. Exclude SAE because N_eichhorniae is absent. Exclude California CA prospectively because one population row pools two printed localities/coordinates and is not needed to meet the 10-site floor.",
+  "independent_host_regions": ["South America", "Africa", "Asia-Pacific", "North America"],
+  "independent_host_range_evidence": "Water hyacinth is native to South America and widely naturalized/invasive across tropical and subtropical regions; this range evidence is independent of snapshot occurrence data.",
+  "predeclared_control_taxa": [
+    "Monochoria hastata",
+    "Oryza sativa",
+    "Ipomoea batatas",
+    "Manihot esculenta",
+    "Ipomoea aquatica",
+    "Centella asiatica",
+    "Nelumbo nucifera",
+    "Nymphaea rubra"
+  ],
+  "predeclared_control_interaction_evidence_doi": "10.52997/jad.2.04.2021",
+  "predeclared_control_interaction_basis": "All eight named taxa were included in the published N. eichhorniae host-spectrum experiment; the paper reports complete life-cycle development only on water hyacinth. Formal frozen-pool interaction screening remains a separate required stage after focal current-taxonomy review.",
+  "engineering_only": true,
+  "confirmatory_promotion_allowed": false,
+  "human_mediated_release_confounding": true,
+  "human_mediated_release_caveat": "Most sampled N. eichhorniae populations outside South America derive from classical biological-control releases. Their geographic containment within water-hyacinth range is therefore partly constructed by human release history and cannot be used as confirmatory ecological invariant evidence.",
+  "species_identity_hybridization_caveat": true,
+  "species_identity_caveat": "Hopper et al. confirmed hybridization between N. eichhorniae and N. bruchi in some sampled regions. The pair is therefore restricted to engineering feasibility and cannot be promoted to confirmatory biological evidence.",
+  "snapshot_occurrence_information_used_for_selection": false,
+  "snapshot_taxonomy_information_used_for_selection": false,
+  "declaration_frozen": true,
+  "current_taxonomy_access_started": false,
+  "current_taxonomy_state": "taxonomy_unopened",
+  "snapshot_taxonomy_identity_access_started": false,
+  "snapshot_occurrence_row_access_started": false,
+  "model_fit_reads_started": false,
+  "invariant_reads_started": false,
+  "process_knockout_reads_started": false
+}

@@ -10,6 +10,7 @@ PAIR = ROOT / "registry/product_b_v7_2_jos003_pair_registry_v0_1.csv"
 WITNESS = ROOT / "registry/product_b_v7_2_jos003_literature_witnesses_v0_1.csv"
 FRAME = ROOT / "config/product_b_v7_2_jos003_frame_v0_1.json"
 SNAPSHOT_CONTRACT = ROOT / "config/product_b_v7_2_snapshot_transport_contract_v0_1.json"
+TERMINAL = ROOT / "results/product_b_v7_2_jos003_snapshot_sampling_terminal_v0_1.json"
 
 
 def witnesses():
@@ -43,19 +44,17 @@ def frame():
 
 
 class JOS003HeldOutEngineeringAdmissionTests(unittest.TestCase):
-    def test_pair_is_new_engineering_only_taxonomy_resolved_and_occurrence_blind(self):
+    def test_pair_is_terminal_after_one_frozen_snapshot_row_run(self):
         with PAIR.open("r", encoding="utf-8", newline="") as handle:
             row = list(csv.DictReader(handle))[0]
         self.assertEqual(row["pair_id"], "JOS003")
         self.assertEqual(row["direction"], "Y_requires_X")
-        self.assertEqual(
-            row["taxonomy_state"],
-            "resolved_direct_exact_current_snapshot_taxonomy",
-        )
-        self.assertEqual(row["occurrence_reads_performed"], "false")
-        self.assertIn("Snapshot occurrence rows/counts remain unopened", row["known_boundary"])
+        self.assertEqual(row["taxonomy_state"], "resolved_direct_exact_current_snapshot_taxonomy")
+        self.assertEqual(row["occurrence_reads_performed"], "true")
+        self.assertIn("unresolved_host_sampling", row["known_boundary"])
+        self.assertIn("Controls were not opened", row["known_boundary"])
 
-    def test_twelve_primary_positive_sites_pass_unchanged_witness_floor(self):
+    def test_twelve_primary_positive_sites_remain_unchanged(self):
         result = evaluate_witness_frame_preflight(pair_id="JOS003", witnesses=witnesses(), frame=frame())
         self.assertTrue(result.passed, (result.witness_preflight.reasons, result.frame_errors))
         self.assertEqual(result.witness_preflight.raw_witness_count, 12)
@@ -68,12 +67,22 @@ class JOS003HeldOutEngineeringAdmissionTests(unittest.TestCase):
         self.assertFalse(data["witness_coordinates_used_to_derive_geometry"])
         self.assertFalse(data["occurrence_information_used_to_derive_geometry"])
 
-    def test_snapshot_contract_is_frozen_and_occurrence_closed(self):
+    def test_snapshot_contract_firewalls_jos003_but_remains_open_for_new_pairs(self):
         contract = json.loads(SNAPSHOT_CONTRACT.read_text(encoding="utf-8"))
         self.assertTrue(contract["new_pair_selection_allowed"])
         self.assertFalse(contract["occurrence_row_reads_allowed"])
         self.assertIn("JOS002", contract["firewalled_consumed_pairs"])
-        self.assertNotIn("JOS003", contract["firewalled_consumed_pairs"])
+        self.assertIn("JOS003", contract["firewalled_consumed_pairs"])
+
+    def test_terminal_result_is_zero_hit_sampling_not_invariant_result(self):
+        result = json.loads(TERMINAL.read_text(encoding="utf-8"))
+        self.assertEqual(result["status"], "unresolved_host_sampling")
+        self.assertEqual(result["focal"]["raw_records"], 0)
+        self.assertFalse(result["controls_opened"])
+        self.assertFalse(result["model_fit_reads_opened"])
+        self.assertFalse(result["invariant_reads_opened"])
+        self.assertFalse(result["process_knockout_reads_opened"])
+        self.assertFalse(result["rerun_allowed"])
 
 
 if __name__ == "__main__":

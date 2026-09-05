@@ -76,8 +76,6 @@ def _preconditions(review: Mapping[str, object]) -> None:
     errors = evaluate_v7_3_contract(identity)
     if errors:
         raise RuntimeError("invalid v7.3 identity contract: " + ",".join(errors))
-    if identity["taxonomy_identity_reads_allowed"]:
-        raise RuntimeError("snapshot taxonomy identity rows must remain closed")
 
     admission = json.loads(ADMISSION.read_text(encoding="utf-8"))
     if admission["current_taxonomy_state"] != "unresolved_host_synonym_bridge_pending":

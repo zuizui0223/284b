@@ -1,0 +1,87 @@
+{
+  "result_version": "product_b_v5_phase1_feasibility_terminal_v0.1",
+  "phase": "obligate_pollination_mutualism_phase1",
+  "pair_count": 7,
+  "pairs_reaching_invariant_evaluation": 0,
+  "invariant_outcomes_opened": false,
+  "negative_control_outcomes_opened": false,
+  "process_knockout_outcomes_opened": false,
+  "terminal_interpretation": "The predeclared v5 answer-check could not be empirically reached on the literature-declared Phase-1 panel under the frozen upstream gates. This is a feasibility result, not evidence that obligate ecological nesting is absent and not evidence for or against any candidate environmental process.",
+  "pairs": [
+    {
+      "pair_id": "OPM_GLO_001",
+      "terminal_gate": "taxonomy",
+      "terminal_state": "unresolved_taxonomy",
+      "reason": "host taxonomic-concept conflict; automatic synonym expansion would change the literature host concept"
+    },
+    {
+      "pair_id": "OPM_GLO_002",
+      "terminal_gate": "taxonomy",
+      "terminal_state": "unresolved_taxonomy",
+      "reason": "host taxonomic-concept conflict; do not use a moth key or occurrence availability to bypass it"
+    },
+    {
+      "pair_id": "OPM_GLO_003",
+      "terminal_gate": "scope",
+      "terminal_state": "unresolved_operational_scope",
+      "reason": "taxonomy resolved directly, but primary literature supplies only one exact machine coordinate; named Ryukyu localities were not post-hoc geocoded"
+    },
+    {
+      "pair_id": "OPM_GLO_004",
+      "terminal_gate": "scope",
+      "terminal_state": "unresolved_operational_scope",
+      "reason": "taxonomy resolved directly, but primary literature supplies only one exact machine coordinate; named Ryukyu localities were not post-hoc geocoded"
+    },
+    {
+      "pair_id": "OPM_FIG_001",
+      "terminal_gate": "sampling",
+      "terminal_state": "unresolved_sampling",
+      "raw_records_x": 42,
+      "raw_records_y": 11,
+      "reason": "both raw denominators are below the frozen 50-independent-record floor, so the floor is unreachable after any exclusion"
+    },
+    {
+      "pair_id": "OPM_YUC_001",
+      "terminal_gate": "sampling",
+      "terminal_state": "unresolved_sampling",
+      "raw_records_x": 8716,
+      "raw_records_y": 16,
+      "retained_records_x": 8529,
+      "retained_records_y": 15,
+      "unique_cells_x": 430,
+      "unique_cells_y": 5,
+      "effective_cells_x": 105.41837028964609,
+      "effective_cells_y": 2.710843373493976,
+      "record_asymmetry_ratio": 568.6,
+      "reason": "dependent moth fails record/cell/effective-cell floors and all three sampling asymmetry ceilings; one cross-partner same-record component was excluded"
+    },
+    {
+      "pair_id": "OPM_YUC_002",
+      "terminal_gate": "sampling",
+      "terminal_state": "unresolved_sampling",
+      "raw_records_x": 3579,
+      "raw_records_y": 3,
+      "retained_records_x": 3385,
+      "retained_records_y": 3,
+      "unique_cells_x": 79,
+      "unique_cells_y": 3,
+      "effective_cells_x": 11.24902684771308,
+      "effective_cells_y": 3.0,
+      "record_asymmetry_ratio": 1128.3333333333333,
+      "reason": "dependent moth fails record/cell/effective-cell floors and record/cell asymmetry ceilings"
+    }
+  ],
+  "gate_counts": {
+    "unresolved_taxonomy": 2,
+    "unresolved_operational_scope": 2,
+    "unresolved_sampling": 3,
+    "reached_invariant": 0
+  },
+  "non_retroactivity": [
+    "do_not_relax_sampling_floors_or_asymmetry_ceilings",
+    "do_not_widen_scope_or_geocode_named_localities_after_the_fact",
+    "do_not_replace_sparse_pairs_with_better_sampled_congeners",
+    "do_not_reopen_consumed_occurrence executions",
+    "do_not_describe_upstream_unresolved_states_as_biological_invariant_violations"
+  ]
+}

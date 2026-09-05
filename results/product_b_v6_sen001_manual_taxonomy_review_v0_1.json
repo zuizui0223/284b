@@ -1,0 +1,29 @@
+{
+  "result_version": "product_b_v6_sen001_manual_taxonomy_review_v0.1",
+  "workflow_run_id": 33833025820,
+  "workflow_head_sha": "92fde27d48f3f03f2868abb55e4136e2463bbc0a",
+  "pair_id": "SEN001",
+  "partner": "x",
+  "state": "resolved_manual_homotypic_synonym_bridge",
+  "occurrence_reads_performed": false,
+  "literature_name_usage": {
+    "key": "3084409",
+    "canonical_name": "Lophocereus schottii",
+    "scientific_name": "Lophocereus schottii (Engelm.) Britton & Rose",
+    "rank": "SPECIES",
+    "status": "SYNONYM",
+    "accepted_key": "3084408",
+    "accepted_name": "Pachycereus schottii (Engelm.) D.R.Hunt"
+  },
+  "legacy_accepted_usage": {
+    "key": "3084408",
+    "canonical_name": "Pachycereus schottii",
+    "scientific_name": "Pachycereus schottii (Engelm.) D.R.Hunt",
+    "rank": "SPECIES",
+    "status": "ACCEPTED"
+  },
+  "relation_by_accepted_key": true,
+  "relation_by_accepted_name": true,
+  "transport_taxon_key": "3084408",
+  "concept_name_retained_for_biology": "Lophocereus schottii"
+}

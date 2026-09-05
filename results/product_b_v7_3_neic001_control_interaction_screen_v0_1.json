@@ -1,0 +1,26 @@
+{
+  "result_version": "product_b_v7_3_neic001_control_interaction_screen_v0.1",
+  "pair_id": "NEIC001",
+  "status": "control_interaction_screen_passed",
+  "host_definition": "plant_species_supporting_complete_life_cycle_and_reproduction",
+  "source_doi": "10.52997/jad.2.04.2021",
+  "predeclared_control_count": 8,
+  "screened_control_count": 8,
+  "invalid_actual_host_controls": [],
+  "controls": [
+    {"control_taxon":"Monochoria hastata","screen_completed":true,"dependent_uses_control_as_host":false,"note":"minimal feeding/damage reported but life cycle not completed"},
+    {"control_taxon":"Oryza sativa","screen_completed":true,"dependent_uses_control_as_host":false,"note":"life cycle not completed"},
+    {"control_taxon":"Ipomoea batatas","screen_completed":true,"dependent_uses_control_as_host":false,"note":"life cycle not completed"},
+    {"control_taxon":"Manihot esculenta","screen_completed":true,"dependent_uses_control_as_host":false,"note":"life cycle not completed"},
+    {"control_taxon":"Ipomoea aquatica","screen_completed":true,"dependent_uses_control_as_host":false,"note":"life cycle not completed"},
+    {"control_taxon":"Centella asiatica","screen_completed":true,"dependent_uses_control_as_host":false,"note":"life cycle not completed"},
+    {"control_taxon":"Nelumbo nucifera","screen_completed":true,"dependent_uses_control_as_host":false,"note":"life cycle not completed"},
+    {"control_taxon":"Nymphaea rubra","screen_completed":true,"dependent_uses_control_as_host":false,"note":"life cycle not completed"}
+  ],
+  "focal_current_taxonomy_bridge_state": "resolved_manual_direct_homotypic_synonym_bridge",
+  "replacement_or_rescue_controls_added": false,
+  "snapshot_taxonomy_identity_rows_opened": false,
+  "snapshot_occurrence_rows_opened": false,
+  "snapshot_occurrence_counts_opened": false,
+  "downstream_use_allowed": true
+}

@@ -1,0 +1,29 @@
+{
+  "contract_version": "product_b_v6_sen001_taxonomy_resolution_v0.1",
+  "status": "predeclared_not_executed",
+  "pair_id": "SEN001",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "occurrence_reads_allowed": false,
+  "requests": [
+    {
+      "partner": "x",
+      "scientific_name": "Lophocereus schottii",
+      "kingdom": "Plantae",
+      "expected_key_hint": ""
+    },
+    {
+      "partner": "y",
+      "scientific_name": "Upiga virescens",
+      "kingdom": "Animalia",
+      "expected_key_hint": ""
+    }
+  ],
+  "acceptance_rule": "EXACT species-rank legacy-backbone match; canonical name must equal literature-declared name; synonym matches require manual concept review; direct /v1/species/{key} page must agree",
+  "forbidden": [
+    "occurrence_search",
+    "occurrence_count",
+    "using_occurrence_availability_to_choose_a_taxonomic_concept",
+    "broadening_to_genus_if_species_match_fails",
+    "substituting_Pachycereus_schottii_if_Lophocereus_schottii_is_not_an_exact_match_without_manual_concept_review"
+  ]
+}

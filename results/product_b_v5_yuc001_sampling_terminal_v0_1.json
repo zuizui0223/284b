@@ -1,0 +1,51 @@
+{
+  "result_version": "product_b_v5_yuc001_sampling_terminal_v0.1",
+  "pair_id": "OPM_YUC_001",
+  "pre_execution_package_commit": "913599085dd94aa6fa0c8f75ab497f67add314a6",
+  "execution_workflow_run_id": 33830916478,
+  "execution_job_id": 100893554036,
+  "execution_status": "completed",
+  "terminal_state": "unresolved_sampling",
+  "rerun_for_rescue_forbidden": true,
+  "artifact_upload_note": "The scientific one-shot script completed successfully. Artifact upload failed only because the workflow expected an uppercase-pair filename while the runner wrote a lowercase-pair filename. This terminal record is reconstructed from the immutable GitHub Actions job log; occurrences were not re-read.",
+  "transport": {
+    "x": {"declared_count": 8716, "pages_fetched": 30, "rows_fetched": 8716},
+    "y": {"declared_count": 16, "pages_fetched": 1, "rows_fetched": 16}
+  },
+  "primary_sampling": {
+    "raw_records_x": 8716,
+    "raw_records_y": 16,
+    "quality_excluded_x": 186,
+    "quality_excluded_y": 0,
+    "quality_exclusion_reason_counts": {"coordinate_uncertainty_ceiling_failed": 186},
+    "collision_excluded_x": 1,
+    "collision_excluded_y": 1,
+    "retained_records_x": 8529,
+    "retained_records_y": 15,
+    "unique_cells_x": 430,
+    "unique_cells_y": 5,
+    "effective_cells_x": 105.41837028964609,
+    "effective_cells_y": 2.710843373493976,
+    "record_asymmetry_ratio": 568.6,
+    "unique_cell_asymmetry_ratio": 86.0,
+    "effective_cell_asymmetry_ratio": 38.887665484625,
+    "reasons": [
+      "y_independent_record_floor_failed",
+      "y_unique_cell_floor_failed",
+      "y_effective_cell_floor_failed",
+      "record_asymmetry_ceiling_failed",
+      "unique_cell_asymmetry_ceiling_failed",
+      "effective_cell_asymmetry_ceiling_failed"
+    ]
+  },
+  "cross_partner_collision": {
+    "component_count": 1,
+    "row_ids": ["4022058326", "4510306348"],
+    "witness_types": [
+      "dataset_key_plus_event_day_plus_coordinate_key",
+      "occurrence_id_lineage",
+      "recorder_plus_event_day_plus_coordinate_key"
+    ]
+  },
+  "interpretation_boundary": "Sampling adequacy failed before any niche-invariant evaluation. This is not evidence for or against ecological nesting."
+}

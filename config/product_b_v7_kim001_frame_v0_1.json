@@ -1,0 +1,23 @@
+{
+  "contract_version": "product_b_v7_kim001_frame_v0.1",
+  "pair_id": "KIM001",
+  "frame_id": "CHN-ADM0-351020",
+  "source_type": "preexisting_admin_boundary",
+  "source_authority": "geoBoundaries gbOpen",
+  "source_version": "boundaryID CHN-ADM0-351020; boundaryYearRepresented 2019; buildDate 2023-12-12; immutable source commit 9469f09",
+  "geometry_type": "admin_codes",
+  "geometry_value": "CHN",
+  "boundary_metadata_endpoint": "https://www.geoboundaries.org/api/current/gbOpen/CHN/ADM0/",
+  "immutable_geojson_source": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHN/ADM0/geoBoundaries-CHN-ADM0.geojson",
+  "boundary_year_represented": "2019",
+  "boundary_id": "CHN-ADM0-351020",
+  "witness_coordinates_used_to_derive_geometry": false,
+  "occurrence_information_used_to_derive_geometry": false,
+  "frame_rationale": "All declared KIM001 witness sites used for the confirmatory panel lie in China. The national ADM0 frame is pre-existing and independent of witness coordinates and occurrence availability.",
+  "forbidden": [
+    "replace_CHN_ADM0_with_witness_convex_hull",
+    "subset_the_frame_after_host_or_control_counts_are_seen",
+    "buffer_witness_points_to_define_background",
+    "derive_frame_geometry_from_GBIF_occurrences"
+  ]
+}

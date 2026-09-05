@@ -1,0 +1,56 @@
+{
+  "status": "terminal_sampling_unresolved",
+  "pair_id": "HTR001",
+  "terminal_state": "unresolved_witness_sampling",
+  "pre_execution_package_commit": "29dce70fe840d703d4aedbbf7f0788fe3554826d",
+  "runtime_github_sha": "da1fcc144b3cb0b9c819391a41de3c98bd465269",
+  "focal": {
+    "x_biological_name": "Euphorbia dregeana",
+    "x_transport_taxon_key": "3069738",
+    "y_taxon_name": "Hydnora triceps",
+    "y_taxon_key": "3646101",
+    "raw_records_x": 10,
+    "raw_records_y": 0,
+    "quality_excluded_x": 1,
+    "quality_excluded_y": 0,
+    "quality_exclusion_reason_counts": {
+      "coordinate_uncertainty_ceiling_failed": 1
+    },
+    "collision_excluded_x": 0,
+    "collision_excluded_y": 0,
+    "retained_records_x": 9,
+    "retained_records_y": 0,
+    "host_unique_cells": 6,
+    "host_effective_cells": 3.857142857142857,
+    "witness_unique_cells": 0
+  },
+  "failed_frozen_floors": [
+    "host_independent_record_floor_failed",
+    "host_unique_cell_floor_failed",
+    "host_effective_cell_floor_failed",
+    "witness_independent_record_floor_failed",
+    "witness_unique_cell_floor_failed"
+  ],
+  "transport_audits": [
+    {
+      "pair_id": "HTR001",
+      "partner": "x",
+      "declared_count": 10,
+      "pages_fetched": 1,
+      "rows_fetched": 10
+    },
+    {
+      "pair_id": "HTR001",
+      "partner": "y",
+      "declared_count": 0,
+      "pages_fetched": 1,
+      "rows_fetched": 0
+    }
+  ],
+  "controls_opened": false,
+  "adequate_control_host_count": 0,
+  "minimum_required_control_hosts": 5,
+  "invariant_reads_opened": false,
+  "interpretation": "The frozen occurrence sampling contract is infeasible for HTR001. This is not evidence for or against the directed dependency invariant or the biological host relationship.",
+  "nonretroactivity": "Do not rerun HTR001 to rescue sampling, widen/buffer its scope, alter focal/control taxon keys, relax floors, add replacement hosts, or reopen the frozen host-specificity decision."
+}

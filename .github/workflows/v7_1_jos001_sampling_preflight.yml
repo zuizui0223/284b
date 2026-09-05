@@ -1,0 +1,37 @@
+name: v7-1-jos001-sampling-preflight
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - .github/workflows/v7_1_jos001_sampling_preflight.yml
+
+permissions:
+  contents: read
+
+jobs:
+  one-shot-engineering-sampling:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify repository tests before occurrence access
+        env:
+          PYTHONPATH: .
+        run: python -m unittest discover -s tests -v
+      - name: Execute frozen JOS001 engineering sampling preflight once
+        env:
+          PYTHONPATH: .
+        run: python scripts/run_v7_1_jos001_sampling_preflight.py
+      - name: Upload JOS001 engineering sampling audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-v7-1-jos001-sampling-preflight
+          path: artifacts/product_b_v7_1_jos001_sampling_preflight.json
+          if-no-files-found: error
+          retention-days: 90

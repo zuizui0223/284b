@@ -1,0 +1,39 @@
+{
+  "result_version": "product_b_v7_2_jos002_taxonomy_terminal_v0.1",
+  "pair_id": "JOS002",
+  "terminal_state": "unresolved_snapshot_taxonomy_concept",
+  "terminal_gate": "snapshot_native_taxonomy_concept",
+  "engineering_only": true,
+  "confirmatory_promotion_allowed": false,
+  "reason": "Current GBIF taxonomy treats Yucca jaegeriana as synonym key 2775598 of accepted Yucca brevifolia key 2775592. The frozen snapshot taxonkey/specieskey concept therefore cannot isolate the eastern Yucca jaegeriana focal host from the western Yucca brevifolia concept without a post-selection name-field rescue.",
+  "dependent_taxon": {
+    "name": "Tegeticula antithetica",
+    "snapshot_native_taxonomy_state": "direct_exact_accepted",
+    "current_gbif_key": "10170653"
+  },
+  "host_taxon": {
+    "biological_name": "Yucca jaegeriana",
+    "current_gbif_synonym_key": "2775598",
+    "current_gbif_accepted_name": "Yucca brevifolia",
+    "current_gbif_accepted_key": "2775592",
+    "snapshot_native_species_concept_separable": false
+  },
+  "literature_witnesses_frozen": 17,
+  "independent_frame_frozen": "USA-ADM0-2327393",
+  "snapshot_date": "2026-08-01",
+  "snapshot_schema_sha256": "8298545ad22ddc1e064ae6e2ca8dbc592fcd47ab87f1018e0699fc68474571aa",
+  "snapshot_occurrence_rows_opened": false,
+  "snapshot_occurrence_counts_opened": false,
+  "controls_selected_or_opened": false,
+  "model_fit_reads_opened": false,
+  "invariant_reads_opened": false,
+  "process_knockout_reads_opened": false,
+  "forbidden_rescues": [
+    "filter_snapshot_rows_by_verbatimscientificname_after_taxonomy_failure",
+    "filter_snapshot_rows_by_scientificname_to_split_the_collapsed_concept",
+    "reuse_legacy_backbone_key_as_snapshot_native_focal_key",
+    "change_focal_host_to_Yucca_brevifolia",
+    "reuse_JOS002_in_a_future_transport_or_taxonomy_design"
+  ],
+  "interpretation": "This is a taxonomy/evidence-interface terminal result, not a biological violation of the directional dependency invariant and not a sampling result."
+}

@@ -1,0 +1,53 @@
+{
+  "result_version": "product_b_v5_glochidion_taxonomy_resolution_v0.1",
+  "workflow_run_id": 33832165630,
+  "workflow_head_sha": "6e3818680094d5afc5a9f84ca9f212b7282b9ec3",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "occurrence_reads_performed": false,
+  "pairs": {
+    "OPM_GLO_003": {
+      "pair_taxonomy_state": "eligible_for_scope_resolution",
+      "x": {
+        "requested_name": "Glochidion lanceolatum",
+        "usage_key": "3080075",
+        "match_type": "EXACT",
+        "rank": "SPECIES",
+        "status": "ACCEPTED",
+        "confidence": 100,
+        "direct_usage_key": "3080075"
+      },
+      "y": {
+        "requested_name": "Epicephala lanceolatella",
+        "usage_key": "9121102",
+        "match_type": "EXACT",
+        "rank": "SPECIES",
+        "status": "ACCEPTED",
+        "confidence": 100,
+        "direct_usage_key": "9121102",
+        "preexisting_secondary_hint": "9121102",
+        "hint_agrees": true
+      }
+    },
+    "OPM_GLO_004": {
+      "pair_taxonomy_state": "eligible_for_scope_resolution",
+      "x": {
+        "requested_name": "Glochidion lanceolatum",
+        "usage_key": "3080075",
+        "match_type": "EXACT",
+        "rank": "SPECIES",
+        "status": "ACCEPTED",
+        "confidence": 100,
+        "direct_usage_key": "3080075"
+      },
+      "y": {
+        "requested_name": "Epicephala perplexa",
+        "usage_key": "8821634",
+        "match_type": "EXACT",
+        "rank": "SPECIES",
+        "status": "ACCEPTED",
+        "confidence": 100,
+        "direct_usage_key": "8821634"
+      }
+    }
+  }
+}

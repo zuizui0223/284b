@@ -1,0 +1,18 @@
+{
+  "contract_version": "product_b_v7_kim001_control_taxonomy_v0.1",
+  "pair_id": "KIM001",
+  "pool_registry": "registry/product_b_v7_kim001_replacement_host_pool_v0_1.csv",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "occurrence_reads_allowed": false,
+  "acceptance_rule": "A replacement host survives only if its predeclared literature name returns an EXACT species-rank ACCEPTED legacy-backbone match and the direct /v1/species/{key} page agrees.",
+  "synonym_policy": "Exclude unresolved/synonym controls; no manual synonym rescue is permitted for replacement hosts.",
+  "minimum_taxonomy_resolved_candidates_before_any_occurrence_query": 5,
+  "pool_is_closed": true,
+  "forbidden": [
+    "adding_new_control_taxa_after_taxonomy_results_are_seen",
+    "opening_occurrence_counts_or_maps_during_taxonomy_resolution",
+    "manual_synonym_bridging_for_controls",
+    "using_Phyllanthus_reticulatus_or_other_names_that_overlap_the_focal_P_microcarpus_concept",
+    "broadening_from_species_to_genus"
+  ]
+}

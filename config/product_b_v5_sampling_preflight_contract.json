@@ -1,0 +1,54 @@
+{
+  "status": "predeclared_not_executed",
+  "taxonomy_gate": "eligible_for_sampling_preflight_only",
+  "spatial_cell": {
+    "crs": "EPSG:6933",
+    "edge_m": 10000,
+    "purpose": "response-blind sampling support and asymmetry audit"
+  },
+  "primary_thresholds": {
+    "minimum_independent_records_per_partner": 50,
+    "minimum_unique_cells_per_partner": 30,
+    "minimum_effective_cells_per_partner": 10.0,
+    "maximum_record_count_asymmetry_ratio": 10.0,
+    "maximum_unique_cell_asymmetry_ratio": 5.0,
+    "maximum_effective_cell_asymmetry_ratio": 5.0
+  },
+  "predeclared_stricter_sensitivity": {
+    "minimum_independent_records_per_partner": 100,
+    "minimum_unique_cells_per_partner": 50,
+    "minimum_effective_cells_per_partner": 20.0,
+    "maximum_record_count_asymmetry_ratio": 5.0,
+    "maximum_unique_cell_asymmetry_ratio": 3.0,
+    "maximum_effective_cell_asymmetry_ratio": 3.0
+  },
+  "effective_cells_definition": "inverse_simpson_of_record_mass_over_10km_cells",
+  "same_record_collision_rule": [
+    "occurrence_id_lineage",
+    "event_id",
+    "catalog_or_specimen_number",
+    "dataset_key_plus_event_date_plus_coordinate",
+    "recorder_plus_date_plus_coordinate"
+  ],
+  "collision_action": "exclude_all_cross_partner_records_in_any_shared_identity_group_before_denominator_calculation",
+  "cross_kingdom": {
+    "separate_target_group_background_by_kingdom": true,
+    "background_must_respect_declared_geographic_scope": true,
+    "background_choice_must_be_response_blind": true,
+    "animal_occurrence_does_not_establish_habitat_use": true
+  },
+  "stop_semantics": "any_primary_threshold_failure_is_unresolved_and_cannot_be_repaired_by_pair_replacement_or_threshold_relaxation_after_counts_are_opened",
+  "forbidden_before_contract_freeze": [
+    "occurrence_count",
+    "unique_cell_count",
+    "effective_cell_count",
+    "record_count_asymmetry_ratio",
+    "unique_cell_asymmetry_ratio",
+    "effective_cell_asymmetry_ratio",
+    "record_map",
+    "range_summary_from_occurrences",
+    "environmental_values",
+    "invariant_metrics",
+    "process_knockout_outcomes"
+  ]
+}

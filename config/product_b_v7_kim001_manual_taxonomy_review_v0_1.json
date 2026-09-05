@@ -1,0 +1,16 @@
+{
+  "contract_version": "product_b_v7_kim001_manual_taxonomy_review_v0.1",
+  "pair_id": "KIM001",
+  "partner": "x",
+  "literature_name": "Kirganelia microcarpa",
+  "expected_legacy_accepted_name": "Phyllanthus microcarpus",
+  "relationship_basis": "Kew/WCVP 2026 treats Kirganelia microcarpa as a homotypic synonym of accepted Phyllanthus microcarpus; Bouman et al. 2022 and the 2026 Kirganelia phylogenomic treatment use Kirganelia microcarpa for the same basionym-derived species concept.",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "occurrence_reads_allowed": false,
+  "forbidden": [
+    "choose_between_names_using_occurrence_counts",
+    "bridge_to_a_non_homotypic_species_concept",
+    "accept_genus_or_higher_rank_usage",
+    "open_host_or_moth_occurrences_during_manual_review"
+  ]
+}

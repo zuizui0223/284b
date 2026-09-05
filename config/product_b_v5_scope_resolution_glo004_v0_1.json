@@ -1,0 +1,30 @@
+{
+  "contract_version": "product_b_v5_scope_resolution_glo004_v0.1",
+  "pair_id": "OPM_GLO_004",
+  "scope_evidence_doi": "10.3897/zookeys.568.6721",
+  "operational_scope_state": "unresolved_operational_scope",
+  "occurrence_information_used_in_derivation": false,
+  "exact_published_points_lon_lat": [
+    {"locality": "Okinawa Island, Kunigami, Cape Hedo", "longitude": 128.257979, "latitude": 26.8602}
+  ],
+  "published_named_localities_without_coordinates": [
+    "Amami Island, Asado",
+    "Ishigaki Island, Omoto",
+    "Iriomote Island, Funaura",
+    "Yonaguni Island, Mantabaru"
+  ],
+  "published_distribution": [
+    "Amami Island",
+    "Okinawa Island",
+    "Ishigaki Island",
+    "Iriomote Island",
+    "Yonaguni Island"
+  ],
+  "reason": "The primary taxonomic revision supplies only one exact coordinate for E. perplexa material. A no-buffer polygon requires at least three distinct exact coordinates. Named islands/localities are not converted to centroids, hand-made bounding boxes, or occurrence-derived geometry after taxonomy resolution.",
+  "forbidden_resolution_shortcuts": [
+    "geocode_named_localities_post_hoc",
+    "use_island_centroids_without_a_predeclared_gazetteer_contract",
+    "construct_a_manual_Ryukyu_bbox",
+    "use_GBIF_occurrence_range_or_density_to_define_scope"
+  ]
+}

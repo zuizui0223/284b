@@ -1,0 +1,23 @@
+{
+  "contract_version": "product_b_v6_epv001_taxonomy_resolution_v0.1",
+  "pair_id": "EPV001",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "requests": [
+    {
+      "partner": "x",
+      "scientific_name": "Fagus grandifolia",
+      "kingdom": "Plantae",
+      "expected_key_hint": ""
+    },
+    {
+      "partner": "y",
+      "scientific_name": "Epifagus virginiana",
+      "kingdom": "Plantae",
+      "expected_key_hint": ""
+    }
+  ],
+  "literature_evidence_doi": "10.1073/pnas.1006225107",
+  "occurrence_reads_allowed": false,
+  "scope_reads_allowed": false,
+  "resolution_rule": "Both taxa must resolve by legacy GBIF species match to direct EXACT species-level accepted usages. Any synonym, doubtful, rank mismatch, or concept ambiguity is unresolved unless a separately predeclared manual concept review is later justified without occurrence information."
+}

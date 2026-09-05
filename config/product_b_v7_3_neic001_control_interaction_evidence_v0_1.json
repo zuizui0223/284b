@@ -1,0 +1,27 @@
+{
+  "evidence_version": "product_b_v7_3_neic001_control_interaction_evidence_v0.1",
+  "pair_id": "NEIC001",
+  "dependent_taxon": "Neochetina eichhorniae",
+  "frozen_host_definition": "plant_species_supporting_complete_life_cycle_and_reproduction",
+  "source_doi": "10.52997/jad.2.04.2021",
+  "source_scope": "published host-spectrum experiment",
+  "screen_state": "passed_exact_frozen_pool_after_focal_taxonomy_resolution",
+  "predeclared_control_pool_must_not_change": true,
+  "controls": [
+    {"control_taxon":"Monochoria hastata","screen_completed":true,"dependent_uses_control_as_host":false,"reported_interaction":"minimal feeding/damage; life cycle not completed"},
+    {"control_taxon":"Oryza sativa","screen_completed":true,"dependent_uses_control_as_host":false,"reported_interaction":"life cycle not completed"},
+    {"control_taxon":"Ipomoea batatas","screen_completed":true,"dependent_uses_control_as_host":false,"reported_interaction":"life cycle not completed"},
+    {"control_taxon":"Manihot esculenta","screen_completed":true,"dependent_uses_control_as_host":false,"reported_interaction":"life cycle not completed"},
+    {"control_taxon":"Ipomoea aquatica","screen_completed":true,"dependent_uses_control_as_host":false,"reported_interaction":"life cycle not completed"},
+    {"control_taxon":"Centella asiatica","screen_completed":true,"dependent_uses_control_as_host":false,"reported_interaction":"life cycle not completed"},
+    {"control_taxon":"Nelumbo nucifera","screen_completed":true,"dependent_uses_control_as_host":false,"reported_interaction":"life cycle not completed"},
+    {"control_taxon":"Nymphaea rubra","screen_completed":true,"dependent_uses_control_as_host":false,"reported_interaction":"life cycle not completed"}
+  ],
+  "interpretation_boundary": "Feeding or minor damage alone does not satisfy the prospectively frozen host definition. A control is an actual host only if it supports complete life-cycle development/reproduction.",
+  "focal_current_taxonomy_state": "resolved_y_direct_exact_x_manual_homotypic_synonym_bridge",
+  "replacement_or_rescue_controls_allowed": false,
+  "snapshot_taxonomy_identity_rows_opened": false,
+  "snapshot_occurrence_rows_opened": false,
+  "snapshot_occurrence_counts_opened": false,
+  "downstream_gate_may_pass_only_after_focal_current_taxonomy_resolves": true
+}

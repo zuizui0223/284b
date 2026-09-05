@@ -1,0 +1,45 @@
+{
+  "result_version": "product_b_v7_2_jos003_snapshot_taxonomy_v0.1",
+  "pair_id": "JOS003",
+  "status": "resolved_direct_exact_current_taxonomy",
+  "taxonomy_system": "GBIF current default taxonomy; no legacy checklistKey",
+  "workflow_run_id": 33897495891,
+  "artifact_id": 9946303298,
+  "artifact_sha256": "b4e79aa794fea4f51f4abdf0d744ed058eb7f37f0d1a24690e9885cd5ab8831d",
+  "resolutions": [
+    {
+      "partner": "x",
+      "requested_name": "Yucca filamentosa",
+      "usage_key": "2775561",
+      "canonical_name": "Yucca filamentosa",
+      "scientific_name": "Yucca filamentosa L.",
+      "rank": "SPECIES",
+      "status": "ACCEPTED",
+      "match_type": "EXACT",
+      "confidence": 99,
+      "direct_usage_key": "2775561",
+      "direct_usage_canonical_name": "Yucca filamentosa",
+      "direct_usage_rank": "SPECIES",
+      "direct_usage_status": "ACCEPTED"
+    },
+    {
+      "partner": "y",
+      "requested_name": "Tegeticula cassandra",
+      "usage_key": "9095047",
+      "canonical_name": "Tegeticula cassandra",
+      "scientific_name": "Tegeticula cassandra Pellmyr, 1999",
+      "rank": "SPECIES",
+      "status": "ACCEPTED",
+      "match_type": "EXACT",
+      "confidence": 100,
+      "direct_usage_key": "9095047",
+      "direct_usage_canonical_name": "Tegeticula cassandra",
+      "direct_usage_rank": "SPECIES",
+      "direct_usage_status": "ACCEPTED"
+    }
+  ],
+  "errors": [],
+  "snapshot_occurrence_rows_opened": false,
+  "snapshot_occurrence_counts_opened": false,
+  "live_occurrence_search_used": false
+}

@@ -1,0 +1,40 @@
+{
+  "status": "completed_taxonomy_only",
+  "contract_version": "product_b_v6_htr001_taxonomy_resolution_v0.1",
+  "pair_id": "HTR001",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "pair_taxonomy_state": "eligible_for_confirmatory_preflight",
+  "resolutions": [
+    {
+      "partner": "x",
+      "requested_name": "Euphorbia dregeana",
+      "canonical_name": "Euphorbia dregeana",
+      "scientific_name": "Euphorbia dregeana E.Mey. ex Boiss.",
+      "usage_key": "3069738",
+      "direct_usage_key": "3069738",
+      "rank": "SPECIES",
+      "direct_usage_rank": "SPECIES",
+      "status": "ACCEPTED",
+      "direct_usage_status": "ACCEPTED",
+      "match_type": "EXACT",
+      "confidence": 99,
+      "state": "resolved_direct_exact"
+    },
+    {
+      "partner": "y",
+      "requested_name": "Hydnora triceps",
+      "canonical_name": "Hydnora triceps",
+      "scientific_name": "Hydnora triceps Drège & E.Mey.",
+      "usage_key": "3646101",
+      "direct_usage_key": "3646101",
+      "rank": "SPECIES",
+      "direct_usage_rank": "SPECIES",
+      "status": "ACCEPTED",
+      "direct_usage_status": "ACCEPTED",
+      "match_type": "EXACT",
+      "confidence": 100,
+      "state": "resolved_direct_exact"
+    }
+  ],
+  "occurrence_reads_performed": false
+}

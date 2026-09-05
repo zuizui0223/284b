@@ -1,0 +1,13 @@
+witness_id,site_code,site_name,source_doi,latitude,longitude,uncertainty_m,coordinate_source_type,rotundiventris_sample_count,admitted,exclusion_reason
+CROT_W01,AMB,Ambri,10.1016/j.ympev.2017.06.012,46.50680,8.70292,100,primary_literature_text,2,true,
+CROT_W02,BAY,Bayasse,10.1016/j.ympev.2017.06.012,44.30814,6.74067,100,primary_literature_text,2,true,
+CROT_W03,BID,Bidjovagge,10.1016/j.ympev.2017.06.012,69.29778,22.47808,100,primary_literature_text,1,true,
+CROT_W04,BON,Col de Bonnecombe,10.1016/j.ympev.2017.06.012,44.57557,3.11410,100,primary_literature_text,1,true,
+CROT_W05,CCO,Col de la Colombiere,10.1016/j.ympev.2017.06.012,45.98722,6.46972,100,primary_literature_text,2,true,
+CROT_W06,CDV,Creux du Van,10.1016/j.ympev.2017.06.012,46.93526,6.74119,100,primary_literature_text,2,true,
+CROT_W07,CHA,Chasseral,10.1016/j.ympev.2017.06.012,47.12569,7.02130,100,primary_literature_text,3,true,
+CROT_W08,CHE,Chemin,10.1016/j.ympev.2017.06.012,46.08993,7.08978,100,primary_literature_text,2,true,
+CROT_W09,CRA,Crans-Montana,10.1016/j.ympev.2017.06.012,46.34650,7.53890,100,primary_literature_text,3,true,
+CROT_W10,CTP,Colt Park,10.1016/j.ympev.2017.06.012,54.19365,-2.35247,100,primary_literature_text,1,true,
+CROT_W11,DON,Donovaly,10.1016/j.ympev.2017.06.012,48.88922,19.23068,100,primary_literature_text,2,true,
+CROT_W12,EPO,Esposouille,10.1016/j.ympev.2017.06.012,42.62341,2.09450,100,primary_literature_text,2,true,

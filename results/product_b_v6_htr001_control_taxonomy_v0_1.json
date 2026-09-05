@@ -1,0 +1,18 @@
+{
+  "status": "completed_control_taxonomy_only",
+  "contract_version": "product_b_v6_htr001_control_taxonomy_v0.1",
+  "pair_id": "HTR001",
+  "closed_pool_size": 6,
+  "minimum_required": 5,
+  "resolved_candidate_count": 6,
+  "pool_state": "control_taxonomy_preflight_passed",
+  "resolved_controls": [
+    {"control_taxon_id": "HTR_C01", "scientific_name": "Euphorbia mauritanica", "taxon_key": "7926635", "confidence": 99},
+    {"control_taxon_id": "HTR_C02", "scientific_name": "Euphorbia gummifera", "taxon_key": "3068472", "confidence": 100},
+    {"control_taxon_id": "HTR_C03", "scientific_name": "Euphorbia gregaria", "taxon_key": "3069722", "confidence": 100},
+    {"control_taxon_id": "HTR_C04", "scientific_name": "Euphorbia damarana", "taxon_key": "3069701", "confidence": 100},
+    {"control_taxon_id": "HTR_C05", "scientific_name": "Euphorbia gariepina", "taxon_key": "3069506", "confidence": 100},
+    {"control_taxon_id": "HTR_C06", "scientific_name": "Euphorbia virosa", "taxon_key": "3066685", "confidence": 100}
+  ],
+  "occurrence_reads_performed": false
+}

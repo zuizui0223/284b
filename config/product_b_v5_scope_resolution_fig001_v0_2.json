@@ -1,0 +1,21 @@
+{
+  "pair_id": "OPM_FIG_001",
+  "biological_evidence_doi": "10.1111/j.1365-294X.2010.04654.x",
+  "scope_evidence_doi": "10.1007/s10682-016-9836-5",
+  "scope_source_type": "primary_literature_methods",
+  "source_population_label": "China-Thailand continental Southeast Asia population",
+  "source_points_lon_lat": [
+    {"locality": "Dazhuang", "country": "China", "longitude": 98.00, "latitude": 24.67},
+    {"locality": "Shitouzhai", "country": "China", "longitude": 98.88, "latitude": 24.90},
+    {"locality": "Xingfuzhan", "country": "China", "longitude": 100.18, "latitude": 22.18},
+    {"locality": "Xishuangbanna", "country": "China", "longitude": 101.27, "latitude": 21.90},
+    {"locality": "Chiang Mai", "country": "Thailand", "longitude": 98.92, "latitude": 18.75},
+    {"locality": "Bangkok", "country": "Thailand", "longitude": 100.42, "latitude": 13.83}
+  ],
+  "derivation_rule": "convex_hull_lon_lat_of_published_china_thailand_population_localities_no_buffer",
+  "buffer_degrees": 0,
+  "filter_type": "polygon_wkt",
+  "filter_value": "POLYGON((98 24.67,98.92 18.75,100.42 13.83,101.27 21.9,98.88 24.9,98 24.67))",
+  "claim_boundary": "This polygon is an operational literature-evidence envelope, not the biological range of either partner and not evidence that the interaction occurs in every location inside the hull.",
+  "occurrence_information_used_in_derivation": false
+}

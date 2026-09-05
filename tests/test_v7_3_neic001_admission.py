@@ -17,7 +17,10 @@ WITNESS = ROOT / "registry/product_b_v7_3_neic001_literature_witnesses_v0_1.csv"
 FRAME = ROOT / "config/product_b_v7_3_neic001_frame_v0_1.json"
 ADMISSION = ROOT / "config/product_b_v7_3_neic001_admission_v0_1.json"
 CURRENT_TAXONOMY = ROOT / "results/product_b_v7_3_neic001_current_taxonomy_v0_1.json"
+BRIDGE = ROOT / "results/product_b_v7_3_neic001_host_manual_taxonomy_review_v0_1.json"
 INTERACTION = ROOT / "config/product_b_v7_3_neic001_control_interaction_evidence_v0_1.json"
+INTERACTION_RESULT = ROOT / "results/product_b_v7_3_neic001_control_interaction_screen_v0_1.json"
+CONTROL_POOL = ROOT / "registry/product_b_v7_3_neic001_control_pool_v0_1.csv"
 CANDIDATE_AUDIT = ROOT / "registry/product_b_v7_3_candidate_audit_v0_1.csv"
 
 
@@ -107,7 +110,7 @@ class NEIC001AdmissionTests(unittest.TestCase):
         self.assertFalse(frame["occurrence_information_used_to_derive_geometry"])
         self.assertEqual(frame["operational_country_materialization_state"], "deferred_until_separate_sampling_package")
 
-    def test_human_release_and_hybridization_confounds_preclude_confirmatory_promotion(self):
+    def test_engineering_confounds_permanently_preclude_confirmatory_promotion(self):
         data = _admission()
         self.assertTrue(data["engineering_only"])
         self.assertFalse(data["confirmatory_promotion_allowed"])
@@ -116,27 +119,36 @@ class NEIC001AdmissionTests(unittest.TestCase):
         self.assertFalse(data["snapshot_occurrence_information_used_for_selection"])
         self.assertFalse(data["snapshot_taxonomy_information_used_for_selection"])
 
-    def test_current_taxonomy_is_opened_only_to_host_synonym_bridge_pending(self):
+    def test_current_taxonomy_is_resolved_before_snapshot_identity(self):
         data = _admission()
-        self.assertEqual(data["host_definition"], "plant_species_supporting_complete_life_cycle_and_reproduction")
-        self.assertEqual(data["predeclared_control_interaction_evidence_doi"], "10.52997/jad.2.04.2021")
-        self.assertEqual(len(data["predeclared_control_taxa"]), 8)
-        self.assertTrue(data["current_taxonomy_access_started"])
-        self.assertEqual(data["current_taxonomy_state"], "unresolved_host_synonym_bridge_pending")
-        self.assertEqual(data["current_taxonomy_result_path"], "results/product_b_v7_3_neic001_current_taxonomy_v0_1.json")
+        self.assertEqual(data["current_taxonomy_state"], "resolved_y_direct_exact_x_manual_homotypic_synonym_bridge")
+        self.assertEqual(data["x_current_accepted_name"], "Pontederia crassipes")
+        self.assertEqual(data["x_current_accepted_key"], "2765942")
+        self.assertEqual(data["x_snapshot_admissible_species_names"], ["Eichhornia crassipes", "Pontederia crassipes"])
+        self.assertEqual(data["y_current_accepted_key"], "4290716")
         self.assertFalse(data["snapshot_taxonomy_identity_access_started"])
         self.assertFalse(data["snapshot_occurrence_row_access_started"])
 
-    def test_partial_current_taxonomy_result_keeps_snapshot_closed(self):
+    def test_partial_current_taxonomy_result_is_preserved_as_historical_audit(self):
         result = json.loads(CURRENT_TAXONOMY.read_text(encoding="utf-8"))
         self.assertEqual(result["status"], "unresolved_current_taxonomy_host_synonym_bridge_pending")
-        self.assertEqual(result["resolved_partner"]["partner"], "y")
         self.assertEqual(result["resolved_partner"]["usage_key"], "4290716")
-        self.assertEqual(result["unresolved_partner"]["partner"], "x")
+        self.assertFalse(result["snapshot_taxonomy_identity_rows_opened"])
+
+    def test_manual_host_bridge_is_direct_homotypic_and_occurrence_blind(self):
+        result = json.loads(BRIDGE.read_text(encoding="utf-8"))
+        self.assertEqual(result["state"], "resolved_manual_direct_homotypic_synonym_bridge")
+        self.assertEqual(result["matched_direct_usage"]["key"], "2765940")
+        self.assertEqual(result["matched_direct_usage"]["status"], "HOMOTYPIC_SYNONYM")
+        self.assertEqual(result["matched_direct_usage"]["accepted_key"], "2765942")
+        self.assertEqual(result["accepted_direct_usage"]["canonical_name"], "Pontederia crassipes")
+        self.assertEqual(result["accepted_direct_usage"]["status"], "ACCEPTED")
+        self.assertTrue(result["relation_by_direct_accepted_key"])
+        self.assertEqual(result["reasons"], [])
         self.assertFalse(result["snapshot_taxonomy_identity_rows_opened"])
         self.assertFalse(result["snapshot_occurrence_rows_opened"])
 
-    def test_frozen_control_interaction_evidence_covers_exact_pool_and_passes_host_definition(self):
+    def test_frozen_control_interaction_screen_passes_exact_pool_under_host_definition(self):
         data = json.loads(INTERACTION.read_text(encoding="utf-8"))
         admission = _admission()
         evidence = tuple(
@@ -154,28 +166,37 @@ class NEIC001AdmissionTests(unittest.TestCase):
         self.assertTrue(decision.passed, decision.reasons)
         self.assertEqual(decision.screened_control_count, 8)
         self.assertEqual(decision.invalid_actual_host_controls, ())
-        self.assertEqual(data["source_doi"], "10.52997/jad.2.04.2021")
-        self.assertEqual(data["frozen_host_definition"], admission["host_definition"])
-        self.assertEqual(data["screen_state"], "evidence_frozen_pending_focal_taxonomy_bridge_completion")
-        self.assertFalse(data["snapshot_taxonomy_identity_rows_opened"])
-        self.assertFalse(data["snapshot_occurrence_rows_opened"])
+        self.assertEqual(data["screen_state"], "passed_exact_frozen_pool_after_focal_taxonomy_resolution")
         monochoria = next(item for item in data["controls"] if item["control_taxon"] == "Monochoria hastata")
         self.assertFalse(monochoria["dependent_uses_control_as_host"])
         self.assertIn("life cycle not completed", monochoria["reported_interaction"])
+        result = json.loads(INTERACTION_RESULT.read_text(encoding="utf-8"))
+        self.assertEqual(result["status"], "control_interaction_screen_passed")
+        self.assertEqual(result["invalid_actual_host_controls"], [])
+        self.assertFalse(result["snapshot_taxonomy_identity_rows_opened"])
 
-    def test_pair_registry_is_bridge_pending_and_snapshot_unopened(self):
+    def test_control_pool_is_fixed_screened_and_current_taxonomy_unopened(self):
+        with CONTROL_POOL.open("r", encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+        self.assertEqual(len(rows), 8)
+        self.assertTrue(all(row["interaction_screen_state"] == "passed_complete_life_cycle_nonhost_screen" for row in rows))
+        self.assertTrue(all(row["current_taxonomy_state"] == "taxonomy_unopened" for row in rows))
+        self.assertTrue(all(row["snapshot_taxonomy_identity_state"] == "snapshot_taxonomy_identity_unopened" for row in rows))
+        self.assertTrue(all(row["snapshot_occurrence_rows_opened"] == "false" for row in rows))
+
+    def test_pair_registry_is_current_taxonomy_resolved_and_snapshot_unopened(self):
         with PAIR.open("r", encoding="utf-8", newline="") as handle:
             row = list(csv.DictReader(handle))[0]
         self.assertEqual(row["pair_id"], "NEIC001")
-        self.assertEqual(row["current_taxonomy_state"], "unresolved_host_synonym_bridge_pending")
+        self.assertEqual(row["current_taxonomy_state"], "resolved_y_direct_exact_x_manual_homotypic_synonym_bridge")
         self.assertEqual(row["snapshot_taxonomy_identity_state"], "snapshot_taxonomy_identity_unopened")
         self.assertEqual(row["snapshot_occurrence_rows_opened"], "false")
 
-    def test_candidate_audit_records_bridge_pending_without_snapshot_selection(self):
+    def test_candidate_audit_records_next_gate_without_snapshot_selection(self):
         with CANDIDATE_AUDIT.open("r", encoding="utf-8", newline="") as handle:
             rows = {row["candidate_id"]: row for row in csv.DictReader(handle)}
         row = rows["NEIC001"]
-        self.assertEqual(row["screen_state"], "current_taxonomy_host_synonym_bridge_pending")
+        self.assertEqual(row["screen_state"], "current_taxonomy_and_control_interaction_passed_pending_control_taxonomy")
         self.assertEqual(row["direct_primary_witness_sites_confirmed"], "10")
         self.assertEqual(row["snapshot_occurrence_information_used"], "false")
 

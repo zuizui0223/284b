@@ -1,0 +1,37 @@
+name: v7-3-neic001-host-manual-taxonomy-review
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - .github/workflows/v7_3_neic001_host_manual_taxonomy_review.yml
+
+permissions:
+  contents: read
+
+jobs:
+  taxonomy-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify repository tests before manual taxonomy access
+        env:
+          PYTHONPATH: .
+        run: python -m unittest discover -s tests -v
+      - name: Verify NEIC001 Eichhornia to Pontederia current-taxonomy bridge only
+        env:
+          PYTHONPATH: .
+        run: python scripts/run_v7_3_neic001_host_manual_taxonomy_review.py
+      - name: Upload NEIC001 host manual taxonomy review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-v7-3-neic001-host-manual-taxonomy-review
+          path: artifacts/product_b_v7_3_neic001_host_manual_taxonomy_review.json
+          if-no-files-found: error
+          retention-days: 90

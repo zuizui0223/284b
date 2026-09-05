@@ -127,7 +127,8 @@
     "HTR001",
     "KIM001",
     "JOS001",
-    "JOS002"
+    "JOS002",
+    "JOS003"
   ],
   "forbidden": [
     "use_live_occurrence_search_as_fallback",
@@ -136,6 +137,9 @@
     "rerun_JOS001_with_snapshot_transport",
     "rerun_or_reuse_JOS002_after_snapshot_taxonomy_concept_failure",
     "split_JOS002_host_using_scientificname_or_verbatimscientificname_after_taxonomy_failure",
+    "rerun_or_reuse_JOS003_after_snapshot_row_opening",
+    "rescue_JOS003_zero_hit_by_switching_specieskey_taxonkey_scientificname_or_verbatimscientificname",
+    "silently_treat_current_taxonomy_key_as_proven_snapshot_internal_identity_for_future_pairs",
     "silently_treat_legacy_taxon_key_as_snapshot_native_key",
     "drop_required_schema_fields_after_rows_are_seen",
     "store_GBIF_username_or_password_in_repository_or_artifacts"

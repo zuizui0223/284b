@@ -120,7 +120,6 @@ def object_manifest_sha256(objects: Iterable[SnapshotObject]) -> str:
 
 
 def select_frozen_schema_probe_object(objects: Sequence[SnapshotObject]) -> SnapshotObject:
-    """Select one real Parquet object only after proving listing identity."""
     if len(objects) != EXPECTED_OBJECT_COUNT:
         raise ValueError("snapshot object count differs from frozen metadata audit")
     digest = object_manifest_sha256(objects)
@@ -150,11 +149,7 @@ def extract_citation_doi(citation_text: str) -> str:
     return match.group(0).lower()
 
 
-def build_metadata_audit(
-    *,
-    objects: Sequence[SnapshotObject],
-    citation_bytes: bytes,
-) -> SnapshotMetadataAudit:
+def build_metadata_audit(*, objects: Sequence[SnapshotObject], citation_bytes: bytes) -> SnapshotMetadataAudit:
     parquet_count = sum(item.key.startswith(EXPECTED_OCCURRENCE_PREFIX) for item in objects)
     if parquet_count < 1:
         raise ValueError("frozen snapshot listing contains no occurrence.parquet objects")
@@ -174,9 +169,7 @@ def build_metadata_audit(
 
 def _schema_digest(fields: Mapping[str, object]) -> str:
     normalized = {str(name): str(dtype) for name, dtype in fields.items()}
-    return hashlib.sha256(
-        (json.dumps(normalized, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
-    ).hexdigest()
+    return hashlib.sha256((json.dumps(normalized, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")).hexdigest()
 
 
 def evaluate_snapshot_contract(contract: Mapping[str, object]) -> SnapshotContractDecision:
@@ -290,6 +283,7 @@ def evaluate_snapshot_contract(contract: Mapping[str, object]) -> SnapshotContra
         "KIM001",
         "JOS001",
         "JOS002",
+        "JOS003",
     }
     if not isinstance(firewalled, list) or set(firewalled) != required_firewall:
         reasons.append("consumed_pair_firewall_changed")

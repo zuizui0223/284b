@@ -45,14 +45,6 @@ jobs:
           assert t['current_12_taxon_paired_discordance_read'] is False
           assert t['process_knockout_opened'] is False
           PY
-      - name: Download sealed successor fit artifacts from frozen fit run
-        uses: actions/download-artifact@v4
-        with:
-          repository: zuizui0223/284b
-          github-token: ${{ github.token }}
-          run-id: ${{ fromJson(steps.trigger.outputs.run_id || '0') }}
-          pattern: product-b-successor-layer1-fit-taxon-*
-          path: fit_artifacts
       - name: Resolve frozen fit run for artifact download
         id: trigger
         run: |
@@ -61,7 +53,7 @@ jobs:
           t=json.load(open('config/product_b_same_target_successor_pairing_calibration_trigger_v0_1.json'))
           print('run_id='+str(int(t['successor_fit_workflow_run_id'])))
           PY
-      - name: Download sealed successor fit artifacts from frozen fit run (resolved)
+      - name: Download sealed successor fit artifacts from frozen fit run
         uses: actions/download-artifact@v4
         with:
           repository: zuizui0223/284b

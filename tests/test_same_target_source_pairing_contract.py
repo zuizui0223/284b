@@ -15,6 +15,17 @@ class SameTargetSourcePairingContractTests(unittest.TestCase):
         self.assertTrue(self.contract["prediction_surfaces_must_be_sealed_before_pairing"])
         self.assertEqual(self.contract["pairing_key"], ["taxon", "procedure", "M_km"])
 
+    def test_prediction_adequacy_must_precede_discordance(self):
+        gate = self.contract["prediction_adequacy_precedes_discordance"]
+        self.assertTrue(gate["required"])
+        self.assertTrue(gate["both_sources_must_pass_before_schoener_d_is_opened"])
+        self.assertTrue(gate["schoener_d_must_remain_unreported_for_inadequate_cells"])
+        self.assertTrue(gate["one_minus_schoener_d_must_remain_unreported_for_inadequate_cells"])
+        self.assertIn(
+            "compute_or_report_paired_discordance_when_either_source_answer_is_inadequate",
+            self.contract["forbidden"],
+        )
+
     def test_no_classification_without_reference_ceiling(self):
         rule = self.contract["reference_ceiling_rule"]
         self.assertEqual(rule["minimum_complete_calibration_taxa_per_procedure_M"], 30)

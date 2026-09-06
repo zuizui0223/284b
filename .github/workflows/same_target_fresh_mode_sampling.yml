@@ -1,0 +1,109 @@
+name: same-target-fresh-mode-sampling
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_fresh_mode_sampling_trigger_v0_1.json
+
+permissions:
+  contents: write
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify fresh sampling authorization
+        run: |
+          python -m unittest discover -s tests -v
+          python -m py_compile scripts/run_same_target_fresh_mode_sampling_shard.py scripts/aggregate_same_target_fresh_mode_sampling.py
+          python - <<'PY'
+          import json
+          closure=json.load(open('results/product_b_same_target_fresh_snapshot_concept_closure_v0_1.json'))
+          trigger=json.load(open('config/product_b_same_target_fresh_mode_sampling_trigger_v0_1.json'))
+          assert closure['occurrence_sampling_authorized'] is True
+          assert closure['concept_closure_passed_taxa'] >= closure['frozen_calibration_minimum_taxa']
+          assert closure['occurrence_counts_opened'] is False
+          assert closure['coordinates_opened'] is False
+          assert closure['paired_discordance_opened'] is False
+          assert trigger['source_mode_sampling_authorized'] is True
+          assert trigger['model_fit_authorized_before_sampling_result'] is False
+          assert trigger['paired_discordance_authorized'] is False
+          PY
+
+  sampling-shards:
+    needs: preflight
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5]
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen snapshot scanner
+        run: python -m pip install --disable-pip-version-check --quiet "pyarrow==21.0.0"
+      - name: Run multi-key source-mode sampling shard
+        env:
+          PYTHONPATH: .
+          SHARD_INDEX: ${{ matrix.shard }}
+          SHARD_COUNT: "6"
+        run: python scripts/run_same_target_fresh_mode_sampling_shard.py
+      - name: Upload sanitized sampling shard
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-fresh-mode-sampling-shard-${{ matrix.shard }}
+          path: artifacts/product_b_same_target_fresh_source_mode_sampling_shard_${{ matrix.shard }}.json
+          if-no-files-found: error
+          retention-days: 90
+
+  aggregate:
+    needs: sampling-shards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: product-b-fresh-mode-sampling-shard-*
+          merge-multiple: true
+          path: artifacts/fresh_mode_sampling_shards
+      - name: Aggregate sanitized fresh sampling results
+        env:
+          PYTHONPATH: .
+        run: python scripts/aggregate_same_target_fresh_mode_sampling.py
+      - name: Upload fresh sampling audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-fresh-mode-sampling-audit
+          path: results/product_b_same_target_fresh_source_mode_sampling_v0_1.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit fresh sampling audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_fresh_source_mode_sampling_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No fresh source-mode sampling audit change to commit"
+          else
+            git commit -m "Record fresh source-mode sampling audit"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi

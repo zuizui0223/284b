@@ -1,0 +1,87 @@
+name: same-target-successor-snapshot-concept
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_successor_snapshot_concept_trigger_v0_1.json
+
+permissions:
+  contents: write
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Verify successor taxonomy-only snapshot boundary
+        run: |
+          python -m py_compile scripts/run_same_target_successor_snapshot_concept_shard.py scripts/aggregate_same_target_successor_snapshot_concept_shards.py
+          python - <<'PY'
+          import json
+          c=json.load(open('config/product_b_same_target_successor_calibration_contract_v0_1.json'))
+          r=json.load(open('results/product_b_same_target_successor_current_taxonomy_v0_1.json'))
+          assert r['resolved_exact_accepted_species'] >= c['panel_rule']['minimum_complete_taxa_for_calibration']
+          assert r['occurrence_counts_opened'] is False and r['coordinates_opened'] is False
+          assert r['snapshot_taxonomy_opened'] is False
+          assert c['taxonomy_concept_closure']['rank_whitelist_forbidden'] is True
+          PY
+
+  concept-shards:
+    needs: preflight
+    strategy:
+      fail-fast: false
+      matrix: {shard: [0,1,2,3,4,5]}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install taxonomy-only snapshot scanner
+        run: python -m pip install --disable-pip-version-check --quiet 'pyarrow==21.0.0'
+      - name: Scan deterministic frozen snapshot taxonomy shard
+        env:
+          PYTHONPATH: .
+          SHARD_INDEX: '${{ matrix.shard }}'
+          SHARD_COUNT: '6'
+        run: python scripts/run_same_target_successor_snapshot_concept_shard.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-snapshot-concept-shard-${{ matrix.shard }}
+          path: artifacts/product_b_same_target_successor_snapshot_concept_shard_${{ matrix.shard }}.json
+          if-no-files-found: error
+          retention-days: 90
+
+  aggregate:
+    needs: concept-shards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: product-b-successor-snapshot-concept-shard-*
+          merge-multiple: true
+          path: artifacts/successor_snapshot_concept_shards
+      - name: Union taxonomy tuples without matched-row counts
+        run: python scripts/aggregate_same_target_successor_snapshot_concept_shards.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-snapshot-concept-tuples
+          path: results/product_b_same_target_successor_snapshot_concept_tuples_v0_1.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit successor taxonomy-only tuple audit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add results/product_b_same_target_successor_snapshot_concept_tuples_v0_1.json
+          if git diff --cached --quiet; then echo 'No successor tuple result change'; else git commit -m 'Record successor snapshot taxonomy tuples'; git pull --rebase origin product-b-v5-obligate-invariant; git push origin HEAD:product-b-v5-obligate-invariant; fi

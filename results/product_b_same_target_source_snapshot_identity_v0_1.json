@@ -1,0 +1,205 @@
+{
+  "coordinates_opened": false,
+  "current_taxonomy_resolved_entering_gate": 0,
+  "current_taxonomy_unresolved_not_entered": 36,
+  "dataset_fields_opened": false,
+  "identity_results": [],
+  "matched_row_counts_persisted": false,
+  "not_entered": [
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Capsella bursa-pastoris",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Stellaria media",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Senecio vulgaris",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Betula pendula",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Fagus sylvatica",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Acer pseudoplatanus",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Picea abies",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Juniperus communis",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Abies alba",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Phalaris arundinacea",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Glyceria maxima",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Calamagrostis canadensis",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Vaccinium myrtillus",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Ulex europaeus",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Rubus idaeus",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Pteridium aquilinum",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Athyrium filix-femina",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Polypodium vulgare",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Artemisia tridentata",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Atriplex canescens",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Encelia farinosa",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Avicennia germinans",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Avicennia marina",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Laguncularia racemosa",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Nothofagus antarctica",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Nothofagus betuloides",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Eucalyptus globulus",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Abies lasiocarpa",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Pinus cembra",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Eucalyptus delegatensis",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Picea glauca",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Larix laricina",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Pinus banksiana",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Typha angustifolia",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Iris pseudacorus",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    },
+    {
+      "current_taxonomy_state": "unresolved_current_taxonomy_no_usage",
+      "requested_name": "Schoenoplectus tabernaemontani",
+      "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved"
+    }
+  ],
+  "occurrence_identifiers_opened": false,
+  "paired_discordance_opened": false,
+  "panel_size": 36,
+  "projected_columns": [
+    "species",
+    "specieskey",
+    "taxonkey",
+    "scientificname",
+    "taxonrank"
+  ],
+  "raw_rows_persisted": false,
+  "result_version": "product_b_same_target_source_snapshot_identity_v0.1",
+  "sampling_authorized_by_identity_gate": false,
+  "snapshot_identity_passed": 0,
+  "snapshot_identity_unresolved": 0
+}

@@ -8,6 +8,8 @@ on:
       - 'scripts/*same_target*'
       - 'results/product_b_same_target_successor_*progress_v0_1.json'
       - '.github/workflows/same_target_postfit_integration.yml'
+      - '.github/workflows/same_target_successor_postfit.yml'
+      - 'tests/test_postfit_download_integrity.py'
   push:
     branches: [main, postfit-integration-audit]
     paths:
@@ -16,6 +18,8 @@ on:
       - 'scripts/*same_target*'
       - 'results/product_b_same_target_successor_*progress_v0_1.json'
       - '.github/workflows/same_target_postfit_integration.yml'
+      - '.github/workflows/same_target_successor_postfit.yml'
+      - 'tests/test_postfit_download_integrity.py'
 
 permissions:
   contents: read
@@ -89,3 +93,73 @@ jobs:
                               '--receipt',str(path),'--artifact-dir','audit_zips','--check'],check=True)
           print(f'Reproduced {len(paths)} committed receipts')
           PY
+  synthetic-artifact-transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Create artificial payloads only
+        run: |
+          mkdir -p synthetic/a synthetic/b synthetic/aggregate
+          printf 'taxon-a\n' > synthetic/a/payload.txt
+          printf 'taxon-b\n' > synthetic/b/payload.txt
+          printf 'aggregate\n' > synthetic/aggregate/payload.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: postfit-synthetic-taxon-a-${{ github.run_attempt }}
+          path: synthetic/a/
+          if-no-files-found: error
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: postfit-synthetic-taxon-b-${{ github.run_attempt }}
+          path: synthetic/b/
+          if-no-files-found: error
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: postfit-synthetic-aggregate-${{ github.run_attempt }}
+          path: synthetic/aggregate/
+          if-no-files-found: error
+          retention-days: 1
+      - name: Exercise authenticated pattern download
+        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8.0.0
+        with:
+          repository: ${{ github.repository }}
+          github-token: ${{ github.token }}
+          run-id: ${{ github.run_id }}
+          pattern: postfit-synthetic-taxon-*-${{ github.run_attempt }}
+          path: downloaded/taxa
+          digest-mismatch: error
+      - name: Exercise authenticated single-aggregate download
+        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8.0.0
+        with:
+          repository: ${{ github.repository }}
+          github-token: ${{ github.token }}
+          run-id: ${{ github.run_id }}
+          name: postfit-synthetic-aggregate-${{ github.run_attempt }}
+          path: downloaded/aggregate
+          digest-mismatch: error
+      - name: Verify payload bytes and preserved directory layout
+        run: |
+          python - <<'PYTHON'
+          from hashlib import sha256
+          from pathlib import Path
+          import os
+          attempt=os.environ['GITHUB_RUN_ATTEMPT']
+          expected={
+              f'taxa/postfit-synthetic-taxon-a-{attempt}/payload.txt': b'taxon-a\n',
+              f'taxa/postfit-synthetic-taxon-b-{attempt}/payload.txt': b'taxon-b\n',
+              'aggregate/payload.txt': b'aggregate\n',
+          }
+          root=Path('downloaded')
+          actual={p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file()}
+          if actual != set(expected):
+              raise RuntimeError('Synthetic download layout mismatch')
+          for name,content in expected.items():
+              if sha256((root/name).read_bytes()).digest() != sha256(content).digest():
+                  raise RuntimeError('Synthetic payload checksum mismatch')
+          print('Three synthetic payloads verified; no empirical data accessed by this job')
+          PYTHON

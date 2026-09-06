@@ -6,7 +6,7 @@ on:
       - 'integration_tests/**'
       - 'product_b_v5/**'
       - 'scripts/*same_target*'
-      - 'results/product_b_same_target_successor_first10_progress_v0_1.json'
+      - 'results/product_b_same_target_successor_*progress_v0_1.json'
       - '.github/workflows/same_target_postfit_integration.yml'
   push:
     branches: [main, postfit-integration-audit]
@@ -14,7 +14,7 @@ on:
       - 'integration_tests/**'
       - 'product_b_v5/**'
       - 'scripts/*same_target*'
-      - 'results/product_b_same_target_successor_first10_progress_v0_1.json'
+      - 'results/product_b_same_target_successor_*progress_v0_1.json'
       - '.github/workflows/same_target_postfit_integration.yml'
 
 permissions:
@@ -37,7 +37,7 @@ jobs:
         env:
           PYTHONPATH: .
         run: python -m unittest discover -s integration_tests -v
-  reproduce-ten-artifact-receipt:
+  reproduce-progress-receipts:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -47,25 +47,45 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Download exact ZIPs without extracting prediction members
+      - name: Download each exact ZIP once without extracting prediction members
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           python - <<'PY'
           import json, subprocess
           from pathlib import Path
-          receipt=json.load(open('results/product_b_same_target_successor_first10_progress_v0_1.json'))
+          paths=sorted(Path('results').glob('product_b_same_target_successor_*progress_v0_1.json'))
+          if not paths:
+              raise RuntimeError('No committed progress receipts found')
+          inventory={}
+          for path in paths:
+              receipt=json.loads(path.read_text(encoding='utf-8'))
+              for item in receipt['artifacts']:
+                  filename=item['archive_filename']
+                  if Path(filename).name != filename or not filename.endswith('.zip'):
+                      raise ValueError('Invalid archive filename')
+                  identity=(int(item['artifact_id']), item['archive_sha256'])
+                  if filename in inventory and inventory[filename] != identity:
+                      raise ValueError('Conflicting archive identity across receipts')
+                  inventory[filename]=identity
           root=Path('audit_zips'); root.mkdir()
-          for item in receipt['artifacts']:
-              filename=item['archive_filename']
-              assert Path(filename).name == filename
+          for filename,(artifact_id,_) in sorted(inventory.items()):
               with (root/filename).open('wb') as handle:
-                  subprocess.run(['gh','api',f"repos/zuizui0223/284b/actions/artifacts/{int(item['artifact_id'])}/zip"],stdout=handle,check=True)
+                  subprocess.run(['gh','api',f'repos/zuizui0223/284b/actions/artifacts/{artifact_id}/zip'],stdout=handle,check=True)
+          print(f'Downloaded {len(inventory)} unique ZIPs for {len(paths)} receipts')
           PY
-      - name: Reproduce the empirical receipt using the existing frozen helper
+      - name: Reproduce every empirical progress receipt with the unchanged helper
         env:
           PYTHONPATH: .
-        run: >-
-          python scripts/audit_same_target_progress_receipt.py
-          --receipt results/product_b_same_target_successor_first10_progress_v0_1.json
-          --artifact-dir audit_zips --check
+        run: |
+          python - <<'PY'
+          import subprocess, sys
+          from pathlib import Path
+          paths=sorted(Path('results').glob('product_b_same_target_successor_*progress_v0_1.json'))
+          if not paths:
+              raise RuntimeError('No committed progress receipts found')
+          for path in paths:
+              subprocess.run([sys.executable,'scripts/audit_same_target_progress_receipt.py',
+                              '--receipt',str(path),'--artifact-dir','audit_zips','--check'],check=True)
+          print(f'Reproduced {len(paths)} committed receipts')
+          PY

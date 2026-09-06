@@ -58,6 +58,7 @@ from .relation_space import (
     align_adapted_answers,
     directional_containment_on_relation_space,
     validate_adapted_answer,
+    validate_paired_relation_with_space,
     validate_relation_space_contract,
 )
 
@@ -107,5 +108,6 @@ __all__ = [
     "align_adapted_answers",
     "directional_containment_on_relation_space",
     "validate_adapted_answer",
+    "validate_paired_relation_with_space",
     "validate_relation_space_contract",
 ]

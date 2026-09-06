@@ -2,7 +2,9 @@
 
 ## Status
 
-This is an extension of the existing invariant layer, not a new Product-B generation and not an empirical authorization. It adds a stronger external biological answer-check for cases in which both partners are independently known to require one another at a declared persistence scale.
+This is a hard-invariant example inside the broader paired biological answer-check framework. It is not the framework itself, not a new Product-B generation, and not an empirical authorization.
+
+The general framework is documented in `docs/product_b_paired_answer_check_framework.md`: independently obtained ecological answers are compared only after fitting, using a biological relation declared before focal outcomes are opened. Unexpected divergence is a diagnostic signal. Mutual obligacy is a particularly strong positive-control case because both directions are biologically required.
 
 The constraint class is `mutual_obligacy` and is represented as two necessary directed statements:
 
@@ -13,7 +15,7 @@ The existing `directed_dependency` class remains unchanged.
 
 ## Scientific role
 
-The primary use of a mutual-obligacy pair is as a **positive control for ecological model validation**.
+The primary use of a mutual-obligacy pair is as a **hard positive control for ecological model cross-checking**.
 
 The question is:
 
@@ -58,7 +60,7 @@ Raw suitability probabilities are not expected to be numerically identical acros
 
 Therefore raw probability differences are not a primary test. The extension reports a descriptive `rank_profile_discordance_pair` instead: each taxon's prediction surface is converted to its own percentile-rank profile and the absolute rank disagreement is weighted by joint recovered support. This asks whether the two models place their high-support regions in systematically different parts of the audit space without pretending that `0.8` for one taxon is calibrated identically to `0.8` for another.
 
-Rank discordance is descriptive. It cannot rescue or override the two directed invariant decisions.
+Rank discordance can also feed the broader soft paired cross-check, where excessive divergence is `paired_crosscheck_attention_required`. It cannot rescue or override a hard mutual-invariant decision.
 
 ## Negative controls
 
@@ -77,12 +79,14 @@ Process necessity is evaluated only after the full model passes the baseline mut
 
 For each frozen environmental process, intervene without refitting and recompute both directions. A process becomes a candidate `invariant_critical` process only if its removal breaks at least one previously admissible direction under the frozen control-relative rule.
 
+More generally, under the paired answer-check framework, a process can also be diagnostically important if its removal creates or amplifies cross-answer discordance beyond a frozen soft-reference ceiling.
+
 This yields the intended hierarchy:
 
 1. **observability** — can the external biological constraint be represented independently?
 2. **identifiability** — can candidate procedures/processes be distinguished structurally?
-3. **validity** — do independently fitted models preserve the known mutual dependency?
-4. **necessity** — which process removals destroy that preservation?
+3. **cross-validity** — do independently fitted answers remain biologically coherent?
+4. **necessity** — which process removals destroy or materially degrade that coherence?
 
 ## Current execution boundary
 

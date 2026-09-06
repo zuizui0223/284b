@@ -1,7 +1,7 @@
 {
   "authorization": "execute_layer1_independent_baseline_model_fits",
-  "execution_revision": 2,
-  "execution_revision_reason": "preflight_compatibility_key_fix_only_no_scientific_rule_change",
+  "execution_revision": 3,
+  "execution_revision_reason": "preflight_standard_library_fix_only_no_scientific_rule_change",
   "model_fit_contract": "config/product_b_same_target_source_model_fit_contract_v0_1.json",
   "common_frame_contract": "config/product_b_same_target_source_common_frame_contract_v0_1.json",
   "sampling_result": "results/product_b_same_target_source_mode_sampling_v0_1.json",

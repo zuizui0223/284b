@@ -5,6 +5,13 @@ come from different taxa, life stages, observation systems, or independent data
 sources. What matters is that external biology declares how the answers should
 relate before either focal comparison outcome is opened.
 
+Same-target source replication is a special controlled case in which estimator
+identity and M/background may deliberately be held fixed. Cross-species and
+cross-role checks do not generally require the same estimator or accessible area.
+When upstream estimands differ, their outputs must first pass a frozen
+``relation_space`` adapter so that the biological event being compared is common.
+Raw scores from different estimands are not made comparable by this module.
+
 Every soft comparison is reduced to a non-negative discordance quantity where
 smaller means more coherent. The numerical tolerance is relation-specific and
 must be frozen independently of the focal outcome. Hard biological invariants
@@ -50,7 +57,12 @@ class PairedRelationContract:
 
 
 def validate_paired_relation_contract(contract: PairedRelationContract) -> tuple[str, ...]:
-    """Validate a paired relation without opening or interpreting focal outcomes."""
+    """Validate a paired relation without opening or interpreting focal outcomes.
+
+    For cross-role relations this generic validation is necessary but not
+    sufficient: a valid ``RelationSpaceContract`` must additionally establish
+    estimator/estimand compatibility and the common biological relation space.
+    """
 
     reasons: list[str] = []
     for field_name, value in (

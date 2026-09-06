@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Run one frozen shard of Layer-1 source-mode sampling preflight.
 
-Only taxa that passed the committed snapshot-internal identity gate may enter.
-The frozen 2026-08-01 snapshot is scanned for PRESERVED_SPECIMEN and
-HUMAN_OBSERVATION rows. Raw rows, coordinates, and identifiers are never written;
-only sanitized sampling summaries are persisted.
+Only taxa that passed the committed transport-equivalent sharded snapshot identity
+gate may enter. The frozen 2026-08-01 snapshot is scanned for PRESERVED_SPECIMEN
+and HUMAN_OBSERVATION rows. Raw rows, coordinates, and identifiers are never
+written; only sanitized sampling summaries are persisted.
 """
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ from product_b_v7_2.snapshot_transport import (
 ROOT = Path(__file__).resolve().parents[1]
 SAMPLING_CONTRACT = ROOT / "config/product_b_same_target_source_sampling_contract_v0_1.json"
 SNAPSHOT_CONTRACT = ROOT / "config/product_b_v7_2_snapshot_transport_contract_v0_1.json"
-IDENTITY_RESULT = ROOT / "results/product_b_same_target_source_snapshot_identity_v0_1.json"
+IDENTITY_RESULT = ROOT / "results/product_b_same_target_source_snapshot_identity_sharded_v0_1.json"
 DATASET_PATH = f"{EXPECTED_BUCKET}/{EXPECTED_OCCURRENCE_PREFIX.rstrip('/')}"
 MODES = ("PRESERVED_SPECIMEN", "HUMAN_OBSERVATION")
 SELECTED_COLUMNS = (
@@ -50,9 +50,6 @@ SELECTED_COLUMNS = (
     "coordinateuncertaintyinmeters",
     "specieskey",
 )
-# build_occurrence_sampling_preflight is reused for quality filtering and
-# cross-mode same-record collision closure. Its symmetric asymmetry decision is
-# intentionally ignored; Layer-1 adequacy is evaluated explicitly below.
 PREPROCESSING_THRESHOLDS = SamplingThresholds(
     minimum_independent_records=50,
     minimum_unique_cells=30,
@@ -176,6 +173,8 @@ def main() -> int:
         raise ValueError("invalid shard index/count")
 
     sampling_contract = json.loads(SAMPLING_CONTRACT.read_text(encoding="utf-8"))
+    if sampling_contract.get("contract_version") != "product_b_same_target_source_sampling_v0.2":
+        raise RuntimeError("sampling contract version mismatch")
     if sampling_contract.get("sharding", {}).get("shard_count") != shard_count:
         raise RuntimeError("shard count differs from frozen sampling contract")
     if sampling_contract.get("paired_discordance_access_allowed") is not False:
@@ -189,8 +188,12 @@ def main() -> int:
         raise RuntimeError("frozen snapshot transport contract invalid: " + ",".join(decision.reasons))
 
     identity = json.loads(IDENTITY_RESULT.read_text(encoding="utf-8"))
+    if identity.get("result_version") != sampling_contract.get("snapshot_identity_result_version_required"):
+        raise RuntimeError("snapshot identity result version differs from frozen sampling contract")
     if identity.get("panel_size") != 36:
         raise RuntimeError("snapshot identity result does not represent frozen panel")
+    if identity.get("snapshot_identity_passed") != 12 or identity.get("snapshot_identity_unresolved") != 24:
+        raise RuntimeError("snapshot identity pass/unresolved counts differ from frozen sampling authorization")
     if identity.get("sampling_authorized_by_identity_gate") is not False:
         raise RuntimeError("identity gate must not itself authorize generic sampling")
     passed = [row for row in identity.get("identity_results", []) if row.get("passed") is True]
@@ -223,7 +226,8 @@ def main() -> int:
         gc.collect()
 
     outcome = {
-        "result_version": "product_b_same_target_source_sampling_shard_v0.1",
+        "result_version": "product_b_same_target_source_sampling_shard_v0.2",
+        "source_snapshot_identity_result_version": identity.get("result_version"),
         "shard_index": shard_index,
         "shard_count": shard_count,
         "snapshot_identity_passed_total": len(passed),

@@ -21,7 +21,8 @@ import pyarrow.fs as pafs
 
 from product_b_v5.occurrence_adapter import adapt_gbif_pair_rows
 from product_b_v5.occurrence_preprocessing import build_occurrence_sampling_preflight
-from product_b_v5.sampling import SamplingSummary, SamplingThresholds
+from product_b_v5.sampling import SamplingThresholds
+from product_b_v5.source_mode_sampling import evaluate_paired_source_mode_adequacy
 from product_b_v7_2.snapshot_transport import (
     EXPECTED_BUCKET,
     EXPECTED_OCCURRENCE_PREFIX,
@@ -49,10 +50,10 @@ SELECTED_COLUMNS = (
     "coordinateuncertaintyinmeters",
     "specieskey",
 )
-# Keep the existing quality/collision implementation but disable cross-mode
-# asymmetry as an exclusion gate. The Layer-1 contract intentionally calibrates
-# disagreement under different observation systems.
-FLOOR_ONLY_THRESHOLDS = SamplingThresholds(
+# build_occurrence_sampling_preflight is reused for quality filtering and
+# cross-mode same-record collision closure. Its symmetric asymmetry decision is
+# intentionally ignored; Layer-1 adequacy is evaluated explicitly below.
+PREPROCESSING_THRESHOLDS = SamplingThresholds(
     minimum_independent_records=50,
     minimum_unique_cells=30,
     minimum_effective_cells=10.0,
@@ -103,17 +104,6 @@ def _snapshot_to_adapter_row(values: dict[str, list[object]], i: int) -> dict[st
     }
 
 
-def _floor_reasons(summary: SamplingSummary, label: str) -> list[str]:
-    reasons: list[str] = []
-    if summary.independent_records < 50:
-        reasons.append(f"{label}_independent_record_floor_failed")
-    if summary.unique_cells < 30:
-        reasons.append(f"{label}_unique_cell_floor_failed")
-    if summary.effective_cells < 10.0:
-        reasons.append(f"{label}_effective_cell_floor_failed")
-    return reasons
-
-
 def _scan_taxon(dataset: ds.Dataset, specieskey: str) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
     expression = (
         (ds.field("specieskey") == specieskey)
@@ -150,17 +140,18 @@ def _sanitize_taxon_result(name: str, specieskey: str, mode_a: list[dict[str, ob
     preflight = build_occurrence_sampling_preflight(
         adapted.records,
         taxonomy_eligible=True,
-        thresholds=FLOOR_ONLY_THRESHOLDS,
+        thresholds=PREPROCESSING_THRESHOLDS,
     )
-    reasons = _floor_reasons(preflight.x_summary, "preserved_specimen") + _floor_reasons(
-        preflight.y_summary, "human_observation"
+    adequacy = evaluate_paired_source_mode_adequacy(
+        preflight.x_summary,
+        preflight.y_summary,
     )
     audit = preflight.audit
     return {
         "requested_name": name,
         "resolved_specieskey": specieskey,
-        "state": "source_mode_sampling_passed" if not reasons else "source_mode_sampling_unresolved",
-        "reasons": reasons,
+        "state": "source_mode_sampling_passed" if adequacy.passed else "source_mode_sampling_unresolved",
+        "reasons": list(adequacy.reasons),
         "preserved_specimen": asdict(preflight.x_summary),
         "human_observation": asdict(preflight.y_summary),
         "quality_excluded_preserved_specimen": audit.quality_excluded_x,
@@ -189,6 +180,8 @@ def main() -> int:
         raise RuntimeError("shard count differs from frozen sampling contract")
     if sampling_contract.get("paired_discordance_access_allowed") is not False:
         raise RuntimeError("paired discordance boundary is not closed")
+    if sampling_contract.get("cross_mode_asymmetry_is_not_an_exclusion_gate") is not True:
+        raise RuntimeError("cross-mode asymmetry contract changed")
 
     snapshot_contract = json.loads(SNAPSHOT_CONTRACT.read_text(encoding="utf-8"))
     decision = evaluate_snapshot_contract(snapshot_contract)
@@ -223,7 +216,6 @@ def main() -> int:
                 "row_identifiers_persisted": False,
             }
         results.append(result)
-        # Ensure raw Python row objects are released before the next taxon.
         if "mode_a" in locals():
             del mode_a
         if "mode_b" in locals():

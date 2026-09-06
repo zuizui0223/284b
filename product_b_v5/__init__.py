@@ -1,4 +1,4 @@
-"""Product-B v5 obligate-association invariant prototype."""
+"""Product-B obligate-association invariant prototype."""
 
 from .invariants import (
     InvariantState,
@@ -12,6 +12,14 @@ from .invariants import (
     schoener_d_pair,
     support_breadth,
 )
+from .mutual import (
+    ConstraintClass,
+    MutualContainmentResult,
+    MutualInvariantDecision,
+    classify_mutual_obligacy,
+    mutual_obligacy_containment,
+    rank_profile_discordance_pair,
+)
 
 __all__ = [
     "InvariantState",
@@ -24,4 +32,10 @@ __all__ = [
     "response_blind_differentiability_precheck",
     "schoener_d_pair",
     "support_breadth",
+    "ConstraintClass",
+    "MutualContainmentResult",
+    "MutualInvariantDecision",
+    "classify_mutual_obligacy",
+    "mutual_obligacy_containment",
+    "rank_profile_discordance_pair",
 ]

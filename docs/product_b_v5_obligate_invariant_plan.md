@@ -10,6 +10,12 @@ The only Product-A material reused is outcome-independent measurement apparatus:
 
 No Product-A scientific experiment is introduced here.
 
+## 0. Broader interpretation
+
+This obligate-association design is now one hard-invariant case inside the broader **paired biological answer-check** framework (`docs/product_b_paired_answer_check_framework.md`). The general scientific idea is that two independently obtained ecological answers can cross-check one another when external biology says they should agree in a declared way. Large divergence in a soft relation is `attention_required`; a complete failure of a true hard invariant can be `invariant_violated`.
+
+The v5 contract below remains unchanged for its original directed hard-invariant case.
+
 ## 1. Goal redirection
 
 ### Previous Product-B question

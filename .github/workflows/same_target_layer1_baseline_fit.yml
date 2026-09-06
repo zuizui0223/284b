@@ -8,7 +8,7 @@ on:
       - config/product_b_same_target_source_model_fit_trigger_v0_1.json
 
 permissions:
-  contents: read
+  contents: write
   actions: read
 
 jobs:
@@ -24,6 +24,7 @@ jobs:
       - name: Verify frozen model-fit boundary
         run: |
           python -m unittest discover -s tests -v
+          python -m py_compile scripts/run_same_target_layer1_baseline_fit_taxon.py scripts/aggregate_same_target_layer1_baseline_fit.py
           python - <<'PY'
           import json, pandas as pd
           c=json.load(open('config/product_b_same_target_source_model_fit_contract_v0_1.json'))
@@ -31,6 +32,7 @@ jobs:
           s=json.load(open('results/product_b_same_target_source_mode_sampling_v0_1.json'))
           r=pd.read_csv('registry/product_b_same_target_source_identity_pass_taxa_v0_1.csv')
           t=json.load(open('config/product_b_same_target_source_model_fit_trigger_v0_1.json'))
+          receipt=json.load(open('results/product_b_same_target_source_target_footprint_receipt_v0_1.json'))
           assert s['source_mode_sampling_passed']==12 and s['source_mode_sampling_unresolved']==0
           assert len(r)==12
           assert c['paired_discordance_access_allowed_during_fit'] is False
@@ -38,6 +40,10 @@ jobs:
           assert f['frame_is_shared_between_observation_modes'] is True
           assert f['shared_frame_coordinate_pooling']['record_frequencies_may_not_weight_common_geometry'] is True
           assert t['target_footprint_receipt_verified'] is True
+          assert t['target_footprint_workflow_run_id']==receipt['workflow_run_id']
+          assert t['target_sha256']==receipt['target_sha256']
+          assert receipt['excluded_focal_taxa_count']==12
+          assert receipt['paired_discordance_opened'] is False
           assert t['paired_discordance_opened'] is False
           PY
 
@@ -75,6 +81,12 @@ jobs:
           mkdir -p target_source
           gh run download "$RUN_ID" -R zuizui0223/284b -n product-b-same-target-target-footprint-2026-08-01 -D target_source
           test -f target_source/target_group.parquet
+          python - <<'PY'
+          import hashlib,json
+          expected=json.load(open('config/product_b_same_target_source_model_fit_trigger_v0_1.json'))['target_sha256']
+          observed=hashlib.sha256(open('target_source/target_group.parquet','rb').read()).hexdigest()
+          assert observed==expected,(observed,expected)
+          PY
       - name: Fit independent source answers and seal predictions
         env:
           PYTHONPATH: .
@@ -116,3 +128,15 @@ jobs:
           path: results/product_b_same_target_source_layer1_baseline_fit_v0_1.json
           if-no-files-found: error
           retention-days: 90
+      - name: Commit aggregate fit audit only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_source_layer1_baseline_fit_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No aggregate fit audit change to commit"
+          else
+            git commit -m "Record sealed Layer-1 baseline fit audit"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi

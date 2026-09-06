@@ -1,0 +1,66 @@
+name: same-target-successor-snapshot-concept-reaggregate
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_successor_snapshot_reaggregate_trigger_v0_1.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  aggregate-frozen-shards:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify recovery source and taxonomy-only boundary
+        run: |
+          python -m py_compile scripts/aggregate_same_target_successor_snapshot_concept_shards.py
+          python - <<'PY'
+          import json
+          t=json.load(open('config/product_b_same_target_successor_snapshot_reaggregate_trigger_v0_1.json'))
+          assert t['source_workflow_run_id']==34024334133
+          assert t['source_shards_completed']==6
+          assert t['source_shards_failed']==0
+          assert t['rescan_snapshot_authorized'] is False
+          assert t['occurrence_access_authorized'] is False
+          PY
+      - name: Download six already-successful taxonomy-only shards
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: zuizui0223/284b
+          run-id: 34024334133
+          pattern: product-b-successor-snapshot-concept-shard-*
+          merge-multiple: true
+          path: artifacts/successor_snapshot_concept_shards
+      - name: Reaggregate without snapshot rescanning
+        env:
+          PYTHONPATH: .
+        run: python scripts/aggregate_same_target_successor_snapshot_concept_shards.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-snapshot-concept-tuples-recovered
+          path: results/product_b_same_target_successor_snapshot_concept_tuples_v0_1.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit recovered taxonomy-only tuple audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_successor_snapshot_concept_tuples_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No recovered successor tuple result change"
+          else
+            git commit -m "Recover successor snapshot taxonomy aggregate"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi

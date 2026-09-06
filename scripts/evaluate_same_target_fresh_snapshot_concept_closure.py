@@ -2,9 +2,9 @@
 """Apply the frozen fresh species-concept closure after taxonomy-only review.
 
 This stage consumes only sanitized snapshot taxonomy tuples and the completed
-current-taxonomy review.  It freezes a complete historical ``specieskey`` set for
+current-taxonomy review. It freezes a complete historical ``specieskey`` set for
 each taxon whose snapshot parent species is coherent and has no explicit current
-species conflict.  No occurrence rows/counts/coordinates are opened here.
+species conflict. No occurrence rows/counts/coordinates are opened here.
 """
 from __future__ import annotations
 
@@ -26,6 +26,10 @@ REVIEWS = ROOT / "results/product_b_same_target_fresh_historical_name_review_v0_
 CONTRACT = ROOT / "config/product_b_same_target_fresh_calibration_contract_v0_1.json"
 OUTPUT = ROOT / "results/product_b_same_target_fresh_snapshot_concept_closure_v0_1.json"
 KEYSETS = ROOT / "registry/product_b_same_target_fresh_snapshot_keysets_v0_1.csv"
+ACCEPTED_REVIEW_VERSIONS = {
+    "product_b_same_target_fresh_historical_name_review_v0.1",
+    "product_b_same_target_fresh_historical_name_review_v0.2",
+}
 
 
 def _tuple(row: dict[str, object]) -> SnapshotTaxonomyTuple:
@@ -46,8 +50,8 @@ def main() -> int:
 
     if tuples.get("current_name_review_authorized") is not True:
         raise RuntimeError("fresh concept tuple aggregate did not authorize taxonomy review")
-    if reviews.get("result_version") != "product_b_same_target_fresh_historical_name_review_v0.1":
-        raise RuntimeError("fresh historical-name review result is missing")
+    if reviews.get("result_version") not in ACCEPTED_REVIEW_VERSIONS:
+        raise RuntimeError("fresh historical-name review result is missing or unknown")
     for payload, flags in (
         (tuples, (
             "matched_row_counts_persisted", "raw_occurrence_rows_persisted", "coordinates_opened",
@@ -128,6 +132,7 @@ def main() -> int:
     sampling_authorized = passed_count >= minimum
     outcome = {
         "result_version": "product_b_same_target_fresh_snapshot_concept_closure_v0.1",
+        "historical_name_review_result_version": reviews.get("result_version"),
         "candidate_taxa": len(decisions),
         "concept_closure_passed_taxa": int(passed_count),
         "concept_closure_unresolved_taxa": int(len(decisions) - passed_count),

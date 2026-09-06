@@ -1,0 +1,41 @@
+{
+  "contract_version": "product_b_same_target_heldout_crosscheck_v0.1",
+  "purpose": "evaluate_the_preexisting_12_taxon_layer1_answers_only_after_successor_reference_ceilings_are_frozen",
+  "heldout_fit_audit": "results/product_b_same_target_source_layer1_baseline_fit_v0_1.json",
+  "successor_reference_calibration": "results/product_b_same_target_successor_pairing_calibration_v0_1.json",
+  "successor_reference_table": "results/product_b_same_target_successor_reference_ceiling_v0_1.csv",
+  "inherit_pairing_contract": "config/product_b_same_target_source_pairing_contract_v0_1.json",
+  "heldout_taxa": 12,
+  "pairing_key": ["taxon", "procedure", "M_km"],
+  "procedure_count": 8,
+  "M_km": [150, 300, 500],
+  "expected_heldout_pair_cells": 288,
+  "successor_panel_may_not_contribute_to_heldout_outcomes": true,
+  "reference_ceiling_must_be_frozen_before_heldout_prediction_surfaces_are_opened": true,
+  "both_heldout_source_answers_must_pass_frozen_prediction_adequacy_before_discordance_is_opened": true,
+  "common_comparison_row_ids_must_match_exactly": true,
+  "intersection_or_posthoc_row_drop_forbidden": true,
+  "primary_discordance_metric": "one_minus_schoener_d",
+  "reference_lookup_key": ["procedure", "M_km"],
+  "when_reference_ceiling_frozen": {
+    "discordance_less_than_or_equal_to_ceiling": "paired_crosscheck_consistent",
+    "discordance_strictly_above_ceiling": "paired_crosscheck_attention_required"
+  },
+  "when_reference_ceiling_unresolved": "paired_crosscheck_calibration_unresolved",
+  "when_one_or_both_source_answers_inadequate": "paired_crosscheck_unresolved",
+  "attention_required_is_not_by_itself_a_biological_model_falsification_claim": true,
+  "attention_required_semantics": "heldout_cross_source_discordance_exceeds_the_prospectively_frozen_successor_q95_reference_for_the_same_procedure_and_M",
+  "no_post_outcome_procedure_selection": true,
+  "no_post_outcome_M_selection": true,
+  "no_heldout_taxon_replacement": true,
+  "report_all_288_cells_and_taxon_level_counts": true,
+  "process_knockout_must_remain_closed_until_heldout_baseline_crosscheck_is_frozen": true,
+  "forbidden": [
+    "read_heldout_paired_discordance_before_successor_reference_is_frozen",
+    "derive_or_adjust_reference_from_the_heldout_12_taxa",
+    "drop_attention_required_taxa_or_cells",
+    "select_a_procedure_or_M_using_heldout_outcomes",
+    "call_attention_required_a_biological_invariant_violation_without_external_biological_evidence",
+    "open_process_knockout_before_heldout_baseline_crosscheck_freeze"
+  ]
+}

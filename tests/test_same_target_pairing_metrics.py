@@ -3,6 +3,7 @@ import unittest
 from product_b_v5.same_target_pairing import (
     evaluate_prediction_adequacy,
     schoener_d_from_sealed_vectors,
+    schoener_d_if_both_answers_adequate,
 )
 
 
@@ -58,6 +59,37 @@ class SameTargetSchoenerDTests(unittest.TestCase):
             schoener_d_from_sealed_vectors(["a", "a"], [1, 2], ["a", "b"], [1, 2])
         with self.assertRaises(ValueError):
             schoener_d_from_sealed_vectors(["a", "b"], [1, float("nan")], ["a", "b"], [1, 2])
+
+    def test_pair_discordance_is_not_opened_when_either_answer_is_inadequate(self):
+        adequate = evaluate_prediction_adequacy([0.60, 0.61, 0.59, 0.60], expected_folds=4)
+        inadequate = evaluate_prediction_adequacy([0.40, 0.41, 0.39, 0.40], expected_folds=4)
+        # Deliberately invalid/mismatched sealed vectors prove the helper returns
+        # before inspecting paired outcomes when the answer-check is inadmissible.
+        self.assertIsNone(
+            schoener_d_if_both_answers_adequate(
+                adequacy_a=adequate,
+                adequacy_b=inadequate,
+                row_ids_a=["a"],
+                scores_a=[float("nan")],
+                row_ids_b=["different"],
+                scores_b=[-1.0],
+            )
+        )
+
+    def test_pair_discordance_opens_only_after_both_answers_are_adequate(self):
+        adequate_a = evaluate_prediction_adequacy([0.60, 0.61, 0.59, 0.60], expected_folds=4)
+        adequate_b = evaluate_prediction_adequacy([0.62, 0.61, 0.60, 0.59], expected_folds=4)
+        self.assertAlmostEqual(
+            schoener_d_if_both_answers_adequate(
+                adequacy_a=adequate_a,
+                adequacy_b=adequate_b,
+                row_ids_a=["a", "b"],
+                scores_a=[1.0, 3.0],
+                row_ids_b=["b", "a"],
+                scores_b=[3.0, 1.0],
+            ),
+            1.0,
+        )
 
 
 if __name__ == "__main__":

@@ -20,7 +20,7 @@ Expected relation: broad environmental support should be concordant at a declare
 
 Default interpretation: **soft cross-check**. Excess divergence is `attention_required`, not a biological violation.
 
-Primary use: calibrate how much disagreement is normal when the biological target is the same but the observation process changes.
+Primary use: calibrate how much disagreement is normal when the biological target is the same but the observation process changes. The current frozen calibration uses the 36 pre-existing Product-A v2.7.1 taxon candidates, 8 frozen recovery procedures, and M = 150/300/500 km. Reference ceilings are calibrated separately by procedure and M; neither procedure nor M can be selected from the same cross-source outcome.
 
 ### Level B — expected biological concordance
 
@@ -67,13 +67,15 @@ These transformations do **not** imply that all discordance metrics share one un
 
 A soft `attention_required` flag needs an empirical reference rather than a post-hoc convenient cutoff.
 
-The preferred first calibration is **same-target independent-source replication**:
+The first frozen calibration is **same-target independent-source replication**:
 
-1. choose an engineering calibration panel without inspecting paired model discordance;
-2. fit each taxon independently under two disjoint observation modes;
-3. compute the predeclared discordance metric;
-4. freeze a predeclared quantile of the calibration distribution as the reference ceiling;
-5. evaluate later held-out taxa against that ceiling without retuning it.
+1. use the pre-existing 36-taxon Product-A candidate panel selected before paired discordance existed;
+2. partition the same 2026-08-01 snapshot into disjoint `PRESERVED_SPECIMEN` and `HUMAN_OBSERVATION` modes;
+3. require 50 independent records / 30 unique 10-km cells / 10 effective cells separately for each mode;
+4. fit the same one of 8 procedures independently to both modes under the same M;
+5. compute the predeclared discordance metric separately for M = 150, 300, 500 km;
+6. within each procedure × M cell, use all complete calibration taxa and freeze the nearest-rank 95th percentile when at least 30 taxa are complete;
+7. if fewer than 30 taxa are complete, that calibration cell is unresolved rather than rescued.
 
 The calibration panel cannot be used as confirmatory evidence that its own members are coherent.
 

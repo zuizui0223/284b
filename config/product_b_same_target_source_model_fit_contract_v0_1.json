@@ -1,0 +1,58 @@
+{
+  "contract_version": "product_b_same_target_source_model_fit_v0.1",
+  "purpose": "seal_independent_layer1_model_fits_before_any_cross_source_discordance_is_opened",
+  "input_sampling_result": "results/product_b_same_target_source_mode_sampling_v0_1.json",
+  "input_calibration_contract": "config/product_b_same_target_source_calibration_contract_v0_1.json",
+  "only_source_mode_sampling_passed_taxa_may_enter": true,
+  "sampling_unresolved_taxa_may_not_be_replaced": true,
+  "observation_modes": [
+    "PRESERVED_SPECIMEN",
+    "HUMAN_OBSERVATION"
+  ],
+  "fits_must_be_independent_between_observation_modes": true,
+  "cross_mode_occurrence_leakage_forbidden": true,
+  "cross_mode_prediction_leakage_forbidden": true,
+  "same_environmental_predictor_universe_required": true,
+  "same_background_and_M_definition_required_within_taxon_procedure_M": true,
+  "M_km": [150, 300, 500],
+  "M_is_sensitivity_grid_not_selection_target": true,
+  "procedure_library": {
+    "strategies": ["all", "vif", "predictive_forward", "niche_forward"],
+    "model_specs": [
+      {"C": 0.1, "degree": 1, "penalty": "l2"},
+      {"C": 1.0, "degree": 2, "penalty": "l2"}
+    ],
+    "procedure_count": 8,
+    "inner_folds": 3,
+    "outer_folds": 4,
+    "max_predictors": 8,
+    "vif_threshold": 5.0,
+    "predictive_min_gain": 0.0,
+    "observation_predictors": []
+  },
+  "fit_failure_state": "layer1_model_fit_unresolved",
+  "prediction_adequacy_must_be_evaluated_separately_for_each_source": true,
+  "prediction_surfaces_must_be_sealed_before_pairing": true,
+  "prediction_surface_pairing_key": [
+    "taxon",
+    "procedure",
+    "M_km"
+  ],
+  "paired_discordance_access_allowed_during_fit": false,
+  "reference_ceiling_access_required_during_fit": false,
+  "process_knockout_access_allowed_during_fit": false,
+  "post_outcome_procedure_selection_forbidden": true,
+  "post_outcome_M_selection_forbidden": true,
+  "post_outcome_taxon_replacement_forbidden": true,
+  "model_fit_outcome_may_not_change_sampling_or_taxonomy_state": true,
+  "next_stage_only_after_fit_freeze": "paired_discordance_evaluation",
+  "forbidden": [
+    "fit_one_source_using_occurrences_from_the_other_source",
+    "fit_one_source_using_predictions_from_the_other_source",
+    "select_procedure_using_cross_source_discordance",
+    "select_M_using_cross_source_discordance",
+    "drop_a_taxon_because_its_future_cross_source_discordance_is_high",
+    "open_process_knockout_before_baseline_pairing_is_frozen",
+    "treat_model_fit_success_as_cross_source_coherence"
+  ]
+}

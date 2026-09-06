@@ -1,15 +1,20 @@
 """Pure taxonomy concept-closure gate for fresh same-target calibration taxa.
 
 The historical occurrence snapshot can expose multiple ``specieskey`` values for
-one biological species concept.  This successor therefore does not demand one
-key.  It accepts a closed set of historical keys only when every distinct
-snapshot taxonomic name represented under the exact frozen ``species`` field has
-been independently resolved by current taxonomy to the same frozen accepted
-species concept.
+one biological species concept. This successor therefore does not demand one
+key. It accepts a closed set of historical keys when the snapshot parent
+``species`` exactly equals the frozen current accepted species and a complete
+current-taxonomy review finds no represented historical name that positively
+resolves to a different current species.
 
-No function here reads occurrence rows or calls taxonomy services.  Callers pass
+Historical names that no longer resolve in current taxonomy are retained as an
+audit condition, not silently treated as conflicts. A review attempt must still
+be complete for every distinct snapshot ``scientificname``. Transport/parse
+failures therefore fail closed, whereas a completed no-match does not.
+
+No function here reads occurrence rows or calls taxonomy services. Callers pass
 only sanitized five-column taxonomy tuples and separately obtained taxonomy-only
-name resolutions.
+name-review results.
 """
 from __future__ import annotations
 
@@ -24,6 +29,7 @@ ALLOWED_CONCEPT_RANKS = {"SPECIES", "SUBSPECIES", "VARIETY", "FORM"}
 @dataclass(frozen=True)
 class CurrentConceptResolution:
     snapshot_scientific_name: str
+    review_complete: bool
     resolved: bool
     accepted_species_name: str | None
     accepted_usage_key: str | None = None
@@ -39,6 +45,7 @@ class SnapshotConceptClosureDecision:
     frozen_current_accepted_species: str
     frozen_historical_specieskeys: tuple[str, ...]
     reviewed_snapshot_scientific_names: tuple[str, ...]
+    current_unresolved_historical_names: tuple[str, ...]
     distinct_taxonomy_tuples: tuple[SnapshotTaxonomyTuple, ...]
 
 
@@ -48,14 +55,17 @@ def evaluate_snapshot_species_concept_closure(
     taxonomy_tuples: Sequence[SnapshotTaxonomyTuple],
     current_name_resolutions: Mapping[str, CurrentConceptResolution],
 ) -> SnapshotConceptClosureDecision:
-    """Freeze all snapshot keys only when every represented name closes to one species.
+    """Freeze all snapshot keys unless a completed taxonomy review finds conflict.
 
-    ``current_accepted_species`` is frozen before snapshot access.  Snapshot rows
-    must have exactly that value in their ``species`` field.  Multiple historical
-    ``specieskey`` values are allowed.  Every distinct ``scientificname`` then
-    requires a taxonomy-only current resolution whose accepted species parent is
-    the same frozen species.  Any missing/unresolved/conflicting name fails the
-    whole taxon; no subset of keys or names may be rescued post hoc.
+    ``current_accepted_species`` is frozen before snapshot access. Snapshot rows
+    must have exactly that parent value in ``species``. Multiple historical
+    ``specieskey`` values are allowed and are frozen together.
+
+    Every distinct snapshot ``scientificname`` must receive a completed current
+    taxonomy review. A name that positively resolves to a different accepted
+    species invalidates the whole taxon. A completed review that finds no current
+    resolution is retained as a historical no-match and does not by itself split
+    the snapshot species concept.
     """
 
     focal = str(current_accepted_species).strip()
@@ -92,7 +102,8 @@ def evaluate_snapshot_species_concept_closure(
     if missing_reviews:
         reasons.append("current_taxonomy_closure_review_missing")
 
-    unresolved_names: list[str] = []
+    incomplete_reviews: list[str] = []
+    unresolved_historical: list[str] = []
     conflicting_names: list[str] = []
     for name in names:
         resolution = current_name_resolutions.get(name)
@@ -101,13 +112,16 @@ def evaluate_snapshot_species_concept_closure(
         if str(resolution.snapshot_scientific_name).strip() != name:
             reasons.append("current_taxonomy_closure_review_name_mismatch")
             continue
+        if not resolution.review_complete:
+            incomplete_reviews.append(name)
+            continue
         accepted = str(resolution.accepted_species_name or "").strip()
         if not resolution.resolved or not accepted:
-            unresolved_names.append(name)
+            unresolved_historical.append(name)
         elif accepted.casefold() != focal.casefold():
             conflicting_names.append(name)
-    if unresolved_names:
-        reasons.append("snapshot_name_current_taxonomy_unresolved")
+    if incomplete_reviews:
+        reasons.append("current_taxonomy_closure_review_incomplete")
     if conflicting_names:
         reasons.append("snapshot_name_resolves_to_different_current_species")
 
@@ -123,6 +137,7 @@ def evaluate_snapshot_species_concept_closure(
         frozen_current_accepted_species=focal,
         frozen_historical_specieskeys=keys if passed else (),
         reviewed_snapshot_scientific_names=names,
+        current_unresolved_historical_names=tuple(sorted(unresolved_historical)),
         distinct_taxonomy_tuples=rows,
     )
 

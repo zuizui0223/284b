@@ -1,0 +1,43 @@
+{
+  "contract_version": "product_b_same_target_source_pairing_v0.1",
+  "purpose": "evaluate_sealed_independent_source_predictions_without_overclaiming_when_reference_calibration_is_incomplete",
+  "input_model_fit_contract": "config/product_b_same_target_source_model_fit_contract_v0_1.json",
+  "input_calibration_contract": "config/product_b_same_target_source_calibration_contract_v0_1.json",
+  "prediction_surfaces_must_be_sealed_before_pairing": true,
+  "pairing_key": ["taxon", "procedure", "M_km"],
+  "mode_a": "PRESERVED_SPECIMEN",
+  "mode_b": "HUMAN_OBSERVATION",
+  "primary_similarity_metric": "schoener_d",
+  "primary_discordance_metric": "one_minus_schoener_d",
+  "secondary_descriptive_metric": "rank_profile_discordance_pair",
+  "reference_ceiling_rule": {
+    "minimum_complete_calibration_taxa_per_procedure_M": 30,
+    "quantile": 0.95,
+    "quantile_method": "nearest_rank",
+    "classification_allowed_only_if_reference_ceiling_exists": true
+  },
+  "when_reference_ceiling_unavailable": {
+    "state": "paired_crosscheck_calibration_unresolved",
+    "descriptive_discordance_may_be_reported": true,
+    "paired_crosscheck_consistent_may_not_be_emitted": true,
+    "paired_crosscheck_attention_required_may_not_be_emitted": true,
+    "procedure_promotion_from_descriptive_discordance_forbidden": true
+  },
+  "when_reference_ceiling_available": {
+    "within_ceiling": "paired_crosscheck_consistent",
+    "above_ceiling": "paired_crosscheck_attention_required"
+  },
+  "raw_suitability_probability_difference_is_not_a_cross_taxon_or_cross_source_primary_metric": true,
+  "post_outcome_threshold_tuning_forbidden": true,
+  "post_outcome_M_selection_forbidden": true,
+  "post_outcome_procedure_selection_for_confirmatory_claim_forbidden": true,
+  "process_knockout_allowed_only_after_baseline_pairing_state_is_frozen": true,
+  "forbidden": [
+    "invent_reference_ceiling_from_incomplete_panel",
+    "lower_minimum_complete_taxa_after_observing_discordance",
+    "label_descriptive_high_discordance_as_attention_required_without_frozen_reference",
+    "label_descriptive_low_discordance_as_consistent_without_frozen_reference",
+    "use_raw_probability_equality_as_primary_answer_check",
+    "open_process_knockout_before_baseline_pairing_freeze"
+  ]
+}

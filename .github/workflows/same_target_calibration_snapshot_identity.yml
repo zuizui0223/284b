@@ -6,8 +6,6 @@ on:
       - product-b-v5-obligate-invariant
     paths:
       - results/product_b_same_target_source_current_taxonomy_v0_1.json
-      - .github/workflows/same_target_calibration_snapshot_identity.yml
-      - scripts/run_same_target_calibration_snapshot_identity.py
 
 permissions:
   contents: write

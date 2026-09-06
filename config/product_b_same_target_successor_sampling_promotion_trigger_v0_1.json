@@ -1,0 +1,18 @@
+{
+  "authorization": "promote_completed_grouped_transport_to_canonical_sampling_only",
+  "original_canonical_run_id": 34026548240,
+  "original_canonical_scientific_artifact_count_verified": 0,
+  "grouped_transport_run_id": 34028547235,
+  "grouped_aggregate_commit_sha": "8e3b6052f61d0dbd529c4f77a88d3a4132a90ca1",
+  "grouped_result_path": "results/product_b_same_target_successor_source_mode_sampling_grouped_v0_1.json",
+  "canonical_result_path": "results/product_b_same_target_successor_source_mode_sampling_v0_1.json",
+  "sampling_thresholds_changed": false,
+  "taxon_set_changed": false,
+  "historical_specieskey_sets_changed": false,
+  "historical_key_subset_selection_allowed": false,
+  "replacement_taxa_allowed": false,
+  "paired_discordance_opened": false,
+  "model_fit_opened": false,
+  "process_intervention_outcomes_opened": false,
+  "next_stage_must_require_separate_user_authored_trigger": true
+}

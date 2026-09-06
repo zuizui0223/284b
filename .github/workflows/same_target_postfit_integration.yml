@@ -1,0 +1,71 @@
+name: same-target-postfit-integration
+
+on:
+  pull_request:
+    paths:
+      - 'integration_tests/**'
+      - 'product_b_v5/**'
+      - 'scripts/*same_target*'
+      - 'results/product_b_same_target_successor_first10_progress_v0_1.json'
+      - '.github/workflows/same_target_postfit_integration.yml'
+  push:
+    branches: [main, postfit-integration-audit]
+    paths:
+      - 'integration_tests/**'
+      - 'product_b_v5/**'
+      - 'scripts/*same_target*'
+      - 'results/product_b_same_target_successor_first10_progress_v0_1.json'
+      - '.github/workflows/same_target_postfit_integration.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  synthetic-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
+      - name: Exercise feasibility, calibration and held-out CLIs on synthetic data only
+        env:
+          PYTHONPATH: .
+        run: python -m unittest discover -s integration_tests -v
+  reproduce-ten-artifact-receipt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download exact ZIPs without extracting prediction members
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          receipt=json.load(open('results/product_b_same_target_successor_first10_progress_v0_1.json'))
+          root=Path('audit_zips'); root.mkdir()
+          for item in receipt['artifacts']:
+              filename=item['archive_filename']
+              assert Path(filename).name == filename
+              with (root/filename).open('wb') as handle:
+                  subprocess.run(['gh','api',f"repos/zuizui0223/284b/actions/artifacts/{int(item['artifact_id'])}/zip"],stdout=handle,check=True)
+          PY
+      - name: Reproduce the empirical receipt using the existing frozen helper
+        env:
+          PYTHONPATH: .
+        run: >-
+          python scripts/audit_same_target_progress_receipt.py
+          --receipt results/product_b_same_target_successor_first10_progress_v0_1.json
+          --artifact-dir audit_zips --check

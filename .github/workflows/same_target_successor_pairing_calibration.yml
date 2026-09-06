@@ -1,0 +1,103 @@
+name: same-target-successor-pairing-calibration
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_successor_pairing_calibration_trigger_v0_1.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  calibrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify frozen successor pairing-calibration boundary
+        run: |
+          python -m pip install --disable-pip-version-check --quiet pandas pyarrow numpy
+          python -m py_compile scripts/calibrate_same_target_successor_pairing.py
+          python - <<'PY'
+          import json
+          c=json.load(open('config/product_b_same_target_successor_pairing_calibration_contract_v0_1.json'))
+          f=json.load(open('results/product_b_same_target_successor_layer1_fit_v0_1.json'))
+          s=json.load(open('results/product_b_same_target_successor_source_mode_sampling_v0_1.json'))
+          t=json.load(open('config/product_b_same_target_successor_pairing_calibration_trigger_v0_1.json'))
+          assert int(s['source_mode_sampling_passed']) >= 30
+          assert f['prediction_surfaces_opened_for_pairing'] is False
+          assert f['paired_discordance_opened'] is False
+          assert f['process_knockout_opened'] is False
+          assert c['minimum_distinct_calibration_taxa_per_reference_cell']==30
+          assert c['reference_quantile']==0.95
+          assert c['quantile_method']=='nearest_rank'
+          assert c['successor_consistent_or_attention_labels_must_not_be_emitted'] is True
+          assert c['current_12_taxon_paired_discordance_may_not_be_read_until_reference_ceiling_file_is_frozen'] is True
+          assert int(t['successor_fit_workflow_run_id']) > 0
+          assert t['current_12_taxon_paired_discordance_read'] is False
+          assert t['process_knockout_opened'] is False
+          PY
+      - name: Download sealed successor fit artifacts from frozen fit run
+        uses: actions/download-artifact@v4
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ fromJson(steps.trigger.outputs.run_id || '0') }}
+          pattern: product-b-successor-layer1-fit-taxon-*
+          path: fit_artifacts
+      - name: Resolve frozen fit run for artifact download
+        id: trigger
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          t=json.load(open('config/product_b_same_target_successor_pairing_calibration_trigger_v0_1.json'))
+          print('run_id='+str(int(t['successor_fit_workflow_run_id'])))
+          PY
+      - name: Download sealed successor fit artifacts from frozen fit run (resolved)
+        uses: actions/download-artifact@v4
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.trigger.outputs.run_id }}
+          pattern: product-b-successor-layer1-fit-taxon-*
+          path: fit_artifacts
+      - name: Construct frozen procedure-by-M reference ceilings
+        env:
+          PYTHONPATH: .
+        run: |
+          python scripts/calibrate_same_target_successor_pairing.py \
+            --input-root fit_artifacts \
+            --fit-audit results/product_b_same_target_successor_layer1_fit_v0_1.json \
+            --output-cells results/product_b_same_target_successor_pairing_cells_v0_1.csv \
+            --output-reference results/product_b_same_target_successor_reference_ceiling_v0_1.csv \
+            --output-summary results/product_b_same_target_successor_pairing_calibration_v0_1.json
+      - name: Upload successor reference calibration artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-pairing-calibration
+          path: |
+            results/product_b_same_target_successor_pairing_cells_v0_1.csv
+            results/product_b_same_target_successor_reference_ceiling_v0_1.csv
+            results/product_b_same_target_successor_pairing_calibration_v0_1.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit frozen successor reference calibration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_successor_pairing_cells_v0_1.csv results/product_b_same_target_successor_reference_ceiling_v0_1.csv results/product_b_same_target_successor_pairing_calibration_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No successor reference calibration change to commit"
+          else
+            git commit -m "Record successor paired-discordance reference calibration"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi

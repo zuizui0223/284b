@@ -1,0 +1,24 @@
+{
+  "trigger_version": "product_b_same_target_source_sampling_trigger_v0.1",
+  "purpose": "explicitly_start_layer1_source_mode_sampling_after_frozen_snapshot_identity_result",
+  "source_snapshot_identity_result": "results/product_b_same_target_source_snapshot_identity_v0_1.json",
+  "source_result_version": "product_b_same_target_source_snapshot_identity_sharded_v0.1",
+  "snapshot_identity_passed": 12,
+  "snapshot_identity_unresolved": 24,
+  "only_identity_passed_taxa_may_enter": true,
+  "identity_unresolved_taxa_may_not_be_replaced": true,
+  "source_mode_floors_unchanged": {
+    "minimum_independent_records": 50,
+    "minimum_unique_10km_cells": 30,
+    "minimum_effective_10km_cells": 10.0
+  },
+  "cross_mode_asymmetry_is_not_an_exclusion_gate": true,
+  "raw_rows_may_be_persisted": false,
+  "coordinates_may_be_persisted": false,
+  "row_identifiers_may_be_persisted": false,
+  "paired_discordance_opened": false,
+  "model_fit_opened": false,
+  "sampling_execution_authorized": true,
+  "post_outcome_threshold_change_forbidden": true,
+  "post_outcome_taxon_replacement_forbidden": true
+}

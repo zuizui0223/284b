@@ -13,6 +13,23 @@
   "answers_fit_independently": true,
   "cross_source_predictor_leakage_forbidden": true,
   "same_modeling_contract_required": true,
+  "shared_frame_source": {
+    "repository": "zuizui0223/sdmr",
+    "git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+    "contract_path": "configs/product_a_v2_7_1_fresh_confirmation_contract.json",
+    "M_km": [150, 300, 500],
+    "M_grid_is_sensitivity_not_optimized": true,
+    "M_built_from_model_pool_only": true,
+    "cross_source_comparison_must_use_same_M_within_taxon": true,
+    "discordance_reported_separately_for_each_M": true,
+    "post_outcome_M_selection_forbidden": true
+  },
+  "source_specific_sampling_floors": {
+    "minimum_independent_records": 50,
+    "minimum_unique_10km_cells": 30,
+    "minimum_effective_10km_cells": 10.0,
+    "must_pass_separately_in_both_observation_modes": true
+  },
   "primary_discordance_metric": "one_minus_schoener_d",
   "secondary_descriptive_metric": "rank_profile_discordance_pair",
   "calibration_panel_source": {
@@ -32,6 +49,8 @@
     "quantile_method": "nearest_rank",
     "minimum_complete_calibration_taxa": 30,
     "use_all_complete_calibration_taxa": true,
+    "calibrate_separate_ceiling_for_each_M": true,
+    "no_cross_M_composite_score": true,
     "ceiling_frozen_only_after_calibration_panel_is_complete": true,
     "ceiling_may_not_be_changed_after_held_out_outcome_access": true,
     "insufficient_complete_taxa_state": "paired_crosscheck_calibration_unresolved"
@@ -47,7 +66,8 @@
     "calibration_panel_attention_flags_are_descriptive_only": true,
     "held_out_above_ceiling_state": "paired_crosscheck_attention_required",
     "held_out_within_ceiling_state": "paired_crosscheck_consistent",
-    "attention_does_not_identify_which_answer_is_wrong": true
+    "attention_does_not_identify_which_answer_is_wrong": true,
+    "single_M_disagreement_is_scale_sensitive_and_reported_without_cross_M_collapse": true
   },
   "forbidden": [
     "choose_calibration_taxa_from_observed_cross_source_overlap",
@@ -55,6 +75,8 @@
     "replace_failed_calibration_taxon_after_discordance_access",
     "relax_source_specific_sampling_floors_after_outcome_access",
     "fit_one_observation_mode_using_the_other_modes_occurrences_or_predictions",
+    "select_best_M_from_cross_source_discordance",
+    "collapse_M_specific_discordance_into_posthoc_weighted_score",
     "tune_reference_quantile_after_held_out_outcomes_are_seen",
     "interpret_calibration_panel_as_confirmatory_biological_validation"
   ]

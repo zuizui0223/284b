@@ -1,19 +1,26 @@
 #!/usr/bin/env python3
 """Review every represented historical snapshot name against current taxonomy.
 
-Input is the taxonomy-only fresh snapshot concept tuple aggregate.  This stage
-never reads occurrence rows/counts/coordinates.  It attempts a current GBIF
-species match for every distinct historical ``scientificname``.  Only an EXACT
-match is treated as a positive current resolution.  Positive resolutions are
-followed to the accepted usage and then to its current species parent.  A
+Input is the taxonomy-only fresh snapshot concept tuple aggregate. This stage
+never reads occurrence rows/counts/coordinates. It attempts a current GBIF
+species match for every distinct historical ``scientificname``. Only an EXACT
+match is treated as a positive current resolution. Positive resolutions are
+followed to the accepted usage and then to its current species parent. A
 completed non-exact/no-match is recorded as a historical no-match, not silently
-converted into a conflict.  Network/parse failures are marked review-incomplete.
+converted into a conflict. Network/parse failures are marked review-incomplete.
+
+The taxonomy requests are transport-parallel only. ``executor.map`` preserves the
+pre-frozen name order and every name is still reviewed exactly once under the
+same scientific rule; concurrency cannot select, omit, or reorder names in the
+persisted audit.
 """
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor
 import json
 from pathlib import Path
 import sys
+import time
 from typing import Mapping
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -27,16 +34,27 @@ ROOT = Path(__file__).resolve().parents[1]
 TUPLES = ROOT / "results/product_b_same_target_fresh_snapshot_concept_tuples_v0_1.json"
 CONTRACT = ROOT / "config/product_b_same_target_fresh_calibration_contract_v0_1.json"
 OUTPUT = ROOT / "results/product_b_same_target_fresh_historical_name_review_v0_1.json"
-USER_AGENT = "zuizui0223-284b-fresh-historical-taxonomy-review/0.1"
+USER_AGENT = "zuizui0223-284b-fresh-historical-taxonomy-review/0.2"
+MAX_WORKERS = 8
+MAX_TRANSPORT_ATTEMPTS = 4
 
 
 def _read_json(url: str, timeout: float = 60.0) -> Mapping[str, object]:
-    request = Request(url, headers={"Accept": "application/json", "User-Agent": USER_AGENT}, method="GET")
-    with urlopen(request, timeout=timeout) as response:
-        payload = json.loads(response.read().decode("utf-8"))
-    if not isinstance(payload, Mapping):
-        raise ValueError("taxonomy response must be an object")
-    return payload
+    last: Exception | None = None
+    for attempt in range(MAX_TRANSPORT_ATTEMPTS):
+        try:
+            request = Request(url, headers={"Accept": "application/json", "User-Agent": USER_AGENT}, method="GET")
+            with urlopen(request, timeout=timeout) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+            if not isinstance(payload, Mapping):
+                raise ValueError("taxonomy response must be an object")
+            return payload
+        except Exception as exc:  # transport robustness only; final failure remains incomplete
+            last = exc
+            if attempt + 1 < MAX_TRANSPORT_ATTEMPTS:
+                time.sleep(0.5 * (2**attempt))
+    assert last is not None
+    raise last
 
 
 def _text(value: object) -> str:
@@ -119,6 +137,21 @@ def _review_name(name: str) -> dict[str, object]:
     }
 
 
+def _review_name_fail_closed(name: str) -> dict[str, object]:
+    try:
+        return _review_name(name)
+    except Exception as exc:
+        return {
+            "snapshot_scientific_name": name,
+            "review_complete": False,
+            "resolved": False,
+            "accepted_species_name": None,
+            "accepted_usage_key": None,
+            "match_type": None,
+            "reason": f"{type(exc).__name__}: {exc}",
+        }
+
+
 def main() -> int:
     tuples = json.loads(TUPLES.read_text(encoding="utf-8"))
     contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
@@ -146,34 +179,25 @@ def main() -> int:
     if not names or len(set(names)) != len(names):
         raise RuntimeError("fresh historical-name review list is empty or duplicated")
 
-    reviews = []
-    for name in names:
-        try:
-            reviews.append(_review_name(name))
-        except Exception as exc:
-            reviews.append(
-                {
-                    "snapshot_scientific_name": name,
-                    "review_complete": False,
-                    "resolved": False,
-                    "accepted_species_name": None,
-                    "accepted_usage_key": None,
-                    "match_type": None,
-                    "reason": f"{type(exc).__name__}: {exc}",
-                }
-            )
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS, thread_name_prefix="fresh-taxonomy-review") as executor:
+        reviews = list(executor.map(_review_name_fail_closed, names))
+    if [row["snapshot_scientific_name"] for row in reviews] != list(names):
+        raise RuntimeError("taxonomy transport parallelization changed frozen historical-name order")
 
     incomplete = sum(not bool(row["review_complete"]) for row in reviews)
     resolved = sum(bool(row["resolved"]) for row in reviews)
     completed_no_match = sum(bool(row["review_complete"]) and not bool(row["resolved"]) for row in reviews)
     outcome = {
-        "result_version": "product_b_same_target_fresh_historical_name_review_v0.1",
+        "result_version": "product_b_same_target_fresh_historical_name_review_v0.2",
         "taxonomy_tuple_result": str(TUPLES.relative_to(ROOT)),
         "distinct_historical_names_reviewed": len(reviews),
         "positive_current_species_resolutions": int(resolved),
         "completed_historical_no_match_reviews": int(completed_no_match),
         "incomplete_reviews": int(incomplete),
         "all_review_attempts_complete": incomplete == 0,
+        "transport_parallel_workers": MAX_WORKERS,
+        "transport_attempts_per_request_maximum": MAX_TRANSPORT_ATTEMPTS,
+        "all_names_reviewed_without_selection": True,
         "reviews": reviews,
         "occurrence_endpoint_called": False,
         "occurrence_counts_opened": False,
@@ -193,6 +217,7 @@ def main() -> int:
                 "positive_current_species_resolutions": outcome["positive_current_species_resolutions"],
                 "completed_historical_no_match_reviews": outcome["completed_historical_no_match_reviews"],
                 "incomplete_reviews": outcome["incomplete_reviews"],
+                "transport_parallel_workers": outcome["transport_parallel_workers"],
                 "occurrence_counts_opened": False,
             },
             indent=2,

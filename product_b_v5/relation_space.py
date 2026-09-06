@@ -16,10 +16,13 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum
 from math import isfinite
-from typing import Sequence
 
 from .invariants import directed_containment
-from .paired_relations import PairedRelationKind
+from .paired_relations import (
+    PairedRelationContract,
+    PairedRelationKind,
+    validate_paired_relation_contract,
+)
 
 
 class AnswerEstimand(str, Enum):
@@ -168,7 +171,6 @@ def validate_relation_space_contract(contract: RelationSpaceContract) -> tuple[s
         if contract.relation_space_kind != RelationSpaceKind.SAME_TARGET_SUPPORT:
             reasons.append("same_target_calibration_requires_same_target_relation_space")
     else:
-        # Cross-role biological checks compare relations, not estimator identity.
         if contract.estimator_policy != EstimatorPolicy.ROLE_SPECIFIC_ESTIMATORS_ALLOWED:
             reasons.append("cross_role_relation_must_allow_role_specific_estimators")
         if contract.same_accessible_area_required:
@@ -179,6 +181,25 @@ def validate_relation_space_contract(contract: RelationSpaceContract) -> tuple[s
     if contract.answer_a.estimand != contract.answer_b.estimand and contract.raw_output_scale_comparison_allowed:
         reasons.append("different_estimands_cannot_be_compared_on_raw_output_scale")
 
+    return tuple(dict.fromkeys(reasons))
+
+
+def validate_paired_relation_with_space(
+    relation: PairedRelationContract,
+    relation_space: RelationSpaceContract,
+) -> tuple[str, ...]:
+    """Require the biological relation and estimator/adapter contract together."""
+
+    reasons = list(validate_paired_relation_contract(relation))
+    reasons.extend(validate_relation_space_contract(relation_space))
+    if relation.relation_id.strip() != relation_space.relation_id.strip():
+        reasons.append("paired_relation_and_relation_space_ids_differ")
+    if relation.relation_kind != relation_space.relation_kind:
+        reasons.append("paired_relation_and_relation_space_kinds_differ")
+    if relation.answer_a_role.strip() != relation_space.answer_a.role.strip():
+        reasons.append("answer_a_role_differs_between_contracts")
+    if relation.answer_b_role.strip() != relation_space.answer_b.role.strip():
+        reasons.append("answer_b_role_differs_between_contracts")
     return tuple(dict.fromkeys(reasons))
 
 
@@ -226,11 +247,7 @@ def directional_containment_on_relation_space(
     dependent_answer: AdaptedAnswer,
     support_quantile: float,
 ) -> float:
-    """Evaluate ``dependent requires required`` after role-specific adaptation.
-
-    This function deliberately knows nothing about the upstream estimators. Their
-    outputs must already have been projected onto the same biological event keys.
-    """
+    """Evaluate ``dependent requires required`` after role-specific adaptation."""
 
     pair = align_adapted_answers(required_answer, dependent_answer)
     return directed_containment(pair.support_a, pair.support_b, support_quantile)
@@ -245,6 +262,7 @@ __all__ = [
     "AdaptedAnswer",
     "RelationSpacePair",
     "validate_relation_space_contract",
+    "validate_paired_relation_with_space",
     "validate_adapted_answer",
     "align_adapted_answers",
     "directional_containment_on_relation_space",

@@ -1,5 +1,5 @@
 {
-  "contract_version": "product_b_same_target_source_common_frame_v0.1",
+  "contract_version": "product_b_same_target_source_common_frame_v0.2",
   "purpose": "freeze_one_source_symmetric_comparison_frame_before_any_layer1_model_or_paired_discordance_outcome",
   "snapshot_date": "2026-08-01",
   "snapshot_identity_registry": "registry/product_b_same_target_source_identity_pass_taxa_v0_1.csv",
@@ -8,17 +8,27 @@
   "observation_modes": ["PRESERVED_SPECIMEN", "HUMAN_OBSERVATION"],
   "shared_frame_coordinate_pooling": {
     "allowed": true,
-    "purpose": "define_common_M_geometry_only",
+    "purpose": "define_common_M_and_spatial_block_geometry_only",
     "input_rows": "quality_and_collision_retained_focal_occurrences_from_both_modes",
+    "source_specific_thinning_cell_degrees": 0.05,
     "source_labels_removed_before_geometry_construction": true,
-    "record_frequencies_not_used_for_model_selection": true,
-    "environmental_values_not_used_to_construct_M": true,
-    "predictions_not_used_to_construct_M": true,
+    "pooled_geometry_thinning_cell_degrees": 0.05,
+    "pooled_geometry_one_point_per_cell": true,
+    "record_frequencies_may_not_weight_common_geometry": true,
+    "environmental_values_not_used_to_construct_M_or_blocks": true,
+    "predictions_not_used_to_construct_M_or_blocks": true,
     "coordinate_pooling_may_not_select_taxa_procedures_or_M": true,
     "interpretation": "symmetric_shared_design_input_not_cross_mode_response_fitting"
   },
+  "spatial_blocks": {
+    "n_blocks": 12,
+    "construction": "KMeans_on_source_blind_pooled_geometry_unit_sphere",
+    "assignment": "nearest_common_center_for_each_source_and_background",
+    "random_state": 2026082201,
+    "same_centers_required_for_both_observation_modes": true
+  },
   "M": {
-    "strategy": "buffer_around_shared_pooled_focal_coordinates",
+    "strategy": "buffer_around_shared_source_blind_geometry",
     "km": [150, 300, 500],
     "all_three_required": true,
     "post_outcome_M_selection_forbidden": true
@@ -32,6 +42,9 @@
     "grid_cell_degrees": 0.05,
     "exclude_all_12_current_focal_taxa_before_target_group_sampling": true,
     "background_points_per_taxon_M": 2000,
+    "background_random_state_base": 2026082201,
+    "background_taxon_seed_index": "alphabetical_rank_among_12_identity_pass_taxa_zero_based",
+    "background_random_state_formula": "background_random_state_base + taxon_seed_index",
     "same_background_rows_required_for_both_observation_modes_within_taxon_M": true,
     "source_independent_of_cross_source_predictions": true
   },
@@ -42,19 +55,20 @@
   },
   "independence_definition": {
     "independent_response_occurrences_required": true,
-    "one_mode_occurrences_may_not_enter_the_other_modes_likelihood_or_selection": true,
+    "one_mode_occurrences_may_not_enter_the_other_modes_likelihood_or_predictor_selection": true,
     "one_mode_predictions_may_not_enter_the_other_modes_fit_or_selection": true,
-    "shared_source_blind_frame_coordinates_are_allowed_only_for_M_geometry": true
+    "shared_source_blind_frame_coordinates_are_allowed_only_for_M_and_spatial_block_geometry": true
   },
   "paired_discordance_access_allowed": false,
   "process_knockout_access_allowed": false,
   "forbidden": [
     "construct_a_different_M_for_each_observation_mode",
-    "use_source_labels_to_weight_or_trim_the_shared_M",
+    "construct_different_spatial_block_centers_for_each_observation_mode",
+    "use_source_labels_or_source_record_frequency_to_weight_or_trim_shared_geometry",
     "use_cross_source_overlap_or_discordance_to_construct_the_frame",
-    "use_environmental_values_to_choose_M",
+    "use_environmental_values_to_choose_M_or_spatial_blocks",
     "retain_any_of_the_12_focal_taxa_in_the_target_group_background_source",
-    "change_background_density_after_model_or_discordance_outcomes",
+    "change_background_density_or_seed_after_model_or_discordance_outcomes",
     "select_one_M_after_cross_source_results"
   ]
 }

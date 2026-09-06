@@ -26,11 +26,12 @@ jobs:
           python -m unittest discover -s tests -v
           python -m py_compile scripts/run_same_target_layer1_baseline_fit_taxon.py scripts/aggregate_same_target_layer1_baseline_fit.py
           python - <<'PY'
-          import json, pandas as pd
+          import csv, json
           c=json.load(open('config/product_b_same_target_source_model_fit_contract_v0_1.json'))
           f=json.load(open('config/product_b_same_target_source_common_frame_contract_v0_1.json'))
           s=json.load(open('results/product_b_same_target_source_mode_sampling_v0_1.json'))
-          r=pd.read_csv('registry/product_b_same_target_source_identity_pass_taxa_v0_1.csv')
+          with open('registry/product_b_same_target_source_identity_pass_taxa_v0_1.csv', newline='', encoding='utf-8') as handle:
+              r=list(csv.DictReader(handle))
           t=json.load(open('config/product_b_same_target_source_model_fit_trigger_v0_1.json'))
           receipt=json.load(open('results/product_b_same_target_source_target_footprint_receipt_v0_1.json'))
           assert s['source_mode_sampling_passed']==12 and s['source_mode_sampling_unresolved']==0

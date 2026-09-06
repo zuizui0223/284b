@@ -9,6 +9,8 @@ on:
       - scripts/run_same_target_fresh_current_taxonomy.py
       - registry/product_b_same_target_fresh_calibration_candidates_v0_1.csv
       - config/product_b_same_target_fresh_calibration_contract_v0_1.json
+      - tests/test_same_target_fresh_calibration_contract.py
+      - tests/test_snapshot_concept_closure.py
 
 permissions:
   contents: write

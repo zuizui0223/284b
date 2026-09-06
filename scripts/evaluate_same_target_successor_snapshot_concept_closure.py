@@ -40,8 +40,12 @@ def main() -> int:
         raise RuntimeError("successor rank semantics drifted")
     if reviews.get("result_version") != "product_b_same_target_successor_historical_name_review_v0.1":
         raise RuntimeError("successor historical-name review result is missing")
-    if reviews.get("all_review_attempts_complete") is not True:
-        raise RuntimeError("successor historical-name review incomplete; closure fails closed before evaluation")
+    # Transport/parse failures are not allowed to disappear, but one incomplete
+    # historical-name review must not abort unrelated taxa.  The pure closure
+    # rule below fails every taxon containing an incomplete reviewed name.
+    incomplete_review_count = int(reviews.get("incomplete_reviews", -1))
+    if incomplete_review_count < 0:
+        raise RuntimeError("successor historical-name review lacks incomplete-review count")
     for payload, flags in (
         (tuples, (
             "matched_row_counts_persisted", "raw_occurrence_rows_persisted", "coordinates_opened",
@@ -78,6 +82,7 @@ def main() -> int:
     key_rows: list[dict[str, object]] = []
     passed_count = 0
     explicit_conflicts = 0
+    incomplete_review_taxa = 0
     for taxon in tuples.get("taxa", []):
         focal = str(taxon.get("current_accepted_species") or "").strip()
         rows = tuple(_tuple(row) for row in taxon.get("taxonomy_tuples", []))
@@ -98,6 +103,8 @@ def main() -> int:
                 })
         if "snapshot_name_resolves_to_different_current_species" in decision.reasons:
             explicit_conflicts += 1
+        if "current_taxonomy_closure_review_incomplete" in decision.reasons:
+            incomplete_review_taxa += 1
         decisions.append({
             "current_accepted_species": focal,
             "passed": bool(decision.passed),
@@ -117,6 +124,8 @@ def main() -> int:
         "concept_closure_passed_taxa": int(passed_count),
         "concept_closure_unresolved_taxa": int(len(decisions) - passed_count),
         "explicit_different_current_species_conflict_taxa": int(explicit_conflicts),
+        "historical_name_review_incomplete_names": incomplete_review_count,
+        "incomplete_review_affected_taxa": int(incomplete_review_taxa),
         "frozen_calibration_minimum_taxa": minimum,
         "occurrence_sampling_authorized": bool(sampling_authorized),
         "if_below_minimum_state": None if sampling_authorized else "successor_cross_source_calibration_unresolved",
@@ -148,6 +157,8 @@ def main() -> int:
         "concept_closure_passed_taxa": outcome["concept_closure_passed_taxa"],
         "concept_closure_unresolved_taxa": outcome["concept_closure_unresolved_taxa"],
         "explicit_different_current_species_conflict_taxa": outcome["explicit_different_current_species_conflict_taxa"],
+        "historical_name_review_incomplete_names": outcome["historical_name_review_incomplete_names"],
+        "incomplete_review_affected_taxa": outcome["incomplete_review_affected_taxa"],
         "occurrence_sampling_authorized": outcome["occurrence_sampling_authorized"],
         "taxonrank_used_as_exclusion_gate": False,
     }, indent=2, sort_keys=True))

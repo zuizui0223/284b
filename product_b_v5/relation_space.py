@@ -168,6 +168,12 @@ def validate_relation_space_contract(contract: RelationSpaceContract) -> tuple[s
             reasons.append("same_target_calibration_requires_same_estimator_family")
         if not contract.same_accessible_area_required:
             reasons.append("same_target_calibration_requires_same_accessible_area")
+        if contract.answer_a.accessible_area_semantics.strip() != contract.answer_b.accessible_area_semantics.strip():
+            reasons.append("same_target_calibration_accessible_area_semantics_differ")
+        if contract.answer_a.spatial_unit.strip() != contract.answer_b.spatial_unit.strip():
+            reasons.append("same_target_calibration_spatial_units_differ")
+        if contract.answer_a.temporal_unit.strip() != contract.answer_b.temporal_unit.strip():
+            reasons.append("same_target_calibration_temporal_units_differ")
         if contract.relation_space_kind != RelationSpaceKind.SAME_TARGET_SUPPORT:
             reasons.append("same_target_calibration_requires_same_target_relation_space")
     else:
@@ -177,6 +183,8 @@ def validate_relation_space_contract(contract: RelationSpaceContract) -> tuple[s
             reasons.append("cross_role_relation_must_not_require_one_universal_accessible_area")
         if contract.raw_output_scale_comparison_allowed:
             reasons.append("cross_role_raw_output_scale_comparison_forbidden")
+        if contract.relation_space_kind == RelationSpaceKind.SAME_TARGET_SUPPORT:
+            reasons.append("cross_role_relation_cannot_use_same_target_support_space")
 
     if contract.answer_a.estimand != contract.answer_b.estimand and contract.raw_output_scale_comparison_allowed:
         reasons.append("different_estimands_cannot_be_compared_on_raw_output_scale")

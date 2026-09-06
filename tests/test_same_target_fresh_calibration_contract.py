@@ -52,7 +52,9 @@ class FreshSameTargetCalibrationContractTests(unittest.TestCase):
             closure["snapshot_taxonomy_fields_allowed"],
             ["species", "specieskey", "taxonkey", "scientificname", "taxonrank"],
         )
-        self.assertIn("occurrence_counts", closure["occurrence_counts_coordinates_dates_dataset_ids_and_model_outcomes_forbidden_during_closure"])
+        self.assertTrue(
+            closure["occurrence_counts_coordinates_dates_dataset_ids_and_model_outcomes_forbidden_during_closure"]
+        )
 
     def test_sampling_and_reference_ceiling_cannot_be_relaxed(self):
         sampling = self.contract["source_mode_sampling"]

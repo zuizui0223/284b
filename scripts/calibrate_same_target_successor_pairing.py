@@ -11,12 +11,12 @@ from __future__ import annotations
 
 import argparse
 import json
-import math
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
+from product_b_v5.reference_calibration import freeze_reference_ceiling
 from product_b_v5.same_target_pairing import evaluate_prediction_adequacy, schoener_d_if_both_answers_adequate
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -71,14 +71,6 @@ def _adequacy_by_key(folds: pd.DataFrame, fit_contract: dict[str, object]) -> di
     return result
 
 
-def _nearest_rank(values: list[float], q: float) -> tuple[float, int]:
-    ordered = sorted(float(v) for v in values if math.isfinite(float(v)))
-    if not ordered:
-        raise ValueError("nearest-rank quantile requires finite values")
-    rank = max(1, int(math.ceil(float(q) * len(ordered))))
-    return float(ordered[rank - 1]), rank
-
-
 def _pair_one_taxon(contract: dict[str, object], directory: Path, fit_contract: dict[str, object]) -> list[dict[str, object]]:
     if contract.get("prediction_surfaces_sealed") is not True:
         raise RuntimeError("successor prediction artifacts not sealed")
@@ -115,8 +107,10 @@ def _pair_one_taxon(contract: dict[str, object], directory: Path, fit_contract: 
             qb = adequacy.get((MODES[1], m_km, procedure))
             reasons: list[str] = []
             if not both_sealed:
-                if by_state[MODES[0]] != "successor_layer1_model_fit_sealed": reasons.append("preserved_specimen_final_fit_unresolved")
-                if by_state[MODES[1]] != "successor_layer1_model_fit_sealed": reasons.append("human_observation_final_fit_unresolved")
+                if by_state[MODES[0]] != "successor_layer1_model_fit_sealed":
+                    reasons.append("preserved_specimen_final_fit_unresolved")
+                if by_state[MODES[1]] != "successor_layer1_model_fit_sealed":
+                    reasons.append("human_observation_final_fit_unresolved")
             if qa is None or not qa.adequate:
                 reasons.append("preserved_specimen_answer_inadequate_or_missing")
             if qb is None or not qb.adequate:
@@ -128,15 +122,21 @@ def _pair_one_taxon(contract: dict[str, object], directory: Path, fit_contract: 
                 if predictions.empty:
                     reasons.append("sealed_prediction_rows_missing")
                 else:
-                    group = predictions[(predictions["taxon"].astype(str) == taxon) & (predictions["M_km"].astype(int) == m_km) & (predictions["procedure"].astype(str) == procedure)]
+                    group = predictions[
+                        (predictions["taxon"].astype(str) == taxon)
+                        & (predictions["M_km"].astype(int) == m_km)
+                        & (predictions["procedure"].astype(str) == procedure)
+                    ]
                     by_source = {source: frame.copy() for source, frame in group.groupby("source", sort=False)}
                     if set(by_source) != set(MODES):
                         reasons.append("sealed_prediction_source_rows_missing")
                     else:
-                        a = by_source[MODES[0]]; b = by_source[MODES[1]]
+                        a = by_source[MODES[0]]
+                        b = by_source[MODES[1]]
                         try:
                             d = schoener_d_if_both_answers_adequate(
-                                adequacy_a=qa, adequacy_b=qb,
+                                adequacy_a=qa,
+                                adequacy_b=qb,
                                 row_ids_a=a["comparison_row_id"].astype(str).tolist(),
                                 scores_a=pd.to_numeric(a["ecological_score"], errors="coerce").tolist(),
                                 row_ids_b=b["comparison_row_id"].astype(str).tolist(),
@@ -212,32 +212,31 @@ def main() -> int:
     for (m_km, procedure), group in frame.groupby(["M_km", "procedure"], sort=True):
         authorized = group[group["calibration_contribution_authorized"]].copy()
         vals = pd.to_numeric(authorized["one_minus_schoener_d"], errors="coerce").to_numpy(float)
-        vals = vals[np.isfinite(vals)]
-        n = int(len(vals))
-        if n >= 30:
-            ceiling, rank = _nearest_rank(vals.tolist(), 0.95)
-            state = "reference_ceiling_frozen"
-        else:
-            ceiling, rank = None, None
-            state = "reference_ceiling_unresolved"
+        if len(vals) and not np.isfinite(vals).all():
+            raise RuntimeError("authorized successor discordance contains non-finite value")
+        decision = freeze_reference_ceiling(vals.tolist(), minimum_n=30, quantile=0.95)
         reference_rows.append({
             "M_km": int(m_km),
             "procedure": str(procedure),
-            "authorized_distinct_calibration_taxa": n,
+            "authorized_distinct_calibration_taxa": int(decision.n),
             "minimum_required_taxa": 30,
             "quantile": 0.95,
             "quantile_method": "nearest_rank",
-            "nearest_rank_index_1_based": rank,
-            "one_minus_schoener_d_reference_ceiling": ceiling,
-            "reference_state": state,
+            "nearest_rank_index_1_based": decision.nearest_rank_index_1_based,
+            "one_minus_schoener_d_reference_ceiling": decision.ceiling,
+            "reference_state": decision.state,
         })
     reference = pd.DataFrame(reference_rows).sort_values(["M_km", "procedure"], kind="mergesort").reset_index(drop=True)
     if len(reference) != 24:
         raise RuntimeError("successor reference matrix no longer contains 24 frozen procedure/M cells")
     available = reference["reference_state"] == "reference_ceiling_frozen"
 
-    out_cells = Path(args.output_cells); out_cells.parent.mkdir(parents=True, exist_ok=True); frame.to_csv(out_cells, index=False)
-    out_ref = Path(args.output_reference); out_ref.parent.mkdir(parents=True, exist_ok=True); reference.to_csv(out_ref, index=False)
+    out_cells = Path(args.output_cells)
+    out_cells.parent.mkdir(parents=True, exist_ok=True)
+    frame.to_csv(out_cells, index=False)
+    out_ref = Path(args.output_reference)
+    out_ref.parent.mkdir(parents=True, exist_ok=True)
+    reference.to_csv(out_ref, index=False)
     summary = {
         "result_version": "product_b_same_target_successor_pairing_calibration_v0.1",
         "sampling_pass_taxa_in_audit": len(expected_names),
@@ -261,7 +260,8 @@ def main() -> int:
         "taxa_replaced_after_outcome": False,
         "claim_strength": "reference_calibration_only_not_confirmatory_biological_evidence",
     }
-    out_summary = Path(args.output_summary); out_summary.parent.mkdir(parents=True, exist_ok=True)
+    out_summary = Path(args.output_summary)
+    out_summary.parent.mkdir(parents=True, exist_ok=True)
     out_summary.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(summary, indent=2, sort_keys=True))
     return 0

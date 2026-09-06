@@ -7,6 +7,7 @@ the panel was frozen before this audit.
 """
 from __future__ import annotations
 
+from dataclasses import asdict
 import csv
 import json
 from pathlib import Path
@@ -15,12 +16,18 @@ from typing import Mapping
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
+from product_b_v7_2.snapshot_taxonomy import (
+    GBIF_CURRENT_SPECIES_MATCH_ENDPOINT,
+    GBIF_CURRENT_SPECIES_USAGE_ENDPOINT,
+    SnapshotTaxonomyRequest,
+    build_current_species_match_params,
+    parse_current_direct_taxonomy_resolution,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 PANEL = ROOT / "registry/product_b_same_target_source_calibration_taxa_v0_1.csv"
 OUTPUT = ROOT / "results/product_b_same_target_source_current_taxonomy_v0_1.json"
-MATCH_ENDPOINT = "https://api.gbif.org/v1/species/match"
-USAGE_ENDPOINT = "https://api.gbif.org/v1/species/{key}"
-USER_AGENT = "zuizui0223-284b-same-target-calibration-taxonomy/0.1"
+USER_AGENT = "zuizui0223-284b-same-target-calibration-taxonomy/0.2"
 
 
 def _read_json(url: str, timeout: float = 60.0) -> Mapping[str, object]:
@@ -46,77 +53,82 @@ def _load_panel() -> list[dict[str, str]]:
     return rows
 
 
-def _resolve(name: str) -> dict[str, object]:
-    match = _read_json(MATCH_ENDPOINT + "?" + urlencode({"name": name, "kingdom": "Plantae"}))
+def _resolve(index: int, name: str) -> dict[str, object]:
+    request = SnapshotTaxonomyRequest(
+        pair_id=f"CAL{index:03d}",
+        partner="x",
+        scientific_name=name,
+        kingdom="Plantae",
+    )
+    match = _read_json(
+        GBIF_CURRENT_SPECIES_MATCH_ENDPOINT
+        + "?"
+        + urlencode(build_current_species_match_params(request))
+    )
     usage = match.get("usage")
+    diagnostics = match.get("diagnostics")
     if not isinstance(usage, Mapping) or usage.get("key") is None:
         return {
             "requested_name": name,
             "state": "unresolved_current_taxonomy_no_usage",
-            "match_type": match.get("matchType"),
-            "confidence": match.get("confidence"),
-            "diagnostics": match.get("diagnostics"),
+            "diagnostics": diagnostics,
+            "snapshot_admissible_species_names": [name],
         }
 
-    usage_key = str(usage["key"])
-    usage_payload = _read_json(USAGE_ENDPOINT.format(key=usage_key))
-    accepted_usage = match.get("acceptedUsage")
-    accepted_key = None
-    accepted_payload: Mapping[str, object] | None = None
-    if isinstance(accepted_usage, Mapping) and accepted_usage.get("key") is not None:
-        accepted_key = str(accepted_usage["key"])
-        accepted_payload = _read_json(USAGE_ENDPOINT.format(key=accepted_key))
-    elif str(usage_payload.get("taxonomicStatus", "")).upper() == "ACCEPTED":
-        accepted_key = usage_key
-        accepted_payload = usage_payload
-    elif usage_payload.get("acceptedKey") is not None:
-        accepted_key = str(usage_payload["acceptedKey"])
-        accepted_payload = _read_json(USAGE_ENDPOINT.format(key=accepted_key))
+    usage_payload = _read_json(
+        GBIF_CURRENT_SPECIES_USAGE_ENDPOINT.format(usage_key=str(usage["key"]))
+    )
+    try:
+        resolution = parse_current_direct_taxonomy_resolution(
+            request=request,
+            match_payload=match,
+            usage_payload=usage_payload,
+        )
+    except ValueError as exc:
+        # Synonyms or non-direct concepts stop here. We do not add new names after
+        # seeing taxonomy outcomes in this calibration pass.
+        accepted_usage = match.get("acceptedUsage")
+        accepted_name = ""
+        accepted_key = None
+        if isinstance(accepted_usage, Mapping):
+            accepted_name = str(accepted_usage.get("canonicalName") or accepted_usage.get("name") or "").strip()
+            if accepted_usage.get("key") is not None:
+                accepted_key = str(accepted_usage["key"])
+        return {
+            "requested_name": name,
+            "state": "unresolved_current_taxonomy_direct_contract",
+            "reason": str(exc),
+            "usage": dict(usage),
+            "accepted_usage": dict(accepted_usage) if isinstance(accepted_usage, Mapping) else None,
+            "accepted_name_seen_but_not_admitted": accepted_name,
+            "accepted_key_seen_but_not_admitted": accepted_key,
+            "diagnostics": dict(diagnostics) if isinstance(diagnostics, Mapping) else diagnostics,
+            "snapshot_admissible_species_names": [name],
+        }
 
-    match_type = str(match.get("matchType", ""))
-    confidence = match.get("confidence")
-    rank = str(usage_payload.get("rank", usage.get("rank", ""))).upper()
-    status = str(usage_payload.get("taxonomicStatus", usage.get("status", ""))).upper()
-    accepted_name = ""
-    if accepted_payload is not None:
-        accepted_name = str(
-            accepted_payload.get("canonicalName")
-            or accepted_payload.get("scientificName")
-            or ""
-        ).strip()
-
-    direct_species = match_type == "EXACT" and rank in {"SPECIES", "SUBSPECIES", "VARIETY", "FORM"}
-    resolved = direct_species and accepted_key is not None and bool(accepted_name)
-    state = "resolved_current_taxonomy" if resolved else "unresolved_current_taxonomy"
-
-    admissible_names: list[str] = []
-    for candidate in (name, accepted_name):
-        candidate = str(candidate).strip()
-        if candidate and candidate not in admissible_names:
-            admissible_names.append(candidate)
-
+    payload = asdict(resolution)
     return {
         "requested_name": name,
-        "state": state,
-        "match_type": match_type,
-        "confidence": confidence,
-        "usage_key": usage_key,
-        "usage_rank": rank,
-        "usage_taxonomic_status": status,
-        "accepted_key": accepted_key,
-        "accepted_name": accepted_name,
-        "snapshot_admissible_species_names": admissible_names,
-        "diagnostics": match.get("diagnostics"),
+        "state": "resolved_current_taxonomy",
+        "match_type": payload["match_type"],
+        "confidence": payload["confidence"],
+        "usage_key": payload["usage_key"],
+        "usage_rank": payload["rank"],
+        "usage_taxonomic_status": payload["status"],
+        "accepted_key": payload["direct_usage_key"],
+        "accepted_name": payload["direct_usage_canonical_name"],
+        "snapshot_admissible_species_names": [payload["direct_usage_canonical_name"]],
+        "diagnostics": diagnostics,
     }
 
 
 def main() -> int:
     rows = _load_panel()
     results: list[dict[str, object]] = []
-    for row in rows:
+    for index, row in enumerate(rows, start=1):
         name = row["scientific_name"].strip()
         try:
-            resolution = _resolve(name)
+            resolution = _resolve(index, name)
         except Exception as exc:
             resolution = {
                 "requested_name": name,
@@ -136,7 +148,8 @@ def main() -> int:
     resolved = sum(item["state"] == "resolved_current_taxonomy" for item in results)
     unresolved = len(results) - resolved
     outcome = {
-        "result_version": "product_b_same_target_source_current_taxonomy_v0.1",
+        "result_version": "product_b_same_target_source_current_taxonomy_v0.2",
+        "taxonomy_endpoint": GBIF_CURRENT_SPECIES_MATCH_ENDPOINT,
         "panel_size": len(results),
         "resolved_taxa": resolved,
         "unresolved_taxa": unresolved,
@@ -147,14 +160,12 @@ def main() -> int:
         "coordinates_opened": False,
         "paired_discordance_opened": False,
         "sampling_authorized": False,
+        "previous_v0_1_all_unresolved_was_parser_endpoint_mismatch": True,
         "resolutions": results,
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(outcome, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(outcome, ensure_ascii=False, indent=2, sort_keys=True))
-    # Taxonomy ambiguity is a scientific outcome, not a workflow failure. The
-    # next gate will include only prospectively resolved taxa and retain all
-    # unresolved taxa as terminal for this calibration pass.
     return 0
 
 

@@ -63,6 +63,31 @@ For a paired answer-check to be informative:
 Shared environmental predictors are allowed. The prohibition is circular use of
 the answer being checked.
 
+## Answer existence precedes answer coherence
+
+Cross-validity is defined only after each independent analysis can construct the
+predeclared ecological answer. A procedure can therefore fail one level earlier
+than paired discordance.
+
+For a frozen `taxon x source x procedure x M` cell:
+
+1. the procedure must produce a complete final ecological answer under its own
+   predeclared selection/recovery semantics;
+2. that answer must pass its source-specific prediction-adequacy gate;
+3. only then may its sealed prediction surface be opened against the other
+   source on the common comparison rows.
+
+If step 1 fails, the state is an **answer-construction / identifiability failure**.
+If step 2 fails, the answer is **prediction-inadequate**. In either case, paired
+Schoener D or another cross-check statistic stays closed. A missing answer must
+never be encoded as maximal discordance, perfect concordance, zero suitability,
+or a dropped cell.
+
+This distinction matters because a procedure may be applicable for one taxon,
+source and M but unable to define a complete ecological-recovery profile for
+another. That is evidence about the domain of the procedure itself, not evidence
+that the two observation systems disagree.
+
 ## Why raw prediction equality is not required
 
 Two independently fitted taxa or evidence channels need not have numerically
@@ -77,7 +102,8 @@ Current comparison tools instead include:
 - directional containment;
 - bidirectional containment;
 - taxon-specific rank-profile discordance;
-- reciprocal-containment asymmetry.
+- reciprocal-containment asymmetry;
+- same-target Schoener D on exactly matched sealed comparison rows.
 
 These compare the location and structure of ecological support rather than
 assuming cross-taxon probability calibration.
@@ -134,12 +160,13 @@ The broader framework is:
 
 The project can now be read as four nested questions:
 
-1. **Observability** — can an external biological relation be represented without
-   deriving the answer from the focal outcomes?
-2. **Identifiability** — are candidate procedures/processes structurally
-   distinguishable?
-3. **Cross-validity** — do independent ecological answers that should agree
-   actually remain coherent?
+1. **Observability** — can the biological target/relation be represented in the
+   evidence layer without deriving the answer from focal outcomes?
+2. **Identifiability** — can the frozen procedure actually construct a complete
+   ecological answer for this target/source/scale, and are alternative
+   procedures/processes structurally distinguishable?
+3. **Cross-validity** — conditional on two independently adequate answers
+   existing, do answers that should agree actually remain coherent?
 4. **Necessity** — which frozen process removals create or amplify biologically
    unexpected divergence?
 
@@ -147,9 +174,16 @@ This reframes process discovery: a process is interesting not merely because it
 improves prediction, but because removing it can make independently constrained
 biological answers cease to agree.
 
+The hierarchy is deliberately non-substitutable. More data cannot rescue a
+biological target that is not cleanly represented by the evidence layer; a
+cross-source distance cannot rescue a procedure that failed to construct an
+answer; and a process-knockout interpretation cannot precede a frozen baseline
+cross-check.
+
 ## Current boundary
 
-This document authorizes only framework code, synthetic tests, registry schemas
-and response-blind candidate design. It does not authorize opening a new focal
-empirical result, adapting a discordance threshold after seeing a focal pair, or
-reinterpreting any terminal v5-v7 endpoint.
+This document authorizes the frozen framework, synthetic tests, registry schemas,
+response-blind candidate design, and the prospectively ordered execution gates.
+It does not authorize adapting a discordance threshold after seeing a focal pair,
+turning an unresolved answer into a discordance value, replacing terminal taxa,
+or reinterpreting any terminal v5-v7 endpoint.

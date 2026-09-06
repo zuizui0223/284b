@@ -1,0 +1,13 @@
+witness_id,site_code,site_name,source_doi,latitude,longitude,uncertainty_m,coordinate_source_type,neochetina_eichhorniae_sample_count,admitted,exclusion_reason
+NEIC_W01,AU,Jilliby Australia,10.1111/eva.12755,-33.224799,151.377455,100,primary_literature_text,20,true,
+NEIC_W02,CH,"Heping Shantou Guangdong China",10.1111/eva.12755,23.251531,116.480457,100,primary_literature_text,23,true,
+NEIC_W03,SI,Sungei Buloh Wetlands Singapore,10.1111/eva.12755,1.440000,103.734633,100,primary_literature_text,33,true,
+NEIC_W04,SAG,"George Western Cape South Africa",10.1111/eva.12755,-34.031966,22.450090,100,primary_literature_text,22,true,
+NEIC_W05,SAW,"Wolseley Western Cape South Africa",10.1111/eva.12755,-33.424800,19.183700,100,primary_literature_text,23,true,
+NEIC_W06,SAK,"Kubusi River Eastern Cape South Africa",10.1111/eva.12755,-32.564722,27.488889,100,primary_literature_text,22,true,
+NEIC_W07,UG,"Port Bell Lake Victoria Uganda",10.1111/eva.12755,0.289963,32.654657,100,primary_literature_text,26,true,
+NEIC_W08,UR,"Uruguay River Soriano Department Uruguay",10.1111/eva.12755,-33.641392,-58.419423,100,primary_literature_text,31,true,
+NEIC_W09,FL,"Gainesville Florida USA",10.1111/eva.12755,29.634337,-82.371453,100,primary_literature_text,21,true,
+NEIC_W10,TX,"Wallisville Texas USA",10.1111/eva.12755,29.837687,-94.761197,100,primary_literature_text,22,true,
+NEIC_EX01,SAE,"Enseleni Reserve KwaZulu-Natal South Africa",10.1111/eva.12755,-28.688611,32.010556,100,primary_literature_text,0,false,N_eichhorniae_absent_in_Table_1
+NEIC_EX02,CA,"San Joaquin River / Riverdale Park California USA",10.1111/eva.12755,37.641917,-121.228889,100,primary_literature_text,24,false,prospectively_excluded_composite_population_row_has_two_printed_localities_and_coordinates

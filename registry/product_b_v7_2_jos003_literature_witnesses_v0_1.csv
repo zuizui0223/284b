@@ -1,0 +1,13 @@
+witness_id,site_name,source_doi,latitude,longitude,uncertainty_m,coordinate_source_type,moth_sample_size,admitted,exclusion_reason
+JOS3_W01,"Archbold Biological Station, Lake Placid, FL",10.1111/j.0014-3820.2004.tb01602.x,27.233333,-81.400000,100,primary_literature_text,23,true,
+JOS3_W02,"Lake Manatee State Park, FL",10.1111/j.0014-3820.2004.tb01602.x,27.478333,-82.335556,100,primary_literature_text,20,true,
+JOS3_W03,"Inverness, FL",10.1111/j.0014-3820.2004.tb01602.x,28.983333,-82.416667,100,primary_literature_text,26,true,
+JOS3_W04,"Ocala National Forest, FL",10.1111/j.0014-3820.2004.tb01602.x,29.133333,-81.516667,100,primary_literature_text,30,true,
+JOS3_W05,"Gold Head Branch State Park, FL",10.1111/j.0014-3820.2004.tb01602.x,29.831944,-81.953056,100,primary_literature_text,20,true,
+JOS3_W06,"Perry, FL",10.1111/j.0014-3820.2004.tb01602.x,30.117222,-83.581944,100,primary_literature_text,22,true,
+JOS3_W07,"Apalachicola Bluffs Preserve, Bristol, FL",10.1111/j.0014-3820.2004.tb01602.x,30.568889,-84.947778,100,primary_literature_text,20,true,
+JOS3_W08,"Douglas, GA",10.1111/j.0014-3820.2004.tb01602.x,31.526389,-82.747222,100,primary_literature_text,5,true,
+JOS3_W09,"Jesup, GA",10.1111/j.0014-3820.2004.tb01602.x,31.707778,-81.742500,100,primary_literature_text,21,true,
+JOS3_W10,"Baxley, GA",10.1111/j.0014-3820.2004.tb01602.x,31.778056,-82.348611,100,primary_literature_text,33,true,
+JOS3_W11,"5 km N Oak Park, GA",10.1111/j.0014-3820.2004.tb01602.x,32.358056,-82.314722,100,primary_literature_text,20,true,
+JOS3_W12,"Statesboro, GA",10.1111/j.0014-3820.2004.tb01602.x,32.448611,-81.783333,100,primary_literature_text,12,true,

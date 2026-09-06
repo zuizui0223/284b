@@ -1,0 +1,32 @@
+{
+  "contract_version": "product_b_v6_sen001_manual_taxonomy_review_v0.1",
+  "pair_id": "SEN001",
+  "partner": "x",
+  "literature_name": "Lophocereus schottii",
+  "automatic_taxonomy_result": "results/product_b_v6_sen001_taxonomy_auto_v0_1.json",
+  "review_trigger": "automatic legacy-GBIF match returned a non-admissible taxonomic status; the predeclared taxonomy contract requires manual concept review for synonym cases",
+  "candidate_legacy_name_key": "3084409",
+  "candidate_legacy_accepted_key": "3084408",
+  "independent_nomenclatural_evidence": {
+    "source": "Plants of the World Online / World Checklist of Vascular Plants",
+    "literature_name_status_2026": "accepted",
+    "alternative_name": "Pachycereus schottii",
+    "alternative_name_relation": "homotypic synonym of Lophocereus schottii",
+    "literature_name_url": "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:143583-2",
+    "alternative_name_url": "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:944017-1"
+  },
+  "direct_legacy_gbif_checks_required": [
+    "candidate_legacy_name_key must resolve to Lophocereus schottii at species rank",
+    "candidate_legacy_accepted_key must resolve to Pachycereus schottii at species rank and accepted status",
+    "legacy Lophocereus usage must point to the candidate accepted key or otherwise explicitly identify Pachycereus schottii as accepted usage"
+  ],
+  "pass_semantics": "resolved_manual_homotypic_synonym_bridge; preserve Lophocereus schottii as the literature concept while use of the frozen legacy accepted taxonKey is permitted only for occurrence transport compatibility",
+  "fail_semantics": "unresolved_taxonomy",
+  "occurrence_reads_allowed": false,
+  "forbidden": [
+    "choosing_between_names_using_occurrence_counts",
+    "treating_a_heterotypic_or_uncertain_synonym_as_automatic_equivalence",
+    "broadening_to_genus",
+    "opening_occurrence data before this review is terminal"
+  ]
+}

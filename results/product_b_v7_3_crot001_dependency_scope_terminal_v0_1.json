@@ -1,0 +1,30 @@
+{
+  "result_version": "product_b_v7_3_crot001_dependency_scope_terminal_v0.1",
+  "pair_id": "CROT001",
+  "terminal_state": "unresolved_dependency_scope",
+  "terminal_stage": "adversarial_replacement_host_interaction_screen",
+  "original_predeclared_direction": "Y_requires_X",
+  "original_predeclared_x": "Trollius europaeus",
+  "original_predeclared_y": "Chiastocheta rotundiventris",
+  "original_declaration_preserved_nonretroactively": true,
+  "invalidating_evidence_summary": "Adversarial literature review after the original literature freeze found Chiastocheta rotundiventris larvae developing on Trollius altaicus and Trollius asiaticus. Those taxa were in the predeclared replacement-host pool, so the assumed exclusive dependency on Trollius europaeus is not valid over the declared species scope and two controls are biologically invalid.",
+  "invalidated_predeclared_controls": ["CROT_C03", "CROT_C04"],
+  "invalidated_control_taxa": ["Trollius altaicus", "Trollius asiaticus"],
+  "control_taxonomy_gate_history": {
+    "workflow_run_id": 33935434321,
+    "artifact_id": 9959990694,
+    "artifact_sha256": "f53933e43bbb20e336009965709c524fff9d3c393ceab06918d8e8d3388a46dc",
+    "taxonomy_admitted_count_before_interaction_invalidation": 7
+  },
+  "replacement_or_rescue_controls_added": false,
+  "dependency_scope_narrowed_after_conflict": false,
+  "snapshot_taxonomy_identity_rows_opened": false,
+  "snapshot_occurrence_rows_opened": false,
+  "snapshot_occurrence_counts_opened": false,
+  "live_occurrence_search_used": false,
+  "model_fit_reads_opened": false,
+  "invariant_reads_opened": false,
+  "process_knockout_reads_opened": false,
+  "downstream_use_allowed": false,
+  "interpretation": "This is a biology/control-admission failure before snapshot access, not an invariant violation and not a sampling result. CROT001 must not be rescued by deleting the conflicting hosts, narrowing the species scope after seeing the conflict, or selecting new controls."
+}

@@ -1,0 +1,13 @@
+{
+  "authorization": "execute_source_independent_target_group_footprint",
+  "contract": "config/product_b_same_target_source_target_footprint_contract_v0_1.json",
+  "snapshot_identity_result": "results/product_b_same_target_source_snapshot_identity_v0_1.json",
+  "snapshot_identity_passed": 12,
+  "snapshot_identity_unresolved": 24,
+  "focal_registry": "registry/product_b_same_target_source_identity_pass_taxa_v0_1.csv",
+  "sampling_results_used_to_select_background": false,
+  "model_outcomes_opened": false,
+  "paired_discordance_opened": false,
+  "process_knockout_opened": false,
+  "scientific_thresholds_changed": false
+}

@@ -1,0 +1,32 @@
+{
+  "result_version": "product_b_v7_1_jos001_taxonomy_resolution_v0.1",
+  "pair_id": "JOS001",
+  "engineering_only": true,
+  "x": {
+    "biological_name": "Yucca brevifolia",
+    "legacy_transport_name": "Yucca brevifolia",
+    "legacy_transport_taxon_key": "2775592",
+    "state": "resolved_direct_exact",
+    "status": "ACCEPTED"
+  },
+  "y": {
+    "biological_name": "Tegeticula synthetica",
+    "legacy_name_key": "5123612",
+    "legacy_name_status": "SYNONYM",
+    "legacy_accepted_name": "Tegeticula paradoxa",
+    "legacy_accepted_key": "5123609",
+    "legacy_accepted_status": "ACCEPTED",
+    "match_type": "EXACT",
+    "confidence": 100,
+    "relation_by_accepted_key": true,
+    "state": "resolved_manual_direct_synonym_bridge",
+    "occurrence_transport_planned": false
+  },
+  "taxonomy_evidence": {
+    "direct_taxonomy_artifact_id": 9933919585,
+    "manual_review_artifact_id": 9934043580,
+    "manual_review_artifact_digest": "sha256:b0dfa2d211c1a7ba25011b8af8a8d68e8faa878f55b0a2b0170736017a58aecc"
+  },
+  "occurrence_reads_performed": false,
+  "invariant_reads_performed": false
+}

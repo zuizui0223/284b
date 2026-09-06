@@ -1,0 +1,45 @@
+{
+  "result_version": "product_b_v7_3_crot001_current_taxonomy_v0.1",
+  "pair_id": "CROT001",
+  "status": "resolved_direct_exact_current_taxonomy",
+  "taxonomy_system": "GBIF current default taxonomy; no legacy checklistKey",
+  "workflow_run_id": 33935293197,
+  "artifact_id": 9959945071,
+  "artifact_sha256": "240d3aad539a4a926c2f16fb1b0e48b3d3715a4fe74f9bb124f3532d768e8720",
+  "resolutions": [
+    {
+      "partner": "x",
+      "requested_name": "Trollius europaeus",
+      "usage_key": "3033289",
+      "canonical_name": "Trollius europaeus",
+      "scientific_name": "Trollius europaeus L.",
+      "rank": "SPECIES",
+      "status": "ACCEPTED",
+      "match_type": "EXACT",
+      "confidence": 99,
+      "direct_usage_key": "3033289",
+      "direct_usage_canonical_name": "Trollius europaeus",
+      "direct_usage_rank": "SPECIES",
+      "direct_usage_status": "ACCEPTED"
+    },
+    {
+      "partner": "y",
+      "requested_name": "Chiastocheta rotundiventris",
+      "usage_key": "1573228",
+      "canonical_name": "Chiastocheta rotundiventris",
+      "scientific_name": "Chiastocheta rotundiventris Hennig, 1953",
+      "rank": "SPECIES",
+      "status": "ACCEPTED",
+      "match_type": "EXACT",
+      "confidence": 100,
+      "direct_usage_key": "1573228",
+      "direct_usage_canonical_name": "Chiastocheta rotundiventris",
+      "direct_usage_rank": "SPECIES",
+      "direct_usage_status": "ACCEPTED"
+    }
+  ],
+  "snapshot_taxonomy_identity_rows_opened": false,
+  "snapshot_occurrence_rows_opened": false,
+  "snapshot_occurrence_counts_opened": false,
+  "live_occurrence_search_used": false
+}

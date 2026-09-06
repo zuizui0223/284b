@@ -1,0 +1,25 @@
+{
+  "contract_version": "product_b_v5_glochidion_taxonomy_resolution_v0.1",
+  "status": "predeclared_not_executed",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "occurrence_reads_allowed": false,
+  "pairs": [
+    {
+      "pair_id": "OPM_GLO_003",
+      "x": {"scientific_name": "Glochidion lanceolatum", "kingdom": "Plantae", "expected_key_hint": ""},
+      "y": {"scientific_name": "Epicephala lanceolatella", "kingdom": "Animalia", "expected_key_hint": "9121102"}
+    },
+    {
+      "pair_id": "OPM_GLO_004",
+      "x": {"scientific_name": "Glochidion lanceolatum", "kingdom": "Plantae", "expected_key_hint": ""},
+      "y": {"scientific_name": "Epicephala perplexa", "kingdom": "Animalia", "expected_key_hint": ""}
+    }
+  ],
+  "acceptance_rule": "EXACT species-rank legacy-backbone match; canonical name must equal literature name; synonym matches require manual concept review; direct /v1/species/{key} page must agree; any pre-existing key hint must agree",
+  "forbidden": [
+    "occurrence_search",
+    "occurrence_count",
+    "using_occurrence_availability_to_choose_a_synonym_or_taxon",
+    "broadening_to_genus_if_species_match_fails"
+  ]
+}

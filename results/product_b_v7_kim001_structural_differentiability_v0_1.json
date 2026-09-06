@@ -1,0 +1,61 @@
+{
+  "result_version": "product_b_v7_kim001_structural_differentiability_v0.1",
+  "pair_id": "KIM001",
+  "state": "structural_differentiability_preflight_passed",
+  "source": {
+    "repository": "zuizui0223/sdmr",
+    "run_id": 33155971954,
+    "run_conclusion": "success",
+    "run_head_sha": "362ced9bdfa3a45f87bc8f91f5c1efe20c6f53f7",
+    "runtime_ref": "b4c8e05ef75f1e65edc3603aad3040cf427a7d30",
+    "artifact_id": 9686651663,
+    "artifact_name": "v284-M-2026082203-taxon0-buffer_300km",
+    "artifact_sha256": "747ccdb6d100df22e993e14acf551e3208a0616584f699c6877ee22662f80519",
+    "member": "base_fold_metrics.csv",
+    "taxon": "Ericameria nauseosa",
+    "M": "buffer_300km",
+    "group": "base"
+  },
+  "sanitizer": {
+    "output_schema_columns": [
+      "fold",
+      "candidate",
+      "procedure",
+      "strategy",
+      "model",
+      "selected_predictors",
+      "selected_ecological_predictors",
+      "n_predictors",
+      "n_ecological_predictors",
+      "taxon",
+      "M",
+      "group",
+      "excluded_process_domain"
+    ],
+    "sanitized_snapshot_sha256": "14a2ca2a97a9991a11eca18165f53f089a4babe6edd881e0a8d5a58ed81878e7",
+    "forbidden_value_columns_emitted": [],
+    "product_a_score_or_recovery_values_emitted": false
+  },
+  "structure": {
+    "candidate_fold_member_count": 32,
+    "unique_procedure_count": 8,
+    "outer_fold_count": 4,
+    "distinct_selected_predictor_signature_count": 20,
+    "minimum_members_required": 2,
+    "minimum_distinct_signatures_required": 2
+  },
+  "process_knockout_structure": [
+    {"process": "thermal", "target_member_count": 25, "admissible_member_count": 25, "admissible": true},
+    {"process": "water", "target_member_count": 32, "admissible_member_count": 29, "admissible": true},
+    {"process": "seasonality_phenology", "target_member_count": 25, "admissible_member_count": 25, "admissible": true},
+    {"process": "energy_productivity", "target_member_count": 26, "admissible_member_count": 26, "admissible": true},
+    {"process": "snow", "target_member_count": 11, "admissible_member_count": 11, "admissible": true},
+    {"process": "wind", "target_member_count": 18, "admissible_member_count": 18, "admissible": true}
+  ],
+  "candidate_scores_read_for_this_preflight": false,
+  "ecological_recovery_values_read_for_this_preflight": false,
+  "sealed_environmental_values_read_for_this_preflight": false,
+  "kim001_occurrence_reads_performed": false,
+  "kim001_invariant_reads_performed": false,
+  "downstream_gate_still_required": "After KIM001 host fitting and before any invariant/support outcome is opened, at least 2 adequate members with at least 2 distinct fitted predictor signatures must remain, and every declared process must have at least one structurally admissible knockout route among adequate members. Failure is unresolved_model_pool_differentiability."
+}

@@ -1,0 +1,32 @@
+{
+  "result_version": "product_b_v6_epv001_taxonomy_v0.1",
+  "pair_id": "EPV001",
+  "taxonomy_state": "eligible_for_scope_resolution",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "workflow_run_id": 33851175450,
+  "artifact_id": 9928390754,
+  "artifact_digest": "sha256:4f622ca0010b7841bcb0366a2137e2303f8be088067bcf898235361ea0163820",
+  "x": {
+    "requested_name": "Fagus grandifolia",
+    "usage_key": "2882274",
+    "canonical_name": "Fagus grandifolia",
+    "scientific_name": "Fagus grandifolia Ehrh.",
+    "rank": "SPECIES",
+    "status": "ACCEPTED",
+    "match_type": "EXACT",
+    "confidence": 100
+  },
+  "y": {
+    "requested_name": "Epifagus virginiana",
+    "usage_key": "3173317",
+    "canonical_name": "Epifagus virginiana",
+    "scientific_name": "Epifagus virginiana (L.) Barton",
+    "rank": "SPECIES",
+    "status": "ACCEPTED",
+    "match_type": "EXACT",
+    "confidence": 100
+  },
+  "occurrence_reads_performed": false,
+  "scope_reads_performed": false,
+  "manual_taxonomy_rescue_used": false
+}

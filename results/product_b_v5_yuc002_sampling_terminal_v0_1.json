@@ -1,0 +1,74 @@
+{
+  "result_version": "product_b_v5_yuc002_sampling_terminal_v0.1",
+  "pair_id": "OPM_YUC_002",
+  "x_taxon": "Yucca schidigera",
+  "x_legacy_gbif_key": "2775710",
+  "y_taxon": "Tegeticula mojavella",
+  "y_legacy_gbif_key": "9143017",
+  "workflow_run_id": 33830916478,
+  "workflow_job_id": 100893554087,
+  "workflow_head_sha": "9786f3ee3eed8f72af2a0789368aae884815bdca",
+  "pre_execution_package_commit": "913599085dd94aa6fa0c8f75ab497f67add314a6",
+  "outcome_source": "GitHub Actions job log; artifact upload failed only because the workflow path used uppercase pair ID while the runner persisted a lowercase filename",
+  "occurrence_execution_completed": true,
+  "transport": {
+    "x_declared_and_fetched_records": 3579,
+    "x_pages_fetched": 12,
+    "y_declared_and_fetched_records": 3,
+    "y_pages_fetched": 1
+  },
+  "primary_sampling": {
+    "state": "unresolved_sampling",
+    "raw_records_x": 3579,
+    "raw_records_y": 3,
+    "quality_excluded_x": 194,
+    "quality_excluded_y": 0,
+    "quality_exclusion_reason_counts": {
+      "coordinate_uncertainty_ceiling_failed": 194
+    },
+    "missing_uncertainty_x": 949,
+    "missing_uncertainty_y": 3,
+    "collision_excluded_x": 0,
+    "collision_excluded_y": 0,
+    "retained_independent_records_x": 3385,
+    "retained_independent_records_y": 3,
+    "unique_cells_x": 79,
+    "unique_cells_y": 3,
+    "effective_cells_x": 11.24902684771308,
+    "effective_cells_y": 3.0,
+    "record_asymmetry_ratio": 1128.3333333333333,
+    "unique_cell_asymmetry_ratio": 26.333333333333332,
+    "effective_cell_asymmetry_ratio": 3.7496756159043603,
+    "reasons": [
+      "y_independent_record_floor_failed",
+      "y_unique_cell_floor_failed",
+      "y_effective_cell_floor_failed",
+      "record_asymmetry_ceiling_failed",
+      "unique_cell_asymmetry_ceiling_failed"
+    ]
+  },
+  "strict_sensitivity": {
+    "state": "unresolved_sampling",
+    "reasons": [
+      "x_effective_cell_floor_failed",
+      "y_independent_record_floor_failed",
+      "y_unique_cell_floor_failed",
+      "y_effective_cell_floor_failed",
+      "record_asymmetry_ceiling_failed",
+      "unique_cell_asymmetry_ceiling_failed",
+      "effective_cell_asymmetry_ceiling_failed"
+    ]
+  },
+  "raw_identity_component_count": 53,
+  "negative_controls_state": "not_reached",
+  "invariant_state": "not_reached",
+  "process_knockout_state": "not_reached",
+  "non_retroactivity": {
+    "rerun_for_rescue": false,
+    "threshold_relaxation_allowed": false,
+    "scope_widening_allowed": false,
+    "taxon_substitution_allowed": false,
+    "using_OPM_YUC_001_outcome_to_change_this_pair": false
+  },
+  "implementation_note": "The scientific execution step completed successfully. The GitHub job was marked failure only by the subsequent artifact-upload filename mismatch; the complete JSON audit was printed to the immutable job log. No rerun is permitted to repair artifact packaging."
+}

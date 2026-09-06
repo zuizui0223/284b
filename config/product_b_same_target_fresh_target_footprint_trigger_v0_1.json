@@ -1,0 +1,19 @@
+{
+  "authorization": "fresh_source_independent_target_group_footprint",
+  "fresh_candidate_registry": "registry/product_b_same_target_fresh_calibration_candidates_v0_1.csv",
+  "fresh_candidate_count": 36,
+  "exclude_all_36_candidates": true,
+  "snapshot_date": "2026-08-01",
+  "grid_cell_degrees": 0.05,
+  "parallel_chunks": 16,
+  "environmental_values_authorized": false,
+  "occurrence_sampling_of_focal_taxa_authorized": false,
+  "model_fit_authorized": false,
+  "paired_discordance_authorized": false,
+  "process_intervention_authorized": false,
+  "current_layer1_paired_outcomes_read": false,
+  "fresh_pairing_outcomes_read": false,
+  "taxa_replaced": false,
+  "failed_candidates_may_return_to_background": false,
+  "scientific_thresholds_changed": false
+}

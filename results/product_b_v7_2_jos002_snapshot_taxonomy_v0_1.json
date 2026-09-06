@@ -1,0 +1,39 @@
+{
+  "result_version": "product_b_v7_2_jos002_snapshot_taxonomy_v0.1",
+  "pair_id": "JOS002",
+  "status": "unresolved_snapshot_taxonomy",
+  "taxonomy_system": "GBIF current default taxonomy; no legacy checklistKey",
+  "workflow_run_id": 33896505106,
+  "artifact_id": 9945930538,
+  "artifact_sha256": "fa7d00deb5668413161dff3fd23ea067538b19d1ef7604e6997ff012d7a36f8a",
+  "resolutions": [
+    {
+      "pair_id": "JOS002",
+      "partner": "y",
+      "requested_name": "Tegeticula antithetica",
+      "requested_kingdom": "Animalia",
+      "usage_key": "10170653",
+      "canonical_name": "Tegeticula antithetica",
+      "scientific_name": "Tegeticula antithetica",
+      "rank": "SPECIES",
+      "status": "ACCEPTED",
+      "match_type": "EXACT",
+      "confidence": 100,
+      "direct_usage_key": "10170653",
+      "direct_usage_canonical_name": "Tegeticula antithetica",
+      "direct_usage_rank": "SPECIES",
+      "direct_usage_status": "ACCEPTED"
+    }
+  ],
+  "errors": [
+    {
+      "partner": "x",
+      "requested_name": "Yucca jaegeriana",
+      "error_type": "ValueError",
+      "error_message": "snapshot-native taxonomy usage must be ACCEPTED"
+    }
+  ],
+  "snapshot_occurrence_rows_opened": false,
+  "snapshot_occurrence_counts_opened": false,
+  "live_occurrence_search_used": false
+}

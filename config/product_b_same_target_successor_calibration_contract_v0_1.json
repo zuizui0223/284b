@@ -1,0 +1,124 @@
+{
+  "contract_version": "product_b_same_target_successor_calibration_v0.1",
+  "purpose": "prospectively_calibrate_same_target_cross_source_discordance_on_a_second_independent_panel_after_the_first_fresh_panel_failed_before_occurrence_access",
+  "engineering_predecessor_terminal_result": "results/product_b_same_target_fresh_calibration_terminal_v0_1.json",
+  "predecessor_information_used_for_successor_design": [
+    "25_of_36_concept_closure_passed",
+    "10_taxa_had_explicit_historical_name_to_different_current_species_conflicts",
+    "1_taxon_failed_only_because_rank_whitelist_excluded_subvariety"
+  ],
+  "predecessor_information_explicitly_not_available_or_not_used": [
+    "successor_candidate_taxonomy_outcomes",
+    "successor_occurrence_counts",
+    "successor_coordinates",
+    "current_12_taxon_paired_discordance",
+    "process_intervention_outcomes"
+  ],
+  "candidate_registry": "registry/product_b_same_target_successor_calibration_candidates_v0_1.csv",
+  "candidate_registry_git_blob_sha": "9de701ca9c9951bd6623bb9b7d1d3afa084be0a3",
+  "candidate_count": 72,
+  "validation_strata": 12,
+  "candidates_per_stratum": 6,
+  "freshness_firewall": {
+    "exact_name_disjointness_required": true,
+    "local_prior_consumed_registry": "registry/product_b_same_target_prior_consumed_taxa_v0_1.csv",
+    "local_prior_consumed_registry_git_blob_sha": "ae46f71b4b9a93a83eeccef20734dd921c9b0683",
+    "consumed_pilot_registry": {
+      "repository": "zuizui0223/sdmr",
+      "git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+      "path": "configs/product_a_pilot_taxa_v1.csv",
+      "git_blob_sha": "56effb13d132b60e261a9b69aefd2a980840f468",
+      "n_taxa": 12
+    },
+    "consumed_geometry_registry": {
+      "repository": "zuizui0223/sdmr",
+      "git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+      "path": "configs/product_a_v2_7_1_fresh_taxon_candidates.csv",
+      "git_blob_sha": "ee43c9731eb8ad3673d2fa9271e0c3a8503bd0e0",
+      "n_taxa": 36
+    },
+    "consumed_first_fresh_registry": {
+      "repository": "zuizui0223/sdmr",
+      "git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+      "path": "configs/product_a_v2_8_1_fresh_taxon_candidates.csv",
+      "git_blob_sha": "38d888d189320a09a48a590e287fa81966e2fc4f",
+      "n_taxa": 36
+    },
+    "total_prior_exact_names_firewalled": 84
+  },
+  "panel_rule": {
+    "use_all_72_predeclared_candidates": true,
+    "candidate_rank_is_order_metadata_not_a_selection_rule": true,
+    "replacement_after_any_taxonomy_sampling_fit_or_pairing_outcome": false,
+    "minimum_complete_taxa_for_calibration": 30,
+    "if_complete_taxa_below_30": "successor_cross_source_calibration_unresolved",
+    "denominator_or_threshold_relaxation_after_outcomes": false
+  },
+  "snapshot": {
+    "date": "2026-08-01",
+    "doi": "10.15468/dl.fs3btq",
+    "bucket": "gbif-open-data-us-east-1",
+    "region": "us-east-1",
+    "object_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+    "schema_sha256": "8298545ad22ddc1e064ae6e2ca8dbc592fcd47ab87f1018e0699fc68474571aa"
+  },
+  "taxonomy_concept_closure": {
+    "current_taxonomy_exact_accepted_species_required_before_snapshot_access": true,
+    "frozen_current_accepted_canonical_name_defines_candidate_species_concept": true,
+    "snapshot_taxonomy_fields_allowed": ["species", "specieskey", "taxonkey", "scientificname", "taxonrank"],
+    "snapshot_tuple_selection_rule": "species_exactly_equals_frozen_current_accepted_canonical_name",
+    "all_distinct_specieskeys_under_exact_species_parent_form_candidate_historical_key_set": true,
+    "candidate_historical_key_set_must_be_nonempty": true,
+    "taxonrank_is_audited_but_is_not_an_exclusion_gate": true,
+    "rank_whitelist_forbidden": true,
+    "current_taxonomy_review_attempt_required_for_every_distinct_snapshot_scientific_name": true,
+    "closure_review_rule": "every_snapshot_name_must_receive_a_complete_current_taxonomy_review; any_name_that_positively_resolves_to_a_different_current_accepted_species_invalidates_the_taxon",
+    "completed_current_no_match_for_historical_name_is_audited_not_a_concept_conflict": true,
+    "taxonomy_transport_or_parse_failure_makes_review_incomplete_and_fails_closed": true,
+    "historical_key_set_frozen_only_after_complete_review_without_explicit_species_conflict": true,
+    "occurrence_counts_coordinates_dates_dataset_ids_and_model_outcomes_forbidden_during_closure": true,
+    "first_fresh_36_panel_may_not_be_retroactively_rerun_under_this_rank_rule": true
+  },
+  "source_mode_sampling": {
+    "observation_modes": ["PRESERVED_SPECIMEN", "HUMAN_OBSERVATION"],
+    "minimum_independent_records_per_mode": 50,
+    "minimum_unique_10km_cells_per_mode": 30,
+    "minimum_effective_cells_per_mode": 10.0,
+    "both_modes_must_pass": true,
+    "all_frozen_historical_specieskeys_are_unioned_per_taxon": true,
+    "historical_key_level_sampling_selection_forbidden": true,
+    "failed_taxon_replacement_forbidden": true
+  },
+  "model_and_pairing": {
+    "inherit_model_fit_contract": "config/product_b_same_target_source_model_fit_contract_v0_1.json",
+    "inherit_common_frame_contract": "config/product_b_same_target_source_common_frame_contract_v0_1.json",
+    "inherit_pairing_contract": "config/product_b_same_target_source_pairing_contract_v0_1.json",
+    "procedure_count": 8,
+    "M_km": [150, 300, 500],
+    "all_procedure_M_cells_retained": true,
+    "prediction_adequacy_must_precede_paired_discordance": true,
+    "calibration_metric": "one_minus_schoener_d",
+    "calibration_quantile": 0.95,
+    "quantile_method": "nearest_rank",
+    "calibration_unit": "procedure_x_M",
+    "minimum_complete_taxa_per_procedure_M": 30,
+    "high_discordance_complete_taxa_may_not_be_dropped": true
+  },
+  "background_rule": {
+    "construct_before_successor_taxonomy_or_sampling_outcomes_can_select_taxa": true,
+    "exclude_all_72_frozen_candidates": true,
+    "failed_candidates_may_not_be_returned_to_background": true,
+    "grid_cell_degrees": 0.05,
+    "sdmr_git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9"
+  },
+  "forbidden": [
+    "reuse_any_of_the_84_prior_exact_candidate_names",
+    "reuse_the_first_fresh_36_panel_under_the_new_rank_semantics",
+    "select_candidate_ranks_after_taxonomy_results",
+    "add_replacement_taxa_after_results",
+    "lower_the_30_taxon_calibration_minimum_after_results",
+    "use_occurrence_counts_or_coordinates_during_taxonomy_closure",
+    "drop_historical_specieskeys_after_snapshot_parent_set_is_opened",
+    "open_paired_discordance_before_both_source_predictions_pass_adequacy"
+  ]
+}

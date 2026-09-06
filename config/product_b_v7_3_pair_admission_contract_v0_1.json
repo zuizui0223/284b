@@ -1,0 +1,49 @@
+{
+  "contract_version": "product_b_v7_3_pair_admission_v0.1",
+  "engineering_only": true,
+  "confirmatory_claims_allowed": false,
+  "minimum_direct_primary_literature_witness_sites": 10,
+  "minimum_independent_host_regions": 2,
+  "dependency_direction_required": "Y_requires_X",
+  "dependency_must_be_obligate_for_y": true,
+  "dependent_host_specificity_must_be_supported_before_snapshot_access": true,
+  "witness_coordinates_must_be_directly_reported_in_primary_source": true,
+  "witness_geocoding_from_place_names_forbidden": true,
+  "witness_sites_may_span_multiple_primary_sources": true,
+  "duplicate_or_same_locality_witnesses_count_once": true,
+  "snapshot_occurrence_counts_for_pair_selection_forbidden": true,
+  "snapshot_maps_for_pair_selection_forbidden": true,
+  "live_occurrence_search_for_pair_selection_forbidden": true,
+  "minimum_predeclared_replacement_hosts": 8,
+  "minimum_exact_taxonomy_admitted_replacement_hosts": 5,
+  "replacement_hosts_must_pass_adversarial_interaction_screen_before_snapshot_identity": true,
+  "interaction_screen_failure_must_not_be_rescued_by_replacing_controls": true,
+  "interaction_screen_failure_must_not_be_rescued_by_narrowing_dependency_scope": true,
+  "sampling_floor_unchanged": {
+    "minimum_independent_records": 50,
+    "minimum_unique_10km_cells": 30,
+    "minimum_effective_10km_cells": 10.0
+  },
+  "required_sequence": [
+    "literature_pair_and_witness_freeze",
+    "independent_frame_freeze",
+    "current_taxonomy_review",
+    "replacement_host_pool_freeze",
+    "adversarial_replacement_host_interaction_screen",
+    "snapshot_internal_taxonomy_identity_gate",
+    "separate_sampling_package_freeze_and_authorization"
+  ],
+  "firewalled_pairs": [
+    "OPM_FIG_001",
+    "OPM_YUC_001",
+    "OPM_YUC_002",
+    "SEN001",
+    "EPV001",
+    "HTR001",
+    "KIM001",
+    "JOS001",
+    "JOS002",
+    "JOS003",
+    "CROT001"
+  ]
+}

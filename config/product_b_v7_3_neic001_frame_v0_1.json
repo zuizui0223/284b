@@ -1,0 +1,15 @@
+{
+  "pair_id": "NEIC001",
+  "frame_id": "UN-M49-WORLD-001",
+  "source_type": "preexisting_admin_boundary",
+  "source_authority": "United Nations Statistics Division M49 geographic regions",
+  "source_version": "UN_M49_online_2026-09-05_world_001",
+  "geometry_type": "admin_codes",
+  "geometry_value": "001",
+  "un_m49_region_code": "001",
+  "operational_snapshot_country_codes_iso2": null,
+  "operational_country_materialization_state": "deferred_until_separate_sampling_package",
+  "witness_coordinates_used_to_derive_geometry": false,
+  "occurrence_information_used_to_derive_geometry": false,
+  "known_boundary": "World M49 frame is deliberately broad and independent of both the Hopper witness coordinates and GBIF snapshot occurrence. Because NEIC001 is engineering-only and the host is globally invasive, country-code materialization is deferred and must be frozen separately before any occurrence sampling execution. No witness hull or occurrence-derived range is permitted."
+}

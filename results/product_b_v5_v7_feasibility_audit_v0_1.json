@@ -1,0 +1,59 @@
+{
+  "result_version": "product_b_v5_v7_feasibility_audit_v0.1",
+  "pair_endpoints_audited": 11,
+  "invariant_endpoints_reached": 0,
+  "invariant_outcomes_opened": false,
+  "generation_counts": {
+    "v5_pairs": 7,
+    "v6_pairs": 3,
+    "v7_pairs": 1
+  },
+  "terminal_gate_counts": {
+    "taxonomy": 2,
+    "scope_or_scope_delivery": 3,
+    "sampling": 6,
+    "invariant": 0
+  },
+  "sampling_endpoint_audit": {
+    "sampling_endpoints": 6,
+    "focal_host_sampling_adequate": 2,
+    "focal_host_sampling_inadequate": 4,
+    "focal_host_adequate_pair_ids": ["OPM_YUC_001", "OPM_YUC_002"],
+    "focal_host_inadequate_pair_ids": ["OPM_FIG_001", "SEN001", "HTR001", "KIM001"],
+    "dependent_GBIF_sampling_endpoints": 5,
+    "dependent_GBIF_sampling_adequate": 0,
+    "dependent_GBIF_sampling_inadequate_pair_ids": [
+      "OPM_FIG_001",
+      "OPM_YUC_001",
+      "OPM_YUC_002",
+      "SEN001",
+      "HTR001"
+    ],
+    "literature_witness_endpoint_count": 1,
+    "literature_witness_preflight_adequate_count": 1,
+    "literature_witness_pair_id": "KIM001",
+    "controls_opened_after_sampling_gate": 0
+  },
+  "observed_sampling_examples": {
+    "OPM_FIG_001": {"x_raw": 42, "y_raw": 11, "host_adequate": false, "dependent_adequate": false},
+    "OPM_YUC_001": {"x_retained": 8529, "y_retained": 15, "x_unique_cells": 430, "y_unique_cells": 5, "host_adequate": true, "dependent_adequate": false},
+    "OPM_YUC_002": {"x_retained": 3385, "y_retained": 3, "x_unique_cells": 79, "y_unique_cells": 3, "host_adequate": true, "dependent_adequate": false},
+    "SEN001": {"x_retained": 1, "y_retained": 0, "x_unique_cells": 1, "host_adequate": false, "dependent_adequate": false},
+    "HTR001": {"x_retained": 9, "y_retained": 0, "x_unique_cells": 6, "host_adequate": false, "dependent_adequate": false},
+    "KIM001": {"x_retained": 6, "x_unique_cells": 4, "x_effective_cells": 3.6, "host_adequate": false, "dependent_source": "13 primary-literature witnesses in 13 cells", "dependent_adequate": true}
+  },
+  "diagnosis": [
+    "The v5 symmetric occurrence design is systematically incompatible with sparse obligate dependents in the audited panel: 0/5 dependent GBIF endpoints passed the frozen occurrence floor.",
+    "Replacing dependent GBIF occurrences with primary-literature witnesses solved the dependent-side gate for KIM001 but did not solve arbitrary-host occurrence feasibility: KIM001 failed the unchanged focal-host 50/30/10 floor.",
+    "Across all six sampling endpoints, focal host X failed the frozen host floor in 4/6 cases. Pair-first biological admission therefore remains a major feasibility bottleneck even after the v7 witness-source change.",
+    "No negative-control or invariant result has been opened, so these findings diagnose the evidence interface rather than the ecological invariant."
+  ],
+  "design_implication": "Do not lower floors or rescue opened pairs. Any successor should prospectively screen NEW engineering candidates for host breadth using independent literature/range evidence before occurrence access, while keeping actual GBIF counts forbidden during candidate selection. A later held-out confirmation pair is required after that prescreen is frozen and debugged.",
+  "nonretroactivity": [
+    "KIM001 remains terminal and cannot be rerun under a new prescreen",
+    "v5/v6 pairs remain firewalled",
+    "sampling floors remain 50 independent records / 30 unique 10-km cells / 10 effective cells for host recovery",
+    "literature witness floor remains 5 independent witnesses / 3 unique 10-km cells",
+    "an engineering-pilot success after this audit is not a confirmatory invariant result"
+  ]
+}

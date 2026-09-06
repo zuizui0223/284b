@@ -1,0 +1,37 @@
+name: v6-epv001-ncbi-s3-delivery
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - .github/workflows/v6_epv001_ncbi_s3_delivery.yml
+
+permissions:
+  contents: read
+
+jobs:
+  literature-distribution-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify repository tests before official dataset metadata access
+        env:
+          PYTHONPATH: .
+        run: python -m unittest discover -s tests -v
+      - name: Audit official PMC S3 article-version metadata only
+        env:
+          PYTHONPATH: .
+        run: python scripts/audit_v6_epv001_ncbi_s3_delivery.py
+      - name: Upload EPV001 official delivery audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-v6-epv001-ncbi-s3-delivery
+          path: artifacts/product_b_v6_epv001_ncbi_s3_delivery.json
+          if-no-files-found: error
+          retention-days: 90

@@ -1,0 +1,36 @@
+{
+  "contract_version": "product_b_same_target_source_target_footprint_v0.1",
+  "purpose": "materialize_source_independent_target_group_background_pool_before_layer1_model_fit",
+  "snapshot_date": "2026-08-01",
+  "snapshot_doi": "10.15468/dl.fs3btq",
+  "region": "us-east-1",
+  "focal_registry": {
+    "path": "registry/product_b_same_target_source_identity_pass_taxa_v0_1.csv",
+    "sha256": "914e2d737b447d23dde93640ddb0a07062a5ec2651fd8eb623331ccc069d124c",
+    "taxa_count": 12,
+    "all_12_must_be_excluded": true
+  },
+  "implementation": {
+    "repository": "zuizui0223/sdmr",
+    "git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+    "command": "sdmr-gbif-target-footprint-parallel"
+  },
+  "sampling_mode": "global_nonfocal_one_per_grid_cell_sampling_footprint",
+  "grid_cell_degrees": 0.05,
+  "parallel_chunk_count": 16,
+  "snapshot_shard_count_expected": 9705,
+  "target_rows_are_transport_resource_not_model_outcome": true,
+  "environmental_values_read": false,
+  "candidate_model_fitting_performed": false,
+  "paired_discordance_opened": false,
+  "process_knockout_opened": false,
+  "output_artifact_name": "product-b-same-target-target-footprint-2026-08-01",
+  "receipt_path": "results/product_b_same_target_source_target_footprint_receipt_v0_1.json",
+  "forbidden": [
+    "retain_any_identity_pass_focal_taxon_in_target_group",
+    "select_target_rows_from_source_mode_discordance",
+    "use_environmental_values_during_target_footprint_sampling",
+    "change_grid_cell_size_after_model_or_pairing_outcomes",
+    "fit_models_during_target_source_acquisition"
+  ]
+}

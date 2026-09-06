@@ -1,0 +1,47 @@
+name: authorized-yucca-sampling-preflight
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - .github/workflows/authorized_yucca_sampling_preflight.yml
+
+permissions:
+  contents: read
+
+jobs:
+  one-shot-yucca:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        pair_id:
+          - OPM_YUC_001
+          - OPM_YUC_002
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen repository before opening occurrences
+        env:
+          PYTHONPATH: .
+        run: python -m unittest discover -s tests -v
+
+      - name: Run independent authorized Yucca sampling preflight
+        env:
+          PYTHONPATH: .
+        run: python scripts/run_authorized_yucca_sampling_preflight.py --pair-id "${{ matrix.pair_id }}"
+
+      - name: Upload terminal pair audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-v5-${{ matrix.pair_id }}-sampling-preflight
+          path: artifacts/product_b_v5_${{ matrix.pair_id }}_sampling_preflight.json
+          if-no-files-found: error
+          retention-days: 90

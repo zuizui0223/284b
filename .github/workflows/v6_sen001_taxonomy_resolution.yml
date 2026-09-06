@@ -1,0 +1,40 @@
+name: v6-sen001-taxonomy-resolution
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - .github/workflows/v6_sen001_taxonomy_resolution.yml
+
+permissions:
+  contents: read
+
+jobs:
+  taxonomy-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify repository tests before taxonomy query
+        env:
+          PYTHONPATH: .
+        run: python -m unittest discover -s tests -v
+
+      - name: Resolve frozen SEN001 taxonomy requests
+        env:
+          PYTHONPATH: .
+        run: python scripts/run_v6_sen001_taxonomy_resolution.py
+
+      - name: Upload taxonomy-only result
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-v6-sen001-taxonomy-resolution
+          path: artifacts/product_b_v6_sen001_taxonomy_resolution.json
+          if-no-files-found: error
+          retention-days: 90

@@ -1,0 +1,58 @@
+{
+  "contract_version": "product_b_same_target_source_sampling_v0.2",
+  "purpose": "source_mode_sampling_preflight_for_layer1_calibration",
+  "snapshot_date": "2026-08-01",
+  "snapshot_identity_result_required": "results/product_b_same_target_source_snapshot_identity_sharded_v0_1.json",
+  "snapshot_identity_result_version_required": "product_b_same_target_source_snapshot_identity_sharded_v0.1",
+  "snapshot_identity_transport_change_only": true,
+  "snapshot_identity_scientific_rule_changed": false,
+  "identity_passed_taxa_expected": 12,
+  "identity_unresolved_taxa_expected": 24,
+  "only_snapshot_identity_passed_taxa_may_enter": true,
+  "unresolved_identity_taxa_remain_terminal_for_this_calibration_pass": true,
+  "observation_modes": ["PRESERVED_SPECIMEN", "HUMAN_OBSERVATION"],
+  "basis_of_record_field": "basisofrecord",
+  "occurrence_status_required": "PRESENT",
+  "country_filter": null,
+  "source_mode_floors": {
+    "minimum_independent_records": 50,
+    "minimum_unique_10km_cells": 30,
+    "minimum_effective_10km_cells": 10.0
+  },
+  "cross_mode_asymmetry_is_not_an_exclusion_gate": true,
+  "coordinate_quality": {
+    "projection": "EPSG:6933",
+    "cell_edge_m": 10000,
+    "maximum_known_coordinate_uncertainty_m": 10000,
+    "missing_coordinate_uncertainty_is_retained_and_audited": true
+  },
+  "cross_mode_same_record_collision_exclusion": true,
+  "collision_witnesses": [
+    "occurrence_id_lineage",
+    "catalog_or_specimen_number",
+    "dataset_key_plus_event_day_plus_coordinate_key",
+    "recorder_plus_event_day_plus_coordinate_key"
+  ],
+  "raw_rows_may_be_persisted": false,
+  "raw_coordinates_may_be_persisted": false,
+  "row_identifiers_may_be_persisted": false,
+  "summary_counts_may_be_persisted": true,
+  "sampling_outcome_may_not_select_replacement_taxa": true,
+  "paired_discordance_access_allowed": false,
+  "model_fit_access_allowed": false,
+  "sharding": {
+    "shard_count": 6,
+    "assignment": "snapshot_identity_passed_order_modulo_6",
+    "post_outcome_reassignment_forbidden": true
+  },
+  "forbidden": [
+    "scan_taxa_that_failed_snapshot_identity",
+    "replace_failed_taxon_after_sampling_result",
+    "reinterpret_24_identity_unresolved_taxa_as_sampling_failures",
+    "relax_50_30_10_after_sampling_result",
+    "persist_raw_snapshot_rows",
+    "persist_coordinates_or_occurrence_identifiers",
+    "open_paired_discordance_before_sampling_preflight_is_frozen",
+    "treat_sampling_pass_as_cross_source_coherence"
+  ]
+}

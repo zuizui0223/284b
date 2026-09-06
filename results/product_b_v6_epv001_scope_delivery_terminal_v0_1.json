@@ -1,0 +1,29 @@
+{
+  "status": "terminal_scope_delivery_unresolved",
+  "pair_id": "EPV001",
+  "dependency": "Epifagus virginiana requires Fagus grandifolia",
+  "taxonomy_state": "resolved_direct_exact_both",
+  "x_taxon_key": "2882274",
+  "y_taxon_key": "3173317",
+  "scope_evidence_doi": "10.1073/pnas.1006225107",
+  "published_scope_evidence": "The primary paper reports 467 parasite samples from 88 localities and identifies Dataset S1 as the supporting locality dataset.",
+  "scope_delivery_state": "unresolved_scope_delivery",
+  "terminal_reason": "The PMC article supplement href currently resolves to a cloudpmc-viewer-pow proof-of-work delivery bridge, and the official current PMC Article Dataset S3 bucket contains no PMC2947922 article-version prefix. Dataset S1 bytes therefore were not available through a reproducible official machine-retrieval route under this contract.",
+  "official_s3_audit": {
+    "bucket": "pmc-oa-opendata",
+    "pmcid": "PMC2947922",
+    "article_version_prefixes": [],
+    "official_distribution_state": "pmcid_not_available_in_current_pmc_article_dataset_s3"
+  },
+  "occurrence_reads_performed": false,
+  "operational_scope_constructed": false,
+  "invariant_reads_performed": false,
+  "challenge_bypass_attempted": false,
+  "forbidden_rescue": [
+    "solve_or_automate_the_PMC_proof_of_work_challenge",
+    "invent_a_bbox_from_the_host_range_or_article_map",
+    "use_GBIF_occurrences_to_define_the_scope",
+    "replace_the_88_published_localities_with_post_outcome_sites"
+  ],
+  "interpretation": "This is a delivery/feasibility terminal, not evidence for or against the directed dependency invariant."
+}

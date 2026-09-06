@@ -1,0 +1,30 @@
+{
+  "result_version": "product_b_v7_3_crot001_control_current_taxonomy_v0.1",
+  "pair_id": "CROT001",
+  "status": "control_current_taxonomy_preflight_passed_but_later_invalidated_by_dependency_scope",
+  "workflow_run_id": 33935434321,
+  "artifact_id": 9959990694,
+  "artifact_sha256": "f53933e43bbb20e336009965709c524fff9d3c393ceab06918d8e8d3388a46dc",
+  "declared_control_count": 8,
+  "minimum_required_control_count": 5,
+  "admitted_count": 7,
+  "admitted": [
+    {"control_id":"CROT_C01","scientific_name":"Trollius acaulis","usage_key":"3930510","status":"ACCEPTED","match_type":"EXACT","confidence":100},
+    {"control_id":"CROT_C03","scientific_name":"Trollius altaicus","usage_key":"7277015","status":"ACCEPTED","match_type":"EXACT","confidence":100},
+    {"control_id":"CROT_C04","scientific_name":"Trollius asiaticus","usage_key":"3923169","status":"ACCEPTED","match_type":"EXACT","confidence":100},
+    {"control_id":"CROT_C05","scientific_name":"Trollius chinensis","usage_key":"7276979","status":"ACCEPTED","match_type":"EXACT","confidence":100},
+    {"control_id":"CROT_C06","scientific_name":"Trollius laxus","usage_key":"3033292","status":"ACCEPTED","match_type":"EXACT","confidence":100},
+    {"control_id":"CROT_C07","scientific_name":"Trollius pumilus","usage_key":"7276894","status":"ACCEPTED","match_type":"EXACT","confidence":99},
+    {"control_id":"CROT_C08","scientific_name":"Trollius yunnanensis","usage_key":"7276834","status":"ACCEPTED","match_type":"EXACT","confidence":100}
+  ],
+  "excluded": [
+    {"control_id":"CROT_C02","scientific_name":"Trollius albiflorus","reason":"current taxonomy usage was not ACCEPTED","rescue_attempted":false}
+  ],
+  "interaction_screen_invalidated_controls": ["CROT_C03","CROT_C04"],
+  "interaction_screen_invalidation_reason": "Subsequent adversarial literature review found Chiastocheta rotundiventris larvae developing on Trollius altaicus and Trollius asiaticus, so these predeclared replacement hosts are not valid non-host controls.",
+  "snapshot_taxonomy_identity_rows_opened": false,
+  "snapshot_occurrence_rows_opened": false,
+  "snapshot_occurrence_counts_opened": false,
+  "live_occurrence_search_used": false,
+  "downstream_use_allowed": false
+}

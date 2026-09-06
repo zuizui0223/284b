@@ -1,0 +1,15 @@
+{
+  "authorization": "execute_successor_historical_name_review_and_rank_agnostic_concept_closure",
+  "successor_snapshot_tuple_result": "results/product_b_same_target_successor_snapshot_concept_tuples_v0_1.json",
+  "candidate_taxa_with_nonempty_snapshot_taxonomy_tuples": 72,
+  "candidate_taxa_without_snapshot_taxonomy_tuple": 0,
+  "frozen_minimum_complete_taxa_for_calibration": 30,
+  "taxonrank_used_as_exclusion_gate": false,
+  "occurrence_sampling_authorized_before_closure_result": false,
+  "occurrence_counts_opened": false,
+  "coordinates_opened": false,
+  "paired_discordance_opened": false,
+  "process_intervention_outcomes_read": false,
+  "scientific_thresholds_changed": false,
+  "taxa_replaced": false
+}

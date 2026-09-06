@@ -1,0 +1,27 @@
+{
+  "contract_version": "product_b_v6_scope_resolution_sen001_v0.1",
+  "pair_id": "SEN001",
+  "dependency_evidence_doi": "10.1007/s004420050459",
+  "scope_evidence_doi": "10.1007/s004420050945",
+  "operational_scope_state": "operational_scope_resolved",
+  "filter_type": "polygon_wkt",
+  "source_points_lon_lat": [
+    {"locality": "Polilla Flats, Bahia de Kino, Sonora, Mexico", "longitude": -111.933333, "latitude": 28.883333},
+    {"locality": "Seri Flats, Bahia de Kino, Sonora, Mexico", "longitude": -111.95, "latitude": 28.866667},
+    {"locality": "Senita Basin North, Organ Pipe Cactus National Monument, Arizona, USA", "longitude": -112.866667, "latitude": 31.95},
+    {"locality": "Senita Basin South, Organ Pipe Cactus National Monument, Arizona, USA", "longitude": -112.883333, "latitude": 31.933333},
+    {"locality": "Dos Republicas, Organ Pipe Cactus National Monument, Arizona, USA", "longitude": -112.85, "latitude": 31.9}
+  ],
+  "derivation": "product_b_v5.scope.convex_hull_polygon_wkt over all five published Table-1 coordinates",
+  "buffer_degrees": 0,
+  "filter_value": "POLYGON((-112.883333 31.933333,-111.95 28.866667,-111.933333 28.883333,-112.85 31.9,-112.866667 31.95,-112.883333 31.933333))",
+  "scope_source_type": "primary_literature_methods",
+  "occurrence_information_used_in_derivation": false,
+  "interpretation_boundary": "This is the no-buffer evidence envelope of the five published populations used to study the obligate interaction. It is not asserted to equal the biological range of either species.",
+  "forbidden": [
+    "widen_scope_after_occurrence_counts_are_opened",
+    "replace_the_hull_with_an_occurrence_range",
+    "buffer_the_polygon_to_rescue_sampling",
+    "drop_a_published_site_after_occurrence_availability_is_seen"
+  ]
+}

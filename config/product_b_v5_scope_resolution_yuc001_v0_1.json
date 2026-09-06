@@ -1,0 +1,25 @@
+{
+  "contract_version": "product_b_v5_scope_resolution_yuc001_v0.1",
+  "pair_id": "OPM_YUC_001",
+  "literature_pair": "Yucca elata / Tegeticula elatella",
+  "biological_registry_evidence_doi": "10.1080/10635150600697325",
+  "scope_evidence_doi": "10.1098/rspb.2005.3201",
+  "scope_source_type": "primary_literature_methods",
+  "scope_rule": "deterministic_no_buffer_convex_hull_of_all_T_elatella_Y_elata_site_coordinates_reported_in_Table_1",
+  "buffer_degrees": 0,
+  "published_scope_points_lon_lat": [
+    {"site": "Sierra Vista, AZ", "longitude": -110.3030555556, "latitude": 31.5544444444},
+    {"site": "Rodeo, NM", "longitude": -109.0305555556, "latitude": 31.8352777778},
+    {"site": "Jornada LTER, NM", "longitude": -106.5666666667, "latitude": 33.9333333333},
+    {"site": "Big Bend National Park, TX", "longitude": -103.25, "latitude": 29.25}
+  ],
+  "filter_type": "polygon_wkt",
+  "filter_value": "POLYGON((-110.303056 31.554444,-103.25 29.25,-106.566667 33.933333,-110.303056 31.554444))",
+  "claim_boundary": "Operational evidence envelope only; not a biological range estimate for either species. Rodeo is retained as an input point but lies inside the deterministic hull and therefore is not a hull vertex.",
+  "forbidden": [
+    "occurrence-derived hull",
+    "occurrence-derived buffer",
+    "widening the polygon after occurrence availability is opened",
+    "substituting the host or moth to improve sampling"
+  ]
+}

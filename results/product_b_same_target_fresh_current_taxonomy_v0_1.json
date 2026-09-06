@@ -1,0 +1,882 @@
+{
+  "all_36_entered": true,
+  "coordinates_opened": false,
+  "occurrence_counts_opened": false,
+  "occurrence_endpoint_called": false,
+  "paired_discordance_opened": false,
+  "panel_size": 36,
+  "resolutions": [
+    {
+      "accepted_key": "2704179",
+      "accepted_name": "Poa annua",
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 3,
+        "timings": {
+          "luceneMatch": 3,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 4
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Poa annua",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2704179",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "temperate_annual_herb"
+    },
+    {
+      "accepted_key": "3172077",
+      "accepted_name": "Veronica persica",
+      "candidate_rank": 2,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 10,
+        "timings": {
+          "luceneMatch": 10,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 11
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Veronica persica",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "3172077",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "temperate_annual_herb"
+    },
+    {
+      "accepted_key": "2926682",
+      "accepted_name": "Lamium purpureum",
+      "candidate_rank": 3,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 10,
+        "timings": {
+          "luceneMatch": 9,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 10
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Lamium purpureum",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2926682",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "temperate_annual_herb"
+    },
+    {
+      "accepted_key": "3189846",
+      "accepted_name": "Acer platanoides",
+      "candidate_rank": 1,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 10,
+        "timings": {
+          "luceneMatch": 10,
+          "nameNRank": 0,
+          "nameParse": 0,
+          "sciNameMatch": 10
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Acer platanoides",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "3189846",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "temperate_deciduous_tree"
+    },
+    {
+      "accepted_key": "2876213",
+      "accepted_name": "Alnus glutinosa",
+      "candidate_rank": 2,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 10,
+        "timings": {
+          "luceneMatch": 9,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 10
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Alnus glutinosa",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2876213",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "temperate_deciduous_tree"
+    },
+    {
+      "accepted_key": "9118014",
+      "accepted_name": "Betula pubescens",
+      "candidate_rank": 3,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 10,
+        "timings": {
+          "luceneMatch": 9,
+          "nameNRank": 0,
+          "nameParse": 0,
+          "sciNameMatch": 10
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Betula pubescens",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "9118014",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "temperate_deciduous_tree"
+    },
+    {
+      "accepted_key": "2685796",
+      "accepted_name": "Pseudotsuga menziesii",
+      "candidate_rank": 1,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 13,
+        "timings": {
+          "luceneMatch": 12,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 13
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Pseudotsuga menziesii",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2685796",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "boreal_temperate_conifer"
+    },
+    {
+      "accepted_key": "5284827",
+      "accepted_name": "Picea sitchensis",
+      "candidate_rank": 2,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 10,
+        "timings": {
+          "luceneMatch": 10,
+          "nameNRank": 0,
+          "nameParse": 0,
+          "sciNameMatch": 10
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Picea sitchensis",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "5284827",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "boreal_temperate_conifer"
+    },
+    {
+      "accepted_key": "2684178",
+      "accepted_name": "Thuja occidentalis",
+      "candidate_rank": 3,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 12,
+        "timings": {
+          "luceneMatch": 12,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 13
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Thuja occidentalis",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2684178",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "boreal_temperate_conifer"
+    },
+    {
+      "accepted_key": "2706435",
+      "accepted_name": "Agrostis stolonifera",
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 12,
+        "timings": {
+          "luceneMatch": 12,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 13
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Agrostis stolonifera",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2706435",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "wetland_grass"
+    },
+    {
+      "accepted_key": "5290090",
+      "accepted_name": "Alopecurus geniculatus",
+      "candidate_rank": 2,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 19,
+        "timings": {
+          "luceneMatch": 19,
+          "nameNRank": 0,
+          "nameParse": 0,
+          "sciNameMatch": 19
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Alopecurus geniculatus",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "5290090",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "wetland_grass"
+    },
+    {
+      "accepted_key": "2726725",
+      "accepted_name": "Carex rostrata",
+      "candidate_rank": 3,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 22,
+        "timings": {
+          "luceneMatch": 22,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 23
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Carex rostrata",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2726725",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "wetland_grass"
+    },
+    {
+      "accepted_key": "2888728",
+      "accepted_name": "Sambucus nigra",
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 10,
+        "timings": {
+          "luceneMatch": 10,
+          "nameNRank": 0,
+          "nameParse": 0,
+          "sciNameMatch": 10
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Sambucus nigra",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2888728",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "temperate_shrub"
+    },
+    {
+      "accepted_key": "2875979",
+      "accepted_name": "Corylus avellana",
+      "candidate_rank": 2,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 9,
+        "timings": {
+          "luceneMatch": 9,
+          "nameNRank": 0,
+          "nameParse": 0,
+          "sciNameMatch": 9
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Corylus avellana",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2875979",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "temperate_shrub"
+    },
+    {
+      "accepted_key": "3002461",
+      "accepted_name": "Rosa canina",
+      "candidate_rank": 3,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 4,
+        "timings": {
+          "luceneMatch": 3,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 4
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Rosa canina",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "3002461",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "temperate_shrub"
+    },
+    {
+      "accepted_key": "8108066",
+      "accepted_name": "Asplenium trichomanes",
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 13,
+        "timings": {
+          "luceneMatch": 13,
+          "nameNRank": 0,
+          "nameParse": 0,
+          "sciNameMatch": 13
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Asplenium trichomanes",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "8108066",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "fern"
+    },
+    {
+      "accepted_key": "2650999",
+      "accepted_name": "Matteuccia struthiopteris",
+      "candidate_rank": 2,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 11,
+        "timings": {
+          "luceneMatch": 11,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 12
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Matteuccia struthiopteris",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2650999",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "fern"
+    },
+    {
+      "accepted_key": "2651098",
+      "accepted_name": "Polystichum acrostichoides",
+      "candidate_rank": 3,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 16,
+        "timings": {
+          "luceneMatch": 15,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 16
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Polystichum acrostichoides",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2651098",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "fern"
+    },
+    {
+      "accepted_key": "3103017",
+      "accepted_name": "Ericameria nauseosa",
+      "candidate_rank": 1,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 5,
+        "timings": {
+          "luceneMatch": 6,
+          "nameNRank": 0,
+          "nameParse": 0,
+          "sciNameMatch": 6
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Ericameria nauseosa",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "3103017",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "arid_shrub"
+    },
+    {
+      "accepted_key": "2653272",
+      "accepted_name": "Ephedra viridis",
+      "candidate_rank": 2,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 11,
+        "timings": {
+          "luceneMatch": 11,
+          "nameNRank": 0,
+          "nameParse": 0,
+          "sciNameMatch": 11
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Ephedra viridis",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2653272",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "arid_shrub"
+    },
+    {
+      "accepted_key": "3083665",
+      "accepted_name": "Atriplex polycarpa",
+      "candidate_rank": 3,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 15,
+        "timings": {
+          "luceneMatch": 15,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 16
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Atriplex polycarpa",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "3083665",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "arid_shrub"
+    },
+    {
+      "accepted_key": "3086527",
+      "accepted_name": "Rhizophora mucronata",
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 11,
+        "timings": {
+          "luceneMatch": 11,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 12
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Rhizophora mucronata",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "3086527",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "tropical_mangrove"
+    },
+    {
+      "accepted_key": "3086526",
+      "accepted_name": "Rhizophora apiculata",
+      "candidate_rank": 2,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 11,
+        "timings": {
+          "luceneMatch": 10,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 11
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Rhizophora apiculata",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "3086526",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "tropical_mangrove"
+    },
+    {
+      "accepted_key": "7583876",
+      "accepted_name": "Bruguiera gymnorhiza",
+      "candidate_rank": 3,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 14,
+        "timings": {
+          "luceneMatch": 14,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 15
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Bruguiera gymnorhiza",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "7583876",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "tropical_mangrove"
+    },
+    {
+      "accepted_key": "3176354",
+      "accepted_name": "Eucalyptus obliqua",
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 11,
+        "timings": {
+          "luceneMatch": 11,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 12
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Eucalyptus obliqua",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "3176354",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "southern_temperate_tree"
+    },
+    {
+      "accepted_key": "3176566",
+      "accepted_name": "Eucalyptus regnans",
+      "candidate_rank": 2,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 11,
+        "timings": {
+          "luceneMatch": 11,
+          "nameNRank": 0,
+          "nameParse": 0,
+          "sciNameMatch": 11
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Eucalyptus regnans",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "3176566",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "southern_temperate_tree"
+    },
+    {
+      "accepted_key": "2874895",
+      "accepted_name": "Nothofagus dombeyi",
+      "candidate_rank": 3,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 10,
+        "timings": {
+          "luceneMatch": 9,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 10
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Nothofagus dombeyi",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2874895",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "southern_temperate_tree"
+    },
+    {
+      "accepted_key": "5284917",
+      "accepted_name": "Picea engelmannii",
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 8,
+        "timings": {
+          "luceneMatch": 8,
+          "nameNRank": 0,
+          "nameParse": 0,
+          "sciNameMatch": 8
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Picea engelmannii",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "5284917",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "montane_tree"
+    },
+    {
+      "accepted_key": "2685580",
+      "accepted_name": "Abies concolor",
+      "candidate_rank": 2,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 9,
+        "timings": {
+          "luceneMatch": 9,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 10
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Abies concolor",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2685580",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "montane_tree"
+    },
+    {
+      "accepted_key": "5285750",
+      "accepted_name": "Pinus contorta",
+      "candidate_rank": 3,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 10,
+        "timings": {
+          "luceneMatch": 10,
+          "nameNRank": 0,
+          "nameParse": 0,
+          "sciNameMatch": 10
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Pinus contorta",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "5285750",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "montane_tree"
+    },
+    {
+      "accepted_key": "2685383",
+      "accepted_name": "Abies balsamea",
+      "candidate_rank": 1,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 8,
+        "timings": {
+          "luceneMatch": 8,
+          "nameNRank": 0,
+          "nameParse": 0,
+          "sciNameMatch": 8
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Abies balsamea",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2685383",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "boreal_conifer"
+    },
+    {
+      "accepted_key": "5285067",
+      "accepted_name": "Pinus resinosa",
+      "candidate_rank": 2,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 10,
+        "timings": {
+          "luceneMatch": 10,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 11
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Pinus resinosa",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "5285067",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "boreal_conifer"
+    },
+    {
+      "accepted_key": "5284717",
+      "accepted_name": "Picea rubens",
+      "candidate_rank": 3,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 9,
+        "timings": {
+          "luceneMatch": 9,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 10
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Picea rubens",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "5284717",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "boreal_conifer"
+    },
+    {
+      "accepted_key": "5328909",
+      "accepted_name": "Sagittaria latifolia",
+      "candidate_rank": 1,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 15,
+        "timings": {
+          "luceneMatch": 15,
+          "nameNRank": 0,
+          "nameParse": 0,
+          "sciNameMatch": 15
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Sagittaria latifolia",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "5328909",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "wetland_emergent"
+    },
+    {
+      "accepted_key": "2766030",
+      "accepted_name": "Pontederia cordata",
+      "candidate_rank": 2,
+      "confidence": 99,
+      "diagnostics": {
+        "confidence": 99,
+        "matchType": "EXACT",
+        "timeTaken": 12,
+        "timings": {
+          "luceneMatch": 11,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 12
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Pontederia cordata",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2766030",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "wetland_emergent"
+    },
+    {
+      "accepted_key": "2710926",
+      "accepted_name": "Schoenoplectus acutus",
+      "candidate_rank": 3,
+      "confidence": 100,
+      "diagnostics": {
+        "confidence": 100,
+        "matchType": "EXACT",
+        "timeTaken": 12,
+        "timings": {
+          "luceneMatch": 11,
+          "nameNRank": 0,
+          "nameParse": 1,
+          "sciNameMatch": 12
+        }
+      },
+      "match_type": "EXACT",
+      "requested_name": "Schoenoplectus acutus",
+      "state": "fresh_current_taxonomy_resolved_exact_accepted_species",
+      "usage_key": "2710926",
+      "usage_rank": "SPECIES",
+      "usage_taxonomic_status": "ACCEPTED",
+      "validation_stratum": "wetland_emergent"
+    }
+  ],
+  "resolved_exact_accepted_species": 36,
+  "result_version": "product_b_same_target_fresh_current_taxonomy_v0.1",
+  "sampling_authorized": false,
+  "selection_used_current_layer1_paired_outcomes": false,
+  "selection_used_process_intervention_outcomes": false,
+  "snapshot_taxonomy_opened": false,
+  "taxa_replaced": false,
+  "unresolved_current_taxonomy": 0
+}

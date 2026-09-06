@@ -1,0 +1,23 @@
+{
+  "authorization": "fresh_historical_name_review_and_species_concept_closure",
+  "taxonomy_tuple_result": "results/product_b_same_target_fresh_snapshot_concept_tuples_v0_1.json",
+  "fresh_current_taxonomy_resolved": 36,
+  "taxa_with_nonempty_snapshot_taxonomy_tuples": 36,
+  "taxa_without_snapshot_taxonomy_tuple": 0,
+  "frozen_minimum_taxa_for_calibration": 30,
+  "historical_name_review_authorized": true,
+  "concept_closure_authorized": true,
+  "historical_specieskey_subset_selection_authorized": false,
+  "occurrence_sampling_authorized_before_closure": false,
+  "occurrence_counts_authorized": false,
+  "coordinates_authorized": false,
+  "environmental_values_authorized": false,
+  "model_fit_authorized": false,
+  "paired_discordance_authorized": false,
+  "process_intervention_authorized": false,
+  "current_layer1_paired_outcomes_read": false,
+  "current_layer1_process_outcomes_read": false,
+  "taxa_replaced": false,
+  "scientific_thresholds_changed": false,
+  "transport_execution_revision": "parallel-review-v0.2"
+}

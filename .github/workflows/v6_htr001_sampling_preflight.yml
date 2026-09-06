@@ -1,0 +1,37 @@
+name: v6-htr001-sampling-preflight
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - .github/workflows/v6_htr001_sampling_preflight.yml
+
+permissions:
+  contents: read
+
+jobs:
+  one-shot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify frozen code before opening HTR001 occurrences
+        env:
+          PYTHONPATH: .
+        run: python -m unittest discover -s tests -v
+      - name: Run authorized HTR001 v6 sampling/control preflight
+        env:
+          PYTHONPATH: .
+        run: python scripts/run_v6_htr001_sampling_preflight.py
+      - name: Upload terminal HTR001 sampling-preflight audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-v6-htr001-sampling-preflight
+          path: artifacts/product_b_v6_htr001_sampling_preflight.json
+          if-no-files-found: error
+          retention-days: 90

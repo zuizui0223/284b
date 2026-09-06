@@ -1,0 +1,14 @@
+pair_id,witness_id,site_name,source_doi,source_table,longitude_dms,latitude_dms,longitude,latitude,uncertainty_m,coordinate_source_type,evidence_for_y_identity,project_geocoded,admitted
+KIM001,KIM_W01_JF,Jianfengling,10.1002/ece3.10228,Table 1,108°49′17″E,18°42′51″N,108.821389,18.714167,100,primary_literature_text,"Em:Et:El = 12:1:1 among 14 dissected reared moths",false,true
+KIM001,KIM_W02_DL,Diaoluoshan,10.1002/ece3.10228,Table 1,109°56′18″E,18°46′05″N,109.938333,18.768056,100,primary_literature_text,"Em:Et:El = 11:0:0 among 11 dissected reared moths",false,true
+KIM001,KIM_W03_BWL,Bawangling,10.1002/ece3.10228,Table 1,109°05′47″E,19°06′36″N,109.096389,19.110000,100,primary_literature_text,"Em:Et:El = 5:9:0 among 14 dissected reared moths",false,true
+KIM001,KIM_W04_YG,Yinggeling,10.1002/ece3.10228,Table 1,109°34′12″E,19°02′03″N,109.570000,19.034167,100,primary_literature_text,"Em:Et:El = 9:1:0 among 10 dissected reared moths",false,true
+KIM001,KIM_W05_DZ,Danzhou,10.1002/ece3.10228,Table 1,109°31′13″E,19°26′01″N,109.520278,19.433611,100,primary_literature_text,"Em:Et:El = 11:0:0 among 11 dissected reared moths",false,true
+KIM001,KIM_W06_WTS,Wutongshan,10.1002/ece3.10228,Table 1,114°11′32″E,22°35′37″N,114.192222,22.593611,100,primary_literature_text,"Em:Et:El = 10:0:0 among 10 dissected reared moths",false,true
+KIM001,KIM_W07_ZQ,Zhaoqing,10.1002/ece3.10228,Table 1,112°29′10″E,23°06′32″N,112.486111,23.108889,100,primary_literature_text,"Em:Et:El = 3:3:6 among 12 dissected reared moths",false,true
+KIM001,KIM_W08_BS,Baise,10.1002/ece3.10228,Table 1,106°33′54″E,23°53′03″N,106.565000,23.884167,100,primary_literature_text,"Em:Et:El = 9:0:1 among 10 dissected reared moths",false,true
+KIM001,KIM_W09_PX,Pingxiang,10.1002/ece3.10228,Table 1,106°55′45″E,22°03′04″N,106.929167,22.051111,100,primary_literature_text,"Em:Et:El = 10:0:0 among 10 dissected reared moths",false,true
+KIM001,KIM_W10_ZB,Zhubu,10.1002/ece3.10228,Table 1,106°58′53″E,22°34′39″N,106.981389,22.577500,100,primary_literature_text,"Em:Et:El = 10:0:0 among 10 dissected reared moths",false,true
+KIM001,KIM_W11_NL,Naliang,10.1002/ece3.10228,Table 1,107°52′53″E,21°40′36″N,107.881389,21.676667,100,primary_literature_text,"Em:Et:El = 7:5:0 among 12 dissected reared moths",false,true
+KIM001,KIM_W12_NS,Nasuo,10.1002/ece3.10228,Table 1,108°06′31″E,21°45′02″N,108.108611,21.750556,100,primary_literature_text,"Em:Et:El = 5:3:0 among 8 dissected reared moths",false,true
+KIM001,KIM_W13_BN,Xishuangbanna,10.1002/ece3.10228,Table 1,101°15′12″E,21°55′50″N,101.253333,21.930556,100,primary_literature_text,"Em:Et:El = 9:2:0 among 11 dissected reared moths",false,true

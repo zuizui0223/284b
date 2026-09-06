@@ -1,0 +1,41 @@
+{
+  "status": "predeclared_not_executed",
+  "contract_version": "product_b_v5_negative_controls_v0.1",
+  "purpose": "make obligate-pair nesting interpretable relative to sampling- and taxonomy-matched non-obligate structure rather than raw co-distribution",
+  "matched_non_obligate_pairs": {
+    "candidate_pair_requirements": [
+      "both candidate taxa differ from the focal obligate taxa",
+      "candidate x is in the same family as focal x",
+      "candidate y is in the same family as focal y",
+      "independent literature/interaction screen contains no declared obligate association between candidate x and candidate y",
+      "sampling summaries use the identical frozen occurrence preprocessing contract"
+    ],
+    "sampling_calipers_max_factor": {
+      "independent_records_per_corresponding_partner": 2.0,
+      "unique_10km_cells_per_corresponding_partner": 2.0,
+      "effective_cells_per_corresponding_partner": 2.0,
+      "occupied_cell_centroid_convex_hull_area_per_corresponding_partner": 2.0
+    },
+    "spatial_extent_definition": "convex hull area in square kilometres of retained occupied EPSG:6933 10-km cell centroids; fewer than 3 non-collinear centroids is not matchable",
+    "selection_rule": "filter by every categorical requirement and every caliper, then sort lexicographically by maximum absolute log2 record deviation, maximum absolute log2 unique-cell deviation, maximum absolute log2 effective-cell deviation, maximum absolute log2 extent deviation, then pair_id",
+    "minimum_controls_required": 5,
+    "maximum_controls_retained": 20,
+    "insufficient_control_action": "unresolved_controls; do not widen family strata or relax calipers after summaries are opened"
+  },
+  "shuffled_partner_null": {
+    "replacement_side": "dependent_y",
+    "candidate_requirements": [
+      "replacement taxon differs from focal y",
+      "replacement is in the same family as focal y",
+      "independent interaction screen contains no declared obligate association between focal x and replacement y",
+      "replacement y passes the same factor-2 sampling calipers against focal y"
+    ],
+    "minimum_distinct_replacements": 5,
+    "repetitions": 100,
+    "seed_rule": "uint32(first_4_bytes(SHA256('product_b_v5_negative_controls_v0.1|shuffle|' + zero_based_iteration)))",
+    "selection_from_sorted_eligible_pool": "seed modulo pool size",
+    "insufficient_replacement_action": "unresolved_controls; do not broaden taxonomy or calipers after summaries are opened"
+  },
+  "no_weighted_matching_score": true,
+  "occurrence_or_invariant_outcomes_used_to_choose_contract": false
+}

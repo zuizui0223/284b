@@ -1,0 +1,26 @@
+{
+  "review_version": "product_b_v7_3_neic001_host_manual_taxonomy_review_v0.1",
+  "pair_id": "NEIC001",
+  "partner": "x",
+  "requested_biological_name": "Eichhornia crassipes",
+  "predeclared_accepted_name": "Pontederia crassipes",
+  "requested_rank": "SPECIES",
+  "requested_kingdom": "Plantae",
+  "external_nomenclatural_evidence": {
+    "authority": "Kew Plants of the World Online",
+    "checked_year": 2026,
+    "relationship": "homotypic_synonym",
+    "statement": "Eichhornia crassipes (Mart.) Solms is a homotypic synonym of accepted Pontederia crassipes Mart."
+  },
+  "required_current_gbif_conditions": [
+    "EXACT species match to requested biological name",
+    "matched nonaccepted usage directly identifies one accepted species usage",
+    "accepted usage canonical name equals predeclared Pontederia crassipes",
+    "direct GBIF usage page for synonym points to the same accepted key",
+    "direct accepted usage page is species rank and ACCEPTED"
+  ],
+  "occurrence_information_used_to_choose_accepted_name": false,
+  "snapshot_taxonomy_identity_rows_allowed": false,
+  "snapshot_occurrence_rows_allowed": false,
+  "downstream_authorization_on_review_failure": false
+}

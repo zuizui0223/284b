@@ -1,0 +1,148 @@
+name: same-target-successor-layer1-fit
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_successor_model_fit_trigger_v0_1.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      indices: ${{ steps.matrix.outputs.indices }}
+      taxon_count: ${{ steps.matrix.outputs.taxon_count }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify frozen successor model-fit boundary
+        id: matrix
+        run: |
+          python -m py_compile scripts/run_same_target_successor_layer1_fit_taxon.py scripts/aggregate_same_target_successor_layer1_fit.py
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          c=json.load(open('config/product_b_same_target_successor_model_fit_contract_v0_1.json'))
+          s=json.load(open('results/product_b_same_target_successor_source_mode_sampling_v0_1.json'))
+          r=json.load(open('results/product_b_same_target_successor_target_footprint_receipt_v0_1.json'))
+          base=json.load(open('config/product_b_same_target_source_model_fit_contract_v0_1.json'))
+          assert s['model_fit_authorized'] is True
+          n=int(s['source_mode_sampling_passed'])
+          assert n >= int(c['minimum_taxa_required_before_fit']) == 30
+          assert c['fit_all_sampling_passed_taxa'] is True
+          assert c['historical_specieskeys_must_be_unioned_per_taxon'] is True
+          assert c['historical_key_subset_selection_forbidden'] is True
+          assert c['target_group_background_excludes_all_72_frozen_successor_candidates'] is True
+          assert r['excluded_focal_taxa_count']==72
+          assert r['failed_candidates_returned_to_background'] is False
+          assert r['current_layer1_paired_outcomes_read'] is False
+          assert r['successor_pairing_outcomes_read'] is False
+          assert base['paired_discordance_access_allowed_during_fit'] is False
+          assert base['process_knockout_access_allowed_during_fit'] is False
+          print('indices='+json.dumps(list(range(n)), separators=(',',':')))
+          print('taxon_count='+str(n))
+          PY
+
+  fit-taxa:
+    needs: prepare
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        taxon_index: ${{ fromJson(needs.prepare.outputs.indices) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned Product-A implementation
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check --quiet -e './sdmr[cloud,parquet,geo]'
+          python -m pip install --disable-pip-version-check --quiet 'pyarrow==21.0.0' joblib
+      - name: Download frozen 72-excluded non-focal target-group artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN_ID=$(python - <<'PY'
+          import json
+          print(json.load(open('results/product_b_same_target_successor_target_footprint_receipt_v0_1.json'))['workflow_run_id'])
+          PY
+          )
+          mkdir -p target_source
+          gh run download "$RUN_ID" -R zuizui0223/284b -n product-b-successor-same-target-target-footprint-2026-08-01 -D target_source
+          test -f target_source/target_group.parquet
+          python - <<'PY'
+          import hashlib,json
+          expected=json.load(open('results/product_b_same_target_successor_target_footprint_receipt_v0_1.json'))['target_sha256']
+          observed=hashlib.sha256(open('target_source/target_group.parquet','rb').read()).hexdigest()
+          assert observed==expected,(observed,expected)
+          PY
+      - name: Fit independent successor source answers and seal predictions
+        env:
+          PYTHONPATH: .
+          TAXON_INDEX: ${{ matrix.taxon_index }}
+          TARGET_GROUP_PATH: target_source/target_group.parquet
+          CHELSA_MANIFEST: sdmr/configs/chelsa_v2_1_plant_candidates.csv
+          OUTPUT_DIR: artifacts/successor_layer1_fit_taxon_${{ matrix.taxon_index }}
+          SDMR_RASTER_LAYER_JOBS: "4"
+        run: python scripts/run_same_target_successor_layer1_fit_taxon.py
+      - name: Upload sealed successor taxon fit artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-layer1-fit-taxon-${{ matrix.taxon_index }}
+          path: artifacts/successor_layer1_fit_taxon_${{ matrix.taxon_index }}/
+          if-no-files-found: error
+          retention-days: 90
+
+  aggregate:
+    needs: fit-taxa
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: product-b-successor-layer1-fit-taxon-*
+          path: fit_artifacts
+      - name: Aggregate successor sealed-fit inventory without pairing predictions
+        env:
+          PYTHONPATH: .
+        run: |
+          python scripts/aggregate_same_target_successor_layer1_fit.py --input-root fit_artifacts --output results/product_b_same_target_successor_layer1_fit_v0_1.json
+      - name: Upload successor aggregate fit audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-layer1-fit-audit
+          path: results/product_b_same_target_successor_layer1_fit_v0_1.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit successor aggregate fit audit only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_successor_layer1_fit_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No successor aggregate fit audit change to commit"
+          else
+            git commit -m "Record successor sealed Layer-1 fit audit"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi

@@ -1,0 +1,26 @@
+{
+  "result_version": "product_b_v7_1_jos001_control_taxonomy_v0.1",
+  "pair_id": "JOS001",
+  "engineering_only": true,
+  "closed_pool_size": 8,
+  "resolved_candidate_count": 7,
+  "minimum_required": 5,
+  "pool_state": "control_taxonomy_preflight_passed",
+  "resolved_controls": [
+    {"control_taxon_id": "JOS_C01", "scientific_name": "Yucca baccata", "taxon_key": "2775788", "confidence": 100},
+    {"control_taxon_id": "JOS_C02", "scientific_name": "Yucca schidigera", "taxon_key": "2775710", "confidence": 99},
+    {"control_taxon_id": "JOS_C03", "scientific_name": "Yucca elata", "taxon_key": "2775775", "confidence": 100},
+    {"control_taxon_id": "JOS_C04", "scientific_name": "Yucca glauca", "taxon_key": "2775497", "confidence": 99},
+    {"control_taxon_id": "JOS_C05", "scientific_name": "Yucca filamentosa", "taxon_key": "2775561", "confidence": 99},
+    {"control_taxon_id": "JOS_C07", "scientific_name": "Yucca rostrata", "taxon_key": "2775576", "confidence": 99},
+    {"control_taxon_id": "JOS_C08", "scientific_name": "Yucca harrimaniae", "taxon_key": "2775580", "confidence": 100}
+  ],
+  "excluded_controls": [
+    {"control_taxon_id": "JOS_C06", "scientific_name": "Yucca torreyi", "state": "excluded_unresolved_taxonomy", "reason": "legacy GBIF usage status inadmissible under direct-exact-only control contract"}
+  ],
+  "synonym_rescues_performed": 0,
+  "source_artifact_id": 9934192738,
+  "source_artifact_digest": "sha256:dcb22b32c1bb8c759c8b9eeaf1ad9662f6acdeda40d39abe066eedc714a08032",
+  "occurrence_reads_performed": false,
+  "invariant_reads_performed": false
+}

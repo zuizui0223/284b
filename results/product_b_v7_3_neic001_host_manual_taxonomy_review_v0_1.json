@@ -1,0 +1,41 @@
+{
+  "result_version": "product_b_v7_3_neic001_host_manual_taxonomy_review_v0.1",
+  "pair_id": "NEIC001",
+  "partner": "x",
+  "requested_name": "Eichhornia crassipes",
+  "predeclared_accepted_name": "Pontederia crassipes",
+  "state": "resolved_manual_direct_homotypic_synonym_bridge",
+  "workflow_run_id": 33952618918,
+  "artifact_id": 9965325895,
+  "artifact_sha256": "9629da651cee4c810431fd63270c598d0d049b27df7db2469dc6c9ef2648e383",
+  "match_type": "EXACT",
+  "confidence": 100,
+  "matched_usage": {
+    "key": "2765940",
+    "canonical_name": "Eichhornia crassipes",
+    "rank": "SPECIES",
+    "status": "SYNONYM"
+  },
+  "matched_direct_usage": {
+    "key": "2765940",
+    "canonical_name": "Eichhornia crassipes",
+    "rank": "SPECIES",
+    "status": "HOMOTYPIC_SYNONYM",
+    "accepted_key": "2765942"
+  },
+  "accepted_direct_usage": {
+    "key": "2765942",
+    "canonical_name": "Pontederia crassipes",
+    "scientific_name": "Pontederia crassipes Mart.",
+    "rank": "SPECIES",
+    "status": "ACCEPTED"
+  },
+  "relation_by_direct_accepted_key": true,
+  "external_nomenclatural_relation": "Kew POWO 2026 homotypic synonym",
+  "reasons": [],
+  "snapshot_taxonomy_identity_rows_opened": false,
+  "snapshot_occurrence_rows_opened": false,
+  "snapshot_occurrence_counts_opened": false,
+  "live_occurrence_search_used": false,
+  "downstream_use_allowed": true
+}

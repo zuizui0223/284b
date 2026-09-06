@@ -1,0 +1,28 @@
+{
+  "status": "design_only_not_frozen_not_authorized",
+  "minimum_admissible_procedure_members": 2,
+  "minimum_distinct_predictor_signatures": 2,
+  "require_every_declared_process_knockout_admissible": true,
+  "forbidden_preflight_reads_or_outputs": [
+    "directed_containment",
+    "schoener_d_pair",
+    "centroid_separation_pair",
+    "breadth_ratio_pair",
+    "matched_control_contrast",
+    "shuffled_control_contrast",
+    "per_process_knockout_outcome",
+    "sealed_environmental_value",
+    "partner_specific_invariant_state",
+    "downstream_invariant_promotion_or_ranking"
+  ],
+  "allowed_response_blind_structure": [
+    "field_names",
+    "procedure_ids",
+    "strategy_ids",
+    "candidate_universe_ids",
+    "predictor_names",
+    "selected_predictor_signatures",
+    "declared_process_membership",
+    "knockout_target_names"
+  ]
+}

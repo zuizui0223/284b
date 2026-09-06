@@ -1,0 +1,14 @@
+{
+  "authorization": "scan_frozen_snapshot_taxonomy_for_all_current_resolved_successor_taxa",
+  "current_taxonomy_result": "results/product_b_same_target_successor_current_taxonomy_v0_1.json",
+  "current_taxonomy_resolved": 72,
+  "frozen_minimum_taxa": 30,
+  "snapshot_date": "2026-08-01",
+  "projected_columns": ["species", "specieskey", "taxonkey", "scientificname", "taxonrank"],
+  "taxonrank_is_exclusion_gate": false,
+  "matched_row_counts_authorized": false,
+  "occurrence_coordinates_authorized": false,
+  "occurrence_identifiers_authorized": false,
+  "model_fit_authorized": false,
+  "paired_discordance_authorized": false
+}

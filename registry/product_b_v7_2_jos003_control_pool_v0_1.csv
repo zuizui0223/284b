@@ -1,0 +1,9 @@
+control_id,scientific_name,family,selection_basis,interaction_screen,taxonomy_state,snapshot_occurrence_reads_performed
+JOS3_C01,Yucca baccata,Asparagaceae,"western Yucca; outside the documented southeastern T. cassandra range; predeclared before snapshot occurrence access",no_declared_T_cassandra_host,false,false
+JOS3_C02,Yucca schidigera,Asparagaceae,"western Yucca; outside the documented southeastern T. cassandra range; predeclared before snapshot occurrence access",no_declared_T_cassandra_host,false,false
+JOS3_C03,Yucca elata,Asparagaceae,"southwestern Yucca; outside the documented southeastern T. cassandra range; predeclared before snapshot occurrence access",no_declared_T_cassandra_host,false,false
+JOS3_C04,Yucca glauca,Asparagaceae,"central/western Yucca; outside the documented southeastern T. cassandra range; predeclared before snapshot occurrence access",no_declared_T_cassandra_host,false,false
+JOS3_C05,Yucca rostrata,Asparagaceae,"southwestern Yucca; outside the documented southeastern T. cassandra range; predeclared before snapshot occurrence access",no_declared_T_cassandra_host,false,false
+JOS3_C06,Yucca harrimaniae,Asparagaceae,"intermountain Yucca; outside the documented southeastern T. cassandra range; predeclared before snapshot occurrence access",no_declared_T_cassandra_host,false,false
+JOS3_C07,Yucca treculeana,Asparagaceae,"southwestern Yucca; outside the documented southeastern T. cassandra range; predeclared before snapshot occurrence access",no_declared_T_cassandra_host,false,false
+JOS3_C08,Yucca faxoniana,Asparagaceae,"southwestern Yucca; outside the documented southeastern T. cassandra range; predeclared before snapshot occurrence access",no_declared_T_cassandra_host,false,false

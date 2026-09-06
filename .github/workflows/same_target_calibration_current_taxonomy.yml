@@ -1,0 +1,50 @@
+name: same-target-calibration-current-taxonomy
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - .github/workflows/same_target_calibration_current_taxonomy.yml
+      - scripts/run_same_target_calibration_current_taxonomy.py
+      - registry/product_b_same_target_source_calibration_taxa_v0_1.csv
+
+permissions:
+  contents: write
+
+jobs:
+  current-taxonomy-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: product-b-v5-obligate-invariant
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run repository tests before taxonomy access
+        run: python -m unittest discover -s tests -v
+      - name: Resolve frozen 36-taxon panel against current GBIF taxonomy
+        env:
+          PYTHONPATH: .
+        run: python scripts/run_same_target_calibration_current_taxonomy.py
+      - name: Commit taxonomy-only audit result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_source_current_taxonomy_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No taxonomy result change to commit"
+          else
+            git commit -m "Record calibration panel current taxonomy audit"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi
+      - name: Upload taxonomy audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-same-target-current-taxonomy
+          path: results/product_b_same_target_source_current_taxonomy_v0_1.json
+          if-no-files-found: error
+          retention-days: 90

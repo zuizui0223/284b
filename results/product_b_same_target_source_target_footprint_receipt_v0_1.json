@@ -1,0 +1,22 @@
+{
+  "artifact_name": "product-b-same-target-target-footprint-2026-08-01",
+  "candidate_model_fitting_performed": false,
+  "citation_sha256": "022a524b59c4c037b28f252c08294e0f22c5eb7b3bce5c52a0a5fc6016f17050",
+  "environmental_values_read": false,
+  "excluded_focal_taxa_count": 12,
+  "execution_sha": "ece3db911514bc98d4c70ffde705afeaeeb6f765",
+  "focal_registry_sha256": "914e2d737b447d23dde93640ddb0a07062a5ec2651fd8eb623331ccc069d124c",
+  "grid_cell_degrees": 0.05,
+  "paired_discordance_opened": false,
+  "parallel_chunk_count": 16,
+  "process_knockout_opened": false,
+  "result_version": "product_b_same_target_source_target_footprint_v0.1",
+  "sampling_mode": "global_nonfocal_one_per_grid_cell_sampling_footprint",
+  "sdmr_git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+  "snapshot_date": "2026-08-01",
+  "snapshot_doi": "10.15468/dl.fs3btq",
+  "snapshot_shard_count": 9705,
+  "source_independent_of_cross_source_predictions": true,
+  "target_sha256": "28f86394c6903d9d2fcb7c614251e51ec9958adf7af056861280c11dfa771e8c",
+  "workflow_run_id": 34020501961
+}

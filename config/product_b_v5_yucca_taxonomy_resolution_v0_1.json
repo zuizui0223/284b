@@ -1,0 +1,43 @@
+{
+  "status": "response_blind_taxonomy_only_not_occurrence",
+  "contract_version": "product_b_v5_yucca_taxonomy_resolution_v0.1",
+  "checklist_key": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+  "match_endpoint": "https://api.gbif.org/v2/species/match",
+  "direct_usage_endpoint_template": "https://api.gbif.org/v1/species/{usage_key}",
+  "acceptance_rule": "EXACT species-rank match; canonical name equals literature name; not synonym; direct species usage page key/name/rank agrees; any pre-existing key hint must agree",
+  "pairs": [
+    {
+      "pair_id": "OPM_YUC_001",
+      "x": {
+        "scientific_name": "Yucca elata",
+        "kingdom": "Plantae",
+        "expected_key_hint": "2775775"
+      },
+      "y": {
+        "scientific_name": "Tegeticula elatella",
+        "kingdom": "Animalia",
+        "expected_key_hint": ""
+      }
+    },
+    {
+      "pair_id": "OPM_YUC_002",
+      "x": {
+        "scientific_name": "Yucca schidigera",
+        "kingdom": "Plantae",
+        "expected_key_hint": "2775710"
+      },
+      "y": {
+        "scientific_name": "Tegeticula mojavella",
+        "kingdom": "Animalia",
+        "expected_key_hint": "9143017"
+      }
+    }
+  ],
+  "forbidden_inputs": [
+    "occurrence counts",
+    "occurrence maps",
+    "occurrence availability",
+    "sampling gate outcomes",
+    "environmental values"
+  ]
+}

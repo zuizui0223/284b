@@ -1,0 +1,62 @@
+{
+  "contract_version": "product_b_v7_literature_witness_v0.1",
+  "direction": "Y_requires_X",
+  "host_sampling_floor": {
+    "minimum_independent_records": 50,
+    "minimum_unique_10km_cells": 30,
+    "minimum_effective_10km_cells": 10.0
+  },
+  "literature_witness_floor": {
+    "minimum_independent_witnesses": 5,
+    "minimum_unique_10km_cells": 3,
+    "maximum_coordinate_uncertainty_m": 10000
+  },
+  "frame_contract": {
+    "witness_coordinates_may_define_frame_geometry": false,
+    "occurrence_availability_may_define_frame_geometry": false,
+    "allowed_source_types": [
+      "preexisting_admin_boundary",
+      "protected_area_boundary",
+      "ecoregion_boundary",
+      "primary_literature_study_region_geometry"
+    ],
+    "required_fields": [
+      "frame_id",
+      "source_type",
+      "source_authority",
+      "source_version",
+      "geometry_type",
+      "geometry_value"
+    ]
+  },
+  "control_contract": {
+    "minimum_taxonomy_and_sampling_adequate_replacement_hosts": 5,
+    "shuffled_draw_count": 100,
+    "lower_quantile": 0.05,
+    "upper_quantile": 0.95,
+    "maximum_host_support_fraction": 0.80
+  },
+  "firewalled_pair_ids": [
+    "OPM_FIG_001",
+    "OPM_YUC_001",
+    "OPM_YUC_002",
+    "OPM_GLO_001",
+    "OPM_GLO_002",
+    "OPM_GLO_003",
+    "OPM_GLO_004",
+    "SEN001",
+    "EPV001",
+    "HTR001"
+  ],
+  "forbidden_preflight_reads_or_outputs": [
+    "GBIF_or_other_occurrence_counts_for_candidate_selection",
+    "recovered_host_support_values",
+    "directed_witness_containment",
+    "shuffled_host_containments",
+    "host_support_fraction",
+    "control_relative_contrast",
+    "process_knockout_outcomes",
+    "sealed_environmental_values"
+  ],
+  "nonretroactivity": "No v5/v6 admitted pair may become a v7 confirmatory pair. No opened v5/v6 scope, threshold, taxon key, control pool or endpoint may be retuned or rescued."
+}

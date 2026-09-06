@@ -1,0 +1,33 @@
+{
+  "contract_version": "product_b_same_target_fresh_target_footprint_v0.1",
+  "purpose": "freeze_source_independent_target_group_background_before_fresh_sampling_model_or_pairing_outcomes",
+  "snapshot_date": "2026-08-01",
+  "snapshot_doi": "10.15468/dl.fs3btq",
+  "sdmr_repository": "zuizui0223/sdmr",
+  "sdmr_git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+  "focal_registry": {
+    "path": "registry/product_b_same_target_fresh_calibration_candidates_v0_1.csv",
+    "git_blob_sha": "fcc4a1190cb3188e6e37cc0e35281a869400e850",
+    "taxon_count": 36,
+    "exclude_all_candidates_regardless_of_future_taxonomy_sampling_or_model_state": true
+  },
+  "sampling_mode": "global_nonfocal_one_per_grid_cell_sampling_footprint",
+  "grid_cell_degrees": 0.05,
+  "snapshot_shard_count": 9705,
+  "parallel_chunk_count": 16,
+  "output_artifact_name": "product-b-fresh-same-target-target-footprint-2026-08-01",
+  "receipt_path": "results/product_b_same_target_fresh_target_footprint_receipt_v0_1.json",
+  "source_independent_of_cross_source_predictions": true,
+  "environmental_values_read": false,
+  "candidate_model_fitting_performed": false,
+  "current_layer1_paired_outcomes_read": false,
+  "fresh_pairing_outcomes_read": false,
+  "process_intervention_outcomes_read": false,
+  "post_outcome_focal_exclusion_change_forbidden": true,
+  "forbidden": [
+    "return_failed_fresh_candidates_to_target_group_after_future_gates",
+    "select_background_rows_using_source_mode_labels",
+    "select_background_rows_using_model_predictions_or_paired_discordance",
+    "change_grid_density_after_future_outcomes"
+  ]
+}

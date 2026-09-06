@@ -1,0 +1,14 @@
+{
+  "authorization": "resolve_all_72_successor_candidates_in_current_gbif_taxonomy",
+  "successor_contract": "config/product_b_same_target_successor_calibration_contract_v0_1.json",
+  "candidate_registry": "registry/product_b_same_target_successor_calibration_candidates_v0_1.csv",
+  "candidate_count": 72,
+  "prior_consumed_exact_names": 84,
+  "required_exact_name_overlap": 0,
+  "occurrence_access_authorized": false,
+  "snapshot_taxonomy_access_authorized": false,
+  "paired_discordance_access_authorized": false,
+  "process_intervention_access_authorized": false,
+  "taxa_replaced": false,
+  "scientific_thresholds_changed": false
+}

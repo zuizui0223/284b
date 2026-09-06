@@ -1,0 +1,109 @@
+name: same-target-successor-mode-sampling-grouped
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_successor_mode_sampling_grouped_trigger_v0_1.json
+
+permissions:
+  contents: write
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify grouped transport is scientifically unchanged
+        run: |
+          python -m py_compile scripts/run_same_target_successor_mode_sampling_grouped_shard.py scripts/aggregate_same_target_successor_mode_sampling_grouped.py
+          python - <<'PY'
+          import json
+          c=json.load(open('config/product_b_same_target_successor_calibration_contract_v0_1.json'))
+          r=json.load(open('results/product_b_same_target_successor_snapshot_concept_closure_v0_1.json'))
+          t=json.load(open('config/product_b_same_target_successor_mode_sampling_grouped_trigger_v0_1.json'))
+          assert t['authorization']=='transport_equivalent_grouped_scan_only'
+          assert int(t['canonical_sampling_run_id'])==34026548240
+          assert t['canonical_result_may_not_be_silently_overwritten'] is True
+          assert t['sampling_thresholds_changed'] is False
+          assert t['taxon_or_key_selection_changed'] is False
+          assert r['occurrence_sampling_authorized'] is True
+          assert r['concept_closure_passed_taxa']==48
+          assert r['historical_key_subset_rescue_used'] is False
+          assert c['source_mode_sampling']['minimum_independent_records_per_mode']==50
+          assert c['source_mode_sampling']['minimum_unique_10km_cells_per_mode']==30
+          assert c['source_mode_sampling']['minimum_effective_cells_per_mode']==10.0
+          PY
+
+  sampling-shards:
+    needs: preflight
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        shard: [0,1,2,3,4,5,6,7,8,9,10,11]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen snapshot scanner
+        run: python -m pip install --disable-pip-version-check --quiet 'pyarrow==21.0.0'
+      - name: Scan union of four frozen taxon keysets once
+        env:
+          PYTHONPATH: .
+          SHARD_INDEX: ${{ matrix.shard }}
+          SHARD_COUNT: "12"
+        run: python scripts/run_same_target_successor_mode_sampling_grouped_shard.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-source-mode-sampling-grouped-shard-${{ matrix.shard }}
+          path: artifacts/product_b_same_target_successor_source_mode_sampling_grouped_shard_${{ matrix.shard }}.json
+          if-no-files-found: error
+          retention-days: 90
+
+  aggregate:
+    needs: sampling-shards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: product-b-successor-source-mode-sampling-grouped-shard-*
+          merge-multiple: true
+          path: artifacts/successor_grouped_mode_sampling_shards
+      - name: Aggregate grouped sanitized summaries without canonical promotion
+        run: python scripts/aggregate_same_target_successor_mode_sampling_grouped.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-source-mode-sampling-grouped
+          path: results/product_b_same_target_successor_source_mode_sampling_grouped_v0_1.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit grouped transport audit only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_successor_source_mode_sampling_grouped_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No grouped sampling audit change"
+          else
+            git commit -m "Record grouped successor sampling transport audit"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi

@@ -1,0 +1,129 @@
+{
+  "contract_version": "product_b_smil001_event_data_opening_v0.2",
+  "pair_id": "SMIL001",
+  "purpose": "retrospective_relation_space_positive_control_and_schema_engineering_only",
+  "confirmatory_biological_crosscheck_authorized": false,
+  "reason_confirmatory_blocked": "the_2026_Current_Biology_biological_outcomes_were_known_before_this_event_data_contract_was_frozen",
+  "publication_sources": {
+    "prior_natural_history_doi": "10.3897/zookeys.1234.146453",
+    "later_experimental_doi": "10.1016/j.cub.2026.03.002",
+    "declared_public_data_doi": "10.6084/m9.figshare.30563942"
+  },
+  "source_package_bytes_opened_under_this_contract": false,
+  "source_package_file_inventory_opened_under_this_contract": false,
+  "article_level_methods_already_known": true,
+  "article_level_frozen_method_facts": {
+    "fieldwork_islands": [
+      "Amami-Oshima",
+      "Tokunoshima",
+      "Okinawa",
+      "Ishigaki",
+      "Yonaguni"
+    ],
+    "fieldwork_periods": [
+      "late_May_to_late_September_2024",
+      "early_July_to_late_August_2025"
+    ],
+    "direct_behavioral_observation_islands": [
+      "Amami-Oshima",
+      "Okinawa",
+      "Ishigaki"
+    ],
+    "direct_behavioral_observation_hours_approx": {
+      "Amami-Oshima": 75,
+      "Okinawa": 15,
+      "Ishigaki": 10
+    },
+    "Tokunoshima_and_Yonaguni_behavioral_replication": "not_available;_association_confirmed_by_flower_collection_and_DNA_barcoding",
+    "visit_level_recorded_variables_reported_in_methods": [
+      "approach_behavior",
+      "landing",
+      "ovipositor_insertion_duration_per_flower",
+      "total_visit_duration_when_continuously_observed",
+      "number_of_flowers_receiving_ovipositor_insertions_per_visit"
+    ],
+    "breeding_system_site": "Amami-Oshima",
+    "breeding_system_year": 2024,
+    "breeding_system_unit": "female_inflorescence",
+    "breeding_system_treatments": [
+      "fine_mesh_insect_exclusion",
+      "hand_cross_pollination",
+      "coarse_mesh_selective_exclusion_allowing_Dasineura",
+      "open_pollination"
+    ],
+    "breeding_system_outcomes_reported_in_methods": [
+      "fruit_set_per_inflorescence",
+      "seed_number_per_fruit"
+    ],
+    "oviposition_and_breeding_success_islands": [
+      "Amami-Oshima",
+      "Okinawa"
+    ],
+    "oviposition_flower_sexes": [
+      "male",
+      "female"
+    ],
+    "female_flower_larval_survival_reported_as_lower_not_zero": true,
+    "male_flower_identity_is_not_an_absolute_breeding_requirement": true,
+    "field_bioassay_site": "Amami-Oshima",
+    "field_bioassay_period": "early_to_mid_August_2025",
+    "field_bioassay_primary_window": "05:48-08:43"
+  },
+  "predeclared_schema_questions_before_opening_files": [
+    "does_the_public_package_preserve_island_or_site_identity_for_pollinator_observations",
+    "does_it_preserve_date_and_clock_time_or_an_equivalent_flowering_window_key",
+    "does_it_preserve_host_sex_and_flower_or_inflorescence_identity",
+    "does_it_preserve_visit_or_ovipositor_insertion_events_at_a_unit_that_can_be_mapped_to_reproductive_opportunity",
+    "does_it_preserve_breeding_treatment_and_inflorescence_level_fruit_set",
+    "does_it_preserve_oviposition_egg_larva_or_emergence_outcomes_with_flower_sex_and_island",
+    "does_it_contain_coordinates_or_only_island_level_site_labels",
+    "can_any_two_role_answers_be_joined_on_a_relation_key_without_using_the_outcome_to_choose_the_join"
+  ],
+  "prospective_relation_space_candidates_for_engineering": [
+    {
+      "relation_id": "plant_reproduction_requires_midge",
+      "preferred_keys_if_available": [
+        "island_or_site",
+        "female_inflorescence_or_plant",
+        "flowering_date_or_window"
+      ],
+      "plant_event": "fruit_set_or_reproductive_success",
+      "midge_event": "effective_visit_or_pollination_service",
+      "minimum_join_rule": "keys_must_be_declared_from_source_schema_before_any_event_value_is_used"
+    },
+    {
+      "relation_id": "midge_breeding_requires_host_floral_resource",
+      "preferred_keys_if_available": [
+        "island_or_site",
+        "collection_or_oviposition_date_window"
+      ],
+      "required_stratifier_if_available": "flower_sex",
+      "host_event": "Smilax_insularis_flower_resource_available",
+      "midge_event": "egg_larva_or_emergence_breeding_success",
+      "male_vs_female_role": "secondary_soft_performance_stratum_not_hard_requirement",
+      "minimum_join_rule": "keys_must_be_declared_from_source_schema_before_any_breeding_outcome_is_used"
+    }
+  ],
+  "allowed_first_opening": [
+    "figshare_metadata",
+    "file_names",
+    "file_types",
+    "column_names_or_schema_only_if_available_without_reading_event_values"
+  ],
+  "event_values_may_be_opened_only_after_schema_receipt_is_frozen": true,
+  "raw_event_values_may_not_upgrade_claim_strength": true,
+  "retrospective_positive_control_may_test": [
+    "whether_role_specific_answers_can_be_constructed_from_real_event_data",
+    "whether_a_frozen_relation_space_adapter_is_executable",
+    "whether_missing_site_time_keys_create_an_observability_stop",
+    "whether_hard_event_semantics_differ_from_raw_occurrence_semantics",
+    "whether_male_vs_female_flower_performance_can_be_preserved_as_a_soft_stratum_without_becoming_a_false_hard_invariant"
+  ],
+  "retrospective_positive_control_may_not_test": [
+    "prospective_confirmation_of_the_known_2026_mutualism_result",
+    "general_cross_species_calibration_threshold",
+    "same_target_q95_transfer",
+    "full_range_Taiwan_mutual_obligacy",
+    "absolute_male_flower_requirement_for_midge_breeding"
+  ]
+}

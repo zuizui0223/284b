@@ -1,0 +1,23 @@
+{
+  "result_version": "product_b_v6_sen001_control_taxonomy_v0.1",
+  "workflow_run_id": 33833261659,
+  "workflow_head_sha": "f5a12a7741d1f47e4504f45d71d09136efc1eed6",
+  "pair_id": "SEN001",
+  "closed_pool_size": 8,
+  "minimum_required": 5,
+  "resolved_candidate_count": 6,
+  "pool_state": "control_taxonomy_preflight_passed",
+  "occurrence_reads_performed": false,
+  "resolved_controls": [
+    {"control_taxon_id": "SEN_C01", "scientific_name": "Carnegiea gigantea", "taxon_key": "5384200"},
+    {"control_taxon_id": "SEN_C02", "scientific_name": "Stenocereus thurberi", "taxon_key": "3084384"},
+    {"control_taxon_id": "SEN_C03", "scientific_name": "Opuntia engelmannii", "taxon_key": "8014872"},
+    {"control_taxon_id": "SEN_C04", "scientific_name": "Ferocactus wislizeni", "taxon_key": "3084153"},
+    {"control_taxon_id": "SEN_C06", "scientific_name": "Echinocereus engelmannii", "taxon_key": "3084111"},
+    {"control_taxon_id": "SEN_C08", "scientific_name": "Cylindropuntia fulgida", "taxon_key": "7282673"}
+  ],
+  "excluded_without_rescue": [
+    {"control_taxon_id": "SEN_C05", "scientific_name": "Mammillaria grahamii", "reason": "legacy taxonomy usage has inadmissible status; synonym rescue forbidden by control contract"},
+    {"control_taxon_id": "SEN_C07", "scientific_name": "Cylindropuntia bigelovii", "reason": "legacy taxonomy usage has inadmissible status; synonym rescue forbidden by control contract"}
+  ]
+}

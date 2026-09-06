@@ -1,0 +1,32 @@
+{
+  "result_version": "product_b_v7_3_neic001_current_taxonomy_v0.1",
+  "pair_id": "NEIC001",
+  "status": "unresolved_current_taxonomy_host_synonym_bridge_pending",
+  "workflow_run_id": 33950339579,
+  "artifact_id": 9964668429,
+  "artifact_sha256": "dafa216b5298764a3b999ab767ccd3152188154809dc3233cbc03452a490133b",
+  "taxonomy_system": "GBIF current default taxonomy; no legacy checklistKey",
+  "resolved_partner": {
+    "partner": "y",
+    "requested_name": "Neochetina eichhorniae",
+    "usage_key": "4290716",
+    "canonical_name": "Neochetina eichhorniae",
+    "rank": "SPECIES",
+    "status": "ACCEPTED",
+    "match_type": "EXACT",
+    "confidence": 100
+  },
+  "unresolved_partner": {
+    "partner": "x",
+    "requested_name": "Eichhornia crassipes",
+    "reason": "current taxonomy usage was not ACCEPTED; direct synonym/accepted-usage bridge required before any downstream taxonomy or snapshot access"
+  },
+  "external_nomenclatural_context": "Kew POWO 2026 treats Eichhornia crassipes as a homotypic synonym of accepted Pontederia crassipes; this context does not itself authorize the GBIF bridge, which must be verified directly in the current GBIF taxonomy.",
+  "engineering_only": true,
+  "confirmatory_promotion_allowed": false,
+  "snapshot_taxonomy_identity_rows_opened": false,
+  "snapshot_occurrence_rows_opened": false,
+  "snapshot_occurrence_counts_opened": false,
+  "live_occurrence_search_used": false,
+  "downstream_use_allowed": false
+}

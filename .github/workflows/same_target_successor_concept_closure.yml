@@ -1,0 +1,70 @@
+name: same-target-successor-concept-closure
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_successor_concept_closure_trigger_v0_1.json
+
+permissions:
+  contents: write
+
+jobs:
+  review-and-close:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify successor taxonomy-only closure boundary
+        run: |
+          python -m unittest tests.test_successor_concept_closure -v
+          python -m py_compile scripts/run_same_target_successor_historical_name_review.py scripts/evaluate_same_target_successor_snapshot_concept_closure.py
+          python - <<'PY'
+          import json
+          c=json.load(open('config/product_b_same_target_successor_calibration_contract_v0_1.json'))
+          t=json.load(open('results/product_b_same_target_successor_snapshot_concept_tuples_v0_1.json'))
+          assert t['current_name_review_authorized'] is True
+          assert t['taxa_with_nonempty_snapshot_taxonomy_tuples'] >= c['panel_rule']['minimum_complete_taxa_for_calibration']
+          assert t['taxonrank_used_as_exclusion_gate'] is False
+          assert t['matched_row_counts_persisted'] is False
+          assert t['coordinates_opened'] is False
+          assert t['occurrence_sampling_authorized'] is False
+          assert c['taxonomy_concept_closure']['rank_whitelist_forbidden'] is True
+          assert c['taxonomy_concept_closure']['taxonrank_is_audited_but_is_not_an_exclusion_gate'] is True
+          PY
+      - name: Review every represented historical snapshot name in current taxonomy
+        env:
+          PYTHONPATH: .
+        run: python scripts/run_same_target_successor_historical_name_review.py
+      - name: Apply rank-agnostic all-key species concept closure
+        env:
+          PYTHONPATH: .
+        run: python scripts/evaluate_same_target_successor_snapshot_concept_closure.py
+      - name: Upload taxonomy-only closure artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-concept-closure
+          path: |
+            results/product_b_same_target_successor_historical_name_review_v0_1.json
+            results/product_b_same_target_successor_snapshot_concept_closure_v0_1.json
+            registry/product_b_same_target_successor_snapshot_keysets_v0_1.csv
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit taxonomy-only successor closure audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_successor_historical_name_review_v0_1.json results/product_b_same_target_successor_snapshot_concept_closure_v0_1.json registry/product_b_same_target_successor_snapshot_keysets_v0_1.csv
+          if git diff --cached --quiet; then
+            echo "No successor closure result change to commit"
+          else
+            git commit -m "Record successor taxonomy concept closure"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi

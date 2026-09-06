@@ -1,0 +1,91 @@
+name: same-target-successor-mode-sampling
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_successor_mode_sampling_trigger_v0_1.json
+
+permissions:
+  contents: write
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Verify successor occurrence-opening boundary
+        run: |
+          python -m py_compile scripts/run_same_target_successor_mode_sampling_shard.py scripts/aggregate_same_target_successor_mode_sampling.py
+          python - <<'PY'
+          import json
+          c=json.load(open('config/product_b_same_target_successor_calibration_contract_v0_1.json'))
+          r=json.load(open('results/product_b_same_target_successor_snapshot_concept_closure_v0_1.json'))
+          assert r['occurrence_sampling_authorized'] is True
+          assert r['concept_closure_passed_taxa'] >= c['panel_rule']['minimum_complete_taxa_for_calibration']
+          assert r['taxonrank_used_as_exclusion_gate'] is False
+          assert r['historical_key_subset_rescue_used'] is False
+          assert r['occurrence_counts_opened'] is False and r['coordinates_opened'] is False
+          assert c['source_mode_sampling']['minimum_independent_records_per_mode']==50
+          assert c['source_mode_sampling']['minimum_unique_10km_cells_per_mode']==30
+          assert c['source_mode_sampling']['minimum_effective_cells_per_mode']==10.0
+          PY
+
+  sampling-shards:
+    needs: preflight
+    strategy:
+      fail-fast: false
+      matrix: {shard: [0,1,2,3,4,5]}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install frozen snapshot scanner
+        run: python -m pip install --disable-pip-version-check --quiet 'pyarrow==21.0.0'
+      - name: Open only authorized source-mode occurrence evidence
+        env:
+          PYTHONPATH: .
+          SHARD_INDEX: '${{ matrix.shard }}'
+          SHARD_COUNT: '6'
+        run: python scripts/run_same_target_successor_mode_sampling_shard.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-source-mode-sampling-shard-${{ matrix.shard }}
+          path: artifacts/product_b_same_target_successor_source_mode_sampling_shard_${{ matrix.shard }}.json
+          if-no-files-found: error
+          retention-days: 90
+
+  aggregate:
+    needs: sampling-shards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: product-b-successor-source-mode-sampling-shard-*
+          merge-multiple: true
+          path: artifacts/successor_mode_sampling_shards
+      - name: Aggregate sanitized successor sampling summaries
+        run: python scripts/aggregate_same_target_successor_mode_sampling.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-source-mode-sampling
+          path: results/product_b_same_target_successor_source_mode_sampling_v0_1.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit sanitized successor sampling audit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add results/product_b_same_target_successor_source_mode_sampling_v0_1.json
+          if git diff --cached --quiet; then echo 'No successor sampling result change'; else git commit -m 'Record successor source-mode sampling audit'; git pull --rebase origin product-b-v5-obligate-invariant; git push origin HEAD:product-b-v5-obligate-invariant; fi

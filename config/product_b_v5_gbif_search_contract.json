@@ -1,0 +1,37 @@
+{
+  "status": "predeclared_not_executed",
+  "contract_version": "product_b_v5_gbif_search_v0.1",
+  "api_reference_checked": "2026-09-04",
+  "endpoint": "https://api.gbif.org/v1/occurrence/search",
+  "taxonomy": {
+    "checklistKey": "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+    "taxon_parameter": "taxonKey",
+    "reason": "continue the explicitly frozen legacy GBIF Backbone identifiers under GBIF's backwards-compatible checklistKey support"
+  },
+  "fixed_filters": {
+    "geography_parameter": "geometry",
+    "geography_value_source": "registry/obligate_pair_registry_scope_v0_2.csv",
+    "geometry_wkt_types_permitted_for_current_execution": ["POLYGON"],
+    "geometry_orientation": "anticlockwise_required",
+    "hasCoordinate": true,
+    "occurrenceStatus": "PRESENT"
+  },
+  "not_added_without_new_preoutcome_contract": [
+    "hasGeospatialIssue",
+    "basisOfRecord",
+    "year",
+    "datasetKey",
+    "coordinateUncertaintyInMeters query filter"
+  ],
+  "paging": {
+    "page_size": 300,
+    "maximum_page_size": 300,
+    "hard_offset_plus_limit_ceiling": 100000,
+    "ceiling_action": "stop_unresolved; do_not_switch_to_download_adaptively_after_count_is_opened"
+  },
+  "implementation": "product_b_v5.gbif_search",
+  "network_implementation": "none_committed",
+  "authorization_boundary": "product_b_v5.occurrence_source.execute_guarded_occurrence_read must pass product_b_v5.authorization before any injected transport is called",
+  "occurrence_reads_allowed": false,
+  "execution_authorized": false
+}

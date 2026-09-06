@@ -1,0 +1,24 @@
+{
+  "result_version": "product_b_v6_sen001_taxonomy_auto_v0.1",
+  "workflow_run_id": 33832871064,
+  "workflow_head_sha": "dc455b53270cb14ae33c70a16c146412873d679c",
+  "pair_id": "SEN001",
+  "occurrence_reads_performed": false,
+  "automatic_pair_taxonomy_state": "unresolved_taxonomy",
+  "x": {
+    "requested_name": "Lophocereus schottii",
+    "state": "requires_manual_concept_review",
+    "automatic_error": "taxonomy usage has inadmissible status"
+  },
+  "y": {
+    "requested_name": "Upiga virescens",
+    "state": "resolved_direct_exact",
+    "usage_key": "1881198",
+    "match_type": "EXACT",
+    "rank": "SPECIES",
+    "status": "ACCEPTED",
+    "confidence": 100,
+    "direct_usage_key": "1881198"
+  },
+  "next_allowed_step": "manual nomenclatural concept review only; occurrence access remains forbidden"
+}

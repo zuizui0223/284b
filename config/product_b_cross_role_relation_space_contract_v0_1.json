@@ -1,0 +1,73 @@
+{
+  "contract_version": "product_b_cross_role_relation_space_v0.1",
+  "purpose": "separate_role_specific_answer_construction_from_biological_relation_check",
+  "scope": [
+    "cross_species_relations",
+    "cross_role_relations",
+    "life_stage_relations"
+  ],
+  "same_target_source_calibration_is_separate_controlled_design": true,
+  "same_target_source_calibration_may_require_same_estimator_and_same_M": true,
+  "cross_role_same_estimator_required": false,
+  "cross_role_same_predictor_universe_required": false,
+  "cross_role_same_accessible_area_required": false,
+  "cross_role_same_observation_model_required": false,
+  "cross_role_raw_output_scale_comparison_forbidden": true,
+  "role_specific_estimator_must_be_frozen_before_focal_relation_outcome": true,
+  "each_role_requires_its_own_answer_construction_and_adequacy_gate": true,
+  "relation_space_adapter_must_be_frozen_before_focal_relation_outcome": true,
+  "relation_space_adapter_must_declare": [
+    "common_relation_keys",
+    "biological_event",
+    "answer_a_projection",
+    "answer_b_projection",
+    "spatial_grain",
+    "temporal_grain"
+  ],
+  "paired_statistic_may_open_only_after_both_answers_exist_are_adequate_and_are_relation_space_compatible": true,
+  "missing_or_inadequate_answer_may_not_be_encoded_as_discordance": true,
+  "same_target_q95_transfer_to_cross_role_relations_forbidden": true,
+  "soft_cross_role_calibration_options": [
+    "prospectively_matched_non_obligate_controls",
+    "prospectively_shuffled_partners",
+    "independent_relation_specific_reference_panel"
+  ],
+  "hard_cross_role_relation_uses_dedicated_invariant": true,
+  "plant_pollinator_example": {
+    "plant_estimand_candidates": [
+      "reproductive_support",
+      "persistence_support"
+    ],
+    "plant_estimator_candidates": [
+      "plant_sdm",
+      "demographic_model",
+      "mechanistic_plant_model"
+    ],
+    "pollinator_estimand_candidates": [
+      "visitation_support",
+      "reachability_support"
+    ],
+    "pollinator_estimator_candidates": [
+      "dynamic_occupancy_model",
+      "movement_model",
+      "eog_style_reachability_model"
+    ],
+    "relation_space_example": "plant_site_x_flowering_window",
+    "hard_candidate_event": "pollinator_dependent_successful_reproduction_requires_pollinator_visitation_or_reachability_at_the_same_opportunity",
+    "raw_adult_plant_occurrence_containment_is_not_assumed_hard": true,
+    "reason": "long_lived_stationary_plants_may_persist_after_local_pollinator_loss_while_pollinators_have_distinct_mobility_and_observation_processes"
+  },
+  "conceptual_alignment": {
+    "eog": "separate_viability_reachability_persistence_and_observation_estimands",
+    "sdmr": "no_single_universal_M_and_transfer_across_taxa_life_forms_and_dispersal_contexts_is_tested_not_assumed"
+  },
+  "forbidden": [
+    "force_plant_and_pollinator_into_one_estimator_for_comparability",
+    "force_one_universal_M_across_stationary_and_mobile_roles",
+    "compare_raw_scores_from_different_estimands_as_if_calibrated_on_one_scale",
+    "use_same_target_source_q95_as_cross_species_biological_tolerance",
+    "treat_adult_occurrence_overlap_as_a_hard_reproductive_dependency_without_external_justification",
+    "change_relation_space_adapter_after_focal_pair_outcome",
+    "drop_a_role_specific_answer_because_its_future_crosscheck_is_inconvenient"
+  ]
+}

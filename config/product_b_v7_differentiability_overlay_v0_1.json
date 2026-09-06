@@ -1,0 +1,24 @@
+{
+  "overlay_version": "product_b_v7_differentiability_overlay_v0.1",
+  "applies_to_contract": "product_b_v7_literature_witness_v0.1",
+  "frozen_before_any_v7_occurrence_or_invariant_read": true,
+  "stage_1_pre_occurrence": {
+    "name": "response_blind_library_structural_differentiability",
+    "minimum_structural_members": 2,
+    "minimum_unique_procedures": 2,
+    "minimum_distinct_selected_predictor_signatures": 2,
+    "every_declared_process_requires_at_least_one_structurally_admissible_knockout_member": true,
+    "candidate_scores_may_be_read": false,
+    "ecological_recovery_values_may_be_read": false,
+    "sealed_values_may_be_read": false
+  },
+  "stage_2_post_host_fit_pre_invariant": {
+    "name": "host_specific_adequate_set_differentiability",
+    "minimum_adequate_members": 2,
+    "minimum_distinct_selected_predictor_signatures_among_adequate_members": 2,
+    "all_declared_processes_must_remain_structurally_knockout_admissible_in_at_least_one_adequate_member": true,
+    "if_failed": "unresolved_model_pool_differentiability",
+    "invariant_reads_allowed_if_failed": false
+  },
+  "nonretroactivity": "This overlay does not change host sampling floors, literature-witness floors, frame rules, control pool rules, support breadth ceiling, shuffled-null rules, or any v5/v6 endpoint. It only separates a response-blind architecture-capability check from the later KIM001-specific adequate-set check so that pre-occurrence code need not inspect outcome-bearing adequacy metrics."
+}

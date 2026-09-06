@@ -1,0 +1,9 @@
+control_id,scientific_name,current_gbif_species_key,match_type,status,confidence,snapshot_occurrence_reads_performed
+JOS3_C01,Yucca baccata,2775788,EXACT,ACCEPTED,100,false
+JOS3_C02,Yucca schidigera,2775710,EXACT,ACCEPTED,99,false
+JOS3_C03,Yucca elata,2775775,EXACT,ACCEPTED,100,false
+JOS3_C04,Yucca glauca,2775497,EXACT,ACCEPTED,99,false
+JOS3_C05,Yucca rostrata,2775576,EXACT,ACCEPTED,99,false
+JOS3_C06,Yucca harrimaniae,2775580,EXACT,ACCEPTED,100,false
+JOS3_C07,Yucca treculeana,2775506,EXACT,ACCEPTED,100,false
+JOS3_C08,Yucca faxoniana,2775736,EXACT,ACCEPTED,100,false

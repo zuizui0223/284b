@@ -1,0 +1,71 @@
+name: same-target-layer1-fit-audit-reaggregate
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_layer1_fit_audit_reaggregate_trigger_v0_1.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  reaggregate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify frozen run-only audit boundary
+        id: trigger
+        run: |
+          python -m py_compile scripts/aggregate_same_target_layer1_baseline_fit.py
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          t=json.load(open('config/product_b_same_target_layer1_fit_audit_reaggregate_trigger_v0_1.json'))
+          assert t['authorization']=='reaggregate_existing_sealed_fit_contracts_without_pairing'
+          assert int(t['baseline_fit_workflow_run_id'])==34023762335
+          assert t['refit_authorized'] is False
+          assert t['paired_prediction_access_authorized'] is False
+          assert t['process_knockout_authorized'] is False
+          print('run_id='+str(int(t['baseline_fit_workflow_run_id'])))
+          PY
+      - name: Download exact existing held-out fit artifacts
+        uses: actions/download-artifact@v4
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.trigger.outputs.run_id }}
+          pattern: product-b-layer1-baseline-fit-taxon-*
+          path: fit_artifacts
+      - name: Require all twelve frozen taxon contracts
+        run: test "$(find fit_artifacts -name contract.json | wc -l)" -eq 12
+      - name: Aggregate fit identifiability only
+        run: |
+          python scripts/aggregate_same_target_layer1_baseline_fit.py \
+            --input-root fit_artifacts \
+            --output results/product_b_same_target_source_layer1_baseline_fit_v0_1.json
+      - name: Upload fit identifiability audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-layer1-fit-identifiability-audit
+          path: results/product_b_same_target_source_layer1_baseline_fit_v0_1.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit fit audit only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_source_layer1_baseline_fit_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No fit audit change"
+          else
+            git commit -m "Record held-out final-fit identifiability audit"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi

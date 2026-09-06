@@ -1,5 +1,5 @@
 {
-  "contract_version": "product_b_same_target_fresh_calibration_v0.1",
+  "contract_version": "product_b_same_target_fresh_calibration_v0.2",
   "purpose": "prospectively_calibrate_same_target_cross_source_discordance_on_a_fresh_panel_disjoint_from_opened_layer1_taxa",
   "candidate_registry": "registry/product_b_same_target_fresh_calibration_candidates_v0_1.csv",
   "candidate_registry_git_blob_sha": "fcc4a1190cb3188e6e37cc0e35281a869400e850",
@@ -39,10 +39,12 @@
     "snapshot_tuple_selection_rule": "species_exactly_equals_frozen_current_accepted_canonical_name",
     "all_distinct_specieskeys_under_exact_species_name_form_candidate_historical_key_set": true,
     "candidate_historical_key_set_must_be_nonempty": true,
-    "current_taxonomy_closure_review_required_for_distinct_snapshot_scientific_names": true,
-    "closure_review_rule": "every_resolvable_species_or_infraspecific_snapshot_name_must_resolve_to_the_same_frozen_current_accepted_species_concept",
-    "unresolved_snapshot_name_or_conflicting_current_species_concept_state": "fresh_snapshot_concept_closure_unresolved",
-    "historical_key_set_frozen_only_after_complete_closure_review": true,
+    "current_taxonomy_review_attempt_required_for_every_distinct_snapshot_scientific_name": true,
+    "closure_review_rule": "every_snapshot_name_must_receive_a_complete_current_taxonomy_review; any_name_that_positively_resolves_to_a_different_current_accepted_species_invalidates_the_taxon",
+    "completed_current_no_match_for_historical_name_is_audited_not_a_concept_conflict": true,
+    "taxonomy_transport_or_parse_failure_makes_review_incomplete_and_fails_closed": true,
+    "explicit_different_current_species_resolution_state": "fresh_snapshot_concept_closure_unresolved",
+    "historical_key_set_frozen_only_after_complete_review_without_explicit_species_conflict": true,
     "occurrence_counts_coordinates_dates_dataset_ids_and_model_outcomes_forbidden_during_closure": true,
     "current_24_single_key_failures_may_not_be_retroactively_rescued_by_this_rule": true
   },
@@ -86,6 +88,7 @@
     "lower_30_taxon_calibration_minimum_after_results",
     "use_current_layer1_discordance_to_choose_fresh_taxa",
     "use_process_knockout_outcomes_to_choose_fresh_taxa",
-    "use_occurrence_counts_or_coordinates_during_taxonomy_concept_closure"
+    "use_occurrence_counts_or_coordinates_during_taxonomy_concept_closure",
+    "drop_historical_specieskeys_after_the_exact_species_parent_set_is_opened"
   ]
 }

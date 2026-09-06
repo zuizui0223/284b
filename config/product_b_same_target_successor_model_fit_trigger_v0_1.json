@@ -1,0 +1,22 @@
+{
+  "authorization": "open_successor_independent_model_fits_after_canonical_sampling_promotion",
+  "canonical_sampling_result_path": "results/product_b_same_target_successor_source_mode_sampling_v0_1.json",
+  "canonical_sampling_promotion_commit_sha": "485f10c0ae6c1bd2e230d1d147d5ee83a33cd68d",
+  "canonical_sampling_original_run_id": 34026548240,
+  "canonical_sampling_grouped_transport_run_id": 34028547235,
+  "source_mode_sampling_passed": 47,
+  "source_mode_sampling_unresolved": 1,
+  "frozen_minimum_complete_taxa_for_calibration": 30,
+  "model_fit_authorized": true,
+  "fit_all_sampling_passed_taxa": true,
+  "sampling_unresolved_taxa_may_not_enter_fit": true,
+  "replacement_taxa_allowed": false,
+  "historical_key_subset_selection_allowed": false,
+  "procedure_selection_from_sampling_or_fit_outcomes_allowed": false,
+  "M_selection_from_sampling_or_fit_outcomes_allowed": false,
+  "paired_discordance_opened": false,
+  "reference_ceiling_opened": false,
+  "process_intervention_outcomes_opened": false,
+  "prediction_surfaces_must_be_sealed_before_pairing": true,
+  "next_stage_after_fit": "aggregate_answer_identifiability_then_prediction_adequacy_then_reference_calibration"
+}

@@ -5,7 +5,8 @@ This stage reads only sealed prediction artifacts and source-specific outer-CV
 metrics from the completed baseline-fit run. It never reopens occurrence rows,
 model fitting, predictor selection, a calibrated reference ceiling, or process
 knockouts. With the current 12-taxon panel it may report descriptive Schoener D
-but may not emit calibrated consistent/attention-required labels.
+only where both independent answers pass the frozen prediction-adequacy gate;
+it may not emit calibrated consistent/attention-required labels.
 """
 from __future__ import annotations
 
@@ -18,7 +19,7 @@ import pandas as pd
 
 from product_b_v5.same_target_pairing import (
     evaluate_prediction_adequacy,
-    schoener_d_from_sealed_vectors,
+    schoener_d_if_both_answers_adequate,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -51,7 +52,6 @@ def _adequacy_by_key(folds: pd.DataFrame, fit_contract: dict[str, object]) -> di
     expected_folds = int(adequacy["outer_folds"])
     result: dict[tuple[str, int, str], object] = {}
     for (source, m_km, procedure), group in folds.groupby(["source", "M_km", "procedure"], sort=True):
-        # Duplicate fold rows would silently overstate evidence, so fail closed.
         fold_ids = pd.to_numeric(group["fold"], errors="raise").astype(int)
         if fold_ids.duplicated().any():
             raise RuntimeError("duplicate outer-fold evidence within source/procedure/M")
@@ -111,27 +111,32 @@ def _pair_one_taxon(
             raise RuntimeError("paired cell does not contain exactly two frozen sources")
         a = by_source[MODES[0]]
         b = by_source[MODES[1]]
-        d = schoener_d_from_sealed_vectors(
-            a["comparison_row_id"].astype(str).tolist(),
-            pd.to_numeric(a["ecological_score"], errors="coerce").tolist(),
-            b["comparison_row_id"].astype(str).tolist(),
-            pd.to_numeric(b["ecological_score"], errors="coerce").tolist(),
-        )
         qa = adequacy.get((MODES[0], int(m_km), str(procedure)))
         qb = adequacy.get((MODES[1], int(m_km), str(procedure)))
         if qa is None or qb is None:
             raise RuntimeError("missing source-specific prediction-adequacy evidence")
+
         reasons: list[str] = []
         if not qa.adequate:
             reasons.append("preserved_specimen_answer_inadequate")
         if not qb.adequate:
             reasons.append("human_observation_answer_inadequate")
+
+        d = schoener_d_if_both_answers_adequate(
+            adequacy_a=qa,
+            adequacy_b=qb,
+            row_ids_a=a["comparison_row_id"].astype(str).tolist(),
+            scores_a=pd.to_numeric(a["ecological_score"], errors="coerce").tolist(),
+            row_ids_b=b["comparison_row_id"].astype(str).tolist(),
+            scores_b=pd.to_numeric(b["ecological_score"], errors="coerce").tolist(),
+        )
         if reasons:
+            if d is not None:
+                raise RuntimeError("paired D opened despite inadequate source answer")
             state = "paired_crosscheck_unresolved"
         else:
-            # The current panel has 12 taxa, below the frozen >=30 calibration
-            # requirement. Descriptive discordance is legitimate; calibrated
-            # consistent/attention labels are not.
+            if d is None:
+                raise RuntimeError("paired D unavailable despite two adequate source answers")
             state = str(pairing_contract["when_reference_ceiling_unavailable"]["state"])
             reasons.append("reference_ceiling_unavailable_panel_below_30")
 
@@ -139,9 +144,10 @@ def _pair_one_taxon(
             "taxon": str(taxon),
             "M_km": int(m_km),
             "procedure": str(procedure),
-            "comparison_rows": int(len(a)),
-            "schoener_d": float(d),
-            "one_minus_schoener_d": float(1.0 - d),
+            "comparison_rows": int(len(a)) if d is not None else None,
+            "schoener_d": None if d is None else float(d),
+            "one_minus_schoener_d": None if d is None else float(1.0 - d),
+            "paired_prediction_surface_opened": bool(d is not None),
             "preserved_specimen_adequate": bool(qa.adequate),
             "preserved_specimen_n_folds": int(qa.n_folds),
             "preserved_specimen_mean_presence_rank": qa.mean_presence_rank,
@@ -187,6 +193,8 @@ def main() -> int:
         raise RuntimeError(f"expected 288 paired cells, found {len(frame)}")
 
     both_adequate = frame["preserved_specimen_adequate"] & frame["human_observation_adequate"]
+    if int(frame["paired_prediction_surface_opened"].sum()) != int(both_adequate.sum()):
+        raise RuntimeError("paired prediction opening count differs from adequacy-authorized cells")
     descriptive = frame.loc[both_adequate].copy()
     summary_by_m = []
     for m_km, group in descriptive.groupby("M_km", sort=True):
@@ -205,11 +213,13 @@ def main() -> int:
     out_cells.parent.mkdir(parents=True, exist_ok=True)
     frame.to_csv(out_cells, index=False)
     summary = {
-        "result_version": "product_b_same_target_source_layer1_pairing_v0.1",
+        "result_version": "product_b_same_target_source_layer1_pairing_v0.2",
         "paired_cells_expected": 288,
         "paired_cells_evaluated": int(len(frame)),
         "both_sources_prediction_adequate_cells": int(both_adequate.sum()),
         "prediction_inadequate_or_incomplete_cells": int((~both_adequate).sum()),
+        "paired_prediction_surfaces_opened_cells": int(frame["paired_prediction_surface_opened"].sum()),
+        "paired_prediction_surfaces_kept_closed_for_inadequate_cells": int((~both_adequate).sum()),
         "taxa": int(frame["taxon"].nunique()),
         "M_km": sorted(int(x) for x in frame["M_km"].unique()),
         "procedures": int(frame["procedure"].nunique()),
@@ -217,7 +227,7 @@ def main() -> int:
         "reference_ceiling_reason": "12_complete_taxa_below_frozen_minimum_30",
         "calibrated_consistent_labels_emitted": 0,
         "calibrated_attention_required_labels_emitted": 0,
-        "descriptive_schoener_d_reported": True,
+        "descriptive_schoener_d_reported_only_for_both_adequate_answers": True,
         "summary_by_M_across_both_adequate_cells": summary_by_m,
         "process_knockout_opened": False,
         "procedure_selected_from_cross_source_outcome": False,

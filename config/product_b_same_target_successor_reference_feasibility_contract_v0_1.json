@@ -1,0 +1,22 @@
+{
+  "contract_version": "product_b_same_target_successor_reference_feasibility_v0.1",
+  "purpose": "determine_procedure_by_M_reference_opening_feasibility_before_any_paired_prediction_surface_is_read",
+  "minimum_eligible_taxa_per_procedure_M": 30,
+  "eligible_taxon_requires": [
+    "both_source_final_fits_sealed",
+    "preserved_specimen_outer_cv_prediction_adequate",
+    "human_observation_outer_cv_prediction_adequate"
+  ],
+  "frozen_M_km": [150, 300, 500],
+  "frozen_procedure_count": 8,
+  "expected_reference_cells": 24,
+  "paired_prediction_surface_read_forbidden": true,
+  "schoener_d_computation_forbidden": true,
+  "reference_ceiling_computation_forbidden": true,
+  "heldout_12_paired_discordance_read_forbidden": true,
+  "process_knockout_forbidden": true,
+  "procedure_or_M_selection_from_feasibility_forbidden": true,
+  "taxon_replacement_forbidden": true,
+  "if_eligible_taxa_below_30": "reference_calibration_unresolved_pre_discordance",
+  "if_eligible_taxa_at_least_30": "reference_discordance_opening_authorized_only_for_that_frozen_procedure_M_cell"
+}

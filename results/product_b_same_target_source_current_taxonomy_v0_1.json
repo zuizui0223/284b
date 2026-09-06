@@ -1,0 +1,339 @@
+{
+  "all_36_entered": true,
+  "coordinates_opened": false,
+  "occurrence_counts_opened": false,
+  "occurrence_endpoint_called": false,
+  "paired_discordance_opened": false,
+  "panel_size": 36,
+  "resolutions": [
+    {
+      "candidate_rank": 1,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Capsella bursa-pastoris",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "temperate_annual_herb"
+    },
+    {
+      "candidate_rank": 2,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Stellaria media",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "temperate_annual_herb"
+    },
+    {
+      "candidate_rank": 3,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Senecio vulgaris",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "temperate_annual_herb"
+    },
+    {
+      "candidate_rank": 1,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Betula pendula",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "temperate_deciduous_tree"
+    },
+    {
+      "candidate_rank": 2,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Fagus sylvatica",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "temperate_deciduous_tree"
+    },
+    {
+      "candidate_rank": 3,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Acer pseudoplatanus",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "temperate_deciduous_tree"
+    },
+    {
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Picea abies",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "boreal_temperate_conifer"
+    },
+    {
+      "candidate_rank": 2,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Juniperus communis",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "boreal_temperate_conifer"
+    },
+    {
+      "candidate_rank": 3,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Abies alba",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "boreal_temperate_conifer"
+    },
+    {
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Phalaris arundinacea",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "wetland_grass"
+    },
+    {
+      "candidate_rank": 2,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Glyceria maxima",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "wetland_grass"
+    },
+    {
+      "candidate_rank": 3,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Calamagrostis canadensis",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "wetland_grass"
+    },
+    {
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Vaccinium myrtillus",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "temperate_shrub"
+    },
+    {
+      "candidate_rank": 2,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Ulex europaeus",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "temperate_shrub"
+    },
+    {
+      "candidate_rank": 3,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Rubus idaeus",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "temperate_shrub"
+    },
+    {
+      "candidate_rank": 1,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Pteridium aquilinum",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "fern"
+    },
+    {
+      "candidate_rank": 2,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Athyrium filix-femina",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "fern"
+    },
+    {
+      "candidate_rank": 3,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Polypodium vulgare",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "fern"
+    },
+    {
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Artemisia tridentata",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "arid_shrub"
+    },
+    {
+      "candidate_rank": 2,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Atriplex canescens",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "arid_shrub"
+    },
+    {
+      "candidate_rank": 3,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Encelia farinosa",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "arid_shrub"
+    },
+    {
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Avicennia germinans",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "tropical_mangrove"
+    },
+    {
+      "candidate_rank": 2,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Avicennia marina",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "tropical_mangrove"
+    },
+    {
+      "candidate_rank": 3,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Laguncularia racemosa",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "tropical_mangrove"
+    },
+    {
+      "candidate_rank": 1,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Nothofagus antarctica",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "southern_temperate_tree"
+    },
+    {
+      "candidate_rank": 2,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Nothofagus betuloides",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "southern_temperate_tree"
+    },
+    {
+      "candidate_rank": 3,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Eucalyptus globulus",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "southern_temperate_tree"
+    },
+    {
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Abies lasiocarpa",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "montane_tree"
+    },
+    {
+      "candidate_rank": 2,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Pinus cembra",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "montane_tree"
+    },
+    {
+      "candidate_rank": 3,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Eucalyptus delegatensis",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "montane_tree"
+    },
+    {
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Picea glauca",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "boreal_conifer"
+    },
+    {
+      "candidate_rank": 2,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Larix laricina",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "boreal_conifer"
+    },
+    {
+      "candidate_rank": 3,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Pinus banksiana",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "boreal_conifer"
+    },
+    {
+      "candidate_rank": 1,
+      "confidence": 99,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Typha angustifolia",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "wetland_emergent"
+    },
+    {
+      "candidate_rank": 2,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Iris pseudacorus",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "wetland_emergent"
+    },
+    {
+      "candidate_rank": 3,
+      "confidence": 100,
+      "diagnostics": null,
+      "match_type": "EXACT",
+      "requested_name": "Schoenoplectus tabernaemontani",
+      "state": "unresolved_current_taxonomy_no_usage",
+      "validation_stratum": "wetland_emergent"
+    }
+  ],
+  "resolved_taxa": 0,
+  "result_version": "product_b_same_target_source_current_taxonomy_v0.1",
+  "sampling_authorized": false,
+  "selection_used_occurrence_information": false,
+  "unresolved_taxa": 36
+}

@@ -1,12 +1,12 @@
 {
   "all_fit_cells_sealed": false,
-  "claim_strength": "engineering_descriptive_only_until_pairing_and_no_calibrated_soft_ceiling_with_12_taxa",
+  "claim_strength": "final_fit_identifiability_audit_only_before_frozen_reference_heldout_pairing",
   "expected_fit_cells": 576,
   "paired_discordance_opened": false,
   "prediction_surfaces_opened_for_pairing": false,
   "process_knockout_opened": false,
   "reference_ceiling_opened": false,
-  "result_version": "product_b_same_target_source_layer1_baseline_fit_v0.1",
+  "result_version": "product_b_same_target_source_layer1_baseline_fit_v0.2",
   "sealed_fit_cells": 490,
   "taxa": [
     {
@@ -19,7 +19,7 @@
       "expected_fit_cells": 48,
       "occurrence_coordinates_persisted": false,
       "paired_discordance_computed": false,
-      "prediction_surface_sha256": "12e79d7c47a31e5afa34c8e0430535ef8850bc5b0aeced6b328c5a74c0ec0732",
+      "prediction_surface_sha256": "6ad65798c8b848ed4b038a65e70bb5fc7141c41fc2c77434b43515117ed87c69",
       "prediction_surfaces_sealed": true,
       "procedure_count": 8,
       "process_knockout_computed": false,
@@ -132,7 +132,7 @@
       "expected_fit_cells": 48,
       "occurrence_coordinates_persisted": false,
       "paired_discordance_computed": false,
-      "prediction_surface_sha256": "d7dae41e8a8228c222c614f17ea7cc4c74a3897dfdd3ed622dc310afb0d8fe2c",
+      "prediction_surface_sha256": "0ff4699cfdef080648ca34d29a3e7a6808b9a102c318a208d3edf7c76203b128",
       "prediction_surfaces_sealed": true,
       "procedure_count": 8,
       "process_knockout_computed": false,
@@ -450,7 +450,7 @@
       "expected_fit_cells": 48,
       "occurrence_coordinates_persisted": false,
       "paired_discordance_computed": false,
-      "prediction_surface_sha256": "dc09d9e0dc7b627f59b8945a217489bc51112a41a6a860c4dd1d6aabfcb013db",
+      "prediction_surface_sha256": "b0cdbc41cc9dab8a85634a1acda6bc57f82a3eeabf00d55346e56c6903383e15",
       "prediction_surfaces_sealed": true,
       "procedure_count": 8,
       "process_knockout_computed": false,
@@ -678,7 +678,7 @@
       "expected_fit_cells": 48,
       "occurrence_coordinates_persisted": false,
       "paired_discordance_computed": false,
-      "prediction_surface_sha256": "bed8d9200c8e2206b9f058e762c8940e18a5cef893923d4a10aacaccc2fc28a0",
+      "prediction_surface_sha256": "84d7602cab987cfaec9a7c8e9e6ece5f99f9ef126cc70b9a0703cc0ef19287f4",
       "prediction_surfaces_sealed": true,
       "procedure_count": 8,
       "process_knockout_computed": false,
@@ -917,7 +917,7 @@
       "expected_fit_cells": 48,
       "occurrence_coordinates_persisted": false,
       "paired_discordance_computed": false,
-      "prediction_surface_sha256": "c85a67826b5ee4711fb8708b96fdb72f3c1b0f23745c7e8f9947de8d9384b84d",
+      "prediction_surface_sha256": "79f9a2e4cafd73960115c25d156f324c8ebb6f2e02632753aca1d7851d441956",
       "prediction_surfaces_sealed": true,
       "procedure_count": 8,
       "process_knockout_computed": false,
@@ -1012,7 +1012,7 @@
       "expected_fit_cells": 48,
       "occurrence_coordinates_persisted": false,
       "paired_discordance_computed": false,
-      "prediction_surface_sha256": "a4000f44e9bb39215a9565ba498d83725cf5d999d9aa6a0fe3302bbd24d1bc3d",
+      "prediction_surface_sha256": "c32a3ea57d2e2d169eb4479152472e88479622b7473449bbb51ffcba684f4a59",
       "prediction_surfaces_sealed": true,
       "procedure_count": 8,
       "process_knockout_computed": false,
@@ -1041,7 +1041,7 @@
       "expected_fit_cells": 48,
       "occurrence_coordinates_persisted": false,
       "paired_discordance_computed": false,
-      "prediction_surface_sha256": "3fcb44cfa20d73b09579b96137923fdb59a28173375a8863920b48c2327d2164",
+      "prediction_surface_sha256": "2b048a56272dc0992653a18020da2e2f8282231bd101d6e56b41968931132ecf",
       "prediction_surfaces_sealed": true,
       "procedure_count": 8,
       "process_knockout_computed": false,
@@ -1139,6 +1139,41 @@
     }
   ],
   "taxa_expected": 12,
-  "taxa_with_sealed_prediction_artifacts": 12,
+  "taxa_with_any_unresolved_fit_cells": 6,
+  "taxa_with_prediction_artifacts": 12,
+  "taxa_with_unresolved_fit_cells": [
+    "Avicennia germinans",
+    "Avicennia marina",
+    "Encelia farinosa",
+    "Eucalyptus delegatensis",
+    "Eucalyptus globulus",
+    "Laguncularia racemosa"
+  ],
+  "unresolved_final_fit_audit": {
+    "by_M_km": {
+      "150": 26,
+      "300": 30,
+      "500": 30
+    },
+    "by_error_message": {
+      "Not enough complete presence/background rows to fit model.": 44,
+      "no candidate has a complete niche-recovery profile": 42
+    },
+    "by_error_type": {
+      "ValueError": 86
+    },
+    "by_source": {
+      "HUMAN_OBSERVATION": 62,
+      "PRESERVED_SPECIMEN": 24
+    },
+    "by_strategy": {
+      "all": 24,
+      "niche_forward": 42,
+      "vif": 20
+    },
+    "failed_cells_dropped_from_denominator": false,
+    "failed_cells_repaired_or_refit": false,
+    "paired_discordance_used_to_interpret_fit_failures": false
+  },
   "unresolved_fit_cells": 86
 }

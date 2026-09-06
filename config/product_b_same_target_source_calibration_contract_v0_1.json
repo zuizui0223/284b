@@ -13,6 +13,26 @@
   "answers_fit_independently": true,
   "cross_source_predictor_leakage_forbidden": true,
   "same_modeling_contract_required": true,
+  "procedure_library_source": {
+    "repository": "zuizui0223/sdmr",
+    "git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+    "contract_path": "configs/product_a_v2_7_1_fresh_confirmation_contract.json",
+    "strategies": ["all", "vif", "predictive_forward", "niche_forward"],
+    "model_specs": [
+      {"C": 0.1, "degree": 1, "penalty": "l2"},
+      {"C": 1.0, "degree": 2, "penalty": "l2"}
+    ],
+    "procedure_count": 8,
+    "inner_folds": 3,
+    "outer_folds": 4,
+    "max_predictors": 8,
+    "vif_threshold": 5.0,
+    "predictive_min_gain": 0.0,
+    "observation_predictors": [],
+    "procedure_identity_is_strategy_cross_model_spec": true,
+    "same_procedure_must_be_used_for_both_observation_modes": true,
+    "post_outcome_procedure_selection_forbidden": true
+  },
   "shared_frame_source": {
     "repository": "zuizui0223/sdmr",
     "git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",
@@ -47,10 +67,10 @@
     "statistic": "empirical_quantile",
     "quantile": 0.95,
     "quantile_method": "nearest_rank",
-    "minimum_complete_calibration_taxa": 30,
+    "minimum_complete_calibration_taxa_per_procedure_M": 30,
     "use_all_complete_calibration_taxa": true,
-    "calibrate_separate_ceiling_for_each_M": true,
-    "no_cross_M_composite_score": true,
+    "calibrate_separate_ceiling_for_each_procedure_and_M": true,
+    "no_cross_procedure_or_cross_M_composite_score": true,
     "ceiling_frozen_only_after_calibration_panel_is_complete": true,
     "ceiling_may_not_be_changed_after_held_out_outcome_access": true,
     "insufficient_complete_taxa_state": "paired_crosscheck_calibration_unresolved"
@@ -60,6 +80,7 @@
     "paired_discordance_may_not_be_used_for_taxon_inclusion": true,
     "minimum_sampling_requirements_are_applied_separately_to_each_observation_mode": true,
     "failed_mode_adequacy_makes_taxon_unresolved_not_high_discordance": true,
+    "procedure_fit_failure_makes_only_that_taxon_procedure_M_cell_unresolved": true,
     "taxon_may_not_be_replaced_after_discordance_is_seen": true
   },
   "interpretation": {
@@ -67,7 +88,8 @@
     "held_out_above_ceiling_state": "paired_crosscheck_attention_required",
     "held_out_within_ceiling_state": "paired_crosscheck_consistent",
     "attention_does_not_identify_which_answer_is_wrong": true,
-    "single_M_disagreement_is_scale_sensitive_and_reported_without_cross_M_collapse": true
+    "single_M_disagreement_is_scale_sensitive_and_reported_without_cross_M_collapse": true,
+    "procedure_cross_source_stability_is_a_model_property_not_proof_of_ecological_truth": true
   },
   "forbidden": [
     "choose_calibration_taxa_from_observed_cross_source_overlap",
@@ -75,8 +97,9 @@
     "replace_failed_calibration_taxon_after_discordance_access",
     "relax_source_specific_sampling_floors_after_outcome_access",
     "fit_one_observation_mode_using_the_other_modes_occurrences_or_predictions",
+    "select_best_procedure_from_the_same_calibration_outcome_and_call_it_confirmatory",
     "select_best_M_from_cross_source_discordance",
-    "collapse_M_specific_discordance_into_posthoc_weighted_score",
+    "collapse_procedure_or_M_specific_discordance_into_posthoc_weighted_score",
     "tune_reference_quantile_after_held_out_outcomes_are_seen",
     "interpret_calibration_panel_as_confirmatory_biological_validation"
   ]

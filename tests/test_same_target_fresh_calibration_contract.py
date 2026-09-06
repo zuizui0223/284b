@@ -43,8 +43,10 @@ class FreshSameTargetCalibrationContractTests(unittest.TestCase):
         self.assertFalse(closure["single_snapshot_specieskey_required"])
         self.assertTrue(closure["current_taxonomy_exact_accepted_species_required_before_snapshot_access"])
         self.assertTrue(closure["all_distinct_specieskeys_under_exact_species_name_form_candidate_historical_key_set"])
-        self.assertTrue(closure["current_taxonomy_closure_review_required_for_distinct_snapshot_scientific_names"])
-        self.assertTrue(closure["historical_key_set_frozen_only_after_complete_closure_review"])
+        self.assertTrue(closure["current_taxonomy_review_attempt_required_for_every_distinct_snapshot_scientific_name"])
+        self.assertTrue(closure["completed_current_no_match_for_historical_name_is_audited_not_a_concept_conflict"])
+        self.assertTrue(closure["taxonomy_transport_or_parse_failure_makes_review_incomplete_and_fails_closed"])
+        self.assertTrue(closure["historical_key_set_frozen_only_after_complete_review_without_explicit_species_conflict"])
         self.assertTrue(closure["current_24_single_key_failures_may_not_be_retroactively_rescued_by_this_rule"])
         self.assertEqual(
             closure["snapshot_taxonomy_fields_allowed"],

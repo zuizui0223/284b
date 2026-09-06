@@ -9,6 +9,9 @@
   "sampling_unresolved_taxa_may_not_be_replaced": true,
   "observation_modes": ["PRESERVED_SPECIMEN", "HUMAN_OBSERVATION"],
   "fits_must_be_independent_between_observation_modes": true,
+  "cross_mode_occurrence_leakage_forbidden": true,
+  "cross_mode_prediction_leakage_forbidden": true,
+  "shared_source_blind_coordinate_pool_is_the_only_cross_mode_occurrence_exception": true,
   "independence_semantics": {
     "cross_mode_response_occurrence_leakage_forbidden": true,
     "cross_mode_prediction_leakage_forbidden": true,

@@ -29,7 +29,9 @@
   "reference_ceiling_rule": {
     "statistic": "empirical_quantile",
     "quantile": 0.95,
+    "quantile_method": "nearest_rank",
     "minimum_complete_calibration_taxa": 30,
+    "use_all_complete_calibration_taxa": true,
     "ceiling_frozen_only_after_calibration_panel_is_complete": true,
     "ceiling_may_not_be_changed_after_held_out_outcome_access": true,
     "insufficient_complete_taxa_state": "paired_crosscheck_calibration_unresolved"

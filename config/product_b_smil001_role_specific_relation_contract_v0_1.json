@@ -1,5 +1,5 @@
 {
-  "contract_version": "product_b_smil001_role_specific_relation_v0.2",
+  "contract_version": "product_b_smil001_role_specific_relation_v0.3",
   "pair_id": "SMIL001",
   "x_taxon": "Smilax insularis",
   "y_taxon": "Dasineura heterosmilacicola",
@@ -8,17 +8,17 @@
   "literature_sources": [
     {
       "doi": "10.1016/j.cub.2026.03.002",
-      "role": "plant_dependence_and_pollination_mechanism",
-      "frozen_fact": "pollination_experiments_report_that_fruit_set_depends_entirely_on_Dasineura_heterosmilacicola_and_that_male_before_female_anthesis_timing_promotes_pollen_transfer"
+      "role": "plant_dependence_pollination_mechanism_and_flower_sex_specific_larval_performance",
+      "frozen_fact": "pollination_experiments_report_that_fruit_set_depends_entirely_on_Dasineura_heterosmilacicola;_larval_development_is_mainly_in_male_flowers_but_female_flowers_can_receive_eggs_and_support_lower_nonzero_larval_survival"
     },
     {
       "doi": "10.3897/zookeys.1234.146453",
-      "role": "midge_breeding_resource_and_described_distribution",
-      "frozen_fact": "larvae_breed_in_fallen_male_flowers_and_feed_on_pollen_and_flower_tissue;_described_midge_distribution_is_Ryukyu_Archipelago"
+      "role": "prior_midge_breeding_resource_and_described_distribution",
+      "frozen_fact": "prior_fieldwork_described_larvae_breeding_in_fallen_male_flowers_and_feeding_on_pollen_and_flower_tissue;_described_midge_distribution_is_Ryukyu_Archipelago"
     }
   ],
   "constraint_class": "mutual_obligacy_candidate",
-  "current_strength": "provisional_hard_pending_event_specific_and_geographic_observability",
+  "current_strength": "provisional_role_specific_hard_dependencies_pending_event_specific_and_geographic_observability",
   "estimator_policy": "role_specific_estimators_allowed",
   "same_estimator_required": false,
   "same_accessible_area_required": false,
@@ -44,16 +44,18 @@
       "reason": "adult_host_presence_and_midge_presence_do_not_directly_measure_fruit_set_or_effective_pollination_service"
     },
     {
-      "direction_id": "midge_breeding_requires_host_male_flowers",
+      "direction_id": "midge_breeding_requires_host_floral_resource",
       "dependent_role": "midge_breeding",
       "dependent_estimand_required": "midge_breeding_or_reproductive_support",
-      "required_role": "host_male_flower_resource",
-      "required_estimand_required": "male_flower_resource_availability_support",
-      "relation_space": "host_male_flower_site_x_flowering_window",
-      "hard_event_statement": "midge_breeding_requires_available_host_male_flower_resource_at_the_same_breeding_opportunity",
+      "required_role": "host_floral_brood_resource",
+      "required_estimand_required": "Smilax_insularis_flower_resource_availability_support",
+      "relation_space": "host_flower_site_x_flowering_window",
+      "hard_event_statement": "midge_breeding_requires_available_Smilax_insularis_floral_resource_at_the_same_breeding_opportunity",
       "adult_host_occurrence_is_sufficient_required_answer": false,
       "midge_occurrence_is_sufficient_dependent_answer": false,
-      "reason": "host_occurrence_does_not_establish_male_flower_availability_and_midge_occurrence_does_not_establish_breeding_or_larval_development"
+      "male_flower_only_requirement_is_hard": false,
+      "male_flower_performance_relation": "soft_preference_and_higher_larval_survival_not_absolute_requirement",
+      "reason": "host_occurrence_does_not_establish_flowering_resource_and_midge_occurrence_does_not_establish_breeding;_2026_evidence_shows_rare_larval_development_in_female_flowers_so_male_flower_identity_is_not_an_absolute_requirement"
     }
   ],
   "role_specific_estimator_candidates": {
@@ -67,19 +69,27 @@
       "dynamic_occupancy_model_with_reproductive_timing"
     ],
     "host_resource_answer": [
-      "male_flower_phenology_resource_model"
+      "flowering_phenology_resource_model_with_flower_sex_as_optional_performance_stratum"
     ],
     "midge_breeding_answer": [
       "breeding_occurrence_or_emergence_model"
     ]
   },
+  "secondary_soft_relation_candidates": [
+    {
+      "relation_id": "midge_breeding_performance_male_vs_female_flowers",
+      "statement": "male_flowers_are_preferred_and_support_higher_larval_survival_than_female_flowers",
+      "strength": "soft_directional_performance_relation",
+      "must_not_be_promoted_to_hard_resource_requirement": true
+    }
+  ],
   "current_available_occurrence_only_surfaces_may_be_used_for": [
     "engineering_feasibility",
     "soft_distributional_diagnostic_if_prospectively_declared"
   ],
   "current_available_occurrence_only_surfaces_may_not_be_used_for": [
     "hard_plant_reproduction_requires_midge_invariant",
-    "hard_midge_breeding_requires_host_male_flower_invariant",
+    "hard_midge_breeding_requires_host_floral_resource_invariant",
     "mutual_hard_invariant_classification"
   ],
   "relation_space_observability_state": "unresolved_pending_event_specific_evidence_and_verified_joint_geographic_scope",
@@ -88,11 +98,12 @@
   "occurrence_outcomes_opened_for_this_new_contract": false,
   "next_admissible_work": [
     "complete_adversarial_partner_specificity_review_with_special_attention_to_Taiwan",
-    "identify_event_specific_plant_reproduction_or_fruit_set_data",
-    "identify_effective_midge_visitation_or_pollination_service_data",
-    "identify_host_male_flower_phenology_resource_data",
-    "identify_midge_breeding_or_emergence_data",
+    "audit_declared_public_figshare_event_data_under_the_frozen_event_data_opening_contract",
+    "identify_event_specific_plant_reproduction_or_fruit_set_rows",
+    "identify_effective_midge_visitation_or_pollination_service_rows",
+    "identify_host_flowering_resource_rows_with_flower_sex_retained_as_a_stratifier",
+    "identify_midge_breeding_or_emergence_rows",
     "freeze_joint_geographic_scope",
-    "freeze_spatial_and_temporal_relation_keys_before_any_hard_outcome"
+    "freeze_spatial_and_temporal_relation_keys_before_any_event_value_pairing"
   ]
 }

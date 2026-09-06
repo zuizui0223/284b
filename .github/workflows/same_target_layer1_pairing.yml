@@ -1,0 +1,85 @@
+name: same-target-layer1-pairing
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_source_pairing_trigger_v0_1.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  pair-sealed-answers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pairing dependencies
+        run: python -m pip install --disable-pip-version-check --quiet pandas numpy pyarrow
+      - name: Verify sealed pairing boundary
+        run: |
+          python -m unittest discover -s tests -v
+          python -m py_compile scripts/evaluate_same_target_layer1_pairing.py
+          python - <<'PY'
+          import hashlib, json
+          trigger=json.load(open('config/product_b_same_target_source_pairing_trigger_v0_1.json'))
+          audit_path='results/product_b_same_target_source_layer1_baseline_fit_v0_1.json'
+          audit=json.load(open(audit_path))
+          observed=hashlib.sha256(open(audit_path,'rb').read()).hexdigest()
+          assert trigger['authorization']=='open_sealed_layer1_predictions_for_descriptive_pairing'
+          assert trigger['fit_audit_sha256']==observed
+          assert trigger['baseline_fit_workflow_run_id'] > 0
+          assert audit['all_fit_cells_sealed'] is True
+          assert audit['sealed_fit_cells']==576 and audit['unresolved_fit_cells']==0
+          assert audit['prediction_surfaces_opened_for_pairing'] is False
+          assert audit['paired_discordance_opened'] is False
+          assert audit['process_knockout_opened'] is False
+          assert trigger['reference_ceiling_available'] is False
+          assert trigger['calibrated_classification_authorized'] is False
+          assert trigger['process_knockout_authorized'] is False
+          PY
+      - name: Download exact sealed baseline artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN_ID=$(python - <<'PY'
+          import json
+          print(json.load(open('config/product_b_same_target_source_pairing_trigger_v0_1.json'))['baseline_fit_workflow_run_id'])
+          PY
+          )
+          mkdir -p fit_artifacts
+          gh run download "$RUN_ID" -R zuizui0223/284b -p 'product-b-layer1-baseline-fit-taxon-*' -D fit_artifacts
+          test "$(find fit_artifacts -name contract.json | wc -l)" -eq 12
+          test "$(find fit_artifacts -name sealed_prediction_surfaces.parquet | wc -l)" -eq 12
+      - name: Pair sealed answers descriptively
+        run: |
+          python scripts/evaluate_same_target_layer1_pairing.py \
+            --input-root fit_artifacts \
+            --fit-audit results/product_b_same_target_source_layer1_baseline_fit_v0_1.json \
+            --output-cells results/product_b_same_target_source_layer1_pairing_cells_v0_1.csv \
+            --output-summary results/product_b_same_target_source_layer1_pairing_v0_1.json
+      - name: Upload pairing audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-layer1-pairing-audit
+          path: |
+            results/product_b_same_target_source_layer1_pairing_cells_v0_1.csv
+            results/product_b_same_target_source_layer1_pairing_v0_1.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit frozen descriptive pairing result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_source_layer1_pairing_cells_v0_1.csv results/product_b_same_target_source_layer1_pairing_v0_1.json
+          git commit -m "Record descriptive Layer-1 paired answers"
+          git pull --rebase origin product-b-v5-obligate-invariant
+          git push origin HEAD:product-b-v5-obligate-invariant

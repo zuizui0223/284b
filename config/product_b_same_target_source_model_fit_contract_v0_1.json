@@ -1,5 +1,5 @@
 {
-  "contract_version": "product_b_same_target_source_model_fit_v0.2",
+  "contract_version": "product_b_same_target_source_model_fit_v0.3",
   "purpose": "seal_independent_layer1_model_fits_before_any_cross_source_discordance_is_opened",
   "input_sampling_result": "results/product_b_same_target_source_mode_sampling_v0_1.json",
   "input_calibration_contract": "config/product_b_same_target_source_calibration_contract_v0_1.json",
@@ -40,6 +40,14 @@
     "predictive_min_gain": 0.0,
     "observation_predictors": []
   },
+  "prediction_adequacy": {
+    "chance_auc": 0.5,
+    "minimum_auc_margin": 0.01,
+    "auc_sem_multiplier": 1.0,
+    "outer_folds": 4,
+    "evaluated_separately_for_each_source_procedure_M": true,
+    "may_not_select_or_drop_procedures_for_cross_source_pairing": true
+  },
   "environmental_predictor_source": {
     "repository": "zuizui0223/sdmr",
     "git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",
@@ -62,6 +70,7 @@
     "fit_one_source_using_response_occurrences_from_the_other_source",
     "fit_one_source_using_predictions_from_the_other_source",
     "construct_source_specific_M_for_the_two_answers",
+    "construct_source_specific_spatial_block_centers",
     "use_source_label_or_source_frequency_to_weight_the_common_M",
     "select_procedure_using_cross_source_discordance",
     "select_M_using_cross_source_discordance",

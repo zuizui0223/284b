@@ -1,6 +1,10 @@
 import unittest
 
-from product_b_v5.paired_relations import PairedRelationKind
+from product_b_v5.paired_relations import (
+    PairedRelationContract,
+    PairedRelationKind,
+    RelationStrength,
+)
 from product_b_v5.relation_space import (
     AdaptedAnswer,
     AnswerEstimand,
@@ -10,6 +14,7 @@ from product_b_v5.relation_space import (
     RelationSpaceKind,
     align_adapted_answers,
     directional_containment_on_relation_space,
+    validate_paired_relation_with_space,
     validate_relation_space_contract,
 )
 
@@ -111,6 +116,75 @@ class RelationSpaceContractTests(unittest.TestCase):
             adapter_frozen_before_focal_outcome=True,
         )
         self.assertEqual(validate_relation_space_contract(contract), ())
+
+        relation = PairedRelationContract(
+            relation_id="PLANT_POLLINATOR",
+            relation_kind=PairedRelationKind.DIRECTIONAL_DEPENDENCY,
+            strength=RelationStrength.HARD_INVARIANT,
+            answer_a_role="plant",
+            answer_b_role="pollinator",
+            declared_scale="plant site x flowering window",
+            external_relation_basis="obligate pollination evidence",
+            discordance_metric="dedicated_directional_classifier",
+            reference_ceiling=None,
+            relation_frozen_before_focal_outcome=True,
+            threshold_frozen_before_focal_outcome=True,
+            answers_fit_independently=True,
+        )
+        self.assertEqual(validate_paired_relation_with_space(relation, contract), ())
+
+    def test_combined_validator_rejects_relation_space_kind_mismatch(self):
+        plant = answer(
+            answer_id="p",
+            role="plant",
+            target="plant",
+            estimator_id="pmodel",
+            estimator_family="plant_model",
+            estimand=AnswerEstimand.REPRODUCTIVE_SUPPORT,
+            m="plant M",
+        )
+        animal = answer(
+            answer_id="a",
+            role="pollinator",
+            target="pollinator",
+            estimator_id="amodel",
+            estimator_family="movement_model",
+            estimand=AnswerEstimand.VISITATION_SUPPORT,
+            m="pollinator M",
+        )
+        space = RelationSpaceContract(
+            relation_id="PAIR",
+            relation_kind=PairedRelationKind.DIRECTIONAL_DEPENDENCY,
+            estimator_policy=EstimatorPolicy.ROLE_SPECIFIC_ESTIMATORS_ALLOWED,
+            answer_a=plant,
+            answer_b=animal,
+            relation_space_kind=RelationSpaceKind.INTERACTION_OPPORTUNITY,
+            relation_keys_semantics="site x flowering window",
+            relation_event_semantics="pollination",
+            answer_a_projection="plant projection",
+            answer_b_projection="pollinator projection",
+            same_accessible_area_required=False,
+            raw_output_scale_comparison_allowed=False,
+            adapter_frozen_before_focal_outcome=True,
+        )
+        relation = PairedRelationContract(
+            relation_id="PAIR",
+            relation_kind=PairedRelationKind.MUTUAL_DEPENDENCY,
+            strength=RelationStrength.HARD_INVARIANT,
+            answer_a_role="plant",
+            answer_b_role="pollinator",
+            declared_scale="site x flowering window",
+            external_relation_basis="external biology",
+            discordance_metric="dedicated_mutual_classifier",
+            reference_ceiling=None,
+            relation_frozen_before_focal_outcome=True,
+            threshold_frozen_before_focal_outcome=True,
+            answers_fit_independently=True,
+        )
+        self.assertIn(
+            "paired_relation_and_relation_space_kinds_differ",
+            validate_paired_relation_with_space(relation, space),
+        )
 
     def test_cross_species_relation_cannot_require_one_universal_M(self):
         plant = answer(

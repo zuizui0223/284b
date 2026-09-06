@@ -1,0 +1,15 @@
+{
+  "trigger_version": "product_b_same_target_source_snapshot_identity_trigger_v0.1",
+  "current_taxonomy_result_path": "results/product_b_same_target_source_current_taxonomy_v0_1.json",
+  "current_taxonomy_result_blob_sha": "ac0b0ea2e0274e0eb6577ef75aee23cbe82f5df4",
+  "current_taxonomy_result_commit": "acaec4b95ff72bd9ee82241983cdf515f8ac456d",
+  "current_taxonomy_result_version": "product_b_same_target_source_current_taxonomy_v0.2",
+  "panel_size": 36,
+  "resolved_taxa": 36,
+  "unresolved_taxa": 0,
+  "occurrence_information_used_for_authorization": false,
+  "paired_discordance_used_for_authorization": false,
+  "authorized_next_action": "snapshot_internal_taxonomy_identity_only",
+  "occurrence_sampling_authorized": false,
+  "frozen": true
+}

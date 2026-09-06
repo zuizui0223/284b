@@ -38,6 +38,7 @@ jobs:
             echo "No taxonomy result change to commit"
           else
             git commit -m "Record calibration panel current taxonomy audit"
+            git pull --rebase origin product-b-v5-obligate-invariant
             git push origin HEAD:product-b-v5-obligate-invariant
           fi
       - name: Upload taxonomy audit

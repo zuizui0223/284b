@@ -1,5 +1,11 @@
-"""Product-B obligate-association invariant prototype."""
+"""Product-B biological-constraint and paired answer-check prototype."""
 
+from .crosscheck import (
+    PairedAnswerCheckDecision,
+    PairedCheckState,
+    classify_paired_answer_check,
+    reciprocal_containment_discordance,
+)
 from .invariants import (
     InvariantState,
     PreflightResult,
@@ -22,6 +28,10 @@ from .mutual import (
 )
 
 __all__ = [
+    "PairedAnswerCheckDecision",
+    "PairedCheckState",
+    "classify_paired_answer_check",
+    "reciprocal_containment_discordance",
     "InvariantState",
     "PreflightResult",
     "ProcedureDescriptor",

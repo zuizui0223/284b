@@ -1,0 +1,45 @@
+{
+  "contract_version": "product_b_same_target_source_calibration_v0.1",
+  "purpose": "calibrate_normal_cross_source_discordance_before_held_out_biological_crosschecks",
+  "confirmatory_claims_allowed_for_calibration_panel": false,
+  "relation_kind": "same_target_independent_source",
+  "relation_strength": "soft_crosscheck",
+  "biological_target_rule": "same_taxon_same_declared_spatial_temporal_frame",
+  "observation_mode_a": "PRESERVED_SPECIMEN",
+  "observation_mode_b": "HUMAN_OBSERVATION",
+  "observation_modes_must_be_disjoint": true,
+  "same_frozen_snapshot_required": true,
+  "snapshot_date": "2026-08-01",
+  "answers_fit_independently": true,
+  "cross_source_predictor_leakage_forbidden": true,
+  "same_modeling_contract_required": true,
+  "primary_discordance_metric": "one_minus_schoener_d",
+  "secondary_descriptive_metric": "rank_profile_discordance_pair",
+  "reference_ceiling_rule": {
+    "statistic": "empirical_quantile",
+    "quantile": 0.95,
+    "minimum_complete_calibration_taxa": 30,
+    "ceiling_frozen_only_after_calibration_panel_is_complete": true,
+    "ceiling_may_not_be_changed_after_held_out_outcome_access": true
+  },
+  "panel_selection_rule": {
+    "selection_must_precede_paired_discordance_access": true,
+    "paired_discordance_may_not_be_used_for_taxon_inclusion": true,
+    "minimum_sampling_requirements_are_applied_separately_to_each_observation_mode": true,
+    "failed_mode_adequacy_makes_taxon_unresolved_not_high_discordance": true
+  },
+  "interpretation": {
+    "calibration_panel_attention_flags_are_descriptive_only": true,
+    "held_out_above_ceiling_state": "paired_crosscheck_attention_required",
+    "held_out_within_ceiling_state": "paired_crosscheck_consistent",
+    "attention_does_not_identify_which_answer_is_wrong": true
+  },
+  "forbidden": [
+    "choose_calibration_taxa_from_observed_cross_source_overlap",
+    "drop_high_discordance_calibration_taxa_after_outcome_access",
+    "relax_source_specific_sampling_floors_after_outcome_access",
+    "fit_one_observation_mode_using_the_other_modes_occurrences_or_predictions",
+    "tune_reference_quantile_after_held_out_outcomes_are_seen",
+    "interpret_calibration_panel_as_confirmatory_biological_validation"
+  ]
+}

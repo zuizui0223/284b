@@ -1,0 +1,95 @@
+name: same-target-calibration-mode-sampling
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - results/product_b_same_target_source_snapshot_identity_v0_1.json
+
+permissions:
+  contents: write
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: product-b-v5-obligate-invariant
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify repository tests before occurrence access
+        run: python -m unittest discover -s tests -v
+
+  sampling-shards:
+    needs: tests
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5]
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: product-b-v5-obligate-invariant
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen snapshot scanner
+        run: python -m pip install --disable-pip-version-check --quiet "pyarrow==21.0.0"
+      - name: Run source-mode sampling shard
+        env:
+          PYTHONPATH: .
+          SHARD_INDEX: ${{ matrix.shard }}
+          SHARD_COUNT: "6"
+        run: python scripts/run_same_target_calibration_mode_sampling_shard.py
+      - name: Upload sanitized shard summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-same-target-sampling-shard-${{ matrix.shard }}
+          path: artifacts/product_b_same_target_source_sampling_shard_${{ matrix.shard }}.json
+          if-no-files-found: error
+          retention-days: 90
+
+  aggregate:
+    needs: sampling-shards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: product-b-v5-obligate-invariant
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download sanitized sampling shards
+        uses: actions/download-artifact@v4
+        with:
+          pattern: product-b-same-target-sampling-shard-*
+          merge-multiple: true
+          path: artifacts/sampling_shards
+      - name: Aggregate sampling preflight
+        env:
+          PYTHONPATH: .
+        run: python scripts/aggregate_same_target_calibration_mode_sampling.py
+      - name: Commit sanitized sampling result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_source_mode_sampling_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No sampling result change to commit"
+          else
+            git commit -m "Record same-target source-mode sampling preflight"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi
+      - name: Upload aggregate sampling audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-same-target-mode-sampling
+          path: results/product_b_same_target_source_mode_sampling_v0_1.json
+          if-no-files-found: error
+          retention-days: 90

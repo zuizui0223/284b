@@ -1,0 +1,95 @@
+name: same-target-calibration-snapshot-identity-sharded
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_source_snapshot_identity_sharded_trigger_v0_1.json
+
+permissions:
+  contents: write
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: product-b-v5-obligate-invariant
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify repository tests before snapshot taxonomy access
+        run: python -m unittest discover -s tests -v
+
+  identity-shards:
+    needs: tests
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: product-b-v5-obligate-invariant
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen snapshot scanner
+        run: python -m pip install --disable-pip-version-check --quiet "pyarrow==21.0.0"
+      - name: Scan deterministic snapshot fragment shard
+        env:
+          PYTHONPATH: .
+          SHARD_INDEX: ${{ matrix.shard }}
+          SHARD_COUNT: "6"
+        run: python scripts/run_same_target_calibration_snapshot_identity_shard.py
+      - name: Upload taxonomy-only shard tuples
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-same-target-snapshot-identity-shard-${{ matrix.shard }}
+          path: artifacts/product_b_same_target_source_snapshot_identity_shard_${{ matrix.shard }}.json
+          if-no-files-found: error
+          retention-days: 90
+
+  aggregate:
+    needs: identity-shards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: product-b-v5-obligate-invariant
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download taxonomy-only shard tuples
+        uses: actions/download-artifact@v4
+        with:
+          pattern: product-b-same-target-snapshot-identity-shard-*
+          merge-multiple: true
+          path: artifacts/snapshot_identity_shards
+      - name: Aggregate and apply frozen v7.3 identity rule
+        env:
+          PYTHONPATH: .
+        run: python scripts/aggregate_same_target_calibration_snapshot_identity_shards.py
+      - name: Commit sharded snapshot identity audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_source_snapshot_identity_sharded_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No sharded identity result change to commit"
+          else
+            git commit -m "Record sharded calibration snapshot identity audit"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi
+      - name: Upload aggregate identity audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-same-target-snapshot-identity-sharded
+          path: results/product_b_same_target_source_snapshot_identity_sharded_v0_1.json
+          if-no-files-found: error
+          retention-days: 90

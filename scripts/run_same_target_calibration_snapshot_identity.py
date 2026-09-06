@@ -94,6 +94,7 @@ def main() -> int:
         if row.get("state") == "resolved_current_taxonomy"
     ]
     declarations = [_declaration(i + 1, row) for i, row in enumerate(resolved_rows)]
+    provenance = {str(row["requested_name"]): row for row in resolved_rows}
     scanned = _scan_all(declarations) if declarations else {}
 
     output_rows: list[dict[str, object]] = []
@@ -105,9 +106,12 @@ def main() -> int:
             declaration=declaration,
             taxonomy_tuples=tuple(sorted(tuples)),
         )
+        source_row = provenance[declaration.biological_name]
         output_rows.append(
             {
                 "requested_name": declaration.biological_name,
+                "validation_stratum": source_row.get("validation_stratum"),
+                "candidate_rank": source_row.get("candidate_rank"),
                 "current_accepted_name": declaration.current_accepted_name,
                 "admissible_species_names": list(declaration.admissible_species_names),
                 "status": decision.terminal_state,
@@ -121,6 +125,8 @@ def main() -> int:
     unresolved_current = [
         {
             "requested_name": row.get("requested_name"),
+            "validation_stratum": row.get("validation_stratum"),
+            "candidate_rank": row.get("candidate_rank"),
             "current_taxonomy_state": row.get("state"),
             "snapshot_identity_state": "not_entered_due_to_current_taxonomy_unresolved",
         }
@@ -130,7 +136,8 @@ def main() -> int:
     passed = sum(bool(row["passed"]) for row in output_rows)
     unresolved_snapshot = len(output_rows) - passed
     outcome = {
-        "result_version": "product_b_same_target_source_snapshot_identity_v0.1",
+        "result_version": "product_b_same_target_source_snapshot_identity_v0.2",
+        "source_current_taxonomy_result_version": current.get("result_version"),
         "panel_size": 36,
         "current_taxonomy_resolved_entering_gate": len(declarations),
         "current_taxonomy_unresolved_not_entered": len(unresolved_current),

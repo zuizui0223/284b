@@ -1,0 +1,53 @@
+name: same-target-fresh-current-taxonomy
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - .github/workflows/same_target_fresh_current_taxonomy.yml
+      - scripts/run_same_target_fresh_current_taxonomy.py
+      - registry/product_b_same_target_fresh_calibration_candidates_v0_1.csv
+      - config/product_b_same_target_fresh_calibration_contract_v0_1.json
+
+permissions:
+  contents: write
+
+jobs:
+  current-taxonomy-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify fresh calibration freeze
+        run: |
+          python -m unittest discover -s tests -v
+          python -m py_compile scripts/run_same_target_fresh_current_taxonomy.py
+      - name: Resolve all 36 fresh taxa against current GBIF taxonomy
+        env:
+          PYTHONPATH: .
+        run: python scripts/run_same_target_fresh_current_taxonomy.py
+      - name: Upload taxonomy-only result
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-fresh-same-target-current-taxonomy
+          path: results/product_b_same_target_fresh_current_taxonomy_v0_1.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit taxonomy-only audit result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_fresh_current_taxonomy_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No fresh taxonomy result change to commit"
+          else
+            git commit -m "Record fresh calibration current taxonomy audit"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi

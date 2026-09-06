@@ -2,7 +2,7 @@
 
 ## Scientific sequence
 
-Product-B is now organized as three escalating validation layers rather than as a search for one universally best predictor set.
+Product-B is organized as escalating validation layers, but **same-target reconstruction and cross-role biological relations use different estimator/calibration logic**.
 
 ### Layer 1 — same-target cross-source reproducibility
 
@@ -10,79 +10,123 @@ Question:
 
 > Does the same modeling procedure recover a coherent ecological answer for the same biological target when the observation system changes?
 
-Calibration panel: the 36 pre-existing Product-A v2.7.1 taxon candidates selected before Product-B cross-source outcomes existed.
+This is a controlled estimator-stability experiment. For each taxon, target,
+estimand, procedure and M/background are held fixed while observation source
+changes.
 
 For each taxon:
 
-1. resolve one snapshot-stable taxonomic identity without occurrence-count selection;
-2. partition the frozen 2026-08-01 GBIF snapshot into disjoint `PRESERVED_SPECIMEN` and `HUMAN_OBSERVATION` records;
-3. require the frozen 50 records / 30 unique 10-km cells / 10 effective cells floor separately for both modes;
-4. reuse the Product-A response-blind M grid (150, 300, 500 km), never selecting M from cross-source results;
-5. for each of the 8 frozen recovery procedures, fit the two observation modes independently under the same procedure and same M;
-6. compute `1 - Schoener's D` as the primary cross-source discordance and rank-profile discordance as descriptive support;
-7. for every procedure × M cell with at least 30 complete taxa, freeze the nearest-rank 95th percentile as that cell's cross-source reference ceiling.
+1. resolve frozen taxonomy without occurrence-outcome selection;
+2. partition the frozen snapshot into disjoint observation modes;
+3. require source-specific sampling adequacy;
+4. use the frozen M sensitivity grid without selecting M from cross-source results;
+5. fit both modes independently with the same procedure and same M;
+6. compare sealed answers on matched rows;
+7. freeze a procedure × M same-target reconstruction reference only when its
+   prospective calibration floor is met.
 
-Calibration-panel members are not confirmatory cases. Their role is to quantify ordinary reconstruction disagreement caused by changing the observation view.
+Layer 1 answers:
 
-### Layer 2 — held-out biological cross-validity
+> How much disagreement can arise when the biological target and estimator are the same but the evidence view changes?
+
+It does **not** answer how much disagreement is biologically acceptable between different species, estimands or mobility regimes.
+
+### Layer 2 — held-out biological cross-validity in a relation space
 
 Question:
 
-> When independent biology says two ecological answers should cohere, does a procedure stay within the amount of disagreement expected from Layer 1?
+> When independent biology says two role-specific ecological answers constrain one another, does the declared relation hold after each answer is estimated appropriately for its own role?
 
-Candidate relation classes include:
+For each relation, prospectively freeze:
 
-- same target from a new independent observation source;
-- soft expected concordance;
-- directional dependency (`Y requires X`);
-- mutual dependency (`X <-> Y`);
-- life-stage coupling.
+1. answer A's biological target, estimand and role-appropriate estimator;
+2. answer B's biological target, estimand and role-appropriate estimator;
+3. each role's own spatial/temporal accessibility semantics;
+4. each answer's independent construction and adequacy gate;
+5. a **relation-space adapter** declaring common relation keys, biological event,
+   spatial/temporal grain and the two projections;
+6. the hard invariant or relation-specific soft calibration.
 
-Soft relations are evaluated against the frozen procedure × M reference ceiling. Exceedance is `paired_crosscheck_attention_required`, not automatic proof that either answer is false.
+Different roles are not required to share estimator family, predictors, accessible
+area `M`, movement model, observation model or raw score scale.
 
-Hard relations retain their dedicated biological invariant semantics. For example, a complete admissible directional dependency violation is still `invariant_violated` even if generic source-calibrated discordance would otherwise look ordinary.
+Examples:
 
-### Layer 3 — process necessity by coherence intervention
+- same target from a genuinely new source: may still use Layer-1-style controlled calibration;
+- soft cross-species concordance: requires an independent relation-specific reference;
+- directional dependency (`Y requires X`): evaluate containment of the relevant dependency event after adaptation;
+- mutual dependency: evaluate two separately meaningful directed events;
+- life-stage coupling: allow stage-specific models and transition-specific relation space.
 
-Only after a procedure is coherent at baseline do process knockouts become informative.
+#### Plant–pollinator example
 
-For each frozen environmental process:
+For an obligately pollinated plant:
 
-1. remove/marginalize that process under the existing no-rescue intervention contract;
-2. recompute the paired biological answer-check without changing the relation, M, controls, or reference ceiling;
-3. ask whether a previously coherent pair becomes unusually discordant or violates a hard invariant.
+- plant answer: reproductive/persistence support from an SDM, demographic or mechanistic plant model;
+- pollinator answer: visitation/reachability support from a dynamic occupancy, movement or EOG-style model;
+- plant and pollinator may have different `M` and temporal grains;
+- relation space: for example `plant site × flowering window`;
+- hard candidate: successful pollinator-dependent reproduction requires pollinator visitation/reachability at that opportunity.
 
-This distinguishes three ideas that ordinary prediction metrics conflate:
+Raw adult plant occurrence containment is not automatically a hard invariant because a long-lived plant can remain present after local pollinator loss.
 
-- predictive adequacy;
-- cross-source reconstruction stability;
-- biological cross-coherence.
+#### Soft calibration boundary
 
-A process is scientifically interesting when removing it selectively damages the third while the comparison remains otherwise admissible.
+The Layer-1 same-target q95 is **not** automatically used for cross-role relations.
+
+Soft cross-role relations instead require a prospective relation-specific reference such as:
+
+- matched non-obligate controls;
+- shuffled partners under a frozen rule;
+- an independent relation-specific calibration panel.
+
+Hard relations use their dedicated biological invariant and do not borrow a generic soft ceiling.
+
+### Layer 3 — process necessity by relation-coherence intervention
+
+Only after a baseline relation is admissible and frozen do process interventions become informative.
+
+Intervention is role-specific. A plant environmental-process intervention and a
+pollinator movement/accessibility intervention need not be the same operation.
+
+For each prospectively declared role/process intervention:
+
+1. hold the baseline estimator, answer definition and relation adapter fixed;
+2. erase/marginalize only the declared process information without outcome-driven rescue;
+3. re-project the intervened answer to the same relation-space keys;
+4. recompute the same hard invariant or relation-specific soft cross-check;
+5. ask whether the biological relation ceases to hold or becomes unusually discordant.
+
+This separates:
+
+- target/relation observability;
+- answer construction / identifiability;
+- role-specific predictive adequacy;
+- relation-space compatibility;
+- biological cross-validity;
+- process contribution to maintaining that relation.
 
 ## Procedure-level interpretation
 
-The eight frozen Product-A procedures are not collapsed into a single calibration score. Each procedure is calibrated against its own cross-source behavior at each M.
+The eight frozen Product-A procedures remain a **Layer-1 plant same-target calibration object**. They are not a universal estimator library that every future biological partner must use.
 
-This makes cross-source coherence a procedure property:
+Layer 1 can characterize observation-view sensitivity of those procedures. It cannot establish that an animal, mobile stage, host-dependent partner or another estimand should be modeled with the same procedure.
 
-- a procedure can be predictively adequate yet observation-view-sensitive;
-- another can be predictively adequate and cross-source stable;
-- only held-out biological relations can test whether that stability transfers to external ecological constraints.
+For cross-role relations, the relevant question is instead:
 
-Layer 1 therefore cannot promote a procedure as ecologically correct by itself. It can identify procedures whose answers are unusually fragile to observation source and procedures that are suitable for stronger held-out biological testing.
+> Is each role-appropriate estimator adequate for its own answer, and do the resulting answers satisfy the independently declared biological relation after adaptation?
 
 ## Main claim if the sequence succeeds
 
-A successful paper-level result would not be "one SDM algorithm is best." It would be:
+A successful result is not "one SDM algorithm is best" and not "two dependent species should have identical suitability maps." It is:
 
-> Ecological models can be evaluated by cross-consistency among independently obtained answers. Cross-source replication calibrates ordinary reconstruction disagreement; externally known biological relations then provide held-out answer checks; process interventions reveal which environmental information is required to preserve that cross-coherence.
+> Ecological models with different estimands can be externally checked against one another when each answer is estimated independently with a role-appropriate model and then projected to a prospectively declared biological relation space. Relation failure localizes where observation, estimator, scale, omitted process or biological expectation ceases to cohere.
 
 ## Main falsification outcomes
 
-The design remains informative under failure.
-
-- If same-target cross-source answers are broadly unstable across procedures, the bottleneck is reconstruction/observation sensitivity before stronger biology is interpreted.
-- If same-target calibration is stable but held-out biological pairs diverge, the failure is relation-specific and biologically informative.
-- If baseline pairs are coherent but a process knockout creates divergence, that process is a candidate coherence-critical environmental component.
-- If all process knockouts preserve coherence, the tested processes are substitutable with respect to that biological answer-check under the frozen model set.
+- If same-target cross-source answers are unstable, reconstruction/observation sensitivity is already large.
+- If a role-specific estimator cannot construct an answer, the cell is identifiability-unresolved before cross-validity.
+- If two adequate answers cannot be mapped to a defensible common relation event, the relation is not jointly observable at that scale.
+- If an adapted hard dependency fails, compatibility under that frozen event/scale is violated.
+- If a soft cross-role relation exceeds its own independent reference, it requires attention but does not identify which answer is wrong.
+- If a frozen role-specific process intervention breaks a previously coherent relation, that process is a candidate coherence-critical component for that role.

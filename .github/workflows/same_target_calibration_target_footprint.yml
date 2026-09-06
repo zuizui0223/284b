@@ -1,0 +1,168 @@
+name: same-target-calibration-target-footprint
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_source_target_footprint_trigger_v0_1.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: product-b-v5-obligate-invariant
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify frozen target-source contract and focal registry
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json
+          from pathlib import Path
+          c=json.load(open('config/product_b_same_target_source_target_footprint_contract_v0_1.json'))
+          p=Path(c['focal_registry']['path'])
+          assert hashlib.sha256(p.read_bytes()).hexdigest()==c['focal_registry']['sha256']
+          rows=list(csv.DictReader(p.open()))
+          assert len(rows)==12
+          assert len({r['scientific_name'] for r in rows})==12
+          assert all(r['snapshot_identity_state']=='snapshot_taxonomy_identity_passed' for r in rows)
+          assert c['environmental_values_read'] is False
+          assert c['candidate_model_fitting_performed'] is False
+          assert c['paired_discordance_opened'] is False
+          PY
+
+  target-chunks:
+    needs: preflight
+    strategy:
+      fail-fast: false
+      max-parallel: 16
+      matrix:
+        chunk: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: product-b-v5-obligate-invariant
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned Product-A transport implementation
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check --quiet -e './sdmr[cloud,parquet]'
+      - name: Materialize exact non-focal target shard partition
+        run: |
+          mkdir -p target_chunk
+          sdmr-gbif-target-footprint-parallel chunk \
+            --snapshot-date 2026-08-01 \
+            --region us-east-1 \
+            --exclude-taxa registry/product_b_same_target_source_identity_pass_taxa_v0_1.csv \
+            --grid-cell-degrees 0.05 \
+            --chunk-index '${{ matrix.chunk }}' \
+            --chunk-count 16 \
+            --output target_chunk/partial.parquet \
+            --metadata target_chunk/partial.metadata.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-same-target-target-chunk-${{ matrix.chunk }}
+          path: target_chunk/
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate:
+    needs: target-chunks
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: product-b-v5-obligate-invariant
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned Product-A transport implementation
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check --quiet -e './sdmr[cloud,parquet]'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: product-b-same-target-target-chunk-*
+          path: target_parts
+      - name: Reconstruct source-independent target footprint
+        run: |
+          mkdir -p target_source results
+          sdmr-gbif-target-footprint-parallel aggregate \
+            --parts-root target_parts \
+            --snapshot-doi 10.15468/dl.fs3btq \
+            --output target_source/target_group.parquet \
+            --provenance target_source/target_group.provenance.csv
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          import pandas as pd
+          c=json.load(open('config/product_b_same_target_source_target_footprint_contract_v0_1.json'))
+          prov=pd.read_csv('target_source/target_group.provenance.csv').iloc[0]
+          target=Path('target_source/target_group.parquet')
+          citation=Path('target_source/target_group.parquet.citation.txt')
+          target_sha=hashlib.sha256(target.read_bytes()).hexdigest()
+          citation_sha=hashlib.sha256(citation.read_bytes()).hexdigest()
+          assert int(prov['excluded_taxa_count'])==12
+          assert str(prov['excluded_taxa_sha256']).lower()==c['focal_registry']['sha256']
+          assert str(prov['sampling_mode'])==c['sampling_mode']
+          assert abs(float(prov['one_per_grid_cell_degrees'])-0.05)<1e-12
+          assert int(prov['snapshot_shard_count'])==9705
+          assert int(prov['parallel_chunk_count'])==16
+          assert target_sha==str(prov['sha256']).lower()
+          receipt={
+            'result_version':'product_b_same_target_source_target_footprint_v0.1',
+            'workflow_run_id':int(os.environ['GITHUB_RUN_ID']),
+            'execution_sha':os.environ['GITHUB_SHA'],
+            'snapshot_date':'2026-08-01',
+            'snapshot_doi':'10.15468/dl.fs3btq',
+            'sdmr_git_ref':'9d2a45b56408cde8a4af41722538d0086c532cc9',
+            'focal_registry_sha256':c['focal_registry']['sha256'],
+            'excluded_focal_taxa_count':12,
+            'sampling_mode':c['sampling_mode'],
+            'grid_cell_degrees':0.05,
+            'snapshot_shard_count':9705,
+            'parallel_chunk_count':16,
+            'target_sha256':target_sha,
+            'citation_sha256':citation_sha,
+            'artifact_name':c['output_artifact_name'],
+            'source_independent_of_cross_source_predictions':True,
+            'environmental_values_read':False,
+            'candidate_model_fitting_performed':False,
+            'paired_discordance_opened':False,
+            'process_knockout_opened':False,
+          }
+          Path(c['receipt_path']).write_text(json.dumps(receipt,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(receipt,indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-same-target-target-footprint-2026-08-01
+          path: target_source/
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit immutable target-footprint receipt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_source_target_footprint_receipt_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No target-footprint receipt change to commit"
+          else
+            git commit -m "Record Layer-1 target-group footprint receipt"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi

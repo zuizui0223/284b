@@ -1,5 +1,5 @@
 {
-  "contract_version": "product_b_same_target_source_pairing_v0.1",
+  "contract_version": "product_b_same_target_source_pairing_v0.2",
   "purpose": "evaluate_sealed_independent_source_predictions_without_overclaiming_when_reference_calibration_is_incomplete",
   "input_model_fit_contract": "config/product_b_same_target_source_model_fit_contract_v0_1.json",
   "input_calibration_contract": "config/product_b_same_target_source_calibration_contract_v0_1.json",
@@ -7,8 +7,25 @@
   "pairing_key": ["taxon", "procedure", "M_km"],
   "mode_a": "PRESERVED_SPECIMEN",
   "mode_b": "HUMAN_OBSERVATION",
+  "common_comparison_rows": {
+    "same_comparison_row_ids_required": true,
+    "row_order_may_be_reordered_by_id_before_comparison": true,
+    "intersection_or_posthoc_row_drop_forbidden": true,
+    "missing_or_duplicate_comparison_row_id_state": "paired_crosscheck_unresolved"
+  },
   "primary_similarity_metric": "schoener_d",
   "primary_discordance_metric": "one_minus_schoener_d",
+  "schoener_d_semantics": {
+    "input": "sealed_ecological_suitability_scores_on_identical_common_background_rows",
+    "scores_must_be_finite": true,
+    "scores_must_be_nonnegative": true,
+    "normalize_each_source_vector_to_unit_sum": true,
+    "zero_or_nonfinite_sum_state": "paired_crosscheck_unresolved",
+    "formula": "D = 1 - 0.5 * sum_i(abs(p_i - q_i))",
+    "discordance_formula": "1 - D",
+    "expected_range": [0.0, 1.0],
+    "raw_probability_equality_not_required": true
+  },
   "secondary_descriptive_metric": "rank_profile_discordance_pair",
   "reference_ceiling_rule": {
     "minimum_complete_calibration_taxa_per_procedure_M": 30,
@@ -35,6 +52,7 @@
   "forbidden": [
     "invent_reference_ceiling_from_incomplete_panel",
     "lower_minimum_complete_taxa_after_observing_discordance",
+    "drop_or_intersect_comparison_rows_after_source_predictions_are_seen",
     "label_descriptive_high_discordance_as_attention_required_without_frozen_reference",
     "label_descriptive_low_discordance_as_consistent_without_frozen_reference",
     "use_raw_probability_equality_as_primary_answer_check",

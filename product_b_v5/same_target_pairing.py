@@ -139,8 +139,31 @@ def schoener_d_from_sealed_vectors(
     return float(min(1.0, max(0.0, d)))
 
 
+def schoener_d_if_both_answers_adequate(
+    *,
+    adequacy_a: PredictionAdequacy,
+    adequacy_b: PredictionAdequacy,
+    row_ids_a: Sequence[str],
+    scores_a: Sequence[float],
+    row_ids_b: Sequence[str],
+    scores_b: Sequence[float],
+) -> float | None:
+    """Open paired prediction discordance only after both answers pass adequacy.
+
+    If either independently fitted answer is inadequate, the sealed prediction
+    vectors are deliberately not inspected and ``None`` is returned. This keeps
+    cross-source disagreement unavailable for cells that cannot support a valid
+    answer-check in the first place.
+    """
+
+    if not adequacy_a.adequate or not adequacy_b.adequate:
+        return None
+    return schoener_d_from_sealed_vectors(row_ids_a, scores_a, row_ids_b, scores_b)
+
+
 __all__ = [
     "PredictionAdequacy",
     "evaluate_prediction_adequacy",
     "schoener_d_from_sealed_vectors",
+    "schoener_d_if_both_answers_adequate",
 ]

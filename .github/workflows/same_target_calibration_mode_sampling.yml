@@ -6,6 +6,7 @@ on:
       - product-b-v5-obligate-invariant
     paths:
       - results/product_b_same_target_source_snapshot_identity_v0_1.json
+      - config/product_b_same_target_source_sampling_trigger_v0_1.json
 
 permissions:
   contents: write

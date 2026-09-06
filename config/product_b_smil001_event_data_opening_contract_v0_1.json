@@ -1,5 +1,5 @@
 {
-  "contract_version": "product_b_smil001_event_data_opening_v0.1",
+  "contract_version": "product_b_smil001_event_data_opening_v0.2",
   "pair_id": "SMIL001",
   "purpose": "retrospective_relation_space_positive_control_and_schema_engineering_only",
   "confirmatory_biological_crosscheck_authorized": false,
@@ -63,6 +63,8 @@
       "male",
       "female"
     ],
+    "female_flower_larval_survival_reported_as_lower_not_zero": true,
+    "male_flower_identity_is_not_an_absolute_breeding_requirement": true,
     "field_bioassay_site": "Amami-Oshima",
     "field_bioassay_period": "early_to_mid_August_2025",
     "field_bioassay_primary_window": "05:48-08:43"
@@ -90,14 +92,15 @@
       "minimum_join_rule": "keys_must_be_declared_from_source_schema_before_any_event_value_is_used"
     },
     {
-      "relation_id": "midge_breeding_requires_host_male_flowers",
+      "relation_id": "midge_breeding_requires_host_floral_resource",
       "preferred_keys_if_available": [
         "island_or_site",
-        "flower_sex",
         "collection_or_oviposition_date_window"
       ],
-      "host_event": "male_flower_resource_available",
+      "required_stratifier_if_available": "flower_sex",
+      "host_event": "Smilax_insularis_flower_resource_available",
       "midge_event": "egg_larva_or_emergence_breeding_success",
+      "male_vs_female_role": "secondary_soft_performance_stratum_not_hard_requirement",
       "minimum_join_rule": "keys_must_be_declared_from_source_schema_before_any_breeding_outcome_is_used"
     }
   ],
@@ -113,12 +116,14 @@
     "whether_role_specific_answers_can_be_constructed_from_real_event_data",
     "whether_a_frozen_relation_space_adapter_is_executable",
     "whether_missing_site_time_keys_create_an_observability_stop",
-    "whether_hard_event_semantics_differ_from_raw_occurrence_semantics"
+    "whether_hard_event_semantics_differ_from_raw_occurrence_semantics",
+    "whether_male_vs_female_flower_performance_can_be_preserved_as_a_soft_stratum_without_becoming_a_false_hard_invariant"
   ],
   "retrospective_positive_control_may_not_test": [
     "prospective_confirmation_of_the_known_2026_mutualism_result",
     "general_cross_species_calibration_threshold",
     "same_target_q95_transfer",
-    "full_range_Taiwan_mutual_obligacy"
+    "full_range_Taiwan_mutual_obligacy",
+    "absolute_male_flower_requirement_for_midge_breeding"
   ]
 }

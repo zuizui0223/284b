@@ -1,5 +1,5 @@
 {
-  "contract_version": "product_b_same_target_source_pairing_v0.2",
+  "contract_version": "product_b_same_target_source_pairing_v0.3",
   "purpose": "evaluate_sealed_independent_source_predictions_without_overclaiming_when_reference_calibration_is_incomplete",
   "input_model_fit_contract": "config/product_b_same_target_source_model_fit_contract_v0_1.json",
   "input_calibration_contract": "config/product_b_same_target_source_calibration_contract_v0_1.json",
@@ -7,6 +7,13 @@
   "pairing_key": ["taxon", "procedure", "M_km"],
   "mode_a": "PRESERVED_SPECIMEN",
   "mode_b": "HUMAN_OBSERVATION",
+  "prediction_adequacy_precedes_discordance": {
+    "required": true,
+    "both_sources_must_pass_before_schoener_d_is_opened": true,
+    "inadequate_or_incomplete_source_state": "paired_crosscheck_unresolved",
+    "schoener_d_must_remain_unreported_for_inadequate_cells": true,
+    "one_minus_schoener_d_must_remain_unreported_for_inadequate_cells": true
+  },
   "common_comparison_rows": {
     "same_comparison_row_ids_required": true,
     "row_order_may_be_reordered_by_id_before_comparison": true,
@@ -50,6 +57,7 @@
   "post_outcome_procedure_selection_for_confirmatory_claim_forbidden": true,
   "process_knockout_allowed_only_after_baseline_pairing_state_is_frozen": true,
   "forbidden": [
+    "compute_or_report_paired_discordance_when_either_source_answer_is_inadequate",
     "invent_reference_ceiling_from_incomplete_panel",
     "lower_minimum_complete_taxa_after_observing_discordance",
     "drop_or_intersect_comparison_rows_after_source_predictions_are_seen",

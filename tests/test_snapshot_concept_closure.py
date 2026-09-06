@@ -34,13 +34,13 @@ class SnapshotSpeciesConceptClosureTests(unittest.TestCase):
         ]
         reviews = {
             "Example alpha Author": CurrentConceptResolution(
-                "Example alpha Author", True, "Example alpha", "100", "EXACT"
+                "Example alpha Author", True, True, "Example alpha", "100", "EXACT"
             ),
             "Oldexample alpha Author": CurrentConceptResolution(
-                "Oldexample alpha Author", True, "Example alpha", "100", "EXACT"
+                "Oldexample alpha Author", True, True, "Example alpha", "100", "EXACT"
             ),
             "Example alpha subsp. minor Author": CurrentConceptResolution(
-                "Example alpha subsp. minor Author", True, "Example alpha", "200", "EXACT"
+                "Example alpha subsp. minor Author", True, True, "Example alpha", "200", "EXACT"
             ),
         }
         decision = evaluate_snapshot_species_concept_closure(
@@ -50,6 +50,7 @@ class SnapshotSpeciesConceptClosureTests(unittest.TestCase):
         )
         self.assertTrue(decision.passed)
         self.assertEqual(decision.frozen_historical_specieskeys, ("100", "XR1"))
+        self.assertEqual(decision.current_unresolved_historical_names, ())
         self.assertEqual(decision.reasons, ())
 
     def test_one_name_resolving_to_different_species_fails_whole_key_set(self):
@@ -58,8 +59,8 @@ class SnapshotSpeciesConceptClosureTests(unittest.TestCase):
             SnapshotTaxonomyTuple("Example alpha", "XR1", "XR2", "Example beta", "SPECIES"),
         ]
         reviews = {
-            "Example alpha": CurrentConceptResolution("Example alpha", True, "Example alpha"),
-            "Example beta": CurrentConceptResolution("Example beta", True, "Example beta"),
+            "Example alpha": CurrentConceptResolution("Example alpha", True, True, "Example alpha"),
+            "Example beta": CurrentConceptResolution("Example beta", True, True, "Example beta"),
         }
         decision = evaluate_snapshot_species_concept_closure(
             current_accepted_species="Example alpha",
@@ -70,7 +71,7 @@ class SnapshotSpeciesConceptClosureTests(unittest.TestCase):
         self.assertIn("snapshot_name_resolves_to_different_current_species", decision.reasons)
         self.assertEqual(decision.frozen_historical_specieskeys, ())
 
-    def test_missing_or_unresolved_name_review_fails_closed(self):
+    def test_missing_review_fails_but_completed_historical_no_match_is_audited_not_conflict(self):
         rows = [SnapshotTaxonomyTuple("Example alpha", "100", "100", "Old alpha", "SPECIES")]
         missing = evaluate_snapshot_species_concept_closure(
             current_accepted_species="Example alpha",
@@ -80,15 +81,32 @@ class SnapshotSpeciesConceptClosureTests(unittest.TestCase):
         self.assertFalse(missing.passed)
         self.assertIn("current_taxonomy_closure_review_missing", missing.reasons)
 
-        unresolved = evaluate_snapshot_species_concept_closure(
+        historical_no_match = evaluate_snapshot_species_concept_closure(
             current_accepted_species="Example alpha",
             taxonomy_tuples=rows,
             current_name_resolutions={
-                "Old alpha": CurrentConceptResolution("Old alpha", False, None, reason="no exact current match")
+                "Old alpha": CurrentConceptResolution(
+                    "Old alpha", True, False, None, reason="completed_no_current_exact_match"
+                )
             },
         )
-        self.assertFalse(unresolved.passed)
-        self.assertIn("snapshot_name_current_taxonomy_unresolved", unresolved.reasons)
+        self.assertTrue(historical_no_match.passed)
+        self.assertEqual(historical_no_match.current_unresolved_historical_names, ("Old alpha",))
+        self.assertEqual(historical_no_match.frozen_historical_specieskeys, ("100",))
+
+    def test_incomplete_review_fails_closed(self):
+        rows = [SnapshotTaxonomyTuple("Example alpha", "100", "100", "Old alpha", "SPECIES")]
+        decision = evaluate_snapshot_species_concept_closure(
+            current_accepted_species="Example alpha",
+            taxonomy_tuples=rows,
+            current_name_resolutions={
+                "Old alpha": CurrentConceptResolution(
+                    "Old alpha", False, False, None, reason="taxonomy_transport_failure"
+                )
+            },
+        )
+        self.assertFalse(decision.passed)
+        self.assertIn("current_taxonomy_closure_review_incomplete", decision.reasons)
 
     def test_snapshot_species_field_must_equal_frozen_current_species(self):
         rows = [SnapshotTaxonomyTuple("Example beta", "100", "100", "Example beta", "SPECIES")]
@@ -96,7 +114,7 @@ class SnapshotSpeciesConceptClosureTests(unittest.TestCase):
             current_accepted_species="Example alpha",
             taxonomy_tuples=rows,
             current_name_resolutions={
-                "Example beta": CurrentConceptResolution("Example beta", True, "Example alpha")
+                "Example beta": CurrentConceptResolution("Example beta", True, True, "Example alpha")
             },
         )
         self.assertFalse(decision.passed)
@@ -108,7 +126,7 @@ class SnapshotSpeciesConceptClosureTests(unittest.TestCase):
             current_accepted_species="Example alpha",
             taxonomy_tuples=rows,
             current_name_resolutions={
-                "Example alpha": CurrentConceptResolution("Example alpha", True, "Example alpha")
+                "Example alpha": CurrentConceptResolution("Example alpha", True, True, "Example alpha")
             },
         )
         self.assertFalse(decision.passed)

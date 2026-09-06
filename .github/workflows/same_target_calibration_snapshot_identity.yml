@@ -6,6 +6,7 @@ on:
       - product-b-v5-obligate-invariant
     paths:
       - results/product_b_same_target_source_current_taxonomy_v0_1.json
+      - config/product_b_same_target_source_snapshot_identity_trigger_v0_1.json
 
 permissions:
   contents: write
@@ -33,12 +34,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --ff-only origin product-b-v5-obligate-invariant
           git add results/product_b_same_target_source_snapshot_identity_v0_1.json
           if git diff --cached --quiet; then
             echo "No snapshot identity result change to commit"
           else
             git commit -m "Record calibration panel snapshot identity audit"
+            git pull --rebase origin product-b-v5-obligate-invariant
             git push origin HEAD:product-b-v5-obligate-invariant
           fi
       - name: Upload snapshot identity audit

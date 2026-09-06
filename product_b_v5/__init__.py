@@ -47,6 +47,19 @@ from .paired_relations import (
     overlap_discordance,
     validate_paired_relation_contract,
 )
+from .relation_space import (
+    AdaptedAnswer,
+    AnswerEstimand,
+    EcologicalAnswerContract,
+    EstimatorPolicy,
+    RelationSpaceContract,
+    RelationSpaceKind,
+    RelationSpacePair,
+    align_adapted_answers,
+    directional_containment_on_relation_space,
+    validate_adapted_answer,
+    validate_relation_space_contract,
+)
 
 __all__ = [
     "CalibrationDecision",
@@ -84,4 +97,15 @@ __all__ = [
     "containment_discordance",
     "bidirectional_containment_discordance",
     "overlap_discordance",
+    "AdaptedAnswer",
+    "AnswerEstimand",
+    "EcologicalAnswerContract",
+    "EstimatorPolicy",
+    "RelationSpaceContract",
+    "RelationSpaceKind",
+    "RelationSpacePair",
+    "align_adapted_answers",
+    "directional_containment_on_relation_space",
+    "validate_adapted_answer",
+    "validate_relation_space_contract",
 ]

@@ -1,0 +1,22 @@
+{
+  "trigger_version": "product_b_same_target_source_snapshot_identity_sharded_trigger_v0.1",
+  "scientific_gate_changed": false,
+  "transport_change_only": true,
+  "reason": "single-run taxonomy-only scan remained in progress before any snapshot identity outcome was opened; fragment sharding reduces wall-clock time without changing data, name set, projected columns, or decision rule",
+  "snapshot_date": "2026-08-01",
+  "current_taxonomy_result_path": "results/product_b_same_target_source_current_taxonomy_v0_1.json",
+  "current_taxonomy_result_version": "product_b_same_target_source_current_taxonomy_v0.2",
+  "panel_size": 36,
+  "current_taxonomy_resolved": 36,
+  "frozen_fragment_shard_count": 6,
+  "fragment_assignment": "sorted_parquet_object_path_index_modulo_6",
+  "projected_columns": ["species", "specieskey", "taxonkey", "scientificname", "taxonrank"],
+  "matched_row_counts_allowed": false,
+  "coordinates_allowed": false,
+  "occurrence_identifiers_allowed": false,
+  "dataset_fields_allowed": false,
+  "paired_discordance_used_for_authorization": false,
+  "snapshot_identity_outcome_seen_before_authorization": false,
+  "sampling_authorized": false,
+  "frozen": true
+}

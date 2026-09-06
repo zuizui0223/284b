@@ -1,23 +1,43 @@
 {
-  "contract_version": "product_b_smil001_role_specific_relation_v0.1",
+  "contract_version": "product_b_smil001_role_specific_relation_v0.2",
   "pair_id": "SMIL001",
   "x_taxon": "Smilax insularis",
   "y_taxon": "Dasineura heterosmilacicola",
   "literature_basis_registry": "registry/mutual_obligacy_candidate_audit_v0_1.csv",
+  "literature_review_date": "2026-09-06",
+  "literature_sources": [
+    {
+      "doi": "10.1016/j.cub.2026.03.002",
+      "role": "plant_dependence_and_pollination_mechanism",
+      "frozen_fact": "pollination_experiments_report_that_fruit_set_depends_entirely_on_Dasineura_heterosmilacicola_and_that_male_before_female_anthesis_timing_promotes_pollen_transfer"
+    },
+    {
+      "doi": "10.3897/zookeys.1234.146453",
+      "role": "midge_breeding_resource_and_described_distribution",
+      "frozen_fact": "larvae_breed_in_fallen_male_flowers_and_feed_on_pollen_and_flower_tissue;_described_midge_distribution_is_Ryukyu_Archipelago"
+    }
+  ],
   "constraint_class": "mutual_obligacy_candidate",
-  "current_strength": "provisional_hard_pending_adversarial_specificity_review",
+  "current_strength": "provisional_hard_pending_event_specific_and_geographic_observability",
   "estimator_policy": "role_specific_estimators_allowed",
   "same_estimator_required": false,
   "same_accessible_area_required": false,
   "raw_distribution_score_comparison_forbidden": true,
+  "geographic_scope_audit": {
+    "plant_reported_scope": "Ryukyu_Archipelago_and_Taiwan",
+    "midge_described_scope": "Ryukyu_Archipelago",
+    "full_range_mutual_constraint_observable": false,
+    "taiwan_partner_status_resolved": false,
+    "hard_confirmatory_scope_must_not_exceed_verified_partner_scope": true
+  },
   "relation_directions": [
     {
       "direction_id": "plant_reproduction_requires_midge",
       "dependent_role": "plant_successful_reproduction",
       "dependent_estimand_required": "pollinator_dependent_successful_fruit_set_or_reproductive_support",
       "required_role": "midge_pollination_service",
-      "required_estimand_required": "visitation_or_pollination_service_support",
-      "relation_space": "host_reproductive_site_x_flowering_window",
+      "required_estimand_required": "effective_visitation_or_pollination_service_support",
+      "relation_space": "host_female_reproductive_site_x_flowering_window",
       "hard_event_statement": "successful_pollinator_dependent_plant_reproduction_requires_effective_midge_visitation_at_the_same_reproductive_opportunity",
       "adult_plant_occurrence_is_sufficient_dependent_answer": false,
       "midge_occurrence_is_sufficient_required_answer": false,
@@ -33,7 +53,7 @@
       "hard_event_statement": "midge_breeding_requires_available_host_male_flower_resource_at_the_same_breeding_opportunity",
       "adult_host_occurrence_is_sufficient_required_answer": false,
       "midge_occurrence_is_sufficient_dependent_answer": false,
-      "reason": "host_occurrence_does_not_establish_male_flower_availability_and_midge_occurrence_does_not_establish_breeding"
+      "reason": "host_occurrence_does_not_establish_male_flower_availability_and_midge_occurrence_does_not_establish_breeding_or_larval_development"
     }
   ],
   "role_specific_estimator_candidates": {
@@ -62,16 +82,17 @@
     "hard_midge_breeding_requires_host_male_flower_invariant",
     "mutual_hard_invariant_classification"
   ],
-  "relation_space_observability_state": "unresolved_pending_event_specific_evidence",
+  "relation_space_observability_state": "unresolved_pending_event_specific_evidence_and_verified_joint_geographic_scope",
   "hard_mutual_invariant_execution_authorized": false,
   "paired_distribution_overlap_execution_authorized_as_hard_test": false,
   "occurrence_outcomes_opened_for_this_new_contract": false,
   "next_admissible_work": [
-    "complete_adversarial_partner_specificity_review",
+    "complete_adversarial_partner_specificity_review_with_special_attention_to_Taiwan",
     "identify_event_specific_plant_reproduction_or_fruit_set_data",
     "identify_effective_midge_visitation_or_pollination_service_data",
     "identify_host_male_flower_phenology_resource_data",
     "identify_midge_breeding_or_emergence_data",
+    "freeze_joint_geographic_scope",
     "freeze_spatial_and_temporal_relation_keys_before_any_hard_outcome"
   ]
 }

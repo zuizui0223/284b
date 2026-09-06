@@ -51,9 +51,26 @@ class CalibrationFreezeTests(unittest.TestCase):
         self.assertEqual(contract["observation_mode_a"], "PRESERVED_SPECIMEN")
         self.assertEqual(contract["observation_mode_b"], "HUMAN_OBSERVATION")
         self.assertEqual(contract["reference_ceiling_rule"]["quantile"], 0.95)
+        self.assertEqual(contract["reference_ceiling_rule"]["quantile_method"], "nearest_rank")
         self.assertEqual(
-            contract["reference_ceiling_rule"]["minimum_complete_calibration_taxa"],
+            contract["reference_ceiling_rule"]["minimum_complete_calibration_taxa_per_procedure_M"],
             30,
+        )
+        self.assertTrue(
+            contract["reference_ceiling_rule"]["calibrate_separate_ceiling_for_each_procedure_and_M"]
+        )
+        procedure = contract["procedure_library_source"]
+        self.assertEqual(procedure["procedure_count"], 8)
+        self.assertEqual(procedure["strategies"], ["all", "vif", "predictive_forward", "niche_forward"])
+        self.assertEqual(contract["shared_frame_source"]["M_km"], [150, 300, 500])
+        floors = contract["source_specific_sampling_floors"]
+        self.assertEqual(
+            (
+                floors["minimum_independent_records"],
+                floors["minimum_unique_10km_cells"],
+                floors["minimum_effective_10km_cells"],
+            ),
+            (50, 30, 10.0),
         )
         source = contract["calibration_panel_source"]
         self.assertEqual(source["candidate_count"], 36)

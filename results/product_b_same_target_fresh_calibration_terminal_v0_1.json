@@ -1,0 +1,51 @@
+{
+  "result_version": "product_b_same_target_fresh_calibration_terminal_v0.1",
+  "panel": "product_b_same_target_fresh_calibration_v0.2",
+  "candidate_taxa": 36,
+  "current_taxonomy_resolved": 36,
+  "snapshot_taxonomy_tuple_present": 36,
+  "historical_names_reviewed": 1392,
+  "historical_name_review_incomplete": 0,
+  "concept_closure_passed_taxa": 25,
+  "concept_closure_unresolved_taxa": 11,
+  "frozen_minimum_complete_taxa": 30,
+  "terminal_state": "fresh_cross_source_calibration_unresolved",
+  "occurrence_sampling_authorized": false,
+  "occurrence_sampling_opened": false,
+  "model_fit_opened": false,
+  "paired_discordance_opened": false,
+  "reference_ceiling_opened": false,
+  "taxa_replaced": false,
+  "thresholds_relaxed": false,
+  "unresolved_reason_counts": {
+    "snapshot_name_resolves_to_different_current_species": 10,
+    "snapshot_taxonrank_outside_species_concept": 5,
+    "rank_ontology_only_without_current_species_conflict": 1
+  },
+  "unresolved_taxa": [
+    {"scientific_name": "Agrostis stolonifera", "reasons": ["snapshot_taxonrank_outside_species_concept", "snapshot_name_resolves_to_different_current_species"]},
+    {"scientific_name": "Alnus glutinosa", "reasons": ["snapshot_taxonrank_outside_species_concept", "snapshot_name_resolves_to_different_current_species"]},
+    {"scientific_name": "Asplenium trichomanes", "reasons": ["snapshot_name_resolves_to_different_current_species"]},
+    {"scientific_name": "Betula pubescens", "reasons": ["snapshot_taxonrank_outside_species_concept", "snapshot_name_resolves_to_different_current_species"]},
+    {"scientific_name": "Carex rostrata", "reasons": ["snapshot_name_resolves_to_different_current_species"]},
+    {"scientific_name": "Ephedra viridis", "reasons": ["snapshot_taxonrank_outside_species_concept"]},
+    {"scientific_name": "Ericameria nauseosa", "reasons": ["snapshot_name_resolves_to_different_current_species"]},
+    {"scientific_name": "Picea sitchensis", "reasons": ["snapshot_name_resolves_to_different_current_species"]},
+    {"scientific_name": "Pontederia cordata", "reasons": ["snapshot_name_resolves_to_different_current_species"]},
+    {"scientific_name": "Rosa canina", "reasons": ["snapshot_taxonrank_outside_species_concept", "snapshot_name_resolves_to_different_current_species"]},
+    {"scientific_name": "Thuja occidentalis", "reasons": ["snapshot_name_resolves_to_different_current_species"]}
+  ],
+  "engineering_interpretation": {
+    "single_specieskey_uniqueness_was_overrestrictive": true,
+    "species_concept_closure_restored_snapshot_representation_for_all_36_before_current_name_conflict_review": true,
+    "remaining_primary_bottleneck": "historical_snapshot_species_parent_contains_names_that_current_taxonomy_splits_across_multiple_species",
+    "rank_whitelist_is_a_secondary_engineering_bottleneck": true,
+    "current_panel_may_not_be_rerun_under_a_relaxed_rank_rule": true
+  },
+  "source_results": {
+    "current_taxonomy": "results/product_b_same_target_fresh_current_taxonomy_v0_1.json",
+    "snapshot_tuples": "results/product_b_same_target_fresh_snapshot_concept_tuples_v0_1.json",
+    "historical_name_review": "results/product_b_same_target_fresh_historical_name_review_v0_1.json",
+    "concept_closure": "results/product_b_same_target_fresh_snapshot_concept_closure_v0_1.json"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "contract_version": "product_b_same_target_source_process_intervention_v0.1",
+  "purpose": "test_whether_erasing_frozen_process_information_changes_cross_source_answer_coherence_without_refitting",
+  "frozen_before_baseline_paired_discordance_opened": true,
+  "input_pairing_contract": "config/product_b_same_target_source_pairing_contract_v0_1.json",
+  "input_model_fit_contract": "config/product_b_same_target_source_model_fit_contract_v0_1.json",
+  "execution_allowed_only_after_baseline_pairing_is_frozen": true,
+  "process_domains": [
+    "thermal",
+    "water",
+    "seasonality_phenology",
+    "energy_productivity",
+    "snow",
+    "wind"
+  ],
+  "all_six_domains_must_be_evaluated_for_every_structurally_evaluable_baseline_cell": true,
+  "process_registry": {
+    "repository": "zuizui0223/sdmr",
+    "git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+    "path": "configs/product_a_empirical_process_registry_v1.csv",
+    "blob_sha": "469a1ced27ff47fe6b731c26cc3b9b0f4a56d58a",
+    "sha256": "08f9a68c7854f4df40c2ec89bf287556be34b78186d3c53f9b72f11b790df95d",
+    "predictor_count": 43
+  },
+  "intervention_implementation": {
+    "repository": "zuizui0223/sdmr",
+    "git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+    "module": "sdmr.product_b_v4_surface_intervention",
+    "function": "score_with_joint_reference_marginalization",
+    "semantics": "joint_background_reference_marginalization_on_fixed_fitted_surface",
+    "max_reference_rows": 64,
+    "reference_row_selection": "deterministic_evenly_spaced_rows_after_complete_case_filter",
+    "model_refit_after_intervention": false,
+    "predictor_reselection_after_intervention": false,
+    "regularization_retuning_after_intervention": false,
+    "M_or_background_change_after_intervention": false
+  },
+  "paired_effect": {
+    "baseline_metric": "one_minus_schoener_d",
+    "intervention_metric": "one_minus_schoener_d",
+    "delta_discordance_formula": "intervention_one_minus_D - baseline_one_minus_D",
+    "positive_delta_interpretation": "erasing_process_information_increases_cross_source_discordance",
+    "negative_delta_interpretation": "erasing_process_information_decreases_cross_source_discordance",
+    "zero_delta_interpretation": "no_detectable_change_on_the_frozen_comparison_surface"
+  },
+  "structural_reporting": {
+    "process_represented_in_neither_source": "structurally_unrepresented_in_pair",
+    "process_represented_in_one_source_only": "asymmetric_process_representation",
+    "process_represented_in_both_sources": "bilateral_process_representation",
+    "structural_state_may_not_be_used_to_drop_cells_from_descriptive_inventory": true
+  },
+  "current_panel_claim_boundary": {
+    "taxa": 12,
+    "calibrated_reference_ceiling_available": false,
+    "process_necessity_label_allowed": false,
+    "descriptive_delta_discordance_allowed": true,
+    "processes_may_not_be_ranked_or_selected_for_confirmatory_claim_from_this_opened_panel": true
+  },
+  "forbidden": [
+    "choose_process_domains_after_viewing_baseline_discordance",
+    "refit_model_after_process_erasure",
+    "reselect_predictors_after_process_erasure",
+    "retune_regularization_after_process_erasure",
+    "change_M_or_background_after_baseline_pairing",
+    "drop_a_process_because_its_delta_is_small_or_inconvenient",
+    "call_positive_delta_process_necessity_without_a_prospectively_calibrated_reference",
+    "promote_the_current_12_taxon_engineering_panel_to_confirmatory_process_evidence"
+  ]
+}

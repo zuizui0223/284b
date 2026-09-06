@@ -72,6 +72,8 @@ jobs:
           merge-multiple: true
           path: artifacts/successor_snapshot_concept_shards
       - name: Union taxonomy tuples without matched-row counts
+        env:
+          PYTHONPATH: .
         run: python scripts/aggregate_same_target_successor_snapshot_concept_shards.py
       - uses: actions/upload-artifact@v4
         with:

@@ -1,0 +1,755 @@
+{
+  "calibration_sampling_feasible_at_panel_level": false,
+  "coordinates_persisted": false,
+  "minimum_complete_taxa_needed_for_cross_source_calibration": 30,
+  "model_fit_opened": false,
+  "paired_discordance_opened": false,
+  "panel_size": 36,
+  "raw_rows_persisted": false,
+  "replacement_taxa_selected": false,
+  "result_version": "product_b_same_target_source_mode_sampling_v0.1",
+  "results": [
+    {
+      "candidate_rank": 1,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Capsella bursa-pastoris",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "temperate_annual_herb"
+    },
+    {
+      "candidate_rank": 2,
+      "reasons": [
+        "snapshot_specieskey_not_unique",
+        "snapshot_taxonrank_outside_species_concept"
+      ],
+      "requested_name": "Stellaria media",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "temperate_annual_herb"
+    },
+    {
+      "candidate_rank": 3,
+      "reasons": [
+        "snapshot_specieskey_not_unique",
+        "snapshot_taxonrank_outside_species_concept"
+      ],
+      "requested_name": "Senecio vulgaris",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "temperate_annual_herb"
+    },
+    {
+      "candidate_rank": 1,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Betula pendula",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "temperate_deciduous_tree"
+    },
+    {
+      "candidate_rank": 2,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Fagus sylvatica",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "temperate_deciduous_tree"
+    },
+    {
+      "candidate_rank": 3,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Acer pseudoplatanus",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "temperate_deciduous_tree"
+    },
+    {
+      "candidate_rank": 1,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Picea abies",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "boreal_temperate_conifer"
+    },
+    {
+      "candidate_rank": 2,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Juniperus communis",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "boreal_temperate_conifer"
+    },
+    {
+      "candidate_rank": 3,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Abies alba",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "boreal_temperate_conifer"
+    },
+    {
+      "candidate_rank": 1,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Phalaris arundinacea",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "wetland_grass"
+    },
+    {
+      "candidate_rank": 2,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Glyceria maxima",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "wetland_grass"
+    },
+    {
+      "candidate_rank": 3,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Calamagrostis canadensis",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "wetland_grass"
+    },
+    {
+      "candidate_rank": 1,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Vaccinium myrtillus",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "temperate_shrub"
+    },
+    {
+      "candidate_rank": 2,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Ulex europaeus",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "temperate_shrub"
+    },
+    {
+      "candidate_rank": 3,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Rubus idaeus",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "temperate_shrub"
+    },
+    {
+      "candidate_rank": 1,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Pteridium aquilinum",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "fern"
+    },
+    {
+      "candidate_rank": 2,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Athyrium filix-femina",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "fern"
+    },
+    {
+      "candidate_rank": 3,
+      "reasons": [
+        "snapshot_specieskey_not_unique",
+        "snapshot_taxonrank_outside_species_concept"
+      ],
+      "requested_name": "Polypodium vulgare",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "fern"
+    },
+    {
+      "candidate_rank": 1,
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 311.26781090732493,
+        "independent_records": 15358,
+        "raw_records": 15775,
+        "unique_cells": 3063
+      },
+      "missing_uncertainty_human_observation": 2974,
+      "missing_uncertainty_preserved_specimen": 8601,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 784.4567329248245,
+        "independent_records": 6480,
+        "raw_records": 11420,
+        "unique_cells": 2617
+      },
+      "quality_excluded_human_observation": 417,
+      "quality_excluded_preserved_specimen": 4940,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 518,
+        "missing_decimal_coordinate": 4841,
+        "missing_projected_coordinate": 4841
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Artemisia tridentata",
+      "resolved_specieskey": "GX2B",
+      "row_identifiers_persisted": false,
+      "state": "source_mode_sampling_passed",
+      "validation_stratum": "arid_shrub"
+    },
+    {
+      "candidate_rank": 2,
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 284.62392400969173,
+        "independent_records": 10016,
+        "raw_records": 10447,
+        "unique_cells": 2131
+      },
+      "missing_uncertainty_human_observation": 2246,
+      "missing_uncertainty_preserved_specimen": 7430,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 988.1944086975815,
+        "independent_records": 4719,
+        "raw_records": 10038,
+        "unique_cells": 2228
+      },
+      "quality_excluded_human_observation": 431,
+      "quality_excluded_preserved_specimen": 5319,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 640,
+        "missing_decimal_coordinate": 5121,
+        "missing_projected_coordinate": 5121
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Atriplex canescens",
+      "resolved_specieskey": "JLB9",
+      "row_identifiers_persisted": false,
+      "state": "source_mode_sampling_passed",
+      "validation_stratum": "arid_shrub"
+    },
+    {
+      "candidate_rank": 3,
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 3,
+      "cross_mode_collision_excluded_human_observation": 4,
+      "cross_mode_collision_excluded_preserved_specimen": 4,
+      "human_observation": {
+        "collision_excluded_records": 4,
+        "effective_cells": 64.25903483776543,
+        "independent_records": 28681,
+        "raw_records": 29271,
+        "unique_cells": 1471
+      },
+      "missing_uncertainty_human_observation": 10170,
+      "missing_uncertainty_preserved_specimen": 3298,
+      "preserved_specimen": {
+        "collision_excluded_records": 4,
+        "effective_cells": 408.4960324256437,
+        "independent_records": 2675,
+        "raw_records": 4330,
+        "unique_cells": 935
+      },
+      "quality_excluded_human_observation": 586,
+      "quality_excluded_preserved_specimen": 1651,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 617,
+        "missing_decimal_coordinate": 1628,
+        "missing_projected_coordinate": 1628
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Encelia farinosa",
+      "resolved_specieskey": "39N69",
+      "row_identifiers_persisted": false,
+      "state": "source_mode_sampling_passed",
+      "validation_stratum": "arid_shrub"
+    },
+    {
+      "candidate_rank": 1,
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 6,
+      "cross_mode_collision_excluded_human_observation": 23,
+      "cross_mode_collision_excluded_preserved_specimen": 24,
+      "human_observation": {
+        "collision_excluded_records": 23,
+        "effective_cells": 15.74254639961006,
+        "independent_records": 26385,
+        "raw_records": 27771,
+        "unique_cells": 1090
+      },
+      "missing_uncertainty_human_observation": 21668,
+      "missing_uncertainty_preserved_specimen": 6351,
+      "preserved_specimen": {
+        "collision_excluded_records": 24,
+        "effective_cells": 79.84425494253148,
+        "independent_records": 3654,
+        "raw_records": 7327,
+        "unique_cells": 1076
+      },
+      "quality_excluded_human_observation": 1363,
+      "quality_excluded_preserved_specimen": 3649,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 464,
+        "missing_decimal_coordinate": 4551,
+        "missing_projected_coordinate": 4551
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Avicennia germinans",
+      "resolved_specieskey": "K35N",
+      "row_identifiers_persisted": false,
+      "state": "source_mode_sampling_passed",
+      "validation_stratum": "tropical_mangrove"
+    },
+    {
+      "candidate_rank": 2,
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 412.5993251964172,
+        "independent_records": 27015,
+        "raw_records": 27230,
+        "unique_cells": 1824
+      },
+      "missing_uncertainty_human_observation": 3218,
+      "missing_uncertainty_preserved_specimen": 3500,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 327.10009954651036,
+        "independent_records": 2432,
+        "raw_records": 4702,
+        "unique_cells": 973
+      },
+      "quality_excluded_human_observation": 215,
+      "quality_excluded_preserved_specimen": 2270,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 350,
+        "missing_decimal_coordinate": 2135,
+        "missing_projected_coordinate": 2135
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Avicennia marina",
+      "resolved_specieskey": "K35T",
+      "row_identifiers_persisted": false,
+      "state": "source_mode_sampling_passed",
+      "validation_stratum": "tropical_mangrove"
+    },
+    {
+      "candidate_rank": 3,
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 5,
+      "cross_mode_collision_excluded_human_observation": 6,
+      "cross_mode_collision_excluded_preserved_specimen": 6,
+      "human_observation": {
+        "collision_excluded_records": 6,
+        "effective_cells": 10.130061764488744,
+        "independent_records": 23623,
+        "raw_records": 25648,
+        "unique_cells": 1086
+      },
+      "missing_uncertainty_human_observation": 21381,
+      "missing_uncertainty_preserved_specimen": 5658,
+      "preserved_specimen": {
+        "collision_excluded_records": 6,
+        "effective_cells": 250.4357423502798,
+        "independent_records": 3243,
+        "raw_records": 6616,
+        "unique_cells": 1155
+      },
+      "quality_excluded_human_observation": 2019,
+      "quality_excluded_preserved_specimen": 3367,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 207,
+        "missing_decimal_coordinate": 5183,
+        "missing_projected_coordinate": 5183
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Laguncularia racemosa",
+      "resolved_specieskey": "3RXYC",
+      "row_identifiers_persisted": false,
+      "state": "source_mode_sampling_passed",
+      "validation_stratum": "tropical_mangrove"
+    },
+    {
+      "candidate_rank": 1,
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 84.08738113595476,
+        "independent_records": 1144,
+        "raw_records": 1262,
+        "unique_cells": 381
+      },
+      "missing_uncertainty_human_observation": 360,
+      "missing_uncertainty_preserved_specimen": 1079,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 91.17721518987342,
+        "independent_records": 294,
+        "raw_records": 1138,
+        "unique_cells": 169
+      },
+      "quality_excluded_human_observation": 118,
+      "quality_excluded_preserved_specimen": 844,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 50,
+        "missing_decimal_coordinate": 912,
+        "missing_projected_coordinate": 912
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Nothofagus antarctica",
+      "resolved_specieskey": "47SYY",
+      "row_identifiers_persisted": false,
+      "state": "source_mode_sampling_passed",
+      "validation_stratum": "southern_temperate_tree"
+    },
+    {
+      "candidate_rank": 2,
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 21.949569598992234,
+        "independent_records": 723,
+        "raw_records": 786,
+        "unique_cells": 169
+      },
+      "missing_uncertainty_human_observation": 204,
+      "missing_uncertainty_preserved_specimen": 567,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 36.01639344262295,
+        "independent_records": 169,
+        "raw_records": 592,
+        "unique_cells": 81
+      },
+      "quality_excluded_human_observation": 63,
+      "quality_excluded_preserved_specimen": 423,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 25,
+        "missing_decimal_coordinate": 461,
+        "missing_projected_coordinate": 461
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Nothofagus betuloides",
+      "resolved_specieskey": "V5FNY",
+      "row_identifiers_persisted": false,
+      "state": "source_mode_sampling_passed",
+      "validation_stratum": "southern_temperate_tree"
+    },
+    {
+      "candidate_rank": 3,
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 1,
+      "cross_mode_collision_excluded_human_observation": 1,
+      "cross_mode_collision_excluded_preserved_specimen": 1,
+      "human_observation": {
+        "collision_excluded_records": 1,
+        "effective_cells": 68.6842499501981,
+        "independent_records": 138151,
+        "raw_records": 138308,
+        "unique_cells": 3244
+      },
+      "missing_uncertainty_human_observation": 13045,
+      "missing_uncertainty_preserved_specimen": 2998,
+      "preserved_specimen": {
+        "collision_excluded_records": 1,
+        "effective_cells": 268.29348869088415,
+        "independent_records": 2798,
+        "raw_records": 5040,
+        "unique_cells": 958
+      },
+      "quality_excluded_human_observation": 156,
+      "quality_excluded_preserved_specimen": 2241,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 183,
+        "missing_decimal_coordinate": 2221,
+        "missing_projected_coordinate": 2221
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Eucalyptus globulus",
+      "resolved_specieskey": "3BPZ6",
+      "row_identifiers_persisted": false,
+      "state": "source_mode_sampling_passed",
+      "validation_stratum": "southern_temperate_tree"
+    },
+    {
+      "candidate_rank": 1,
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 213.7193374140294,
+        "independent_records": 8302,
+        "raw_records": 8538,
+        "unique_cells": 1721
+      },
+      "missing_uncertainty_human_observation": 2104,
+      "missing_uncertainty_preserved_specimen": 3906,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 41.54416906597991,
+        "independent_records": 2935,
+        "raw_records": 5112,
+        "unique_cells": 927
+      },
+      "quality_excluded_human_observation": 236,
+      "quality_excluded_preserved_specimen": 2177,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 265,
+        "missing_decimal_coordinate": 2157,
+        "missing_projected_coordinate": 2157
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Abies lasiocarpa",
+      "resolved_specieskey": "8KDX",
+      "row_identifiers_persisted": false,
+      "state": "source_mode_sampling_passed",
+      "validation_stratum": "montane_tree"
+    },
+    {
+      "candidate_rank": 2,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Pinus cembra",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "montane_tree"
+    },
+    {
+      "candidate_rank": 3,
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 84.41966644026866,
+        "independent_records": 2365,
+        "raw_records": 2372,
+        "unique_cells": 288
+      },
+      "missing_uncertainty_human_observation": 40,
+      "missing_uncertainty_preserved_specimen": 237,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 56.92471769134253,
+        "independent_records": 426,
+        "raw_records": 575,
+        "unique_cells": 142
+      },
+      "quality_excluded_human_observation": 7,
+      "quality_excluded_preserved_specimen": 149,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 35,
+        "missing_decimal_coordinate": 121,
+        "missing_projected_coordinate": 121
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Eucalyptus delegatensis",
+      "resolved_specieskey": "6GSMS",
+      "row_identifiers_persisted": false,
+      "state": "source_mode_sampling_passed",
+      "validation_stratum": "montane_tree"
+    },
+    {
+      "candidate_rank": 1,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Picea glauca",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "boreal_conifer"
+    },
+    {
+      "candidate_rank": 2,
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 758.8558397542492,
+        "independent_records": 17289,
+        "raw_records": 18622,
+        "unique_cells": 4534
+      },
+      "missing_uncertainty_human_observation": 3536,
+      "missing_uncertainty_preserved_specimen": 4760,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 889.0652364273205,
+        "independent_records": 2850,
+        "raw_records": 5906,
+        "unique_cells": 1821
+      },
+      "quality_excluded_human_observation": 1333,
+      "quality_excluded_preserved_specimen": 3056,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 1404,
+        "missing_decimal_coordinate": 3017,
+        "missing_projected_coordinate": 3017
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Larix laricina",
+      "resolved_specieskey": "6NYVX",
+      "row_identifiers_persisted": false,
+      "state": "source_mode_sampling_passed",
+      "validation_stratum": "boreal_conifer"
+    },
+    {
+      "candidate_rank": 3,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Pinus banksiana",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "boreal_conifer"
+    },
+    {
+      "candidate_rank": 1,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Typha angustifolia",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "wetland_emergent"
+    },
+    {
+      "candidate_rank": 2,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Iris pseudacorus",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "wetland_emergent"
+    },
+    {
+      "candidate_rank": 3,
+      "reasons": [
+        "snapshot_specieskey_not_unique"
+      ],
+      "requested_name": "Schoenoplectus tabernaemontani",
+      "state": "unresolved_snapshot_taxonomy_identity",
+      "validation_stratum": "wetland_emergent"
+    }
+  ],
+  "row_identifiers_persisted": false,
+  "snapshot_identity_passed_entering_sampling": 12,
+  "source_mode_sampling_passed": 12,
+  "source_mode_sampling_unresolved": 0,
+  "stratum_summary": {
+    "arid_shrub": {
+      "panel": 3,
+      "sampling_passed": 3,
+      "sampling_unresolved_or_not_entered": 0
+    },
+    "boreal_conifer": {
+      "panel": 3,
+      "sampling_passed": 1,
+      "sampling_unresolved_or_not_entered": 2
+    },
+    "boreal_temperate_conifer": {
+      "panel": 3,
+      "sampling_passed": 0,
+      "sampling_unresolved_or_not_entered": 3
+    },
+    "fern": {
+      "panel": 3,
+      "sampling_passed": 0,
+      "sampling_unresolved_or_not_entered": 3
+    },
+    "montane_tree": {
+      "panel": 3,
+      "sampling_passed": 2,
+      "sampling_unresolved_or_not_entered": 1
+    },
+    "southern_temperate_tree": {
+      "panel": 3,
+      "sampling_passed": 3,
+      "sampling_unresolved_or_not_entered": 0
+    },
+    "temperate_annual_herb": {
+      "panel": 3,
+      "sampling_passed": 0,
+      "sampling_unresolved_or_not_entered": 3
+    },
+    "temperate_deciduous_tree": {
+      "panel": 3,
+      "sampling_passed": 0,
+      "sampling_unresolved_or_not_entered": 3
+    },
+    "temperate_shrub": {
+      "panel": 3,
+      "sampling_passed": 0,
+      "sampling_unresolved_or_not_entered": 3
+    },
+    "tropical_mangrove": {
+      "panel": 3,
+      "sampling_passed": 3,
+      "sampling_unresolved_or_not_entered": 0
+    },
+    "wetland_emergent": {
+      "panel": 3,
+      "sampling_passed": 0,
+      "sampling_unresolved_or_not_entered": 3
+    },
+    "wetland_grass": {
+      "panel": 3,
+      "sampling_passed": 0,
+      "sampling_unresolved_or_not_entered": 3
+    }
+  },
+  "upstream_taxonomy_or_identity_not_entered": 24
+}

@@ -48,7 +48,9 @@
     "minimum_independent_records": 50,
     "minimum_unique_10km_cells": 30,
     "minimum_effective_10km_cells": 10.0,
-    "must_pass_separately_in_both_observation_modes": true
+    "must_pass_separately_in_both_observation_modes": true,
+    "cross_mode_asymmetry_ceiling_applied": false,
+    "rationale": "Layer-1 calibration intentionally measures ordinary disagreement when observation systems differ. Minimum evidence quality is required independently in both modes, but count/cell/effective-cell ratios between modes are not themselves exclusion criteria."
   },
   "primary_discordance_metric": "one_minus_schoener_d",
   "secondary_descriptive_metric": "rank_profile_discordance_pair",
@@ -97,6 +99,7 @@
     "replace_failed_calibration_taxon_after_discordance_access",
     "relax_source_specific_sampling_floors_after_outcome_access",
     "fit_one_observation_mode_using_the_other_modes_occurrences_or_predictions",
+    "add_cross_mode_asymmetry_exclusion_after_discordance_access",
     "select_best_procedure_from_the_same_calibration_outcome_and_call_it_confirmatory",
     "select_best_M_from_cross_source_discordance",
     "collapse_procedure_or_M_specific_discordance_into_posthoc_weighted_score",

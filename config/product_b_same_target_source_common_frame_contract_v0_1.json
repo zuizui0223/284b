@@ -15,6 +15,8 @@
     "pooled_geometry_thinning_cell_degrees": 0.05,
     "pooled_geometry_one_point_per_cell": true,
     "record_frequencies_may_not_weight_common_geometry": true,
+    "environmental_values_not_used_to_construct_M": true,
+    "predictions_not_used_to_construct_M": true,
     "environmental_values_not_used_to_construct_M_or_blocks": true,
     "predictions_not_used_to_construct_M_or_blocks": true,
     "coordinate_pooling_may_not_select_taxa_procedures_or_M": true,

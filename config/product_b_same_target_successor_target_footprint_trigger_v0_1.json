@@ -1,0 +1,12 @@
+{
+  "authorization": "construct_successor_source_independent_target_footprint",
+  "target_footprint_contract": "config/product_b_same_target_successor_target_footprint_contract_v0_1.json",
+  "exclude_all_72_frozen_candidates": true,
+  "failed_candidates_may_not_return_to_background": true,
+  "snapshot_date": "2026-08-01",
+  "grid_cell_degrees": 0.05,
+  "environmental_values_authorized": false,
+  "model_fit_authorized": false,
+  "paired_discordance_authorized": false,
+  "process_intervention_authorized": false
+}

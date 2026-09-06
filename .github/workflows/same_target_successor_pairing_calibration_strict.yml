@@ -1,0 +1,90 @@
+name: same-target-successor-pairing-calibration-strict
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_successor_pairing_calibration_strict_trigger_v0_1.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  calibrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify strict prediction-opening boundary
+        id: trigger
+        run: |
+          python -m pip install --disable-pip-version-check --quiet pandas pyarrow numpy
+          python -m py_compile scripts/calibrate_same_target_successor_pairing_strict.py product_b_v5/prediction_opening.py
+          test ! -f config/product_b_same_target_successor_pairing_calibration_trigger_v0_1.json
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          c=json.load(open('config/product_b_same_target_successor_pairing_calibration_contract_v0_1.json'))
+          f=json.load(open('results/product_b_same_target_successor_layer1_fit_v0_1.json'))
+          q=json.load(open('results/product_b_same_target_successor_reference_feasibility_v0_1.json'))
+          t=json.load(open('config/product_b_same_target_successor_pairing_calibration_strict_trigger_v0_1.json'))
+          assert c['minimum_distinct_calibration_taxa_per_reference_cell']==30
+          assert c['reference_quantile']==0.95 and c['quantile_method']=='nearest_rank'
+          assert f['prediction_surfaces_opened_for_pairing'] is False
+          assert f['paired_discordance_opened'] is False
+          assert f['process_knockout_opened'] is False
+          assert q['paired_prediction_surfaces_read'] is False
+          assert q['schoener_d_computed'] is False
+          assert q['reference_ceiling_computed'] is False
+          assert int(t['successor_fit_workflow_run_id']) > 0
+          assert int(t['reference_feasibility_workflow_run_id']) > 0
+          assert t['heldout_12_paired_discordance_read'] is False
+          assert t['process_knockout_opened'] is False
+          print('run_id='+str(int(t['successor_fit_workflow_run_id'])))
+          PY
+      - name: Download sealed successor fit artifacts
+        uses: actions/download-artifact@v4
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.trigger.outputs.run_id }}
+          pattern: product-b-successor-layer1-fit-taxon-*
+          path: fit_artifacts
+      - name: Open only pre-authorized prediction cells and freeze references
+        env:
+          PYTHONPATH: .
+        run: |
+          python scripts/calibrate_same_target_successor_pairing_strict.py \
+            --input-root fit_artifacts \
+            --fit-audit results/product_b_same_target_successor_layer1_fit_v0_1.json \
+            --output-cells results/product_b_same_target_successor_pairing_cells_v0_1.csv \
+            --output-reference results/product_b_same_target_successor_reference_ceiling_v0_1.csv \
+            --output-summary results/product_b_same_target_successor_pairing_calibration_v0_1.json
+      - name: Upload strict successor reference artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-pairing-calibration-strict
+          path: |
+            results/product_b_same_target_successor_pairing_cells_v0_1.csv
+            results/product_b_same_target_successor_reference_ceiling_v0_1.csv
+            results/product_b_same_target_successor_pairing_calibration_v0_1.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit strict successor reference calibration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_successor_pairing_cells_v0_1.csv results/product_b_same_target_successor_reference_ceiling_v0_1.csv results/product_b_same_target_successor_pairing_calibration_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No strict successor reference calibration change"
+          else
+            git commit -m "Record strict successor reference calibration"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi

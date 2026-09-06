@@ -26,6 +26,15 @@ from .mutual import (
     mutual_obligacy_containment,
     rank_profile_discordance_pair,
 )
+from .paired_relations import (
+    PairedRelationContract,
+    PairedRelationKind,
+    RelationStrength,
+    bidirectional_containment_discordance,
+    containment_discordance,
+    overlap_discordance,
+    validate_paired_relation_contract,
+)
 
 __all__ = [
     "PairedAnswerCheckDecision",
@@ -48,4 +57,11 @@ __all__ = [
     "classify_mutual_obligacy",
     "mutual_obligacy_containment",
     "rank_profile_discordance_pair",
+    "PairedRelationContract",
+    "PairedRelationKind",
+    "RelationStrength",
+    "validate_paired_relation_contract",
+    "containment_discordance",
+    "bidirectional_containment_discordance",
+    "overlap_discordance",
 ]

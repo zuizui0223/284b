@@ -18,5 +18,6 @@
   "current_layer1_paired_outcomes_read": false,
   "current_layer1_process_outcomes_read": false,
   "taxa_replaced": false,
-  "scientific_thresholds_changed": false
+  "scientific_thresholds_changed": false,
+  "transport_execution_revision": "parallel-review-v0.2"
 }

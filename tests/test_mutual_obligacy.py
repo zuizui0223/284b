@@ -20,7 +20,7 @@ class MutualObligacyTests(unittest.TestCase):
     def test_bidirectional_containment_passes_when_supports_are_compatible(self):
         x = (0.45, 0.35, 0.15, 0.05)
         y = (0.50, 0.30, 0.15, 0.05)
-        containment = mutual_obligacy_containment(x, y, 0.80)
+        containment = mutual_obligacy_containment(x, y, 0.90)
 
         decision = classify_mutual_obligacy(
             containment_y_in_x=containment.y_in_x,

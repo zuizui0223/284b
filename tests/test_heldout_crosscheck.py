@@ -23,15 +23,25 @@ class HeldoutCrosscheckTests(unittest.TestCase):
                 reference_ceiling=0.20,
             )
 
-    def test_missing_reference_cannot_generate_label(self):
+    def test_missing_reference_keeps_discordance_closed(self):
         decision = classify_heldout_crosscheck(
             both_answers_adequate=True,
-            discordance=0.10,
+            discordance=None,
             reference_state="reference_ceiling_unresolved",
             reference_ceiling=None,
         )
         self.assertEqual(decision.state, "paired_crosscheck_calibration_unresolved")
+        self.assertIsNone(decision.discordance)
         self.assertIsNone(decision.exceedance)
+
+    def test_missing_reference_rejects_opened_discordance(self):
+        with self.assertRaises(ValueError):
+            classify_heldout_crosscheck(
+                both_answers_adequate=True,
+                discordance=0.10,
+                reference_state="reference_ceiling_unresolved",
+                reference_ceiling=None,
+            )
 
     def test_equal_to_ceiling_is_consistent(self):
         decision = classify_heldout_crosscheck(

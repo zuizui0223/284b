@@ -1,0 +1,1144 @@
+{
+  "all_fit_cells_sealed": false,
+  "claim_strength": "engineering_descriptive_only_until_pairing_and_no_calibrated_soft_ceiling_with_12_taxa",
+  "expected_fit_cells": 576,
+  "paired_discordance_opened": false,
+  "prediction_surfaces_opened_for_pairing": false,
+  "process_knockout_opened": false,
+  "reference_ceiling_opened": false,
+  "result_version": "product_b_same_target_source_layer1_baseline_fit_v0.1",
+  "sealed_fit_cells": 490,
+  "taxa": [
+    {
+      "M_km": [
+        150,
+        300,
+        500
+      ],
+      "errors": [],
+      "expected_fit_cells": 48,
+      "occurrence_coordinates_persisted": false,
+      "paired_discordance_computed": false,
+      "prediction_surface_sha256": "12e79d7c47a31e5afa34c8e0430535ef8850bc5b0aeced6b328c5a74c0ec0732",
+      "prediction_surfaces_sealed": true,
+      "procedure_count": 8,
+      "process_knockout_computed": false,
+      "raw_occurrence_rows_persisted": false,
+      "reference_ceiling_read": false,
+      "result_version": "product_b_same_target_source_layer1_baseline_fit_taxon_v0.1",
+      "same_background_rows_used_for_both_sources": true,
+      "sealed_fit_cells": 48,
+      "shared_source_blind_M_and_block_geometry": true,
+      "source_modes": [
+        "PRESERVED_SPECIMEN",
+        "HUMAN_OBSERVATION"
+      ],
+      "specieskey": "GX2B",
+      "taxon": "Artemisia tridentata",
+      "taxon_index": 0,
+      "unresolved_fit_cells": 0
+    },
+    {
+      "M_km": [
+        150,
+        300,
+        500
+      ],
+      "errors": [],
+      "expected_fit_cells": 48,
+      "occurrence_coordinates_persisted": false,
+      "paired_discordance_computed": false,
+      "prediction_surface_sha256": "0704fb82449453975f3d2d48bfeee16fb03321ed35ffb243b024d1e7812b436c",
+      "prediction_surfaces_sealed": true,
+      "procedure_count": 8,
+      "process_knockout_computed": false,
+      "raw_occurrence_rows_persisted": false,
+      "reference_ceiling_read": false,
+      "result_version": "product_b_same_target_source_layer1_baseline_fit_taxon_v0.1",
+      "same_background_rows_used_for_both_sources": true,
+      "sealed_fit_cells": 48,
+      "shared_source_blind_M_and_block_geometry": true,
+      "source_modes": [
+        "PRESERVED_SPECIMEN",
+        "HUMAN_OBSERVATION"
+      ],
+      "specieskey": "JLB9",
+      "taxon": "Atriplex canescens",
+      "taxon_index": 1,
+      "unresolved_fit_cells": 0
+    },
+    {
+      "M_km": [
+        150,
+        300,
+        500
+      ],
+      "errors": [
+        {
+          "M_km": 150,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "39N69",
+          "taxon": "Encelia farinosa"
+        },
+        {
+          "M_km": 150,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "39N69",
+          "taxon": "Encelia farinosa"
+        },
+        {
+          "M_km": 300,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "39N69",
+          "taxon": "Encelia farinosa"
+        },
+        {
+          "M_km": 300,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "39N69",
+          "taxon": "Encelia farinosa"
+        },
+        {
+          "M_km": 500,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "39N69",
+          "taxon": "Encelia farinosa"
+        },
+        {
+          "M_km": 500,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "39N69",
+          "taxon": "Encelia farinosa"
+        }
+      ],
+      "expected_fit_cells": 48,
+      "occurrence_coordinates_persisted": false,
+      "paired_discordance_computed": false,
+      "prediction_surface_sha256": "d7dae41e8a8228c222c614f17ea7cc4c74a3897dfdd3ed622dc310afb0d8fe2c",
+      "prediction_surfaces_sealed": true,
+      "procedure_count": 8,
+      "process_knockout_computed": false,
+      "raw_occurrence_rows_persisted": false,
+      "reference_ceiling_read": false,
+      "result_version": "product_b_same_target_source_layer1_baseline_fit_taxon_v0.1",
+      "same_background_rows_used_for_both_sources": true,
+      "sealed_fit_cells": 42,
+      "shared_source_blind_M_and_block_geometry": true,
+      "source_modes": [
+        "PRESERVED_SPECIMEN",
+        "HUMAN_OBSERVATION"
+      ],
+      "specieskey": "39N69",
+      "taxon": "Encelia farinosa",
+      "taxon_index": 2,
+      "unresolved_fit_cells": 6
+    },
+    {
+      "M_km": [
+        150,
+        300,
+        500
+      ],
+      "errors": [
+        {
+          "M_km": 150,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C0.1_degree1",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 150,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 150,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C1_degree2",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 150,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 150,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 150,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 150,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 150,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C0.1_degree1",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C0.1_degree1",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 300,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C1_degree2",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C1_degree2",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 300,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 300,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 300,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C0.1_degree1",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C0.1_degree1",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 500,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C1_degree2",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C1_degree2",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 500,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 500,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        },
+        {
+          "M_km": 500,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35N",
+          "taxon": "Avicennia germinans"
+        }
+      ],
+      "expected_fit_cells": 48,
+      "occurrence_coordinates_persisted": false,
+      "paired_discordance_computed": false,
+      "prediction_surface_sha256": "dc09d9e0dc7b627f59b8945a217489bc51112a41a6a860c4dd1d6aabfcb013db",
+      "prediction_surfaces_sealed": true,
+      "procedure_count": 8,
+      "process_knockout_computed": false,
+      "raw_occurrence_rows_persisted": false,
+      "reference_ceiling_read": false,
+      "result_version": "product_b_same_target_source_layer1_baseline_fit_taxon_v0.1",
+      "same_background_rows_used_for_both_sources": true,
+      "sealed_fit_cells": 16,
+      "shared_source_blind_M_and_block_geometry": true,
+      "source_modes": [
+        "PRESERVED_SPECIMEN",
+        "HUMAN_OBSERVATION"
+      ],
+      "specieskey": "K35N",
+      "taxon": "Avicennia germinans",
+      "taxon_index": 3,
+      "unresolved_fit_cells": 32
+    },
+    {
+      "M_km": [
+        150,
+        300,
+        500
+      ],
+      "errors": [
+        {
+          "M_km": 150,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 150,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 150,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 150,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 150,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 150,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 150,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 150,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 300,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 300,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 300,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 300,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 500,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        },
+        {
+          "M_km": 500,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "K35T",
+          "taxon": "Avicennia marina"
+        }
+      ],
+      "expected_fit_cells": 48,
+      "occurrence_coordinates_persisted": false,
+      "paired_discordance_computed": false,
+      "prediction_surface_sha256": "bed8d9200c8e2206b9f058e762c8940e18a5cef893923d4a10aacaccc2fc28a0",
+      "prediction_surfaces_sealed": true,
+      "procedure_count": 8,
+      "process_knockout_computed": false,
+      "raw_occurrence_rows_persisted": false,
+      "reference_ceiling_read": false,
+      "result_version": "product_b_same_target_source_layer1_baseline_fit_taxon_v0.1",
+      "same_background_rows_used_for_both_sources": true,
+      "sealed_fit_cells": 26,
+      "shared_source_blind_M_and_block_geometry": true,
+      "source_modes": [
+        "PRESERVED_SPECIMEN",
+        "HUMAN_OBSERVATION"
+      ],
+      "specieskey": "K35T",
+      "taxon": "Avicennia marina",
+      "taxon_index": 4,
+      "unresolved_fit_cells": 22
+    },
+    {
+      "M_km": [
+        150,
+        300,
+        500
+      ],
+      "errors": [
+        {
+          "M_km": 150,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 150,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 150,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 150,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 150,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 150,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 150,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 150,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 300,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 300,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 300,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 500,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "all|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 500,
+          "error_message": "Not enough complete presence/background rows to fit model.",
+          "error_type": "ValueError",
+          "procedure": "vif|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        },
+        {
+          "M_km": 500,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3RXYC",
+          "taxon": "Laguncularia racemosa"
+        }
+      ],
+      "expected_fit_cells": 48,
+      "occurrence_coordinates_persisted": false,
+      "paired_discordance_computed": false,
+      "prediction_surface_sha256": "41ab4d5d5c64d7fbb4e8304263049565e58f080b2b566b616eab963d81fe5e76",
+      "prediction_surfaces_sealed": true,
+      "procedure_count": 8,
+      "process_knockout_computed": false,
+      "raw_occurrence_rows_persisted": false,
+      "reference_ceiling_read": false,
+      "result_version": "product_b_same_target_source_layer1_baseline_fit_taxon_v0.1",
+      "same_background_rows_used_for_both_sources": true,
+      "sealed_fit_cells": 28,
+      "shared_source_blind_M_and_block_geometry": true,
+      "source_modes": [
+        "PRESERVED_SPECIMEN",
+        "HUMAN_OBSERVATION"
+      ],
+      "specieskey": "3RXYC",
+      "taxon": "Laguncularia racemosa",
+      "taxon_index": 5,
+      "unresolved_fit_cells": 20
+    },
+    {
+      "M_km": [
+        150,
+        300,
+        500
+      ],
+      "errors": [],
+      "expected_fit_cells": 48,
+      "occurrence_coordinates_persisted": false,
+      "paired_discordance_computed": false,
+      "prediction_surface_sha256": "c85a67826b5ee4711fb8708b96fdb72f3c1b0f23745c7e8f9947de8d9384b84d",
+      "prediction_surfaces_sealed": true,
+      "procedure_count": 8,
+      "process_knockout_computed": false,
+      "raw_occurrence_rows_persisted": false,
+      "reference_ceiling_read": false,
+      "result_version": "product_b_same_target_source_layer1_baseline_fit_taxon_v0.1",
+      "same_background_rows_used_for_both_sources": true,
+      "sealed_fit_cells": 48,
+      "shared_source_blind_M_and_block_geometry": true,
+      "source_modes": [
+        "PRESERVED_SPECIMEN",
+        "HUMAN_OBSERVATION"
+      ],
+      "specieskey": "47SYY",
+      "taxon": "Nothofagus antarctica",
+      "taxon_index": 6,
+      "unresolved_fit_cells": 0
+    },
+    {
+      "M_km": [
+        150,
+        300,
+        500
+      ],
+      "errors": [],
+      "expected_fit_cells": 48,
+      "occurrence_coordinates_persisted": false,
+      "paired_discordance_computed": false,
+      "prediction_surface_sha256": "5d4e3afe60c5903f2c7be1d323086d41180f240f972a7d95d7b7bc94f75e9fe1",
+      "prediction_surfaces_sealed": true,
+      "procedure_count": 8,
+      "process_knockout_computed": false,
+      "raw_occurrence_rows_persisted": false,
+      "reference_ceiling_read": false,
+      "result_version": "product_b_same_target_source_layer1_baseline_fit_taxon_v0.1",
+      "same_background_rows_used_for_both_sources": true,
+      "sealed_fit_cells": 48,
+      "shared_source_blind_M_and_block_geometry": true,
+      "source_modes": [
+        "PRESERVED_SPECIMEN",
+        "HUMAN_OBSERVATION"
+      ],
+      "specieskey": "V5FNY",
+      "taxon": "Nothofagus betuloides",
+      "taxon_index": 7,
+      "unresolved_fit_cells": 0
+    },
+    {
+      "M_km": [
+        150,
+        300,
+        500
+      ],
+      "errors": [
+        {
+          "M_km": 300,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3BPZ6",
+          "taxon": "Eucalyptus globulus"
+        },
+        {
+          "M_km": 300,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3BPZ6",
+          "taxon": "Eucalyptus globulus"
+        },
+        {
+          "M_km": 500,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3BPZ6",
+          "taxon": "Eucalyptus globulus"
+        },
+        {
+          "M_km": 500,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "HUMAN_OBSERVATION",
+          "specieskey": "3BPZ6",
+          "taxon": "Eucalyptus globulus"
+        }
+      ],
+      "expected_fit_cells": 48,
+      "occurrence_coordinates_persisted": false,
+      "paired_discordance_computed": false,
+      "prediction_surface_sha256": "a4000f44e9bb39215a9565ba498d83725cf5d999d9aa6a0fe3302bbd24d1bc3d",
+      "prediction_surfaces_sealed": true,
+      "procedure_count": 8,
+      "process_knockout_computed": false,
+      "raw_occurrence_rows_persisted": false,
+      "reference_ceiling_read": false,
+      "result_version": "product_b_same_target_source_layer1_baseline_fit_taxon_v0.1",
+      "same_background_rows_used_for_both_sources": true,
+      "sealed_fit_cells": 44,
+      "shared_source_blind_M_and_block_geometry": true,
+      "source_modes": [
+        "PRESERVED_SPECIMEN",
+        "HUMAN_OBSERVATION"
+      ],
+      "specieskey": "3BPZ6",
+      "taxon": "Eucalyptus globulus",
+      "taxon_index": 8,
+      "unresolved_fit_cells": 4
+    },
+    {
+      "M_km": [
+        150,
+        300,
+        500
+      ],
+      "errors": [],
+      "expected_fit_cells": 48,
+      "occurrence_coordinates_persisted": false,
+      "paired_discordance_computed": false,
+      "prediction_surface_sha256": "3fcb44cfa20d73b09579b96137923fdb59a28173375a8863920b48c2327d2164",
+      "prediction_surfaces_sealed": true,
+      "procedure_count": 8,
+      "process_knockout_computed": false,
+      "raw_occurrence_rows_persisted": false,
+      "reference_ceiling_read": false,
+      "result_version": "product_b_same_target_source_layer1_baseline_fit_taxon_v0.1",
+      "same_background_rows_used_for_both_sources": true,
+      "sealed_fit_cells": 48,
+      "shared_source_blind_M_and_block_geometry": true,
+      "source_modes": [
+        "PRESERVED_SPECIMEN",
+        "HUMAN_OBSERVATION"
+      ],
+      "specieskey": "8KDX",
+      "taxon": "Abies lasiocarpa",
+      "taxon_index": 9,
+      "unresolved_fit_cells": 0
+    },
+    {
+      "M_km": [
+        150,
+        300,
+        500
+      ],
+      "errors": [
+        {
+          "M_km": 500,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C0.1_degree1",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "6GSMS",
+          "taxon": "Eucalyptus delegatensis"
+        },
+        {
+          "M_km": 500,
+          "error_message": "no candidate has a complete niche-recovery profile",
+          "error_type": "ValueError",
+          "procedure": "niche_forward|logit_l2_C1_degree2",
+          "source": "PRESERVED_SPECIMEN",
+          "specieskey": "6GSMS",
+          "taxon": "Eucalyptus delegatensis"
+        }
+      ],
+      "expected_fit_cells": 48,
+      "occurrence_coordinates_persisted": false,
+      "paired_discordance_computed": false,
+      "prediction_surface_sha256": "269098318605f3bf9f839651896dda56b291f0d60365ac774044472926cc8d34",
+      "prediction_surfaces_sealed": true,
+      "procedure_count": 8,
+      "process_knockout_computed": false,
+      "raw_occurrence_rows_persisted": false,
+      "reference_ceiling_read": false,
+      "result_version": "product_b_same_target_source_layer1_baseline_fit_taxon_v0.1",
+      "same_background_rows_used_for_both_sources": true,
+      "sealed_fit_cells": 46,
+      "shared_source_blind_M_and_block_geometry": true,
+      "source_modes": [
+        "PRESERVED_SPECIMEN",
+        "HUMAN_OBSERVATION"
+      ],
+      "specieskey": "6GSMS",
+      "taxon": "Eucalyptus delegatensis",
+      "taxon_index": 10,
+      "unresolved_fit_cells": 2
+    },
+    {
+      "M_km": [
+        150,
+        300,
+        500
+      ],
+      "errors": [],
+      "expected_fit_cells": 48,
+      "occurrence_coordinates_persisted": false,
+      "paired_discordance_computed": false,
+      "prediction_surface_sha256": "676e0fc1a2ce596b6ffd4b249be9afba0a1f64d573cffba2ffb63e9917d2ad14",
+      "prediction_surfaces_sealed": true,
+      "procedure_count": 8,
+      "process_knockout_computed": false,
+      "raw_occurrence_rows_persisted": false,
+      "reference_ceiling_read": false,
+      "result_version": "product_b_same_target_source_layer1_baseline_fit_taxon_v0.1",
+      "same_background_rows_used_for_both_sources": true,
+      "sealed_fit_cells": 48,
+      "shared_source_blind_M_and_block_geometry": true,
+      "source_modes": [
+        "PRESERVED_SPECIMEN",
+        "HUMAN_OBSERVATION"
+      ],
+      "specieskey": "6NYVX",
+      "taxon": "Larix laricina",
+      "taxon_index": 11,
+      "unresolved_fit_cells": 0
+    }
+  ],
+  "taxa_expected": 12,
+  "taxa_with_sealed_prediction_artifacts": 12,
+  "unresolved_fit_cells": 86
+}

@@ -1,0 +1,70 @@
+{
+  "M_km_counts": {
+    "150": 26,
+    "300": 30,
+    "500": 30
+  },
+  "expected_fit_cells": 576,
+  "failure_class_by_source": {
+    "feature_completeness_failure": {
+      "HUMAN_OBSERVATION": 34,
+      "PRESERVED_SPECIMEN": 10
+    },
+    "niche_recovery_identifiability_failure": {
+      "HUMAN_OBSERVATION": 28,
+      "PRESERVED_SPECIMEN": 14
+    }
+  },
+  "failure_class_counts": {
+    "feature_completeness_failure": 44,
+    "niche_recovery_identifiability_failure": 42
+  },
+  "interpretation_boundary": {
+    "audit_is_descriptive_of_answer_construction_only": true,
+    "no_refit_or_procedure_replacement_performed": true,
+    "paired_discordance_opened": false,
+    "process_knockout_opened": false,
+    "reference_ceiling_opened": false,
+    "taxon_concentration_is_not_causal_evidence": true,
+    "unresolved_cells_must_not_be_imputed_as_discordance": true
+  },
+  "result_version": "product_b_same_target_source_answer_identifiability_audit_v0.1",
+  "sealed_fit_cells": 490,
+  "source_counts": {
+    "HUMAN_OBSERVATION": 62,
+    "PRESERVED_SPECIMEN": 24
+  },
+  "source_result": "results/product_b_same_target_source_layer1_baseline_fit_v0_1.json",
+  "source_result_sha256": "e9f6f05996c371ebc7d45713256c0d922ec75b696924c060dfab73699828cbcc",
+  "strategy_counts": {
+    "all": 24,
+    "niche_forward": 42,
+    "vif": 20
+  },
+  "taxa": [
+    {"M_km_counts": {}, "failure_class_counts": {}, "sealed_fit_cells": 48, "source_counts": {}, "strategy_counts": {}, "taxon": "Artemisia tridentata", "unresolved_fit_cells": 0},
+    {"M_km_counts": {}, "failure_class_counts": {}, "sealed_fit_cells": 48, "source_counts": {}, "strategy_counts": {}, "taxon": "Atriplex canescens", "unresolved_fit_cells": 0},
+    {"M_km_counts": {"150": 2, "300": 2, "500": 2}, "failure_class_counts": {"niche_recovery_identifiability_failure": 6}, "sealed_fit_cells": 42, "source_counts": {"HUMAN_OBSERVATION": 6}, "strategy_counts": {"niche_forward": 6}, "taxon": "Encelia farinosa", "unresolved_fit_cells": 6},
+    {"M_km_counts": {"150": 8, "300": 12, "500": 12}, "failure_class_counts": {"feature_completeness_failure": 20, "niche_recovery_identifiability_failure": 12}, "sealed_fit_cells": 16, "source_counts": {"HUMAN_OBSERVATION": 16, "PRESERVED_SPECIMEN": 16}, "strategy_counts": {"all": 12, "niche_forward": 12, "vif": 8}, "taxon": "Avicennia germinans", "unresolved_fit_cells": 32},
+    {"M_km_counts": {"150": 8, "300": 8, "500": 6}, "failure_class_counts": {"feature_completeness_failure": 12, "niche_recovery_identifiability_failure": 10}, "sealed_fit_cells": 26, "source_counts": {"HUMAN_OBSERVATION": 18, "PRESERVED_SPECIMEN": 4}, "strategy_counts": {"all": 6, "niche_forward": 10, "vif": 6}, "taxon": "Avicennia marina", "unresolved_fit_cells": 22},
+    {"M_km_counts": {"150": 8, "300": 6, "500": 6}, "failure_class_counts": {"feature_completeness_failure": 12, "niche_recovery_identifiability_failure": 8}, "sealed_fit_cells": 28, "source_counts": {"HUMAN_OBSERVATION": 18, "PRESERVED_SPECIMEN": 2}, "strategy_counts": {"all": 6, "niche_forward": 8, "vif": 6}, "taxon": "Laguncularia racemosa", "unresolved_fit_cells": 20},
+    {"M_km_counts": {}, "failure_class_counts": {}, "sealed_fit_cells": 48, "source_counts": {}, "strategy_counts": {}, "taxon": "Nothofagus antarctica", "unresolved_fit_cells": 0},
+    {"M_km_counts": {}, "failure_class_counts": {}, "sealed_fit_cells": 48, "source_counts": {}, "strategy_counts": {}, "taxon": "Nothofagus betuloides", "unresolved_fit_cells": 0},
+    {"M_km_counts": {"300": 2, "500": 2}, "failure_class_counts": {"niche_recovery_identifiability_failure": 4}, "sealed_fit_cells": 44, "source_counts": {"HUMAN_OBSERVATION": 4}, "strategy_counts": {"niche_forward": 4}, "taxon": "Eucalyptus globulus", "unresolved_fit_cells": 4},
+    {"M_km_counts": {}, "failure_class_counts": {}, "sealed_fit_cells": 48, "source_counts": {}, "strategy_counts": {}, "taxon": "Abies lasiocarpa", "unresolved_fit_cells": 0},
+    {"M_km_counts": {"500": 2}, "failure_class_counts": {"niche_recovery_identifiability_failure": 2}, "sealed_fit_cells": 46, "source_counts": {"PRESERVED_SPECIMEN": 2}, "strategy_counts": {"niche_forward": 2}, "taxon": "Eucalyptus delegatensis", "unresolved_fit_cells": 2},
+    {"M_km_counts": {}, "failure_class_counts": {}, "sealed_fit_cells": 48, "source_counts": {}, "strategy_counts": {}, "taxon": "Larix laricina", "unresolved_fit_cells": 0}
+  ],
+  "taxa_expected": 12,
+  "taxa_fully_sealed": 6,
+  "taxa_with_any_unresolved": 6,
+  "taxon_counts": {
+    "Avicennia germinans": 32,
+    "Avicennia marina": 22,
+    "Encelia farinosa": 6,
+    "Eucalyptus delegatensis": 2,
+    "Eucalyptus globulus": 4,
+    "Laguncularia racemosa": 20
+  },
+  "unresolved_fit_cells": 86
+}

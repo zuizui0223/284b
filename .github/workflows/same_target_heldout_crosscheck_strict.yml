@@ -1,0 +1,89 @@
+name: same-target-heldout-crosscheck-strict
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_heldout_crosscheck_strict_trigger_v0_1.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  evaluate-heldout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify frozen-reference strict opening boundary
+        id: trigger
+        run: |
+          python -m pip install --disable-pip-version-check --quiet pandas pyarrow numpy
+          python -m unittest tests.test_heldout_crosscheck tests.test_reference_calibration -v
+          python -m py_compile scripts/evaluate_same_target_heldout_crosscheck_strict.py product_b_v5/prediction_opening.py
+          test ! -f config/product_b_same_target_heldout_crosscheck_trigger_v0_1.json
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, pandas as pd
+          c=json.load(open('config/product_b_same_target_heldout_crosscheck_contract_v0_1.json'))
+          r=json.load(open('results/product_b_same_target_successor_pairing_calibration_v0_1.json'))
+          f=json.load(open('results/product_b_same_target_source_layer1_baseline_fit_v0_1.json'))
+          t=json.load(open('config/product_b_same_target_heldout_crosscheck_strict_trigger_v0_1.json'))
+          table=pd.read_csv('results/product_b_same_target_successor_reference_ceiling_v0_1.csv')
+          assert c['reference_ceiling_must_be_frozen_before_heldout_prediction_surfaces_are_opened'] is True
+          assert len(table)==24
+          assert r['current_12_taxon_paired_discordance_read'] is False
+          assert r['process_knockout_opened'] is False
+          assert f['prediction_surfaces_opened_for_pairing'] is False
+          assert f['paired_discordance_opened'] is False
+          assert f['process_knockout_opened'] is False
+          assert int(t['heldout_fit_workflow_run_id']) > 0
+          assert int(t['successor_reference_calibration_workflow_run_id']) > 0
+          assert t['reference_derived_from_heldout_taxa'] is False
+          assert t['process_knockout_opened'] is False
+          print('heldout_fit_run_id='+str(int(t['heldout_fit_workflow_run_id'])))
+          PY
+      - name: Download preexisting held-out sealed fit artifacts
+        uses: actions/download-artifact@v4
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.trigger.outputs.heldout_fit_run_id }}
+          pattern: product-b-layer1-baseline-fit-taxon-*
+          path: heldout_fit_artifacts
+      - name: Evaluate only cells with adequate answers and frozen references
+        env:
+          PYTHONPATH: .
+        run: |
+          python scripts/evaluate_same_target_heldout_crosscheck_strict.py \
+            --input-root heldout_fit_artifacts \
+            --fit-audit results/product_b_same_target_source_layer1_baseline_fit_v0_1.json \
+            --output-cells results/product_b_same_target_heldout_crosscheck_cells_v0_1.csv \
+            --output-summary results/product_b_same_target_heldout_crosscheck_v0_1.json
+      - name: Upload strict held-out crosscheck artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-heldout-crosscheck-strict
+          path: |
+            results/product_b_same_target_heldout_crosscheck_cells_v0_1.csv
+            results/product_b_same_target_heldout_crosscheck_v0_1.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit strict held-out crosscheck result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_heldout_crosscheck_cells_v0_1.csv results/product_b_same_target_heldout_crosscheck_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No strict held-out crosscheck result change"
+          else
+            git commit -m "Record strict frozen-reference held-out crosscheck"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi

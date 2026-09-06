@@ -1,0 +1,2183 @@
+{
+  "concept_closure_passed_entering_sampling": 48,
+  "coordinates_persisted": false,
+  "current_layer1_paired_discordance_read": false,
+  "current_taxonomy_or_snapshot_tuple_not_entering_closure": 0,
+  "frozen_minimum_complete_taxa_for_calibration": 30,
+  "frozen_panel_size": 72,
+  "historical_key_level_sampling_selection_used": false,
+  "if_below_minimum_state": null,
+  "model_fit_authorized": true,
+  "model_fit_opened": false,
+  "paired_discordance_opened": false,
+  "process_intervention_outcomes_read": false,
+  "promotion_provenance": {
+    "grouped_result_version": "product_b_same_target_successor_source_mode_sampling_grouped_v0.1",
+    "grouped_transport_run_id": 34028547235,
+    "historical_specieskey_sets_changed": false,
+    "original_canonical_run_id": 34026548240,
+    "original_canonical_scientific_artifact_count": 0,
+    "sampling_reasons_recomputed": false,
+    "sampling_states_recomputed": false,
+    "sampling_thresholds_changed": false,
+    "taxon_set_changed": false,
+    "transport_only_promotion": true
+  },
+  "raw_rows_persisted": false,
+  "replacement_taxa_selected": false,
+  "result_version": "product_b_same_target_successor_source_mode_sampling_v0.1",
+  "results": [
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "63Z5D"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 99.55569698576858,
+        "independent_records": 3356,
+        "raw_records": 3467,
+        "unique_cells": 574
+      },
+      "missing_uncertainty_human_observation": 736,
+      "missing_uncertainty_preserved_specimen": 784,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 81.73617021276596,
+        "independent_records": 392,
+        "raw_records": 989,
+        "unique_cells": 211
+      },
+      "quality_excluded_human_observation": 111,
+      "quality_excluded_preserved_specimen": 597,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 113,
+        "missing_decimal_coordinate": 598,
+        "missing_projected_coordinate": 598
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Abies amabilis",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 5,
+      "cross_mode_collision_excluded_human_observation": 5,
+      "cross_mode_collision_excluded_preserved_specimen": 5,
+      "frozen_historical_specieskeys": [
+        "2685361",
+        "8KCY"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 5,
+        "effective_cells": 386.5577164737072,
+        "independent_records": 19812,
+        "raw_records": 20049,
+        "unique_cells": 4157
+      },
+      "missing_uncertainty_human_observation": 2215,
+      "missing_uncertainty_preserved_specimen": 1663,
+      "preserved_specimen": {
+        "collision_excluded_records": 5,
+        "effective_cells": 40.9392658952004,
+        "independent_records": 2443,
+        "raw_records": 3580,
+        "unique_cells": 791
+      },
+      "quality_excluded_human_observation": 232,
+      "quality_excluded_preserved_specimen": 1132,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 251,
+        "missing_decimal_coordinate": 1119,
+        "missing_projected_coordinate": 1119
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Abies grandis",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "63Z6H"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 64.56707122787707,
+        "independent_records": 1493,
+        "raw_records": 1540,
+        "unique_cells": 277
+      },
+      "missing_uncertainty_human_observation": 349,
+      "missing_uncertainty_preserved_specimen": 950,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 70.8638170974155,
+        "independent_records": 534,
+        "raw_records": 1295,
+        "unique_cells": 233
+      },
+      "quality_excluded_human_observation": 47,
+      "quality_excluded_preserved_specimen": 761,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 57,
+        "missing_decimal_coordinate": 751,
+        "missing_projected_coordinate": 751
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Abies magnifica",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 2,
+      "cross_mode_collision_excluded_human_observation": 3,
+      "cross_mode_collision_excluded_preserved_specimen": 3,
+      "frozen_historical_specieskeys": [
+        "2685308",
+        "8KFP"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 3,
+        "effective_cells": 356.73387049135783,
+        "independent_records": 5495,
+        "raw_records": 5537,
+        "unique_cells": 1492
+      },
+      "missing_uncertainty_human_observation": 340,
+      "missing_uncertainty_preserved_specimen": 773,
+      "preserved_specimen": {
+        "collision_excluded_records": 3,
+        "effective_cells": 114.84235943428767,
+        "independent_records": 816,
+        "raw_records": 1299,
+        "unique_cells": 354
+      },
+      "quality_excluded_human_observation": 39,
+      "quality_excluded_preserved_specimen": 480,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 37,
+        "missing_decimal_coordinate": 482,
+        "missing_projected_coordinate": 482
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Abies procera",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 1,
+      "cross_mode_collision_excluded_human_observation": 1,
+      "cross_mode_collision_excluded_preserved_specimen": 1,
+      "frozen_historical_specieskeys": [
+        "2685654",
+        "8KG5"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 1,
+        "effective_cells": 149.57283435380685,
+        "independent_records": 5219,
+        "raw_records": 5568,
+        "unique_cells": 1256
+      },
+      "missing_uncertainty_human_observation": 1877,
+      "missing_uncertainty_preserved_specimen": 832,
+      "preserved_specimen": {
+        "collision_excluded_records": 1,
+        "effective_cells": 21.24248832496255,
+        "independent_records": 491,
+        "raw_records": 1042,
+        "unique_cells": 273
+      },
+      "quality_excluded_human_observation": 348,
+      "quality_excluded_preserved_specimen": 550,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 370,
+        "missing_decimal_coordinate": 550,
+        "missing_projected_coordinate": 550
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Abies sibirica",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 5,
+      "cross_mode_collision_excluded_human_observation": 5,
+      "cross_mode_collision_excluded_preserved_specimen": 6,
+      "frozen_historical_specieskeys": [
+        "2979000",
+        "8PN2"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 5,
+        "effective_cells": 364.74749909147835,
+        "independent_records": 54809,
+        "raw_records": 55346,
+        "unique_cells": 4825
+      },
+      "missing_uncertainty_human_observation": 9846,
+      "missing_uncertainty_preserved_specimen": 2305,
+      "preserved_specimen": {
+        "collision_excluded_records": 6,
+        "effective_cells": 457.20460230115054,
+        "independent_records": 2704,
+        "raw_records": 4560,
+        "unique_cells": 1271
+      },
+      "quality_excluded_human_observation": 532,
+      "quality_excluded_preserved_specimen": 1850,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 757,
+        "missing_decimal_coordinate": 1823,
+        "missing_projected_coordinate": 1823
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Acacia melanoxylon",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 20,
+      "cross_mode_collision_excluded_human_observation": 26,
+      "cross_mode_collision_excluded_preserved_specimen": 23,
+      "frozen_historical_specieskeys": [
+        "2873769",
+        "64MF2"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 26,
+        "effective_cells": 249.17291577748057,
+        "independent_records": 50815,
+        "raw_records": 51798,
+        "unique_cells": 6980
+      },
+      "missing_uncertainty_human_observation": 15323,
+      "missing_uncertainty_preserved_specimen": 7730,
+      "preserved_specimen": {
+        "collision_excluded_records": 23,
+        "effective_cells": 1063.8876894332573,
+        "independent_records": 3921,
+        "raw_records": 9620,
+        "unique_cells": 2185
+      },
+      "quality_excluded_human_observation": 957,
+      "quality_excluded_preserved_specimen": 5676,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 966,
+        "missing_decimal_coordinate": 5684,
+        "missing_projected_coordinate": 5684
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Acorus calamus",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Adiantum pedatum",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "659BB"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 90.11377043654137,
+        "independent_records": 3270,
+        "raw_records": 3339,
+        "unique_cells": 476
+      },
+      "missing_uncertainty_human_observation": 999,
+      "missing_uncertainty_preserved_specimen": 2044,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 254.02627678210484,
+        "independent_records": 1373,
+        "raw_records": 2923,
+        "unique_cells": 600
+      },
+      "quality_excluded_human_observation": 69,
+      "quality_excluded_preserved_specimen": 1550,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 180,
+        "missing_decimal_coordinate": 1439,
+        "missing_projected_coordinate": 1439
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Aegiceras corniculatum",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 34,
+      "cross_mode_collision_excluded_human_observation": 53,
+      "cross_mode_collision_excluded_preserved_specimen": 41,
+      "frozen_historical_specieskeys": [
+        "2865100",
+        "BSH4"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 53,
+        "effective_cells": 2739.7862672263336,
+        "independent_records": 324142,
+        "raw_records": 327176,
+        "unique_cells": 23757
+      },
+      "missing_uncertainty_human_observation": 51785,
+      "missing_uncertainty_preserved_specimen": 9672,
+      "preserved_specimen": {
+        "collision_excluded_records": 41,
+        "effective_cells": 1800.3919217418743,
+        "independent_records": 6756,
+        "raw_records": 13992,
+        "unique_cells": 3878
+      },
+      "quality_excluded_human_observation": 2981,
+      "quality_excluded_preserved_specimen": 7195,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 2689,
+        "missing_decimal_coordinate": 7495,
+        "missing_projected_coordinate": 7495
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Alisma plantago-aquatica",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 1,
+      "cross_mode_collision_excluded_human_observation": 1,
+      "cross_mode_collision_excluded_preserved_specimen": 1,
+      "frozen_historical_specieskeys": [
+        "CPP4"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 1,
+        "effective_cells": 103.2990310725025,
+        "independent_records": 6810,
+        "raw_records": 6973,
+        "unique_cells": 959
+      },
+      "missing_uncertainty_human_observation": 2377,
+      "missing_uncertainty_preserved_specimen": 2661,
+      "preserved_specimen": {
+        "collision_excluded_records": 1,
+        "effective_cells": 379.3125054014346,
+        "independent_records": 2095,
+        "raw_records": 3538,
+        "unique_cells": 834
+      },
+      "quality_excluded_human_observation": 162,
+      "quality_excluded_preserved_specimen": 1442,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 215,
+        "missing_decimal_coordinate": 1391,
+        "missing_projected_coordinate": 1391
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Ambrosia dumosa",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "GWBD"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 98.10731942602195,
+        "independent_records": 1804,
+        "raw_records": 1936,
+        "unique_cells": 621
+      },
+      "missing_uncertainty_human_observation": 360,
+      "missing_uncertainty_preserved_specimen": 1560,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 299.83219512195126,
+        "independent_records": 784,
+        "raw_records": 2066,
+        "unique_cells": 474
+      },
+      "quality_excluded_human_observation": 132,
+      "quality_excluded_preserved_specimen": 1282,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 204,
+        "missing_decimal_coordinate": 1212,
+        "missing_projected_coordinate": 1212
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Artemisia filifolia",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Asplenium adiantum-nigrum",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 1,
+      "cross_mode_collision_excluded_human_observation": 1,
+      "cross_mode_collision_excluded_preserved_specimen": 1,
+      "frozen_historical_specieskeys": [
+        "JLBV"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 1,
+        "effective_cells": 133.77306751649002,
+        "independent_records": 1900,
+        "raw_records": 1968,
+        "unique_cells": 741
+      },
+      "missing_uncertainty_human_observation": 476,
+      "missing_uncertainty_preserved_specimen": 2881,
+      "preserved_specimen": {
+        "collision_excluded_records": 1,
+        "effective_cells": 422.9786147462496,
+        "independent_records": 1628,
+        "raw_records": 3694,
+        "unique_cells": 852
+      },
+      "quality_excluded_human_observation": 67,
+      "quality_excluded_preserved_specimen": 2065,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 135,
+        "missing_decimal_coordinate": 1999,
+        "missing_projected_coordinate": 1999
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Atriplex confertifolia",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "688F4"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 53.13544159175666,
+        "independent_records": 3140,
+        "raw_records": 3187,
+        "unique_cells": 365
+      },
+      "missing_uncertainty_human_observation": 645,
+      "missing_uncertainty_preserved_specimen": 1225,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 131.33038348082596,
+        "independent_records": 844,
+        "raw_records": 1694,
+        "unique_cells": 315
+      },
+      "quality_excluded_human_observation": 47,
+      "quality_excluded_preserved_specimen": 850,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 70,
+        "missing_decimal_coordinate": 830,
+        "missing_projected_coordinate": 830
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Atriplex lentiformis",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 31,
+      "cross_mode_collision_excluded_human_observation": 38,
+      "cross_mode_collision_excluded_preserved_specimen": 34,
+      "frozen_historical_specieskeys": [
+        "2864467",
+        "NZ5R"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 38,
+        "effective_cells": 454.7094106152598,
+        "independent_records": 116385,
+        "raw_records": 118098,
+        "unique_cells": 11871
+      },
+      "missing_uncertainty_human_observation": 28151,
+      "missing_uncertainty_preserved_specimen": 5333,
+      "preserved_specimen": {
+        "collision_excluded_records": 34,
+        "effective_cells": 857.2866941015089,
+        "independent_records": 3354,
+        "raw_records": 7450,
+        "unique_cells": 1788
+      },
+      "quality_excluded_human_observation": 1675,
+      "quality_excluded_preserved_specimen": 4062,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 1954,
+        "missing_decimal_coordinate": 3800,
+        "missing_projected_coordinate": 3800
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Butomus umbellatus",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Calamagrostis stricta",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 22,
+      "cross_mode_collision_excluded_human_observation": 46,
+      "cross_mode_collision_excluded_preserved_specimen": 24,
+      "frozen_historical_specieskeys": [
+        "2875818",
+        "RG23"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 46,
+        "effective_cells": 2700.4179534936156,
+        "independent_records": 528762,
+        "raw_records": 534312,
+        "unique_cells": 17272
+      },
+      "missing_uncertainty_human_observation": 127290,
+      "missing_uncertainty_preserved_specimen": 7545,
+      "preserved_specimen": {
+        "collision_excluded_records": 24,
+        "effective_cells": 301.2397393634453,
+        "independent_records": 3953,
+        "raw_records": 8822,
+        "unique_cells": 1605
+      },
+      "quality_excluded_human_observation": 5504,
+      "quality_excluded_preserved_specimen": 4845,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 4317,
+        "missing_decimal_coordinate": 6066,
+        "missing_projected_coordinate": 6066
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Carpinus betulus",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Cerastium glomeratum",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "SYC9"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 1.6199999999999999,
+        "independent_records": 18,
+        "raw_records": 33,
+        "unique_cells": 5
+      },
+      "missing_uncertainty_human_observation": 18,
+      "missing_uncertainty_preserved_specimen": 392,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 27.55731922398589,
+        "independent_records": 125,
+        "raw_records": 449,
+        "unique_cells": 68
+      },
+      "quality_excluded_human_observation": 15,
+      "quality_excluded_preserved_specimen": 324,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 14,
+        "missing_decimal_coordinate": 325,
+        "missing_projected_coordinate": 325
+      },
+      "raw_rows_persisted": false,
+      "reasons": [
+        "human_observation_independent_record_floor_failed",
+        "human_observation_unique_cell_floor_failed",
+        "human_observation_effective_cell_floor_failed"
+      ],
+      "requested_name": "Ceriops decandra",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "SYCK"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 220.51528201500344,
+        "independent_records": 12232,
+        "raw_records": 12255,
+        "unique_cells": 714
+      },
+      "missing_uncertainty_human_observation": 507,
+      "missing_uncertainty_preserved_specimen": 1831,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 246.72081359710225,
+        "independent_records": 941,
+        "raw_records": 2256,
+        "unique_cells": 474
+      },
+      "quality_excluded_human_observation": 23,
+      "quality_excluded_preserved_specimen": 1315,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 66,
+        "missing_decimal_coordinate": 1273,
+        "missing_projected_coordinate": 1273
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Ceriops tagal",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 4,
+      "cross_mode_collision_excluded_human_observation": 4,
+      "cross_mode_collision_excluded_preserved_specimen": 4,
+      "frozen_historical_specieskeys": [
+        "2683866",
+        "TJJD"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 4,
+        "effective_cells": 1192.5756101613333,
+        "independent_records": 31244,
+        "raw_records": 31332,
+        "unique_cells": 5212
+      },
+      "missing_uncertainty_human_observation": 1407,
+      "missing_uncertainty_preserved_specimen": 3297,
+      "preserved_specimen": {
+        "collision_excluded_records": 4,
+        "effective_cells": 256.25897506166075,
+        "independent_records": 1934,
+        "raw_records": 4318,
+        "unique_cells": 775
+      },
+      "quality_excluded_human_observation": 84,
+      "quality_excluded_preserved_specimen": 2380,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 89,
+        "missing_decimal_coordinate": 2383,
+        "missing_projected_coordinate": 2383
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Chamaecyparis lawsoniana",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 53,
+      "cross_mode_collision_excluded_human_observation": 81,
+      "cross_mode_collision_excluded_preserved_specimen": 56,
+      "frozen_historical_specieskeys": [
+        "3082234",
+        "YGMF"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 81,
+        "effective_cells": 1783.016598337178,
+        "independent_records": 716927,
+        "raw_records": 722287,
+        "unique_cells": 20210
+      },
+      "missing_uncertainty_human_observation": 137871,
+      "missing_uncertainty_preserved_specimen": 6935,
+      "preserved_specimen": {
+        "collision_excluded_records": 56,
+        "effective_cells": 279.43525721628833,
+        "independent_records": 4497,
+        "raw_records": 8903,
+        "unique_cells": 1949
+      },
+      "quality_excluded_human_observation": 5279,
+      "quality_excluded_preserved_specimen": 4350,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 4343,
+        "missing_decimal_coordinate": 5310,
+        "missing_projected_coordinate": 5310
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Cornus sanguinea",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Crataegus monogyna",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Deschampsia cespitosa",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 1,
+      "cross_mode_collision_excluded_human_observation": 1,
+      "cross_mode_collision_excluded_preserved_specimen": 1,
+      "frozen_historical_specieskeys": [
+        "6FNH6"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 1,
+        "effective_cells": 23.768916975170363,
+        "independent_records": 2008,
+        "raw_records": 2039,
+        "unique_cells": 519
+      },
+      "missing_uncertainty_human_observation": 240,
+      "missing_uncertainty_preserved_specimen": 2029,
+      "preserved_specimen": {
+        "collision_excluded_records": 1,
+        "effective_cells": 254.50846414281318,
+        "independent_records": 1286,
+        "raw_records": 2648,
+        "unique_cells": 575
+      },
+      "quality_excluded_human_observation": 30,
+      "quality_excluded_preserved_specimen": 1361,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 60,
+        "missing_decimal_coordinate": 1333,
+        "missing_projected_coordinate": 1333
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Ephedra nevadensis",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Erodium cicutarium",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "3BPNJ",
+        "VLXXV"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 83.5048098614609,
+        "independent_records": 7439,
+        "raw_records": 7453,
+        "unique_cells": 565
+      },
+      "missing_uncertainty_human_observation": 330,
+      "missing_uncertainty_preserved_specimen": 380,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 87.45086588803866,
+        "independent_records": 1318,
+        "raw_records": 1528,
+        "unique_cells": 287
+      },
+      "quality_excluded_human_observation": 14,
+      "quality_excluded_preserved_specimen": 210,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 61,
+        "missing_decimal_coordinate": 165,
+        "missing_projected_coordinate": 165
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Eucalyptus baxteri",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "3BQ97"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 29.41653160453809,
+        "independent_records": 660,
+        "raw_records": 661,
+        "unique_cells": 128
+      },
+      "missing_uncertainty_human_observation": 72,
+      "missing_uncertainty_preserved_specimen": 146,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 25.776508389860766,
+        "independent_records": 380,
+        "raw_records": 446,
+        "unique_cells": 95
+      },
+      "quality_excluded_human_observation": 1,
+      "quality_excluded_preserved_specimen": 66,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 7,
+        "missing_decimal_coordinate": 60,
+        "missing_projected_coordinate": 60
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Eucalyptus nitens",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Eucalyptus ovata",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Eucalyptus radiata",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 2,
+      "cross_mode_collision_excluded_human_observation": 2,
+      "cross_mode_collision_excluded_preserved_specimen": 2,
+      "frozen_historical_specieskeys": [
+        "3177112",
+        "3BQMN"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 2,
+        "effective_cells": 186.50879176352169,
+        "independent_records": 23565,
+        "raw_records": 23622,
+        "unique_cells": 2128
+      },
+      "missing_uncertainty_human_observation": 2117,
+      "missing_uncertainty_preserved_specimen": 1415,
+      "preserved_specimen": {
+        "collision_excluded_records": 2,
+        "effective_cells": 372.82618266768503,
+        "independent_records": 4074,
+        "raw_records": 5242,
+        "unique_cells": 1166
+      },
+      "quality_excluded_human_observation": 55,
+      "quality_excluded_preserved_specimen": 1166,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 215,
+        "missing_decimal_coordinate": 1006,
+        "missing_projected_coordinate": 1006
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Eucalyptus viminalis",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 28,
+      "cross_mode_collision_excluded_human_observation": 31,
+      "cross_mode_collision_excluded_preserved_specimen": 28,
+      "frozen_historical_specieskeys": [
+        "3169131",
+        "3CGVN"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 31,
+        "effective_cells": 3836.8099601860476,
+        "independent_records": 488866,
+        "raw_records": 492907,
+        "unique_cells": 22661
+      },
+      "missing_uncertainty_human_observation": 101364,
+      "missing_uncertainty_preserved_specimen": 7283,
+      "preserved_specimen": {
+        "collision_excluded_records": 28,
+        "effective_cells": 652.1762624296684,
+        "independent_records": 4293,
+        "raw_records": 8960,
+        "unique_cells": 2013
+      },
+      "quality_excluded_human_observation": 4010,
+      "quality_excluded_preserved_specimen": 4639,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 3102,
+        "missing_decimal_coordinate": 5589,
+        "missing_projected_coordinate": 5589
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Euonymus europaeus",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Fraxinus excelsior",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 36,
+      "cross_mode_collision_excluded_human_observation": 44,
+      "cross_mode_collision_excluded_preserved_specimen": 43,
+      "frozen_historical_specieskeys": [
+        "2890040",
+        "6KCC8"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 44,
+        "effective_cells": 3278.9015138627406,
+        "independent_records": 436537,
+        "raw_records": 440060,
+        "unique_cells": 19775
+      },
+      "missing_uncertainty_human_observation": 52853,
+      "missing_uncertainty_preserved_specimen": 9502,
+      "preserved_specimen": {
+        "collision_excluded_records": 43,
+        "effective_cells": 1233.8940339726857,
+        "independent_records": 5711,
+        "raw_records": 12425,
+        "unique_cells": 3129
+      },
+      "quality_excluded_human_observation": 3479,
+      "quality_excluded_preserved_specimen": 6671,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 2801,
+        "missing_decimal_coordinate": 7372,
+        "missing_projected_coordinate": 7372
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Geranium dissectum",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Glyceria fluitans",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "3HN2F"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 113.38318119288824,
+        "independent_records": 6926,
+        "raw_records": 7153,
+        "unique_cells": 1684
+      },
+      "missing_uncertainty_human_observation": 1293,
+      "missing_uncertainty_preserved_specimen": 6740,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 1126.477397343731,
+        "independent_records": 4300,
+        "raw_records": 9226,
+        "unique_cells": 2244
+      },
+      "quality_excluded_human_observation": 227,
+      "quality_excluded_preserved_specimen": 4926,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 409,
+        "missing_decimal_coordinate": 4746,
+        "missing_projected_coordinate": 4746
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Gutierrezia sarothrae",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Juncus effusus",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Larix decidua",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Larix sibirica",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 49,
+      "cross_mode_collision_excluded_human_observation": 70,
+      "cross_mode_collision_excluded_preserved_specimen": 71,
+      "frozen_historical_specieskeys": [
+        "2702905",
+        "3SX78"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 70,
+        "effective_cells": 534.8848992949266,
+        "independent_records": 30512,
+        "raw_records": 31156,
+        "unique_cells": 5135
+      },
+      "missing_uncertainty_human_observation": 4268,
+      "missing_uncertainty_preserved_specimen": 11010,
+      "preserved_specimen": {
+        "collision_excluded_records": 71,
+        "effective_cells": 1415.205481254111,
+        "independent_records": 5681,
+        "raw_records": 13883,
+        "unique_cells": 3190
+      },
+      "quality_excluded_human_observation": 574,
+      "quality_excluded_preserved_specimen": 8131,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 718,
+        "missing_decimal_coordinate": 7993,
+        "missing_projected_coordinate": 7993
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Leersia oryzoides",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 26,
+      "cross_mode_collision_excluded_human_observation": 41,
+      "cross_mode_collision_excluded_preserved_specimen": 28,
+      "frozen_historical_specieskeys": [
+        "3172300",
+        "6PYTF"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 41,
+        "effective_cells": 3322.1048073160973,
+        "independent_records": 550642,
+        "raw_records": 556058,
+        "unique_cells": 20685
+      },
+      "missing_uncertainty_human_observation": 98433,
+      "missing_uncertainty_preserved_specimen": 5780,
+      "preserved_specimen": {
+        "collision_excluded_records": 28,
+        "effective_cells": 598.5022653721683,
+        "independent_records": 3598,
+        "raw_records": 7586,
+        "unique_cells": 1894
+      },
+      "quality_excluded_human_observation": 5375,
+      "quality_excluded_preserved_specimen": 3960,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 3660,
+        "missing_decimal_coordinate": 5685,
+        "missing_projected_coordinate": 5685
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Ligustrum vulgare",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "6435171",
+        "6QQ94"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 126.21547377135548,
+        "independent_records": 1295,
+        "raw_records": 1891,
+        "unique_cells": 439
+      },
+      "missing_uncertainty_human_observation": 589,
+      "missing_uncertainty_preserved_specimen": 1359,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 229.81332972094285,
+        "independent_records": 921,
+        "raw_records": 1795,
+        "unique_cells": 447
+      },
+      "quality_excluded_human_observation": 596,
+      "quality_excluded_preserved_specimen": 874,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 642,
+        "missing_decimal_coordinate": 829,
+        "missing_projected_coordinate": 829
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Lumnitzera racemosa",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 4,
+      "cross_mode_collision_excluded_human_observation": 4,
+      "cross_mode_collision_excluded_preserved_specimen": 5,
+      "frozen_historical_specieskeys": [
+        "2650903",
+        "49L7W"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 4,
+        "effective_cells": 1701.9186588419325,
+        "independent_records": 79725,
+        "raw_records": 83947,
+        "unique_cells": 12147
+      },
+      "missing_uncertainty_human_observation": 15344,
+      "missing_uncertainty_preserved_specimen": 14250,
+      "preserved_specimen": {
+        "collision_excluded_records": 5,
+        "effective_cells": 1785.1554345896695,
+        "independent_records": 7768,
+        "raw_records": 18163,
+        "unique_cells": 4654
+      },
+      "quality_excluded_human_observation": 4218,
+      "quality_excluded_preserved_specimen": 10390,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 4538,
+        "missing_decimal_coordinate": 10327,
+        "missing_projected_coordinate": 10327
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Onoclea sensibilis",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Osmunda regalis",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Papaver rhoeas",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 1,
+      "cross_mode_collision_excluded_human_observation": 1,
+      "cross_mode_collision_excluded_preserved_specimen": 1,
+      "frozen_historical_specieskeys": [
+        "4HQ46",
+        "5284765"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 1,
+        "effective_cells": 332.1422651819005,
+        "independent_records": 8944,
+        "raw_records": 9496,
+        "unique_cells": 2481
+      },
+      "missing_uncertainty_human_observation": 2550,
+      "missing_uncertainty_preserved_specimen": 554,
+      "preserved_specimen": {
+        "collision_excluded_records": 1,
+        "effective_cells": 58.42857142857143,
+        "independent_records": 409,
+        "raw_records": 752,
+        "unique_cells": 231
+      },
+      "quality_excluded_human_observation": 551,
+      "quality_excluded_preserved_specimen": 342,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 532,
+        "missing_decimal_coordinate": 372,
+        "missing_projected_coordinate": 372
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Picea obovata",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Picea pungens",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "4J273"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 97.44770125349591,
+        "independent_records": 4921,
+        "raw_records": 5288,
+        "unique_cells": 1015
+      },
+      "missing_uncertainty_human_observation": 1235,
+      "missing_uncertainty_preserved_specimen": 3654,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 123.36564299424185,
+        "independent_records": 2484,
+        "raw_records": 4647,
+        "unique_cells": 769
+      },
+      "quality_excluded_human_observation": 367,
+      "quality_excluded_preserved_specimen": 2163,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 201,
+        "missing_decimal_coordinate": 2334,
+        "missing_projected_coordinate": 2334
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Pinus flexilis",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Pinus nigra",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "4J2F3"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 326.8004525482653,
+        "independent_records": 43289,
+        "raw_records": 43868,
+        "unique_cells": 3702
+      },
+      "missing_uncertainty_human_observation": 5013,
+      "missing_uncertainty_preserved_specimen": 13526,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 114.40929230192619,
+        "independent_records": 15470,
+        "raw_records": 19261,
+        "unique_cells": 1855
+      },
+      "quality_excluded_human_observation": 579,
+      "quality_excluded_preserved_specimen": 3791,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 637,
+        "missing_decimal_coordinate": 3740,
+        "missing_projected_coordinate": 3740
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Pinus ponderosa",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 1,
+      "cross_mode_collision_excluded_human_observation": 1,
+      "cross_mode_collision_excluded_preserved_specimen": 1,
+      "frozen_historical_specieskeys": [
+        "4J2HD",
+        "5284667"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 1,
+        "effective_cells": 43.808294748884705,
+        "independent_records": 9278,
+        "raw_records": 9587,
+        "unique_cells": 1522
+      },
+      "missing_uncertainty_human_observation": 2767,
+      "missing_uncertainty_preserved_specimen": 404,
+      "preserved_specimen": {
+        "collision_excluded_records": 1,
+        "effective_cells": 183.6248275862069,
+        "independent_records": 516,
+        "raw_records": 794,
+        "unique_cells": 325
+      },
+      "quality_excluded_human_observation": 308,
+      "quality_excluded_preserved_specimen": 277,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 341,
+        "missing_decimal_coordinate": 276,
+        "missing_projected_coordinate": 276
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Pinus sibirica",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 8,
+      "cross_mode_collision_excluded_human_observation": 8,
+      "cross_mode_collision_excluded_preserved_specimen": 8,
+      "frozen_historical_specieskeys": [
+        "4J2HY",
+        "5284982"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 8,
+        "effective_cells": 783.2055978534187,
+        "independent_records": 99859,
+        "raw_records": 103185,
+        "unique_cells": 12950
+      },
+      "missing_uncertainty_human_observation": 18897,
+      "missing_uncertainty_preserved_specimen": 6755,
+      "preserved_specimen": {
+        "collision_excluded_records": 8,
+        "effective_cells": 714.3567860787368,
+        "independent_records": 3647,
+        "raw_records": 8713,
+        "unique_cells": 2168
+      },
+      "quality_excluded_human_observation": 3318,
+      "quality_excluded_preserved_specimen": 5058,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 3380,
+        "missing_decimal_coordinate": 5175,
+        "missing_projected_coordinate": 5175
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Pinus strobus",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Poa palustris",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 12,
+      "cross_mode_collision_excluded_human_observation": 37,
+      "cross_mode_collision_excluded_preserved_specimen": 23,
+      "frozen_historical_specieskeys": [
+        "4044517",
+        "BB5QH",
+        "VL7J6"
+      ],
+      "historical_key_count": 3,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 37,
+        "effective_cells": 1147.3879309770805,
+        "independent_records": 120310,
+        "raw_records": 121070,
+        "unique_cells": 7336
+      },
+      "missing_uncertainty_human_observation": 10168,
+      "missing_uncertainty_preserved_specimen": 8275,
+      "preserved_specimen": {
+        "collision_excluded_records": 23,
+        "effective_cells": 322.9077711357814,
+        "independent_records": 2750,
+        "raw_records": 9588,
+        "unique_cells": 983
+      },
+      "quality_excluded_human_observation": 723,
+      "quality_excluded_preserved_specimen": 6815,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 511,
+        "missing_decimal_coordinate": 7036,
+        "missing_projected_coordinate": 7036
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Polystichum setiferum",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 40,
+      "cross_mode_collision_excluded_human_observation": 59,
+      "cross_mode_collision_excluded_preserved_specimen": 48,
+      "frozen_historical_specieskeys": [
+        "3040249",
+        "4LVQY"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 59,
+        "effective_cells": 5821.711693624707,
+        "independent_records": 638997,
+        "raw_records": 645172,
+        "unique_cells": 34183
+      },
+      "missing_uncertainty_human_observation": 109640,
+      "missing_uncertainty_preserved_specimen": 9814,
+      "preserved_specimen": {
+        "collision_excluded_records": 48,
+        "effective_cells": 687.7233355706843,
+        "independent_records": 6560,
+        "raw_records": 12800,
+        "unique_cells": 2940
+      },
+      "quality_excluded_human_observation": 6116,
+      "quality_excluded_preserved_specimen": 6192,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 5206,
+        "missing_decimal_coordinate": 7129,
+        "missing_projected_coordinate": 7129
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Populus tremula",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Prunus spinosa",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 36,
+      "cross_mode_collision_excluded_human_observation": 90,
+      "cross_mode_collision_excluded_preserved_specimen": 43,
+      "frozen_historical_specieskeys": [
+        "2880130",
+        "4R5SK"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 90,
+        "effective_cells": 1602.4865069551563,
+        "independent_records": 344166,
+        "raw_records": 347808,
+        "unique_cells": 15176
+      },
+      "missing_uncertainty_human_observation": 76381,
+      "missing_uncertainty_preserved_specimen": 8053,
+      "preserved_specimen": {
+        "collision_excluded_records": 43,
+        "effective_cells": 355.7295966785291,
+        "independent_records": 4898,
+        "raw_records": 10482,
+        "unique_cells": 1836
+      },
+      "quality_excluded_human_observation": 3552,
+      "quality_excluded_preserved_specimen": 5541,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 2313,
+        "missing_decimal_coordinate": 6787,
+        "missing_projected_coordinate": 6787
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Quercus petraea",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Schoenoplectus lacustris",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "4Y9T7"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 99.73022378883515,
+        "independent_records": 1103,
+        "raw_records": 1403,
+        "unique_cells": 435
+      },
+      "missing_uncertainty_human_observation": 794,
+      "missing_uncertainty_preserved_specimen": 1548,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 146.7438249823571,
+        "independent_records": 912,
+        "raw_records": 1854,
+        "unique_cells": 394
+      },
+      "quality_excluded_human_observation": 300,
+      "quality_excluded_preserved_specimen": 942,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 58,
+        "missing_decimal_coordinate": 1185,
+        "missing_projected_coordinate": 1185
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Sonneratia alba",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Sparganium emersum",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 107,
+      "cross_mode_collision_excluded_human_observation": 134,
+      "cross_mode_collision_excluded_preserved_specimen": 128,
+      "frozen_historical_specieskeys": [
+        "6Z7P2",
+        "7679536"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 134,
+        "effective_cells": 1084.9164542513352,
+        "independent_records": 288139,
+        "raw_records": 290389,
+        "unique_cells": 16998
+      },
+      "missing_uncertainty_human_observation": 57101,
+      "missing_uncertainty_preserved_specimen": 7404,
+      "preserved_specimen": {
+        "collision_excluded_records": 128,
+        "effective_cells": 1141.3767126967923,
+        "independent_records": 6518,
+        "raw_records": 11913,
+        "unique_cells": 2930
+      },
+      "quality_excluded_human_observation": 2116,
+      "quality_excluded_preserved_specimen": 5267,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 1788,
+        "missing_decimal_coordinate": 5597,
+        "missing_projected_coordinate": 5597
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Sparganium erectum",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Taxus baccata",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 48,
+      "cross_mode_collision_excluded_human_observation": 103,
+      "cross_mode_collision_excluded_preserved_specimen": 55,
+      "frozen_historical_specieskeys": [
+        "3152047",
+        "56WPP"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 103,
+        "effective_cells": 117.84609946848725,
+        "independent_records": 311228,
+        "raw_records": 313435,
+        "unique_cells": 19447
+      },
+      "missing_uncertainty_human_observation": 131654,
+      "missing_uncertainty_preserved_specimen": 7632,
+      "preserved_specimen": {
+        "collision_excluded_records": 55,
+        "effective_cells": 583.476181567316,
+        "independent_records": 4995,
+        "raw_records": 11416,
+        "unique_cells": 2374
+      },
+      "quality_excluded_human_observation": 2104,
+      "quality_excluded_preserved_specimen": 6366,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 2475,
+        "missing_decimal_coordinate": 6008,
+        "missing_projected_coordinate": 6008
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Tilia cordata",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 1,
+      "cross_mode_collision_excluded_human_observation": 1,
+      "cross_mode_collision_excluded_preserved_specimen": 1,
+      "frozen_historical_specieskeys": [
+        "2687182",
+        "59HM6"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 1,
+        "effective_cells": 237.17367383195122,
+        "independent_records": 54559,
+        "raw_records": 57306,
+        "unique_cells": 6673
+      },
+      "missing_uncertainty_human_observation": 12143,
+      "missing_uncertainty_preserved_specimen": 5086,
+      "preserved_specimen": {
+        "collision_excluded_records": 1,
+        "effective_cells": 541.3013248782697,
+        "independent_records": 3092,
+        "raw_records": 6953,
+        "unique_cells": 1747
+      },
+      "quality_excluded_human_observation": 2746,
+      "quality_excluded_preserved_specimen": 3860,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 2843,
+        "missing_decimal_coordinate": 3840,
+        "missing_projected_coordinate": 3840
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Tsuga canadensis",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 0,
+      "cross_mode_collision_excluded_human_observation": 0,
+      "cross_mode_collision_excluded_preserved_specimen": 0,
+      "frozen_historical_specieskeys": [
+        "59HMR"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 0,
+        "effective_cells": 114.18071196181337,
+        "independent_records": 6934,
+        "raw_records": 7097,
+        "unique_cells": 906
+      },
+      "missing_uncertainty_human_observation": 1561,
+      "missing_uncertainty_preserved_specimen": 1629,
+      "preserved_specimen": {
+        "collision_excluded_records": 0,
+        "effective_cells": 20.426613885505482,
+        "independent_records": 1036,
+        "raw_records": 2252,
+        "unique_cells": 401
+      },
+      "quality_excluded_human_observation": 163,
+      "quality_excluded_preserved_specimen": 1216,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 173,
+        "missing_decimal_coordinate": 1209,
+        "missing_projected_coordinate": 1209
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Tsuga mertensiana",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "frozen_historical_specieskeys": [],
+      "reasons": [
+        "snapshot_name_resolves_to_different_current_species"
+      ],
+      "requested_name": "Ulmus glabra",
+      "state": "successor_snapshot_species_concept_closure_unresolved"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 90,
+      "cross_mode_collision_excluded_human_observation": 122,
+      "cross_mode_collision_excluded_preserved_specimen": 96,
+      "frozen_historical_specieskeys": [
+        "3172048",
+        "5B6FX"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 122,
+        "effective_cells": 4566.261828575879,
+        "independent_records": 464994,
+        "raw_records": 469201,
+        "unique_cells": 27688
+      },
+      "missing_uncertainty_human_observation": 67440,
+      "missing_uncertainty_preserved_specimen": 17595,
+      "preserved_specimen": {
+        "collision_excluded_records": 96,
+        "effective_cells": 2623.097424911216,
+        "independent_records": 13507,
+        "raw_records": 24681,
+        "unique_cells": 7095
+      },
+      "quality_excluded_human_observation": 4085,
+      "quality_excluded_preserved_specimen": 11078,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 3298,
+        "missing_decimal_coordinate": 11945,
+        "missing_projected_coordinate": 11946
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Veronica arvensis",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 33,
+      "cross_mode_collision_excluded_human_observation": 54,
+      "cross_mode_collision_excluded_preserved_specimen": 37,
+      "frozen_historical_specieskeys": [
+        "2888605",
+        "5BCCB"
+      ],
+      "historical_key_count": 2,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 54,
+        "effective_cells": 5129.61104750513,
+        "independent_records": 487142,
+        "raw_records": 492329,
+        "unique_cells": 31305
+      },
+      "missing_uncertainty_human_observation": 89281,
+      "missing_uncertainty_preserved_specimen": 9152,
+      "preserved_specimen": {
+        "collision_excluded_records": 37,
+        "effective_cells": 1619.0152500350844,
+        "independent_records": 5883,
+        "raw_records": 12964,
+        "unique_cells": 3350
+      },
+      "quality_excluded_human_observation": 5133,
+      "quality_excluded_preserved_specimen": 7044,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 4617,
+        "missing_decimal_coordinate": 7628,
+        "missing_projected_coordinate": 7628
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Viburnum opulus",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 49,
+      "cross_mode_collision_excluded_human_observation": 68,
+      "cross_mode_collision_excluded_preserved_specimen": 55,
+      "frozen_historical_specieskeys": [
+        "5331235",
+        "5BGDQ",
+        "VJT9C"
+      ],
+      "historical_key_count": 3,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 68,
+        "effective_cells": 4606.943524050288,
+        "independent_records": 342085,
+        "raw_records": 345293,
+        "unique_cells": 26535
+      },
+      "missing_uncertainty_human_observation": 48758,
+      "missing_uncertainty_preserved_specimen": 11251,
+      "preserved_specimen": {
+        "collision_excluded_records": 55,
+        "effective_cells": 1435.768915212832,
+        "independent_records": 7893,
+        "raw_records": 15883,
+        "unique_cells": 4044
+      },
+      "quality_excluded_human_observation": 3140,
+      "quality_excluded_preserved_specimen": 7935,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 3272,
+        "missing_decimal_coordinate": 7828,
+        "missing_projected_coordinate": 7828
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Viola arvensis",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 3,
+      "cross_mode_collision_excluded_human_observation": 3,
+      "cross_mode_collision_excluded_preserved_specimen": 3,
+      "frozen_historical_specieskeys": [
+        "5C3C6"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 3,
+        "effective_cells": 88.17787873981958,
+        "independent_records": 5325,
+        "raw_records": 5561,
+        "unique_cells": 613
+      },
+      "missing_uncertainty_human_observation": 1215,
+      "missing_uncertainty_preserved_specimen": 1758,
+      "preserved_specimen": {
+        "collision_excluded_records": 3,
+        "effective_cells": 176.66021029330383,
+        "independent_records": 1130,
+        "raw_records": 2440,
+        "unique_cells": 414
+      },
+      "quality_excluded_human_observation": 233,
+      "quality_excluded_preserved_specimen": 1307,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 288,
+        "missing_decimal_coordinate": 1259,
+        "missing_projected_coordinate": 1259
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Woodwardia fimbriata",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    },
+    {
+      "coordinates_persisted": false,
+      "cross_mode_asymmetry_exclusion_applied": false,
+      "cross_mode_collision_component_count": 1,
+      "cross_mode_collision_excluded_human_observation": 1,
+      "cross_mode_collision_excluded_preserved_specimen": 1,
+      "frozen_historical_specieskeys": [
+        "5CKH9"
+      ],
+      "historical_key_count": 1,
+      "historical_key_level_sampling_selection_used": false,
+      "human_observation": {
+        "collision_excluded_records": 1,
+        "effective_cells": 33.26209847330719,
+        "independent_records": 1013,
+        "raw_records": 1031,
+        "unique_cells": 247
+      },
+      "missing_uncertainty_human_observation": 703,
+      "missing_uncertainty_preserved_specimen": 1643,
+      "preserved_specimen": {
+        "collision_excluded_records": 1,
+        "effective_cells": 167.51045211473019,
+        "independent_records": 587,
+        "raw_records": 1795,
+        "unique_cells": 303
+      },
+      "quality_excluded_human_observation": 17,
+      "quality_excluded_preserved_specimen": 1207,
+      "quality_exclusion_reason_counts": {
+        "coordinate_uncertainty_ceiling_failed": 44,
+        "missing_decimal_coordinate": 1180,
+        "missing_projected_coordinate": 1180
+      },
+      "raw_rows_persisted": false,
+      "reasons": [],
+      "requested_name": "Xylocarpus granatum",
+      "row_identifiers_persisted": false,
+      "state": "successor_source_mode_sampling_passed"
+    }
+  ],
+  "row_identifiers_persisted": false,
+  "source_mode_sampling_passed": 47,
+  "source_mode_sampling_unresolved": 1,
+  "upstream_concept_closure_unresolved": 24
+}

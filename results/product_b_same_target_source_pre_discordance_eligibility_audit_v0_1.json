@@ -1,0 +1,73 @@
+{
+  "eligible_pairs_by_procedure_M": [
+    {"M_km": 150, "heldout_pair_cells_pre_discordance_eligible": 4, "heldout_taxa_total": 12, "procedure": "all|logit_l2_C0.1_degree1"},
+    {"M_km": 150, "heldout_pair_cells_pre_discordance_eligible": 5, "heldout_taxa_total": 12, "procedure": "all|logit_l2_C1_degree2"},
+    {"M_km": 150, "heldout_pair_cells_pre_discordance_eligible": 6, "heldout_taxa_total": 12, "procedure": "niche_forward|logit_l2_C0.1_degree1"},
+    {"M_km": 150, "heldout_pair_cells_pre_discordance_eligible": 6, "heldout_taxa_total": 12, "procedure": "niche_forward|logit_l2_C1_degree2"},
+    {"M_km": 150, "heldout_pair_cells_pre_discordance_eligible": 6, "heldout_taxa_total": 12, "procedure": "predictive_forward|logit_l2_C0.1_degree1"},
+    {"M_km": 150, "heldout_pair_cells_pre_discordance_eligible": 8, "heldout_taxa_total": 12, "procedure": "predictive_forward|logit_l2_C1_degree2"},
+    {"M_km": 150, "heldout_pair_cells_pre_discordance_eligible": 7, "heldout_taxa_total": 12, "procedure": "vif|logit_l2_C0.1_degree1"},
+    {"M_km": 150, "heldout_pair_cells_pre_discordance_eligible": 7, "heldout_taxa_total": 12, "procedure": "vif|logit_l2_C1_degree2"},
+    {"M_km": 300, "heldout_pair_cells_pre_discordance_eligible": 5, "heldout_taxa_total": 12, "procedure": "all|logit_l2_C0.1_degree1"},
+    {"M_km": 300, "heldout_pair_cells_pre_discordance_eligible": 5, "heldout_taxa_total": 12, "procedure": "all|logit_l2_C1_degree2"},
+    {"M_km": 300, "heldout_pair_cells_pre_discordance_eligible": 6, "heldout_taxa_total": 12, "procedure": "niche_forward|logit_l2_C0.1_degree1"},
+    {"M_km": 300, "heldout_pair_cells_pre_discordance_eligible": 6, "heldout_taxa_total": 12, "procedure": "niche_forward|logit_l2_C1_degree2"},
+    {"M_km": 300, "heldout_pair_cells_pre_discordance_eligible": 9, "heldout_taxa_total": 12, "procedure": "predictive_forward|logit_l2_C0.1_degree1"},
+    {"M_km": 300, "heldout_pair_cells_pre_discordance_eligible": 8, "heldout_taxa_total": 12, "procedure": "predictive_forward|logit_l2_C1_degree2"},
+    {"M_km": 300, "heldout_pair_cells_pre_discordance_eligible": 6, "heldout_taxa_total": 12, "procedure": "vif|logit_l2_C0.1_degree1"},
+    {"M_km": 300, "heldout_pair_cells_pre_discordance_eligible": 5, "heldout_taxa_total": 12, "procedure": "vif|logit_l2_C1_degree2"},
+    {"M_km": 500, "heldout_pair_cells_pre_discordance_eligible": 5, "heldout_taxa_total": 12, "procedure": "all|logit_l2_C0.1_degree1"},
+    {"M_km": 500, "heldout_pair_cells_pre_discordance_eligible": 5, "heldout_taxa_total": 12, "procedure": "all|logit_l2_C1_degree2"},
+    {"M_km": 500, "heldout_pair_cells_pre_discordance_eligible": 4, "heldout_taxa_total": 12, "procedure": "niche_forward|logit_l2_C0.1_degree1"},
+    {"M_km": 500, "heldout_pair_cells_pre_discordance_eligible": 4, "heldout_taxa_total": 12, "procedure": "niche_forward|logit_l2_C1_degree2"},
+    {"M_km": 500, "heldout_pair_cells_pre_discordance_eligible": 7, "heldout_taxa_total": 12, "procedure": "predictive_forward|logit_l2_C0.1_degree1"},
+    {"M_km": 500, "heldout_pair_cells_pre_discordance_eligible": 8, "heldout_taxa_total": 12, "procedure": "predictive_forward|logit_l2_C1_degree2"},
+    {"M_km": 500, "heldout_pair_cells_pre_discordance_eligible": 6, "heldout_taxa_total": 12, "procedure": "vif|logit_l2_C0.1_degree1"},
+    {"M_km": 500, "heldout_pair_cells_pre_discordance_eligible": 6, "heldout_taxa_total": 12, "procedure": "vif|logit_l2_C1_degree2"}
+  ],
+  "eligible_pairs_by_taxon": {
+    "Abies lasiocarpa": 24,
+    "Artemisia tridentata": 24,
+    "Atriplex canescens": 24,
+    "Avicennia germinans": 1,
+    "Avicennia marina": 0,
+    "Encelia farinosa": 1,
+    "Eucalyptus delegatensis": 5,
+    "Eucalyptus globulus": 3,
+    "Laguncularia racemosa": 6,
+    "Larix laricina": 22,
+    "Nothofagus antarctica": 20,
+    "Nothofagus betuloides": 14
+  },
+  "information_boundary": {
+    "paired_discordance_opened": false,
+    "procedure_or_M_selected_from_outcome": false,
+    "process_knockout_opened": false,
+    "reference_ceiling_read": false,
+    "schoener_d_computed": false,
+    "sealed_prediction_surfaces_read": false,
+    "unresolved_cells_imputed_as_discordance": false
+  },
+  "paired_cells_expected": 288,
+  "paired_cells_pre_discordance_eligible": 144,
+  "paired_cells_pre_discordance_unresolved": 144,
+  "result_version": "product_b_same_target_source_pre_discordance_eligibility_audit_v0.1",
+  "source_cell_pre_discordance_states": {
+    "answer_adequate": 326,
+    "final_fit_unresolved": 86,
+    "outer_fold_evidence_count_incomplete": 76,
+    "prediction_performance_inadequate": 12,
+    "validation_metric_observability_incomplete": 76
+  },
+  "source_cells_answer_adequate": 326,
+  "source_fit_audit": "results/product_b_same_target_source_layer1_baseline_fit_v0_1.json",
+  "source_fit_cells_expected": 576,
+  "source_workflow_run_id": 34023762335,
+  "state_definitions": {
+    "answer_adequate": "final fit sealed and all four finite outer-fold presence-rank values passed the frozen adequacy gate",
+    "final_fit_unresolved": "final source answer could not be constructed under the frozen procedure/M",
+    "outer_fold_evidence_count_incomplete": "final fit sealed, but fewer than four outer-fold metric rows were retained; the current artifact does not distinguish fewer available blocks from a handled fold-local skip",
+    "prediction_performance_inadequate": "four finite presence-rank values were observed, but mean/lower-bound frozen adequacy criteria failed",
+    "validation_metric_observability_incomplete": "four outer-fold rows were retained, but fewer than four finite presence-rank values were observable"
+  }
+}

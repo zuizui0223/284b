@@ -1,0 +1,75 @@
+name: same-target-successor-sampling-promotion
+
+on:
+  push:
+    branches:
+      - product-b-v5-obligate-invariant
+    paths:
+      - config/product_b_same_target_successor_sampling_promotion_trigger_v0_1.json
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify transport-only promotion boundary
+        run: |
+          python -m unittest tests.test_successor_sampling_promotion -v
+          python -m py_compile product_b_v5/sampling_promotion.py scripts/promote_same_target_successor_grouped_sampling.py
+          python - <<'PY'
+          import json
+          p=json.load(open('config/product_b_same_target_successor_sampling_promotion_contract_v0_1.json'))
+          t=json.load(open('config/product_b_same_target_successor_sampling_promotion_trigger_v0_1.json'))
+          g=json.load(open('results/product_b_same_target_successor_source_mode_sampling_grouped_v0_1.json'))
+          assert t['authorization']=='promote_completed_grouped_transport_to_canonical_sampling_only'
+          assert int(t['grouped_transport_run_id'])==int(p['grouped_transport_run_id'])==34028547235
+          assert int(t['original_canonical_run_id'])==int(p['original_canonical_run_id'])==34026548240
+          assert t['original_canonical_scientific_artifact_count_verified']==0
+          assert t['sampling_thresholds_changed'] is False
+          assert t['taxon_set_changed'] is False
+          assert t['historical_specieskey_sets_changed'] is False
+          assert g['scientific_contract_equivalent_to_canonical_sampling'] is True
+          assert g['canonical_result_promoted'] is False
+          assert g['paired_discordance_opened'] is False
+          assert g['model_fit_opened'] is False
+          PY
+      - name: Promote sanitized grouped result without recomputation
+        env:
+          PYTHONPATH: .
+        run: python scripts/promote_same_target_successor_grouped_sampling.py
+      - name: Verify canonical result remains outcome-sealed
+        run: |
+          python - <<'PY'
+          import json
+          c=json.load(open('results/product_b_same_target_successor_source_mode_sampling_v0_1.json'))
+          assert c['result_version']=='product_b_same_target_successor_source_mode_sampling_v0.1'
+          assert c['promotion_provenance']['transport_only_promotion'] is True
+          assert c['promotion_provenance']['sampling_thresholds_changed'] is False
+          assert c['promotion_provenance']['taxon_set_changed'] is False
+          assert c['promotion_provenance']['historical_specieskey_sets_changed'] is False
+          assert c['paired_discordance_opened'] is False
+          assert c['model_fit_opened'] is False
+          assert c['process_intervention_outcomes_read'] is False
+          assert c['source_mode_sampling_passed'] >= c['frozen_minimum_complete_taxa_for_calibration']
+          assert c['model_fit_authorized'] is True
+          PY
+      - name: Commit canonical sampling result only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/product_b_same_target_successor_source_mode_sampling_v0_1.json
+          if git diff --cached --quiet; then
+            echo "No canonical sampling promotion change"
+          else
+            git commit -m "Promote grouped successor sampling transport"
+            git pull --rebase origin product-b-v5-obligate-invariant
+            git push origin HEAD:product-b-v5-obligate-invariant
+          fi

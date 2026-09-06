@@ -1,0 +1,133 @@
+{
+  "artifacts": [
+    {
+      "archive_filename": "successor_fit_taxon2.zip",
+      "archive_sha256": "7eec84035b1535ca8491b26936bf331f0ae8c9d456d17ffdd6577d3712633069",
+      "artifact_id": 9990711971,
+      "taxon": "Abies magnifica",
+      "taxon_index": 2
+    },
+    {
+      "archive_filename": "successor_fit_taxon9.zip",
+      "archive_sha256": "ef5c335b1615a1e388ff9e4f51e199e52036bd5307ddc17c581b8a207d73d5ce",
+      "artifact_id": 9990371286,
+      "taxon": "Ambrosia dumosa",
+      "taxon_index": 9
+    },
+    {
+      "archive_filename": "successor_fit_taxon10.zip",
+      "archive_sha256": "e69bc690b21c8159b6cacae70b83e3feb625136b4dfaa9cd2ae4a7107d754e88",
+      "artifact_id": 9990748607,
+      "taxon": "Artemisia filifolia",
+      "taxon_index": 10
+    },
+    {
+      "archive_filename": "successor_fit_taxon11.zip",
+      "archive_sha256": "28a05d0da7892b5f3fb81e562fc5ab28b33dbec6d9ae669f9e874112935d2333",
+      "artifact_id": 9990834620,
+      "taxon": "Atriplex confertifolia",
+      "taxon_index": 11
+    }
+  ],
+  "audit": {
+    "pair_cells_audited": 96,
+    "paired_discordance_computed": false,
+    "pre_discordance_eligible_pairs": 74,
+    "pre_discordance_unresolved_pairs": 22,
+    "prediction_members_decoded": [],
+    "reference_calibration_authorized_by_this_receipt": false,
+    "source_cell_states": {
+      "answer_adequate": 152,
+      "final_fit_unresolved": 0,
+      "outer_fold_rows_incomplete": 24,
+      "prediction_performance_below_floor": 0,
+      "validation_metric_nonfinite": 16
+    },
+    "source_cells_audited": 192,
+    "source_cells_sealed": 192,
+    "taxa": [
+      {
+        "decoded_member_sha256": {
+          "contract.json": "81c7ea52c51a5fbd3ec80bd128a6dd721c4f8c058248b71acd730f6be58635b0",
+          "fit_inventory.csv": "15a4597b3d8a306f1aa2f68369a3cd8b3627b6e564502fb98f33f5f7577faed9",
+          "outer_cv_fold_metrics.csv": "9be0fd2f8b41cf44480c5971e9f7363053c45909cf609171ca2956e28c1572e6"
+        },
+        "eligible_pairs_by_M_km": {"150": 8, "300": 8, "500": 8},
+        "expected_pair_cells": 24,
+        "expected_source_cells": 48,
+        "pre_discordance_eligible_pairs": 24,
+        "pre_discordance_unresolved_pairs": 0,
+        "sealed_source_cells": 48,
+        "source_cell_states": {"answer_adequate": 48, "final_fit_unresolved": 0, "outer_fold_rows_incomplete": 0, "prediction_performance_below_floor": 0, "validation_metric_nonfinite": 0},
+        "taxon": "Abies magnifica",
+        "taxon_index": 2
+      },
+      {
+        "decoded_member_sha256": {
+          "contract.json": "246bcd569e17977b5cdfae1421e3e28fc34d220d1165a6dce7898bd675d87ecb",
+          "fit_inventory.csv": "c3e05d9b519889f46b103dd5e1730e4c85ba88356ad429c36cb7e31388de7038",
+          "outer_cv_fold_metrics.csv": "0d301bddf778a97704a1944b95ac79886f6236de0c40ab25b69bc5f98edaa6d0"
+        },
+        "eligible_pairs_by_M_km": {"150": 2, "300": 0, "500": 0},
+        "expected_pair_cells": 24,
+        "expected_source_cells": 48,
+        "pre_discordance_eligible_pairs": 2,
+        "pre_discordance_unresolved_pairs": 22,
+        "sealed_source_cells": 48,
+        "source_cell_states": {"answer_adequate": 8, "final_fit_unresolved": 0, "outer_fold_rows_incomplete": 24, "prediction_performance_below_floor": 0, "validation_metric_nonfinite": 16},
+        "taxon": "Ambrosia dumosa",
+        "taxon_index": 9
+      },
+      {
+        "decoded_member_sha256": {
+          "contract.json": "0b321be1e39c884b446d02e94644b544e320d568e7868cff89f408b57d39062b",
+          "fit_inventory.csv": "2f169aad489f3357a20887ee20d79d51b4b1c57c90ee6b4466f75b1b4298a6aa",
+          "outer_cv_fold_metrics.csv": "aa84e564e4ed6aeabb9487f118ab2fa801ba936e7d7492f549a1ff993e4573cf"
+        },
+        "eligible_pairs_by_M_km": {"150": 8, "300": 8, "500": 8},
+        "expected_pair_cells": 24,
+        "expected_source_cells": 48,
+        "pre_discordance_eligible_pairs": 24,
+        "pre_discordance_unresolved_pairs": 0,
+        "sealed_source_cells": 48,
+        "source_cell_states": {"answer_adequate": 48, "final_fit_unresolved": 0, "outer_fold_rows_incomplete": 0, "prediction_performance_below_floor": 0, "validation_metric_nonfinite": 0},
+        "taxon": "Artemisia filifolia",
+        "taxon_index": 10
+      },
+      {
+        "decoded_member_sha256": {
+          "contract.json": "06dc9121e5c08e1dd3a6e6efa2c6f81c8df3b00f1049362bbb80ca2f6dbca248",
+          "fit_inventory.csv": "bdc198b162831f0d88ce873f515642e54aaf96b1e05c34cafd6fd8d047572d40",
+          "outer_cv_fold_metrics.csv": "5829e8920d09b8df5f2efc707b6f64648582a75c11d90a65a51a1ec261c3f6fc"
+        },
+        "eligible_pairs_by_M_km": {"150": 8, "300": 8, "500": 8},
+        "expected_pair_cells": 24,
+        "expected_source_cells": 48,
+        "pre_discordance_eligible_pairs": 24,
+        "pre_discordance_unresolved_pairs": 0,
+        "sealed_source_cells": 48,
+        "source_cell_states": {"answer_adequate": 48, "final_fit_unresolved": 0, "outer_fold_rows_incomplete": 0, "prediction_performance_below_floor": 0, "validation_metric_nonfinite": 0},
+        "taxon": "Atriplex confertifolia",
+        "taxon_index": 11
+      }
+    ],
+    "taxa_audited": 4,
+    "taxa_not_audited_in_this_receipt": 43
+  },
+  "audit_scope": "first_four_completed_artifacts_diagnostic_only_not_full_panel",
+  "claim_strength": "three_taxa_support_all_24_pre_discordance_comparisons_not_evidence_of_cross_source_agreement",
+  "completion_order_subset_not_representative": true,
+  "expected_full_panel_pair_cells": 1128,
+  "expected_full_panel_source_cells": 2256,
+  "expected_successor_taxa": 47,
+  "fitting_restarted": false,
+  "frozen_prediction_adequacy": {"auc_sem_multiplier": 1.0, "chance_auc": 0.5, "minimum_auc_margin": 0.01, "outer_folds": 4},
+  "frozen_rule_source": "config/product_b_same_target_source_model_fit_contract_v0_1.json",
+  "frozen_rule_source_commit": "5e68a3b73cd2fbaa2fcaa4ff78a71594bacdc413",
+  "procedure_or_M_selected": false,
+  "receipt_version": "product_b_same_target_successor_first4_progress_v0.1",
+  "source_execution_sha": "5d16212538d8b25d12235d2bb11b9a5e184a113b",
+  "source_workflow_run_id": 34032659571,
+  "thresholds_changed": false,
+  "unaudited_taxa_are_not_failures": true
+}

@@ -1,5 +1,11 @@
 """Product-B biological-constraint and paired answer-check prototype."""
 
+from .calibration import (
+    CalibrationDecision,
+    CalibrationState,
+    CalibrationTaxonResult,
+    calibrate_reference_ceiling,
+)
 from .crosscheck import (
     PairedAnswerCheckDecision,
     PairedCheckState,
@@ -26,6 +32,12 @@ from .mutual import (
     mutual_obligacy_containment,
     rank_profile_discordance_pair,
 )
+from .observation_modes import (
+    ALLOWED_GBIF_OBSERVATION_MODES,
+    EXPECTED_PARTITION_FIELD,
+    SameTargetObservationSplit,
+    validate_same_target_observation_split,
+)
 from .paired_relations import (
     PairedRelationContract,
     PairedRelationKind,
@@ -37,6 +49,10 @@ from .paired_relations import (
 )
 
 __all__ = [
+    "CalibrationDecision",
+    "CalibrationState",
+    "CalibrationTaxonResult",
+    "calibrate_reference_ceiling",
     "PairedAnswerCheckDecision",
     "PairedCheckState",
     "classify_paired_answer_check",
@@ -57,6 +73,10 @@ __all__ = [
     "classify_mutual_obligacy",
     "mutual_obligacy_containment",
     "rank_profile_discordance_pair",
+    "ALLOWED_GBIF_OBSERVATION_MODES",
+    "EXPECTED_PARTITION_FIELD",
+    "SameTargetObservationSplit",
+    "validate_same_target_observation_split",
     "PairedRelationContract",
     "PairedRelationKind",
     "RelationStrength",

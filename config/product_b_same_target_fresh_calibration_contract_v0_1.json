@@ -1,0 +1,91 @@
+{
+  "contract_version": "product_b_same_target_fresh_calibration_v0.1",
+  "purpose": "prospectively_calibrate_same_target_cross_source_discordance_on_a_fresh_panel_disjoint_from_opened_layer1_taxa",
+  "candidate_registry": "registry/product_b_same_target_fresh_calibration_candidates_v0_1.csv",
+  "candidate_registry_git_blob_sha": "fcc4a1190cb3188e6e37cc0e35281a869400e850",
+  "candidate_count": 36,
+  "source": {
+    "repository": "zuizui0223/sdmr",
+    "git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+    "candidate_registry_path": "configs/product_a_v2_8_1_fresh_taxon_candidates.csv",
+    "candidate_registry_git_blob_sha": "38d888d189320a09a48a590e287fa81966e2fc4f",
+    "eligibility_contract_path": "configs/product_a_v2_8_1_fresh_taxon_eligibility_contract.json",
+    "eligibility_contract_git_blob_sha": "eb3a8accc56b5eecda63c35a6decf6dd11752f1f",
+    "upstream_freshness_basis": "new_taxa_disjoint_from_pilot_12_and_all_36_geometry_calibration_taxa"
+  },
+  "panel_rule": {
+    "use_all_36_predeclared_candidates": true,
+    "select_one_per_stratum": false,
+    "candidate_rank_may_not_select_or_reorder_taxa": true,
+    "opened_current_layer1_taxa_may_not_be_added": true,
+    "replacement_after_any_taxonomy_sampling_fit_or_pairing_outcome": false,
+    "minimum_complete_taxa_for_calibration": 30,
+    "if_complete_taxa_below_30": "fresh_cross_source_calibration_unresolved",
+    "denominator_or_threshold_relaxation_after_outcomes": false
+  },
+  "snapshot": {
+    "date": "2026-08-01",
+    "doi": "10.15468/dl.fs3btq",
+    "bucket": "gbif-open-data-us-east-1",
+    "region": "us-east-1",
+    "object_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+    "schema_sha256": "8298545ad22ddc1e064ae6e2ca8dbc592fcd47ab87f1018e0699fc68474571aa"
+  },
+  "taxonomy_concept_closure": {
+    "single_snapshot_specieskey_required": false,
+    "current_taxonomy_exact_accepted_species_required_before_snapshot_access": true,
+    "frozen_current_accepted_canonical_name_defines_candidate_species_concept": true,
+    "snapshot_taxonomy_fields_allowed": ["species", "specieskey", "taxonkey", "scientificname", "taxonrank"],
+    "snapshot_tuple_selection_rule": "species_exactly_equals_frozen_current_accepted_canonical_name",
+    "all_distinct_specieskeys_under_exact_species_name_form_candidate_historical_key_set": true,
+    "candidate_historical_key_set_must_be_nonempty": true,
+    "current_taxonomy_closure_review_required_for_distinct_snapshot_scientific_names": true,
+    "closure_review_rule": "every_resolvable_species_or_infraspecific_snapshot_name_must_resolve_to_the_same_frozen_current_accepted_species_concept",
+    "unresolved_snapshot_name_or_conflicting_current_species_concept_state": "fresh_snapshot_concept_closure_unresolved",
+    "historical_key_set_frozen_only_after_complete_closure_review": true,
+    "occurrence_counts_coordinates_dates_dataset_ids_and_model_outcomes_forbidden_during_closure": true,
+    "current_24_single_key_failures_may_not_be_retroactively_rescued_by_this_rule": true
+  },
+  "source_mode_sampling": {
+    "observation_modes": ["PRESERVED_SPECIMEN", "HUMAN_OBSERVATION"],
+    "minimum_independent_records_per_mode": 50,
+    "minimum_unique_10km_cells_per_mode": 30,
+    "minimum_effective_cells_per_mode": 10.0,
+    "cross_mode_record_count_ratio_is_not_a_gate": true,
+    "both_modes_must_pass": true,
+    "failed_taxon_replacement_forbidden": true
+  },
+  "model_and_pairing": {
+    "inherit_model_fit_contract": "config/product_b_same_target_source_model_fit_contract_v0_1.json",
+    "inherit_common_frame_contract": "config/product_b_same_target_source_common_frame_contract_v0_1.json",
+    "inherit_pairing_contract": "config/product_b_same_target_source_pairing_contract_v0_1.json",
+    "procedure_count": 8,
+    "M_km": [150, 300, 500],
+    "all_procedure_M_cells_retained": true,
+    "prediction_adequacy_must_precede_paired_discordance": true,
+    "calibration_metric": "one_minus_schoener_d",
+    "calibration_quantile": 0.95,
+    "quantile_method": "nearest_rank",
+    "calibration_unit": "procedure_x_M",
+    "all_complete_taxa_must_contribute_to_each_available_procedure_M_ceiling": true,
+    "high_discordance_complete_taxa_may_not_be_dropped": true,
+    "minimum_complete_taxa_per_procedure_M": 30
+  },
+  "information_barrier": {
+    "current_12_taxon_layer1_paired_D_may_not_select_taxa": true,
+    "current_12_taxon_layer1_paired_D_may_not_set_fresh_reference_ceiling": true,
+    "process_intervention_outcomes_may_not_select_taxa_or_thresholds": true,
+    "fresh_pairing_outcomes_closed_until_taxonomy_sampling_and_model_fits_are_frozen": true,
+    "fresh_reference_ceiling_is_calibration_not_confirmatory_biological_evidence": true
+  },
+  "forbidden": [
+    "reuse_the_opened_36_geometry_calibration_taxa_as_fresh_calibration_candidates",
+    "rescue_current_24_taxonomy_failures_with_the_new_concept_closure_rule",
+    "select_only_candidate_ranks_that_happen_to_pass_future_gates",
+    "add_replacement_taxa_after_future_gate_results",
+    "lower_30_taxon_calibration_minimum_after_results",
+    "use_current_layer1_discordance_to_choose_fresh_taxa",
+    "use_process_knockout_outcomes_to_choose_fresh_taxa",
+    "use_occurrence_counts_or_coordinates_during_taxonomy_concept_closure"
+  ]
+}

@@ -1,0 +1,155 @@
+name: same-target-successor-postfit
+
+on:
+  workflow_run:
+    workflows: [same-target-successor-layer1-fit]
+    types: [completed]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/same_target_successor_postfit.yml
+      - scripts/verify_same_target_postfit_source.py
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: same-target-successor-postfit-34032659571
+  cancel-in-progress: false
+
+jobs:
+  audit-and-calibrate:
+    if: >-
+      github.repository == 'zuizui0223/284b' &&
+      (github.event_name != 'workflow_run' ||
+       github.event.workflow_run.id == 34032659571)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Check out the controller, never source-run code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: controller
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify fixed completed run and complete artifact inventory
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p gate
+          gh api repos/zuizui0223/284b/actions/runs/34032659571 > gate/run.json
+          gh api 'repos/zuizui0223/284b/actions/runs/34032659571/artifacts?per_page=100' > gate/artifacts.json
+          python controller/scripts/verify_same_target_postfit_source.py \
+            --run gate/run.json --artifacts gate/artifacts.json --output gate/receipt.json
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          decision=json.load(open('gate/receipt.json'))
+          print('authorized='+str(decision['postfit_authorized']).lower())
+          PY
+      - name: Save readiness receipt, including pending or failed-source states
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-postfit-readiness
+          path: gate/
+          if-no-files-found: error
+          retention-days: 90
+      - name: Check out the already-merged frozen analysis implementation
+        if: steps.source.outputs.authorized == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: 89f1a01386d5906420cb625dbf87ee18d60672e5
+          path: analysis
+          persist-credentials: false
+      - name: Install post-fit dependencies only
+        if: steps.source.outputs.authorized == 'true'
+        run: python -m pip install --disable-pip-version-check pandas numpy 'pyarrow==21.0.0'
+      - name: Download all 47 sealed taxon artifacts
+        if: steps.source.outputs.authorized == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: 34032659571
+          pattern: product-b-successor-layer1-fit-taxon-*
+          path: analysis/fit_artifacts
+      - name: Download source-run aggregate
+        if: steps.source.outputs.authorized == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: 34032659571
+          name: product-b-successor-layer1-fit-audit
+          path: analysis/source_audit
+      - name: Run existing pre-discordance reference-feasibility audit
+        if: steps.source.outputs.authorized == 'true'
+        working-directory: analysis
+        env:
+          PYTHONPATH: .
+        run: |
+          python scripts/audit_same_target_successor_reference_feasibility.py \
+            --input-root fit_artifacts \
+            --fit-audit source_audit/product_b_same_target_successor_layer1_fit_v0_1.json \
+            --output results/product_b_same_target_successor_reference_feasibility_v0_1.json
+      - name: Seal feasibility before any successor D computation
+        if: steps.source.outputs.authorized == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-postfit-feasibility
+          path: |
+            analysis/source_audit/product_b_same_target_successor_layer1_fit_v0_1.json
+            analysis/results/product_b_same_target_successor_reference_feasibility_v0_1.json
+            gate/receipt.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Run existing strict calibration, preserving all 24 reference cells
+        if: steps.source.outputs.authorized == 'true'
+        working-directory: analysis
+        env:
+          PYTHONPATH: .
+        run: |
+          python scripts/calibrate_same_target_successor_pairing_strict.py \
+            --input-root fit_artifacts \
+            --fit-audit source_audit/product_b_same_target_successor_layer1_fit_v0_1.json \
+            --output-cells results/product_b_same_target_successor_pairing_cells_v0_1.csv \
+            --output-reference results/product_b_same_target_successor_reference_ceiling_v0_1.csv \
+            --output-summary results/product_b_same_target_successor_pairing_calibration_v0_1.json
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          names=[
+            'product_b_same_target_successor_reference_feasibility_v0_1.json',
+            'product_b_same_target_successor_pairing_cells_v0_1.csv',
+            'product_b_same_target_successor_reference_ceiling_v0_1.csv',
+            'product_b_same_target_successor_pairing_calibration_v0_1.json',
+          ]
+          receipt={
+            'source_run_id':34032659571,
+            'source_execution_sha':'5d16212538d8b25d12235d2bb11b9a5e184a113b',
+            'analysis_sha':'89f1a01386d5906420cb625dbf87ee18d60672e5',
+            'heldout_prediction_opened':False,
+            'process_knockout_opened':False,
+            'outputs_committed_to_repository':False,
+            'output_sha256':{n:hashlib.sha256((Path('results')/n).read_bytes()).hexdigest() for n in names},
+          }
+          Path('results/product_b_same_target_successor_postfit_receipt_v0_1.json').write_text(json.dumps(receipt,indent=2,sort_keys=True)+'\n')
+          PY
+      - name: Upload reference outputs for a separate evidence PR
+        if: steps.source.outputs.authorized == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-postfit-reference
+          path: |
+            analysis/results/product_b_same_target_successor_reference_feasibility_v0_1.json
+            analysis/results/product_b_same_target_successor_pairing_cells_v0_1.csv
+            analysis/results/product_b_same_target_successor_reference_ceiling_v0_1.csv
+            analysis/results/product_b_same_target_successor_pairing_calibration_v0_1.json
+            analysis/results/product_b_same_target_successor_postfit_receipt_v0_1.json
+          if-no-files-found: error
+          retention-days: 90

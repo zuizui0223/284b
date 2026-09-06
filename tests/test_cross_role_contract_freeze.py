@@ -50,9 +50,40 @@ class CrossRoleContractFreezeTests(unittest.TestCase):
         plant = directions["plant_reproduction_requires_midge"]
         self.assertFalse(plant["adult_plant_occurrence_is_sufficient_dependent_answer"])
         self.assertFalse(plant["midge_occurrence_is_sufficient_required_answer"])
-        midge = directions["midge_breeding_requires_host_male_flowers"]
+        midge = directions["midge_breeding_requires_host_floral_resource"]
         self.assertFalse(midge["adult_host_occurrence_is_sufficient_required_answer"])
         self.assertFalse(midge["midge_occurrence_is_sufficient_dependent_answer"])
+        self.assertFalse(midge["male_flower_only_requirement_is_hard"])
+        self.assertEqual(
+            midge["male_flower_performance_relation"],
+            "soft_preference_and_higher_larval_survival_not_absolute_requirement",
+        )
+
+    def test_smil001_event_data_is_retrospective_engineering_not_confirmation(self):
+        contract = json.loads(
+            (ROOT / "config/product_b_smil001_event_data_opening_contract_v0_1.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertFalse(contract["confirmatory_biological_crosscheck_authorized"])
+        self.assertFalse(contract["source_package_bytes_opened_under_this_contract"])
+        self.assertTrue(contract["event_values_may_be_opened_only_after_schema_receipt_is_frozen"])
+        self.assertTrue(
+            contract["article_level_frozen_method_facts"]["male_flower_identity_is_not_an_absolute_breeding_requirement"]
+        )
+        relations = {
+            row["relation_id"]: row
+            for row in contract["prospective_relation_space_candidates_for_engineering"]
+        }
+        breeding = relations["midge_breeding_requires_host_floral_resource"]
+        self.assertEqual(
+            breeding["male_vs_female_role"],
+            "secondary_soft_performance_stratum_not_hard_requirement",
+        )
+        self.assertIn(
+            "absolute_male_flower_requirement_for_midge_breeding",
+            contract["retrospective_positive_control_may_not_test"],
+        )
 
 
 if __name__ == "__main__":

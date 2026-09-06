@@ -21,6 +21,8 @@
   "candidates_per_stratum": 6,
   "freshness_firewall": {
     "exact_name_disjointness_required": true,
+    "local_prior_consumed_registry": "registry/product_b_same_target_prior_consumed_taxa_v0_1.csv",
+    "local_prior_consumed_registry_git_blob_sha": "ae46f71b4b9a93a83eeccef20734dd921c9b0683",
     "consumed_pilot_registry": {
       "repository": "zuizui0223/sdmr",
       "git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",

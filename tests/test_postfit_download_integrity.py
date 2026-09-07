@@ -36,11 +36,30 @@ def validate_download_steps(text):
     return steps
 
 
+def validate_heldout_download(text):
+    steps = download_steps(text)
+    if len(steps) != 1:
+        raise ValueError('expected exactly one held-out artifact download')
+    step = steps[0]
+    if f'uses: {PIN} # v8.0.0\n' not in step:
+        raise ValueError('held-out download implementation is not pinned')
+    if not re.search(r'(?m)^          digest-mismatch: error$', step):
+        raise ValueError('held-out digest mismatch must fail the action')
+    if 'continue-on-error:' in step:
+        raise ValueError('held-out download failure must not be ignored')
+    if 'run-id: ${{ steps.trigger.outputs.heldout_fit_run_id }}' not in step:
+        raise ValueError('held-out download must use the frozen trigger run id')
+    if 'pattern: product-b-layer1-baseline-fit-taxon-*' not in step:
+        raise ValueError('held-out artifact selector changed')
+    return step
+
+
 class PostfitDownloadIntegrityTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.workflow = (ROOT/'.github/workflows/same_target_successor_postfit.yml').read_text()
         cls.integration = (ROOT/'.github/workflows/same_target_postfit_integration.yml').read_text()
+        cls.heldout = (ROOT/'.github/workflows/same_target_heldout_crosscheck_strict.yml').read_text()
 
     def test_both_production_downloads_pin_error_behavior(self):
         steps = validate_download_steps(self.workflow)
@@ -86,6 +105,18 @@ class PostfitDownloadIntegrityTests(unittest.TestCase):
         self.assertNotIn('34032659571',text)
         self.assertNotIn('sealed_prediction',text)
         self.assertEqual(self.integration.count("      - '.github/workflows/same_target_successor_postfit.yml'"),2)
+
+    def test_strict_heldout_download_is_fail_closed(self):
+        step = validate_heldout_download(self.heldout)
+        self.assertIn('path: heldout_fit_artifacts', step)
+        self.assertNotIn('continue-on-error:', self.heldout)
+        self.assertIn('reference_ceiling_must_be_frozen_before_heldout_prediction_surfaces_are_opened', self.heldout)
+
+    def test_heldout_regression_to_warning_or_mutable_tag_fails(self):
+        for before,after in [('digest-mismatch: error', 'digest-mismatch: warn'),
+                             (PIN, 'actions/download-artifact@v8')]:
+            with self.subTest(after=after), self.assertRaises(ValueError):
+                validate_heldout_download(self.heldout.replace(before,after,1))
 
 
 if __name__ == '__main__':

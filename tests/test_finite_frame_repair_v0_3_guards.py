@@ -98,6 +98,56 @@ class FiniteFrameRepairV03Guards(unittest.TestCase):
             )
             self.assertNotIn('evaluate_same_target_heldout', text)
 
+    def test_v03_refit_adapters_preserve_scientific_body_and_frame_provenance(self):
+        paths = (
+            'scripts/run_same_target_successor_layer1_fit_taxon_finite_frame_v0_3.py',
+            'scripts/run_same_target_heldout_layer1_fit_taxon_finite_frame_v0_3.py',
+        )
+        for name in paths:
+            text = (ROOT / name).read_text()
+            self.assertIn('finite_frame_preflight_result_version', text)
+            self.assertIn('finite_frame_parent_preflight_result_version', text)
+            self.assertIn('v0_3_adapter_changed_frame_bytes', text)
+            self.assertIn('v0_3_adapter_changed_model_fit_body', text)
+            self.assertIn('base.main()', text)
+            self.assertNotIn('schoener_d', text.lower())
+
+    def test_v03_refit_workflows_require_exact_v03_summaries(self):
+        successor = (ROOT / '.github/workflows/same_target_successor_finite_frame_refit_v0_3.yml').read_text()
+        heldout = (ROOT / '.github/workflows/same_target_heldout_finite_frame_refit_v0_3.yml').read_text()
+        self.assertIn('product-b-successor-finite-frame-v0-3-preflight-summary', successor)
+        self.assertIn("'taxon_M_cells_frozen':141", successor)
+        self.assertIn("'paired_discordance_opened':False", successor)
+        self.assertIn('product-b-successor-finite-frame-repair-fit-audit-v0-3', successor)
+        self.assertIn('product-b-heldout-finite-frame-v0-3-preflight-summary', heldout)
+        self.assertIn("'taxon_M_cells_frozen':36", heldout)
+        self.assertIn("'heldout_pairing_opened':False", heldout)
+        self.assertIn('product-b-heldout-finite-frame-repair-fit-audit-v0-3', heldout)
+
+    def test_v03_reference_requires_both_closed_refit_audits_before_D(self):
+        text = (ROOT / '.github/workflows/same_target_successor_finite_frame_reference_calibration_v0_3.yml').read_text()
+        self.assertIn('product-b-successor-finite-frame-repair-fit-audit-v0-3', text)
+        self.assertIn('product-b-heldout-finite-frame-repair-fit-audit-v0-3', text)
+        self.assertIn('audit_same_target_successor_reference_feasibility_finite_frame_repair_v0_3.py', text)
+        self.assertIn('calibrate_same_target_successor_pairing_finite_frame_repair_v0_3.py', text)
+        self.assertIn("'heldout_pairing_authorized':False", text)
+        self.assertIn("'counts_as_empirical_conclusion':False", text)
+
+    def test_v03_final_is_distinct_one_shot_exact_artifact_endpoint(self):
+        workflow = (ROOT / '.github/workflows/same_target_heldout_final_finite_frame_repair_v0_3.yml').read_text()
+        evaluator = (ROOT / 'scripts/evaluate_same_target_heldout_final_finite_frame_repair_v0_3.py').read_text()
+        self.assertIn("GITHUB_RUN_ATTEMPT')!='1", workflow)
+        self.assertIn("'one_shot':True", workflow)
+        self.assertIn('heldout_taxon_artifacts', workflow)
+        self.assertIn('product-b-successor-finite-frame-repair-reference-v0-3', workflow)
+        self.assertIn('product-b-heldout-finite-frame-repair-fit-audit-v0-3', workflow)
+        self.assertIn('evaluate_same_target_heldout_final_finite_frame_repair_v0_3.py', workflow)
+        self.assertIn("r['counts_as_empirical_conclusion'] is True", workflow)
+        self.assertIn('base._load_heldout = _load_heldout_v3', evaluator)
+        self.assertIn('base.REFERENCE_RESULT = REFERENCE_RESULT_V3', evaluator)
+        self.assertIn('v0_3_adapter_changed_scientific_evaluation_body', evaluator)
+        self.assertNotIn('process_knockout_computed(', evaluator)
+
 
 if __name__ == '__main__':
     unittest.main()

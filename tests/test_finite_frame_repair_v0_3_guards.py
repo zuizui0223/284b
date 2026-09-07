@@ -1,3 +1,4 @@
+import ast
 import json
 from pathlib import Path
 import unittest
@@ -8,6 +9,21 @@ ROOT = Path(__file__).resolve().parents[1]
 class FiniteFrameRepairV03Guards(unittest.TestCase):
     def _contract(self, name):
         return json.loads((ROOT / name).read_text())
+
+    def _source_has_false_dict_entry(self, text, key):
+        tree = ast.parse(text)
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Dict):
+                continue
+            for k, v in zip(node.keys, node.values):
+                if (
+                    isinstance(k, ast.Constant)
+                    and k.value == key
+                    and isinstance(v, ast.Constant)
+                    and v.value is False
+                ):
+                    return True
+        return False
 
     def test_successor_v03_repairs_only_unresolved_cells_and_keeps_outcomes_closed(self):
         c = self._contract('config/product_b_same_target_reference_finite_frame_repair_contract_v0_3.json')
@@ -75,7 +91,11 @@ class FiniteFrameRepairV03Guards(unittest.TestCase):
             self.assertIn('inherit_v0_2_frozen_frame_byte_identical', text)
             self.assertIn('sha256(path.read_bytes()).hexdigest() != expected', text)
             self.assertIn('finite_comparison_frame_frozen', text)
-            self.assertIn('"counts_as_empirical_conclusion": False', text)
+            self.assertIn('candidate_seeds =', text)
+            self.assertIn('final_seeds =', text)
+            self.assertTrue(
+                self._source_has_false_dict_entry(text, 'counts_as_empirical_conclusion')
+            )
             self.assertNotIn('evaluate_same_target_heldout', text)
 
 

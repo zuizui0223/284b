@@ -1,0 +1,92 @@
+{
+  "audit_artifact_id": 10002365752,
+  "audit_artifact_sha256": "ee03b5ef5bad16fa16456ed1ad8c3324f4e812a15aa184c44c332e6a08221df7",
+  "audit_bundle_member_sha256": {
+    "cancellation_annotations.json": "7437971057fc4c7d78d05dc20358125df82ff58a59bcd018027a16727d7f5fe6",
+    "product_b_same_target_successor_terminal_audit_v0_1.json": "64548d0f15ac1c2dd6fed6120a64a2c9a02a8cdeee911eee19a85481f2a004d8",
+    "product_b_same_target_successor_terminal_reference_bounds_v0_1.csv": "094eccc89c43a631cfc4c761cb6f12b3e11a313d9e1ca92d5b44e5cd27aeccac",
+    "source_artifacts.json": "c65415d7e5ad632cc6ed0ebc55d1fdfefd04b73a2680349dc1d2b787e8a1f577",
+    "source_jobs.json": "58c837b41ccff1523551b126586c8734c5ad31e2193fa1606130bc5315622c45",
+    "source_run.json": "33d673429a82b117acf84a868af94b01b854894143373f7fcda8735efbdf8ec6"
+  },
+  "audit_implementation_sha": "8f6cbf4de123cb8c253b5ff3c7f07774650a471b",
+  "audit_summary": {
+    "all_24_eligible_taxa": [
+      "Abies amabilis", "Abies magnifica", "Acorus calamus", "Artemisia filifolia", "Atriplex confertifolia",
+      "Butomus umbellatus", "Carpinus betulus", "Ephedra nevadensis", "Euonymus europaeus", "Geranium dissectum",
+      "Leersia oryzoides", "Ligustrum vulgare", "Onoclea sensibilis", "Picea obovata", "Pinus flexilis",
+      "Pinus ponderosa", "Pinus strobus", "Tilia cordata", "Tsuga canadensis", "Tsuga mertensiana",
+      "Veronica arvensis", "Viburnum opulus", "Viola arvensis"
+    ],
+    "completed_artifact_taxa": 45,
+    "execution_unknown_pair_cells": 48,
+    "execution_unknown_taxa": 2,
+    "expected_taxa": 47,
+    "known_pre_discordance_ineligible_pairs": 350,
+    "missing_executions": [
+      {
+        "biological_or_model_failure_inferred": false,
+        "completed_at": "2026-09-06T17:51:06Z",
+        "conclusion": "cancelled",
+        "elapsed_minutes": 330.25,
+        "job_id": 101485038204,
+        "source_answer_state": "execution_artifact_missing",
+        "started_at": "2026-09-06T12:20:51Z",
+        "taxon": "Alisma plantago-aquatica",
+        "taxon_index": 8
+      },
+      {
+        "biological_or_model_failure_inferred": false,
+        "completed_at": "2026-09-06T23:58:00Z",
+        "conclusion": "cancelled",
+        "elapsed_minutes": 330.25,
+        "job_id": 101485039282,
+        "source_answer_state": "execution_artifact_missing",
+        "started_at": "2026-09-06T18:27:45Z",
+        "taxon": "Populus tremula",
+        "taxon_index": 35
+      }
+    ],
+    "pair_cells_expected": 1128,
+    "pre_discordance_eligible_pairs": 730,
+    "pre_discordance_eligible_pairs_upper_bound": 778,
+    "reference_bound_states": {
+      "floor_unreachable_even_if_missing_all_pass": 6,
+      "missing_executions_can_change_floor_decision": 6,
+      "observed_floor_met_execution_still_blocked": 12
+    },
+    "source_cell_states_full_denominator": {
+      "answer_adequate": 1581,
+      "execution_artifact_missing": 96,
+      "final_fit_unresolved": 266,
+      "outer_fold_rows_incomplete": 103,
+      "prediction_performance_below_floor": 66,
+      "validation_metric_nonfinite": 144
+    },
+    "source_cells_audited_from_artifacts": 2160,
+    "source_cells_expected": 2256,
+    "source_cells_sealed": 1894
+  },
+  "audit_workflow_run_id": 34076881576,
+  "bounds_are_not_statistical_confidence_intervals": true,
+  "bounds_assume_only_missing_executions_can_change_completed_cell_eligibility": true,
+  "claim_strength": "observed_answer_evaluability_and_logical_reference_eligibility_bounds_only",
+  "completed_45_taxa_are_not_a_random_subsample": true,
+  "fitting_restarted": false,
+  "heldout_prediction_opened": false,
+  "missing_answers_imputed": false,
+  "original_complete_run_gate_unchanged": true,
+  "postfit_authorized": false,
+  "process_knockout_opened": false,
+  "q95_or_paired_D_computed": false,
+  "receipt_version": "product_b_same_target_successor_terminal_receipt_v0.1",
+  "recovery_scope": "Only missing taxon indices 8 and 35 need execution completion; preserve all 45 original artifacts. No recovery run is authorized or started by this receipt.",
+  "reference_floor": 30,
+  "source_completed_at_utc": "2026-09-07T01:31:10Z",
+  "source_execution_sha": "5d16212538d8b25d12235d2bb11b9a5e184a113b",
+  "source_final_state": "completed/cancelled",
+  "source_run_id": 34032659571,
+  "source_timeout_minutes": 330,
+  "taxa_or_thresholds_changed": false,
+  "timeout_reason_evidence": "GitHub check-run annotations for both missing executions explicitly report exceeding 5h30m0s"
+}

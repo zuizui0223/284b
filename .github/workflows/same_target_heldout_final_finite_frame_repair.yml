@@ -1,4 +1,4 @@
-name: same-target-heldout-final-finite-frame-repair
+name: same-target-heldout-final-finite-frame-repair-legacy-deprecated
 
 on:
   push:
@@ -7,170 +7,13 @@ on:
 
 permissions:
   contents: read
-  actions: read
-
-concurrency:
-  group: same-target-heldout-final-finite-frame-repair-${{ github.ref }}
-  cancel-in-progress: false
 
 jobs:
-  authorize:
-    runs-on: ubuntu-latest
-    outputs:
-      reference_run_id: ${{ steps.gate.outputs.reference_run_id }}
-      heldout_refit_run_id: ${{ steps.gate.outputs.heldout_refit_run_id }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.sha }}
-          persist-credentials: false
-      - name: Validate one-shot final opening authorization and exact upstream artifacts
-        id: gate
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          python - <<'PY'
-          import json, os, subprocess
-          a=json.load(open('config/product_b_same_target_heldout_final_authorization_v0_1.json'))
-          exact={
-              'authorization_version':'product_b_same_target_heldout_final_authorization_v0.1',
-              'repair_branch':'successor-reference-finite-frame-repair',
-              'endpoint_id':'same_target_cross_source_reproducibility_heldout12_finite_frame_v0_1',
-              'heldout_final_opening_authorized':True,
-              'process_knockout_authorized':False,
-              'procedure_selection_authorized':False,
-              'M_selection_authorized':False,
-              'taxon_replacement_authorized':False,
-              'one_shot':True,
-          }
-          for k,v in exact.items():
-              if a.get(k)!=v: raise RuntimeError(f'held-out final authorization drift: {k}')
-
-          def verify(run_key, head_key, artifact_name, artifact_id_key, digest_key):
-              run_id=int(a[run_key])
-              run=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{run_id}'],text=True))
-              if run.get('status')!='completed' or run.get('conclusion')!='success': raise RuntimeError(f'{run_key} is not completed success')
-              if run.get('head_sha')!=str(a[head_key]): raise RuntimeError(f'{run_key} head SHA mismatch')
-              arts=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{run_id}/artifacts?per_page=100'],text=True)).get('artifacts',[])
-              matches=[x for x in arts if x.get('name')==artifact_name]
-              if len(matches)!=1: raise RuntimeError(f'{artifact_name} missing/duplicate')
-              art=matches[0]
-              if art.get('expired') is True: raise RuntimeError(f'{artifact_name} expired')
-              if int(art['id'])!=int(a[artifact_id_key]) or str(art.get('digest'))!=str(a[digest_key]): raise RuntimeError(f'{artifact_name} identity mismatch')
-              return run_id
-
-          rr=verify('reference_run_id','reference_head_sha','product-b-successor-finite-frame-repair-reference','reference_artifact_id','reference_artifact_digest')
-          hr=verify('heldout_refit_run_id','heldout_refit_head_sha','product-b-heldout-finite-frame-repair-fit-audit','heldout_refit_audit_artifact_id','heldout_refit_audit_artifact_digest')
-          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as h:
-              h.write(f'reference_run_id={rr}\nheldout_refit_run_id={hr}\n')
-          PY
-
-  open-final:
-    needs: authorize
+  deprecated:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.sha }}
-          persist-credentials: false
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
-      - name: Download exact repaired successor reference
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
-        with:
-          repository: zuizui0223/284b
-          github-token: ${{ github.token }}
-          run-id: ${{ needs.authorize.outputs.reference_run_id }}
-          name: product-b-successor-finite-frame-repair-reference
-          path: repaired_reference
-          digest-mismatch: error
-      - name: Download all exact repaired held-out fit artifacts
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
-        with:
-          repository: zuizui0223/284b
-          github-token: ${{ github.token }}
-          run-id: ${{ needs.authorize.outputs.heldout_refit_run_id }}
-          pattern: product-b-heldout-finite-frame-repair-fit-taxon-*
-          path: repaired_heldout_fit_artifacts
-          digest-mismatch: error
-      - name: Download exact held-out repaired fit audit
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
-        with:
-          repository: zuizui0223/284b
-          github-token: ${{ github.token }}
-          run-id: ${{ needs.authorize.outputs.heldout_refit_run_id }}
-          name: product-b-heldout-finite-frame-repair-fit-audit
-          path: heldout_fit_audit
-          digest-mismatch: error
-      - name: Recheck final information boundary before materializing any held-out paired score
+      - name: Refuse stale v0.1 final-opening path
         run: |
-          python - <<'PY'
-          import json
-          r=json.load(open('repaired_reference/repaired_reference_summary.json'))
-          h=json.load(open('heldout_fit_audit/heldout_repaired_fit_audit.json'))
-          if r.get('result_version')!='product_b_same_target_successor_pairing_calibration_finite_frame_repair_v0.1': raise RuntimeError('wrong repaired reference result')
-          if int(r.get('reference_cells_frozen',0)) < 1: raise RuntimeError('no frozen reference cells; final must stay sealed')
-          if r.get('heldout_12_paired_discordance_read') is not False or r.get('process_knockout_opened') is not False: raise RuntimeError('reference already crossed heldout/process boundary')
-          if h.get('result_version')!='product_b_same_target_heldout_finite_frame_repair_fit_audit_v0.2': raise RuntimeError('held-out final requires v0.2 repaired fit audit')
-          if h.get('heldout_taxa_observed')!=12 or h.get('expected_fit_cells')!=576: raise RuntimeError('held-out repaired denominator drifted')
-          if h.get('paired_discordance_opened') is not False or h.get('reference_ceiling_read') is not False or h.get('heldout_pairing_opened') is not False or h.get('process_knockout_opened') is not False: raise RuntimeError('held-out repaired fit already crossed endpoint boundary')
-          PY
-      - name: Freeze exact source manifest before opening final endpoint
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          python - <<'PY'
-          import json, subprocess
-          a=json.load(open('config/product_b_same_target_heldout_final_authorization_v0_1.json'))
-          def artifact(run_id,name):
-              arts=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{run_id}/artifacts?per_page=100'],text=True)).get('artifacts',[])
-              x=[z for z in arts if z.get('name')==name]
-              if len(x)!=1: raise RuntimeError(f'{name} missing/duplicate')
-              return {'id':int(x[0]['id']),'digest':str(x[0].get('digest')),'name':name}
-          manifest={
-              'authorization_commit_sha':a['authorization_commit_sha'],
-              'reference_run_id':int(a['reference_run_id']),
-              'reference_head_sha':a['reference_head_sha'],
-              'reference_artifact':artifact(int(a['reference_run_id']),'product-b-successor-finite-frame-repair-reference'),
-              'heldout_refit_run_id':int(a['heldout_refit_run_id']),
-              'heldout_refit_head_sha':a['heldout_refit_head_sha'],
-              'heldout_refit_audit_artifact':artifact(int(a['heldout_refit_run_id']),'product-b-heldout-finite-frame-repair-fit-audit'),
-              'heldout_taxon_artifact_count':12,
-              'process_knockout_opened':False,
-          }
-          open('source_manifest.json','w').write(json.dumps(manifest,indent=2,sort_keys=True)+'\n')
-          PY
-      - name: Open only prospectively authorized held-out paired cells
-        env:
-          PYTHONPATH: .
-        run: >-
-          python scripts/evaluate_same_target_heldout_final_finite_frame_repair.py
-          --input-root repaired_heldout_fit_artifacts
-          --reference-summary repaired_reference/repaired_reference_summary.json
-          --reference-table repaired_reference/repaired_reference_ceiling.csv
-          --source-manifest source_manifest.json
-          --output-cells final_endpoint/heldout_final_cells.csv
-          --output-final final_endpoint/final_endpoint_result.json
-      - name: Require genuine empirical terminal and process closure
-        run: |
-          python - <<'PY'
-          import json
-          r=json.load(open('final_endpoint/final_endpoint_result.json'))
-          assert r['terminal_class']=='empirical_result'
-          assert r['counts_as_empirical_conclusion'] is True
-          assert r['counts_as_empirical_evidence'] is True
-          assert int(r['paired_prediction_surfaces_opened_cells']) >= 1
-          assert r['process_knockout_opened'] is False
-          assert len(r['final_endpoint_fingerprint'])==64
-          PY
-      - uses: actions/upload-artifact@v4
-        with:
-          name: product-b-same-target-heldout-final-finite-frame-v0-1
-          path: |
-            final_endpoint/final_endpoint_result.json
-            final_endpoint/heldout_final_cells.csv
-            source_manifest.json
-          if-no-files-found: error
-          retention-days: 90
+          echo "Deprecated and fail-closed: the v0.1 final path expects the superseded repaired-reference provenance."
+          echo "Use same-target-heldout-final-finite-frame-repair-v0-2 only after exact v0.2 successor-reference and held-out-refit audits are frozen."
+          exit 1

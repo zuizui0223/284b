@@ -1,0 +1,235 @@
+name: same-target-two-taxon-continuation
+
+on:
+  pull_request:
+    paths:
+      - scripts/continue_same_target_missing_taxa.py
+      - scripts/assemble_same_target_continuation.py
+      - tests/test_same_target_continuation.py
+      - .github/workflows/same_target_two_taxon_continuation.yml
+  push:
+    branches: [successor-two-taxon-continuation]
+    paths: [config/product_b_same_target_two_taxon_continuation_trigger_v0_1.json]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: same-target-two-taxon-continuation-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
+      - name: Check exact original AST, six-part coverage, opaque assembly and existing Arrow reader
+        env:
+          PYTHONPATH: .
+        run: python -m unittest discover -s tests -p test_same_target_continuation.py -v
+
+  authorize:
+    needs: validation
+    if: github.event_name == 'push' && github.repository == 'zuizui0223/284b'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate explicit first continuation trigger
+        run: |
+          python - <<'PY'
+          import json, os
+          c=json.load(open('config/product_b_same_target_two_taxon_continuation_trigger_v0_1.json'))
+          assert c['original_run_id']==34032659571
+          assert c['taxon_indices']==[8,35] and c['M_km']==[150,300,500]
+          assert c['completed_original_taxa_refit_authorized'] is False
+          assert c['continuation_execution_authorized'] is True
+          assert os.environ['GITHUB_RUN_ATTEMPT']=='1'
+          PY
+      - name: Check original cancelled run and immutable 45-artifact inventory
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: .
+        run: python scripts/assemble_same_target_continuation.py gate --output gate/receipt.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-two-taxon-continuation-gate
+          path: gate/receipt.json
+          if-no-files-found: error
+          retention-days: 90
+
+  continue-missing:
+    needs: authorize
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        taxon_index: [8, 35]
+        M_km: [150, 300, 500]
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: controller
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: 5d16212538d8b25d12235d2bb11b9a5e184a113b
+          path: source
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install the original pinned Product-A implementation and original dependency recipe
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check --quiet -e './sdmr[cloud,parquet,geo]'
+          python -m pip install --disable-pip-version-check --quiet 'pyarrow==21.0.0' joblib
+      - name: Retrieve the original frozen target-group input and verify its bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import hashlib,json,subprocess
+          from pathlib import Path
+          c=json.load(open('source/results/product_b_same_target_successor_target_footprint_receipt_v0_1.json'))
+          subprocess.run(['gh','run','download',str(c['workflow_run_id']),'-R','zuizui0223/284b',
+              '-n','product-b-successor-same-target-target-footprint-2026-08-01','-D','target_source'],check=True)
+          if hashlib.sha256(Path('target_source/target_group.parquet').read_bytes()).hexdigest()!=c['target_sha256']:
+              raise RuntimeError('target-group input changed')
+          PY
+      - name: Continue one M partition without changing the original fitting body
+        env:
+          TARGET_GROUP_PATH: target_source/target_group.parquet
+          CHELSA_MANIFEST: sdmr/configs/chelsa_v2_1_plant_candidates.csv
+          OUTPUT_DIR: partial_fit
+          SDMR_RASTER_LAYER_JOBS: '4'
+        run: >-
+          python controller/scripts/continue_same_target_missing_taxa.py
+          --source-root source --taxon-index ${{ matrix.taxon_index }} --M-km ${{ matrix.M_km }}
+      - name: Record resolved package versions without changing optimizer randomness
+        run: python -m pip freeze > partial_fit/continuation_environment.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-two-taxon-part-${{ matrix.taxon_index }}-M${{ matrix.M_km }}
+          path: partial_fit/
+          if-no-files-found: error
+          retention-days: 90
+
+  assemble-and-calibrate:
+    needs: continue-missing
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: controller
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: 89f1a01386d5906420cb625dbf87ee18d60672e5
+          path: analysis
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
+      - name: Download exact original 45 artifacts without refitting
+        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: 34032659571
+          pattern: product-b-successor-layer1-fit-taxon-*
+          path: analysis/fit_artifacts
+          digest-mismatch: error
+      - name: Download all six continuation partitions
+        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ github.run_id }}
+          pattern: product-b-two-taxon-part-*
+          path: parts
+          digest-mismatch: error
+      - name: Download the pre-execution continuation receipt
+        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ github.run_id }}
+          name: product-b-two-taxon-continuation-gate
+          path: gate
+          digest-mismatch: error
+      - name: Assemble 45 original and two continued taxa using opaque prediction copies
+        env:
+          PYTHONPATH: controller
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          python controller/scripts/assemble_same_target_continuation.py assemble
+          --parts parts --fit-root analysis/fit_artifacts --gate gate/receipt.json
+          --output outputs/continuation_receipt.json
+      - name: Preserve all 47 completed taxon artifacts before analysis
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-continued-fit-bundle
+          path: |
+            analysis/fit_artifacts/
+            outputs/continuation_receipt.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Run unchanged aggregate and pre-D feasibility code
+        working-directory: analysis
+        env:
+          PYTHONPATH: .
+        run: |
+          python scripts/aggregate_same_target_successor_layer1_fit.py --input-root fit_artifacts --output results/product_b_same_target_successor_layer1_fit_v0_1.json
+          python scripts/audit_same_target_successor_reference_feasibility.py --input-root fit_artifacts --fit-audit results/product_b_same_target_successor_layer1_fit_v0_1.json --output results/product_b_same_target_successor_reference_feasibility_v0_1.json
+      - name: Seal the complete continuation and pre-D eligibility before reference opening
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-continued-feasibility
+          path: |
+            outputs/continuation_receipt.json
+            analysis/results/product_b_same_target_successor_layer1_fit_v0_1.json
+            analysis/results/product_b_same_target_successor_reference_feasibility_v0_1.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Apply unchanged strict 30-taxon nearest-rank q95 calibration
+        working-directory: analysis
+        env:
+          PYTHONPATH: .
+        run: >-
+          python scripts/calibrate_same_target_successor_pairing_strict.py
+          --input-root fit_artifacts
+          --fit-audit results/product_b_same_target_successor_layer1_fit_v0_1.json
+          --output-cells results/product_b_same_target_successor_pairing_cells_v0_1.csv
+          --output-reference results/product_b_same_target_successor_reference_ceiling_v0_1.csv
+          --output-summary results/product_b_same_target_successor_pairing_calibration_v0_1.json
+      - name: Save reference artifacts for review; never open held-out outcomes here
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-continued-reference
+          path: |
+            outputs/continuation_receipt.json
+            analysis/results/product_b_same_target_successor_layer1_fit_v0_1.json
+            analysis/results/product_b_same_target_successor_reference_feasibility_v0_1.json
+            analysis/results/product_b_same_target_successor_pairing_cells_v0_1.csv
+            analysis/results/product_b_same_target_successor_reference_ceiling_v0_1.csv
+            analysis/results/product_b_same_target_successor_pairing_calibration_v0_1.json
+          if-no-files-found: error
+          retention-days: 90

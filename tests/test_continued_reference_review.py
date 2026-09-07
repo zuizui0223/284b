@@ -3,11 +3,16 @@ from pathlib import Path
 import tempfile
 import unittest
 
-import pandas as pd
+try:
+    import pandas as pd
+except ModuleNotFoundError:
+    pd = None
 
-from scripts.review_same_target_continued_reference import review
+if pd is not None:
+    from scripts.review_same_target_continued_reference import review
 
 
+@unittest.skipUnless(pd is not None, 'pandas-dependent reference review runs in dedicated CI')
 class ContinuedReferenceReviewTests(unittest.TestCase):
     def fixture(self, root: Path):
         procedures = [f'p{i}' for i in range(8)]

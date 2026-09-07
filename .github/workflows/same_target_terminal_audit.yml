@@ -1,0 +1,37 @@
+name: same-target-terminal-audit
+on:
+  push:
+    branches: [successor-terminal-audit]
+    paths:
+      - scripts/audit_same_target_terminal_run.py
+      - tests/test_same_target_terminal_run.py
+      - .github/workflows/same_target_terminal_audit.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  terminal-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test diagnostic accounting before source access
+        run: python -m unittest tests.test_same_target_terminal_run -v
+      - name: Audit all terminal execution metadata and allowlisted evidence
+        env:
+          PYTHONPATH: .
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/audit_same_target_terminal_run.py --output-dir terminal_audit --archive-dir terminal_zips
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-terminal-audit
+          path: terminal_audit/
+          if-no-files-found: error
+          retention-days: 90

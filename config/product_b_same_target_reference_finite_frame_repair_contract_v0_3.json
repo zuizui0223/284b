@@ -1,0 +1,91 @@
+{
+  "contract_version": "product_b_same_target_reference_finite_frame_repair_v0.3",
+  "empirical_ledger": {
+    "new_empirical_conclusion_requires_distinct_sealed_final_endpoint_closed_to_open_transition": true,
+    "this_contract_counts_as_empirical_conclusion": false,
+    "v0_2_preflight_counts_as_empirical_conclusion": false
+  },
+  "finite_frame": {
+    "M_definition_unchanged": true,
+    "M_km": [
+      150,
+      300,
+      500
+    ],
+    "active_predictors_required": 43,
+    "all_43_predictors_must_be_finite_for_candidate_row": true,
+    "candidate_background_points_for_unresolved_cell": "all_eligible_cells_no_fixed_oversampling_cap",
+    "final_background_points_per_taxon_M": 2000,
+    "final_selection_random_state_formula": "same_v0_2_candidate_sampling_random_state + 1000000",
+    "grid_cell_degrees": 0.05,
+    "if_fewer_than_2000_all_predictor_finite_rows_after_exhaustive_enumeration": "finite_comparison_frame_unresolved",
+    "partial_frame_for_model_fit_forbidden": true,
+    "target_group_excludes_all_72_frozen_successor_candidates": true,
+    "target_group_source_unchanged": true,
+    "v0_2_frozen_cells": "inherit_frame_bytes_and_sha256_without_resampling",
+    "v0_2_unresolved_cells": "enumerate_all_eligible_target_group_grid_cells_after_focal_cell_exclusion_then_filter_all_43_finite"
+  },
+  "preflight": {
+    "heldout_opening_allowed": false,
+    "model_fit_allowed": false,
+    "prediction_score_computation_allowed": false,
+    "process_knockout_allowed": false,
+    "reference_ceiling_computation_allowed": false,
+    "schoener_d_computation_allowed": false,
+    "taxa": 47,
+    "taxon_M_cells": 141
+  },
+  "purpose": "supersede only the engineering candidate-width cap for v0.2-unresolved successor taxon x M cells by exhaustively enumerating all eligible frozen target-group grid cells; inherit every v0.2-frozen 2000-row frame byte-for-byte",
+  "selection_invariance": {
+    "M_selection_forbidden": true,
+    "engineering_only_statement": "the v0.2 32000-cell stage is a without-replacement proposal subsample before outcome-blind finite filtering; exhaustive enumeration changes only proposal coverage for previously unresolved cells",
+    "procedure_selection_forbidden": true,
+    "taxon_replacement_forbidden": true,
+    "v0_2_frozen_frames_reselected": false,
+    "v0_2_unresolved_cells_only_repaired": true
+  },
+  "supersedes_contract": "config/product_b_same_target_reference_finite_frame_repair_contract_v0_2.json",
+  "supersession_reason": {
+    "all_43_finite_rows_by_M": {
+      "150": 693,
+      "300": 1103,
+      "500": 1647
+    },
+    "all_three_M_frames_frozen": false,
+    "candidate_rows_by_M": {
+      "150": 32000,
+      "300": 32000,
+      "500": 32000
+    },
+    "counts_as_empirical_conclusion": false,
+    "evidence_class": "environmental_availability_engineering_preflight_only",
+    "heldout_opened": false,
+    "model_fit_opened": false,
+    "paired_discordance_opened": false,
+    "prediction_scores_computed": false,
+    "preflight_head_sha": "ddefeee99230942d90b7fcbb8d229e37401942b0",
+    "preflight_run_id": 34125329933,
+    "process_knockout_opened": false,
+    "reference_ceiling_opened": false,
+    "witness_artifact_digest": "sha256:9e943da7944ada23a270041b9684a84bffee66ae22ca08397a270f080cfad360",
+    "witness_artifact_id": 10021792969,
+    "witness_taxon": "Aegiceras corniculatum",
+    "witness_taxon_index": 7
+  },
+  "unchanged_scientific_rules": {
+    "M_km": [
+      150,
+      300,
+      500
+    ],
+    "failed_candidates_may_not_be_replaced": true,
+    "final_background_points_per_taxon_M": 2000,
+    "minimum_complete_calibration_taxa_per_procedure_M": 30,
+    "post_outcome_M_selection_forbidden": true,
+    "post_outcome_procedure_selection_forbidden": true,
+    "post_outcome_taxon_replacement_forbidden": true,
+    "procedure_count": 8,
+    "quantile_method": "nearest_rank",
+    "reference_quantile": 0.95
+  }
+}

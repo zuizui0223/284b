@@ -1,0 +1,75 @@
+name: same-target-continued-reference-review
+
+on:
+  workflow_run:
+    workflows: [same-target-two-taxon-continuation]
+    types: [completed]
+  pull_request:
+    paths:
+      - scripts/review_same_target_continued_reference.py
+      - tests/test_continued_reference_review.py
+      - .github/workflows/same_target_continued_reference_review.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  review-reference:
+    if: >-
+      github.repository == 'zuizui0223/284b' &&
+      (github.event_name != 'workflow_run' ||
+       github.event.workflow_run.id == 34078855468)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.workflow_sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pandas
+      - name: Verify continuation source completed successfully
+        if: github.event_name == 'workflow_run'
+        run: |
+          python - <<'PY'
+          import json, os
+          event=json.load(open(os.environ['GITHUB_EVENT_PATH']))['workflow_run']
+          assert event['id']==34078855468
+          assert event['head_sha']=='8c525cdcda145ff1a094d2528ca073b324e18dd7'
+          assert event['run_attempt']==1
+          assert event['status']=='completed' and event['conclusion']=='success'
+          PY
+      - name: Download continued reference artifact with digest enforcement
+        if: github.event_name == 'workflow_run'
+        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8.0.0
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: 34078855468
+          name: product-b-successor-continued-reference
+          path: continued_reference
+          digest-mismatch: error
+      - name: Review only reference outputs; keep held-out closed
+        if: github.event_name == 'workflow_run'
+        run: |
+          python scripts/review_same_target_continued_reference.py \
+            --continuation continued_reference/continuation_receipt.json \
+            --fit-audit continued_reference/product_b_same_target_successor_layer1_fit_v0_1.json \
+            --feasibility continued_reference/product_b_same_target_successor_reference_feasibility_v0_1.json \
+            --reference continued_reference/product_b_same_target_successor_reference_ceiling_v0_1.csv \
+            --summary continued_reference/product_b_same_target_successor_pairing_calibration_v0_1.json \
+            --output review/product_b_same_target_continued_reference_review_v0_1.json
+      - name: Upload review receipt only
+        if: github.event_name == 'workflow_run'
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-continued-reference-review
+          path: review/product_b_same_target_continued_reference_review_v0_1.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Run review unit tests on PRs
+        if: github.event_name == 'pull_request'
+        run: python -m unittest tests.test_continued_reference_review -v

@@ -1,0 +1,75 @@
+{
+  "contract_version": "product_b_same_target_reference_finite_frame_repair_v0.1",
+  "purpose": "repair_nonfinite_successor_reference_prediction_frames_without_using_discordance_or_heldout_outcomes",
+  "superseded_reference_attempt": {
+    "workflow_run_id": 34078855468,
+    "fit_bundle_artifact_id": 10006924897,
+    "reference_artifact_id": 10006933587,
+    "reference_cells_frozen": 0,
+    "reference_cells_unresolved": 24,
+    "heldout_opened": false,
+    "process_knockout_opened": false,
+    "status": "reference_calibration_structurally_unresolved_not_empirical_conclusion"
+  },
+  "diagnostic_evidence": {
+    "workflow_run_id": 34121165525,
+    "artifact_id": 10018235167,
+    "authorized_cells_reaudited": 607,
+    "cells_ok": 2,
+    "cells_failed_nonfinite_scores": 605,
+    "new_prediction_cells_authorized": 0,
+    "heldout_opened": false,
+    "process_knockout_opened": false,
+    "failure_message": "sealed prediction scores must all be finite"
+  },
+  "repair_principle": {
+    "comparison_frame_must_be_frozen_before_model_fitting": true,
+    "comparison_frame_uses_environmental_predictor_availability_only": true,
+    "source_labels_may_not_select_or_drop_comparison_rows": true,
+    "model_scores_may_not_select_or_drop_comparison_rows": true,
+    "paired_discordance_may_not_select_or_drop_comparison_rows": true,
+    "posthoc_intersection_of_prediction_rows_forbidden": true,
+    "heldout_outcomes_may_not_be_read": true,
+    "process_knockout_may_not_be_opened": true
+  },
+  "finite_frame": {
+    "active_predictors_required": 43,
+    "all_43_predictors_must_be_finite_for_candidate_row": true,
+    "candidate_background_points_per_taxon_M": 8000,
+    "final_background_points_per_taxon_M": 2000,
+    "candidate_sampling_random_state": "same_frozen_72_candidate_seed_as_original_successor_attempt",
+    "final_selection_random_state_formula": "candidate_sampling_random_state + 1000000",
+    "M_km": [150, 300, 500],
+    "M_definition_unchanged": true,
+    "target_group_source_unchanged": true,
+    "target_group_excludes_all_72_frozen_successor_candidates": true,
+    "grid_cell_degrees": 0.05,
+    "if_fewer_than_2000_all_predictor_finite_rows": "finite_comparison_frame_unresolved",
+    "partial_frame_for_model_fit_forbidden": true
+  },
+  "preflight": {
+    "taxa": 47,
+    "taxon_M_cells": 141,
+    "model_fit_allowed": false,
+    "prediction_score_computation_allowed": false,
+    "schoener_d_computation_allowed": false,
+    "reference_ceiling_computation_allowed": false,
+    "heldout_opening_allowed": false,
+    "process_knockout_allowed": false
+  },
+  "unchanged_scientific_rules": {
+    "minimum_complete_calibration_taxa_per_procedure_M": 30,
+    "reference_quantile": 0.95,
+    "quantile_method": "nearest_rank",
+    "procedure_count": 8,
+    "post_outcome_procedure_selection_forbidden": true,
+    "post_outcome_M_selection_forbidden": true,
+    "post_outcome_taxon_replacement_forbidden": true,
+    "failed_candidates_may_not_be_replaced": true
+  },
+  "empirical_ledger": {
+    "this_repair_contract_counts_as_empirical_conclusion": false,
+    "diagnostic_run_counts_as_empirical_conclusion": false,
+    "new_empirical_conclusion_requires_distinct_sealed_final_endpoint_closed_to_open_transition": true
+  }
+}

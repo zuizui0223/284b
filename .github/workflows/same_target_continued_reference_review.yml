@@ -7,8 +7,13 @@ on:
   pull_request:
     paths:
       - scripts/review_same_target_continued_reference.py
+      - scripts/audit_same_target_reference_surfaces.py
       - tests/test_continued_reference_review.py
+      - tests/test_reference_surface_audit.py
       - .github/workflows/same_target_continued_reference_review.yml
+  push:
+    branches: [reference-surface-audit]
+    paths: [config/product_b_reference_surface_audit_trigger_v0_1.json]
 
 permissions:
   contents: read
@@ -18,8 +23,7 @@ jobs:
   review-reference:
     if: >-
       github.repository == 'zuizui0223/284b' &&
-      (github.event_name != 'workflow_run' ||
-       github.event.workflow_run.id == 34078855468)
+      (github.event_name != 'workflow_run' || github.event.workflow_run.id == 34078855468)
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -30,46 +34,69 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install --quiet pandas
-      - name: Verify continuation source completed successfully
-        if: github.event_name == 'workflow_run'
+      - run: python -m pip install --quiet pandas numpy 'pyarrow==21.0.0'
+      - name: Test terminal references and surface diagnostics before source access
+        env:
+          PYTHONPATH: .
+        run: python -m unittest tests.test_continued_reference_review tests.test_reference_surface_audit -v
+      - name: Verify fixed successful continuation and retrieve exact reference ZIP
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: .
         run: |
           python - <<'PY'
-          import json, os
-          event=json.load(open(os.environ['GITHUB_EVENT_PATH']))['workflow_run']
-          assert event['id']==34078855468
-          assert event['head_sha']=='8c525cdcda145ff1a094d2528ca073b324e18dd7'
-          assert event['run_attempt']==1
-          assert event['status']=='completed' and event['conclusion']=='success'
+          import json,subprocess,os
+          from pathlib import Path
+          from scripts.audit_same_target_reference_surfaces import checked_zip,REFERENCE_ID,REFERENCE_SHA
+          run=json.loads(subprocess.check_output(['gh','api','repos/zuizui0223/284b/actions/runs/34078855468']))
+          expected={'id':34078855468,'head_sha':'8c525cdcda145ff1a094d2528ca073b324e18dd7',
+                    'run_attempt':1,'status':'completed','conclusion':'success'}
+          if any(run.get(k)!=v for k,v in expected.items()):raise RuntimeError('source continuation changed')
+          if os.environ['GITHUB_EVENT_NAME']=='push':
+              trigger=json.load(open('config/product_b_reference_surface_audit_trigger_v0_1.json'))
+              if trigger!={'source_run_id':34078855468,'reference_artifact_id':REFERENCE_ID,
+                           'bundle_artifact_id':10006924897,'heldout_opening_authorized':False}:
+                  raise RuntimeError('diagnostic trigger changed')
+          with open('reference.zip','wb') as f:
+              subprocess.run(['gh','api',f'repos/zuizui0223/284b/actions/artifacts/{REFERENCE_ID}/zip'],stdout=f,check=True)
+          with checked_zip(Path('reference.zip'),REFERENCE_SHA) as z:
+              z.extractall('continued_reference')
           PY
-      - name: Download continued reference artifact with digest enforcement
-        if: github.event_name == 'workflow_run'
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8.0.0
-        with:
-          repository: zuizui0223/284b
-          github-token: ${{ github.token }}
-          run-id: 34078855468
-          name: product-b-successor-continued-reference
-          path: continued_reference
-          digest-mismatch: error
-      - name: Review only reference outputs; keep held-out closed
-        if: github.event_name == 'workflow_run'
+      - name: Review nested reference outputs and preserve unavailable states
+        if: github.event_name != 'pull_request'
         run: |
           python scripts/review_same_target_continued_reference.py \
-            --continuation continued_reference/continuation_receipt.json \
-            --fit-audit continued_reference/product_b_same_target_successor_layer1_fit_v0_1.json \
-            --feasibility continued_reference/product_b_same_target_successor_reference_feasibility_v0_1.json \
-            --reference continued_reference/product_b_same_target_successor_reference_ceiling_v0_1.csv \
-            --summary continued_reference/product_b_same_target_successor_pairing_calibration_v0_1.json \
-            --output review/product_b_same_target_continued_reference_review_v0_1.json
-      - name: Upload review receipt only
-        if: github.event_name == 'workflow_run'
+            --continuation continued_reference/outputs/continuation_receipt.json \
+            --fit-audit continued_reference/analysis/results/product_b_same_target_successor_layer1_fit_v0_1.json \
+            --feasibility continued_reference/analysis/results/product_b_same_target_successor_reference_feasibility_v0_1.json \
+            --reference continued_reference/analysis/results/product_b_same_target_successor_reference_ceiling_v0_1.csv \
+            --summary continued_reference/analysis/results/product_b_same_target_successor_pairing_calibration_v0_1.json \
+            --pairing-cells continued_reference/analysis/results/product_b_same_target_successor_pairing_cells_v0_1.csv \
+            --output review/reference_review.json
+      - name: Check out unchanged analysis helpers for authorized-only diagnostic
+        if: github.event_name == 'push'
+        uses: actions/checkout@v4
+        with:
+          ref: 89f1a01386d5906420cb625dbf87ee18d60672e5
+          path: frozen_analysis
+          persist-credentials: false
+      - name: Retrieve sealed bundle bytes without decoding models
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api repos/zuizui0223/284b/actions/artifacts/10006924897/zip > bundle.zip
+      - name: Diagnose only cells previously authorized and materialized by calibration
+        if: github.event_name == 'push'
+        run: >-
+          python scripts/audit_same_target_reference_surfaces.py
+          --reference-zip reference.zip --bundle-zip bundle.zip
+          --analysis-root frozen_analysis --output review
+      - name: Save review and diagnostic receipts, not new predictions
+        if: github.event_name != 'pull_request'
         uses: actions/upload-artifact@v4
         with:
-          name: product-b-successor-continued-reference-review
-          path: review/product_b_same_target_continued_reference_review_v0_1.json
+          name: product-b-successor-reference-surface-audit
+          path: review/
           if-no-files-found: error
           retention-days: 90
-      - name: Run review unit tests on PRs
-        if: github.event_name == 'pull_request'
-        run: python -m unittest tests.test_continued_reference_review -v

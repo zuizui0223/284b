@@ -24,7 +24,6 @@ from product_b_v5.finite_comparison_frame import freeze_finite_comparison_frame
 from scripts.run_same_target_successor_layer1_fit_taxon import (
     MODES,
     _comparison_ids,
-    _frozen_candidate_names,
     _retained_source_frames,
     _scan_taxon,
 )
@@ -165,11 +164,14 @@ def main() -> int:
     unresolved_m = [m for m in (150, 300, 500) if parent_cells[m].get("state") != "finite_comparison_frame_frozen"]
     runtime = None
     if unresolved_m:
-        frozen_names = sorted(_frozen_candidate_names())
-        if len(frozen_names) != 72 or name not in frozen_names:
-            raise RuntimeError("taxon absent from frozen 72-candidate registry")
-        candidate_seed = int(frame_contract["background"]["background_random_state_base"]) + frozen_names.index(name)
-        final_seed = candidate_seed + 1_000_000
+        candidate_seeds = {int(c["candidate_sampling_random_state"]) for c in parent_cells.values()}
+        final_seeds = {int(c["final_selection_random_state"]) for c in parent_cells.values()}
+        if len(candidate_seeds) != 1 or len(final_seeds) != 1:
+            raise RuntimeError("v0.2 seed identity drifted across M")
+        candidate_seed = candidate_seeds.pop()
+        final_seed = final_seeds.pop()
+        if final_seed != candidate_seed + 1_000_000:
+            raise RuntimeError("v0.2 final-selection seed no longer matches frozen successor semantics")
 
         mode_a, mode_b = _scan_taxon(historical_keys)
         retained = _retained_source_frames(name, mode_a, mode_b)

@@ -1,0 +1,17 @@
+{
+  "trigger_version": "product_b_same_target_heldout_finite_frame_preflight_trigger_v0.2",
+  "repair_contract_version": "product_b_same_target_heldout_finite_frame_repair_v0.2",
+  "repair_branch": "successor-reference-finite-frame-repair",
+  "heldout_taxa": 12,
+  "taxon_M_cells": 36,
+  "candidate_background_points_per_taxon_M": 32000,
+  "final_background_points_per_taxon_M": 2000,
+  "preflight_execution_authorized": true,
+  "model_refit_authorized": false,
+  "prediction_score_computation_authorized": false,
+  "paired_discordance_authorized": false,
+  "reference_ceiling_read_authorized": false,
+  "heldout_pairing_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_conclusion": false
+}

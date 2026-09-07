@@ -1,0 +1,12 @@
+{
+  "result_version": "product_b_same_target_reference_integrity_diagnostic_trigger_v0.1",
+  "source_run_id": 34078855468,
+  "fit_bundle_artifact_id": 10006924897,
+  "reference_artifact_id": 10006933587,
+  "diagnostic_scope": "previously_authorized_reference_prediction_cells_only",
+  "prior_prediction_materialization_authorized_cells": 607,
+  "new_prediction_cells_authorized": 0,
+  "heldout_12_paired_discordance_read_authorized": false,
+  "process_knockout_authorized": false,
+  "execution_authorized": true
+}

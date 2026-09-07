@@ -1,0 +1,20 @@
+{
+  "contract_version": "product_b_same_target_two_taxon_continuation_v0.1",
+  "original_run_id": 34032659571,
+  "original_execution_sha": "5d16212538d8b25d12235d2bb11b9a5e184a113b",
+  "reviewed_implementation_sha": "6d4e9374aa19bf3cb420d9e8555b14ec26c67f15",
+  "implementation_merge_sha": "cd5a33e22856da32d32e43fa5bff956bfe44582a",
+  "taxon_indices": [8, 35],
+  "taxa": ["Alisma plantago-aquatica", "Populus tremula"],
+  "M_km": [150, 300, 500],
+  "continuation_execution_authorized": true,
+  "completed_original_taxa_refit_authorized": false,
+  "original_45_artifacts_must_remain_unchanged": true,
+  "original_attempt_remains_cancelled": true,
+  "all_six_partitions_required_before_postfit": true,
+  "reference_minimum_taxa": 30,
+  "reference_quantile": 0.95,
+  "heldout_opening_authorized": false,
+  "process_intervention_authorized": false,
+  "bitwise_replay_claimed": false
+}

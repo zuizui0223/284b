@@ -1,0 +1,97 @@
+{
+  "M_km": [
+    150,
+    300,
+    500
+  ],
+  "M_or_procedure_selection_from_future_outcome_forbidden": true,
+  "active_predictors_required": 43,
+  "all_predictors_must_be_finite_before_final_row_selection": true,
+  "candidate_background_points_for_unresolved_cell": "all_eligible_cells_no_fixed_oversampling_cap",
+  "contract_version": "product_b_same_target_heldout_finite_frame_repair_v0.3",
+  "empirical_ledger": {
+    "new_empirical_conclusion_requires_distinct_sealed_final_endpoint_closed_to_open_transition": true,
+    "this_contract_counts_as_empirical_conclusion": false,
+    "v0_2_preflight_counts_as_empirical_conclusion": false
+  },
+  "engineering_witness_class": "heldout_environmental_availability_preflight_only",
+  "engineering_witness_counts_as_empirical_conclusion": false,
+  "engineering_witnesses": [
+    {
+      "all_43_finite_rows_by_M": {
+        "150": 1175,
+        "300": 1407,
+        "500": 1338
+      },
+      "artifact_digest": "sha256:695a7491b73d9428a46bda11e6ca085cffe8381e7f65d652843c7a394dc97031",
+      "artifact_id": 10022283661,
+      "candidate_rows_materialized_by_M": {
+        "150": 14584,
+        "300": 27809,
+        "500": 32000
+      },
+      "preflight_head_sha": "b25fbbc43af4177037a6297d58a1932903a5cc96",
+      "preflight_run_id": 34125793364,
+      "taxon": "Nothofagus betuloides",
+      "taxon_index": 7
+    },
+    {
+      "all_43_finite_rows_by_M": {
+        "150": 1024,
+        "300": 1169,
+        "500": 1507
+      },
+      "artifact_digest": "sha256:1e7ca162534abac9c912712d65e2bae204f98ae9d60700ef08c49c0acc5a8c87",
+      "artifact_id": 10022228329,
+      "candidate_rows_materialized_by_M": {
+        "150": 32000,
+        "300": 32000,
+        "500": 32000
+      },
+      "preflight_head_sha": "b25fbbc43af4177037a6297d58a1932903a5cc96",
+      "preflight_run_id": 34125793364,
+      "taxon": "Eucalyptus delegatensis",
+      "taxon_index": 10
+    }
+  ],
+  "final_background_points_per_taxon_M": 2000,
+  "grid_cell_degrees": 0.05,
+  "heldout_taxa": 12,
+  "if_fewer_than_2000_all_predictor_finite_rows_after_exhaustive_enumeration": "finite_comparison_frame_unresolved",
+  "partial_frame_forbidden": true,
+  "preflight": {
+    "counts_as_empirical_conclusion": false,
+    "heldout_pairing_allowed": false,
+    "model_refit_allowed": false,
+    "paired_discordance_computation_allowed": false,
+    "prediction_score_computation_allowed": false,
+    "process_knockout_allowed": false,
+    "reference_ceiling_read_allowed": false
+  },
+  "purpose": "repair only v0.2-unresolved held-out taxon x M cells by exhaustive eligible target-group grid-cell enumeration while inheriting every v0.2-frozen frame byte-for-byte",
+  "same_final_rows_required_for_both_observation_modes": true,
+  "selection_invariance": {
+    "M_selection_forbidden": true,
+    "procedure_selection_forbidden": true,
+    "taxon_replacement_forbidden": true,
+    "v0_2_frozen_frames_reselected": false,
+    "v0_2_unresolved_cells_only_repaired": true
+  },
+  "supersedes_contract": "config/product_b_same_target_heldout_finite_frame_repair_contract_v0_2.json",
+  "taxon_M_cells": 36,
+  "taxon_replacement_forbidden": true,
+  "unchanged_scientific_rules": {
+    "M_km": [
+      150,
+      300,
+      500
+    ],
+    "final_background_points_per_taxon_M": 2000,
+    "post_outcome_M_selection_forbidden": true,
+    "post_outcome_procedure_selection_forbidden": true,
+    "prediction_adequacy_contract_unchanged": true,
+    "procedure_count": 8
+  },
+  "v0_2_frozen_cells": "inherit_frame_bytes_and_sha256_without_resampling",
+  "v0_2_unresolved_cells": "enumerate_all_eligible_target_group_grid_cells_after_focal_cell_exclusion_then_filter_all_43_finite"
+}

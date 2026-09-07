@@ -1,0 +1,194 @@
+name: same-target-reference-integrity-diagnostic
+
+on:
+  push:
+    branches: [successor-two-taxon-continuation]
+    paths: [config/product_b_same_target_reference_integrity_diagnostic_trigger_v0_1.json]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: same-target-reference-integrity-diagnostic-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 89f1a01386d5906420cb625dbf87ee18d60672e5
+          path: analysis
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
+      - name: Download the already-sealed 47-taxon fit bundle
+        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: 34078855468
+          name: product-b-successor-continued-fit-bundle
+          path: fit_bundle
+          digest-mismatch: error
+      - name: Download the already-produced strict calibration ledger
+        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: 34078855468
+          name: product-b-successor-continued-reference
+          path: reference
+          digest-mismatch: error
+      - name: Re-audit only cells whose prediction materialization was already authorized
+        env:
+          PYTHONPATH: analysis
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+
+          import json
+          from collections import Counter
+          from pathlib import Path
+
+          import numpy as np
+          import pandas as pd
+
+          from product_b_v5.prediction_opening import read_authorized_prediction_cells
+          from product_b_v5.same_target_pairing import schoener_d_from_sealed_vectors
+
+          MODES = ("PRESERVED_SPECIMEN", "HUMAN_OBSERVATION")
+          fit_root = Path("fit_bundle/analysis/fit_artifacts")
+          cells_path = Path("reference/analysis/results/product_b_same_target_successor_pairing_cells_v0_1.csv")
+          cells = pd.read_csv(cells_path)
+          authorized = cells[cells["prediction_materialization_authorized"].astype(bool)].copy()
+          if len(cells) != 1128 or len(authorized) != 607:
+              raise RuntimeError(f"unexpected prior calibration ledger shape: total={len(cells)} authorized={len(authorized)}")
+
+          taxon_dirs: dict[str, Path] = {}
+          for contract_path in sorted(fit_root.rglob("contract.json")):
+              contract = json.loads(contract_path.read_text(encoding="utf-8"))
+              if contract.get("result_version") != "product_b_same_target_successor_layer1_fit_taxon_v0.1":
+                  continue
+              taxon = str(contract["taxon"])
+              if taxon in taxon_dirs:
+                  raise RuntimeError(f"duplicate taxon artifact: {taxon}")
+              taxon_dirs[taxon] = contract_path.parent
+          if len(taxon_dirs) != 47:
+              raise RuntimeError(f"expected 47 taxon artifacts, found {len(taxon_dirs)}")
+
+          def source_stats(frame: pd.DataFrame) -> dict[str, object]:
+              ids = frame["comparison_row_id"].astype(str)
+              scores = pd.to_numeric(frame["ecological_score"], errors="coerce")
+              finite = np.isfinite(scores.to_numpy(float))
+              return {
+                  "rows": int(len(frame)),
+                  "unique_row_ids": int(ids.nunique(dropna=False)),
+                  "duplicate_row_ids": int(ids.duplicated().sum()),
+                  "finite_scores": int(finite.sum()),
+                  "negative_scores": int((scores < 0).fillna(False).sum()),
+                  "score_mass": None if not finite.all() else float(scores.sum()),
+              }
+
+          details: list[dict[str, object]] = []
+          for taxon, taxon_auth in authorized.groupby("taxon", sort=True):
+              directory = taxon_dirs[str(taxon)]
+              allowed = {
+                  (int(row.M_km), str(row.procedure))
+                  for row in taxon_auth[["M_km", "procedure"]].itertuples(index=False)
+              }
+              predictions = read_authorized_prediction_cells(directory / "sealed_prediction_surfaces.parquet", allowed)
+              observed = {
+                  (int(row.M_km), str(row.procedure))
+                  for row in predictions[["M_km", "procedure"]].drop_duplicates().itertuples(index=False)
+              }
+              if not observed.issubset(allowed):
+                  raise RuntimeError(f"unauthorized cell materialized for {taxon}")
+
+              for prior in taxon_auth.itertuples(index=False):
+                  m_km = int(prior.M_km)
+                  procedure = str(prior.procedure)
+                  group = predictions[
+                      (predictions["M_km"].astype(int) == m_km)
+                      & (predictions["procedure"].astype(str) == procedure)
+                  ]
+                  by_source = {str(src): frame.copy() for src, frame in group.groupby("source", sort=False)}
+                  record: dict[str, object] = {
+                      "taxon": str(taxon),
+                      "M_km": m_km,
+                      "procedure": procedure,
+                      "prior_prediction_materialization_authorized": True,
+                      "prior_paired_prediction_surface_opened": bool(prior.paired_prediction_surface_opened),
+                      "observed_sources": sorted(by_source),
+                      "exception_type": None,
+                      "exception_message": None,
+                      "recomputed_schoener_d": None,
+                  }
+                  for mode in MODES:
+                      record[f"{mode.lower()}_stats"] = source_stats(by_source[mode]) if mode in by_source else None
+                  if set(by_source) == set(MODES):
+                      ids_a = by_source[MODES[0]]["comparison_row_id"].astype(str)
+                      ids_b = by_source[MODES[1]]["comparison_row_id"].astype(str)
+                      set_a, set_b = set(ids_a), set(ids_b)
+                      record.update({
+                          "row_set_equal": bool(set_a == set_b),
+                          "row_id_intersection": int(len(set_a & set_b)),
+                          "preserved_only_row_ids": int(len(set_a - set_b)),
+                          "human_only_row_ids": int(len(set_b - set_a)),
+                      })
+                      try:
+                          d = schoener_d_from_sealed_vectors(
+                              ids_a.tolist(),
+                              pd.to_numeric(by_source[MODES[0]]["ecological_score"], errors="coerce").tolist(),
+                              ids_b.tolist(),
+                              pd.to_numeric(by_source[MODES[1]]["ecological_score"], errors="coerce").tolist(),
+                          )
+                          record["recomputed_schoener_d"] = float(d)
+                      except Exception as exc:
+                          record["exception_type"] = type(exc).__name__
+                          record["exception_message"] = str(exc)
+                  else:
+                      record["exception_type"] = "SourceInventoryError"
+                      record["exception_message"] = "sealed prediction source rows missing"
+                  details.append(record)
+
+          if len(details) != 607:
+              raise RuntimeError(f"expected 607 authorized diagnostics, found {len(details)}")
+          error_counts = Counter(
+              "OK" if row["exception_message"] is None else f"{row['exception_type']}: {row['exception_message']}"
+              for row in details
+          )
+          summary = {
+              "result_version": "product_b_same_target_reference_integrity_diagnostic_v0.1",
+              "source_run_id": 34078855468,
+              "fit_bundle_artifact_id": 10006924897,
+              "reference_artifact_id": 10006933587,
+              "prior_pair_cells": 1128,
+              "prior_prediction_materialization_authorized_cells": 607,
+              "diagnosed_cells": len(details),
+              "diagnostic_reopens_only_previously_authorized_prediction_cells": True,
+              "new_prediction_cells_authorized": 0,
+              "heldout_12_paired_discordance_read": False,
+              "process_knockout_opened": False,
+              "error_counts": dict(sorted(error_counts.items())),
+          }
+          out = Path("diagnostics")
+          out.mkdir(parents=True, exist_ok=True)
+          (out / "reference_integrity_diagnostic.json").write_text(
+              json.dumps({"summary": summary, "details": details}, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          pd.DataFrame(details).to_csv(out / "reference_integrity_diagnostic_cells.csv", index=False)
+          print(json.dumps(summary, indent=2, sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-reference-integrity-diagnostic
+          path: diagnostics/
+          if-no-files-found: error
+          retention-days: 90

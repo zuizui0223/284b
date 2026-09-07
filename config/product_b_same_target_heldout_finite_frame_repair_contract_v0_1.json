@@ -1,0 +1,37 @@
+{
+  "contract_version": "product_b_same_target_heldout_finite_frame_repair_v0.1",
+  "purpose": "freeze outcome-blind finite held-out comparison frames before repaired reference discordance or held-out pairing is opened",
+  "inherits_common_frame_contract": "config/product_b_same_target_source_common_frame_contract_v0_1.json",
+  "inherits_fit_contract": "config/product_b_same_target_source_model_fit_contract_v0_1.json",
+  "heldout_taxa": 12,
+  "M_km": [150, 300, 500],
+  "taxon_M_cells": 36,
+  "active_predictors_required": 43,
+  "candidate_background_points_per_taxon_M": 8000,
+  "final_background_points_per_taxon_M": 2000,
+  "grid_cell_degrees": 0.05,
+  "candidate_seed_semantics": "original_background_seed_base_plus_alphabetical_rank_among_frozen_12",
+  "final_selection_seed_offset": 2000000,
+  "all_predictors_must_be_finite_before_final_row_selection": true,
+  "same_final_rows_required_for_both_observation_modes": true,
+  "partial_frame_forbidden": true,
+  "taxon_replacement_forbidden": true,
+  "M_or_procedure_selection_from_future_outcome_forbidden": true,
+  "preflight": {
+    "model_refit_allowed": false,
+    "prediction_score_computation_allowed": false,
+    "paired_discordance_computation_allowed": false,
+    "reference_ceiling_read_allowed": false,
+    "heldout_pairing_allowed": false,
+    "process_knockout_allowed": false,
+    "counts_as_empirical_conclusion": false
+  },
+  "repair_order": [
+    "freeze_all_12x3_finite_frames",
+    "seal_preflight_summary",
+    "explicit_refit_authorization_only_after_preflight_review",
+    "refit_12_heldout_taxa_without_pairing",
+    "wait_for_successor_reference_freeze",
+    "open_only_heldout_cells_with_both_adequate_answers_and_frozen_matching_reference"
+  ]
+}

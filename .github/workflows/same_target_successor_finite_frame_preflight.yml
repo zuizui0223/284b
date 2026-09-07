@@ -1,4 +1,4 @@
-name: same-target-successor-finite-frame-preflight
+name: same-target-successor-finite-frame-preflight-legacy-deprecated
 
 on:
   push:
@@ -7,192 +7,16 @@ on:
 
 permissions:
   contents: read
-  actions: read
 
 concurrency:
   group: same-target-successor-finite-frame-preflight-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
-  validation:
+  supersede:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.sha }}
-          persist-credentials: false
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
-      - name: Validate finite-frame helper and preflight information boundary
-        env:
-          PYTHONPATH: .
+      - name: Close superseded 8k successor preflight path
         run: |
-          python -m unittest tests.test_finite_comparison_frame -v
-          python -m py_compile product_b_v5/finite_comparison_frame.py scripts/preflight_same_target_successor_finite_frame.py
-          python - <<'PY'
-          import json
-          c=json.load(open('config/product_b_same_target_reference_finite_frame_repair_contract_v0_1.json'))
-          assert c['preflight']['taxa']==47 and c['preflight']['taxon_M_cells']==141
-          assert c['finite_frame']['active_predictors_required']==43
-          assert c['finite_frame']['candidate_background_points_per_taxon_M']==8000
-          assert c['finite_frame']['final_background_points_per_taxon_M']==2000
-          for k in ['model_fit_allowed','prediction_score_computation_allowed','schoener_d_computation_allowed','reference_ceiling_computation_allowed','heldout_opening_allowed','process_knockout_allowed']:
-              assert c['preflight'][k] is False
-          PY
-
-  prepare-target:
-    needs: validation
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.sha }}
-          persist-credentials: false
-      - name: Retrieve and verify the frozen successor target-group input once
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          python - <<'PY'
-          import hashlib,json,subprocess
-          from pathlib import Path
-          c=json.load(open('results/product_b_same_target_successor_target_footprint_receipt_v0_1.json'))
-          subprocess.run(['gh','run','download',str(c['workflow_run_id']),'-R','zuizui0223/284b',
-              '-n','product-b-successor-same-target-target-footprint-2026-08-01','-D','target_source'],check=True)
-          p=Path('target_source/target_group.parquet')
-          if hashlib.sha256(p.read_bytes()).hexdigest()!=c['target_sha256']:
-              raise RuntimeError('target-group input changed')
-          PY
-      - uses: actions/upload-artifact@v4
-        with:
-          name: product-b-successor-finite-frame-target-group
-          path: target_source/target_group.parquet
-          if-no-files-found: error
-          retention-days: 30
-
-  preflight:
-    needs: prepare-target
-    strategy:
-      fail-fast: false
-      max-parallel: 12
-      matrix:
-        taxon_index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46]
-    runs-on: ubuntu-latest
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.sha }}
-          persist-credentials: false
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Install the original pinned environmental implementation
-        run: |
-          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
-          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
-          python -m pip install --disable-pip-version-check --quiet -e './sdmr[cloud,parquet,geo]'
-          python -m pip install --disable-pip-version-check --quiet 'pyarrow==21.0.0' joblib
-      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
-        with:
-          name: product-b-successor-finite-frame-target-group
-          path: target_source
-          digest-mismatch: error
-      - name: Freeze source-blind all-43-finite comparison frames before any model score
-        env:
-          PYTHONPATH: .
-          SDMR_RASTER_LAYER_JOBS: '4'
-        run: >-
-          python scripts/preflight_same_target_successor_finite_frame.py
-          --taxon-index ${{ matrix.taxon_index }}
-          --target-group target_source/target_group.parquet
-          --chelsa-manifest sdmr/configs/chelsa_v2_1_plant_candidates.csv
-          --output-dir finite_frame_${{ matrix.taxon_index }}
-      - uses: actions/upload-artifact@v4
-        with:
-          name: product-b-successor-finite-frame-preflight-taxon-${{ matrix.taxon_index }}
-          path: finite_frame_${{ matrix.taxon_index }}/
-          if-no-files-found: error
-          retention-days: 90
-
-  aggregate:
-    needs: preflight
-    if: always() && needs.preflight.result != 'cancelled'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.sha }}
-          persist-credentials: false
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
-      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
-        with:
-          pattern: product-b-successor-finite-frame-preflight-taxon-*
-          path: preflight_artifacts
-          digest-mismatch: error
-      - name: Aggregate frame availability without fitting or opening predictions
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          import numpy as np
-          import pandas as pd
-
-          receipts=[]
-          for p in sorted(Path('preflight_artifacts').rglob('receipt.json')):
-              receipts.append(json.loads(p.read_text(encoding='utf-8')))
-          rows=[]
-          for r in receipts:
-              for cell in r['cells']:
-                  rows.append({
-                      'taxon':r['taxon'], 'taxon_index':r['taxon_index'],
-                      'M_km':cell['M_km'], 'state':cell['state'],
-                      'candidate_rows_materialized':cell['candidate_rows_materialized'],
-                      'all_43_predictor_finite_rows':cell['all_43_predictor_finite_rows'],
-                      'finite_fraction':cell['finite_fraction'], 'selected_rows':cell['selected_rows'],
-                      'comparison_frame_sha256':cell['comparison_frame_sha256'],
-                  })
-          frame=pd.DataFrame(rows)
-          counts=pd.to_numeric(frame.get('all_43_predictor_finite_rows', pd.Series(dtype=float)), errors='coerce').dropna().to_numpy(float)
-          fractions=pd.to_numeric(frame.get('finite_fraction', pd.Series(dtype=float)), errors='coerce').dropna().to_numpy(float)
-          frozen=int((frame.get('state', pd.Series(dtype=str))=='finite_comparison_frame_frozen').sum())
-          summary={
-              'result_version':'product_b_same_target_successor_finite_frame_preflight_v0.1',
-              'workflow_run_id':int(__import__('os').environ['GITHUB_RUN_ID']),
-              'taxa_expected':47,
-              'taxa_with_receipts':len(receipts),
-              'taxon_M_cells_expected':141,
-              'taxon_M_cells_observed':int(len(frame)),
-              'taxon_M_cells_frozen':frozen,
-              'taxon_M_cells_unresolved':int(len(frame)-frozen),
-              'taxa_with_all_three_M_frames_frozen':int(sum(bool(r['all_three_M_frames_frozen']) for r in receipts)),
-              'minimum_all_43_finite_rows':None if not len(counts) else int(np.min(counts)),
-              'median_all_43_finite_rows':None if not len(counts) else float(np.median(counts)),
-              'p10_all_43_finite_rows':None if not len(counts) else float(np.quantile(counts,0.10)),
-              'minimum_finite_fraction':None if not len(fractions) else float(np.min(fractions)),
-              'median_finite_fraction':None if not len(fractions) else float(np.median(fractions)),
-              'all_141_frames_ready_for_review':bool(len(receipts)==47 and len(frame)==141 and frozen==141),
-              'model_refit_opened':False,
-              'prediction_scores_computed':False,
-              'paired_discordance_opened':False,
-              'reference_ceiling_computed':False,
-              'heldout_12_paired_discordance_read':False,
-              'process_knockout_opened':False,
-              'claim_strength':'environmental_availability_preflight_only_not_empirical_evidence',
-              'counts_as_empirical_conclusion':False,
-          }
-          out=Path('preflight_summary'); out.mkdir(exist_ok=True)
-          frame.sort_values(['taxon_index','M_km']).to_csv(out/'finite_frame_preflight_cells.csv',index=False)
-          (out/'finite_frame_preflight_summary.json').write_text(json.dumps(summary,indent=2,sort_keys=True)+'\n',encoding='utf-8')
-          print(json.dumps(summary,indent=2,sort_keys=True))
-          PY
-      - uses: actions/upload-artifact@v4
-        with:
-          name: product-b-successor-finite-frame-preflight-summary
-          path: preflight_summary/
-          if-no-files-found: error
-          retention-days: 90
+          echo "v0.1 8k successor preflight is superseded by the frozen 32k v0.2 path."
+          echo "This run exists only to cancel any older in-progress v0.1 run in the same concurrency group."

@@ -1,0 +1,182 @@
+name: same-target-heldout-final-finite-frame-repair-v0-3
+
+on:
+  push:
+    branches: [successor-reference-finite-frame-repair]
+    paths: [config/product_b_same_target_heldout_final_authorization_v0_3.json]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: same-target-heldout-final-finite-frame-repair-v0-3-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    outputs:
+      reference_run_id: ${{ steps.gate.outputs.reference_run_id }}
+      heldout_refit_run_id: ${{ steps.gate.outputs.heldout_refit_run_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - id: gate
+        name: Validate one-shot v0.3 final authorization and exact upstream artifacts
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          if os.environ.get('GITHUB_RUN_ATTEMPT')!='1': raise RuntimeError('v0.3 empirical final is one-shot; workflow reruns are forbidden')
+          a=json.load(open('config/product_b_same_target_heldout_final_authorization_v0_3.json'))
+          exact={
+            'authorization_version':'product_b_same_target_heldout_final_authorization_v0.3',
+            'repair_branch':'successor-reference-finite-frame-repair',
+            'endpoint_id':'same_target_cross_source_reproducibility_heldout12_finite_frame_v0_3',
+            'successor_reference_result_version':'product_b_same_target_successor_pairing_calibration_finite_frame_repair_v0.3',
+            'heldout_fit_audit_result_version':'product_b_same_target_heldout_finite_frame_repair_fit_audit_v0.3',
+            'heldout_final_opening_authorized':True,'process_knockout_authorized':False,
+            'procedure_selection_authorized':False,'M_selection_authorized':False,
+            'taxon_replacement_authorized':False,'one_shot':True,
+          }
+          for k,v in exact.items():
+              if a.get(k)!=v: raise RuntimeError(f'v0.3 held-out final authorization drift: {k}')
+          def artifacts(rid):
+              return json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}/artifacts?per_page=100'],text=True)).get('artifacts',[])
+          def verify(run_key,head_key,artifact_name,id_key,digest_key):
+              rid=int(a[run_key]); run=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}'],text=True))
+              if run.get('status')!='completed' or run.get('conclusion')!='success': raise RuntimeError(f'{run_key} is not completed success')
+              if run.get('head_sha')!=str(a[head_key]): raise RuntimeError(f'{run_key} head SHA mismatch')
+              xs=[x for x in artifacts(rid) if x.get('name')==artifact_name]
+              if len(xs)!=1 or xs[0].get('expired') is True: raise RuntimeError(f'{artifact_name} missing/duplicate/expired')
+              if int(xs[0]['id'])!=int(a[id_key]) or str(xs[0].get('digest'))!=str(a[digest_key]): raise RuntimeError(f'{artifact_name} identity mismatch')
+              return rid
+          rr=verify('reference_run_id','reference_head_sha','product-b-successor-finite-frame-repair-reference-v0-3','reference_artifact_id','reference_artifact_digest')
+          hr=verify('heldout_refit_run_id','heldout_refit_head_sha','product-b-heldout-finite-frame-repair-fit-audit-v0-3','heldout_refit_audit_artifact_id','heldout_refit_audit_artifact_digest')
+          actual=sorted((x for x in artifacts(hr) if str(x.get('name','')).startswith('product-b-heldout-finite-frame-repair-v0-3-fit-taxon-')),key=lambda x:x['name'])
+          frozen=sorted(a.get('heldout_taxon_artifacts',[]),key=lambda x:x['name'])
+          if len(actual)!=12 or len(frozen)!=12: raise RuntimeError('v0.3 final requires exactly 12 frozen held-out taxon artifacts')
+          actual_norm=[{'name':x['name'],'id':int(x['id']),'digest':str(x.get('digest'))} for x in actual]
+          frozen_norm=[{'name':x['name'],'id':int(x['id']),'digest':str(x.get('digest'))} for x in frozen]
+          if actual_norm!=frozen_norm or any(x.get('expired') is True for x in actual): raise RuntimeError('v0.3 held-out taxon artifact manifest mismatch')
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as h: h.write(f'reference_run_id={rr}\nheldout_refit_run_id={hr}\n')
+          PY
+
+  open-final:
+    needs: authorize
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        name: Download exact v0.3 repaired successor reference
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.reference_run_id }}
+          name: product-b-successor-finite-frame-repair-reference-v0-3
+          path: repaired_reference
+          digest-mismatch: error
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        name: Download all exact v0.3 repaired held-out fit artifacts
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.heldout_refit_run_id }}
+          pattern: product-b-heldout-finite-frame-repair-v0-3-fit-taxon-*
+          path: repaired_heldout_fit_artifacts
+          digest-mismatch: error
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        name: Download exact held-out v0.3 repaired fit audit
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.heldout_refit_run_id }}
+          name: product-b-heldout-finite-frame-repair-fit-audit-v0-3
+          path: heldout_fit_audit
+          digest-mismatch: error
+      - name: Recheck v0.3 information boundary before materializing held-out D
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('repaired_reference/repaired_reference_summary.json'))
+          h=json.load(open('heldout_fit_audit/heldout_repaired_fit_audit.json'))
+          if r.get('result_version')!='product_b_same_target_successor_pairing_calibration_finite_frame_repair_v0.3': raise RuntimeError('final requires v0.3 repaired successor reference')
+          if r.get('finite_frame_repair_contract_version')!='product_b_same_target_reference_finite_frame_repair_v0.3': raise RuntimeError('successor reference repair contract mismatch')
+          if int(r.get('reference_cells_frozen',0))<1: raise RuntimeError('no frozen v0.3 reference cells; final stays sealed')
+          if r.get('heldout_12_paired_discordance_read') is not False or r.get('process_knockout_opened') is not False: raise RuntimeError('reference already crossed heldout/process boundary')
+          if r.get('counts_as_empirical_conclusion') is not False: raise RuntimeError('reference stage was incorrectly marked empirical')
+          if h.get('result_version')!='product_b_same_target_heldout_finite_frame_repair_fit_audit_v0.3': raise RuntimeError('held-out final requires v0.3 repaired fit audit')
+          if h.get('finite_frame_repair_contract_version')!='product_b_same_target_heldout_finite_frame_repair_v0.3': raise RuntimeError('held-out fit repair contract mismatch')
+          if h.get('heldout_taxa_observed')!=12 or h.get('expected_fit_cells')!=576: raise RuntimeError('held-out repaired denominator drifted')
+          for k in ('paired_discordance_opened','reference_ceiling_read','heldout_pairing_opened','process_knockout_opened'):
+              if h.get(k) is not False: raise RuntimeError(f'held-out repaired fit already crossed endpoint boundary: {k}')
+          if h.get('counts_as_empirical_conclusion') is not False: raise RuntimeError('held-out refit was incorrectly marked empirical')
+          PY
+      - name: Freeze exact v0.3 source manifest before final opening
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          a=json.load(open('config/product_b_same_target_heldout_final_authorization_v0_3.json'))
+          def artifacts(rid):
+              return json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}/artifacts?per_page=100'],text=True)).get('artifacts',[])
+          rr=int(a['reference_run_id']); hr=int(a['heldout_refit_run_id'])
+          ra=[x for x in artifacts(rr) if x.get('name')=='product-b-successor-finite-frame-repair-reference-v0-3']
+          ha=artifacts(hr)
+          audit=[x for x in ha if x.get('name')=='product-b-heldout-finite-frame-repair-fit-audit-v0-3']
+          taxa=sorted((x for x in ha if str(x.get('name','')).startswith('product-b-heldout-finite-frame-repair-v0-3-fit-taxon-')),key=lambda x:x['name'])
+          frozen=sorted(a['heldout_taxon_artifacts'],key=lambda x:x['name'])
+          actual=[{'name':x['name'],'id':int(x['id']),'digest':str(x.get('digest'))} for x in taxa]
+          if len(ra)!=1 or len(audit)!=1 or len(taxa)!=12 or actual!=frozen: raise RuntimeError('v0.3 final source inventory changed')
+          manifest={
+            'endpoint_id':'same_target_cross_source_reproducibility_heldout12_finite_frame_v0_3',
+            'authorization_run_sha':os.environ['GITHUB_SHA'],
+            'reference_run_id':rr,'reference_head_sha':a['reference_head_sha'],
+            'reference_artifact':{'id':int(ra[0]['id']),'digest':str(ra[0].get('digest')),'name':ra[0]['name']},
+            'heldout_refit_run_id':hr,'heldout_refit_head_sha':a['heldout_refit_head_sha'],
+            'heldout_refit_audit_artifact':{'id':int(audit[0]['id']),'digest':str(audit[0].get('digest')),'name':audit[0]['name']},
+            'heldout_taxon_artifacts':actual,'heldout_taxon_artifact_count':12,
+            'process_knockout_opened':False,
+          }
+          open('source_manifest.json','w').write(json.dumps(manifest,indent=2,sort_keys=True)+'\n')
+          PY
+      - name: Open only prospectively authorized v0.3 held-out paired cells
+        env: {PYTHONPATH: '.'}
+        run: >-
+          python scripts/evaluate_same_target_heldout_final_finite_frame_repair_v0_3.py
+          --input-root repaired_heldout_fit_artifacts
+          --reference-summary repaired_reference/repaired_reference_summary.json
+          --reference-table repaired_reference/repaired_reference_ceiling.csv
+          --source-manifest source_manifest.json
+          --output-cells final_endpoint/heldout_final_cells.csv
+          --output-final final_endpoint/final_endpoint_result.json
+      - name: Require genuine v0.3 empirical terminal and process closure
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('final_endpoint/final_endpoint_result.json'))
+          assert r['result_version']=='product_b_same_target_heldout_final_finite_frame_repair_v0.3'
+          assert r['endpoint_id']=='same_target_cross_source_reproducibility_heldout12_finite_frame_v0_3'
+          assert r['reference_result_version']=='product_b_same_target_successor_pairing_calibration_finite_frame_repair_v0.3'
+          assert r['heldout_finite_frame_repair_contract_version']=='product_b_same_target_heldout_finite_frame_repair_v0.3'
+          assert r['terminal_class']=='empirical_result'
+          assert r['counts_as_empirical_conclusion'] is True and r['counts_as_empirical_evidence'] is True
+          assert int(r['paired_prediction_surfaces_opened_cells'])>=1
+          assert r['process_knockout_opened'] is False
+          assert r['v0_3_adapter_changed_scientific_evaluation_body'] is False
+          assert len(r['final_endpoint_fingerprint'])==64
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-same-target-heldout-final-finite-frame-v0-3
+          path: |
+            final_endpoint/final_endpoint_result.json
+            final_endpoint/heldout_final_cells.csv
+            source_manifest.json
+          if-no-files-found: error
+          retention-days: 90

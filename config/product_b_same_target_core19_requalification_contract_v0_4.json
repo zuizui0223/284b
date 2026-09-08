@@ -8,6 +8,21 @@
     "authorization_condition": "exact diagnostic summary must report all_14_unresolved_cells_core19_ready_for_2000 == true, core19_cells_ready_for_2000 == 14, core19_cells_not_ready_for_2000 == 0, with all outcome layers still closed",
     "if_condition_false": "do_not_authorize_core19_requalification_and_do_not_change_thresholds_or_pick_an_alternate_predictor_subset_from_diagnostic_results"
   },
+  "all43_v0_3_parent_provenance": {
+    "successor_run_id": 34176721182,
+    "successor_head_sha": "1235fd3a732d934e5c0e5e59d3bc97c3368c44aa",
+    "successor_summary_artifact_id": 10038977219,
+    "successor_summary_artifact_digest": "sha256:dc98729aa9e5d89f455130cd70da2acbd73d422ce9990ffd3390ad9b17330383",
+    "successor_taxon_M_cells_frozen": 131,
+    "successor_taxon_M_cells_unresolved": 10,
+    "heldout_run_id": 34176728606,
+    "heldout_head_sha": "6f7aefe58e703ebc6187f2392465de47a1d04d64",
+    "heldout_summary_artifact_id": 10038643105,
+    "heldout_summary_artifact_digest": "sha256:1126c4cbf3fbec4bb454382d91d2007d6e5169e09729ede0730a7e40fd4a8b12",
+    "heldout_taxon_M_cells_frozen": 32,
+    "heldout_taxon_M_cells_unresolved": 4,
+    "reuse_from_these_runs": "source_blind_common_geometry_hash_and_pre_outcome_seed_metadata_only"
+  },
   "endpoint_versioning": {
     "all43_v0_3_endpoint_is_not_redefined": true,
     "all43_v0_3_structural_unresolved_state_is_preserved": true,

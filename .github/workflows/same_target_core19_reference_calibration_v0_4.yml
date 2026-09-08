@@ -1,0 +1,144 @@
+name: same-target-core19-reference-calibration-v0-4
+
+on:
+  push:
+    branches: [successor-reference-finite-frame-repair]
+    paths: [config/product_b_same_target_core19_reference_authorization_v0_4.json]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: same-target-core19-reference-calibration-v0-4-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    outputs:
+      refit_run_id: ${{ steps.gate.outputs.refit_run_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - id: gate
+        name: Require exact core19 fit audit before opening successor reference D
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          python -m py_compile scripts/core19_v0_4_adapter_utils.py scripts/audit_same_target_successor_reference_feasibility_core19_v0_4.py scripts/calibrate_same_target_successor_pairing_core19_v0_4.py
+          python - <<'PY'
+          import json,os,subprocess
+          a=json.load(open('config/product_b_same_target_core19_reference_authorization_v0_4.json'))
+          exact={
+            'authorization_version':'product_b_same_target_core19_reference_authorization_v0.4',
+            'contract_version':'product_b_same_target_core19_requalification_v0.4',
+            'repair_branch':'successor-reference-finite-frame-repair',
+            'successor_reference_calibration_authorized':True,
+            'heldout_pairing_authorized':False,'process_knockout_authorized':False,
+            'counts_as_empirical_conclusion':False,
+          }
+          for k,v in exact.items():
+              if a.get(k)!=v: raise RuntimeError(f'core19 reference authorization drift: {k}')
+          rid=int(a['refit_run_id'])
+          run=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}'],text=True))
+          if run.get('status')!='completed' or run.get('conclusion')!='success' or run.get('head_sha')!=a['refit_head_sha']:
+              raise RuntimeError('core19 refit source not exact completed success')
+          arts=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}/artifacts?per_page=100'],text=True)).get('artifacts',[])
+          xs=[x for x in arts if x.get('name')=='product-b-core19-v0-4-fit-audit']
+          if len(xs)!=1 or xs[0].get('expired') is True: raise RuntimeError('core19 fit audit missing/duplicate/expired')
+          if int(xs[0]['id'])!=int(a['refit_audit_artifact_id']) or str(xs[0].get('digest'))!=str(a['refit_audit_artifact_digest']): raise RuntimeError('core19 fit audit identity mismatch')
+          subprocess.run(['gh','run','download',str(rid),'-R','zuizui0223/284b','-n','product-b-core19-v0-4-fit-audit','-D','audit'],check=True)
+          s=json.load(open('audit/core19_fit_audit.json'))
+          required={
+            'result_version':'product_b_same_target_core19_fit_audit_v0.4','contract_version':'product_b_same_target_core19_requalification_v0.4',
+            'active_predictor_count':19,'successor_taxa_observed':47,'successor_expected_fit_cells':2256,
+            'heldout_taxa_observed':12,'heldout_expected_fit_cells':576,'all_prediction_scores_finite_for_sealed_cells':True,
+            'paired_discordance_opened':False,'reference_ceiling_opened_or_read':False,'heldout_pairing_opened':False,'process_knockout_opened':False,
+            'counts_as_empirical_conclusion':False,
+          }
+          for k,v in required.items():
+              if s.get(k)!=v: raise RuntimeError(f'core19 fit audit boundary/denominator drift: {k}={s.get(k)!r}')
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as h: h.write(f'refit_run_id={rid}\n')
+          PY
+
+  pre-D:
+    needs: authorize
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.refit_run_id }}
+          pattern: product-b-core19-v0-4-successor-fit-taxon-*
+          path: successor_fits
+          digest-mismatch: error
+      - env: {PYTHONPATH: '.'}
+        run: python scripts/audit_same_target_successor_reference_feasibility_core19_v0_4.py --input-root successor_fits --output out/core19_reference_feasibility.json
+      - name: Require pre-D information boundary
+        run: |
+          python - <<'PY'
+          import json
+          s=json.load(open('out/core19_reference_feasibility.json'))
+          assert s['result_version']=='product_b_same_target_successor_reference_feasibility_core19_v0.4'
+          assert s['candidate_pair_cells']==1128 and s['reference_cells_expected']==24 and s['minimum_eligible_taxa_per_procedure_M']==30
+          assert s['paired_prediction_surfaces_read'] is False and s['schoener_d_computed'] is False and s['reference_ceiling_computed'] is False
+          assert s['heldout_12_paired_discordance_read'] is False and s['process_knockout_opened'] is False and s['counts_as_empirical_conclusion'] is False
+          PY
+      - uses: actions/upload-artifact@v4
+        with: {name: product-b-core19-v0-4-reference-feasibility, path: out/core19_reference_feasibility.json, if-no-files-found: error, retention-days: 90}
+
+  calibrate:
+    needs: [authorize, pre-D]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.refit_run_id }}
+          pattern: product-b-core19-v0-4-successor-fit-taxon-*
+          path: successor_fits
+          digest-mismatch: error
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with: {name: product-b-core19-v0-4-reference-feasibility, path: feasibility, digest-mismatch: error}
+      - env: {PYTHONPATH: '.'}
+        run: >-
+          python scripts/calibrate_same_target_successor_pairing_core19_v0_4.py
+          --input-root successor_fits --feasibility feasibility/core19_reference_feasibility.json
+          --output-cells final/core19_pairing_cells.csv --output-reference final/core19_reference_ceiling.csv
+          --output-summary final/core19_reference_summary.json
+      - name: Require strict q95 provenance and held-out closure
+        run: |
+          python - <<'PY'
+          import json
+          s=json.load(open('final/core19_reference_summary.json'))
+          assert s['result_version']=='product_b_same_target_successor_pairing_calibration_core19_v0.4'
+          assert s['core19_contract_version']=='product_b_same_target_core19_requalification_v0.4'
+          assert s['sampling_pass_taxa_in_audit']==47 and s['paired_cells_expected']==1128 and s['reference_cells_expected']==24
+          assert s['minimum_distinct_calibration_taxa_per_reference_cell']==30 and s['reference_quantile']==0.95 and s['quantile_method']=='nearest_rank'
+          assert s['heldout_12_paired_discordance_read'] is False and s['process_knockout_opened'] is False
+          assert s['provenance_adapter_changed_scientific_calibration_body'] is False and s['counts_as_empirical_conclusion'] is False
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-core19-v0-4-reference
+          path: |
+            final/core19_pairing_cells.csv
+            final/core19_reference_ceiling.csv
+            final/core19_reference_summary.json
+            feasibility/core19_reference_feasibility.json
+          if-no-files-found: error
+          retention-days: 90

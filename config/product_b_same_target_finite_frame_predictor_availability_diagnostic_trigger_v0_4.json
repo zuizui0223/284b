@@ -1,0 +1,22 @@
+{
+  "authorization_version": "product_b_same_target_finite_frame_predictor_availability_diagnostic_authorization_v0.4",
+  "repair_branch": "successor-reference-finite-frame-repair",
+  "successor_v0_3_run_id": 34176721182,
+  "successor_v0_3_head_sha": "1235fd3a732d934e5c0e5e59d3bc97c3368c44aa",
+  "successor_v0_3_summary_artifact_id": 10038977219,
+  "successor_v0_3_summary_artifact_digest": "sha256:dc98729aa9e5d89f455130cd70da2acbd73d422ce9990ffd3390ad9b17330383",
+  "successor_v0_3_expected_unresolved_cells": 10,
+  "heldout_v0_3_run_id": 34176728606,
+  "heldout_v0_3_head_sha": "6f7aefe58e703ebc6187f2392465de47a1d04d64",
+  "heldout_v0_3_summary_artifact_id": 10038643105,
+  "heldout_v0_3_summary_artifact_digest": "sha256:1126c4cbf3fbec4bb454382d91d2007d6e5169e09729ede0730a7e40fd4a8b12",
+  "heldout_v0_3_expected_unresolved_cells": 4,
+  "diagnostic_authorized": true,
+  "model_fit_authorized": false,
+  "prediction_scores_authorized": false,
+  "paired_discordance_authorized": false,
+  "reference_ceiling_authorized": false,
+  "heldout_pairing_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_conclusion": false
+}

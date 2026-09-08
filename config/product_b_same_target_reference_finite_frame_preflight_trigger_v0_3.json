@@ -1,0 +1,17 @@
+{
+  "authorization_version": "product_b_same_target_reference_finite_frame_preflight_authorization_v0.3",
+  "repair_contract_version": "product_b_same_target_reference_finite_frame_repair_v0.3",
+  "repair_branch": "successor-reference-finite-frame-repair",
+  "parent_preflight_result_version": "product_b_same_target_successor_finite_frame_preflight_v0.2",
+  "parent_preflight_run_id": 34125329933,
+  "parent_preflight_head_sha": "ddefeee99230942d90b7fcbb8d229e37401942b0",
+  "parent_preflight_summary_artifact_id": 10029275998,
+  "parent_preflight_summary_artifact_digest": "sha256:82e274560bfb3c348d198ff88607fbf00a5a1c6fc2abe9d4cb933f29b303da1e",
+  "preflight_authorized": true,
+  "model_refit_authorized": false,
+  "paired_discordance_opening_authorized": false,
+  "reference_ceiling_computation_authorized": false,
+  "heldout_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_conclusion": false
+}

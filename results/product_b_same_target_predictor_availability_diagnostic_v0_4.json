@@ -1,0 +1,33 @@
+{
+  "result_version": "product_b_same_target_predictor_availability_diagnostic_v0.4",
+  "workflow_run_id": 34237335426,
+  "workflow_head_sha": "25e6fd4795041f4a401d0aa73363bc9435858259",
+  "summary_artifact_id": 10063260092,
+  "summary_artifact_digest": "sha256:28e785eb53a0742f4255a09e1aa6f9ec315dcdee875ba75d6bb643c71df6b27e",
+  "all43_v0_3_unresolved_cells": 14,
+  "affected_taxa": 6,
+  "successor_unresolved_cells_reproduced": 10,
+  "heldout_unresolved_cells_reproduced": 4,
+  "manifest_defined_core19_predictors": ["bio1", "bio2", "bio3", "bio4", "bio5", "bio6", "bio7", "bio8", "bio9", "bio10", "bio11", "bio12", "bio13", "bio14", "bio15", "bio16", "bio17", "bio18", "bio19"],
+  "core19_cells_ready_for_2000": 14,
+  "core19_cells_not_ready_for_2000": 0,
+  "minimum_core19_finite_rows": 14584,
+  "dominant_all43_missingness": [
+    {"predictor": "swe", "candidate_class": "extended_climate", "total_missing_rows": 1354519, "max_missing_fraction": 1.0, "max_gain_if_only_predictor_removed": 3218},
+    {"predictor": "fcf", "candidate_class": "extended_climate", "total_missing_rows": 1326970, "max_missing_fraction": 0.999987, "max_gain_if_only_predictor_removed": 0},
+    {"predictor": "gdgfgd5", "candidate_class": "extended_climate", "total_missing_rows": 1296890, "max_missing_fraction": 0.999756, "max_gain_if_only_predictor_removed": 0},
+    {"predictor": "gdgfgd10", "candidate_class": "extended_climate", "total_missing_rows": 1184924, "max_missing_fraction": 0.998321, "max_gain_if_only_predictor_removed": 0},
+    {"predictor": "fgd", "candidate_class": "extended_climate", "total_missing_rows": 610676, "max_missing_fraction": 0.705275, "max_gain_if_only_predictor_removed": 0},
+    {"predictor": "lgd", "candidate_class": "extended_climate", "total_missing_rows": 610676, "max_missing_fraction": 0.705275, "max_gain_if_only_predictor_removed": 0}
+  ],
+  "interpretation": "The all-43 endpoint is structurally incomplete because extended-climate raster availability jointly removes most eligible rows in the six affected taxa. The prospectively frozen core19 endpoint is a distinct endpoint version, not a post-outcome single-predictor drop or in-place rescue.",
+  "raw_zero_reinterpretation_performed": false,
+  "model_fit_opened": false,
+  "prediction_scores_computed": false,
+  "paired_discordance_opened": false,
+  "reference_ceiling_opened_or_read": false,
+  "heldout_pairing_opened": false,
+  "process_knockout_opened": false,
+  "counts_as_empirical_conclusion": false,
+  "counts_as_empirical_evidence": false
+}

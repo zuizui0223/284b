@@ -38,8 +38,11 @@ jobs:
             'endpoint_id':'same_target_cross_source_reproducibility_heldout12_core19_v0_4',
             'reference_result_version':'product_b_same_target_successor_pairing_calibration_core19_v0.4',
             'heldout_fit_result_version':'product_b_same_target_heldout_core19_layer1_fit_taxon_v0.4',
-            'heldout_final_opening_authorized':True,'process_knockout_authorized':False,
-            'procedure_selection_authorized':False,'M_selection_authorized':False,'taxon_replacement_authorized':False,
+            'heldout_final_opening_authorized':True,
+            'process_knockout_authorized':False,
+            'procedure_selection_authorized':False,
+            'M_selection_authorized':False,
+            'taxon_replacement_authorized':False,
             'one_shot':True,
           }
           for k,v in exact.items():
@@ -52,15 +55,19 @@ jobs:
               return rid
           rr=verify_run('reference_run_id','reference_head_sha'); fr=verify_run('refit_run_id','refit_head_sha')
           ra=[x for x in arts(rr) if x.get('name')=='product-b-core19-v0-4-2-reference']
-          if len(ra)!=1 or ra[0].get('expired') is True or int(ra[0]['id'])!=int(a['reference_artifact_id']) or str(ra[0].get('digest'))!=str(a['reference_artifact_digest']): raise RuntimeError('core19 v0.4.2 reference artifact identity mismatch')
-          fa=arts(fr); audits=[x for x in fa if x.get('name')=='product-b-core19-v0-4-2-fit-audit']
-          if len(audits)!=1 or audits[0].get('expired') is True or int(audits[0]['id'])!=int(a['refit_audit_artifact_id']) or str(audits[0].get('digest'))!=str(a['refit_audit_artifact_digest']): raise RuntimeError('core19 v0.4.2 fit audit identity mismatch')
+          if len(ra)!=1 or ra[0].get('expired') is True or int(ra[0]['id'])!=int(a['reference_artifact_id']) or str(ra[0].get('digest'))!=str(a['reference_artifact_digest']):
+              raise RuntimeError('core19 v0.4.2 reference artifact identity mismatch')
+          fa=arts(fr); audits=[x for x in fa if x.get('name')=='product-b-core19-v0-4-fit-audit']
+          if len(audits)!=1 or audits[0].get('expired') is True or int(audits[0]['id'])!=int(a['refit_audit_artifact_id']) or str(audits[0].get('digest'))!=str(a['refit_audit_artifact_digest']):
+              raise RuntimeError('serialization-repaired core19 fit audit identity mismatch')
           actual=sorted((x for x in fa if str(x.get('name','')).startswith('product-b-core19-v0-4-heldout-fit-taxon-')),key=lambda x:x['name'])
           frozen=sorted(a.get('heldout_taxon_artifacts',[]),key=lambda x:x['name'])
           actual_norm=[{'name':x['name'],'id':int(x['id']),'digest':str(x.get('digest'))} for x in actual]
           frozen_norm=[{'name':x['name'],'id':int(x['id']),'digest':str(x.get('digest'))} for x in frozen]
-          if len(actual)!=12 or len(frozen)!=12 or actual_norm!=frozen_norm or any(x.get('expired') is True for x in actual): raise RuntimeError('core19 v0.4.2 heldout taxon artifact manifest mismatch')
-          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as h: h.write(f'reference_run_id={rr}\nrefit_run_id={fr}\n')
+          if len(actual)!=12 or len(frozen)!=12 or actual_norm!=frozen_norm or any(x.get('expired') is True for x in actual):
+              raise RuntimeError('core19 v0.4.2 heldout taxon artifact manifest mismatch')
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as h:
+              h.write(f'reference_run_id={rr}\nrefit_run_id={fr}\n')
           PY
 
   open-final:
@@ -91,12 +98,12 @@ jobs:
           path: heldout_fits
           digest-mismatch: error
       - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
-        name: Download exact repaired core19 fit audit
+        name: Download exact serialization-repaired core19 fit audit
         with:
           repository: zuizui0223/284b
           github-token: ${{ github.token }}
           run-id: ${{ needs.authorize.outputs.refit_run_id }}
-          name: product-b-core19-v0-4-2-fit-audit
+          name: product-b-core19-v0-4-fit-audit
           path: fit_audit
           digest-mismatch: error
       - name: Recheck core19 information boundary before first held-out D
@@ -107,7 +114,14 @@ jobs:
           if r.get('result_version')!='product_b_same_target_successor_pairing_calibration_core19_v0.4' or r.get('core19_contract_version')!='product_b_same_target_core19_requalification_v0.4': raise RuntimeError('core19 final requires exact unchanged-science reference')
           if int(r.get('reference_cells_frozen',0))<1: raise RuntimeError('no frozen core19 reference cells; final stays sealed')
           if r.get('heldout_12_paired_discordance_read') is not False or r.get('process_knockout_opened') is not False or r.get('counts_as_empirical_conclusion') is not False: raise RuntimeError('core19 reference crossed heldout/process/empirical boundary')
-          required={'result_version':'product_b_same_target_core19_fit_audit_v0.4.2','heldout_taxa_observed':12,'heldout_expected_fit_cells':576,'heldout_sealed_fit_cells':576,'heldout_unresolved_fit_cells':0,'paired_discordance_opened':False,'reference_ceiling_opened_or_read':False,'heldout_pairing_opened':False,'process_knockout_opened':False,'counts_as_empirical_conclusion':False}
+          required={
+            'result_version':'product_b_same_target_core19_fit_audit_v0.4',
+            'successor_serialization_repair_version':'v0.4.2',
+            'heldout_fit_artifacts_inherited_from_parent':True,
+            'heldout_taxa_observed':12,'heldout_expected_fit_cells':576,'heldout_sealed_fit_cells':576,'heldout_unresolved_fit_cells':0,
+            'paired_discordance_opened':False,'reference_ceiling_opened_or_read':False,'heldout_pairing_opened':False,'process_knockout_opened':False,
+            'counts_as_empirical_conclusion':False,
+          }
           for k,v in required.items():
               if a.get(k)!=v: raise RuntimeError(f'core19 heldout fit audit boundary drift: {k}')
           PY
@@ -119,11 +133,22 @@ jobs:
           a=json.load(open('config/product_b_same_target_core19_final_authorization_v0_4_2.json'))
           def arts(rid): return json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}/artifacts?per_page=100'],text=True)).get('artifacts',[])
           rr=int(a['reference_run_id']); fr=int(a['refit_run_id']); ra=[x for x in arts(rr) if x.get('name')=='product-b-core19-v0-4-2-reference']; fa=arts(fr)
-          audit=[x for x in fa if x.get('name')=='product-b-core19-v0-4-2-fit-audit']; taxa=sorted((x for x in fa if str(x.get('name','')).startswith('product-b-core19-v0-4-heldout-fit-taxon-')),key=lambda x:x['name'])
-          actual=[{'name':x['name'],'id':int(x['id']),'digest':str(x.get('digest'))} for x in taxa]; frozen=sorted(a['heldout_taxon_artifacts'],key=lambda x:x['name'])
-          frozen=[{'name':x['name'],'id':int(x['id']),'digest':str(x.get('digest'))} for x in frozen]
+          audit=[x for x in fa if x.get('name')=='product-b-core19-v0-4-fit-audit']; taxa=sorted((x for x in fa if str(x.get('name','')).startswith('product-b-core19-v0-4-heldout-fit-taxon-')),key=lambda x:x['name'])
+          actual=[{'name':x['name'],'id':int(x['id']),'digest':str(x.get('digest'))} for x in taxa]
+          frozen=sorted(a['heldout_taxon_artifacts'],key=lambda x:x['name']); frozen=[{'name':x['name'],'id':int(x['id']),'digest':str(x.get('digest'))} for x in frozen]
           if len(ra)!=1 or len(audit)!=1 or len(taxa)!=12 or actual!=frozen: raise RuntimeError('core19 final source inventory changed')
-          manifest={'endpoint_id':'same_target_cross_source_reproducibility_heldout12_core19_v0_4','authorization_run_sha':os.environ['GITHUB_SHA'],'reference_run_id':rr,'reference_head_sha':a['reference_head_sha'],'reference_artifact':{'id':int(ra[0]['id']),'digest':str(ra[0].get('digest')),'name':ra[0]['name']},'refit_run_id':fr,'refit_head_sha':a['refit_head_sha'],'refit_audit_artifact':{'id':int(audit[0]['id']),'digest':str(audit[0].get('digest')),'name':audit[0]['name']},'heldout_taxon_artifacts':actual,'heldout_taxon_artifact_count':12,'active_predictors':[f'bio{i}' for i in range(1,20)],'serialization_repair_provenance':'successor_only_v0.4.2_heldout_inherited','process_knockout_opened':False}
+          manifest={
+            'endpoint_id':'same_target_cross_source_reproducibility_heldout12_core19_v0_4',
+            'authorization_run_sha':os.environ['GITHUB_SHA'],
+            'reference_run_id':rr,'reference_head_sha':a['reference_head_sha'],
+            'reference_artifact':{'id':int(ra[0]['id']),'digest':str(ra[0].get('digest')),'name':ra[0]['name']},
+            'refit_run_id':fr,'refit_head_sha':a['refit_head_sha'],
+            'refit_audit_artifact':{'id':int(audit[0]['id']),'digest':str(audit[0].get('digest')),'name':audit[0]['name']},
+            'heldout_taxon_artifacts':actual,'heldout_taxon_artifact_count':12,
+            'active_predictors':[f'bio{i}' for i in range(1,20)],
+            'serialization_repair_provenance':'successor_only_v0.4.2_heldout_inherited',
+            'process_knockout_opened':False,
+          }
           open('source_manifest.json','w').write(json.dumps(manifest,indent=2,sort_keys=True)+'\n')
           PY
       - name: Open only prospectively authorized core19 held-out paired cells

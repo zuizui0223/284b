@@ -70,6 +70,10 @@ class Core19V04Guards(unittest.TestCase):
         self.assertIn('all_prediction_scores_finite_for_sealed_cells', script)
         self.assertIn('"paired_discordance_computed":False', script)
         self.assertIn('"heldout_pairing_opened":False', script)
+        self.assertIn('row_identity_fields = {"historical_specieskeys": "|".join(identity)', script)
+        self.assertIn('contract_identity_fields = {"historical_specieskeys": list(identity)', script)
+        self.assertIn('base.update(row_identity_fields)', script)
+        self.assertIn('**contract_identity_fields', script)
 
     def test_core19_reference_opens_only_successor_D_and_keeps_heldout_closed(self):
         workflow = (ROOT / '.github/workflows/same_target_core19_reference_calibration_v0_4.yml').read_text()

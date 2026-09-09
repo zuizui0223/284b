@@ -58,9 +58,7 @@ jobs:
             'contract_version':'product_b_same_target_core19_requalification_v0.4',
             'active_predictor_count':19,
             'successor_taxa_observed':47,'successor_expected_fit_cells':2256,
-            'successor_sealed_fit_cells':2256,'successor_unresolved_fit_cells':0,
             'heldout_taxa_observed':12,'heldout_expected_fit_cells':576,
-            'heldout_sealed_fit_cells':576,'heldout_unresolved_fit_cells':0,
             'all_prediction_scores_finite_for_sealed_cells':True,
             'successor_serialization_repair_version':'v0.4.2',
             'heldout_fit_artifacts_inherited_from_parent':True,
@@ -70,8 +68,11 @@ jobs:
           }
           for k,v in required.items():
               if s.get(k)!=v: raise RuntimeError(f'repaired core19 fit audit boundary/denominator drift: {k}={s.get(k)!r}')
-          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as h:
-              h.write(f'refit_run_id={rid}\n')
+          if int(s.get('successor_sealed_fit_cells',-1))+int(s.get('successor_unresolved_fit_cells',-1))!=2256:
+              raise RuntimeError('successor repaired fit accounting does not sum to frozen denominator')
+          if int(s.get('heldout_sealed_fit_cells',-1))+int(s.get('heldout_unresolved_fit_cells',-1))!=576:
+              raise RuntimeError('heldout inherited fit accounting does not sum to frozen denominator')
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as h: h.write(f'refit_run_id={rid}\n')
           PY
 
   pre-D:
@@ -99,11 +100,9 @@ jobs:
           import json
           s=json.load(open('out/core19_reference_feasibility.json'))
           assert s['result_version']=='product_b_same_target_successor_reference_feasibility_core19_v0.4'
-          assert s['candidate_pair_cells']==1128 and s['reference_cells_expected']==24
-          assert s['minimum_eligible_taxa_per_procedure_M']==30
+          assert s['candidate_pair_cells']==1128 and s['reference_cells_expected']==24 and s['minimum_eligible_taxa_per_procedure_M']==30
           assert s['paired_prediction_surfaces_read'] is False and s['schoener_d_computed'] is False and s['reference_ceiling_computed'] is False
-          assert s['heldout_12_paired_discordance_read'] is False and s['process_knockout_opened'] is False
-          assert s['counts_as_empirical_conclusion'] is False
+          assert s['heldout_12_paired_discordance_read'] is False and s['process_knockout_opened'] is False and s['counts_as_empirical_conclusion'] is False
           PY
       - uses: actions/upload-artifact@v4
         with: {name: product-b-core19-v0-4-2-reference-feasibility, path: out/core19_reference_feasibility.json, if-no-files-found: error, retention-days: 90}
@@ -141,11 +140,9 @@ jobs:
           assert s['result_version']=='product_b_same_target_successor_pairing_calibration_core19_v0.4'
           assert s['core19_contract_version']=='product_b_same_target_core19_requalification_v0.4'
           assert s['sampling_pass_taxa_in_audit']==47 and s['paired_cells_expected']==1128 and s['reference_cells_expected']==24
-          assert s['minimum_distinct_calibration_taxa_per_reference_cell']==30
-          assert s['reference_quantile']==0.95 and s['quantile_method']=='nearest_rank'
+          assert s['minimum_distinct_calibration_taxa_per_reference_cell']==30 and s['reference_quantile']==0.95 and s['quantile_method']=='nearest_rank'
           assert s['heldout_12_paired_discordance_read'] is False and s['process_knockout_opened'] is False
-          assert s['provenance_adapter_changed_scientific_calibration_body'] is False
-          assert s['counts_as_empirical_conclusion'] is False
+          assert s['provenance_adapter_changed_scientific_calibration_body'] is False and s['counts_as_empirical_conclusion'] is False
           PY
       - uses: actions/upload-artifact@v4
         with:

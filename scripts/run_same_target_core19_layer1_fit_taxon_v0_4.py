@@ -126,7 +126,8 @@ def main() -> int:
         if name != expected_name or receipt.get("historical_specieskeys") != list(identity):
             raise RuntimeError("successor core19 taxon identity mismatch")
         mode_a, mode_b = scan_fn(identity)
-        identity_fields = {"historical_specieskeys": list(identity), "historical_key_count": len(identity)}
+        row_identity_fields = {"historical_specieskeys": "|".join(identity), "historical_key_count": len(identity)}
+        contract_identity_fields = {"historical_specieskeys": list(identity), "historical_key_count": len(identity)}
     else:
         registry = pd.read_csv(HELDOUT_REGISTRY)
         sampling = json.loads(HELDOUT_SAMPLING.read_text(encoding="utf-8"))
@@ -141,7 +142,8 @@ def main() -> int:
         if name != expected_name or str(receipt.get("specieskey")) != specieskey:
             raise RuntimeError("heldout core19 taxon identity mismatch")
         mode_a, mode_b = scan_fn(specieskey)
-        identity_fields = {"specieskey": specieskey}
+        row_identity_fields = {"specieskey": specieskey}
+        contract_identity_fields = {"specieskey": specieskey}
 
     retained = retained_fn(name, mode_a, mode_b)
     del mode_a, mode_b
@@ -212,7 +214,7 @@ def main() -> int:
             presence = featured_source[mode]
             for procedure in procedures:
                 base = {"taxon":name, "source":mode, "M_km":m, "procedure":procedure.label}
-                base.update(identity_fields)
+                base.update(row_identity_fields)
                 try:
                     benchmark = cross_validated_recovery_procedure(
                         presence, background, source_blocks[mode], bg_blocks,
@@ -264,7 +266,7 @@ def main() -> int:
     prediction_sha=sha256((outdir/"sealed_prediction_surfaces.parquet").read_bytes()).hexdigest()
     contract_out={
         "result_version":result_version,"core19_contract_version":CONTRACT_VERSION,"panel":panel,
-        "taxon":name,"taxon_index":taxon_index,**identity_fields,"source_modes":list(MODES),
+        "taxon":name,"taxon_index":taxon_index,**contract_identity_fields,"source_modes":list(MODES),
         "active_predictors":list(predictors),"active_predictor_count":19,"M_km":[150,300,500],"procedure_count":8,
         "expected_fit_cells":48,"sealed_fit_cells":sealed,"unresolved_fit_cells":int(len(inventory)-sealed),
         "prediction_surface_sha256":prediction_sha,"prediction_surfaces_sealed":True,
@@ -276,6 +278,7 @@ def main() -> int:
         "same_frozen_core19_background_rows_used_for_both_sources":True,
         "background_rows_resampled_during_refit":False,"posthoc_prediction_row_drop_used":False,
         "taxon_replaced":False,"procedure_selected_from_outcome":False,"M_selected_from_outcome":False,
+        "row_identity_serialization":"scalar_metadata_columns_only",
         "errors":errors,"counts_as_empirical_conclusion":False,
         "claim_strength":"core19_layer1_refit_only_cross_source_endpoint_still_sealed",
     }

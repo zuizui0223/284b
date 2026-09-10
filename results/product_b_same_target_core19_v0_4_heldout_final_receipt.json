@@ -1,0 +1,110 @@
+{
+  "receipt_version": "product_b_same_target_core19_heldout_final_receipt_v0.1",
+  "endpoint_id": "same_target_cross_source_reproducibility_heldout12_core19_v0_4",
+  "result_version": "product_b_same_target_heldout_final_core19_v0.4",
+  "terminal_class": "empirical_result",
+  "status": "heldout_cross_source_consistent_on_opened_cells",
+  "claim_strength": "heldout_cross_source_answer_reproducibility_under_frozen_successor_reference_not_direct_biological_process_falsification",
+  "opened_at_utc": "2026-09-10T05:02:59.326858+00:00",
+  "final_run_id": 34439487385,
+  "final_run_head_sha": "a50f186d9d1b2a9f4ba9b9b81f2b47531fcef975",
+  "final_artifact": {
+    "name": "product-b-same-target-heldout-final-core19-v0-4",
+    "id": 10137399646,
+    "digest": "sha256:c44b250aaa512d564418b2973a8d56c03bf9a800e9a6d89dbfc3d7a40ce4b27a"
+  },
+  "final_endpoint_fingerprint": "80465bdefd484a8e9d5adcdbd792820ff1716c2b589ff9ad2a278c6c9494646c",
+  "cells_sha256": "d9194ea416dcc3bbae339167e271d3cbcd522327b41fe573325770a94bd90b0d",
+  "reference_summary_sha256": "d92eb0bb5b1a2b8f21674548cca8d20dfd02837deecc91e1be717a907324452e",
+  "reference_table_sha256": "10759c6e0ffc70ff403c0eabd9c7ce30765ebbf1ce6403fa29562a7c7bb2b039",
+  "hash_verification": {
+    "cells_sha256_recomputed_matches": true,
+    "reference_summary_sha256_recomputed_matches": true,
+    "reference_table_sha256_recomputed_matches": true,
+    "final_endpoint_fingerprint_recomputed_matches": true,
+    "source_manifest_embedded_equals_uploaded_manifest": true
+  },
+  "reference": {
+    "run_id": 34439012066,
+    "artifact_id": 10137248940,
+    "artifact_digest": "sha256:b25ff78668b73c19a5e87e66680d06b026ebebb612ae0c94a3ae1fa400d5b535",
+    "reference_cells_frozen": 24,
+    "reference_cells_unresolved": 0,
+    "reference_derived_from_heldout_taxa": false,
+    "quantile": 0.95,
+    "quantile_method": "nearest_rank"
+  },
+  "heldout": {
+    "taxa": 12,
+    "cells_expected": 288,
+    "cells_audited": 288,
+    "paired_prediction_surfaces_opened_cells": 283,
+    "paired_prediction_surfaces_kept_closed_cells": 5,
+    "paired_crosscheck_consistent": 283,
+    "paired_crosscheck_attention_required": 0,
+    "paired_crosscheck_unresolved": 5,
+    "paired_crosscheck_calibration_unresolved": 0,
+    "opened_cells_all_within_frozen_reference_ceiling": true,
+    "largest_discordance_minus_reference": -0.0045996075407875,
+    "closest_opened_cell": {
+      "taxon": "Nothofagus betuloides",
+      "M_km": 150,
+      "procedure": "predictive_forward|logit_l2_C1_degree2",
+      "one_minus_schoener_d": 0.3862495699632878,
+      "frozen_reference_ceiling": 0.3908491775040753,
+      "discordance_minus_reference": -0.0045996075407875
+    },
+    "unresolved_cells": [
+      {
+        "taxon": "Eucalyptus globulus",
+        "M_km": 150,
+        "procedure": "niche_forward|logit_l2_C0.1_degree1",
+        "reason": "human_observation_answer_inadequate_or_missing"
+      },
+      {
+        "taxon": "Eucalyptus globulus",
+        "M_km": 150,
+        "procedure": "predictive_forward|logit_l2_C0.1_degree1",
+        "reason": "human_observation_answer_inadequate_or_missing"
+      },
+      {
+        "taxon": "Larix laricina",
+        "M_km": 150,
+        "procedure": "niche_forward|logit_l2_C0.1_degree1",
+        "reason": "preserved_specimen_answer_inadequate_or_missing"
+      },
+      {
+        "taxon": "Larix laricina",
+        "M_km": 300,
+        "procedure": "niche_forward|logit_l2_C0.1_degree1",
+        "reason": "human_observation_answer_inadequate_or_missing"
+      },
+      {
+        "taxon": "Nothofagus antarctica",
+        "M_km": 150,
+        "procedure": "niche_forward|logit_l2_C1_degree2",
+        "reason": "preserved_specimen_answer_inadequate_or_missing"
+      }
+    ]
+  },
+  "information_boundary": {
+    "process_knockout_opened": false,
+    "procedure_selected_from_heldout_outcome": false,
+    "M_selected_from_heldout_outcome": false,
+    "heldout_taxa_replaced": false,
+    "provenance_adapter_changed_scientific_evaluation_body": false,
+    "attention_required_is_biological_falsification": false
+  },
+  "execution_provenance": {
+    "successor_serialization_repair_version": "v0.4.2",
+    "final_execution_repair_version": "v0.4.3",
+    "final_execution_repair_scope": "artifact_relative_path_only",
+    "preopening_failed_final_run_id": 34439174715,
+    "preopening_failed_final_opening_step_skipped": true
+  },
+  "counts_as_empirical_evidence": true,
+  "counts_as_empirical_conclusion": true,
+  "empirical_ledger_increment": 1,
+  "deduplication_key": "same_target_cross_source_reproducibility_heldout12_core19_v0_4:80465bdefd484a8e9d5adcdbd792820ff1716c2b589ff9ad2a278c6c9494646c",
+  "do_not_recount_same_endpoint": true
+}

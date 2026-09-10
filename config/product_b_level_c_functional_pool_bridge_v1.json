@@ -1,0 +1,33 @@
+{
+  "bridge_version": "product_b_level_c_functional_pool_bridge_v1",
+  "bridge_state": "pure_equivalence_design_frozen_before_any_functional_pool_candidate_search",
+  "member_level_relation": "E(k)_implies_OR_over_frozen_members_Rk",
+  "direct_functional_relation": "E(k)_implies_F(k)",
+  "functional_support_definition": "F is the externally declared biological function supplied by the required role, not a taxon occurrence proxy",
+  "equivalence_conditions": [
+    "R(k) is externally complete",
+    "F(k) is defined exactly as support by at least one member of R(k)",
+    "member answers and F refer to the same frozen event key",
+    "adequacy and evidence-completeness semantics are aligned"
+  ],
+  "incomplete_set_consequence": "All represented members can be adequately negative while the member-level relation remains unresolved because an unrepresented alternative may exist.",
+  "direct_functional_channel_consequence": "A separately validated aggregate functional channel can establish F(k)=false without enumerating every provider species, but only if its observation/estimator adequacy supports functional absence at that key.",
+  "hard_boundaries": {
+    "generic_occurrence_or_suitability_is_functional_support": false,
+    "zero_observed_visits_without_detection_adequacy_is_functional_absence": false,
+    "known_member_absence_without_set_completeness_is_functional_absence": false,
+    "functional_channel_definition_may_change_after_outcome": false,
+    "event_key_may_change_after_outcome": false,
+    "level_a_q95_is_functional_pool_tolerance": false
+  },
+  "design_implication": "Cross-role hard relations have two legitimate routes: externally close the alternative-member universe, or directly observe/model the required biological function as a complete aggregate channel. These routes must not be conflated.",
+  "future_candidate_search_authorized_now": false,
+  "focal_data_opening_authorized": false,
+  "hard_invariant_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_at_bridge_freeze": 1
+}

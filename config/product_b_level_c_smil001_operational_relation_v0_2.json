@@ -73,6 +73,16 @@
     "answer_contract_frozen": false,
     "adequacy_gate_frozen": false
   },
+  "evidence_independence_gate": {
+    "external_relation_evidence_may_define_focal_role_answer": false,
+    "2026_pollinator_observations_from_dependency_paper_eligible_as_confirmatory_focal_role_y_answer": false,
+    "2025_interaction_observations_used_to_admit_candidate_eligible_as_confirmatory_focal_role_y_answer": false,
+    "same_published_dataset_may_both_define_hard_relation_and_score_confirmatory_endpoint": false,
+    "confirmatory_role_x_requires_fresh_or_independent_answer_source": true,
+    "confirmatory_role_y_requires_fresh_or_independent_answer_source": true,
+    "engineering_use_of_relation_evidence_for_synthetic_or_pipeline_validation": true,
+    "current_state": "unresolved_independent_focal_role_answers"
+  },
   "relation_space": {
     "intended_key_semantics": "dependency_experiment_population_x_reproductive_event_window",
     "exact_key_inventory_frozen": false,
@@ -93,7 +103,8 @@
     "freeze_event_specific_temporal_relation_keys_from_external_provenance",
     "design_and_synthetically_validate_role_x_answer_contract",
     "design_and_synthetically_validate_role_y_answer_contract",
-    "run_sampling_feasibility_only_after_relation_keys_and_role_contracts_are_frozen"
+    "identify_independent_focal_role_answer_sources_without_occurrence_overlap_selection",
+    "run_sampling_feasibility_only_after_relation_keys_role_contracts_and_evidence_independence_are_frozen"
   ],
   "counts_as_empirical_evidence": false,
   "counts_as_empirical_conclusion": false,

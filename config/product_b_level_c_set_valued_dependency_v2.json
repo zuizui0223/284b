@@ -1,0 +1,73 @@
+{
+  "design_version": "product_b_level_c_set_valued_dependency_v2",
+  "design_state": "pure_relation_design_frozen_before_any_v2_candidate_search",
+  "parent_v1_hard_stop": {
+    "receipt": "results/product_b_level_c_candidate_admission_v1_hard_stop.json",
+    "screened_candidates": 12,
+    "fully_admitted_candidates": 0,
+    "interpretation": "v1_is_a_closed_structural_candidate_admission_result_not_a_pool_to_rescue"
+  },
+  "motivation": "The v1 screen showed that a hard implication to one named required species is often biologically too narrow when function can be supplied by multiple pollinators, host species, or resources. v2 generalizes only the relation vocabulary; it does not reopen v1 candidates.",
+  "relation_class": "set_valued_directional_event_dependency",
+  "relation_form": "dependent_event(k)_implies_OR_over_frozen_required_members_Rk",
+  "key_semantics": "event_relevant_relation_key_frozen_before_focal_outcome",
+  "required_set_contract": {
+    "member_identity_must_be_external_and_response_blind": true,
+    "member_set_frozen_before_focal_answer_access": true,
+    "member_addition_after_focal_outcome_forbidden": true,
+    "member_removal_after_focal_outcome_forbidden": true,
+    "membership_may_not_be_derived_from_occurrence_overlap": true,
+    "membership_may_not_be_derived_from_fitted_role_surfaces": true,
+    "membership_may_not_be_derived_from_cross_role_result": true,
+    "set_completeness_is_a_separate_external_claim": true,
+    "absence_of_reported_alternatives_is_not_set_completeness": true,
+    "hard_violation_requires_set_completeness": true
+  },
+  "decision_semantics": {
+    "dependent_event_negative": "not_triggered",
+    "dependent_event_positive_and_any_frozen_required_member_positive": "consistent",
+    "dependent_event_positive_all_frozen_members_negative_but_set_incomplete": "unresolved",
+    "dependent_event_positive_no_positive_member_and_any_member_answer_inadequate": "unresolved",
+    "dependent_event_positive_all_frozen_members_adequately_negative_and_set_complete": "violated",
+    "all_relation_keys_not_triggered": "aggregate_unresolved_not_vacuous_consistency"
+  },
+  "monotonicity_warning": "Adding a new positive alternative can convert a previously violated key to consistent. Therefore required-set membership is part of the frozen scientific hypothesis and cannot be edited after focal results.",
+  "v2_confirmatory_freshness_boundary": {
+    "v1_screened_candidate_ids_excluded": [
+      "SMIL001",
+      "BREY001",
+      "AGLA001",
+      "CELA001",
+      "SMIC001",
+      "UDEA001",
+      "PAST001",
+      "TETR001",
+      "ANAD001",
+      "SACC001",
+      "PLIC001",
+      "STRONG001"
+    ],
+    "v1_post_cap_seen_systems_excluded": [
+      "Ganaspis kimorum -> Drosophila suzukii"
+    ],
+    "reason": "v2_must_not_circumvent_the_v1_candidate_cap_by_repackaging_seen_candidates_under_a_more_permissive_relation",
+    "future_candidate_search_requires_separate_prospective_protocol": true,
+    "future_candidate_search_authorized_now": false
+  },
+  "role_answer_requirements": {
+    "generic_occurrence_surface_automatically_sufficient": false,
+    "each_required_member_answer_must_match_the_event_estimand": true,
+    "dependent_answer_must_match_the_event_estimand": true,
+    "missing_or_inadequate_answers_are_unresolved_not_absence": true
+  },
+  "level_a_q95_imported_as_cross_role_tolerance": false,
+  "focal_occurrence_or_answer_data_opening_authorized": false,
+  "hard_invariant_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_at_v2_design_freeze": 1,
+  "claim_strength": "pure_set_valued_relation_semantics_only_no_v2_candidate_or_empirical_outcome"
+}

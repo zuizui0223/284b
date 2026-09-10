@@ -56,6 +56,22 @@ class Smil001LevelCBoundaryTests(unittest.TestCase):
         self.assertFalse(c["relation_space"]["raw_suitability_equality_is_required"])
         self.assertFalse(c["level_a_same_target_q95_imported_as_cross_role_tolerance"])
 
+    def test_relation_evidence_cannot_double_as_confirmatory_focal_answer(self):
+        g = self.contract["evidence_independence_gate"]
+        self.assertFalse(g["external_relation_evidence_may_define_focal_role_answer"])
+        self.assertFalse(
+            g["2026_pollinator_observations_from_dependency_paper_eligible_as_confirmatory_focal_role_y_answer"]
+        )
+        self.assertFalse(
+            g["2025_interaction_observations_used_to_admit_candidate_eligible_as_confirmatory_focal_role_y_answer"]
+        )
+        self.assertFalse(
+            g["same_published_dataset_may_both_define_hard_relation_and_score_confirmatory_endpoint"]
+        )
+        self.assertTrue(g["confirmatory_role_x_requires_fresh_or_independent_answer_source"])
+        self.assertTrue(g["confirmatory_role_y_requires_fresh_or_independent_answer_source"])
+        self.assertEqual(g["current_state"], "unresolved_independent_focal_role_answers")
+
     def test_event_relation_module_is_pure_and_surface_free(self):
         forbidden = (
             "requests",

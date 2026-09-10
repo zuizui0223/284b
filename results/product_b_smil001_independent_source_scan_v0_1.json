@@ -1,0 +1,53 @@
+{
+  "result_version": "product_b_smil001_independent_source_scan_v0.1",
+  "pair_id": "SMIL001",
+  "scan_date": "2026-09-10",
+  "scan_scope": "response_blind_literature_and_dataset_metadata_only",
+  "scan_interpretation": "This is a bounded source-discovery scan, not a proof that no independent source exists.",
+  "relation_defining_sources": [
+    {
+      "doi": "10.1016/j.cub.2026.03.002",
+      "role": "experimental_plant_dependency_and_pollinator_behavior",
+      "eligible_as_confirmatory_focal_role_answer": false
+    },
+    {
+      "doi": "10.3897/zookeys.1234.146453",
+      "role": "interaction_description_pollinator_taxonomy_and_exact_interaction_anchors",
+      "eligible_as_confirmatory_focal_role_answer": false
+    }
+  ],
+  "source_discovery_findings": {
+    "independent_role_x_reproductive_success_source_located": false,
+    "independent_role_y_visitation_or_reachability_source_located": false,
+    "exact_2026_Amami_dependency_experiment_coordinate_located": false,
+    "2025_Higashinakama_anchor_located": true,
+    "2025_anchor_identity_with_2026_dependency_population_established": false,
+    "additional_confirmatory_source_admitted": false
+  },
+  "information_not_inspected": {
+    "focal_GBIF_occurrence_counts": true,
+    "focal_iNaturalist_occurrence_counts": true,
+    "plant_midge_occurrence_overlap": true,
+    "fitted_plant_surface": true,
+    "fitted_midge_surface": true,
+    "cross_role_relation_statistic": true
+  },
+  "operational_decision": {
+    "SMIL001_confirmatory_execution_authorized": false,
+    "SMIL001_sampling_feasibility_authorized": false,
+    "SMIL001_hard_invariant_opening_authorized": false,
+    "SMIL001_soft_crosscheck_opening_authorized": false,
+    "SMIL001_process_knockout_authorized": false,
+    "SMIL001_execution_hard_stop_until_new_external_metadata_or_independent_source": true,
+    "reason": "The hard biological direction is strong, but exact relation-space provenance and independent focal role-answer sources are still unresolved."
+  },
+  "next_allowed_actions": [
+    "obtain_response_blind_author_or_repository_metadata_for_the_2026_dependency_population",
+    "locate_a_truly_independent_reproductive_or_visitation_dataset_without_using_occurrence_overlap_for_selection",
+    "if_SMIL001_remains_blocked_define_a_separate_response_blind_candidate_admission_protocol_before_considering_another_Level_C_system"
+  ],
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_after_this_scan": 1
+}

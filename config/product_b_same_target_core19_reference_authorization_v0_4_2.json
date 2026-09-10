@@ -1,0 +1,21 @@
+{
+  "authorization_version": "product_b_same_target_core19_reference_authorization_v0.4.2",
+  "contract_version": "product_b_same_target_core19_requalification_v0.4",
+  "repair_branch": "successor-reference-finite-frame-repair",
+  "refit_run_id": 34314390923,
+  "refit_head_sha": "fbcd7fcf3dd6eca86ba634ec3e21d13bc6e3afd3",
+  "refit_audit_artifact_id": 10098074429,
+  "refit_audit_artifact_digest": "sha256:69b9351d020ff8e2f43fa2fb19d349a048790366ab139b8522d3a170ab08131e",
+  "successor_expected_fit_cells": 2256,
+  "successor_sealed_fit_cells": 2255,
+  "successor_unresolved_fit_cells": 1,
+  "heldout_expected_fit_cells": 576,
+  "heldout_sealed_fit_cells": 576,
+  "heldout_unresolved_fit_cells": 0,
+  "successor_serialization_repair_version": "v0.4.2",
+  "successor_reference_calibration_authorized": true,
+  "heldout_pairing_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_conclusion": false,
+  "authorization_reason": "Exact repaired fit audit is complete; one successor fit cell remains unresolved, which is retained under the original pre-D >=30-taxon reference rule rather than rescued or dropped."
+}

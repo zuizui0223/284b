@@ -1,0 +1,71 @@
+{
+  "protocol_version": "product_b_level_c_functional_pool_candidate_admission_v1",
+  "protocol_state": "frozen_before_functional_pool_candidate_search",
+  "parent_bridge": "product_b_level_c_functional_pool_bridge_v1",
+  "scientific_target": "fresh_event_level_directional_dependencies_with_direct_aggregate_required_function_answers",
+  "relation_form": "dependent_event(k)_implies_required_function_F(k)",
+  "candidate_discovery_queries_frozen": [
+    "wild plant pollinator exclusion fruit set independent visitation monitoring exact site year dataset",
+    "obligate pollination multiple pollinator species exclusion experiment independent visitation study exact locality",
+    "orchid seed germination obligate mycorrhiza field sowing fungal community exact site independent monitoring",
+    "host dependent emergence field monitoring host availability independent dataset exact site year"
+  ],
+  "admission_gates": {
+    "F1_event_necessity": "Primary external biology must support the exact directional event necessity, preferably by exclusion/removal/manipulation rather than raw co-occurrence.",
+    "F2_functional_channel": "The required role must be definable and measurable as an aggregate biological function without needing post-outcome provider-species enumeration.",
+    "F3_operational_relation_keys": "An exact or unambiguous site/population unit and event-relevant time window must be available from response-blind metadata.",
+    "F4_focal_independence": "A focal dataset or data source independent of the relation-defining evidence must contain distinct dependent-event and required-function measurement channels that are not tuned to one another.",
+    "F5_functional_absence_adequacy": "Metadata must define observation or measurement effort capable in principle of distinguishing functional absence from non-detection; zero observations alone are insufficient.",
+    "F6_management_scope": "Management, deliberate release, cultivation, or experimental placement must not create the confirmatory relation-space pattern unless the endpoint is explicitly engineering-only.",
+    "F7_fresh_endpoint_identity": "Previously consumed 284b endpoints and all systems observed during the v1 finite screen are excluded from confirmatory admission."
+  },
+  "candidate_registry_rule": {
+    "every_screened_candidate_logged": true,
+    "failed_candidates_retained": true,
+    "maximum_candidates_screened": 8,
+    "target_fully_admitted_candidates": 2,
+    "hard_stop": "Stop when 2 candidates pass F1-F7 or 8 candidates have been screened, whichever happens first.",
+    "candidate_replacement_after_data_or_result_inspection_forbidden": true
+  },
+  "freshness_exclusions": {
+    "v1_screened_candidate_ids": ["SMIL001","BREY001","AGLA001","CELA001","SMIC001","UDEA001","PAST001","TETR001","ANAD001","SACC001","PLIC001","STRONG001"],
+    "v1_post_cap_seen_systems": ["Ganaspis kimorum -> Drosophila suzukii"],
+    "previously_consumed_obligate_pair_systems_must_not_be_reopened": true
+  },
+  "forbidden_before_registry_freeze": [
+    "GBIF_or_iNaturalist_occurrence_counts",
+    "focal_occurrence_coordinates_not_published_as_study_metadata",
+    "provider_overlap_maps",
+    "fitted_role_surfaces",
+    "cross_role_relation_statistics",
+    "candidate_ranking_by_data_richness",
+    "candidate_ranking_by_expected_result",
+    "Level_A_q95_import"
+  ],
+  "allowed_before_registry_freeze": [
+    "primary_relation_evidence",
+    "published_site_time_methods_metadata",
+    "independent_dataset_metadata_without_opening_focal_values",
+    "observation_effort_design_metadata",
+    "taxonomic_and_life_history_metadata"
+  ],
+  "screen_states": [
+    "fully_admitted_for_source_feasibility",
+    "blocked_event_necessity",
+    "blocked_functional_channel",
+    "blocked_operational_keys",
+    "blocked_focal_independence",
+    "blocked_functional_absence_adequacy",
+    "engineering_only_management_confounded",
+    "excluded_seen_or_consumed_system"
+  ],
+  "source_feasibility_authorized_now": false,
+  "candidate_search_authorized_after_this_freeze": true,
+  "hard_invariant_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_at_protocol_freeze": 1
+}

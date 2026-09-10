@@ -1,0 +1,157 @@
+name: same-target-core19-heldout-final-v0-4
+
+on:
+  push:
+    branches: [successor-reference-finite-frame-repair]
+    paths: [config/product_b_same_target_core19_final_authorization_v0_4.json]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: same-target-core19-heldout-final-v0-4-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    outputs:
+      reference_run_id: ${{ steps.gate.outputs.reference_run_id }}
+      refit_run_id: ${{ steps.gate.outputs.refit_run_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - id: gate
+        name: Validate one-shot core19 final authorization and exact upstream artifacts
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          python -m py_compile scripts/evaluate_same_target_heldout_final_core19_v0_4.py
+          python - <<'PY'
+          import json,os,subprocess
+          if os.environ.get('GITHUB_RUN_ATTEMPT')!='1': raise RuntimeError('core19 empirical final is one-shot; workflow reruns are forbidden')
+          a=json.load(open('config/product_b_same_target_core19_final_authorization_v0_4.json'))
+          exact={
+            'authorization_version':'product_b_same_target_core19_final_authorization_v0.4',
+            'contract_version':'product_b_same_target_core19_requalification_v0.4',
+            'repair_branch':'successor-reference-finite-frame-repair',
+            'endpoint_id':'same_target_cross_source_reproducibility_heldout12_core19_v0_4',
+            'reference_result_version':'product_b_same_target_successor_pairing_calibration_core19_v0.4',
+            'heldout_fit_result_version':'product_b_same_target_heldout_core19_layer1_fit_taxon_v0.4',
+            'heldout_final_opening_authorized':True,'process_knockout_authorized':False,
+            'procedure_selection_authorized':False,'M_selection_authorized':False,'taxon_replacement_authorized':False,
+            'one_shot':True,
+          }
+          for k,v in exact.items():
+              if a.get(k)!=v: raise RuntimeError(f'core19 final authorization drift: {k}')
+          def arts(rid):
+              return json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}/artifacts?per_page=100'],text=True)).get('artifacts',[])
+          def verify_run(run_key,head_key):
+              rid=int(a[run_key]); r=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}'],text=True))
+              if r.get('status')!='completed' or r.get('conclusion')!='success' or r.get('head_sha')!=a[head_key]: raise RuntimeError(f'{run_key} source mismatch')
+              return rid
+          rr=verify_run('reference_run_id','reference_head_sha'); fr=verify_run('refit_run_id','refit_head_sha')
+          ra=[x for x in arts(rr) if x.get('name')=='product-b-core19-v0-4-reference']
+          if len(ra)!=1 or ra[0].get('expired') is True or int(ra[0]['id'])!=int(a['reference_artifact_id']) or str(ra[0].get('digest'))!=str(a['reference_artifact_digest']): raise RuntimeError('core19 reference artifact identity mismatch')
+          fa=arts(fr); audits=[x for x in fa if x.get('name')=='product-b-core19-v0-4-fit-audit']
+          if len(audits)!=1 or audits[0].get('expired') is True or int(audits[0]['id'])!=int(a['refit_audit_artifact_id']) or str(audits[0].get('digest'))!=str(a['refit_audit_artifact_digest']): raise RuntimeError('core19 fit audit identity mismatch')
+          actual=sorted((x for x in fa if str(x.get('name','')).startswith('product-b-core19-v0-4-heldout-fit-taxon-')),key=lambda x:x['name'])
+          frozen=sorted(a.get('heldout_taxon_artifacts',[]),key=lambda x:x['name'])
+          actual_norm=[{'name':x['name'],'id':int(x['id']),'digest':str(x.get('digest'))} for x in actual]
+          frozen_norm=[{'name':x['name'],'id':int(x['id']),'digest':str(x.get('digest'))} for x in frozen]
+          if len(actual)!=12 or len(frozen)!=12 or actual_norm!=frozen_norm or any(x.get('expired') is True for x in actual): raise RuntimeError('core19 heldout taxon artifact manifest mismatch')
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as h: h.write(f'reference_run_id={rr}\nrefit_run_id={fr}\n')
+          PY
+
+  open-final:
+    needs: authorize
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        name: Download exact core19 successor reference
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.reference_run_id }}
+          name: product-b-core19-v0-4-reference
+          path: reference
+          digest-mismatch: error
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        name: Download exact 12 core19 held-out fits
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.refit_run_id }}
+          pattern: product-b-core19-v0-4-heldout-fit-taxon-*
+          path: heldout_fits
+          digest-mismatch: error
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        name: Download exact core19 fit audit
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.refit_run_id }}
+          name: product-b-core19-v0-4-fit-audit
+          path: fit_audit
+          digest-mismatch: error
+      - name: Recheck core19 information boundary before first held-out D
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('reference/core19_reference_summary.json')); a=json.load(open('fit_audit/core19_fit_audit.json'))
+          if r.get('result_version')!='product_b_same_target_successor_pairing_calibration_core19_v0.4' or r.get('core19_contract_version')!='product_b_same_target_core19_requalification_v0.4': raise RuntimeError('core19 final requires exact core19 reference')
+          if int(r.get('reference_cells_frozen',0))<1: raise RuntimeError('no frozen core19 reference cells; final stays sealed')
+          if r.get('heldout_12_paired_discordance_read') is not False or r.get('process_knockout_opened') is not False or r.get('counts_as_empirical_conclusion') is not False: raise RuntimeError('core19 reference crossed heldout/process/empirical boundary')
+          required={'result_version':'product_b_same_target_core19_fit_audit_v0.4','heldout_taxa_observed':12,'heldout_expected_fit_cells':576,'paired_discordance_opened':False,'reference_ceiling_opened_or_read':False,'heldout_pairing_opened':False,'process_knockout_opened':False,'counts_as_empirical_conclusion':False}
+          for k,v in required.items():
+              if a.get(k)!=v: raise RuntimeError(f'core19 heldout fit audit boundary drift: {k}')
+          PY
+      - name: Freeze exact core19 source manifest before opening
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          python - <<'PY'
+          import json,os,subprocess
+          a=json.load(open('config/product_b_same_target_core19_final_authorization_v0_4.json'))
+          def arts(rid): return json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}/artifacts?per_page=100'],text=True)).get('artifacts',[])
+          rr=int(a['reference_run_id']); fr=int(a['refit_run_id']); ra=[x for x in arts(rr) if x.get('name')=='product-b-core19-v0-4-reference']; fa=arts(fr)
+          audit=[x for x in fa if x.get('name')=='product-b-core19-v0-4-fit-audit']; taxa=sorted((x for x in fa if str(x.get('name','')).startswith('product-b-core19-v0-4-heldout-fit-taxon-')),key=lambda x:x['name'])
+          actual=[{'name':x['name'],'id':int(x['id']),'digest':str(x.get('digest'))} for x in taxa]; frozen=sorted(a['heldout_taxon_artifacts'],key=lambda x:x['name'])
+          frozen=[{'name':x['name'],'id':int(x['id']),'digest':str(x.get('digest'))} for x in frozen]
+          if len(ra)!=1 or len(audit)!=1 or len(taxa)!=12 or actual!=frozen: raise RuntimeError('core19 final source inventory changed')
+          manifest={'endpoint_id':'same_target_cross_source_reproducibility_heldout12_core19_v0_4','authorization_run_sha':os.environ['GITHUB_SHA'],'reference_run_id':rr,'reference_head_sha':a['reference_head_sha'],'reference_artifact':{'id':int(ra[0]['id']),'digest':str(ra[0].get('digest')),'name':ra[0]['name']},'refit_run_id':fr,'refit_head_sha':a['refit_head_sha'],'refit_audit_artifact':{'id':int(audit[0]['id']),'digest':str(audit[0].get('digest')),'name':audit[0]['name']},'heldout_taxon_artifacts':actual,'heldout_taxon_artifact_count':12,'active_predictors':[f'bio{i}' for i in range(1,20)],'process_knockout_opened':False}
+          open('source_manifest.json','w').write(json.dumps(manifest,indent=2,sort_keys=True)+'\n')
+          PY
+      - name: Open only prospectively authorized core19 held-out paired cells
+        env: {PYTHONPATH: '.'}
+        run: >-
+          python scripts/evaluate_same_target_heldout_final_core19_v0_4.py
+          --input-root heldout_fits --reference-summary reference/core19_reference_summary.json
+          --reference-table reference/core19_reference_ceiling.csv --source-manifest source_manifest.json
+          --output-cells final/core19_heldout_final_cells.csv --output-final final/core19_final_endpoint_result.json
+      - name: Require genuine distinct empirical terminal and process closure
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('final/core19_final_endpoint_result.json'))
+          assert r['result_version']=='product_b_same_target_heldout_final_core19_v0.4'
+          assert r['endpoint_id']=='same_target_cross_source_reproducibility_heldout12_core19_v0_4'
+          assert r['reference_result_version']=='product_b_same_target_successor_pairing_calibration_core19_v0.4'
+          assert r['core19_contract_version']=='product_b_same_target_core19_requalification_v0.4'
+          assert r['terminal_class']=='empirical_result' and r['counts_as_empirical_conclusion'] is True and r['counts_as_empirical_evidence'] is True
+          assert int(r['paired_prediction_surfaces_opened_cells'])>=1 and r['process_knockout_opened'] is False
+          assert r['provenance_adapter_changed_scientific_evaluation_body'] is False and len(r['final_endpoint_fingerprint'])==64
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-same-target-heldout-final-core19-v0-4
+          path: |
+            final/core19_final_endpoint_result.json
+            final/core19_heldout_final_cells.csv
+            source_manifest.json
+          if-no-files-found: error
+          retention-days: 90

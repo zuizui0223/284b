@@ -1,0 +1,210 @@
+name: same-target-heldout-finite-frame-refit-v0-2
+
+on:
+  push:
+    branches: [successor-reference-finite-frame-repair]
+    paths: [config/product_b_same_target_heldout_finite_frame_refit_authorization_v0_2.json]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: same-target-heldout-finite-frame-refit-v0-2-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    outputs:
+      preflight_run_id: ${{ steps.gate.outputs.preflight_run_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Validate explicit held-out v0.2 refit authorization
+        id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          a=json.load(open('config/product_b_same_target_heldout_finite_frame_refit_authorization_v0_2.json'))
+          exact={
+              'authorization_version':'product_b_same_target_heldout_finite_frame_refit_authorization_v0.2',
+              'repair_contract_version':'product_b_same_target_heldout_finite_frame_repair_v0.2',
+              'repair_branch':'successor-reference-finite-frame-repair',
+              'heldout_taxa':12,
+              'taxon_M_cells':36,
+              'all_36_frames_ready_for_review':True,
+              'refit_authorized':True,
+              'paired_discordance_authorized':False,
+              'reference_ceiling_read_authorized':False,
+              'heldout_pairing_authorized':False,
+              'process_knockout_authorized':False,
+              'counts_as_empirical_conclusion':False,
+          }
+          for k,v in exact.items():
+              if a.get(k)!=v: raise RuntimeError(f'held-out v0.2 authorization drift: {k}')
+          run_id=int(a['preflight_run_id'])
+          run=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{run_id}'],text=True))
+          if run.get('status')!='completed' or run.get('conclusion')!='success': raise RuntimeError('held-out v0.2 preflight source run not completed success')
+          if run.get('head_sha')!=a['preflight_head_sha']: raise RuntimeError('held-out v0.2 preflight head SHA mismatch')
+          arts=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{run_id}/artifacts?per_page=100'],text=True)).get('artifacts',[])
+          matches=[x for x in arts if x.get('name')=='product-b-heldout-finite-frame-v0-2-preflight-summary']
+          if len(matches)!=1: raise RuntimeError('held-out v0.2 preflight summary missing/duplicate')
+          art=matches[0]
+          if int(art['id'])!=int(a['preflight_summary_artifact_id']) or str(art.get('digest'))!=str(a['preflight_summary_artifact_digest']):
+              raise RuntimeError('held-out v0.2 preflight summary identity mismatch')
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as h: h.write(f'preflight_run_id={run_id}\n')
+          PY
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.gate.outputs.preflight_run_id }}
+          name: product-b-heldout-finite-frame-v0-2-preflight-summary
+          path: reviewed_summary
+          digest-mismatch: error
+      - name: Require complete held-out v0.2 preflight and sealed paired endpoint
+        run: |
+          python - <<'PY'
+          import json
+          s=json.load(open('reviewed_summary/heldout_finite_frame_preflight_summary.json'))
+          exact={
+              'result_version':'product_b_same_target_heldout_finite_frame_preflight_v0.2',
+              'repair_contract_version':'product_b_same_target_heldout_finite_frame_repair_v0.2',
+              'heldout_taxa_expected':12,
+              'heldout_taxa_with_receipts':12,
+              'taxon_M_cells_expected':36,
+              'taxon_M_cells_observed':36,
+              'taxon_M_cells_frozen':36,
+              'taxon_M_cells_unresolved':0,
+              'taxa_with_all_three_M_frames_frozen':12,
+              'all_36_frames_ready_for_review':True,
+              'model_refit_opened':False,
+              'prediction_scores_computed':False,
+              'paired_discordance_opened':False,
+              'reference_ceiling_read':False,
+              'heldout_pairing_opened':False,
+              'process_knockout_opened':False,
+              'counts_as_empirical_conclusion':False,
+          }
+          for k,v in exact.items():
+              if s.get(k)!=v: raise RuntimeError(f'held-out v0.2 preflight not refit-ready: {k}={s.get(k)!r}')
+          if int(s.get('minimum_all_43_finite_rows',0)) < 2000: raise RuntimeError('held-out v0.2 minimum finite rows below 2000')
+          PY
+
+  refit:
+    needs: authorize
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        taxon_index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install unchanged pinned Product-A implementation
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check --quiet -e './sdmr[cloud,parquet,geo]'
+          python -m pip install --disable-pip-version-check --quiet 'pyarrow==21.0.0' joblib
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.preflight_run_id }}
+          name: product-b-heldout-finite-frame-v0-2-preflight-taxon-${{ matrix.taxon_index }}
+          path: finite_frame
+          digest-mismatch: error
+      - name: Refit unchanged held-out body on v0.2 finite rows while pairing stays closed
+        env:
+          PYTHONPATH: .
+          SDMR_RASTER_LAYER_JOBS: '4'
+        run: >-
+          python scripts/run_same_target_heldout_layer1_fit_taxon_finite_frame_v0_2.py
+          --taxon-index ${{ matrix.taxon_index }}
+          --finite-frame-dir finite_frame
+          --chelsa-manifest sdmr/configs/chelsa_v2_1_plant_candidates.csv
+          --output-dir repaired_heldout_fit
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-heldout-finite-frame-repair-fit-taxon-${{ matrix.taxon_index }}
+          path: repaired_heldout_fit/
+          if-no-files-found: error
+          retention-days: 90
+
+  audit:
+    needs: refit
+    if: always() && needs.refit.result != 'cancelled'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          pattern: product-b-heldout-finite-frame-repair-fit-taxon-*
+          path: repaired_heldout_fit_artifacts
+          digest-mismatch: error
+      - name: Audit all 12 held-out v0.2-frame fits without opening pairing/reference
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          contracts=[]
+          for p in sorted(Path('repaired_heldout_fit_artifacts').rglob('contract.json')):
+              c=json.load(open(p))
+              if c.get('result_version')!='product_b_same_target_source_layer1_baseline_fit_taxon_finite_frame_repair_v0.1': raise RuntimeError('foreign held-out repaired artifact')
+              if c.get('finite_frame_preflight_result_version')!='product_b_same_target_heldout_finite_frame_preflight_taxon_v0.2': raise RuntimeError('held-out fit not derived from v0.2 frame')
+              if c.get('finite_frame_repair_contract_version')!='product_b_same_target_heldout_finite_frame_repair_v0.2': raise RuntimeError('held-out repair contract mismatch')
+              if c.get('v0_2_adapter_changed_frame_bytes') is not False or c.get('v0_2_adapter_changed_model_fit_body') is not False: raise RuntimeError('held-out v0.2 adapter changed protected body/frames')
+              for k in ('paired_discordance_computed','reference_ceiling_read','heldout_pairing_opened','process_knockout_computed'):
+                  if c.get(k) is not False: raise RuntimeError(f'held-out v0.2 refit opened boundary: {k}')
+              if c.get('all_prediction_scores_finite_by_contract') is not True: raise RuntimeError('held-out v0.2 repaired surface not all-finite')
+              contracts.append(c)
+          if len(contracts)!=12 or sorted(int(c['taxon_index']) for c in contracts)!=list(range(12)): raise RuntimeError(f'held-out v0.2 repaired inventory incomplete: {len(contracts)}')
+          expected=sum(int(c['expected_fit_cells']) for c in contracts); sealed=sum(int(c['sealed_fit_cells']) for c in contracts); unresolved=sum(int(c['unresolved_fit_cells']) for c in contracts)
+          if expected!=576 or sealed+unresolved!=576: raise RuntimeError('held-out v0.2 repaired fit denominator drifted')
+          summary={
+              'result_version':'product_b_same_target_heldout_finite_frame_repair_fit_audit_v0.2',
+              'workflow_run_id':int(os.environ['GITHUB_RUN_ID']),
+              'finite_frame_repair_contract_version':'product_b_same_target_heldout_finite_frame_repair_v0.2',
+              'heldout_taxa_expected':12,
+              'heldout_taxa_observed':12,
+              'expected_fit_cells':576,
+              'sealed_fit_cells':sealed,
+              'unresolved_fit_cells':unresolved,
+              'all_prediction_scores_finite_for_sealed_cells':True,
+              'paired_discordance_opened':False,
+              'reference_ceiling_read':False,
+              'heldout_pairing_opened':False,
+              'process_knockout_opened':False,
+              'counts_as_empirical_conclusion':False,
+              'claim_strength':'heldout_v0_2_repaired_fit_audit_endpoint_still_sealed'
+          }
+          out=Path('heldout_fit_audit'); out.mkdir(exist_ok=True)
+          (out/'heldout_repaired_fit_audit.json').write_text(json.dumps(summary,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(summary,indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-heldout-finite-frame-repair-fit-audit
+          path: heldout_fit_audit/
+          if-no-files-found: error
+          retention-days: 90

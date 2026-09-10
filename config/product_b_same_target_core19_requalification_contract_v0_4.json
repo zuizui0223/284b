@@ -1,0 +1,92 @@
+{
+  "contract_version": "product_b_same_target_core19_requalification_v0.4",
+  "purpose": "prospectively define a distinct core-climate qualification endpoint before the v0.4 predictor-availability diagnostic result is observed; never mutate the structurally incomplete all-43 v0.3 endpoint in place",
+  "prospective_freeze": {
+    "frozen_before_diagnostic_completion": true,
+    "diagnostic_run_id": 34237335426,
+    "diagnostic_head_sha": "25e6fd4795041f4a401d0aa73363bc9435858259",
+    "authorization_condition": "exact diagnostic summary must report all_14_unresolved_cells_core19_ready_for_2000 == true, core19_cells_ready_for_2000 == 14, core19_cells_not_ready_for_2000 == 0, with all outcome layers still closed",
+    "if_condition_false": "do_not_authorize_core19_requalification_and_do_not_change_thresholds_or_pick_an_alternate_predictor_subset_from_diagnostic_results"
+  },
+  "all43_v0_3_parent_provenance": {
+    "successor_run_id": 34176721182,
+    "successor_head_sha": "1235fd3a732d934e5c0e5e59d3bc97c3368c44aa",
+    "successor_summary_artifact_id": 10038977219,
+    "successor_summary_artifact_digest": "sha256:dc98729aa9e5d89f455130cd70da2acbd73d422ce9990ffd3390ad9b17330383",
+    "successor_taxon_M_cells_frozen": 131,
+    "successor_taxon_M_cells_unresolved": 10,
+    "heldout_run_id": 34176728606,
+    "heldout_head_sha": "6f7aefe58e703ebc6187f2392465de47a1d04d64",
+    "heldout_summary_artifact_id": 10038643105,
+    "heldout_summary_artifact_digest": "sha256:1126c4cbf3fbec4bb454382d91d2007d6e5169e09729ede0730a7e40fd4a8b12",
+    "heldout_taxon_M_cells_frozen": 32,
+    "heldout_taxon_M_cells_unresolved": 4,
+    "reuse_from_these_runs": "source_blind_common_geometry_hash_and_pre_outcome_seed_metadata_only"
+  },
+  "endpoint_versioning": {
+    "all43_v0_3_endpoint_is_not_redefined": true,
+    "all43_v0_3_structural_unresolved_state_is_preserved": true,
+    "core19_is_a_distinct_new_endpoint_version": true,
+    "future_endpoint_id": "same_target_cross_source_reproducibility_heldout12_core19_v0_4"
+  },
+  "predictor_universe": {
+    "selection_rule": "CHELSA manifest candidate_class == core_climate",
+    "manifest_repository": "zuizui0223/sdmr",
+    "manifest_git_ref": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+    "manifest_path": "configs/chelsa_v2_1_plant_candidates.csv",
+    "expected_predictors_in_manifest_order": ["bio1", "bio2", "bio3", "bio4", "bio5", "bio6", "bio7", "bio8", "bio9", "bio10", "bio11", "bio12", "bio13", "bio14", "bio15", "bio16", "bio17", "bio18", "bio19"],
+    "expected_predictor_count": 19,
+    "alternate_subset_selection_after_diagnostic_forbidden": true,
+    "single_predictor_drop_from_diagnostic_rankings_forbidden": true,
+    "raw_zero_reinterpretation_without_separate_encoding_proof_forbidden": true
+  },
+  "uniform_requalification": {
+    "successor_taxa": 47,
+    "heldout_taxa": 12,
+    "M_km": [150, 300, 500],
+    "successor_taxon_M_cells": 141,
+    "heldout_taxon_M_cells": 36,
+    "final_background_points_per_taxon_M": 2000,
+    "grid_cell_degrees": 0.05,
+    "all_taxa_are_requalified_from_coordinates_not_only_v0_3_unresolved_taxa": true,
+    "all43_v0_3_frame_bytes_are_not_reused_as_core19_frames": true,
+    "all_eligible_frozen_target_group_grid_cells_are_enumerated_before_core19_finite_filtering": true,
+    "same_core19_frame_rows_required_for_both_observation_modes": true,
+    "reuse_v0_3_source_blind_common_geometry_and_seed_metadata_only": true,
+    "if_fewer_than_2000_core19_finite_rows_after_exhaustive_enumeration": "core19_frame_unresolved",
+    "partial_frame_for_model_fit_forbidden": true
+  },
+  "unchanged_scientific_rules": {
+    "observation_modes": ["PRESERVED_SPECIMEN", "HUMAN_OBSERVATION"],
+    "M_km": [150, 300, 500],
+    "M_is_sensitivity_grid_not_selection_target": true,
+    "procedure_count": 8,
+    "procedure_library_unchanged": true,
+    "prediction_adequacy_contract_unchanged": true,
+    "minimum_complete_calibration_taxa_per_procedure_M": 30,
+    "reference_quantile": 0.95,
+    "quantile_method": "nearest_rank",
+    "post_outcome_procedure_selection_forbidden": true,
+    "post_outcome_M_selection_forbidden": true,
+    "post_outcome_taxon_replacement_forbidden": true,
+    "failed_taxa_may_not_be_replaced": true,
+    "process_knockout_stays_closed_through_baseline_final": true
+  },
+  "information_boundary": {
+    "qualification_model_fit_allowed": false,
+    "qualification_prediction_scores_allowed": false,
+    "qualification_paired_discordance_allowed": false,
+    "qualification_reference_ceiling_allowed": false,
+    "qualification_heldout_pairing_allowed": false,
+    "qualification_process_knockout_allowed": false,
+    "counts_as_empirical_conclusion": false
+  },
+  "empirical_ledger": {
+    "new_empirical_conclusion_requires_distinct_sealed_final_endpoint_closed_to_open_transition": true,
+    "diagnostic_counts_as_empirical_conclusion": false,
+    "core19_qualification_counts_as_empirical_conclusion": false,
+    "core19_refit_counts_as_empirical_conclusion": false,
+    "core19_reference_calibration_counts_as_empirical_conclusion": false,
+    "only_future_one_shot_core19_heldout_final_may_count_if_it_actually_opens": true
+  }
+}

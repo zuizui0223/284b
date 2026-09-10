@@ -1,0 +1,182 @@
+name: same-target-successor-finite-frame-refit-v0-3
+
+on:
+  push:
+    branches: [successor-reference-finite-frame-repair]
+    paths: [config/product_b_same_target_reference_finite_frame_refit_authorization_v0_3.json]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: same-target-successor-finite-frame-refit-v0-3-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    outputs:
+      preflight_run_id: ${{ steps.gate.outputs.preflight_run_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - id: gate
+        name: Validate explicit v0.3 post-preflight refit authorization
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          a=json.load(open('config/product_b_same_target_reference_finite_frame_refit_authorization_v0_3.json'))
+          exact={
+            'authorization_version':'product_b_same_target_reference_finite_frame_refit_authorization_v0.3',
+            'repair_contract_version':'product_b_same_target_reference_finite_frame_repair_v0.3',
+            'repair_branch':'successor-reference-finite-frame-repair',
+            'taxa':47,'taxon_M_cells':141,'all_141_frames_ready_for_review':True,
+            'refit_authorized':True,'paired_discordance_opening_authorized':False,
+            'reference_ceiling_computation_authorized':False,'heldout_opening_authorized':False,
+            'process_knockout_authorized':False,'counts_as_empirical_conclusion':False,
+          }
+          for k,v in exact.items():
+              if a.get(k)!=v: raise RuntimeError(f'v0.3 refit authorization drift: {k}')
+          rid=int(a['preflight_run_id'])
+          run=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}'],text=True))
+          if run.get('status')!='completed' or run.get('conclusion')!='success': raise RuntimeError('v0.3 preflight source run not completed success')
+          if run.get('head_sha')!=a['preflight_head_sha']: raise RuntimeError('v0.3 preflight head SHA mismatch')
+          arts=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}/artifacts?per_page=100'],text=True)).get('artifacts',[])
+          matches=[x for x in arts if x.get('name')=='product-b-successor-finite-frame-v0-3-preflight-summary']
+          if len(matches)!=1: raise RuntimeError('v0.3 preflight summary missing/duplicate')
+          art=matches[0]
+          if int(art['id'])!=int(a['preflight_summary_artifact_id']) or str(art.get('digest'))!=str(a['preflight_summary_artifact_digest']): raise RuntimeError('v0.3 preflight summary identity mismatch')
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as h: h.write(f'preflight_run_id={rid}\n')
+          PY
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.gate.outputs.preflight_run_id }}
+          name: product-b-successor-finite-frame-v0-3-preflight-summary
+          path: reviewed_summary
+          digest-mismatch: error
+      - name: Require complete v0.3 composite preflight and closed outcomes
+        run: |
+          python - <<'PY'
+          import json
+          s=json.load(open('reviewed_summary/finite_frame_preflight_summary.json'))
+          exact={
+            'result_version':'product_b_same_target_successor_finite_frame_preflight_v0.3',
+            'repair_contract_version':'product_b_same_target_reference_finite_frame_repair_v0.3',
+            'taxa_expected':47,'taxa_with_receipts':47,
+            'taxon_M_cells_expected':141,'taxon_M_cells_observed':141,'taxon_M_cells_frozen':141,
+            'taxon_M_cells_unresolved':0,'taxa_with_all_three_M_frames_frozen':47,
+            'all_141_frames_ready_for_review':True,'model_refit_opened':False,
+            'prediction_scores_computed':False,'paired_discordance_opened':False,
+            'reference_ceiling_computed':False,'heldout_12_paired_discordance_read':False,
+            'process_knockout_opened':False,'counts_as_empirical_conclusion':False,
+          }
+          for k,v in exact.items():
+              if s.get(k)!=v: raise RuntimeError(f'v0.3 preflight not refit-ready: {k}={s.get(k)!r}')
+          if int(s.get('minimum_all_43_finite_rows',0)) < 2000: raise RuntimeError('v0.3 minimum finite rows below 2000')
+          PY
+
+  refit:
+    needs: authorize
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        taxon_index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46]
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install unchanged pinned Product-A implementation
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check --quiet -e './sdmr[cloud,parquet,geo]'
+          python -m pip install --disable-pip-version-check --quiet 'pyarrow==21.0.0' joblib
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.preflight_run_id }}
+          name: product-b-successor-finite-frame-v0-3-preflight-taxon-${{ matrix.taxon_index }}
+          path: finite_frame
+          digest-mismatch: error
+      - name: Refit unchanged model body on v0.3 composite frozen rows
+        env: {PYTHONPATH: '.', SDMR_RASTER_LAYER_JOBS: '4'}
+        run: >-
+          python scripts/run_same_target_successor_layer1_fit_taxon_finite_frame_v0_3.py
+          --taxon-index ${{ matrix.taxon_index }}
+          --finite-frame-dir finite_frame
+          --chelsa-manifest sdmr/configs/chelsa_v2_1_plant_candidates.csv
+          --output-dir repaired_fit
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-finite-frame-repair-v0-3-fit-taxon-${{ matrix.taxon_index }}
+          path: repaired_fit/
+          if-no-files-found: error
+          retention-days: 90
+
+  audit-refit:
+    needs: refit
+    if: always() && needs.refit.result != 'cancelled'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          pattern: product-b-successor-finite-frame-repair-v0-3-fit-taxon-*
+          path: repaired_fit_artifacts
+          digest-mismatch: error
+      - name: Audit all 47 v0.3-frame repaired fits without opening pairing
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          contracts=[]
+          for p in sorted(Path('repaired_fit_artifacts').rglob('contract.json')):
+              c=json.load(open(p))
+              if c.get('result_version')!='product_b_same_target_successor_layer1_fit_taxon_finite_frame_repair_v0.1': raise RuntimeError('foreign repaired fit artifact')
+              if c.get('finite_frame_preflight_result_version')!='product_b_same_target_successor_finite_frame_preflight_taxon_v0.3': raise RuntimeError('fit not derived from v0.3 frame')
+              if c.get('finite_frame_parent_preflight_result_version')!='product_b_same_target_successor_finite_frame_preflight_taxon_v0.2': raise RuntimeError('v0.3 parent provenance missing')
+              if c.get('finite_frame_repair_contract_version')!='product_b_same_target_reference_finite_frame_repair_v0.3': raise RuntimeError('fit repair contract mismatch')
+              if c.get('v0_3_adapter_changed_frame_bytes') is not False or c.get('v0_3_adapter_changed_model_fit_body') is not False: raise RuntimeError('v0.3 adapter changed protected body/frames')
+              for k in ('paired_discordance_computed','reference_ceiling_read','heldout_12_paired_discordance_read','process_knockout_computed'):
+                  if c.get(k) is not False: raise RuntimeError(f'v0.3 refit opened boundary: {k}')
+              if c.get('all_prediction_scores_finite_by_contract') is not True: raise RuntimeError('v0.3 repaired scores not all finite by contract')
+              contracts.append(c)
+          if len(contracts)!=47 or sorted(int(c['taxon_index']) for c in contracts)!=list(range(47)): raise RuntimeError(f'v0.3 repaired inventory incomplete: {len(contracts)}')
+          expected=sum(int(c['expected_fit_cells']) for c in contracts); sealed=sum(int(c['sealed_fit_cells']) for c in contracts); unresolved=sum(int(c['unresolved_fit_cells']) for c in contracts)
+          if expected!=2256 or sealed+unresolved!=2256: raise RuntimeError('v0.3 repaired fit denominator drifted')
+          summary={
+            'result_version':'product_b_same_target_successor_finite_frame_repair_fit_audit_v0.3',
+            'workflow_run_id':int(os.environ['GITHUB_RUN_ID']),
+            'finite_frame_repair_contract_version':'product_b_same_target_reference_finite_frame_repair_v0.3',
+            'finite_frame_preflight_result_version':'product_b_same_target_successor_finite_frame_preflight_v0.3',
+            'taxa_expected':47,'taxa_observed':47,'expected_fit_cells':2256,
+            'sealed_fit_cells':sealed,'unresolved_fit_cells':unresolved,
+            'all_prediction_scores_finite_for_sealed_cells':True,
+            'paired_discordance_opened':False,'reference_ceiling_opened':False,
+            'heldout_12_paired_discordance_read':False,'process_knockout_opened':False,
+            'counts_as_empirical_conclusion':False,
+            'claim_strength':'v0_3_repaired_layer1_fit_audit_only_not_cross_source_empirical_evidence',
+          }
+          out=Path('repaired_fit_audit'); out.mkdir(exist_ok=True)
+          (out/'repaired_fit_audit.json').write_text(json.dumps(summary,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(summary,indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-finite-frame-repair-fit-audit-v0-3
+          path: repaired_fit_audit/
+          if-no-files-found: error
+          retention-days: 90

@@ -1,0 +1,21 @@
+{
+  "authorization_version": "product_b_same_target_core19_refit_authorization_v0.4",
+  "contract_version": "product_b_same_target_core19_requalification_v0.4",
+  "repair_branch": "successor-reference-finite-frame-repair",
+  "qualification_run_id": 34245807165,
+  "qualification_head_sha": "cdb4875f9a92c48ca1db4494c30c7b0766c85a55",
+  "qualification_summary_artifact_id": 10080418768,
+  "qualification_summary_artifact_digest": "sha256:6a221f5e1b7aeb4e59460a11a68bb5476cff21141b5dec3ea05260ee955e4ffa",
+  "qualification_result_version": "product_b_same_target_core19_qualification_summary_v0.4",
+  "successor_cells_frozen": 141,
+  "successor_cells_unresolved": 0,
+  "heldout_cells_frozen": 36,
+  "heldout_cells_unresolved": 0,
+  "minimum_core19_finite_rows": 14584,
+  "model_refit_authorized": true,
+  "paired_discordance_authorized": false,
+  "reference_ceiling_authorized": false,
+  "heldout_pairing_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_conclusion": false
+}

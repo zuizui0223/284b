@@ -1,0 +1,48 @@
+{
+  "contract_version": "product_b_same_target_heldout_finite_frame_repair_v0.2",
+  "purpose": "freeze wider outcome-blind held-out finite frames before repaired reference discordance is opened",
+  "supersedes_contract": "config/product_b_same_target_heldout_finite_frame_repair_contract_v0_1.json",
+  "engineering_reason": {
+    "source": "successor environmental-availability preflight only",
+    "successor_preflight_run_id": 34122128799,
+    "witness_artifact_id": 10019645644,
+    "witness_taxon": "Ambrosia dumosa",
+    "witness_all_43_finite_rows_by_M": {"150": 1393, "300": 1649, "500": 2016},
+    "paired_discordance_opened": false,
+    "reference_ceiling_opened": false,
+    "heldout_pairing_opened": false,
+    "process_knockout_opened": false,
+    "counts_as_empirical_conclusion": false
+  },
+  "heldout_taxa": 12,
+  "M_km": [150, 300, 500],
+  "taxon_M_cells": 36,
+  "active_predictors_required": 43,
+  "candidate_background_points_per_taxon_M": 32000,
+  "final_background_points_per_taxon_M": 2000,
+  "grid_cell_degrees": 0.05,
+  "candidate_seed_semantics": "original_background_seed_base_plus_alphabetical_rank_among_frozen_12",
+  "final_selection_seed_offset": 2000000,
+  "all_predictors_must_be_finite_before_final_row_selection": true,
+  "same_final_rows_required_for_both_observation_modes": true,
+  "partial_frame_forbidden": true,
+  "taxon_replacement_forbidden": true,
+  "M_or_procedure_selection_from_future_outcome_forbidden": true,
+  "preflight": {
+    "model_refit_allowed": false,
+    "prediction_score_computation_allowed": false,
+    "paired_discordance_computation_allowed": false,
+    "reference_ceiling_read_allowed": false,
+    "heldout_pairing_allowed": false,
+    "process_knockout_allowed": false,
+    "counts_as_empirical_conclusion": false
+  },
+  "unchanged_scientific_rules": {
+    "final_background_points_per_taxon_M": 2000,
+    "procedure_count": 8,
+    "M_km": [150, 300, 500],
+    "prediction_adequacy_contract_unchanged": true,
+    "post_outcome_procedure_selection_forbidden": true,
+    "post_outcome_M_selection_forbidden": true
+  }
+}

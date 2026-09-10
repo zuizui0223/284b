@@ -1,0 +1,21 @@
+{
+  "authorization_version": "product_b_same_target_core19_qualification_authorization_v0.4",
+  "contract_version": "product_b_same_target_core19_requalification_v0.4",
+  "repair_branch": "successor-reference-finite-frame-repair",
+  "diagnostic_run_id": 34237335426,
+  "diagnostic_head_sha": "25e6fd4795041f4a401d0aa73363bc9435858259",
+  "diagnostic_summary_artifact_id": 10063260092,
+  "diagnostic_summary_artifact_digest": "sha256:28e785eb53a0742f4255a09e1aa6f9ec315dcdee875ba75d6bb643c71df6b27e",
+  "diagnostic_core19_cells_ready_for_2000": 14,
+  "diagnostic_core19_cells_not_ready_for_2000": 0,
+  "diagnostic_minimum_core19_finite_rows": 14584,
+  "qualification_authorized": true,
+  "model_refit_authorized": false,
+  "prediction_scores_authorized": false,
+  "paired_discordance_authorized": false,
+  "reference_ceiling_authorized": false,
+  "heldout_pairing_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_conclusion": false,
+  "authorization_basis": "prospectively frozen condition satisfied by exact v0.4 diagnostic summary: all 14 all43-v0.3-unresolved cells have at least 2000 manifest-defined core-climate finite rows; uniform requalification of all 59 taxa is authorized"
+}

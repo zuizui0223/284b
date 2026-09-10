@@ -1,0 +1,19 @@
+name: same-target-heldout-final-finite-frame-repair-legacy-deprecated
+
+on:
+  push:
+    branches: [successor-reference-finite-frame-repair]
+    paths: [config/product_b_same_target_heldout_final_authorization_v0_1.json]
+
+permissions:
+  contents: read
+
+jobs:
+  deprecated:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refuse stale v0.1 final-opening path
+        run: |
+          echo "Deprecated and fail-closed: the v0.1 final path expects the superseded repaired-reference provenance."
+          echo "Use same-target-heldout-final-finite-frame-repair-v0-2 only after exact v0.2 successor-reference and held-out-refit audits are frozen."
+          exit 1

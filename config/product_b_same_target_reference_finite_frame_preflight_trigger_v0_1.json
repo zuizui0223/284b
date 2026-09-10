@@ -1,0 +1,21 @@
+{
+  "result_version": "product_b_same_target_reference_finite_frame_preflight_trigger_v0.1",
+  "repair_contract": "config/product_b_same_target_reference_finite_frame_repair_contract_v0_1.json",
+  "superseded_reference_run_id": 34078855468,
+  "diagnostic_run_id": 34121165525,
+  "diagnostic_artifact_id": 10018235167,
+  "taxa": 47,
+  "M_km": [150, 300, 500],
+  "candidate_background_points_per_taxon_M": 8000,
+  "final_background_points_per_taxon_M": 2000,
+  "active_predictors_required": 43,
+  "preflight_execution_authorized": false,
+  "superseded_by": "product_b_same_target_reference_finite_frame_repair_v0.2",
+  "supersession_action": "cancel_legacy_in_progress_only",
+  "model_refit_authorized": false,
+  "prediction_score_computation_authorized": false,
+  "paired_discordance_opening_authorized": false,
+  "reference_ceiling_computation_authorized": false,
+  "heldout_opening_authorized": false,
+  "process_knockout_authorized": false
+}

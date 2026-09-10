@@ -1,0 +1,56 @@
+{
+  "result_version": "product_b_same_target_all43_structural_unresolved_v0.3",
+  "endpoint_family": "same_target_cross_source_reproducibility",
+  "predictor_universe": "all_43_pinned_CHELSA_predictors",
+  "status": "structurally_unresolved_before_model_refit_or_paired_discordance",
+  "successor_preflight": {
+    "run_id": 34176721182,
+    "head_sha": "1235fd3a732d934e5c0e5e59d3bc97c3368c44aa",
+    "summary_artifact_id": 10038977219,
+    "summary_artifact_digest": "sha256:dc98729aa9e5d89f455130cd70da2acbd73d422ce9990ffd3390ad9b17330383",
+    "taxon_M_cells_expected": 141,
+    "taxon_M_cells_frozen": 131,
+    "taxon_M_cells_unresolved": 10
+  },
+  "heldout_preflight": {
+    "run_id": 34176728606,
+    "head_sha": "6f7aefe58e703ebc6187f2392465de47a1d04d64",
+    "summary_artifact_id": 10038643105,
+    "summary_artifact_digest": "sha256:1126c4cbf3fbec4bb454382d91d2007d6e5169e09729ede0730a7e40fd4a8b12",
+    "taxon_M_cells_expected": 36,
+    "taxon_M_cells_frozen": 32,
+    "taxon_M_cells_unresolved": 4
+  },
+  "predictor_availability_diagnostic": {
+    "run_id": 34237335426,
+    "head_sha": "25e6fd4795041f4a401d0aa73363bc9435858259",
+    "summary_artifact_id": 10063260092,
+    "summary_artifact_digest": "sha256:28e785eb53a0742f4255a09e1aa6f9ec315dcdee875ba75d6bb643c71df6b27e",
+    "v0_3_unresolved_cells_reproduced": 14,
+    "core19_cells_ready_for_2000": 14,
+    "minimum_core19_finite_rows": 14584,
+    "diagnostic_interpretation": "all43 structural incompleteness is concentrated in extended-climate availability; manifest-defined core_climate bio1-bio19 is separately qualifiable, but this does not retroactively repair or redefine the all43 endpoint"
+  },
+  "all43_endpoint_disposition": {
+    "model_refit_authorized": false,
+    "prediction_scores_opened": false,
+    "paired_discordance_opened": false,
+    "reference_ceiling_opened": false,
+    "heldout_pairing_opened": false,
+    "process_knockout_opened": false,
+    "posthoc_threshold_lowering_used": false,
+    "posthoc_taxon_replacement_used": false,
+    "posthoc_predictor_drop_used_within_all43_endpoint": false,
+    "endpoint_redefinition_forbidden": true
+  },
+  "successor_endpoint": {
+    "version": "core19_v0.4",
+    "endpoint_id": "same_target_cross_source_reproducibility_heldout12_core19_v0_4",
+    "is_distinct_endpoint_version": true,
+    "uniform_requalification_of_all_59_taxa_required": true,
+    "all43_frame_bytes_reused": false
+  },
+  "counts_as_empirical_conclusion": false,
+  "counts_as_empirical_evidence": false,
+  "empirical_ledger_note": "engineering/qualification terminal only; no sealed held-out empirical endpoint opened"
+}

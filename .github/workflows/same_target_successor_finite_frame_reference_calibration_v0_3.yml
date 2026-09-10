@@ -1,0 +1,146 @@
+name: same-target-successor-finite-frame-reference-calibration-v0-3
+
+on:
+  push:
+    branches: [successor-reference-finite-frame-repair]
+    paths: [config/product_b_same_target_finite_frame_reference_calibration_authorization_v0_3.json]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: same-target-successor-finite-frame-reference-calibration-v0-3-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    outputs:
+      successor_run: ${{ steps.gate.outputs.successor_run }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - id: gate
+        name: Require v0.3 successor and held-out fit audits before reference D
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          a=json.load(open('config/product_b_same_target_finite_frame_reference_calibration_authorization_v0_3.json'))
+          exact={
+            'authorization_version':'product_b_same_target_finite_frame_reference_calibration_authorization_v0.3',
+            'repair_branch':'successor-reference-finite-frame-repair',
+            'successor_repair_contract_version':'product_b_same_target_reference_finite_frame_repair_v0.3',
+            'heldout_repair_contract_version':'product_b_same_target_heldout_finite_frame_repair_v0.3',
+            'successor_reference_calibration_authorized':True,
+            'heldout_pairing_authorized':False,'process_knockout_authorized':False,
+            'counts_as_empirical_conclusion':False,
+          }
+          for k,v in exact.items():
+              if a.get(k)!=v: raise RuntimeError(f'v0.3 reference authorization drift: {k}')
+          def verify(run_key,head_key,name,id_key,digest_key):
+              rid=int(a[run_key])
+              run=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}'],text=True))
+              if run.get('status')!='completed' or run.get('conclusion')!='success' or run.get('head_sha')!=a[head_key]: raise RuntimeError(f'{run_key} source mismatch')
+              arts=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}/artifacts?per_page=100'],text=True)).get('artifacts',[])
+              x=[z for z in arts if z.get('name')==name]
+              if len(x)!=1 or int(x[0]['id'])!=int(a[id_key]) or str(x[0].get('digest'))!=str(a[digest_key]) or x[0].get('expired') is True: raise RuntimeError(f'{name} identity mismatch')
+              return rid
+          s=verify('successor_refit_run_id','successor_refit_head_sha','product-b-successor-finite-frame-repair-fit-audit-v0-3','successor_refit_audit_artifact_id','successor_refit_audit_artifact_digest')
+          verify('heldout_refit_run_id','heldout_refit_head_sha','product-b-heldout-finite-frame-repair-fit-audit-v0-3','heldout_refit_audit_artifact_id','heldout_refit_audit_artifact_digest')
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as h: h.write(f'successor_run={s}\n')
+          PY
+      - name: Validate exact v0.3 audit payloads remain endpoint-closed
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          a=json.load(open('config/product_b_same_target_finite_frame_reference_calibration_authorization_v0_3.json'))
+          subprocess.run(['gh','run','download',str(a['successor_refit_run_id']),'-R','zuizui0223/284b','-n','product-b-successor-finite-frame-repair-fit-audit-v0-3','-D','sa'],check=True)
+          subprocess.run(['gh','run','download',str(a['heldout_refit_run_id']),'-R','zuizui0223/284b','-n','product-b-heldout-finite-frame-repair-fit-audit-v0-3','-D','ha'],check=True)
+          s=json.load(open('sa/repaired_fit_audit.json')); h=json.load(open('ha/heldout_repaired_fit_audit.json'))
+          if s.get('result_version')!='product_b_same_target_successor_finite_frame_repair_fit_audit_v0.3' or s.get('finite_frame_repair_contract_version')!='product_b_same_target_reference_finite_frame_repair_v0.3': raise RuntimeError('successor audit is not v0.3')
+          if h.get('result_version')!='product_b_same_target_heldout_finite_frame_repair_fit_audit_v0.3' or h.get('finite_frame_repair_contract_version')!='product_b_same_target_heldout_finite_frame_repair_v0.3': raise RuntimeError('heldout audit is not v0.3')
+          if s.get('taxa_observed')!=47 or s.get('expected_fit_cells')!=2256: raise RuntimeError('successor v0.3 audit denominator drifted')
+          if h.get('heldout_taxa_observed')!=12 or h.get('expected_fit_cells')!=576: raise RuntimeError('heldout v0.3 audit denominator drifted')
+          for x,keys in [(s,['paired_discordance_opened','reference_ceiling_opened','heldout_12_paired_discordance_read','process_knockout_opened']),(h,['paired_discordance_opened','reference_ceiling_read','heldout_pairing_opened','process_knockout_opened'])]:
+              for k in keys:
+                  if x.get(k) is not False: raise RuntimeError(f'upstream v0.3 audit already opened {k}')
+          PY
+
+  pre-D:
+    needs: authorize
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.successor_run }}
+          pattern: product-b-successor-finite-frame-repair-v0-3-fit-taxon-*
+          path: repaired_fit
+          digest-mismatch: error
+      - env: {PYTHONPATH: '.'}
+        run: python scripts/audit_same_target_successor_reference_feasibility_finite_frame_repair_v0_3.py --input-root repaired_fit --output out/reference_feasibility.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-finite-frame-repair-reference-feasibility-v0-3
+          path: out/reference_feasibility.json
+          if-no-files-found: error
+          retention-days: 90
+
+  calibrate:
+    needs: [authorize, pre-D]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet numpy pandas 'pyarrow==21.0.0'
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.successor_run }}
+          pattern: product-b-successor-finite-frame-repair-v0-3-fit-taxon-*
+          path: repaired_fit
+          digest-mismatch: error
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          name: product-b-successor-finite-frame-repair-reference-feasibility-v0-3
+          path: feasibility
+          digest-mismatch: error
+      - env: {PYTHONPATH: '.'}
+        run: >-
+          python scripts/calibrate_same_target_successor_pairing_finite_frame_repair_v0_3.py
+          --input-root repaired_fit --feasibility feasibility/reference_feasibility.json
+          --output-cells final/repaired_pairing_cells.csv
+          --output-reference final/repaired_reference_ceiling.csv
+          --output-summary final/repaired_reference_summary.json
+      - name: Require v0.3 reference provenance and held-out closure
+        run: |
+          python - <<'PY'
+          import json
+          s=json.load(open('final/repaired_reference_summary.json'))
+          assert s['result_version']=='product_b_same_target_successor_pairing_calibration_finite_frame_repair_v0.3'
+          assert s['finite_frame_repair_contract_version']=='product_b_same_target_reference_finite_frame_repair_v0.3'
+          assert s['heldout_12_paired_discordance_read'] is False and s['process_knockout_opened'] is False
+          assert s['counts_as_empirical_conclusion'] is False
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: product-b-successor-finite-frame-repair-reference-v0-3
+          path: |
+            final/repaired_pairing_cells.csv
+            final/repaired_reference_ceiling.csv
+            final/repaired_reference_summary.json
+            feasibility/reference_feasibility.json
+          if-no-files-found: error
+          retention-days: 90

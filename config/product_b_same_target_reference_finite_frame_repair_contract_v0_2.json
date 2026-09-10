@@ -1,0 +1,61 @@
+{
+  "contract_version": "product_b_same_target_reference_finite_frame_repair_v0.2",
+  "purpose": "supersede only the engineering oversampling width of v0.1 after an outcome-blind environmental-availability preflight proved 8000 candidates insufficient",
+  "supersedes_contract": "config/product_b_same_target_reference_finite_frame_repair_contract_v0_1.json",
+  "supersession_reason": {
+    "evidence_class": "environmental_availability_engineering_preflight_only",
+    "preflight_run_id": 34122128799,
+    "witness_artifact_id": 10019645644,
+    "witness_artifact_digest": "sha256:7a3c0d5435968cca576d5c00230b044e52bc8e6508aa64600b3f4d28974b4a27",
+    "witness_taxon": "Ambrosia dumosa",
+    "all_43_finite_rows_by_M": {"150": 1393, "300": 1649, "500": 2016},
+    "candidate_rows_by_M": {"150": 8000, "300": 8000, "500": 8000},
+    "paired_discordance_opened": false,
+    "reference_ceiling_opened": false,
+    "heldout_opened": false,
+    "process_knockout_opened": false,
+    "counts_as_empirical_conclusion": false
+  },
+  "finite_frame": {
+    "active_predictors_required": 43,
+    "all_43_predictors_must_be_finite_for_candidate_row": true,
+    "candidate_background_points_per_taxon_M": 32000,
+    "final_background_points_per_taxon_M": 2000,
+    "candidate_sampling_random_state": "same_frozen_72_candidate_seed_as_original_successor_attempt",
+    "final_selection_random_state_formula": "candidate_sampling_random_state + 1000000",
+    "M_km": [150, 300, 500],
+    "M_definition_unchanged": true,
+    "target_group_source_unchanged": true,
+    "target_group_excludes_all_72_frozen_successor_candidates": true,
+    "grid_cell_degrees": 0.05,
+    "if_fewer_than_2000_all_predictor_finite_rows": "finite_comparison_frame_unresolved",
+    "partial_frame_for_model_fit_forbidden": true
+  },
+  "preflight": {
+    "taxa": 47,
+    "taxon_M_cells": 141,
+    "model_fit_allowed": false,
+    "prediction_score_computation_allowed": false,
+    "schoener_d_computation_allowed": false,
+    "reference_ceiling_computation_allowed": false,
+    "heldout_opening_allowed": false,
+    "process_knockout_allowed": false
+  },
+  "unchanged_scientific_rules": {
+    "final_background_points_per_taxon_M": 2000,
+    "minimum_complete_calibration_taxa_per_procedure_M": 30,
+    "reference_quantile": 0.95,
+    "quantile_method": "nearest_rank",
+    "procedure_count": 8,
+    "M_km": [150, 300, 500],
+    "post_outcome_procedure_selection_forbidden": true,
+    "post_outcome_M_selection_forbidden": true,
+    "post_outcome_taxon_replacement_forbidden": true,
+    "failed_candidates_may_not_be_replaced": true
+  },
+  "empirical_ledger": {
+    "this_contract_counts_as_empirical_conclusion": false,
+    "v0_1_preflight_counts_as_empirical_conclusion": false,
+    "new_empirical_conclusion_requires_distinct_sealed_final_endpoint_closed_to_open_transition": true
+  }
+}

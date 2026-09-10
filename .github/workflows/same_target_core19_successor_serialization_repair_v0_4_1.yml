@@ -1,0 +1,253 @@
+name: same-target-core19-successor-serialization-repair-v0-4-1
+
+on:
+  push:
+    branches: [successor-reference-finite-frame-repair]
+    paths: [config/product_b_same_target_core19_successor_serialization_repair_authorization_v0_4_1.json]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: same-target-core19-successor-serialization-repair-v0-4-1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    outputs:
+      qualification_run_id: ${{ steps.gate.outputs.qualification_run_id }}
+      parent_refit_run_id: ${{ steps.gate.outputs.parent_refit_run_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - id: gate
+        name: Require exact pre-reference serialization failure and frozen held-out inheritance
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          python -m py_compile scripts/run_same_target_core19_layer1_fit_taxon_v0_4.py
+          python - <<'PY'
+          import json, os, subprocess
+          a=json.load(open('config/product_b_same_target_core19_successor_serialization_repair_authorization_v0_4_1.json'))
+          exact={
+            'authorization_version':'product_b_same_target_core19_successor_serialization_repair_authorization_v0.4.1',
+            'contract_version':'product_b_same_target_core19_requalification_v0.4',
+            'repair_branch':'successor-reference-finite-frame-repair',
+            'serialization_repair_authorized':True,
+            'successor_refit_authorized':True,
+            'heldout_refit_authorized':False,
+            'heldout_artifact_inheritance_authorized':True,
+            'paired_discordance_authorized':False,
+            'reference_ceiling_authorized':False,
+            'heldout_pairing_authorized':False,
+            'process_knockout_authorized':False,
+            'counts_as_empirical_conclusion':False,
+          }
+          for k,v in exact.items():
+              if a.get(k)!=v: raise RuntimeError(f'serialization-repair authorization drift: {k}')
+
+          pr=int(a['parent_refit_run_id'])
+          r=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{pr}'],text=True))
+          if r.get('status')!='completed' or r.get('conclusion')!='success' or r.get('head_sha')!=a['parent_refit_head_sha']:
+              raise RuntimeError('parent core19 refit is not exact completed success')
+          arts=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{pr}/artifacts?per_page=100'],text=True)).get('artifacts',[])
+          audits=[x for x in arts if x.get('name')=='product-b-core19-v0-4-fit-audit']
+          if len(audits)!=1 or audits[0].get('expired') is True: raise RuntimeError('parent fit audit missing/duplicate/expired')
+          if int(audits[0]['id'])!=int(a['parent_fit_audit_artifact_id']) or str(audits[0].get('digest'))!=str(a['parent_fit_audit_artifact_digest']):
+              raise RuntimeError('parent fit audit identity mismatch')
+          subprocess.run(['gh','run','download',str(pr),'-R','zuizui0223/284b','-n','product-b-core19-v0-4-fit-audit','-D','parent_audit'],check=True)
+          s=json.load(open('parent_audit/core19_fit_audit.json'))
+          required={
+            'result_version':'product_b_same_target_core19_fit_audit_v0.4',
+            'contract_version':'product_b_same_target_core19_requalification_v0.4',
+            'successor_expected_fit_cells':2256,'successor_sealed_fit_cells':0,'successor_unresolved_fit_cells':2256,
+            'heldout_expected_fit_cells':576,'heldout_sealed_fit_cells':576,'heldout_unresolved_fit_cells':0,
+            'all_prediction_scores_finite_for_sealed_cells':True,
+            'paired_discordance_opened':False,'reference_ceiling_opened_or_read':False,
+            'heldout_pairing_opened':False,'process_knockout_opened':False,'counts_as_empirical_conclusion':False,
+          }
+          for k,v in required.items():
+              if s.get(k)!=v: raise RuntimeError(f'parent fit audit does not match serialization-only repair witness: {k}')
+
+          qr=int(a['qualification_run_id'])
+          qrun=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{qr}'],text=True))
+          if qrun.get('status')!='completed' or qrun.get('conclusion')!='success' or qrun.get('head_sha')!=a['qualification_head_sha']:
+              raise RuntimeError('qualification run identity changed')
+          qarts=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{qr}/artifacts?per_page=100'],text=True)).get('artifacts',[])
+          qs=[x for x in qarts if x.get('name')=='product-b-core19-v0-4-qualification-summary']
+          if len(qs)!=1 or int(qs[0]['id'])!=int(a['qualification_summary_artifact_id']) or str(qs[0].get('digest'))!=str(a['qualification_summary_artifact_digest']):
+              raise RuntimeError('qualification summary identity mismatch')
+
+          old=json.loads(subprocess.check_output(['gh','api',f"/repos/zuizui0223/284b/contents/scripts/run_same_target_core19_layer1_fit_taxon_v0_4.py?ref={a['parent_refit_head_sha']}"],text=True))
+          if old.get('sha')!=a['parent_runner_blob_sha']: raise RuntimeError('parent runner blob identity mismatch')
+          current=subprocess.check_output(['git','hash-object','scripts/run_same_target_core19_layer1_fit_taxon_v0_4.py'],text=True).strip()
+          if current!=a['repaired_runner_blob_sha']: raise RuntimeError('repaired runner blob identity mismatch')
+          text=open('scripts/run_same_target_core19_layer1_fit_taxon_v0_4.py',encoding='utf-8').read()
+          if 'row_identity_fields = {"historical_specieskeys": "|".join(identity)' not in text: raise RuntimeError('scalar row serialization repair missing')
+          if 'contract_identity_fields = {"historical_specieskeys": list(identity)' not in text: raise RuntimeError('contract list identity preservation missing')
+          if 'identity_fields = {"historical_specieskeys": list(identity)' in text: raise RuntimeError('old list-valued row serialization still present')
+
+          held=[x for x in arts if str(x.get('name','')).startswith('product-b-core19-v0-4-heldout-fit-taxon-')]
+          actual=sorted([{'name':x['name'],'id':int(x['id']),'digest':str(x.get('digest'))} for x in held],key=lambda x:x['name'])
+          frozen=sorted(a['heldout_parent_artifacts'],key=lambda x:x['name'])
+          if len(actual)!=12 or actual!=frozen or any(x.get('expired') is True for x in held):
+              raise RuntimeError('held-out parent artifact manifest mismatch')
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as h:
+              h.write(f'qualification_run_id={qr}\nparent_refit_run_id={pr}\n')
+          PY
+
+  diagnose-parent:
+    needs: authorize
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.parent_refit_run_id }}
+          pattern: product-b-core19-v0-4-successor-fit-taxon-*
+          path: parent_successor
+          digest-mismatch: error
+      - name: Prove all 2256 successor failures share the scalar-serialization error before repair
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          contracts=[]; errors=[]
+          for p in sorted(Path('parent_successor').rglob('contract.json')):
+              c=json.load(open(p)); contracts.append(c); errors.extend(c.get('errors',[]))
+              if c.get('panel')!='successor' or c.get('result_version')!='product_b_same_target_successor_core19_layer1_fit_taxon_v0.4': raise RuntimeError('foreign parent successor fit')
+              if c.get('sealed_fit_cells')!=0 or c.get('unresolved_fit_cells')!=48: raise RuntimeError('parent successor failure inventory drifted')
+              for k in ('paired_discordance_computed','reference_ceiling_opened_or_read','heldout_pairing_opened','process_knockout_computed'):
+                  if c.get(k) is not False: raise RuntimeError(f'parent successor crossed boundary: {k}')
+          if len(contracts)!=47 or len(errors)!=2256: raise RuntimeError(f'expected 47 contracts / 2256 errors, got {len(contracts)} / {len(errors)}')
+          for e in errors:
+              if e.get('error_type')!='ValueError': raise RuntimeError('non-ValueError found in serialization witness')
+              m=str(e.get('error_message',''))
+              if not (m.startswith('Length of values (') and 'does not match length of index' in m): raise RuntimeError(f'unexpected successor error: {m}')
+          out={'result_version':'product_b_same_target_core19_successor_serialization_diagnostic_v0.4.1','workflow_run_id':int(os.environ['GITHUB_RUN_ID']),'successor_taxa':47,'failed_fit_cells':2256,'shared_error_type':'ValueError','shared_error_class':'pandas_list_length_assignment_mismatch','paired_discordance_opened':False,'reference_ceiling_opened_or_read':False,'heldout_pairing_opened':False,'process_knockout_opened':False,'counts_as_empirical_conclusion':False}
+          Path('diagnostic').mkdir(exist_ok=True); Path('diagnostic/summary.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n'); print(json.dumps(out,indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with: {name: product-b-core19-v0-4-successor-serialization-diagnostic-v0-4-1, path: diagnostic/, if-no-files-found: error, retention-days: 90}
+
+  fit-successor:
+    needs: [authorize, diagnose-parent]
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        taxon_index: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46]
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install pinned model implementation
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check --quiet -e './sdmr[cloud,parquet,geo]'
+          python -m pip install --disable-pip-version-check --quiet 'pyarrow==21.0.0' joblib
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.qualification_run_id }}
+          name: product-b-core19-v0-4-successor-taxon-${{ matrix.taxon_index }}
+          path: frame
+          digest-mismatch: error
+      - name: Refit successor with serialization-only repair on unchanged core19 rows
+        env: {PYTHONPATH: '.', SDMR_RASTER_LAYER_JOBS: '4'}
+        run: >-
+          python scripts/run_same_target_core19_layer1_fit_taxon_v0_4.py --panel successor
+          --taxon-index ${{ matrix.taxon_index }} --core19-frame-dir frame
+          --chelsa-manifest sdmr/configs/chelsa_v2_1_plant_candidates.csv --output-dir fit
+      - uses: actions/upload-artifact@v4
+        with: {name: 'product-b-core19-v0-4-successor-fit-taxon-${{ matrix.taxon_index }}', path: fit/, if-no-files-found: error, retention-days: 90}
+
+  inherit-heldout:
+    needs: authorize
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        taxon_index: [0,1,2,3,4,5,6,7,8,9,10,11]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.parent_refit_run_id }}
+          name: product-b-core19-v0-4-heldout-fit-taxon-${{ matrix.taxon_index }}
+          path: inherited
+          digest-mismatch: error
+      - name: Verify inherited held-out fit remains sealed and unchanged in scientific state
+        run: |
+          python - <<'PY'
+          import json
+          c=json.load(open('inherited/contract.json'))
+          if c.get('panel')!='heldout' or c.get('result_version')!='product_b_same_target_heldout_core19_layer1_fit_taxon_v0.4': raise RuntimeError('wrong heldout inheritance')
+          if c.get('sealed_fit_cells')!=48 or c.get('unresolved_fit_cells')!=0 or c.get('all_prediction_scores_finite_for_sealed_cells') is not True: raise RuntimeError('heldout inherited fit not fully sealed finite')
+          for k in ('paired_discordance_computed','reference_ceiling_opened_or_read','heldout_pairing_opened','process_knockout_computed'):
+              if c.get(k) is not False: raise RuntimeError(f'heldout inherited fit crossed boundary: {k}')
+          if c.get('counts_as_empirical_conclusion') is not False: raise RuntimeError('heldout inherited fit marked empirical')
+          PY
+      - uses: actions/upload-artifact@v4
+        with: {name: 'product-b-core19-v0-4-heldout-fit-taxon-${{ matrix.taxon_index }}', path: inherited/, if-no-files-found: error, retention-days: 90}
+
+  audit:
+    needs: [fit-successor, inherit-heldout]
+    if: always() && needs.fit-successor.result == 'success' && needs.inherit-heldout.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with: {pattern: product-b-core19-v0-4-*-fit-taxon-*, path: fits, digest-mismatch: error}
+      - name: Audit repaired successor plus inherited held-out inventory while all paired outcomes remain sealed
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          contracts=[]
+          for p in sorted(Path('fits').rglob('contract.json')):
+              c=json.load(open(p)); contracts.append(c)
+              if c.get('core19_contract_version')!='product_b_same_target_core19_requalification_v0.4': raise RuntimeError('foreign core19 fit')
+              if c.get('active_predictors')!=[f'bio{i}' for i in range(1,20)] or c.get('active_predictor_count')!=19: raise RuntimeError('core19 fit predictor drift')
+              if c.get('prediction_surfaces_sealed') is not True or c.get('all_prediction_scores_finite_for_sealed_cells') is not True: raise RuntimeError('core19 sealed-score contract failed')
+              for k in ('paired_discordance_computed','reference_ceiling_opened_or_read','heldout_pairing_opened','process_knockout_computed'):
+                  if c.get(k) is not False: raise RuntimeError(f'core19 fit crossed boundary: {k}')
+              if c.get('counts_as_empirical_conclusion') is not False: raise RuntimeError('core19 refit marked empirical')
+              if c.get('panel')=='successor':
+                  if c.get('row_identity_serialization')!='scalar_metadata_columns_only': raise RuntimeError('successor serialization repair not attested')
+                  for e in c.get('errors',[]):
+                      if 'Length of values (' in str(e.get('error_message','')): raise RuntimeError('serialization failure survived repair')
+          s=[c for c in contracts if c.get('panel')=='successor']; h=[c for c in contracts if c.get('panel')=='heldout']
+          if len(s)!=47 or sorted(int(c['taxon_index']) for c in s)!=list(range(47)): raise RuntimeError('successor repaired inventory incomplete')
+          if len(h)!=12 or sorted(int(c['taxon_index']) for c in h)!=list(range(12)): raise RuntimeError('heldout inherited inventory incomplete')
+          se=sum(int(c['expected_fit_cells']) for c in s); ss=sum(int(c['sealed_fit_cells']) for c in s); su=sum(int(c['unresolved_fit_cells']) for c in s)
+          he=sum(int(c['expected_fit_cells']) for c in h); hs=sum(int(c['sealed_fit_cells']) for c in h); hu=sum(int(c['unresolved_fit_cells']) for c in h)
+          if se!=2256 or ss+su!=2256 or he!=576 or hs!=576 or hu!=0: raise RuntimeError('serialization-repair fit denominator drifted')
+          out={
+            'result_version':'product_b_same_target_core19_fit_audit_v0.4','workflow_run_id':int(os.environ['GITHUB_RUN_ID']),
+            'contract_version':'product_b_same_target_core19_requalification_v0.4','active_predictor_count':19,
+            'successor_taxa_observed':47,'successor_expected_fit_cells':2256,'successor_sealed_fit_cells':ss,'successor_unresolved_fit_cells':su,
+            'heldout_taxa_observed':12,'heldout_expected_fit_cells':576,'heldout_sealed_fit_cells':576,'heldout_unresolved_fit_cells':0,
+            'all_prediction_scores_finite_for_sealed_cells':True,'successor_serialization_repair_version':'v0.4.1',
+            'heldout_fit_artifacts_inherited_from_parent':True,
+            'paired_discordance_opened':False,'reference_ceiling_opened_or_read':False,'heldout_pairing_opened':False,'process_knockout_opened':False,
+            'counts_as_empirical_conclusion':False,'claim_strength':'core19_fit_audit_after_successor_serialization_repair_only_endpoint_still_sealed',
+          }
+          Path('audit').mkdir(exist_ok=True); Path('audit/core19_fit_audit.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n'); print(json.dumps(out,indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with: {name: product-b-core19-v0-4-fit-audit, path: audit/, if-no-files-found: error, retention-days: 90}

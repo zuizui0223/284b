@@ -59,10 +59,25 @@ Therefore any cross-source niche overlap estimated from these 12 taxa is descrip
 
 The 24 unresolved taxa are not retroactively rescued. A future unopened calibration may prospectively test a closed biological-concept-to-snapshot-key-set representation, but that would be a new design evaluated on fresh taxa.
 
-## Next unopened question
+## Next unopened question at the time of this result
 
 For the 12 admissible taxa:
 
 > Does the same frozen modeling procedure recover a similar ecological answer when the biological target is unchanged but the independent observation system changes?
 
-Both source-specific answers will be fit independently on one shared, source-symmetric M/background frame. Paired discordance remains sealed until all prediction surfaces are frozen.
+Both source-specific answers were to be fit independently on one shared, source-symmetric M/background frame. Paired discordance remained sealed until all prediction surfaces were frozen.
+
+## Historical status and successor continuation
+
+This document is intentionally retained as the terminal result of the **original 36-taxon panel**. Its statement that the original panel could not form a >=30-taxon q95 reference remains true and must not be rewritten as though that panel later succeeded.
+
+The research program subsequently opened a distinct, prospectively governed successor continuation rather than retroactively replacing the 24 taxonomy-unresolved taxa. That continuation eventually produced a separate core19 v0.4 same-target endpoint after outcome-blind finite-frame qualification and explicitly versioned engineering repairs.
+
+The later endpoint therefore does not invalidate this feasibility result. Instead, the two results occupy different levels:
+
+- this document: **why the original panel stopped before calibrated cross-validity**;
+- `docs/product_b_same_target_core19_empirical_result.md`: **the later fresh successor/held-out endpoint that did reach calibrated cross-validity**.
+
+In the completed core19 v0.4 endpoint, successor reference calibration froze 24/24 procedure-by-M cells under the unchanged >=30 adequate-taxa and nearest-rank q95 rules. A fresh held-out 12-taxon matrix then opened 283 paired cells, and all 283 remained within their frozen successor reference ceilings; five cells stayed closed at the predeclared answer-adequacy gate.
+
+Thus Product-B now has an empirical Level-A cross-validity result, but it came from the separately qualified successor/core19 path, **not** from post-hoc rescue of this original 36-taxon panel.

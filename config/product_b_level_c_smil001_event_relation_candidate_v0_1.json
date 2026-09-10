@@ -1,0 +1,80 @@
+{
+  "contract_version": "product_b_level_c_smil001_event_relation_candidate_v0.1",
+  "contract_state": "candidate_qualification_only_not_empirical_authorization",
+  "pair_id": "SMIL001",
+  "x_taxon_name": "Smilax insularis",
+  "y_taxon_name": "Dasineura heterosmilacicola",
+  "constraint_class": "directional_dependency",
+  "authorized_direction": "X_requires_Y",
+  "declared_biological_event": "successful_sexual_reproduction_of_Smilax_insularis",
+  "candidate_hard_relation": "A prospectively admitted Smilax insularis reproductive opportunity at a frozen site-by-flowering-window key requires adequate Dasineura heterosmilacicola visitation_or_reachability support at that same key.",
+  "external_evidence": [
+    {
+      "doi": "10.1016/j.cub.2026.03.002",
+      "role": "plant_dependency_evidence",
+      "frozen_interpretation": "Field pollination experiments report that Smilax insularis fruit set depends entirely on Dasineura heterosmilacicola; fieldwork was conducted on five Ryukyu islands."
+    },
+    {
+      "doi": "10.3897/zookeys.1234.146453",
+      "role": "pollinator_biology_and_host_association",
+      "frozen_interpretation": "Dasineura heterosmilacicola is described from the Smilax/Heterosmilax system; larvae feed and develop in fallen male flowers."
+    }
+  ],
+  "declared_confirmatory_geographic_evidence_scope": [
+    "Amami-Oshima",
+    "Tokunoshima",
+    "Okinawa",
+    "Ishigaki",
+    "Yonaguni"
+  ],
+  "geographic_scope_extension_forbidden_without_new_external_evidence": true,
+  "mutual_obligacy_authorized": false,
+  "mutual_obligacy_block_reason": "The response-blind literature review supports host association and brood-site use but does not yet adversarially establish that Dasineura heterosmilacicola has no alternative larval host across the declared range.",
+  "candidate_selection_used_occurrence_information": false,
+  "candidate_selection_used_fitted_surfaces": false,
+  "candidate_selection_used_relation_outcomes": false,
+  "level_a_same_target_q95_imported_as_cross_role_tolerance": false,
+  "role_x": {
+    "role": "plant",
+    "estimand": "reproductive_opportunity_or_support",
+    "estimator_contract_frozen": false,
+    "accessible_area_semantics_frozen": false,
+    "predictor_universe_frozen": false,
+    "adequacy_gate_frozen": false
+  },
+  "role_y": {
+    "role": "pollinator",
+    "estimand": "visitation_or_reachability_support_during_flowering",
+    "estimator_contract_frozen": false,
+    "accessible_area_or_movement_semantics_frozen": false,
+    "predictor_or_movement_feature_universe_frozen": false,
+    "adequacy_gate_frozen": false
+  },
+  "relation_space": {
+    "key_semantics": "plant_site_x_flowering_window",
+    "exact_spatial_keys_frozen": false,
+    "flowering_window_keys_frozen": false,
+    "x_projection_frozen": false,
+    "y_projection_frozen": false,
+    "missingness_semantics": "any_missing_or_inadequate_role_answer_keeps_the_relation_key_unresolved_and_closed"
+  },
+  "operational_scope_state": "unresolved_before_focal_occurrence_relation_opening",
+  "operational_scope_blockers": [
+    "Exact confirmatory plant-site relation keys are not yet frozen from response-blind external evidence.",
+    "A prospectively defensible flowering-window key set is not yet frozen.",
+    "Role-specific plant and midge estimator contracts are not yet frozen."
+  ],
+  "next_allowed_actions": [
+    "response_blind_external_site_and_phenology_provenance_review",
+    "role_specific_estimator_design_without_focal_relation_opening",
+    "synthetic_relation_space_tests",
+    "source_blind_sampling_feasibility_after_operational_keys_are_frozen"
+  ],
+  "focal_occurrence_relation_opening_authorized": false,
+  "hard_invariant_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "claim_strength": "prospective_Level_C_candidate_only_no_focal_cross_role_outcome_opened"
+}

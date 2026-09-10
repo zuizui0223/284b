@@ -1,0 +1,267 @@
+name: same-target-core19-qualification-v0-4
+
+on:
+  push:
+    branches: [successor-reference-finite-frame-repair]
+    paths: [config/product_b_same_target_core19_qualification_authorization_v0_4.json]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: same-target-core19-qualification-v0-4-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    outputs:
+      successor_parent_run: ${{ steps.gate.outputs.successor_parent_run }}
+      heldout_parent_run: ${{ steps.gate.outputs.heldout_parent_run }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - id: gate
+        name: Require prospectively frozen diagnostic condition and exact parents
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          python -m py_compile scripts/preflight_same_target_core19_taxon_v0_4.py
+          python - <<'PY'
+          import json, os, subprocess
+          c=json.load(open('config/product_b_same_target_core19_requalification_contract_v0_4.json'))
+          a=json.load(open('config/product_b_same_target_core19_qualification_authorization_v0_4.json'))
+          if c.get('contract_version')!='product_b_same_target_core19_requalification_v0.4': raise RuntimeError('wrong core19 v0.4 contract')
+          exact={
+            'authorization_version':'product_b_same_target_core19_qualification_authorization_v0.4',
+            'contract_version':'product_b_same_target_core19_requalification_v0.4',
+            'repair_branch':'successor-reference-finite-frame-repair',
+            'qualification_authorized':True,
+            'model_refit_authorized':False,
+            'prediction_scores_authorized':False,
+            'paired_discordance_authorized':False,
+            'reference_ceiling_authorized':False,
+            'heldout_pairing_authorized':False,
+            'process_knockout_authorized':False,
+            'counts_as_empirical_conclusion':False,
+          }
+          for k,v in exact.items():
+              if a.get(k)!=v: raise RuntimeError(f'core19 authorization drift: {k}')
+          frozen=c['prospective_freeze']
+          if int(a['diagnostic_run_id'])!=int(frozen['diagnostic_run_id']) or a['diagnostic_head_sha']!=frozen['diagnostic_head_sha']:
+              raise RuntimeError('diagnostic identity differs from prospective freeze')
+          rid=int(a['diagnostic_run_id'])
+          run=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}'],text=True))
+          if run.get('status')!='completed' or run.get('conclusion')!='success' or run.get('head_sha')!=a['diagnostic_head_sha']:
+              raise RuntimeError('v0.4 diagnostic is not exact completed success')
+          arts=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{rid}/artifacts?per_page=100'],text=True)).get('artifacts',[])
+          xs=[x for x in arts if x.get('name')=='product-b-v0-4-predictor-availability-diagnostic-summary']
+          if len(xs)!=1 or xs[0].get('expired') is True: raise RuntimeError('diagnostic summary missing/duplicate/expired')
+          if int(xs[0]['id'])!=int(a['diagnostic_summary_artifact_id']) or str(xs[0].get('digest'))!=str(a['diagnostic_summary_artifact_digest']):
+              raise RuntimeError('diagnostic summary identity mismatch')
+          subprocess.run(['gh','run','download',str(rid),'-R','zuizui0223/284b','-n','product-b-v0-4-predictor-availability-diagnostic-summary','-D','diagnostic_summary'],check=True)
+          s=json.load(open('diagnostic_summary/summary.json'))
+          required={
+            'result_version':'product_b_same_target_finite_frame_predictor_availability_diagnostic_summary_v0.4',
+            'affected_taxa':6,'v0_3_unresolved_cells':14,
+            'successor_unresolved_cells_reproduced':10,'heldout_unresolved_cells_reproduced':4,
+            'core_predictor_count':19,'core19_cells_ready_for_2000':14,'core19_cells_not_ready_for_2000':0,
+            'all_14_unresolved_cells_core19_ready_for_2000':True,
+            'model_fit_opened':False,'prediction_scores_computed':False,'paired_discordance_opened':False,
+            'reference_ceiling_opened_or_read':False,'heldout_pairing_opened':False,'process_knockout_opened':False,
+            'counts_as_empirical_conclusion':False,
+          }
+          for k,v in required.items():
+              if s.get(k)!=v: raise RuntimeError(f'prospectively frozen core19 condition failed: {k}={s.get(k)!r}')
+
+          p=c['all43_v0_3_parent_provenance']
+          for prefix in ('successor','heldout'):
+              prun=int(p[f'{prefix}_run_id'])
+              rr=json.loads(subprocess.check_output(['gh','api',f'/repos/zuizui0223/284b/actions/runs/{prun}'],text=True))
+              if rr.get('status')!='completed' or rr.get('conclusion')!='success' or rr.get('head_sha')!=p[f'{prefix}_head_sha']:
+                  raise RuntimeError(f'{prefix} exact all43 parent run changed')
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as h:
+              h.write(f"successor_parent_run={p['successor_run_id']}\nheldout_parent_run={p['heldout_run_id']}\n")
+          PY
+
+  prepare-successor-target:
+    needs: authorize
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - name: Retrieve and verify frozen successor target group
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          python - <<'PY'
+          import hashlib,json,subprocess
+          from pathlib import Path
+          c=json.load(open('results/product_b_same_target_successor_target_footprint_receipt_v0_1.json'))
+          subprocess.run(['gh','run','download',str(c['workflow_run_id']),'-R','zuizui0223/284b','-n','product-b-successor-same-target-target-footprint-2026-08-01','-D','target'],check=True)
+          p=Path('target/target_group.parquet')
+          if hashlib.sha256(p.read_bytes()).hexdigest()!=c['target_sha256']: raise RuntimeError('successor target-group bytes changed')
+          PY
+      - uses: actions/upload-artifact@v4
+        with: {name: product-b-core19-v0-4-successor-target-group, path: target/target_group.parquet, if-no-files-found: error, retention-days: 30}
+
+  prepare-heldout-target:
+    needs: authorize
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - name: Retrieve and verify frozen held-out target group
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          python - <<'PY'
+          import hashlib,json,subprocess
+          from pathlib import Path
+          c=json.load(open('results/product_b_same_target_source_target_footprint_receipt_v0_1.json'))
+          subprocess.run(['gh','run','download',str(c['workflow_run_id']),'-R','zuizui0223/284b','-n','product-b-same-target-target-footprint-2026-08-01','-D','target'],check=True)
+          p=Path('target/target_group.parquet')
+          if hashlib.sha256(p.read_bytes()).hexdigest()!=c['target_sha256']: raise RuntimeError('heldout target-group bytes changed')
+          PY
+      - uses: actions/upload-artifact@v4
+        with: {name: product-b-core19-v0-4-heldout-target-group, path: target/target_group.parquet, if-no-files-found: error, retention-days: 30}
+
+  qualify-successor:
+    needs: [authorize, prepare-successor-target]
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        taxon_index: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46]
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install pinned environmental implementation
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check --quiet -e './sdmr[cloud,parquet,geo]'
+          python -m pip install --disable-pip-version-check --quiet 'pyarrow==21.0.0' joblib
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.successor_parent_run }}
+          name: product-b-successor-finite-frame-v0-3-preflight-taxon-${{ matrix.taxon_index }}
+          path: parent_v03
+          digest-mismatch: error
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with: {name: product-b-core19-v0-4-successor-target-group, path: target, digest-mismatch: error}
+      - name: Qualify successor core19 frame from coordinates for all M
+        env: {PYTHONPATH: '.', SDMR_RASTER_LAYER_JOBS: '4'}
+        run: >-
+          python scripts/preflight_same_target_core19_taxon_v0_4.py --panel successor
+          --taxon-index ${{ matrix.taxon_index }} --parent-v0-3-dir parent_v03
+          --target-group target/target_group.parquet --chelsa-manifest sdmr/configs/chelsa_v2_1_plant_candidates.csv
+          --output-dir core19
+      - uses: actions/upload-artifact@v4
+        with: {name: 'product-b-core19-v0-4-successor-taxon-${{ matrix.taxon_index }}', path: core19/, if-no-files-found: error, retention-days: 90}
+
+  qualify-heldout:
+    needs: [authorize, prepare-heldout-target]
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        taxon_index: [0,1,2,3,4,5,6,7,8,9,10,11]
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install pinned environmental implementation
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check --quiet -e './sdmr[cloud,parquet,geo]'
+          python -m pip install --disable-pip-version-check --quiet 'pyarrow==21.0.0' joblib
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.heldout_parent_run }}
+          name: product-b-heldout-finite-frame-v0-3-preflight-taxon-${{ matrix.taxon_index }}
+          path: parent_v03
+          digest-mismatch: error
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with: {name: product-b-core19-v0-4-heldout-target-group, path: target, digest-mismatch: error}
+      - name: Qualify held-out core19 frame from coordinates for all M
+        env: {PYTHONPATH: '.', SDMR_RASTER_LAYER_JOBS: '4'}
+        run: >-
+          python scripts/preflight_same_target_core19_taxon_v0_4.py --panel heldout
+          --taxon-index ${{ matrix.taxon_index }} --parent-v0-3-dir parent_v03
+          --target-group target/target_group.parquet --chelsa-manifest sdmr/configs/chelsa_v2_1_plant_candidates.csv
+          --output-dir core19
+      - uses: actions/upload-artifact@v4
+        with: {name: 'product-b-core19-v0-4-heldout-taxon-${{ matrix.taxon_index }}', path: core19/, if-no-files-found: error, retention-days: 90}
+
+  aggregate:
+    needs: [qualify-successor, qualify-heldout]
+    if: always() && needs.qualify-successor.result == 'success' && needs.qualify-heldout.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet pandas numpy
+      - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        with: {pattern: product-b-core19-v0-4-*-taxon-*, path: qualified, digest-mismatch: error}
+      - name: Aggregate exact 59-taxon core19 qualification with outcomes closed
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          import pandas as pd
+          receipts=[]; rows=[]
+          for p in sorted(Path('qualified').rglob('receipt.json')):
+              r=json.load(open(p)); receipts.append(r)
+              if r.get('contract_version')!='product_b_same_target_core19_requalification_v0.4': raise RuntimeError('foreign core19 receipt')
+              if r.get('active_predictor_count')!=19 or r.get('active_predictors')!=[f'bio{i}' for i in range(1,20)]: raise RuntimeError('core19 predictor identity drifted')
+              if r.get('parent_v0_3_frame_bytes_reused') is not False: raise RuntimeError('all43 frame bytes leaked into core19')
+              for k in ('model_fit_opened','prediction_scores_computed','paired_discordance_opened','reference_ceiling_opened_or_read','heldout_pairing_opened','process_knockout_opened'):
+                  if r.get(k) is not False: raise RuntimeError(f'core19 qualification crossed boundary: {k}')
+              if r.get('counts_as_empirical_conclusion') is not False: raise RuntimeError('core19 qualification marked empirical')
+              for c in r['cells']:
+                  rows.append({'panel':r['panel'],'taxon':r['taxon'],'taxon_index':r['taxon_index'],'M_km':c['M_km'],'state':c['state'],'candidate_rows_materialized':c['candidate_rows_materialized'],'core19_finite_rows':c['core19_finite_rows'],'selected_rows':c['selected_rows'],'comparison_frame_sha256':c.get('comparison_frame_sha256')})
+          if len(receipts)!=59: raise RuntimeError(f'expected 59 receipts, got {len(receipts)}')
+          frame=pd.DataFrame(rows)
+          if len(frame)!=177: raise RuntimeError(f'expected 177 taxon-M cells, got {len(frame)}')
+          sframe=frame[frame.panel=='successor']; hframe=frame[frame.panel=='heldout']
+          if len(sframe)!=141 or len(hframe)!=36: raise RuntimeError('core19 panel denominators drifted')
+          sfrozen=int((sframe.state=='core19_comparison_frame_frozen').sum()); hfrozen=int((hframe.state=='core19_comparison_frame_frozen').sum())
+          summary={
+            'result_version':'product_b_same_target_core19_qualification_summary_v0.4',
+            'workflow_run_id':int(os.environ['GITHUB_RUN_ID']),
+            'contract_version':'product_b_same_target_core19_requalification_v0.4',
+            'predictor_selection_rule':'CHELSA manifest candidate_class == core_climate',
+            'active_predictors':[f'bio{i}' for i in range(1,20)],'active_predictor_count':19,
+            'successor_taxa_expected':47,'successor_taxa_observed':int(sum(r['panel']=='successor' for r in receipts)),
+            'heldout_taxa_expected':12,'heldout_taxa_observed':int(sum(r['panel']=='heldout' for r in receipts)),
+            'successor_cells_expected':141,'successor_cells_frozen':sfrozen,'successor_cells_unresolved':int(141-sfrozen),
+            'heldout_cells_expected':36,'heldout_cells_frozen':hfrozen,'heldout_cells_unresolved':int(36-hfrozen),
+            'minimum_core19_finite_rows':int(frame.core19_finite_rows.min()),
+            'all_177_core19_frames_ready_for_review':bool(sfrozen==141 and hfrozen==36),
+            'model_fit_opened':False,'prediction_scores_computed':False,'paired_discordance_opened':False,
+            'reference_ceiling_opened_or_read':False,'heldout_pairing_opened':False,'process_knockout_opened':False,
+            'counts_as_empirical_conclusion':False,
+            'claim_strength':'uniform_core19_frame_qualification_only_not_empirical_evidence',
+          }
+          out=Path('summary'); out.mkdir(exist_ok=True)
+          frame.sort_values(['panel','taxon_index','M_km']).to_csv(out/'core19_qualification_cells.csv',index=False)
+          (out/'core19_qualification_summary.json').write_text(json.dumps(summary,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(summary,indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with: {name: product-b-core19-v0-4-qualification-summary, path: summary/, if-no-files-found: error, retention-days: 90}

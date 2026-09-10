@@ -1,0 +1,22 @@
+name: same-target-heldout-finite-frame-preflight-legacy-deprecated
+
+on:
+  push:
+    branches: [successor-reference-finite-frame-repair]
+    paths: [config/product_b_same_target_heldout_finite_frame_preflight_trigger_v0_1.json]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: same-target-heldout-finite-frame-preflight-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  supersede:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close superseded 8k held-out preflight path
+        run: |
+          echo "v0.1 8k held-out preflight is superseded by the frozen 32k v0.2 path."
+          echo "This run exists only to cancel any older in-progress v0.1 run in the same concurrency group."

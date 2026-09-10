@@ -16,14 +16,21 @@ Unexpected divergence is a warning that deserves explanation.
 
 ## Same-target replication is a special controlled case
 
-The current preserved-specimen versus human-observation calibration is deliberately
-special. The biological target and estimand are identical, so the design can hold
-the estimator/procedure, M/background semantics and comparison rows fixed while
-changing only the observation source.
+The completed preserved-specimen versus human-observation core19 v0.4 endpoint is
+deliberately special. The biological target and estimand are identical, so the
+design holds the estimator/procedure, M/background semantics and comparison rows
+fixed while changing only the observation source.
 
 That same-estimator requirement is an **experimental control for same-target
 reconstruction stability**. It is not a general requirement of the biological
 cross-check framework.
+
+The controlled case is now empirically demonstrated rather than merely proposed:
+a successor panel prospectively froze 24/24 procedure-by-M q95 reference cells,
+and a fresh 12-taxon held-out panel opened 283 paired cells. All 283 opened cells
+fell within their frozen successor reference ceilings; five additional cells
+remained closed because one source-specific answer failed its predeclared adequacy
+gate. No held-out procedure, M, taxon replacement or process rescue was allowed.
 
 For different taxa, life histories or ecological roles, requiring one estimator
 or one accessible area merely to make the outputs numerically comparable can be
@@ -91,6 +98,11 @@ This is intentionally not called a biological violation. Large divergence may
 reflect model misspecification, omitted processes, observation bias, scale
 mismatch, historical contingency, or an incomplete biological expectation.
 
+The core19 v0.4 Level-A endpoint provides the first empirical example of the
+complementary terminal state: every opened held-out cell was
+`paired_crosscheck_consistent`, while answer-inadequate cells remained unresolved
+and unopened rather than being forced into either class.
+
 ## What independence means
 
 For a paired answer-check to be informative:
@@ -129,6 +141,10 @@ relation is **not jointly observable at the declared scale**. In all three cases
 a paired cross-check statistic stays closed. A missing answer must never be
 encoded as maximal discordance, perfect concordance, zero suitability, or a
 dropped cell.
+
+The held-out core19 endpoint followed this rule literally: 283 cells reached the
+paired comparison and five failed earlier at source-specific answer adequacy, so
+those five stayed closed and unresolved.
 
 ## No universal estimator or universal M across biological roles
 
@@ -172,16 +188,29 @@ The same-target independent-source q95 estimates disagreement under a controlled
 case where target, estimand, estimator and M/background are held fixed and only
 the observation source changes.
 
-It must **not** be imported automatically as the tolerance for a plant-pollinator,
-host-dependent, life-stage or movement-persistence relation. Those comparisons
-have different estimands and require either:
+That calibration is now empirically anchored. Reference run `34439012066` froze
+24/24 successor procedure-by-M cells using the prospectively declared nearest-rank
+q95 rule, with at least 34 adequate successor taxa in every reference cell. Fresh
+held-out run `34439487385` then opened 283/288 eligible paired comparisons; all
+283 remained within their frozen reference ceilings, with zero
+`attention_required` cells. The five unopened cells were answer-adequacy failures,
+not discordance failures.
+
+This supports **same-target cross-source answer reproducibility conditional on
+answer adequacy**. It does not establish equality of raw predictions or universal
+source invariance.
+
+The Level-A q95 must **not** be imported automatically as the tolerance for a
+plant-pollinator, host-dependent, life-stage or movement-persistence relation.
+Those comparisons have different estimands and require either:
 
 - a dedicated hard biological invariant; or
 - relation-specific soft calibration, such as prospectively matched non-obligate
   controls, shuffled partners, or another external reference design.
 
-Same-target calibration remains useful as a reconstruction-stability diagnostic,
-not as a universal biological-discordance ruler.
+Same-target calibration is therefore both an empirical reconstruction-stability
+result and a controlled baseline for the framework, not a universal
+biological-discordance ruler.
 
 ## Attention logic
 
@@ -192,6 +221,10 @@ The soft cross-check asks:
 
 A focal pair exceeding this ceiling is flagged for diagnosis rather than declared
 biologically false.
+
+The Level-A empirical result shows that a frozen soft check can also terminate
+cleanly on the other side: 283 fresh opened cells required no attention under the
+successor-derived reference.
 
 ## Diagnostic hierarchy after a warning
 
@@ -227,7 +260,7 @@ The broader framework is:
 
 ## Relation to the Product-B hierarchy
 
-The project now has five nested questions:
+The project has five nested questions:
 
 1. **Observability** — can each biological target and the relation event be
    represented without deriving the answer from focal outcomes?
@@ -245,11 +278,34 @@ unobservable target; a cross-source distance cannot rescue a failed estimator;
 forcing one M cannot manufacture valid comparability across mobility regimes;
 and process interpretation cannot precede a frozen baseline relation check.
 
+The core19 v0.4 endpoint is the first empirical closure of level 4 in the
+controlled Level-A setting. It does not skip level 5: process knockout remained
+closed throughout.
+
 ## Current boundary
 
-The currently running same-target source calibration remains unchanged and keeps
-its common-estimator/common-M control. The new role-specific relation-space layer
-applies to future cross-species, cross-role and life-stage checks. It does not
-retroactively rescue or reinterpret any terminal v5-v7 endpoint, and it does not
-authorize opening a new cross-species outcome before the role-specific estimators
-and relation adapter are prospectively frozen.
+Level A is no longer merely a running calibration. It has one prospectively
+frozen, fresh held-out empirical result:
+
+- endpoint: `same_target_cross_source_reproducibility_heldout12_core19_v0_4`;
+- held-out cells audited: 288;
+- paired cells opened: 283;
+- within frozen successor q95: 283/283;
+- attention required: 0;
+- unresolved before paired comparison: 5;
+- process knockout: closed;
+- final fingerprint:
+  `80465bdefd484a8e9d5adcdbd792820ff1716c2b589ff9ad2a278c6c9494646c`.
+
+The canonical interpretation is recorded in
+`docs/product_b_same_target_core19_empirical_result.md` and the machine-readable
+receipt in
+`results/product_b_same_target_core19_v0_4_heldout_final_receipt.json`.
+
+The next scientific boundary is a fresh cross-role or life-stage check. The
+role-specific relation-space layer applies there prospectively; it does not
+retroactively rescue or reinterpret terminal v5-v7 endpoints, and the Level-A
+q95 cannot be reused as a universal tolerance. No new cross-species outcome may
+open before both role-specific estimators, the common biological event, the
+relation-space adapter, and the appropriate hard invariant or soft reference
+design are frozen.

@@ -1,0 +1,111 @@
+{
+  "protocol_version": "product_b_level_c_candidate_admission_v1",
+  "protocol_state": "frozen_before_new_candidate_search",
+  "scientific_target": "fresh_cross_role_event_level_directional_dependency_endpoints",
+  "purpose": "Create a finite response-blind candidate set from external biology before inspecting focal occurrence availability, fitted role answers, or cross-role outcomes.",
+  "eligible_relation_classes": [
+    "successful_reproduction_requires_partner_access",
+    "dependent_larval_or_juvenile_development_requires_named_host_resource",
+    "dependent_life_stage_transition_requires_named_partner_or_resource"
+  ],
+  "candidate_discovery_queries_frozen": [
+    "obligate pollination experimental dependence exact study site phenology",
+    "specialist larva obligate host field experiment exact site phenology",
+    "obligate brood-site mutualism exclusion experiment exact locality",
+    "host-dependent development experimental host specificity exact field site"
+  ],
+  "external_source_policy": {
+    "primary_literature_required_for_hard_direction": true,
+    "review_only_evidence_sufficient_for_hard_direction": false,
+    "directionality_must_be_stated_at_event_level": true,
+    "adult_range_overlap_sufficient_as_external_relation": false,
+    "cooccurrence_sufficient_as_external_relation": false,
+    "absence_of_reported_alternative_partner_proves_exclusivity": false
+  },
+  "admission_gates": {
+    "G1_event_relation": {
+      "required": true,
+      "rule": "A primary external source must support the exact directional event implication being proposed; only supported directions are admitted."
+    },
+    "G2_operational_space": {
+      "required": true,
+      "rule": "Published or independently frozen metadata must identify an exact or unambiguous relation population/site unit; country/island-wide presence is insufficient when the event is local."
+    },
+    "G3_operational_time": {
+      "required": true,
+      "rule": "The biological event must have a prospectively defensible temporal key or window. General species phenology cannot silently substitute for the event-specific window."
+    },
+    "G4_role_estimands": {
+      "required": true,
+      "rule": "Both role answers must measure the event-relevant estimands. Generic occurrence or habitat-suitability surfaces cannot be relabelled as reproduction, visitation, host use, or stage transition."
+    },
+    "G5_focal_evidence_independence": {
+      "required": true,
+      "rule": "The data that define the external hard relation cannot also score the confirmatory focal endpoint. Independent or fresh role-answer sources must be identifiable from metadata before focal outcome access."
+    },
+    "G6_management_and_intervention_scope": {
+      "required": true,
+      "rule": "Deliberate release, cultivation, experimental placement, or other management that creates the relation-space pattern must be absent or the candidate is engineering-only."
+    },
+    "G7_fresh_endpoint_identity": {
+      "required": true,
+      "rule": "A previously consumed Product-B pair/outcome cannot be reopened or reclassified as a fresh endpoint. A genuinely new event estimand requires a distinct prospectively frozen endpoint identity."
+    }
+  },
+  "candidate_registry_rule": {
+    "every_screened_candidate_must_be_logged": true,
+    "failed_candidates_must_remain_in_registry": true,
+    "candidate_removal_after_occurrence_or_model_inspection_forbidden": true,
+    "candidate_replacement_after_occurrence_or_model_inspection_forbidden": true,
+    "maximum_candidates_screened": 12,
+    "target_fully_admitted_candidates": 3,
+    "candidate_hunting_hard_stop_rule": "Stop external candidate discovery when either 3 candidates pass all G1-G7 gates or 12 candidates have been screened, whichever happens first.",
+    "after_hard_stop": "Freeze the whole registry. Run any later source/sampling feasibility on all fully admitted candidates under one common predeclared feasibility contract. Do not add replacements because a candidate has sparse data."
+  },
+  "candidate_ordering_rule": {
+    "discovery_order_must_be_recorded": true,
+    "within_each_frozen_query": "record qualifying primary-literature systems in search-result discovery order before reading any occurrence availability metadata",
+    "duplicate_systems": "retain the first discovery record and cross-reference later sources",
+    "priority_after_admission": "none; all fully admitted candidates enter source-feasibility together"
+  },
+  "forbidden_before_registry_freeze": [
+    "GBIF_or_iNaturalist_occurrence_counts",
+    "focal_occurrence_coordinates",
+    "plant_partner_or_host_dependent_overlap_maps",
+    "fitted_role_surfaces",
+    "cross_role_relation_statistics",
+    "Level_A_q95_import_as_cross_role_tolerance",
+    "candidate_ranking_by_expected_data_richness",
+    "candidate_ranking_by_expected_result_direction"
+  ],
+  "allowed_before_registry_freeze": [
+    "primary_literature_relation_evidence",
+    "published_methods_metadata_for_site_population_and_time",
+    "data_repository_metadata_without_focal_record_counts_or_values",
+    "taxonomic_and_life_history_metadata",
+    "whether_an_independent_focal_answer_source_exists_in_principle"
+  ],
+  "screen_states": [
+    "fully_admitted_for_later_source_feasibility",
+    "blocked_event_relation",
+    "blocked_operational_space",
+    "blocked_operational_time",
+    "blocked_role_estimand",
+    "blocked_focal_evidence_independence",
+    "engineering_only_management_confounded",
+    "excluded_previously_consumed_endpoint"
+  ],
+  "post_registry_source_feasibility": {
+    "authorized_now": false,
+    "occurrence_or_record_counts_may_be_opened_only_after_registry_freeze": true,
+    "all_fully_admitted_candidates_evaluated_together": true,
+    "post_feasibility_replacement_candidates_forbidden": true
+  },
+  "hard_invariant_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_at_protocol_freeze": 1
+}

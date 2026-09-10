@@ -1,0 +1,102 @@
+{
+  "contract_version": "product_b_level_c_smil001_operational_relation_v0.2",
+  "contract_state": "response_blind_operationalization_blocked_before_focal_outcome",
+  "pair_id": "SMIL001",
+  "x_taxon_name": "Smilax insularis",
+  "y_taxon_name": "Dasineura heterosmilacicola",
+  "constraint_class": "directional_dependency",
+  "authorized_direction": "X_requires_Y",
+  "declared_biological_event": "successful_sexual_reproduction_of_Smilax_insularis",
+  "hard_relation_text": "A positively established Smilax insularis reproductive-success event at a frozen relation key requires adequate Dasineura heterosmilacicola visitation_or_reachability support at that same key.",
+  "plant_dependency_evidence": {
+    "doi": "10.1016/j.cub.2026.03.002",
+    "evidence_strength": "experimental_exclusion_and_pollination",
+    "reported_spatial_grain": "Amami-Oshima_Island",
+    "exact_dependency_experiment_coordinate_published_in_reviewed_article": false,
+    "reported_experiment_window": "early_July_to_late_September_2024",
+    "reported_fieldwork_islands": [
+      "Amami-Oshima",
+      "Tokunoshima",
+      "Okinawa",
+      "Ishigaki",
+      "Yonaguni"
+    ],
+    "reported_general_flowering_period": "May_to_October"
+  },
+  "interaction_anchor_evidence": {
+    "doi": "10.3897/zookeys.1234.146453",
+    "amami_anchor": {
+      "locality": "Higashinakama",
+      "latitude": 28.2856,
+      "longitude": 129.4355,
+      "elevation_m": 120
+    },
+    "reported_general_flowering_period": "March_to_August",
+    "identity_with_2026_dependency_experiment_population": "not_established"
+  },
+  "spatial_provenance_decision": {
+    "borrow_2025_Higashinakama_coordinate_for_2026_dependency_experiment": false,
+    "island_level_hard_relation_fallback_authorized": false,
+    "island_level_block_reason": "Midge support somewhere on Amami-Oshima would not establish midge support at the focal reproductive opportunity; the hard event cannot be weakened to island-wide co-occurrence.",
+    "exact_relation_site_key_frozen": false,
+    "current_state": "unresolved_exact_dependency_experiment_site"
+  },
+  "temporal_provenance_decision": {
+    "2025_species_flowering_period": "March_to_August",
+    "2026_species_flowering_period": "May_to_October",
+    "2026_pollinator_observation_window_amami": "early_July_to_mid_August_2024_and_2025",
+    "2026_breeding_system_window": "early_July_to_late_September_2024",
+    "single_interchangeable_flowering_window_assumed": false,
+    "event_specific_relation_window_frozen": false,
+    "block_reason": "Species flowering season, pollinator observation window, and breeding-system treatment window are different quantities and must not be collapsed after outcome inspection."
+  },
+  "role_x_answer_contract": {
+    "role": "dependent_event",
+    "estimand": "successful_reproductive_event_or_validated_reproductive_success_support",
+    "generic_adult_occurrence_SDM_sufficient": false,
+    "acceptable_answer_classes": [
+      "independent_reproductive_success_observation",
+      "prospectively_validated_reproductive_success_model"
+    ],
+    "answer_contract_frozen": false,
+    "adequacy_gate_frozen": false
+  },
+  "role_y_answer_contract": {
+    "role": "required_support",
+    "estimand": "midge_visitation_or_reachability_support_at_the_same_reproductive_opportunity",
+    "generic_midge_occurrence_SDM_sufficient": false,
+    "acceptable_answer_classes": [
+      "independent_visitation_observation",
+      "prospectively_validated_visitation_model",
+      "prospectively_frozen_reachability_model_with_declared_sources_and_transition_rules"
+    ],
+    "answer_contract_frozen": false,
+    "adequacy_gate_frozen": false
+  },
+  "relation_space": {
+    "intended_key_semantics": "dependency_experiment_population_x_reproductive_event_window",
+    "exact_key_inventory_frozen": false,
+    "x_projection_frozen": false,
+    "y_projection_frozen": false,
+    "missing_or_inadequate_answer_semantics": "unresolved_and_relation_key_stays_closed",
+    "raw_range_overlap_is_hard_invariant": false,
+    "raw_suitability_equality_is_required": false
+  },
+  "level_a_same_target_q95_imported_as_cross_role_tolerance": false,
+  "mutual_obligacy_authorized": false,
+  "focal_occurrence_relation_opening_authorized": false,
+  "hard_invariant_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "next_allowed_actions": [
+    "request_or_locate_response_blind_metadata_for_exact_2026_dependency_experiment_population",
+    "freeze_event_specific_temporal_relation_keys_from_external_provenance",
+    "design_and_synthetically_validate_role_x_answer_contract",
+    "design_and_synthetically_validate_role_y_answer_contract",
+    "run_sampling_feasibility_only_after_relation_keys_and_role_contracts_are_frozen"
+  ],
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "claim_strength": "prospective_Level_C_operationalization_only_no_focal_cross_role_outcome_opened"
+}

@@ -25,15 +25,27 @@ Expected relation: broad environmental support should be concordant at a declare
 
 Default interpretation: **soft cross-check**. Excess divergence is `attention_required`, not a biological violation.
 
-This level is intentionally a controlled reconstruction experiment. The current calibration therefore holds fixed:
+This level is intentionally a controlled reconstruction experiment. The core19 v0.4 endpoint held fixed:
 
 - the biological target;
 - the ecological estimand;
 - the estimator/procedure identity;
 - M/background semantics within a procedure × M cell;
-- the comparison rows.
+- the comparison rows;
+- the active `bio1`–`bio19` predictor universe;
+- the adequacy and successor-reference rules.
 
-Only the observation source changes. This is where a same-estimator requirement is scientifically justified.
+Only the observation source changed. This is where a same-estimator requirement is scientifically justified.
+
+**Empirical status:** Level A now has a prospectively frozen fresh held-out result. Successor calibration froze 24/24 procedure-by-M nearest-rank q95 reference cells. In the held-out 12-taxon matrix, 283/288 paired cells were eligible to open and **283/283 remained within the frozen successor ceiling**, with zero `attention_required` cells. Five cells stayed closed because one source-specific answer failed its predeclared adequacy gate. Process knockout remained closed.
+
+Canonical endpoint:
+
+`same_target_cross_source_reproducibility_heldout12_core19_v0_4`
+
+Canonical interpretation: **same-target cross-source answer reproducibility conditional on answer adequacy**.
+
+This is the first empirical closure of the cross-validity layer in the ladder. It is not yet a cross-role or biological-process result.
 
 ### Level B — expected biological concordance
 
@@ -42,6 +54,8 @@ Examples: independently estimated ecological responses that external experimenta
 The upstream estimators may differ when the roles differ. A relation-space adapter must state what common event/units are being compared.
 
 Default interpretation: **soft cross-check** with relation-specific calibration.
+
+Current status: **unopened as a fresh empirical relation endpoint in this ladder**. Level-A success cannot serve as its tolerance by default. A Level-B test needs its own prospectively frozen reference design because two different biological roles or estimands can have legitimate discordance that is absent from the controlled same-target experiment.
 
 ### Level C — directional dependency
 
@@ -56,6 +70,8 @@ For a plant requiring an obligate pollinator, adult plant occupancy need not be 
 Plant and pollinator answers may therefore use different estimators and different accessible areas. They are compared only after projection to the same site/time interaction-opportunity keys.
 
 Interpretation: may be a **hard invariant** when dependency, event and scale are genuinely mandatory; otherwise it is prospectively a soft directional cross-check.
+
+Current status: the relation form is defined, but the first fresh Level-C empirical endpoint must still be prospectively frozen. Level-A reproducibility establishes that the independent-answer machinery can close empirically; it does not establish the dependency itself.
 
 ### Level D — mutual dependency
 
@@ -88,6 +104,8 @@ The common relation space can be, for example:
 
 The relation-space keys, biological event and both projections must be frozen before the focal comparison is opened.
 
+Level A did not require a nontrivial cross-role adapter because both independent answers referred to the same target, estimand and matched comparison rows. Levels B–E do require explicit adaptation and therefore represent a real scientific step beyond the completed Level-A result.
+
 ## What must not be forced across roles
 
 Unless external biology itself justifies it, cross-role checks must not require:
@@ -118,11 +136,13 @@ These do **not** share one universal threshold.
 
 The same-target independent-source panel estimates reconstruction disagreement when the **target, estimand, estimator and M/background are controlled** and only the observation source changes.
 
-Therefore its q95 ceiling is valid for that same-target calibration problem. It is **not automatically a tolerance for plant-versus-pollinator, host-versus-dependent, life-stage, or movement-versus-persistence comparisons**.
+The completed core19 v0.4 endpoint gives this calibration an empirical held-out check: all 283 opened fresh cells remained within the successor-derived q95 ceiling. The closest opened cell was *Nothofagus betuloides*, M=150 km, `predictive_forward|logit_l2_C1_degree2`, with discordance `0.3862496` versus a frozen ceiling of `0.3908492`.
+
+Therefore the q95 ceiling is empirically useful for the Level-A same-target calibration problem. It is **not automatically a tolerance for plant-versus-pollinator, host-versus-dependent, life-stage, or movement-versus-persistence comparisons**.
 
 Cross-role soft checks require their own reference design, such as prospectively matched non-obligate controls, shuffled partners, or another relation-specific external calibration. Hard obligacy uses the dedicated biological invariant rather than importing the same-target q95.
 
-The same-target result remains useful diagnostically: it quantifies one source of reconstruction instability. It does not define how much disagreement is biologically acceptable between different estimands.
+The same-target result now does two things: it quantifies one source of reconstruction instability and demonstrates that a prospectively frozen independent-answer cross-check can produce a clean fresh terminal result. It still does not define how much disagreement is biologically acceptable between different estimands.
 
 ## Process intervention extension
 
@@ -133,3 +153,5 @@ The general question becomes:
 > Which frozen process intervention in either role makes a previously coherent biological relation cease to hold after both answers are re-projected to the same relation space?
 
 No process knockout may change the baseline estimator, adapter, relation event or comparison keys after the focal baseline has been opened.
+
+The completed Level-A endpoint intentionally stopped before this step. Its empirical conclusion is cross-validity, not necessity. The next process-level claim requires a separately frozen intervention after a valid baseline relation has been established.

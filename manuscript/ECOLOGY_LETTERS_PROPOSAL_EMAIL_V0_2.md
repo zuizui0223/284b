@@ -37,6 +37,6 @@ Prospective screens then identified two fresh ecological systems with independen
 
 ## Proposed attachment
 
-`manuscript/figures/ecology_letters_method_proposal_figure_v0_2.svg`
+`manuscript/figures/ecology_letters_method_proposal_figure_v0_3.svg`
 
-The figure contains no focal Level-C biological values.
+This figure has been rendered and visually audited; the v0.3 revision fixes only layout overflow and does not change scientific content. It contains no focal Level-C biological values.

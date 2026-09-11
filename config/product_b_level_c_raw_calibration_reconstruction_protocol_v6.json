@@ -1,0 +1,57 @@
+{
+  "protocol_version": "product_b_level_c_raw_calibration_reconstruction_v6",
+  "protocol_state": "frozen_before_any_raw_or_supplementary_calibration_value_opening",
+  "candidate_set": ["CREMV3-007", "BELV3-012"],
+  "candidate_set_frozen": true,
+  "new_candidate_search_authorized": false,
+  "candidate_replacement_authorized": false,
+  "prior_level_c_system_rescue_authorized": false,
+  "scientific_question": "Can candidate-specific detection calibration required by v5 be reconstructed from already-existing supplementary or raw data without opening focal cross-role outcomes?",
+  "reconstruction_gates": {
+    "R1_calibration_stream_exists": "A distinct existing observation stream must compare the focal detector/resource scorer against a higher-coverage or repeated reference observation on the same units/windows.",
+    "R2_same_unit_same_window_alignment": "Calibration and candidate detector/scorer must overlap on the same biological units and relevant time windows.",
+    "R3_reference_not_defined_by_focal_outcome": "The gold-standard or repeated reference labels must not be derived from fruit, emergence, or the focal cross-role outcome.",
+    "R4_failure_missingness_separable": "Device failure, out-of-frame periods, missing records, and unavailable files must be distinguishable from confirmed biological absence.",
+    "R5_performance_estimable": "Sensitivity, false-negative rate, and specificity or an equivalent prespecified detection-performance quantity must be estimable from existing data.",
+    "R6_v5_thresholds_met": "Reconstructed performance must satisfy sensitivity >= 0.80, hard FNR <= 0.20, and specificity >= 0.95 before any empirical endpoint opening."
+  },
+  "allowed_prevalue_sources": [
+    "article_methods_and_results_text",
+    "supplementary_file_inventory_and_descriptions",
+    "repository_file_names_and_metadata",
+    "sampling_schedule_metadata",
+    "device_failure_and_missingness_metadata"
+  ],
+  "forbidden_until_reconstruction_pass": [
+    "focal_cross_role_statistics",
+    "candidate_specific_hard_invariant",
+    "soft_crosscheck",
+    "process_knockout",
+    "post_hoc_threshold_tuning",
+    "Level_A_q95_import_as_cross_role_tolerance",
+    "interpretation_of_unavailable_or_missing_as_F_false"
+  ],
+  "candidate_specific_reconstruction_targets": {
+    "CREMV3-007": "same-inflorescence overlapping sensor-camera versus continuous_or_scheduled_reference observations with effective-pollinator labels independent of fruit outcome",
+    "BELV3-012": "same-tree repeated_or_cross_observer budbreak/resource scoring across the full relevant window with explicit missing-versus-confirmed-absence states"
+  },
+  "terminal_states": [
+    "reconstruction_pass",
+    "calibration_stream_absent",
+    "calibration_stream_not_same_key",
+    "reference_depends_on_focal_outcome",
+    "failure_missingness_not_separable",
+    "performance_not_estimable",
+    "reconstructed_performance_below_threshold",
+    "source_unavailable"
+  ],
+  "unavailable_is_biological_negative": false,
+  "missing_is_biological_negative": false,
+  "retrieval_failure_is_biological_negative": false,
+  "zero_without_reconstruction_pass_is_biological_negative": false,
+  "focal_value_opening_authorized_now": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_at_protocol_freeze": 1
+}

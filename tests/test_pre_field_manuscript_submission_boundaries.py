@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-MANUSCRIPT = ROOT / "manuscript" / "PREFIELD_FLAGSHIP_V0_4.md"
+MANUSCRIPT = ROOT / "manuscript" / "PREFIELD_FLAGSHIP_V0_5.md"
 PITCH = ROOT / "manuscript" / "ECOLOGY_LETTERS_300WORD_PITCH_V0_5.md"
 PROPOSAL = ROOT / "manuscript" / "ECOLOGY_LETTERS_METHOD_PROPOSAL_V0_5.md"
 PROPOSAL_FIGURE = ROOT / "manuscript" / "figures" / "ecology_letters_method_proposal_figure_v0_2.svg"
@@ -70,12 +70,25 @@ def test_manuscript_keeps_level_c_focal_claims_closed():
 
 def test_manuscript_explicitly_positions_against_prior_work():
     manuscript = MANUSCRIPT.read_text(encoding="utf-8")
-    assert "Imperfect detection is not a new problem" in manuscript
+    assert "The ingredients of this problem are not new" in manuscript
+    assert "Chadwick et al. (2024)" in manuscript
+    assert "Latency, Identifiability, Effort and Scale" in manuscript
+    assert "observation-process identifiability" in manuscript
     assert "Getz et al. (2018)" in manuscript
     assert "MacKenzie et al. 2004" in manuscript
     assert "Rota et al. 2016" in manuscript
     assert "Weinstein & Graham 2017" in manuscript
     assert "prospectivity itself is not the novelty claim" in manuscript
+
+
+def test_manuscript_defines_specific_relation_endpoint_contract():
+    manuscript = MANUSCRIPT.read_text(encoding="utf-8")
+    assert "five-part **relation-endpoint contract**" in manuscript
+    assert "the biological relation to be tested" in manuscript
+    assert "the biological event or key space" in manuscript
+    assert "adapters mapping each role-specific answer" in manuscript
+    assert "answer-adequacy gates" in manuscript
+    assert "calibration/opening rule" in manuscript
 
 
 def test_manuscript_uses_unambiguous_benchmark_notation():

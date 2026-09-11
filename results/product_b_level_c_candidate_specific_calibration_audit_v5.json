@@ -1,0 +1,82 @@
+{
+  "result_version": "product_b_level_c_candidate_specific_calibration_audit_v5",
+  "result_state": "candidate_specific_calibration_unavailable_for_both_retained_candidates",
+  "protocol": "config/product_b_level_c_candidate_specific_calibration_protocol_v5.json",
+  "candidate_audits": {
+    "CREMV3-007": {
+      "system": "Cremastra appendiculata var. variabilis",
+      "calibration_source_metadata": [
+        "Shimada et al. 2026 Plant Species Biology DOI 10.1111/1442-1984.70048"
+      ],
+      "positive_detection_support": "strong: multi-year full-flowering-period sensor-camera monitoring records Bombus diversus queens carrying pollinia and links recorded visits to pollinia removal/fruit development",
+      "candidate_specific_detection_completeness_validation_located": false,
+      "continuous_recording_gold_standard_comparison_available_for_effective_visit_detection": false,
+      "known_positive_detection_sensitivity_estimable_without_focal_outcome_selection": false,
+      "known_negative_specificity_estimable_without_focal_outcome_selection": false,
+      "camera_failure_states_explicitly_exist": true,
+      "source_itself_notes_need_for_quantitative_validation_against_continuous_recording": true,
+      "C1_independent_calibration_stream": "fail",
+      "C2_known_state_support": "fail",
+      "C3_detection_performance": "not_evaluable",
+      "C4_window_coverage": "pass_for_deployment_but_not_detection_completeness",
+      "C5_failure_state_separation": "pass_design_only",
+      "C6_no_outcome_tuning": "pass",
+      "terminal_state": "calibration_unavailable",
+      "hard_negative_authorized": false,
+      "focal_value_opening_authorized": false,
+      "interpretation": "Positive effective-pollinator detections are biologically meaningful, but existing metadata do not support a calibrated probability of detecting the function when present. Zero sensor-camera detections therefore remain unresolved rather than F=false."
+    },
+    "BELV3-012": {
+      "system": "Belonocnema treatae / live-oak budbreak",
+      "calibration_source_metadata": [
+        "Hood et al. 2019 Dryad DOI 10.5061/dryad.82j677c",
+        "Hood et al. 2019 Evolution DOI 10.1111/evo.13683"
+      ],
+      "positive_detection_support": "strong: separate natural budbreak and adult-emergence datasets measure the two role streams",
+      "candidate_specific_budbreak_detection_validation_located": false,
+      "repeated_same_tree_cross_observer_validation_located": false,
+      "known_positive_detection_sensitivity_estimable_without_focal_emergence_selection": false,
+      "known_negative_specificity_estimable_without_focal_emergence_selection": false,
+      "missing_or_unobserved_budbreak_can_be_distinguished_from_true_resource_absence": false,
+      "C1_independent_calibration_stream": "fail",
+      "C2_known_state_support": "fail",
+      "C3_detection_performance": "not_evaluable",
+      "C4_window_coverage": "unresolved_for_hard_absence",
+      "C5_failure_state_separation": "pass_design_only",
+      "C6_no_outcome_tuning": "pass",
+      "terminal_state": "calibration_unavailable",
+      "hard_negative_authorized": false,
+      "focal_value_opening_authorized": false,
+      "interpretation": "Budbreak is a biologically appropriate resource signal and is separately measured, but the available metadata do not calibrate observational false negatives for the required resource state. An unobserved or missing budbreak state therefore remains unresolved rather than F=false."
+    }
+  },
+  "joint_decision": {
+    "candidates_passing_all_C1_C6": 0,
+    "hard_invariant_opening_authorized": false,
+    "soft_crosscheck_opening_authorized": false,
+    "process_knockout_authorized": false,
+    "new_candidate_search_authorized": false,
+    "candidate_replacement_authorized": false,
+    "threshold_relaxation_authorized": false,
+    "reuse_synthetic_v4_pass_as_candidate_specific_calibration_authorized": false,
+    "reason": "Both retained candidates lack prospective candidate-specific observation-process validation sufficient to identify F=false."
+  },
+  "next_identifiable_data_requirements": {
+    "CREMV3-007": [
+      "paired or overlapping continuous/scheduled recording covering the same flowers and opportunity windows as the sensor detector",
+      "predefined effective-pollination event labels independent of fruit outcome",
+      "known-positive detection sensitivity and false-negative estimate",
+      "explicit treatment of out-of-frame, knocked-over, malfunction, and incomplete-window states"
+    ],
+    "BELV3-012": [
+      "repeated within-tree budbreak/resource observations across the full dependent opportunity window",
+      "independent observer or repeat-assessment agreement for the threshold defining usable new tissue",
+      "known-positive sensitivity and false-negative estimate for that resource-state rule",
+      "explicit separation of missing visits/records from confirmed pre-budbreak resource absence"
+    ]
+  },
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_after_v5_audit": 1
+}

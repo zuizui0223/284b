@@ -1,0 +1,67 @@
+{
+  "protocol_version": "product_b_level_c_candidate_specific_calibration_protocol_v5",
+  "protocol_state": "frozen_before_candidate_specific_detection_calibration_or_focal_outcome_opening",
+  "scientific_target": "candidate_specific_validation_of_when_non_detection_can_identify_F_false",
+  "retained_candidates": ["CREMV3-007", "BELV3-012"],
+  "candidate_set_frozen": true,
+  "new_candidate_search_authorized": false,
+  "candidate_replacement_authorized": false,
+  "prior_v1_v2_system_rescue_authorized": false,
+  "hard_relation": "E(k)_implies_F(k)",
+  "calibration_principle": "Each candidate must independently validate the observation process that would convert a zero/non-detection into F(k)=false. Synthetic v4 qualification is necessary background but not sufficient empirical authorization.",
+  "candidate_specific_calibration": {
+    "CREMV3-007": {
+      "function_channel": "effective_pollinia_transfer_during_the_frozen_flowering_opportunity",
+      "calibration_target": "probability_of_detecting_at_least_one_effective_pollinia_transfer_event_when_function_is_present",
+      "required_validation_source": "independent calibration, duplication, manual audit, or known-positive observation subset not selected using focal fruit outcome",
+      "minimum_detection_sensitivity": 0.80,
+      "maximum_hard_false_negative_rate": 0.20,
+      "minimum_specificity": 0.95,
+      "coverage_must_span_declared_focal_window": true,
+      "zero_camera_detections_without_validation_is_F_false": false
+    },
+    "BELV3-012": {
+      "function_channel": "live_oak_budbreak_or_equivalent_emergent_host_resource_during_the_frozen_dependent_window",
+      "calibration_target": "probability_of_detecting_the_required_budbreak_resource_state_when_it_is_present",
+      "required_validation_source": "independent repeated budbreak assessment, cross-observer validation, or known-positive resource subset not selected using focal emergence outcome",
+      "minimum_detection_sensitivity": 0.80,
+      "maximum_hard_false_negative_rate": 0.20,
+      "minimum_specificity": 0.95,
+      "coverage_must_span_declared_focal_window": true,
+      "missing_or_unobserved_budbreak_without_validation_is_F_false": false
+    }
+  },
+  "calibration_gates": {
+    "C1_independent_calibration_stream": "Calibration observations must be independent of the focal event outcome and may not be selected using the desired relation result.",
+    "C2_known_state_support": "Calibration must contain externally defensible known-positive and, where available, known-negative or controlled-null states.",
+    "C3_detection_performance": "Candidate-specific sensitivity, hard false-negative rate, and specificity must meet the frozen thresholds.",
+    "C4_window_coverage": "The validated detector/observer process must cover the same frozen event opportunity in space and time.",
+    "C5_failure_state_separation": "Missingness, device/observer failure, ambiguous state, and retrieval failure must remain unresolved and cannot be recoded as F=false.",
+    "C6_no_outcome_tuning": "Thresholds, detector rules, and coverage rules may not be changed after focal X/Y outcomes or cross-role relation statistics are inspected."
+  },
+  "joint_authorization_rule": "A candidate may proceed to empirical hard-endpoint opening only if all C1-C6 gates pass for that candidate. Failure or unavailability for one candidate does not imply biology and does not alter the other candidate's thresholds.",
+  "forbidden_before_candidate_calibration_freeze": [
+    "candidate_specific_focal_event_outcomes",
+    "candidate_specific_cross_role_relation_statistics",
+    "candidate_specific_zero_pattern_used_to_choose_detection_threshold",
+    "Level_A_q95_import_as_cross_role_tolerance"
+  ],
+  "terminal_nonbiological_states": [
+    "calibration_unavailable",
+    "calibration_incomplete",
+    "insufficient_detection_sensitivity",
+    "excess_hard_false_negative_rate",
+    "insufficient_specificity",
+    "insufficient_window_coverage",
+    "observer_or_device_failure",
+    "retrieval_failure",
+    "ambiguous_state"
+  ],
+  "hard_invariant_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_at_protocol_freeze": 1
+}

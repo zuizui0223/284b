@@ -31,6 +31,6 @@ Use the exact text in `manuscript/ECOLOGY_LETTERS_300WORD_PITCH_V0_6.md`.
 
 ## Proposed attachment
 
-`manuscript/figures/ecology_letters_method_proposal_figure_v0_4.svg`
+`manuscript/figures/ecology_letters_method_proposal_figure_v0_5.svg`
 
 The figure contains no focal Level-C biological values.

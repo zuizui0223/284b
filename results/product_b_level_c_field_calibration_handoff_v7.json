@@ -1,0 +1,34 @@
+{
+  "result_version": "product_b_level_c_field_calibration_handoff_v7",
+  "result_state": "prospective_field_calibration_ready_not_yet_executed",
+  "retained_candidates": ["CREMV3-007", "BELV3-012"],
+  "field_calibration_execution_required": true,
+  "current_candidate_states": {
+    "CREMV3-007": "awaiting_same_flower_gold_standard_detection_calibration",
+    "BELV3-012": "awaiting_same_tree_repeat_observer_resource_calibration"
+  },
+  "minimum_clean_design": {
+    "gold_positive_units": 30,
+    "gold_negative_units": 60,
+    "candidate_specific_thresholds": {
+      "sensitivity_min": 0.80,
+      "false_negative_rate_max": 0.20,
+      "specificity_min": 0.95
+    }
+  },
+  "opening_policy": {
+    "candidate_specific_opening": true,
+    "joint_pass_required": false,
+    "opening_before_calibration_pass": false,
+    "failure_or_unavailability_counts_as_biological_negative": false,
+    "new_candidate_search_authorized": false
+  },
+  "scientific_interpretation": "Level C has reached a true external-data boundary. Existing literature, metadata, supplementary material, and raw archives are insufficient to identify the negative functional state for the two retained systems. The next admissible information is prospective calibration measurement, not additional candidate hunting or reinterpretation of non-detection.",
+  "hard_invariant_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_after_v7_handoff": 1
+}

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+<rect width="1200" height="900" fill="white"/>
+<style>text{font-family:Arial,sans-serif;fill:#111}.h{font-size:24px;font-weight:bold}.sh{font-size:18px;font-weight:bold}.b{font-size:14px}.s{font-size:12px}.xs{font-size:10.5px}.box{fill:white;stroke:#333;stroke-width:1.4}.soft{fill:#f7f7f7;stroke:#777;stroke-width:1.1}.pass{fill:white;stroke:#333;stroke-width:1.4}.stop{fill:#f7f7f7;stroke:#111;stroke-width:2}.arrow{stroke:#222;stroke-width:1.7;fill:none;marker-end:url(#m)}.dash{stroke:#777;stroke-width:1.3;stroke-dasharray:5 4;fill:none;marker-end:url(#m)}</style>
+<defs><marker id="m" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#222"/></marker></defs>
+<text x="45" y="40" class="h">Figure 4. Two real systems reach the same endpoint-openability boundary</text>
+<text x="45" y="68" class="b">The figure audits whether a hard endpoint may be opened; it does not reveal a Level-C biological outcome.</text>
+
+<text x="45" y="112" class="sh">A  Shared prospective gate sequence</text>
+<rect x="50" y="132" width="1100" height="105" rx="10" class="soft"/>
+<rect x="75" y="158" width="140" height="52" rx="6" class="box"/><text x="145" y="180" class="b" text-anchor="middle">R</text><text x="145" y="199" class="xs" text-anchor="middle">external relation evidence</text>
+<line x1="215" y1="184" x2="245" y2="184" class="arrow"/>
+<rect x="253" y="158" width="140" height="52" rx="6" class="box"/><text x="323" y="180" class="b" text-anchor="middle">X</text><text x="323" y="199" class="xs" text-anchor="middle">dependent-event answer</text>
+<line x1="393" y1="184" x2="423" y2="184" class="arrow"/>
+<rect x="431" y="158" width="140" height="52" rx="6" class="box"/><text x="501" y="180" class="b" text-anchor="middle">Y</text><text x="501" y="199" class="xs" text-anchor="middle">required-function answer</text>
+<line x1="571" y1="184" x2="601" y2="184" class="arrow"/>
+<rect x="609" y="158" width="150" height="52" rx="6" class="box"/><text x="684" y="180" class="b" text-anchor="middle">common key</text><text x="684" y="199" class="xs" text-anchor="middle">same opportunity</text>
+<line x1="759" y1="184" x2="789" y2="184" class="arrow"/>
+<rect x="797" y="158" width="150" height="52" rx="6" class="box"/><text x="872" y="180" class="b" text-anchor="middle">provenance</text><text x="872" y="199" class="xs" text-anchor="middle">R / X / Y separated</text>
+<line x1="947" y1="184" x2="977" y2="184" class="arrow"/>
+<rect x="985" y="150" width="140" height="68" rx="6" class="stop"/><text x="1055" y="176" class="b" text-anchor="middle">negative-state</text><text x="1055" y="195" class="b" text-anchor="middle">calibration</text><text x="1055" y="211" class="xs" text-anchor="middle">required before F=false</text>
+
+<text x="45" y="292" class="sh">B  Cremastra appendiculata var. variabilis — pollination-function lane</text>
+<rect x="50" y="312" width="1100" height="205" rx="10" class="soft"/>
+<rect x="80" y="346" width="180" height="86" rx="7" class="pass"/><text x="170" y="371" class="b" text-anchor="middle">R: breeding-system</text><text x="170" y="392" class="s" text-anchor="middle">external experimental evidence</text><text x="170" y="412" class="xs" text-anchor="middle">separate from monitoring stream</text>
+<line x1="260" y1="389" x2="305" y2="389" class="arrow"/>
+<rect x="315" y="346" width="180" height="86" rx="7" class="pass"/><text x="405" y="371" class="b" text-anchor="middle">X: final fruit count</text><text x="405" y="392" class="s" text-anchor="middle">same monitored inflorescences</text><text x="405" y="412" class="xs" text-anchor="middle">direct dependent-event estimand</text>
+<line x1="495" y1="389" x2="540" y2="389" class="arrow"/>
+<rect x="550" y="346" width="190" height="86" rx="7" class="pass"/><text x="645" y="371" class="b" text-anchor="middle">Y: pollinia-carrying</text><text x="645" y="392" class="s" text-anchor="middle">flower contact on camera</text><text x="645" y="412" class="xs" text-anchor="middle">direct positive function observation</text>
+<line x1="740" y1="389" x2="785" y2="389" class="arrow"/>
+<rect x="795" y="336" width="305" height="106" rx="7" class="stop"/><text x="947" y="363" class="sh" text-anchor="middle">STOP: functional absence uncalibrated</text><text x="947" y="389" class="s" text-anchor="middle">camera non-detection ≠ absence of effective pollination</text><text x="947" y="410" class="s" text-anchor="middle">no continuous/scheduled gold-standard comparison</text><text x="947" y="430" class="xs" text-anchor="middle">new data: overlapping same-flower reference observation + failure accounting</text>
+<text x="600" y="483" class="s" text-anchor="middle">Positive detections remain biologically meaningful; zero detections remain unresolved. Hard endpoint opening = false.</text>
+
+<text x="45" y="570" class="sh">C  Belonocnema treatae / live-oak — resource-function lane</text>
+<rect x="50" y="590" width="1100" height="205" rx="10" class="soft"/>
+<rect x="80" y="624" width="180" height="86" rx="7" class="pass"/><text x="170" y="649" class="b" text-anchor="middle">R: host specificity</text><text x="170" y="670" class="s" text-anchor="middle">independent relation evidence</text><text x="170" y="690" class="xs" text-anchor="middle">separate from phenology files</text>
+<line x1="260" y1="667" x2="305" y2="667" class="arrow"/>
+<rect x="315" y="624" width="180" height="86" rx="7" class="pass"/><text x="405" y="649" class="b" text-anchor="middle">X: adult emergence</text><text x="405" y="670" class="s" text-anchor="middle">natural emergence stream</text><text x="405" y="690" class="xs" text-anchor="middle">direct dependent-event estimand</text>
+<line x1="495" y1="667" x2="540" y2="667" class="arrow"/>
+<rect x="550" y="624" width="190" height="86" rx="7" class="pass"/><text x="645" y="649" class="b" text-anchor="middle">Y: live-oak budbreak</text><text x="645" y="670" class="s" text-anchor="middle">natural budbreak stream</text><text x="645" y="690" class="xs" text-anchor="middle">direct required-resource signal</text>
+<line x1="740" y1="667" x2="785" y2="667" class="arrow"/>
+<rect x="795" y="614" width="305" height="106" rx="7" class="stop"/><text x="947" y="641" class="sh" text-anchor="middle">STOP: usable-resource absence uncalibrated</text><text x="947" y="667" class="s" text-anchor="middle">unrecorded budbreak ≠ confirmed resource absence</text><text x="947" y="688" class="s" text-anchor="middle">no repeated/cross-observer detection validation</text><text x="947" y="708" class="xs" text-anchor="middle">new data: repeated within-tree scoring + missing/absence separation</text>
+<text x="600" y="761" class="s" text-anchor="middle">Separate emergence and budbreak answers exist, but the negative resource state is not identified. Hard endpoint opening = false.</text>
+
+<rect x="180" y="830" width="840" height="42" rx="7" class="box"/>
+<text x="600" y="856" class="sh" text-anchor="middle">Same measurement boundary in two biological systems → new calibration measurement is required; no focal biological outcome is opened.</text>
+</svg>

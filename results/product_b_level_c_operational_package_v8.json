@@ -1,0 +1,27 @@
+{
+  "result_version": "product_b_level_c_operational_package_v8",
+  "result_state": "field_calibration_operational_package_frozen_empirical_endpoint_closed",
+  "candidate_ids": ["CREMV3-007", "BELV3-012"],
+  "operational_components": [
+    "field calibration CSV template",
+    "candidate-specific evaluator",
+    "QC and missingness guard",
+    "candidate-specific opening flag",
+    "operational workflow documentation"
+  ],
+  "field_calibration_executed": false,
+  "candidate_calibration_receipts_present": false,
+  "endpoint_opening_authorized_now": false,
+  "calibration_pass_would_count_as_empirical_evidence": false,
+  "calibration_pass_would_count_as_empirical_conclusion": false,
+  "calibration_pass_would_increment_empirical_ledger": false,
+  "endpoint_opening_requires_separate_frozen_stage": true,
+  "focal_cross_role_values_opened": false,
+  "hard_invariant_opened": false,
+  "soft_crosscheck_opened": false,
+  "process_knockout_opened": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_after_v8": 1
+}

@@ -1,0 +1,126 @@
+{
+  "analytic_not_monte_carlo": true,
+  "benchmark_version": "pre_field_identifiability_benchmark_v0_1",
+  "calibration_fail_count": 4428,
+  "calibration_pass_count": 4320,
+  "equal_weight_grid_descriptives": {
+    "gated_false_violation_rate_median": 0.0,
+    "naive_false_violation_rate_median": 0.525
+  },
+  "focal_level_c_values_read": false,
+  "grid": {
+    "complete_window_fraction": [0.5, 0.8, 1.0],
+    "event_detection_sensitivity": [0.5, 0.8, 0.95],
+    "event_probability": [0.05, 0.2, 0.5],
+    "failure_rate": [0.0, 0.05, 0.2],
+    "missingness": [0.0, 0.1, 0.3],
+    "opportunities": [1, 5, 20],
+    "specificity": [0.8, 0.95, 0.99],
+    "violation_prevalence": [0.05, 0.1, 0.2, 0.5]
+  },
+  "interpretation_boundary": "Synthetic inferential benchmark only. Results do not estimate Cremastra or Belonocnema detection performance, do not authorize Level-C endpoint opening, and do not increment the empirical ledger.",
+  "scenario_count": 8748,
+  "structural_results": {
+    "gated_hard_calls_in_failing_scenarios": 0.0,
+    "max_abs_error_fpr_identity_naive_minus_gated_equals_invalid_mass": 1.1102230246251565e-16,
+    "max_abs_error_tpr_identity_naive_minus_gated_equals_invalid_mass": 1.1102230246251565e-16,
+    "max_gated_false_violation_rate_among_passing_scenarios": 0.19999999999999996,
+    "max_naive_false_violation_rate_among_passing_scenarios": 0.776
+  },
+  "thresholds": {
+    "key_sensitivity_min": 0.8,
+    "specificity_min": 0.95
+  },
+  "representative_scenarios": {
+    "high_quality_dense": {
+      "key_sensitivity": 0.9999984232909376,
+      "valid_key_fraction": 1.0,
+      "calibration_pass": true,
+      "naive_false_violation_rate": 1.5767090624230207e-06,
+      "gated_false_violation_rate": 1.5767090624230207e-06,
+      "naive_true_violation_sensitivity": 0.99,
+      "gated_true_violation_sensitivity": 0.99,
+      "gated_unresolved_fraction": 0.0
+    },
+    "threshold_sensitivity": {
+      "key_sensitivity": 0.8000000000000004,
+      "valid_key_fraction": 1.0,
+      "calibration_pass": true,
+      "naive_false_violation_rate": 0.19999999999999962,
+      "gated_false_violation_rate": 0.19999999999999962,
+      "naive_true_violation_sensitivity": 0.99,
+      "gated_true_violation_sensitivity": 0.99,
+      "gated_unresolved_fraction": 0.0
+    },
+    "subthreshold_sensitivity": {
+      "key_sensitivity": 0.5,
+      "valid_key_fraction": 1.0,
+      "calibration_pass": false,
+      "naive_false_violation_rate": 0.5,
+      "gated_false_violation_rate": 0.0,
+      "naive_true_violation_sensitivity": 0.99,
+      "gated_true_violation_sensitivity": 0.0,
+      "gated_unresolved_fraction": 0.549
+    },
+    "sparse_event": {
+      "key_sensitivity": 0.8161438755851972,
+      "valid_key_fraction": 1.0,
+      "calibration_pass": true,
+      "naive_false_violation_rate": 0.1838561244148028,
+      "gated_false_violation_rate": 0.1838561244148028,
+      "naive_true_violation_sensitivity": 0.99,
+      "gated_true_violation_sensitivity": 0.99,
+      "gated_unresolved_fraction": 0.0
+    },
+    "high_missingness": {
+      "key_sensitivity": 0.9999984232909376,
+      "valid_key_fraction": 0.7,
+      "calibration_pass": true,
+      "naive_false_violation_rate": 0.3000011036963437,
+      "gated_false_violation_rate": 1.1036963436961144e-06,
+      "naive_true_violation_sensitivity": 0.993,
+      "gated_true_violation_sensitivity": 0.693,
+      "gated_unresolved_fraction": 0.3000000000000001
+    },
+    "device_failure": {
+      "key_sensitivity": 0.9999984232909376,
+      "valid_key_fraction": 0.8,
+      "calibration_pass": true,
+      "naive_false_violation_rate": 0.20000126136724994,
+      "gated_false_violation_rate": 1.2613672499384166e-06,
+      "naive_true_violation_sensitivity": 0.992,
+      "gated_true_violation_sensitivity": 0.792,
+      "gated_unresolved_fraction": 0.19999999999999996
+    },
+    "incomplete_window": {
+      "key_sensitivity": 0.9999984232909376,
+      "valid_key_fraction": 0.5,
+      "calibration_pass": true,
+      "naive_false_violation_rate": 0.5000007883545312,
+      "gated_false_violation_rate": 7.883545312115103e-07,
+      "naive_true_violation_sensitivity": 0.995,
+      "gated_true_violation_sensitivity": 0.495,
+      "gated_unresolved_fraction": 0.5
+    },
+    "mixed_qualified": {
+      "key_sensitivity": 0.8653439695383153,
+      "valid_key_fraction": 0.684,
+      "calibration_pass": true,
+      "naive_false_violation_rate": 0.4081047248357923,
+      "gated_false_violation_rate": 0.09210472483579236,
+      "naive_true_violation_sensitivity": 0.9658,
+      "gated_true_violation_sensitivity": 0.6498,
+      "gated_unresolved_fraction": 0.316
+    },
+    "subthreshold_specificity": {
+      "key_sensitivity": 0.9999984232909376,
+      "valid_key_fraction": 1.0,
+      "calibration_pass": false,
+      "naive_false_violation_rate": 1.5767090624230207e-06,
+      "gated_false_violation_rate": 0.0,
+      "naive_true_violation_sensitivity": 0.8,
+      "gated_true_violation_sensitivity": 0.0,
+      "gated_unresolved_fraction": 0.08000141903815619
+    }
+  }
+}

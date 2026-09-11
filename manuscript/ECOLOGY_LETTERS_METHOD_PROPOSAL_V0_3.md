@@ -1,4 +1,4 @@
-# Ecology Letters — unsolicited Method proposal package v0.3
+# Ecology Letters — unsolicited Method proposal package v0.4
 
 ## Working title
 
@@ -14,7 +14,7 @@ Short alternatives:
 
 **Method**
 
-The proposal should present a transferable inferential technique, not a report on the internal development history of 284b and not a taxon-specific biological study.
+The proposal presents a transferable inferential technique, not an internal development history of 284b and not a taxon-specific biological study.
 
 ## Proposal text (271 words)
 
@@ -26,9 +26,15 @@ For hard cross-role dependency `E(k) -> F(k)`, the framework requires the negati
 
 Prospective screens then identified two fresh ecological systems with independently separated relation, dependent-event and required-function streams, yet both stopped before focal biological opening because functional absence was not independently calibrated. The method therefore links external validation, relation-specific comparison and detection identifiability into an auditable stopping rule: when the falsifying state is not identified by the observation design, the next scientific step is new measurement rather than stronger interpretation of the same data.
 
-## Why this is not occupancy modelling
+## Why this is not occupancy modelling, generic model adequacy, or preregistration
 
-The proposal should explicitly concede that imperfect detection, false absence, multispecies occupancy and missed species interactions already have mature literatures. The new object is the **prospective relation endpoint**: the method decides what relation independently constructed answers are permitted to test and whether the negative state required to contradict a hard biological dependency is identifiable enough for that endpoint to be opened.
+The proposal should explicitly concede three antecedent literatures.
+
+1. Imperfect-detection and occupancy methods already separate ecological state from observation error.
+2. Ecological model-adequacy work already argues that data determinacy, sensitivity and validity must be audited; Getz et al. (2018, *Ecology Letters*) is a close conceptual ancestor.
+3. Preregistration and Registered Reports already establish prospective outcome-blind design in ecology.
+
+The new object is the **prospective relation endpoint**: what relation independently constructed answers are permitted to test, how role-specific answers are mapped to a common biological event, and whether the negative state required to contradict a hard dependency is identifiable enough for that endpoint to be opened. Prospectivity is an enforcement mechanism, not the novelty claim itself.
 
 ## Why this fits the Method criteria
 
@@ -45,15 +51,19 @@ The transferable technique consists of:
 
 ### Statistical performance
 
-The exact benchmark gives a closed-form performance result for a zero-collapsing comparator versus the identifiability gate. For a qualified process with valid-key mass `v`,
+The exact benchmark gives a closed-form performance result for a zero-collapsing comparator versus the identifiability gate. With `a` denoting valid-key fraction,
 
-`FPR_zero - FPR_gated = 1-v`
+`FPR_zero - FPR_gated = 1-a`
 
 and
 
-`TPR_zero - TPR_gated = 1-v`.
+`TPR_zero - TPR_gated = 1-a`.
 
-The result is checked across 8,748 exact parameter combinations. A separate outcome-blind audit quantifies the operating characteristics of the proposed calibration gate.
+The result is checked across 8,748 exact parameter combinations. A second analytic result shows why calibration is an opening condition rather than a posterior guarantee: with true violation prevalence `pi`, key sensitivity `q` and specificity `sp`, the false-discovery fraction among gated calls is
+
+`FDF = (1-pi)(1-q) / [(1-pi)(1-q) + pi sp]`.
+
+A separate outcome-blind audit quantifies the operating characteristics of the proposed calibration gate.
 
 ### Open code
 
@@ -69,17 +79,21 @@ The endpoint architecture applies to pollination, host dependence, trophic inter
 
 ## Quantitative figure to attach with the proposal
 
-Use one compact conceptual/performance figure with three elements:
+Use:
 
-1. the relation ladder from same-target reproducibility to event-to-function dependency;
-2. the exact identity `zero-collapsing minus gated = invalid-key mass (1-v)`;
-3. a small empirical inset: `283/283` eligible Level-A held-out cells within frozen ceilings; `5` unresolved.
+`manuscript/figures/ecology_letters_method_proposal_figure_v0_1.svg`
 
-This figure makes the novelty, performance result and case study visible before the editor reads the full manuscript.
+It combines:
+
+1. the relation distinction between same-target reproducibility and event-to-function dependency;
+2. the fresh Level-A empirical anchor (`283/283` eligible openings inside frozen ceilings; `5` unresolved);
+3. the exact invalid-state identity for hard dependency testing.
+
+No focal Level-C biological values appear.
 
 ## Author-qualification paragraph for the proposal email
 
-Final wording depends on the author list. Current lead-author wording:
+Final wording depends on the frozen author list. Current lead-author wording supported by the project is:
 
 > The lead author works across empirical pollination ecology, species-distribution modelling and reproducible computational inference. The proposed method emerged from a version-controlled prospective-validation programme spanning independent-source ecological reconstruction, explicit falsification boundaries and cross-role biological dependency.
 
@@ -87,4 +101,8 @@ Add one concise sentence per coauthor only if it establishes directly relevant e
 
 ## Editorial-risk sentence
 
-If the editor views the contribution as too conceptual for Method, invite advice on whether the same quantitative framework would be better considered as a Perspective. Do not submit it as a Perspective without editorial guidance: the current package is deliberately built to satisfy the Method requirements for executable technique, performance characterization, code and case study.
+If the editor views the contribution as too conceptual for Method, invite advice on whether the same quantitative framework would be better considered as a Perspective. Do not submit it as a Perspective without editorial guidance: the package is deliberately built to satisfy Method requirements for an executable technique, performance characterization, open code and a case study.
+
+## Proposal-readiness boundary
+
+The proposal does **not** require Level-C field data. Before sending, close only the remaining presentation tasks: notation consistency, final author qualifications, and visual QA of the proposal figure. New focal Level-C data should not be inserted into this pre-field proposal state.

@@ -1,0 +1,34 @@
+{
+  "result_version": "product_b_level_c_field_calibration_design_validation_v7",
+  "design_only": true,
+  "no_focal_values_opened": true,
+  "confidence_rule": "one_sided_95_percent_exact_binomial_lower_bound_for_all-success_design",
+  "formula_when_x_equals_n": "lower_bound = 0.05^(1/n)",
+  "gold_positive_design": {
+    "n": 30,
+    "required_detected": 30,
+    "observed_rate_if_passed": 1.0,
+    "one_sided_95pct_lower_bound": 0.9049661471446958,
+    "required_sensitivity_floor": 0.8,
+    "passes_floor": true
+  },
+  "gold_negative_design": {
+    "n": 60,
+    "required_correct_negative": 60,
+    "observed_rate_if_passed": 1.0,
+    "one_sided_95pct_lower_bound": 0.9512970866899025,
+    "required_specificity_floor": 0.95,
+    "passes_floor": true
+  },
+  "failure_policy": {
+    "any_failure_does_not_automatically_fail_forever": true,
+    "but_posthoc_sample_size_extension_to_rescue_threshold_is_forbidden": true,
+    "predeclared_exact_interval_must_be_used_if_failures_occur": true,
+    "if_threshold_not_met_at_predeclared_end_state": "calibration_failed_or_unresolved_not_biological_negative"
+  },
+  "interpretation": "The minimum clean design is deliberately conservative: 30/30 gold-positive detection and 60/60 gold-negative classification are sufficient to clear the frozen floors with one-sided 95% exact lower bounds. This validates the field-calibration design only and does not validate either biological candidate.",
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_after_design_validation": 1
+}

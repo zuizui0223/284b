@@ -1,0 +1,72 @@
+{
+  "protocol_version": "product_b_level_c_field_calibration_protocol_v7",
+  "protocol_state": "frozen_before_any_v7_field_calibration_or_focal_endpoint_opening",
+  "scientific_target": "candidate_specific_detection_calibration_for_functional_absence_identifiability",
+  "retained_candidates": ["CREMV3-007", "BELV3-012"],
+  "new_candidate_search_authorized": false,
+  "candidate_replacement_authorized": false,
+  "prior_system_rescue_authorized": false,
+  "focal_cross_role_endpoint_opening_authorized_now": false,
+  "calibration_targets": {
+    "sensitivity_min": 0.80,
+    "hard_false_negative_rate_max": 0.20,
+    "specificity_min": 0.95,
+    "confidence_rule": "one_sided_95_percent_exact_or_more_conservative",
+    "minimum_gold_positive_units_if_all_detected": 30,
+    "minimum_gold_negative_units_if_all_correctly_negative": 60,
+    "adaptive_sample_size_rescue_after_inspecting_calibration_failures": false
+  },
+  "common_rules": {
+    "gold_standard_must_be_observation_based_and_independent_of_focal_biological_outcome": true,
+    "same_operational_unit_and_time_window_required": true,
+    "device_or_observer_failure_must_be_explicitly_separated_from_negative": true,
+    "missing_is_negative": false,
+    "unavailable_is_negative": false,
+    "zero_without_calibration_pass_is_negative": false,
+    "fruit_or_emergence_outcome_may_define_gold_standard": false,
+    "level_a_q95_import_authorized": false,
+    "threshold_tuning_after_focal_outcome_access_authorized": false
+  },
+  "CREMV3_007": {
+    "calibration_unit": "flower_window",
+    "candidate_observer": "sensor_camera_schedule_used_for_function_answer",
+    "gold_standard": "overlapping_continuous_video_or_direct_observation_covering_the_same_flower_window",
+    "gold_positive_definition": "at_least_one_effective_pollinia_transfer_event_confirmed_by_gold_standard_without_using_fruit_outcome",
+    "gold_negative_definition": "complete_gold_standard_coverage_confirms_no_effective_pollinia_transfer_event_in_the_window",
+    "required_failure_logging": ["camera_offline", "storage_failure", "occlusion", "flower_out_of_frame", "gold_standard_gap"],
+    "primary_estimates": ["sensitivity", "false_negative_rate", "specificity"],
+    "minimum_design": {
+      "gold_positive_units": 30,
+      "gold_negative_units": 60,
+      "full_window_overlap_required": true,
+      "same_flower_overlap_required": true
+    },
+    "unlock_rule": "all_common_rules_and_candidate_thresholds_pass_before_any_Cremastra_cross_role_endpoint_is_opened"
+  },
+  "BELV3_012": {
+    "calibration_unit": "tree_day_resource_state",
+    "candidate_observer": "field_budbreak_scoring_stream_used_for_function_answer",
+    "gold_standard": "independent_same_tree_same_day_repeat_scoring_with_adjudicated_consensus_and_explicit_usable_resource_threshold",
+    "gold_positive_definition": "gold_standard_confirms_usable_new_leaf_or_bud_resource_present",
+    "gold_negative_definition": "full_same_tree_same_day_gold_standard confirms usable resource absent",
+    "required_failure_logging": ["tree_not_found", "observer_missing", "canopy_not_visible", "date_gap", "adjudication_unresolved"],
+    "primary_estimates": ["sensitivity", "false_negative_rate", "specificity"],
+    "minimum_design": {
+      "gold_positive_units": 30,
+      "gold_negative_units": 60,
+      "independent_duplicate_observers_or_equivalent_repeat_protocol_required": true,
+      "same_tree_same_day_required": true
+    },
+    "unlock_rule": "all_common_rules_and_candidate_thresholds_pass_before_any_Belonocnema_cross_role_endpoint_is_opened"
+  },
+  "joint_opening_rule": {
+    "require_both_candidates_to_pass_before_any_empirical_opening": false,
+    "candidate_specific_opening_allowed": true,
+    "failed_or_unavailable_candidate_remains_nonbiological_unresolved": true,
+    "one_candidate_pass_does_not_rescue_or_reclassify_the_other": true
+  },
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_at_v7_freeze": 1
+}

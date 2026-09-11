@@ -39,7 +39,8 @@ def row(cid, gold, observed, **flags):
         "observer_state": observed,
         "notes": "",
     })
-    for k, v in flags.items(): r[k] = "true" if v else "false"
+    for k, v in flags.items():
+        r[k] = "true" if v else "false"
     return r
 
 
@@ -55,7 +56,19 @@ class LevelCOperationalPackageV8Tests(unittest.TestCase):
         self.assertEqual(c["empirical_ledger_increment"], 0)
         self.assertEqual(c["global_284b_empirical_ledger_at_v8_freeze"], 1)
 
-    def test_clean_30_60_pass_authorizes_opening(self):
+    def test_exact_one_sided_bounds_match_closed_forms_for_all_successes(self):
+        self.assertAlmostEqual(
+            MOD.exact_one_sided_lower_bound(30, 30),
+            0.05 ** (1 / 30),
+            places=12,
+        )
+        self.assertAlmostEqual(
+            MOD.exact_one_sided_lower_bound(60, 60),
+            0.05 ** (1 / 60),
+            places=12,
+        )
+
+    def test_minimum_clean_design_passes_and_reports_exact_method(self):
         rows = [row("CREMV3-007", "positive", "positive") for _ in range(30)]
         rows += [row("CREMV3-007", "negative", "negative") for _ in range(60)]
         p = write_rows(rows)
@@ -63,6 +76,26 @@ class LevelCOperationalPackageV8Tests(unittest.TestCase):
         self.assertTrue(res["opening_authorized"])
         self.assertEqual(res["state"], "calibration_pass")
         self.assertEqual(res["empirical_ledger_increment"], 0)
+        self.assertEqual(
+            res["confidence_method"],
+            "exact_clopper_pearson_one_sided_95_percent",
+        )
+
+    def test_28_of_30_positive_is_minimum_sensitivity_pass_at_minimum_n(self):
+        rows = [row("CREMV3-007", "positive", "positive") for _ in range(28)]
+        rows += [row("CREMV3-007", "positive", "negative") for _ in range(2)]
+        rows += [row("CREMV3-007", "negative", "negative") for _ in range(60)]
+        p = write_rows(rows)
+        res = MOD.evaluate(p, "CREMV3-007")
+        self.assertTrue(res["sensitivity_pass"])
+        self.assertGreaterEqual(res["one_sided_95_sensitivity_lower"], 0.80)
+
+        rows = [row("CREMV3-007", "positive", "positive") for _ in range(27)]
+        rows += [row("CREMV3-007", "positive", "negative") for _ in range(3)]
+        rows += [row("CREMV3-007", "negative", "negative") for _ in range(60)]
+        p = write_rows(rows)
+        res = MOD.evaluate(p, "CREMV3-007")
+        self.assertFalse(res["sensitivity_pass"])
 
     def test_under_minimum_counts_do_not_open(self):
         rows = [row("BELV3-012", "positive", "positive") for _ in range(29)]

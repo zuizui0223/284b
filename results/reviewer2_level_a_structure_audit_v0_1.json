@@ -1,0 +1,51 @@
+{
+  "audit_version": "reviewer2_level_a_structure_audit_v0_1",
+  "source_artifacts": {
+    "reference_artifact_id": 10137248940,
+    "heldout_artifact_id": 10137399646
+  },
+  "heldout_design": {
+    "independent_heldout_taxa": 12,
+    "prespecified_cells": 288,
+    "evaluable_cells": 283,
+    "unresolved_cells": 5,
+    "evaluable_cells_per_taxon_min": 22,
+    "evaluable_cells_per_taxon_max": 24,
+    "taxa_with_any_ceiling_exceedance": 0,
+    "taxa_without_any_ceiling_exceedance": 12
+  },
+  "cell_level_margin_diagnostics": {
+    "cells_with_margin_le_0_005": 1,
+    "cells_with_margin_le_0_01": 1,
+    "cells_with_margin_le_0_025": 1,
+    "cells_with_margin_le_0_05": 6,
+    "cells_with_margin_le_0_10": 22,
+    "closest_margin": 0.0045996075407875,
+    "closest_taxon": "Nothofagus betuloides"
+  },
+  "taxon_level_max_observed_to_ceiling_ratio": {
+    "Nothofagus betuloides": 0.988232,
+    "Nothofagus antarctica": 0.915264,
+    "Eucalyptus delegatensis": 0.894522,
+    "Eucalyptus globulus": 0.882378,
+    "Abies lasiocarpa": 0.865330,
+    "Laguncularia racemosa": 0.751287,
+    "Avicennia marina": 0.646847,
+    "Encelia farinosa": 0.643325,
+    "Atriplex canescens": 0.636188,
+    "Artemisia tridentata": 0.549924,
+    "Larix laricina": 0.540132,
+    "Avicennia germinans": 0.508772
+  },
+  "reference_calibration": {
+    "reference_cells": 24,
+    "distinct_successor_taxa_per_cell_min": 34,
+    "distinct_successor_taxa_per_cell_max": 47,
+    "quantile": 0.95,
+    "quantile_method": "nearest_rank",
+    "interpretation": "prospectively frozen empirical source-discordance envelope; not a nominal 95% predictive interval and not an alpha=0.05 hypothesis test"
+  },
+  "reviewer_safe_interpretation": "The independent held-out biological units are 12 taxa. The 283 opened values are repeated cell-level diagnostics across accessible-area and procedure settings and must not be treated as 283 independent replicates or used in a binomial success-probability argument.",
+  "focal_level_c_values_read": false,
+  "empirical_ledger_increment": 0
+}

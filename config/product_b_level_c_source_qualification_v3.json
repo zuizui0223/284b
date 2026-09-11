@@ -1,0 +1,44 @@
+{
+  "contract_version": "product_b_level_c_source_qualification_v3",
+  "contract_state": "frozen_after_registry_hard_stop_before_any_qualified_candidate_value_opening",
+  "candidate_ids": ["CREMV3-007", "BELV3-012"],
+  "apply_same_contract_to_all_candidates": true,
+  "qualification_checks": {
+    "Q1_source_materializable": "X and Y source objects must be retrievable as auditable data or exact published observation tables rather than only narrative conclusions",
+    "Q2_common_key_materializable": "X and Y must expose a joinable predeclared site/population and event-time key without inferring identity from broad geography",
+    "Q3_event_estimand_materializable": "X must directly encode the declared event-side state or outcome",
+    "Q4_function_estimand_materializable": "Y must directly encode the declared biological function or a prospectively justified sufficient observation of that function",
+    "Q5_absence_adequacy_predeclared": "a negative Y answer is allowed only where the observation design has prospectively sufficient temporal/spatial/detection coverage for the declared function",
+    "Q6_provenance_separation_preserved": "materialization must not reveal that R reuses the same observation stream as X or Y",
+    "Q7_no_posthoc_key_or_function_redefinition": "event key and F definition cannot be changed after values are seen"
+  },
+  "terminal_states": [
+    "qualified_for_frozen_endpoint_opening",
+    "unavailable_source_not_materializable",
+    "unresolved_common_key_not_materializable",
+    "unresolved_event_estimand_not_materializable",
+    "unresolved_function_estimand_not_materializable",
+    "unresolved_absence_adequacy",
+    "blocked_provenance_overlap"
+  ],
+  "negative_semantics": {
+    "unavailable_is_biological_negative": false,
+    "missing_is_biological_negative": false,
+    "retrieval_failure_is_biological_negative": false,
+    "zero_without_Q5_is_biological_negative": false,
+    "no_record_without_Q5_is_biological_negative": false
+  },
+  "forbidden_during_qualification": [
+    "candidate_replacement",
+    "new_candidate_search",
+    "result_direction_based_key_selection",
+    "result_direction_based_time_window_selection",
+    "Level_A_q95_import",
+    "generic_occurrence_substitution_for_F"
+  ],
+  "hard_invariant_opening_authorized_before_qualification_receipt": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_at_contract_freeze": 1
+}

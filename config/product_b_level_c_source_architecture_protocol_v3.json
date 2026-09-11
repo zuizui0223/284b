@@ -1,0 +1,98 @@
+{
+  "protocol_version": "product_b_level_c_source_architecture_v3",
+  "protocol_state": "frozen_before_any_v3_candidate_search_or_focal_value_access",
+  "scientific_target": "fresh_cross_role_event_to_function_dependency_with_preseparated_evidence_channels",
+  "hard_relation": "E(k)_implies_F(k)",
+  "candidate_unit": "one externally supported biological relation plus prospectively identifiable independent event-answer and function-answer channels on a common frozen event key",
+  "motivation_from_v2": "v2 showed that function-level biological relation closure can pass while evidence independence remains the binding bottleneck; v3 therefore moves source separation into candidate identity rather than weakening G5 after discovery",
+  "three_channel_architecture": {
+    "R_relation_channel": "primary external evidence establishing only the directional biological implication E(k)->F(k)",
+    "X_event_answer_channel": "independent source capable in principle of estimating the event-side answer E at the frozen key",
+    "Y_function_answer_channel": "independent source capable in principle of estimating the required biological function F at the same frozen key",
+    "R_may_equal_X": false,
+    "R_may_equal_Y": false,
+    "X_may_equal_Y": false,
+    "relation_defining_observations_may_score_confirmatory_endpoint": false
+  },
+  "source_identity_rule": {
+    "independence_requires_distinct_observation_generation_or_sampling_stream": true,
+    "different_publication_of_same_underlying_observations_is_independent": false,
+    "different_model_fit_to_same_underlying_observations_is_independent": false,
+    "same_repository_with_prospectively_separable_nonoverlapping_sampling_streams_may_be_independent_only_if_metadata_proves_separation_before_value_access": true,
+    "author_overlap_alone_invalidates_independence": false
+  },
+  "candidate_discovery_queries_frozen_in_order": [
+    "obligate pollination reproductive dependence independent monitoring dataset exact site phenology",
+    "pollinator exclusion reproductive success independent visitation monitoring same locality season",
+    "host dependent development independent host monitoring dataset exact site phenology",
+    "obligate symbiosis stage transition independent partner monitoring exact site time window"
+  ],
+  "prevalue_architecture_gates": {
+    "A1_hard_relation_source": "primary external source supports the exact directional event-to-function implication",
+    "A2_event_answer_source_identity": "an independent event-answer source or prospectively fixed sampling stream is identifiable from metadata without opening focal values",
+    "A3_function_answer_source_identity": "an independent function-answer source or prospectively fixed sampling stream is identifiable from metadata without opening focal values",
+    "A4_three_way_independence": "R, X, and Y satisfy the frozen source-identity rule",
+    "A5_common_operational_space": "metadata support a common exact or unambiguous relation-space key",
+    "A6_common_operational_time": "metadata support a common event-specific temporal key or window",
+    "A7_estimand_alignment": "X measures E and Y measures F; occurrence or suitability cannot be silently substituted",
+    "A8_management_scope": "the focal relation-space pattern is not created by release, cultivation, placement, or comparable intervention unless the declared target is explicitly experimental",
+    "A9_fresh_endpoint_identity": "the system was not consumed or screened in Level-C v1 or v2 and is not a relabelled prior endpoint"
+  },
+  "candidate_registry_rule": {
+    "maximum_candidates_screened": 12,
+    "target_architecture_qualified_candidates": 3,
+    "hard_stop_rule": "stop when 3 candidates pass A1-A9 or 12 candidates have been screened, whichever happens first",
+    "every_screened_candidate_must_be_logged": true,
+    "failed_candidates_must_remain_in_registry": true,
+    "v1_or_v2_screened_system_reentry_forbidden": true,
+    "replacement_after_value_or_availability_inspection_forbidden": true,
+    "queries_not_reached_after_hard_stop_must_remain_unsearched_for_v3": true
+  },
+  "forbidden_before_registry_freeze": [
+    "focal_record_counts",
+    "focal_coordinates",
+    "focal_visit_or_interaction_values",
+    "focal_reproductive_or_developmental_values",
+    "fitted_event_or_function_surfaces",
+    "cross_role_statistics",
+    "candidate_ranking_by_expected_sample_size",
+    "candidate_ranking_by_expected_result_direction",
+    "Level_A_q95_import_as_cross_role_tolerance"
+  ],
+  "allowed_before_registry_freeze": [
+    "primary_relation_literature",
+    "methods_and_repository_metadata_without_focal_values_or_counts",
+    "sampling_protocol_metadata",
+    "site_and_time metadata",
+    "taxonomic_and_life_history_metadata",
+    "source_identity_and_provenance_metadata"
+  ],
+  "post_registry_source_qualification": {
+    "authorized_only_after_registry_freeze": true,
+    "common_contract_required_before_opening_any_candidate_values": true,
+    "all_architecture_qualified_candidates_evaluated_together": true,
+    "postqualification_replacement_candidates_forbidden": true,
+    "unavailable_is_biological_negative": false,
+    "missing_is_biological_negative": false,
+    "retrieval_failure_is_biological_negative": false,
+    "inadequate_detection_is_biological_negative": false,
+    "zero_without_prespecified_detection_adequacy_is_biological_negative": false,
+    "terminal_nonbiological_states": [
+      "unavailable",
+      "missing",
+      "retrieval_failed",
+      "insufficient_detection_adequacy",
+      "insufficient_common_key_support",
+      "estimand_mismatch"
+    ]
+  },
+  "candidate_search_authorized_after_this_freeze": true,
+  "focal_value_opening_authorized_before_registry_freeze": false,
+  "hard_invariant_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_at_protocol_freeze": 1
+}

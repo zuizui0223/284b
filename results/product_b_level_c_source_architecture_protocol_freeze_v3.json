@@ -1,0 +1,15 @@
+{
+  "receipt_version": "product_b_level_c_source_architecture_protocol_freeze_v3",
+  "protocol_commit": "0ff549db6d856f184262f5f0325368a0db064b9e",
+  "empty_registry_commit": "3b108228e6efe6f3aba3f8f8ac5f9d0dbaa0e8a8",
+  "protocol_frozen_before_candidate_search": true,
+  "registry_empty_at_freeze": true,
+  "focal_values_opened_before_freeze": false,
+  "candidate_limit": 12,
+  "target_architecture_qualified": 3,
+  "unavailable_is_biological_negative": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_at_freeze": 1
+}

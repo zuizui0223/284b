@@ -9,13 +9,15 @@ Maximum display items: 6
 1. **Figure 1 — executable relation-endpoint contract**  
    `manuscript/figures/figure1_relation_endpoint_contract_v0_1.svg`
 2. **Figure 2 — controlled Level-A empirical anchor**  
-   generated deterministically by `scripts/build_prefield_main_figures_v0_2.py` as `figure2_level_a_empirical_anchor_v0_2.svg`
+   `manuscript/figures/figure2_level_a_empirical_anchor_v0_2.svg`  
+   reproducible with `scripts/build_prefield_main_figures_v0_2.py`
 3. **Figure 3 — event-to-function dependency**  
    `manuscript/figures/figure3_event_function_dependency_v0_1.svg`
 4. **Figure 4 — parallel real-system openability audits**  
    `manuscript/figures/figure4_parallel_openability_audits_v0_1.svg`
 5. **Figure 5 — exact invalid-state decomposition**  
-   generated deterministically by `scripts/build_prefield_main_figures_v0_2.py` as `figure5_invalid_state_decomposition_v0_3.svg`
+   `manuscript/figures/figure5_invalid_state_decomposition_v0_3.svg`  
+   reproducible with `scripts/build_prefield_main_figures_v0_2.py`
 6. **Table 1 — relation-endpoint claim/evidence matrix**  
    `manuscript/TABLE1_CLAIM_EVIDENCE_MATRIX_V0_1.md`
 

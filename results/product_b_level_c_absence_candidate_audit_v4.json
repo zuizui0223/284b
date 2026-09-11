@@ -1,0 +1,39 @@
+{
+  "result_version": "product_b_level_c_absence_candidate_audit_v4",
+  "audit_state": "both_v3_candidates_remain_unresolved_before_empirical_value_opening",
+  "candidate_results": {
+    "CREMV3-007": {
+      "A0_key_observable": "pass_from_v3_metadata",
+      "A1_function_channel_directness": "pass_positive_channel",
+      "A2_coverage_completeness": "not_yet_sufficient_for_hard_absence",
+      "A3_detection_adequacy": "fail_not_prospectively_validated",
+      "A4_missingness_separation": "not_yet_demonstrated_for_negative_inference",
+      "A5_negative_decision_rule": "blocked_by_A2_A4",
+      "terminal_state": "insufficient_detection_adequacy",
+      "biological_negative": false,
+      "empirical_value_opening_authorized": false,
+      "reason": "The monitoring architecture supports direct positive pollinia-transfer observations but the existing metadata do not prospectively validate camera non-detection as absence of effective pollination function."
+    },
+    "BELV3-012": {
+      "A0_key_observable": "pass_from_v3_metadata",
+      "A1_function_channel_directness": "pass_resource_state_channel",
+      "A2_coverage_completeness": "not_yet_sufficient_for_hard_absence",
+      "A3_detection_adequacy": "fail_not_prospectively_validated",
+      "A4_missingness_separation": "not_yet_demonstrated_for_negative_inference",
+      "A5_negative_decision_rule": "blocked_by_A2_A4",
+      "terminal_state": "insufficient_detection_adequacy",
+      "biological_negative": false,
+      "empirical_value_opening_authorized": false,
+      "reason": "Separate emergence and budbreak observation streams exist, but no prevalidated rule currently distinguishes a truly absent usable budbreak state from an unobserved or incompletely sampled state at the frozen key."
+    }
+  },
+  "candidate_replacement_authorized": false,
+  "candidate_specific_threshold_tuning_authorized": false,
+  "hard_endpoint_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_after_candidate_audit": 1
+}

@@ -1,0 +1,60 @@
+{
+  "result_version": "product_b_level_c_raw_calibration_reconstruction_v6",
+  "result_state": "existing_raw_and_supplementary_sources_do_not_reconstruct_candidate_specific_absence_calibration",
+  "candidate_results": {
+    "CREMV3-007": {
+      "system": "Cremastra appendiculata var. variabilis sensor-camera pollination system",
+      "article_metadata_reviewed": true,
+      "supplementary_inventory_reviewed": true,
+      "known_supplementary_items": [
+        "Table S1 camera operation days SD-card changes and battery changes",
+        "Figure S1 site versus meteorological-office temperature relationship",
+        "Figure S2 still image of Bombus diversus queen visit"
+      ],
+      "methods_fact": "sensor cameras were deployed before anthesis to flower senescence; scheduled cameras were used only in limited flowering-period trials until storage filled",
+      "author_stated_limitation": "quantitative validation against continuous recording is necessary to fully test sensor-camera detection completeness",
+      "R1_calibration_stream_exists": "fail",
+      "R2_same_unit_same_window_alignment": "fail",
+      "R3_reference_not_defined_by_focal_outcome": "not_evaluated_after_R1_failure",
+      "R4_failure_missingness_separable": "partial_but_insufficient",
+      "R5_performance_estimable": "fail",
+      "R6_v5_thresholds_met": "not_evaluable",
+      "terminal_state": "calibration_stream_absent",
+      "empirical_opening_authorized": false,
+      "required_new_data": "overlapping same-inflorescence continuous or prespecified scheduled gold-standard observation spanning the relevant flowering window, with effective-pollinator labels independent of fruit outcome and explicit camera-failure/out-of-frame accounting"
+    },
+    "BELV3-012": {
+      "system": "Belonocnema treatae / live-oak budbreak resource-dependency system",
+      "repository_inventory_reviewed": true,
+      "existing_files_confirmed": [
+        "Budbreak in Nature",
+        "Initial Budbreak Common Garden",
+        "Emergence in Nature",
+        "Emergence in Laboratory",
+        "Adult Longevity"
+      ],
+      "metadata_fact": "Budbreak in Nature estimates live-oak budbreak phenology and Emergence in Nature estimates adult B. treatae emergence phenology as distinct streams",
+      "R1_calibration_stream_exists": "fail",
+      "R2_same_unit_same_window_alignment": "not_evaluated_after_R1_failure",
+      "R3_reference_not_defined_by_focal_outcome": "not_evaluated_after_R1_failure",
+      "R4_failure_missingness_separable": "not_established",
+      "R5_performance_estimable": "fail",
+      "R6_v5_thresholds_met": "not_evaluable",
+      "terminal_state": "calibration_stream_absent",
+      "empirical_opening_authorized": false,
+      "required_new_data": "repeated within-tree budbreak/resource observations over the full relevant window with independent or cross-observer reference scoring, a prespecified usable-resource threshold, and explicit missing-record versus confirmed-absence coding"
+    }
+  },
+  "candidates_passing_reconstruction": 0,
+  "candidate_count": 2,
+  "focal_cross_role_values_opened": false,
+  "hard_invariant_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "new_candidate_search_authorized": false,
+  "interpretation": "The v5 calibration gap cannot be repaired from currently identified existing supplementary/raw sources. This closes the two retained candidates at an additional-measurement requirement rather than converting unavailable calibration into biological absence.",
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_after_v6": 1
+}

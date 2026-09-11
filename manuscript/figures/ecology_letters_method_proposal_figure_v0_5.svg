@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820">
+<rect width="1200" height="820" fill="white"/>
+<style>
+text{font-family:Arial,sans-serif;fill:#111}.h{font-size:24px;font-weight:bold}.sh{font-size:18px;font-weight:bold}.b{font-size:15px}.s{font-size:13px}.xs{font-size:12px}.n{font-size:28px;font-weight:bold}.box{fill:white;stroke:#222;stroke-width:1.5}.soft{fill:#f7f7f7;stroke:#555;stroke-width:1.2}.arrow{stroke:#222;stroke-width:1.8;fill:none;marker-end:url(#m)}
+</style>
+<defs><marker id="m" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#222"/></marker></defs>
+
+<text x="50" y="42" class="h">Executable relation endpoints for ecological answers</text>
+<text x="50" y="70" class="b">Freeze the biological relation → construct adequate answers → authorize only identifiable endpoint states</text>
+
+<text x="50" y="115" class="sh">A  One contract, different endpoint states</text>
+<rect x="55" y="138" width="1090" height="190" rx="10" class="soft"/>
+<rect x="80" y="168" width="240" height="130" rx="8" class="box"/>
+<text x="200" y="192" class="sh" text-anchor="middle">Five-part contract</text>
+<text x="98" y="211" class="b">1  biological relation</text>
+<text x="98" y="231" class="b">2  event / key space</text>
+<text x="98" y="251" class="b">3  role-specific adapters</text>
+<text x="98" y="271" class="b">4  adequacy gates</text>
+<text x="98" y="291" class="b">5  opening rule</text>
+<line x1="320" y1="233" x2="405" y2="233" class="arrow"/>
+<rect x="415" y="162" width="285" height="142" rx="8" class="box"/>
+<text x="557" y="187" class="sh" text-anchor="middle">Soft calibrated endpoint</text>
+<text x="557" y="215" class="b" text-anchor="middle">same target / soft cross-role</text>
+<text x="557" y="243" class="b" text-anchor="middle">consistent</text>
+<text x="557" y="265" class="b" text-anchor="middle">attention_required</text>
+<text x="557" y="287" class="b" text-anchor="middle">unresolved</text>
+<line x1="700" y1="233" x2="785" y2="233" class="arrow"/>
+<rect x="795" y="162" width="320" height="142" rx="8" class="box"/>
+<text x="955" y="187" class="sh" text-anchor="middle">Hard directional endpoint</text>
+<text x="955" y="214" class="b" text-anchor="middle">E(k) → F(k)</text>
+<text x="955" y="239" class="s" text-anchor="middle">hard_violation_authorized</text>
+<text x="955" y="260" class="s" text-anchor="middle">no_observed_violation</text>
+<text x="955" y="281" class="s" text-anchor="middle">noninformative / unresolved</text>
+
+<text x="50" y="375" class="sh">B  Fresh Level-A empirical anchor — replication is by taxon, not by cell</text>
+<rect x="55" y="398" width="1090" height="160" rx="10" class="soft"/>
+<rect x="85" y="425" width="235" height="94" rx="8" class="box"/>
+<text x="202" y="453" class="n" text-anchor="middle">12</text>
+<text x="202" y="477" class="b" text-anchor="middle">fresh held-out taxa</text>
+<text x="202" y="499" class="s" text-anchor="middle">independent biological units</text>
+<line x1="320" y1="472" x2="410" y2="472" class="arrow"/>
+<rect x="420" y="425" width="260" height="94" rx="8" class="box"/>
+<text x="550" y="453" class="n" text-anchor="middle">288</text>
+<text x="550" y="477" class="b" text-anchor="middle">prespecified cell diagnostics</text>
+<text x="550" y="499" class="s" text-anchor="middle">3 areas × 8 procedures per taxon</text>
+<line x1="680" y1="472" x2="765" y2="472" class="arrow"/>
+<rect x="775" y="415" width="335" height="114" rx="8" class="box"/>
+<text x="942" y="446" class="n" text-anchor="middle">283 evaluable</text>
+<text x="942" y="472" class="b" text-anchor="middle">all within frozen empirical envelopes</text>
+<text x="942" y="495" class="s" text-anchor="middle">5 inadequate cells stayed unresolved</text>
+<text x="942" y="515" class="xs" text-anchor="middle">cell count is diagnostic, not independent n</text>
+<text x="600" y="545" class="b" text-anchor="middle">0 / 12 held-out taxa contained any envelope exceedance among their evaluable cells</text>
+
+<text x="50" y="610" class="sh">C  Exact ablation: the cost of coercing invalid observations into biological negatives</text>
+<rect x="55" y="633" width="1090" height="142" rx="10" class="soft"/>
+<rect x="80" y="655" width="500" height="94" rx="8" class="box"/>
+<text x="330" y="678" class="b" text-anchor="middle">Allow validity to depend on latent function state:</text>
+<text x="330" y="700" class="b" text-anchor="middle">a₁ = P(valid | F=true),  a₀ = P(valid | F=false)</text>
+<text x="330" y="722" class="sh" text-anchor="middle">false-violation inflation = 1 − a₁</text>
+<text x="330" y="742" class="sh" text-anchor="middle">apparent sensitivity gain = 1 − a₀</text>
+<rect x="610" y="655" width="510" height="94" rx="8" class="box"/>
+<text x="865" y="681" class="b" text-anchor="middle">Equal-validity corollary</text>
+<text x="865" y="705" class="sh" text-anchor="middle">if a₁ = a₀ = a, both increments equal 1 − a</text>
+<text x="865" y="727" class="s" text-anchor="middle">zero-collapsing is an ablation of the unresolved-state guard</text>
+<text x="865" y="744" class="xs" text-anchor="middle">not a competitor to occupancy or other detection-aware models</text>
+
+<text x="600" y="802" class="s" text-anchor="middle">No focal Level-C biological values are opened in the proposal, engine or synthetic audits.</text>
+</svg>

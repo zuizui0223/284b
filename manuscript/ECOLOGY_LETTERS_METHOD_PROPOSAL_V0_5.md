@@ -111,7 +111,9 @@ The endpoint architecture is applicable to pollination, host dependence, trophic
 
 Use:
 
-`manuscript/figures/ecology_letters_method_proposal_figure_v0_2.svg`
+`manuscript/figures/ecology_letters_method_proposal_figure_v0_3.svg`
+
+This version was rendered and visually audited after generation; it fixes text overflow in the held-out design panel without changing any scientific content.
 
 The figure combines:
 
@@ -139,7 +141,6 @@ If the editor views relation-endpoint authorization as too conceptual for Method
 The proposal does **not** require Level-C field data. Before sending, the remaining tasks are presentational rather than scientific:
 
 - final author list/qualification sentences;
-- final visual QA of the proposal figure;
 - one last citation/notation audit;
 - immutable archive/release identifiers if desired before full manuscript submission.
 

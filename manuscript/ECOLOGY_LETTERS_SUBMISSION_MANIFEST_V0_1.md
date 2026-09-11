@@ -9,6 +9,7 @@ This file is the single routing surface for the pre-field Paper 1 package. Older
 - proposal email wrapper: `manuscript/ECOLOGY_LETTERS_PROPOSAL_EMAIL_V0_2.md`
 - proposal figure: `manuscript/figures/ecology_letters_method_proposal_figure_v0_2.svg`
 - closer-antecedent audit: `manuscript/CLOSER_ANTECEDENT_AUDIT_V0_2.md`
+- desk-review positioning matrix: `manuscript/EDITORIAL_POSITIONING_MATRIX_V0_1.md`
 - compliance checklist: `manuscript/ECOLOGY_LETTERS_COMPLIANCE_V0_2.md`
 
 ## Full manuscript if proposal is invited

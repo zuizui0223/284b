@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="970" viewBox="0 0 1200 970">
+<rect width="1200" height="970" fill="white"/>
+<style>text{font-family:Arial,sans-serif;fill:#111}.h{font-size:24px;font-weight:bold}.sh{font-size:18px;font-weight:bold}.b{font-size:14px}.s{font-size:12px}.xs{font-size:10.5px}.n{font-size:27px;font-weight:bold}.box{fill:white;stroke:#333;stroke-width:1.4}.soft{fill:#f7f7f7;stroke:#777;stroke-width:1.1}.axis{stroke:#333;stroke-width:1.2}.grid{stroke:#ddd;stroke-width:1}.heavy{stroke:#111;stroke-width:2;fill:none}</style>
+<text x="45" y="40" class="h">Figure 2. Controlled Level-A cross-source empirical anchor</text>
+<text x="45" y="68" class="b">Independent replication is by held-out taxon; procedure × area cells are repeated diagnostics.</text>
+<text x="45" y="112" class="sh">A  Reference envelopes frozen before held-out opening</text>
+<rect x="50" y="132" width="1100" height="135" rx="10" class="soft"/>
+<rect x="85" y="158" width="290" height="82" rx="7" class="box"/><text x="230" y="187" class="n" text-anchor="middle">24 / 24</text><text x="230" y="210" class="b" text-anchor="middle">reference cells frozen</text><text x="230" y="230" class="s" text-anchor="middle">34–47 adequate successor taxa / cell</text>
+<rect x="415" y="158" width="290" height="82" rx="7" class="box"/><text x="560" y="187" class="n" text-anchor="middle">q95</text><text x="560" y="210" class="b" text-anchor="middle">nearest-rank empirical envelope</text><text x="560" y="230" class="s" text-anchor="middle">not a nominal 95% predictive interval</text>
+<rect x="745" y="158" width="290" height="82" rx="7" class="box"/><text x="890" y="187" class="n" text-anchor="middle">0</text><text x="890" y="210" class="b" text-anchor="middle">held-out values read during calibration</text><text x="890" y="230" class="s" text-anchor="middle">relation threshold fixed prospectively</text>
+
+<text x="45" y="315" class="sh">B  Held-out structure and outcome</text>
+<rect x="50" y="335" width="1100" height="145" rx="10" class="soft"/>
+<rect x="82" y="360" width="220" height="92" rx="7" class="box"/><text x="192" y="390" class="n" text-anchor="middle">12</text><text x="192" y="416" class="b" text-anchor="middle">fresh held-out taxa</text><text x="192" y="439" class="s" text-anchor="middle">independent biological units</text>
+<rect x="340" y="360" width="220" height="92" rx="7" class="box"/><text x="450" y="390" class="n" text-anchor="middle">288</text><text x="450" y="416" class="b" text-anchor="middle">prespecified diagnostics</text><text x="450" y="439" class="s" text-anchor="middle">3 areas × 8 procedures / taxon</text>
+<rect x="598" y="360" width="220" height="92" rx="7" class="box"/><text x="708" y="390" class="n" text-anchor="middle">283</text><text x="708" y="416" class="b" text-anchor="middle">evaluable cell diagnostics</text><text x="708" y="439" class="s" text-anchor="middle">5 unresolved</text>
+<rect x="856" y="360" width="220" height="92" rx="7" class="box"/><text x="966" y="390" class="n" text-anchor="middle">0 / 12</text><text x="966" y="416" class="b" text-anchor="middle">taxa with any exceedance</text><text x="966" y="439" class="s" text-anchor="middle">among evaluable cells</text>
+
+<text x="45" y="525" class="sh">C  Taxon-level maximum observed discordance / frozen envelope</text>
+<text x="45" y="548" class="s">Values near 1 approach the prospectively frozen cell-specific envelope; none exceed 1.</text>
+<line x1="335" y1="566" x2="1115" y2="566" class="grid"/>
+<line x1="335" y1="566" x2="335" y2="827" class="grid"/><text x="335" y="560" class="xs" text-anchor="middle">0.00</text>
+<line x1="530" y1="566" x2="530" y2="827" class="grid"/><text x="530" y="560" class="xs" text-anchor="middle">0.25</text>
+<line x1="725" y1="566" x2="725" y2="827" class="grid"/><text x="725" y="560" class="xs" text-anchor="middle">0.50</text>
+<line x1="920" y1="566" x2="920" y2="827" class="grid"/><text x="920" y="560" class="xs" text-anchor="middle">0.75</text>
+<line x1="1115" y1="566" x2="1115" y2="827" class="grid"/><text x="1115" y="560" class="xs" text-anchor="middle">1.00</text>
+
+<text x="320" y="584" class="s" text-anchor="end">Nothofagus betuloides</text><line x1="335" y1="580" x2="1105.8" y2="580" class="heavy"/><text x="1112.8" y="584" class="xs">0.988</text>
+<text x="320" y="605" class="s" text-anchor="end">Nothofagus antarctica</text><line x1="335" y1="601" x2="1048.9" y2="601" class="heavy"/><text x="1055.9" y="605" class="xs">0.915</text>
+<text x="320" y="626" class="s" text-anchor="end">Eucalyptus delegatensis</text><line x1="335" y1="622" x2="1032.7" y2="622" class="heavy"/><text x="1039.7" y="626" class="xs">0.895</text>
+<text x="320" y="647" class="s" text-anchor="end">Eucalyptus globulus</text><line x1="335" y1="643" x2="1023.3" y2="643" class="heavy"/><text x="1030.3" y="647" class="xs">0.882</text>
+<text x="320" y="668" class="s" text-anchor="end">Abies lasiocarpa</text><line x1="335" y1="664" x2="1009.9" y2="664" class="heavy"/><text x="1016.9" y="668" class="xs">0.865</text>
+<text x="320" y="689" class="s" text-anchor="end">Laguncularia racemosa</text><line x1="335" y1="685" x2="921.0" y2="685" class="heavy"/><text x="928.0" y="689" class="xs">0.751</text>
+<text x="320" y="710" class="s" text-anchor="end">Avicennia marina</text><line x1="335" y1="706" x2="839.5" y2="706" class="heavy"/><text x="846.5" y="710" class="xs">0.647</text>
+<text x="320" y="731" class="s" text-anchor="end">Encelia farinosa</text><line x1="335" y1="727" x2="836.8" y2="727" class="heavy"/><text x="843.8" y="731" class="xs">0.643</text>
+<text x="320" y="752" class="s" text-anchor="end">Atriplex canescens</text><line x1="335" y1="748" x2="831.2" y2="748" class="heavy"/><text x="838.2" y="752" class="xs">0.636</text>
+<text x="320" y="773" class="s" text-anchor="end">Artemisia tridentata</text><line x1="335" y1="769" x2="763.9" y2="769" class="heavy"/><text x="770.9" y="773" class="xs">0.550</text>
+<text x="320" y="794" class="s" text-anchor="end">Larix laricina</text><line x1="335" y1="790" x2="756.3" y2="790" class="heavy"/><text x="763.3" y="794" class="xs">0.540</text>
+<text x="320" y="815" class="s" text-anchor="end">Avicennia germinans</text><line x1="335" y1="811" x2="731.8" y2="811" class="heavy"/><text x="738.8" y="815" class="xs">0.509</text>
+
+<text x="45" y="857" class="sh">D  Margin diagnostics</text>
+<text x="45" y="883" class="b">Closest margin to envelope: 0.0046 (Nothofagus betuloides).</text>
+<text x="45" y="905" class="b">Cells within 0.025 of envelope: 1 / 283; within 0.05: 6 / 283.</text>
+<text x="45" y="927" class="s">Interpretation: conditional cross-source reproducibility relative to predeclared empirical envelopes—not 283 independent successes.</text>
+</svg>

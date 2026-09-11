@@ -27,7 +27,7 @@
 <line x1="495" y1="389" x2="540" y2="389" class="arrow"/>
 <rect x="550" y="346" width="190" height="86" rx="7" class="pass"/><text x="645" y="371" class="b" text-anchor="middle">Y: pollinia-carrying</text><text x="645" y="392" class="s" text-anchor="middle">flower contact on camera</text><text x="645" y="412" class="xs" text-anchor="middle">direct positive function observation</text>
 <line x1="740" y1="389" x2="785" y2="389" class="arrow"/>
-<rect x="795" y="336" width="305" height="106" rx="7" class="stop"/><text x="947" y="363" class="sh" text-anchor="middle">STOP: functional absence uncalibrated</text><text x="947" y="389" class="s" text-anchor="middle">camera non-detection ≠ absence of effective pollination</text><text x="947" y="410" class="s" text-anchor="middle">no continuous/scheduled gold-standard comparison</text><text x="947" y="430" class="xs" text-anchor="middle">new data: overlapping same-flower reference observation + failure accounting</text>
+<rect x="795" y="332" width="305" height="116" rx="7" class="stop"/><text x="947" y="354" class="b" text-anchor="middle">STOP: functional absence</text><text x="947" y="373" class="b" text-anchor="middle">is not calibrated</text><text x="947" y="395" class="s" text-anchor="middle">camera non-detection ≠ effective-pollination absence</text><text x="947" y="415" class="s" text-anchor="middle">no gold-standard detection comparison</text><text x="947" y="434" class="xs" text-anchor="middle">new data: same-flower reference observation</text><text x="947" y="446" class="xs" text-anchor="middle">plus explicit failure / out-of-frame accounting</text>
 <text x="600" y="483" class="s" text-anchor="middle">Positive detections remain biologically meaningful; zero detections remain unresolved. Hard endpoint opening = false.</text>
 
 <text x="45" y="570" class="sh">C  Belonocnema treatae / live-oak — resource-function lane</text>
@@ -38,9 +38,10 @@
 <line x1="495" y1="667" x2="540" y2="667" class="arrow"/>
 <rect x="550" y="624" width="190" height="86" rx="7" class="pass"/><text x="645" y="649" class="b" text-anchor="middle">Y: live-oak budbreak</text><text x="645" y="670" class="s" text-anchor="middle">natural budbreak stream</text><text x="645" y="690" class="xs" text-anchor="middle">direct required-resource signal</text>
 <line x1="740" y1="667" x2="785" y2="667" class="arrow"/>
-<rect x="795" y="614" width="305" height="106" rx="7" class="stop"/><text x="947" y="641" class="sh" text-anchor="middle">STOP: usable-resource absence uncalibrated</text><text x="947" y="667" class="s" text-anchor="middle">unrecorded budbreak ≠ confirmed resource absence</text><text x="947" y="688" class="s" text-anchor="middle">no repeated/cross-observer detection validation</text><text x="947" y="708" class="xs" text-anchor="middle">new data: repeated within-tree scoring + missing/absence separation</text>
+<rect x="795" y="610" width="305" height="116" rx="7" class="stop"/><text x="947" y="632" class="b" text-anchor="middle">STOP: usable-resource absence</text><text x="947" y="651" class="b" text-anchor="middle">is not calibrated</text><text x="947" y="673" class="s" text-anchor="middle">unrecorded budbreak ≠ confirmed resource absence</text><text x="947" y="693" class="s" text-anchor="middle">no repeated / cross-observer validation</text><text x="947" y="712" class="xs" text-anchor="middle">new data: repeated within-tree scoring</text><text x="947" y="724" class="xs" text-anchor="middle">plus explicit missing-versus-absence coding</text>
 <text x="600" y="761" class="s" text-anchor="middle">Separate emergence and budbreak answers exist, but the negative resource state is not identified. Hard endpoint opening = false.</text>
 
-<rect x="180" y="830" width="840" height="42" rx="7" class="box"/>
-<text x="600" y="856" class="sh" text-anchor="middle">Same measurement boundary in two biological systems → new calibration measurement is required; no focal biological outcome is opened.</text>
+<rect x="180" y="824" width="840" height="54" rx="7" class="box"/>
+<text x="600" y="846" class="b" text-anchor="middle">Same measurement boundary in two biological systems: new calibration measurement is required.</text>
+<text x="600" y="866" class="b" text-anchor="middle">No focal biological outcome is opened.</text>
 </svg>

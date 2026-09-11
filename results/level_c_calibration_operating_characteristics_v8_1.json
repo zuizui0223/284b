@@ -1,0 +1,52 @@
+{
+  "audit_version": "level_c_calibration_operating_characteristics_v8_1",
+  "confidence_method": "exact_clopper_pearson_one_sided_95_percent",
+  "empirical_ledger_increment": 0,
+  "field_calibration_values_read": false,
+  "focal_level_c_values_read": false,
+  "first_n_with_at_least_80_percent_nominal_pass_probability": {
+    "sensitivity": {
+      "0.85": {"n": 365, "true_rate": 0.85, "threshold": 0.8, "critical_successes": 305, "pass_probability": 0.8017786275340949, "target_power": 0.8},
+      "0.9": {"n": 82, "true_rate": 0.9, "threshold": 0.8, "critical_successes": 72, "pass_probability": 0.8057063959899641, "target_power": 0.8},
+      "0.95": {"n": 30, "true_rate": 0.95, "threshold": 0.8, "critical_successes": 28, "pass_probability": 0.81217881314696, "target_power": 0.8},
+      "0.98": {"n": 30, "true_rate": 0.98, "threshold": 0.8, "critical_successes": 28, "pass_probability": 0.9782821654563825, "target_power": 0.8},
+      "0.99": {"n": 30, "true_rate": 0.99, "threshold": 0.8, "critical_successes": 28, "pass_probability": 0.9966822906811174, "target_power": 0.8}
+    },
+    "specificity": {
+      "0.97": {"n": 601, "true_rate": 0.97, "threshold": 0.95, "critical_successes": 580, "pass_probability": 0.8001953127031924, "target_power": 0.8},
+      "0.98": {"n": 234, "true_rate": 0.98, "threshold": 0.95, "critical_successes": 228, "pass_probability": 0.8091388317679807, "target_power": 0.8},
+      "0.99": {"n": 124, "true_rate": 0.99, "threshold": 0.95, "critical_successes": 122, "pass_probability": 0.8715535097463496, "target_power": 0.8},
+      "0.995": {"n": 93, "true_rate": 0.995, "threshold": 0.95, "critical_successes": 92, "pass_probability": 0.9206112641191567, "target_power": 0.8},
+      "0.999": {"n": 60, "true_rate": 0.999, "threshold": 0.95, "critical_successes": 60, "pass_probability": 0.9417362622231682, "target_power": 0.8}
+    }
+  },
+  "interpretation": "These are exact nominal binomial operating characteristics under independent calibration units. They are design-planning quantities, not candidate-specific performance estimates. Any larger planned sample size must be frozen before outcome inspection; observed failure cannot justify post-hoc extension.",
+  "minimum_design_critical_counts": {
+    "sensitivity": {"n": 30, "critical_successes": 28},
+    "specificity": {"n": 60, "critical_successes": 60}
+  },
+  "pass_probability_at_minimum_design": {
+    "sensitivity": {
+      "0.8": {"n": 30, "true_rate": 0.8, "threshold": 0.8, "critical_successes": 28, "pass_probability": 0.04417898515199706},
+      "0.85": {"n": 30, "true_rate": 0.85, "threshold": 0.8, "critical_successes": 28, "pass_probability": 0.15140060732360866},
+      "0.9": {"n": 30, "true_rate": 0.9, "threshold": 0.8, "critical_successes": 28, "pass_probability": 0.41135123955950553},
+      "0.95": {"n": 30, "true_rate": 0.95, "threshold": 0.8, "critical_successes": 28, "pass_probability": 0.81217881314696},
+      "0.98": {"n": 30, "true_rate": 0.98, "threshold": 0.8, "critical_successes": 28, "pass_probability": 0.9782821654563825},
+      "0.99": {"n": 30, "true_rate": 0.99, "threshold": 0.8, "critical_successes": 28, "pass_probability": 0.9966822906811174}
+    },
+    "specificity": {
+      "0.95": {"n": 60, "true_rate": 0.95, "threshold": 0.95, "critical_successes": 60, "pass_probability": 0.046069798986951946},
+      "0.97": {"n": 60, "true_rate": 0.97, "threshold": 0.95, "critical_successes": 60, "pass_probability": 0.1608066690215766},
+      "0.98": {"n": 60, "true_rate": 0.98, "threshold": 0.95, "critical_successes": 60, "pass_probability": 0.2975531426921204},
+      "0.99": {"n": 60, "true_rate": 0.99, "threshold": 0.95, "critical_successes": 60, "pass_probability": 0.5471566423907612},
+      "0.995": {"n": 60, "true_rate": 0.995, "threshold": 0.95, "critical_successes": 60, "pass_probability": 0.7402609576967045},
+      "0.999": {"n": 60, "true_rate": 0.999, "threshold": 0.95, "critical_successes": 60, "pass_probability": 0.9417362622231682}
+    }
+  },
+  "thresholds_unchanged": {
+    "minimum_gold_negative": 60,
+    "minimum_gold_positive": 30,
+    "sensitivity_min": 0.8,
+    "specificity_min": 0.95
+  }
+}

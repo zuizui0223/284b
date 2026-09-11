@@ -1,0 +1,34 @@
+{
+  "result_version": "product_b_level_c_absence_synthetic_qualification_v4",
+  "qualification_state": "synthetic_absence_classifier_passed",
+  "worlds_total": 12,
+  "known_positive_worlds": 5,
+  "known_negative_worlds": 4,
+  "nonbiological_or_unresolved_worlds": 4,
+  "expected_confusion": {
+    "true_positive": 4,
+    "false_negative_hard": 0,
+    "true_negative": 4,
+    "false_positive": 0,
+    "known_positive_unresolved_due_to_insufficient_detection": 1
+  },
+  "metrics": {
+    "sensitivity": 0.8,
+    "false_negative_rate_hard": 0.0,
+    "specificity": 1.0,
+    "unavailable_not_negative": true
+  },
+  "thresholds": {
+    "minimum_positive_sensitivity": 0.8,
+    "maximum_false_negative_rate": 0.2,
+    "minimum_negative_specificity": 0.95
+  },
+  "interpretation": "The decision system can preserve hard negatives only under complete coverage and detection adequacy while routing sparse, missing, failed, or underpowered observations to unresolved rather than biological absence.",
+  "candidate_empirical_values_opened": false,
+  "candidate_specific_threshold_tuning_performed": false,
+  "hard_endpoint_opening_authorized_by_this_result_alone": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_after_synthetic_qualification": 1
+}

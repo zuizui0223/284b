@@ -7,7 +7,7 @@ This is the single routing surface for the reviewer-hardened pre-field Paper 1 p
 - 300-word proposal: `manuscript/ECOLOGY_LETTERS_300WORD_PITCH_V0_6.md`
 - full proposal rationale: `manuscript/ECOLOGY_LETTERS_METHOD_PROPOSAL_V0_6.md`
 - proposal email wrapper: `manuscript/ECOLOGY_LETTERS_PROPOSAL_EMAIL_V0_3.md`
-- proposal figure: `manuscript/figures/ecology_letters_method_proposal_figure_v0_4.svg`
+- proposal figure: `manuscript/figures/ecology_letters_method_proposal_figure_v0_5.svg`
 - adversarial novelty/method audit: `manuscript/REVIEWER2_ADVERSARIAL_AUDIT_V0_1.md`
 - closer-antecedent audit: `manuscript/CLOSER_ANTECEDENT_AUDIT_V0_2.md`
 - compliance checklist: `manuscript/ECOLOGY_LETTERS_COMPLIANCE_V0_2.md`

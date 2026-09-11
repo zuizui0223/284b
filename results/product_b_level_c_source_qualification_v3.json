@@ -1,0 +1,47 @@
+{
+  "result_version": "product_b_level_c_source_qualification_v3",
+  "contract": "config/product_b_level_c_source_qualification_v3.json",
+  "candidate_ids": ["CREMV3-007", "BELV3-012"],
+  "qualification_performed_on_all_architecture_qualified_candidates": true,
+  "focal_candidate_selection_by_values_performed": false,
+  "candidate_results": {
+    "CREMV3-007": {
+      "Q1_source_materializable": "pass_published_methods_and_exact_aggregate_observation_tables_available",
+      "Q2_common_key_materializable": "pass_same_monitored_inflorescences_and_full_flowering_period_link_camera_operation_flower_state_and_final_fruit_count",
+      "Q3_event_estimand_materializable": "pass_final_fruit_count_on_monitored_inflorescences",
+      "Q4_function_estimand_materializable": "pass_pollinia_carrying_flower_contact_is_direct_function_observation_not_provider_occurrence",
+      "Q5_absence_adequacy_predeclared": "unresolved_sensor_non_detection_cannot_yet_be_promoted_to_absence_of_effective_pollination_function",
+      "Q6_provenance_separation_preserved": "pass_relation_source_is_external_breeding_system_experiment_and_X_Y_are_later_monitoring_streams",
+      "Q7_no_posthoc_key_or_function_redefinition": "pass",
+      "terminal_state": "unresolved_absence_adequacy",
+      "hard_endpoint_opening_authorized": false,
+      "biological_negative": false,
+      "reason": "Full-flowering camera coverage and same-inflorescence fruit counts make the positive channels strong, but a no-record state is not yet prospectively adequate evidence that F(k)=false."
+    },
+    "BELV3-012": {
+      "Q1_source_materializable": "pass_Dryad_exposes_separate_Budbreak_in_Nature_and_Emergence_in_Nature_files",
+      "Q2_common_key_materializable": "pass_at_metadata_level_host_associated_natural_populations_and_phenology_are_the_declared_common_population_time_framework",
+      "Q3_event_estimand_materializable": "pass_adult_emergence_in_nature_is_directly_encoded",
+      "Q4_function_estimand_materializable": "pass_live_oak_budbreak_directly_encodes_production_of_ephemeral_new_tissue_required_for_reproduction",
+      "Q5_absence_adequacy_predeclared": "unresolved_metadata_does_not_yet_establish_that_a_no_budbreak_or_no_resource_state_at_an_event_key_has_complete_enough_observation_coverage_for_hard_functional_absence",
+      "Q6_provenance_separation_preserved": "pass_relation_is_defined_by_independent_host_specificity_evidence_and_X_Y_are_separate_natural_phenology_streams",
+      "Q7_no_posthoc_key_or_function_redefinition": "pass",
+      "terminal_state": "unresolved_absence_adequacy",
+      "hard_endpoint_opening_authorized": false,
+      "biological_negative": false,
+      "reason": "The natural emergence and budbreak streams are explicitly materializable, but metadata alone does not license converting an unobserved resource state into F(k)=false."
+    }
+  },
+  "qualified_for_frozen_endpoint_opening": [],
+  "hard_invariant_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "candidate_replacement_authorized": false,
+  "new_candidate_search_authorized": false,
+  "unavailable_or_unresolved_interpreted_as_biological_negative": false,
+  "scientific_interpretation": "v3 successfully moved the binding constraint from evidence-channel independence to negative-state observation adequacy. Two fresh cross-role systems have prospectively separated R/X/Y channels, but neither yet licenses hard functional absence at the event key.",
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_after_source_qualification": 1
+}

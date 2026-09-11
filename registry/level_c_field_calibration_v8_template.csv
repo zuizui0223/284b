@@ -1,0 +1,3 @@
+candidate_id,calibration_unit_id,date_time,site_or_tree_id,gold_state,observer_state,missing,device_failure,observer_failure,occlusion,unresolved_adjudication,notes
+CREMV3-007,,,,,,,false,false,false,false,false,
+BELV3-012,,,,,,,false,false,false,false,false,

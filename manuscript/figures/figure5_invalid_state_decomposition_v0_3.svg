@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+<rect width="1200" height="900" fill="white"/>
+<style>text{font-family:Arial,sans-serif;fill:#111}.h{font-size:24px;font-weight:bold}.sh{font-size:18px;font-weight:bold}.b{font-size:14px}.s{font-size:12px}.xs{font-size:10.5px}.box{fill:white;stroke:#333;stroke-width:1.4}.soft{fill:#f7f7f7;stroke:#777;stroke-width:1.1}.axis{stroke:#333;stroke-width:1.2}.grid{stroke:#ddd;stroke-width:1}.heavy{stroke:#111;stroke-width:2;fill:none}.thin{stroke:#555;stroke-width:1.5;fill:none}.dash{stroke:#777;stroke-width:1.2;stroke-dasharray:5 4;fill:none}</style>
+<text x="45" y="40" class="h">Figure 5. Exact cost of coercing invalid observation into a biological negative</text>
+<text x="45" y="68" class="b">Zero collapsing is an ablation of the unresolved-state guard, not a competitor to detection-aware observation models.</text>
+
+<text x="45" y="112" class="sh">A  General class-conditional decomposition</text>
+<rect x="50" y="132" width="1100" height="145" rx="10" class="soft"/>
+<text x="92" y="162" class="sh">Compatible keys (F=true)</text>
+<text x="92" y="190" class="b">a₁ = P(valid | F=true)</text>
+<text x="92" y="218" class="sh">FPRzero − FPRgated = 1 − a₁</text>
+<text x="650" y="162" class="sh">True violations (F=false)</text>
+<text x="650" y="190" class="b">a₀ = P(valid | F=false)</text>
+<text x="650" y="218" class="sh">TPRzero − TPRgated = 1 − a₀</text>
+<text x="600" y="258" class="b" text-anchor="middle">Equal-validity corollary: if a₁ = a₀ = a, both increments equal 1 − a.</text>
+
+<text x="45" y="325" class="sh">B  State-dependent validity example</text>
+<rect x="50" y="345" width="530" height="250" rx="10" class="soft"/>
+<text x="315" y="371" class="s" text-anchor="middle">a₁=0.70, a₀=0.90, q=0.95, sp=0.99</text>
+<line x1="115" y1="540" x2="535" y2="540" class="axis"/><line x1="115" y1="390" x2="115" y2="540" class="axis"/>
+<line x1="115" y1="540" x2="535" y2="540" class="grid"/><text x="107" y="544" class="xs" text-anchor="end">0.00</text>
+<line x1="115" y1="502.5" x2="535" y2="502.5" class="grid"/><text x="107" y="506.5" class="xs" text-anchor="end">0.25</text>
+<line x1="115" y1="465" x2="535" y2="465" class="grid"/><text x="107" y="469" class="xs" text-anchor="end">0.50</text>
+<line x1="115" y1="427.5" x2="535" y2="427.5" class="grid"/><text x="107" y="431.5" class="xs" text-anchor="end">0.75</text>
+<line x1="115" y1="390" x2="535" y2="390" class="grid"/><text x="107" y="394" class="xs" text-anchor="end">1.00</text>
+<rect x="185" y="534.75" width="38" height="5.25" rx="2" class="box"/><text x="204" y="528" class="xs" text-anchor="middle">0.035</text><text x="204" y="558" class="xs" text-anchor="middle">gated</text>
+<rect x="240" y="489.75" width="38" height="50.25" rx="2" class="box"/><text x="259" y="483" class="xs" text-anchor="middle">0.335</text><text x="259" y="558" class="xs" text-anchor="middle">zero</text>
+<text x="232" y="579" class="s" text-anchor="middle">False violation</text>
+<rect x="395" y="406.35" width="38" height="133.65" rx="2" class="box"/><text x="414" y="400" class="xs" text-anchor="middle">0.891</text><text x="414" y="558" class="xs" text-anchor="middle">gated</text>
+<rect x="450" y="391.35" width="38" height="148.65" rx="2" class="box"/><text x="469" y="385" class="xs" text-anchor="middle">0.991</text><text x="469" y="558" class="xs" text-anchor="middle">zero</text>
+<text x="442" y="579" class="s" text-anchor="middle">True-violation sensitivity</text>
+
+<text x="620" y="325" class="sh">C  Qualification is not false-discovery control</text>
+<rect x="620" y="345" width="530" height="250" rx="10" class="soft"/>
+<line x1="690" y1="545" x2="1095" y2="545" class="axis"/><line x1="690" y1="385" x2="690" y2="545" class="axis"/>
+<line x1="690" y1="545" x2="1095" y2="545" class="grid"/><text x="682" y="549" class="xs" text-anchor="end">0.00</text>
+<line x1="690" y1="505" x2="1095" y2="505" class="grid"/><text x="682" y="509" class="xs" text-anchor="end">0.25</text>
+<line x1="690" y1="465" x2="1095" y2="465" class="grid"/><text x="682" y="469" class="xs" text-anchor="end">0.50</text>
+<line x1="690" y1="425" x2="1095" y2="425" class="grid"/><text x="682" y="429" class="xs" text-anchor="end">0.75</text>
+<line x1="690" y1="385" x2="1095" y2="385" class="grid"/><text x="682" y="389" class="xs" text-anchor="end">1.00</text>
+<line x1="706.4" y1="385" x2="706.4" y2="545" class="grid"/><text x="706.4" y="563" class="xs" text-anchor="middle">0.05</text>
+<line x1="788.2" y1="385" x2="788.2" y2="545" class="grid"/><text x="788.2" y="563" class="xs" text-anchor="middle">0.25</text>
+<line x1="890.5" y1="385" x2="890.5" y2="545" class="grid"/><text x="890.5" y="563" class="xs" text-anchor="middle">0.50</text>
+<line x1="992.7" y1="385" x2="992.7" y2="545" class="grid"/><text x="992.7" y="563" class="xs" text-anchor="middle">0.75</text>
+<line x1="1095" y1="385" x2="1095" y2="545" class="grid"/><text x="1095" y="563" class="xs" text-anchor="middle">1.00</text>
+<path d="M690.0,392.6 L704.0,414.8 L717.9,432.4 L731.9,446.7 L745.9,458.5 L759.8,468.5 L773.8,477.0 L787.8,484.4 L801.7,490.9 L815.7,496.5 L829.7,501.5 L843.6,506.0 L857.6,510.1 L871.6,513.7 L885.5,517.0 L899.5,520.0 L913.4,522.8 L927.4,525.3 L941.4,527.7 L955.3,529.8 L969.3,531.8 L983.3,533.7 L997.2,535.5 L1011.2,537.1 L1025.2,538.6 L1039.1,540.0 L1053.1,541.4 L1067.1,542.7 L1081.0,543.9 L1095.0,545.0" class="heavy"/>
+<path d="M690.0,399.5 L704.0,435.2 L717.9,458.1 L731.9,474.0 L745.9,485.7 L759.8,494.7 L773.8,501.9 L787.8,507.6 L801.7,512.4 L815.7,516.4 L829.7,519.9 L843.6,522.8 L857.6,525.4 L871.6,527.7 L885.5,529.7 L899.5,531.5 L913.4,533.1 L927.4,534.5 L941.4,535.8 L955.3,537.0 L969.3,538.1 L983.3,539.1 L997.2,540.1 L1011.2,540.9 L1025.2,541.7 L1039.1,542.5 L1053.1,543.2 L1067.1,543.8 L1081.0,544.4 L1095.0,545.0" class="thin"/>
+<path d="M690.0,411.7 L704.0,461.4 L717.9,485.3 L731.9,499.4 L745.9,508.6 L759.8,515.2 L773.8,520.1 L787.8,523.8 L801.7,526.9 L815.7,529.3 L829.7,531.4 L843.6,533.1 L857.6,534.6 L871.6,535.8 L885.5,536.9 L899.5,537.9 L913.4,538.8 L927.4,539.6 L941.4,540.3 L955.3,540.9 L969.3,541.5 L983.3,542.0 L997.2,542.5 L1011.2,542.9 L1025.2,543.4 L1039.1,543.7 L1053.1,544.1 L1067.1,544.4 L1081.0,544.7 L1095.0,545.0" class="dash"/>
+<text x="895" y="582" class="s" text-anchor="middle">true violation prevalence π</text><text x="637" y="470" class="s" text-anchor="middle">FDF</text>
+<text x="1080" y="390" class="xs">q=0.80</text><text x="1080" y="408" class="xs">q=0.90</text><text x="1080" y="426" class="xs">q=0.95</text>
+<circle cx="726.8" cy="441.8" r="4" fill="#111"/><text x="734.8" y="434.8" class="xs">π=0.10 → FDF≈0.645</text>
+
+<text x="45" y="645" class="sh">D  Endpoint-state interpretation</text>
+<rect x="50" y="665" width="1100" height="170" rx="10" class="soft"/>
+<rect x="100" y="704" width="220" height="76" rx="7" class="box"/><text x="210" y="731" class="b" text-anchor="middle">Qualified observation</text><text x="210" y="754" class="b" text-anchor="middle">+ valid focal key</text>
+<line x1="320" y1="742" x2="410" y2="742" class="heavy"/>
+<rect x="420" y="704" width="250" height="76" rx="7" class="box"/><text x="545" y="731" class="b" text-anchor="middle">negative can enter</text><text x="545" y="754" class="b" text-anchor="middle">hard endpoint</text>
+<rect x="780" y="695" width="300" height="92" rx="7" class="box"/><text x="930" y="720" class="b" text-anchor="middle">Invalid / missing / failed key</text><text x="930" y="745" class="sh" text-anchor="middle">must remain unresolved</text><text x="930" y="768" class="s" text-anchor="middle">zero collapsing deletes this state</text>
+<text x="600" y="822" class="s" text-anchor="middle">The decomposition quantifies removing the unresolved-state guard; it does not replace occupancy, LIES, or other detection-aware models.</text>
+</svg>

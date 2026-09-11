@@ -11,8 +11,9 @@
 <rect x="350" y="168" width="195" height="120" rx="7" class="bad"/><text x="447" y="196" class="sh" text-anchor="middle">Provider role</text><text x="447" y="222" class="b" text-anchor="middle">occurrence /</text><text x="447" y="242" class="b" text-anchor="middle">suitability surface</text><text x="447" y="270" class="xs" text-anchor="middle">different mobility and sampling</text>
 <line x1="280" y1="228" x2="350" y2="228" class="dash"/>
 <text x="315" y="215" class="s" text-anchor="middle">not required to match</text>
-<text x="315" y="329" class="sh" text-anchor="middle">Adult plant occupancy ⊄ current pollinator occupancy is not a hard contradiction.</text>
-<text x="315" y="353" class="s" text-anchor="middle">Different roles may legitimately use different estimators, predictors, accessible areas and raw scales.</text>
+<text x="315" y="322" class="b" text-anchor="middle">Adult plant occupancy need not be contained in current pollinator occupancy.</text>
+<text x="315" y="342" class="b" text-anchor="middle">That mismatch alone is not a hard biological contradiction.</text>
+<text x="315" y="362" class="xs" text-anchor="middle">Different roles may use different estimators, predictors, accessible areas and raw scales.</text>
 
 <text x="620" y="112" class="sh">B  Accepted object: event-key implication</text>
 <rect x="625" y="132" width="525" height="250" rx="10" class="soft"/>

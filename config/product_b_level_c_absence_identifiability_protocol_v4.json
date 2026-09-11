@@ -1,0 +1,69 @@
+{
+  "protocol_version": "product_b_level_c_absence_identifiability_v4",
+  "protocol_state": "frozen_before_any_v4_empirical_value_opening",
+  "scientific_target": "prospective_conditions_under_which_F(k)=false_is_identifiable",
+  "inherits_from": [
+    "product_b_level_c_source_architecture_protocol_v3",
+    "product_b_level_c_source_qualification_v3"
+  ],
+  "eligible_candidates": ["CREMV3-007", "BELV3-012"],
+  "candidate_addition_or_replacement_authorized": false,
+  "hard_relation": "E(k)_implies_F(k)",
+  "absence_claim_rule": "F(k)=false may be opened only when all A0-A5 absence-identifiability gates pass prospectively for that candidate/key. Otherwise the key remains unresolved/unavailable and cannot count as a biological negative.",
+  "absence_identifiability_gates": {
+    "A0_key_observable": "the exact operational event key k and observation window are materializable without using outcome values to choose them",
+    "A1_function_channel_directness": "Y measures the required biological function or a prespecified complete functional proxy, not provider occurrence or generic suitability",
+    "A2_coverage_completeness": "the Y observation window covers the complete prespecified functional opportunity or a validated sampling design that supports absence inference",
+    "A3_detection_adequacy": "a prespecified sensitivity/detection model or validation result bounds false absence for the relevant function state",
+    "A4_missingness_separation": "missing/retrieval failure/device failure/occlusion/unsampled intervals are separable from observed negative states",
+    "A5_negative_decision_rule": "a prospective deterministic decision rule maps only adequate negative observations to F(k)=false; zeros without adequacy remain unresolved"
+  },
+  "synthetic_qualification_before_empirical_opening": {
+    "required": true,
+    "minimum_positive_sensitivity": 0.8,
+    "maximum_false_negative_rate": 0.2,
+    "minimum_negative_specificity": 0.95,
+    "must_include_missingness_worlds": true,
+    "must_include_sparse_event_worlds": true,
+    "must_include_observer_failure_worlds": true,
+    "must_show_unavailable_not_negative": true,
+    "candidate_specific_threshold_tuning_after_value_opening_forbidden": true
+  },
+  "candidate_specific_prevalue_requirements": {
+    "CREMV3-007": {
+      "function_state": "effective pollinia_transfer_contact_during_focal_flowering_opportunity",
+      "allowed_negative_evidence": "only a validated camera/observation design whose coverage and sensitivity are sufficient to rule out the required function over the frozen opportunity",
+      "forbidden_negative_shortcut": "zero recorded pollinia-bearing visits alone"
+    },
+    "BELV3-012": {
+      "function_state": "usable_live_oak_budbreak_resource_available_during_focal_emergence_opportunity",
+      "allowed_negative_evidence": "only directly observed and adequately sampled no-budbreak/no-usable-resource state for the frozen host-time key",
+      "forbidden_negative_shortcut": "missing budbreak record or no observation row"
+    }
+  },
+  "terminal_nonbiological_states": [
+    "unavailable",
+    "missing",
+    "retrieval_failure",
+    "incomplete_coverage",
+    "insufficient_detection_adequacy",
+    "observer_or_device_failure",
+    "unresolved_key"
+  ],
+  "forbidden_interpretations": {
+    "unavailable_is_biological_negative": false,
+    "missing_is_biological_negative": false,
+    "retrieval_failure_is_biological_negative": false,
+    "zero_without_detection_adequacy_is_biological_negative": false,
+    "provider_absence_is_functional_absence": false,
+    "Level_A_q95_is_cross_role_absence_tolerance": false
+  },
+  "empirical_value_opening_authorized_now": false,
+  "hard_endpoint_opening_authorized_now": false,
+  "soft_crosscheck_opening_authorized_now": false,
+  "process_knockout_authorized_now": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_at_protocol_freeze": 1
+}

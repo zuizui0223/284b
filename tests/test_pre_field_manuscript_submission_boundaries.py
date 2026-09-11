@@ -3,11 +3,12 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-MANUSCRIPT = ROOT / "manuscript" / "PREFIELD_FLAGSHIP_V0_5.md"
+MANUSCRIPT = ROOT / "manuscript" / "PREFIELD_FLAGSHIP_V0_6.md"
 PITCH = ROOT / "manuscript" / "ECOLOGY_LETTERS_300WORD_PITCH_V0_5.md"
 PROPOSAL = ROOT / "manuscript" / "ECOLOGY_LETTERS_METHOD_PROPOSAL_V0_5.md"
 PROPOSAL_FIGURE = ROOT / "manuscript" / "figures" / "ecology_letters_method_proposal_figure_v0_2.svg"
 ANTECEDENT_AUDIT = ROOT / "manuscript" / "CLOSER_ANTECEDENT_AUDIT_V0_2.md"
+COMPLIANCE = ROOT / "manuscript" / "ECOLOGY_LETTERS_COMPLIANCE_V0_2.md"
 SUMMARY = ROOT / "results" / "pre_field_identifiability_benchmark_summary_v0_1.json"
 V81 = ROOT / "results" / "product_b_level_c_operational_package_v8_1.json"
 
@@ -16,10 +17,21 @@ def _word_count(text: str) -> int:
     return len(re.findall(r"\b[\w'’-]+\b", text, flags=re.UNICODE))
 
 
+def _abstract(manuscript: str) -> str:
+    start = manuscript.index("## Abstract") + len("## Abstract")
+    end = manuscript.index("## 1. Introduction")
+    return manuscript[start:end]
+
+
 def _main_text(manuscript: str) -> str:
     start = manuscript.index("## 1. Introduction")
     end = manuscript.index("## Data and code availability")
     return manuscript[start:end]
+
+
+def test_ecology_letters_abstract_stays_within_method_limit():
+    manuscript = MANUSCRIPT.read_text(encoding="utf-8")
+    assert _word_count(_abstract(manuscript)) <= 150
 
 
 def test_ecology_letters_main_text_stays_within_method_limit():
@@ -38,6 +50,7 @@ def test_canonical_proposal_and_attachment_exist():
     assert PROPOSAL.exists()
     assert PROPOSAL_FIGURE.exists()
     assert ANTECEDENT_AUDIT.exists()
+    assert COMPLIANCE.exists()
     proposal = PROPOSAL.read_text(encoding="utf-8")
     figure = PROPOSAL_FIGURE.read_text(encoding="utf-8")
     assert "prospective relation endpoint" in proposal.lower()
@@ -70,7 +83,7 @@ def test_manuscript_keeps_level_c_focal_claims_closed():
 
 def test_manuscript_explicitly_positions_against_prior_work():
     manuscript = MANUSCRIPT.read_text(encoding="utf-8")
-    assert "The ingredients of this problem are not new" in manuscript
+    assert "The ingredients are established" in manuscript
     assert "Chadwick et al. (2024)" in manuscript
     assert "Latency, Identifiability, Effort and Scale" in manuscript
     assert "observation-process identifiability" in manuscript
@@ -78,7 +91,7 @@ def test_manuscript_explicitly_positions_against_prior_work():
     assert "MacKenzie et al. 2004" in manuscript
     assert "Rota et al. 2016" in manuscript
     assert "Weinstein & Graham 2017" in manuscript
-    assert "prospectivity itself is not the novelty claim" in manuscript
+    assert "prospectivity itself is not the novelty claim" in manuscript.lower()
 
 
 def test_manuscript_defines_specific_relation_endpoint_contract():
@@ -93,7 +106,7 @@ def test_manuscript_defines_specific_relation_endpoint_contract():
 
 def test_manuscript_uses_unambiguous_benchmark_notation():
     manuscript = MANUSCRIPT.read_text(encoding="utf-8")
-    assert "Let `a` be the probability that an event key is valid" in manuscript
+    assert "Let `a` be the probability that a key is valid" in manuscript
     assert "true violation prevalence `π`" in manuscript
     assert "`FPR_zero - FPR_gated = 1-a`" in manuscript
     assert "Let `v` be the probability that an event key is valid" not in manuscript

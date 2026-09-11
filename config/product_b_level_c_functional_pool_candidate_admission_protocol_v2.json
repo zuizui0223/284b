@@ -1,0 +1,140 @@
+{
+  "protocol_version": "product_b_level_c_functional_pool_candidate_admission_v2",
+  "protocol_state": "frozen_before_any_v2_candidate_search",
+  "scientific_target": "fresh_cross_role_event_to_functional_pool_directional_dependency_endpoints",
+  "hard_relation": "E(k)_implies_F(k)",
+  "purpose": "Create a finite response-blind candidate set from external biology in which the dependent event and the required biological function are defined before any focal source values, fitted role answers, or cross-role outcomes are inspected.",
+  "functional_pool_definition": "F(k) is the externally declared biological function required by the dependent event at the frozen key k. It may be supplied by one or more provider taxa, but it is not a generic taxon occurrence, richness, range-overlap, or habitat-suitability proxy.",
+  "functional_pool_routes": {
+    "complete_member_set": "F(k) may be represented as an OR over members only when the admissible provider universe is externally complete and member answers share the same event key and adequacy semantics.",
+    "direct_aggregate_channel": "F(k) may instead be measured by a separately validated aggregate functional channel that is prospectively adequate for both functional support and functional absence at the frozen event key.",
+    "route_mixing_forbidden": true,
+    "route_may_change_after_candidate_or_outcome_inspection": false
+  },
+  "eligible_relation_classes": [
+    "successful_reproduction_requires_pollination_or_fertilization_service",
+    "dependent_larval_or_juvenile_development_requires_compatible_host_resource_function",
+    "dependent_life_stage_transition_requires_compatible_partner_or_resource_function"
+  ],
+  "candidate_discovery_queries_frozen": [
+    "obligate pollination experiment reproductive success pollinator community exact study site phenology",
+    "pollinator exclusion experiment obligate specialized pollination exact locality flowering period",
+    "host dependent larval development compatible host range field experiment exact site phenology",
+    "obligate symbiosis life stage transition compatible partner community exact field site time window"
+  ],
+  "external_source_policy": {
+    "primary_literature_required_for_hard_direction": true,
+    "review_only_evidence_sufficient_for_hard_direction": false,
+    "directionality_must_be_stated_at_event_to_function_level": true,
+    "single_named_provider_exclusivity_required": false,
+    "absence_of_reported_alternative_provider_proves_pool_completeness": false,
+    "generic_occurrence_or_suitability_sufficient_as_functional_support": false,
+    "generic_occurrence_or_suitability_sufficient_as_functional_absence": false,
+    "zero_observed_service_without_detection_adequacy_is_functional_absence": false,
+    "relation_defining_observations_may_score_focal_endpoint": false
+  },
+  "admission_gates": {
+    "G1_event_function_relation": {
+      "required": true,
+      "rule": "A primary external source must support the exact directional implication from the dependent event to the required biological function; association, preference, co-occurrence, or improved performance alone is insufficient."
+    },
+    "G2_operational_space": {
+      "required": true,
+      "rule": "Published or independently frozen metadata must identify an exact or unambiguous relation population/site unit at the scale on which E(k) and F(k) are intended to be compared."
+    },
+    "G3_operational_time": {
+      "required": true,
+      "rule": "The biological event must have a prospectively defensible temporal key or window shared by the dependent event and required-function answer; broad species phenology cannot silently substitute for the event window."
+    },
+    "G4_role_estimands": {
+      "required": true,
+      "rule": "Role X must estimate the declared dependent event and Role Y must estimate the declared biological function F(k). A provider occurrence or suitability surface is admissible only as an input to a separately justified function estimator, never by relabelling."
+    },
+    "G5_focal_evidence_independence": {
+      "required": true,
+      "rule": "The evidence that establishes the external hard relation cannot also score the confirmatory focal endpoint. Independent or fresh event and function answer sources must be identifiable from metadata before focal values are opened."
+    },
+    "G6_management_and_intervention_scope": {
+      "required": true,
+      "rule": "Deliberate release, cultivation, experimental placement, supplementation, or other management that creates the focal relation-space pattern must be absent or the candidate is engineering-only."
+    },
+    "G7_fresh_endpoint_identity": {
+      "required": true,
+      "rule": "A Product-B endpoint or v1 candidate system already consumed or screened cannot be rescued by post hoc functional-pool relabelling. A v2 endpoint must be a genuinely fresh system discovered under this frozen function-level contract."
+    }
+  },
+  "candidate_registry_rule": {
+    "every_screened_candidate_must_be_logged": true,
+    "failed_candidates_must_remain_in_registry": true,
+    "v1_screened_system_reentry_forbidden": true,
+    "candidate_removal_after_source_or_model_inspection_forbidden": true,
+    "candidate_replacement_after_source_or_model_inspection_forbidden": true,
+    "maximum_candidates_screened": 12,
+    "target_fully_admitted_candidates": 3,
+    "candidate_hunting_hard_stop_rule": "Stop external candidate discovery when either 3 candidates pass all G1-G7 gates or 12 candidates have been screened, whichever happens first.",
+    "after_hard_stop": "Freeze the complete v2 registry. Only then may all fully admitted candidates enter one common, predeclared source-qualification contract. No replacement is allowed because a source is sparse, unavailable, inadequate, or biologically inconvenient."
+  },
+  "candidate_ordering_rule": {
+    "discovery_order_must_be_recorded": true,
+    "within_each_frozen_query": "record qualifying primary-literature systems in search-result discovery order before reading focal record counts, coordinates, fitted answers, or outcomes",
+    "duplicate_systems": "retain the first discovery record and cross-reference later sources",
+    "priority_after_admission": "none; all fully admitted candidates enter source qualification together"
+  },
+  "forbidden_before_registry_freeze": [
+    "GBIF_or_iNaturalist_occurrence_counts",
+    "focal_occurrence_coordinates",
+    "focal_visit_or_interaction_record_values",
+    "focal_reproductive_or_developmental_outcome_values",
+    "provider_member_or_function_overlap_maps",
+    "fitted_event_or_function_surfaces",
+    "cross_role_relation_statistics",
+    "Level_A_q95_import_as_cross_role_tolerance",
+    "candidate_ranking_by_expected_data_richness",
+    "candidate_ranking_by_expected_result_direction"
+  ],
+  "allowed_before_registry_freeze": [
+    "primary_literature_relation_evidence",
+    "published_methods_metadata_for_relation_site_population_and_time",
+    "data_repository_metadata_without_focal_counts_coordinates_or_values",
+    "taxonomic_and_life_history_metadata",
+    "whether_independent_event_and_function_answer_sources_exist_in_principle",
+    "whether_a_functional_pool_route_is_definable_in_principle"
+  ],
+  "screen_states": [
+    "fully_admitted_for_later_source_qualification",
+    "blocked_event_function_relation",
+    "blocked_operational_space",
+    "blocked_operational_time",
+    "blocked_role_estimand",
+    "blocked_focal_evidence_independence",
+    "engineering_only_management_confounded",
+    "excluded_previously_consumed_or_v1_screened_system"
+  ],
+  "post_registry_source_qualification": {
+    "authorized_only_after_registry_freeze": true,
+    "contract_must_be_frozen_before_opening_candidate_source_values": true,
+    "all_fully_admitted_candidates_evaluated_together": true,
+    "post_qualification_replacement_candidates_forbidden": true,
+    "required_terminal_states": [
+      "qualified_for_confirmatory_execution",
+      "source_unavailable",
+      "event_channel_inadequate",
+      "functional_channel_inadequate",
+      "event_key_mismatch",
+      "evidence_independence_failed"
+    ],
+    "unavailable_is_biological_negative": false,
+    "inadequate_is_biological_negative": false,
+    "missing_is_biological_negative": false,
+    "zero_without_prespecified_detection_adequacy_is_biological_negative": false
+  },
+  "candidate_search_authorized_after_this_protocol_freeze": true,
+  "focal_data_opening_authorized_before_registry_freeze": false,
+  "hard_invariant_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_at_protocol_freeze": 1
+}

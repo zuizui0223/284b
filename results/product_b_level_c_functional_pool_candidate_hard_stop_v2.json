@@ -1,0 +1,89 @@
+{
+  "result_version": "product_b_level_c_functional_pool_candidate_hard_stop_v2",
+  "result_state": "finite_candidate_screen_closed_without_admission",
+  "protocol": "config/product_b_level_c_functional_pool_candidate_admission_protocol_v2.json",
+  "registry": "registry/level_c_functional_pool_candidate_screen_v2.csv",
+  "source_qualification_contract": "config/product_b_level_c_functional_pool_source_qualification_v2.json",
+  "scientific_target": "fresh_cross_role_event_to_functional_pool_directional_dependency_endpoints",
+  "hard_relation": "E(k)_implies_F(k)",
+  "screened_candidates": 12,
+  "fully_admitted_candidates": 0,
+  "candidate_ids_in_frozen_discovery_order": [
+    "SMILV2-001",
+    "ARLYV2-002",
+    "YUFIV2-003",
+    "PHALV2-004",
+    "HALOV2-005",
+    "ORCHV2-006",
+    "EULAV2-007",
+    "URBPLV2-008",
+    "AUCV2-009",
+    "CYMDV2-010",
+    "PACHV2-011",
+    "PELTV2-012"
+  ],
+  "queries_reached_in_order": [
+    "obligate pollination experiment reproductive success pollinator community exact study site phenology",
+    "pollinator exclusion experiment obligate specialized pollination exact locality flowering period"
+  ],
+  "queries_not_reached_due_to_hard_stop": [
+    "host dependent larval development compatible host range field experiment exact site phenology",
+    "obligate symbiosis life stage transition compatible partner community exact field site time window"
+  ],
+  "hard_stop_reached": true,
+  "hard_stop_reason": "maximum_candidates_screened_reached_before_three_admissions",
+  "candidate_hunting_closed_for_v2": true,
+  "screen_state_counts": {
+    "excluded_previously_consumed_or_v1_screened_system": 1,
+    "blocked_event_function_relation": 7,
+    "blocked_focal_evidence_independence": 3,
+    "blocked_operational_space": 1,
+    "fully_admitted_for_later_source_qualification": 0
+  },
+  "functional_pool_diagnostic": {
+    "nonexcluded_candidates_passing_G1_event_function_relation": 4,
+    "candidate_ids_passing_G1": [
+      "YUFIV2-003",
+      "ORCHV2-006",
+      "CYMDV2-010",
+      "PELTV2-012"
+    ],
+    "candidate_ids_passing_G1_through_G4_then_blocked_at_G5": [
+      "YUFIV2-003",
+      "ORCHV2-006",
+      "CYMDV2-010"
+    ],
+    "candidate_ids_passing_G1_then_blocked_at_G2": [
+      "PELTV2-012"
+    ],
+    "interpretation": "Function-level semantics materially improve biological relation closure relative to a single-named-provider contract, but no fresh confirmatory endpoint survives independent-source and exact-key admission. This is an admission result, not a biological negative result."
+  },
+  "source_qualification": {
+    "contract_was_frozen_before_candidate_source_values": true,
+    "authorized_for_execution_now": false,
+    "reason": "zero_candidates_passed_all_G1_G7_admission_gates",
+    "candidate_source_values_opened": false,
+    "focal_occurrence_or_interaction_counts_opened": false,
+    "focal_reproductive_or_developmental_values_opened": false,
+    "fitted_event_or_function_surfaces_opened": false,
+    "cross_role_relation_statistics_opened": false,
+    "level_a_q95_imported": false,
+    "unavailable_interpreted_as_biological_negative": false,
+    "missing_interpreted_as_biological_negative": false,
+    "zero_without_detection_adequacy_interpreted_as_biological_negative": false
+  },
+  "post_cap_policy": {
+    "replacement_candidates_authorized": false,
+    "query_3_or_query_4_candidate_screening_authorized": false,
+    "v1_candidate_rescue_authorized": false,
+    "relax_G5_to_occurrence_overlap_authorized": false,
+    "relax_functional_absence_adequacy_authorized": false
+  },
+  "hard_invariant_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_after_v2_hard_stop": 1
+}

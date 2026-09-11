@@ -1,0 +1,78 @@
+{
+  "qualification_version": "product_b_level_c_functional_pool_source_qualification_v2",
+  "qualification_state": "frozen_before_any_v2_focal_source_values_are_opened",
+  "applies_to": "all_fully_admitted_v2_candidates_after_registry_freeze",
+  "scientific_relation": "E(k)_implies_F(k)",
+  "purpose": "Determine whether independently sourced event and functional-pool channels can score the frozen cross-role endpoint without converting missingness, source failure, or weak observation into biological absence.",
+  "common_requirements": {
+    "same_frozen_event_key_required": true,
+    "relation_defining_source_may_score_focal_endpoint": false,
+    "candidate_specific_relaxation_after_source_inspection_forbidden": true,
+    "all_admitted_candidates_use_same_qualification_logic": true,
+    "replacement_candidate_after_qualification_forbidden": true
+  },
+  "event_channel": {
+    "must_measure_declared_event_estimand": true,
+    "generic_occurrence_or_suitability_is_event": false,
+    "positive_event_must_be_supported_by_prespecified_measurement_rule": true,
+    "event_unavailable_is_event_negative": false,
+    "event_missing_is_event_negative": false
+  },
+  "functional_channel": {
+    "must_measure_declared_biological_function": true,
+    "generic_provider_occurrence_or_suitability_is_function": false,
+    "member_OR_route_requires_externally_complete_provider_universe": true,
+    "direct_aggregate_route_requires_independent_validation": true,
+    "hard_negative_requires_prespecified_absence_adequacy": true,
+    "absence_adequacy_requires": [
+      "observation_or_sampling_domain_matches_frozen_key",
+      "effort_or_coverage_is_observed_and_meets_a_frozen_minimum",
+      "detection_or_capture_process_is capable_of_resolving_functional_absence_at_the_declared_scale",
+      "no_post_outcome_change_to_function_definition_or_detection_threshold"
+    ],
+    "zero_records_without_absence_adequacy_is_function_negative": false,
+    "source_unavailable_is_function_negative": false,
+    "missing_is_function_negative": false,
+    "failed_download_or_API_is_function_negative": false,
+    "empty_query_result_is_function_negative": false,
+    "provider_not_in_database_is_function_negative": false
+  },
+  "candidate_terminal_states": [
+    "qualified_for_confirmatory_execution",
+    "source_unavailable",
+    "event_channel_inadequate",
+    "functional_channel_inadequate",
+    "event_key_mismatch",
+    "evidence_independence_failed"
+  ],
+  "terminal_state_semantics": {
+    "qualified_for_confirmatory_execution": "Both independent channels exist and meet the frozen key, estimand, independence, and adequacy requirements. This authorizes endpoint execution but is not itself empirical evidence.",
+    "source_unavailable": "At least one required source cannot be accessed or does not expose the needed frozen-key records. This is an epistemic availability state, not a biological state.",
+    "event_channel_inadequate": "The event source exists but cannot validly measure E(k) under the frozen estimand/key.",
+    "functional_channel_inadequate": "The function source exists but cannot validly measure F(k), especially functional absence, under the frozen estimand/key.",
+    "event_key_mismatch": "The event and function sources cannot be aligned to the same prospectively frozen biological opportunity.",
+    "evidence_independence_failed": "The relation-defining evidence and focal endpoint answers are not sufficiently independent."
+  },
+  "confirmatory_key_states_if_candidate_qualifies": {
+    "supported": "E(k) is adequately positive and F(k) is adequately positive.",
+    "violated": "E(k) is adequately positive and F(k) is adequately negative under the prespecified functional-absence adequacy rule.",
+    "unresolved": "E(k) is positive but F(k) cannot be assigned an adequate positive or negative state, including unavailable, missing, failed retrieval, weak effort, or zero without sufficient detection adequacy.",
+    "not_triggered": "E(k) is not adequately positive; this key does not test the directional implication."
+  },
+  "hard_violation_license": {
+    "requires_event_positive": true,
+    "requires_function_negative": true,
+    "requires_function_absence_adequacy": true,
+    "unavailable_can_license_violation": false,
+    "missing_can_license_violation": false,
+    "zero_without_detection_adequacy_can_license_violation": false
+  },
+  "qualification_opens_focal_outcome_values": false,
+  "hard_invariant_opening_authorized_by_this_file": false,
+  "soft_crosscheck_opening_authorized_by_this_file": false,
+  "process_knockout_authorized_by_this_file": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_at_qualification_freeze": 1
+}

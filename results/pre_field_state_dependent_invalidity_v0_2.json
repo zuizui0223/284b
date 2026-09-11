@@ -1,0 +1,53 @@
+{
+  "audit_version": "pre_field_state_dependent_invalidity_v0_2",
+  "empirical_ledger_increment": 0,
+  "focal_level_c_values_read": false,
+  "general_result": {
+    "apparent_true_violation_sensitivity_gain": "1-a0",
+    "equal_validity_corollary": "if a1=a0=a, both increments equal 1-a",
+    "false_violation_inflation": "1-a1",
+    "notation": {
+      "a0": "P(valid key | F=false)",
+      "a1": "P(valid key | F=true)",
+      "q": "key sensitivity conditional on F=true and valid key",
+      "sp": "specificity conditional on F=false and valid key"
+    }
+  },
+  "interpretation": "The original 1-a identity is exact when validity is class-independent. With state-dependent validity, the two increments remain exact but are indexed by their own invalid-state masses. This audit is synthetic and does not estimate candidate-specific missingness or detection.",
+  "original_mixed_qualified_equal_validity_corollary": {
+    "parameters": {
+      "a0": 0.684,
+      "a1": 0.684,
+      "q": 0.8653439695383153,
+      "sp": 0.95
+    },
+    "result": {
+      "apparent_sensitivity_gain": 0.31599999999999995,
+      "false_violation_inflation": 0.31599999999999995,
+      "gated_false_violation_rate": 0.09210472483579236,
+      "gated_true_violation_sensitivity": 0.6498,
+      "invalid_mass_if_function_absent": 0.31599999999999995,
+      "invalid_mass_if_function_present": 0.31599999999999995,
+      "zero_false_violation_rate": 0.4081047248357923,
+      "zero_true_violation_sensitivity": 0.9658
+    }
+  },
+  "representative_state_dependent_scenario": {
+    "parameters": {
+      "a0": 0.9,
+      "a1": 0.7,
+      "q": 0.95,
+      "sp": 0.99
+    },
+    "result": {
+      "apparent_sensitivity_gain": 0.09999999999999998,
+      "false_violation_inflation": 0.30000000000000004,
+      "gated_false_violation_rate": 0.03500000000000003,
+      "gated_true_violation_sensitivity": 0.891,
+      "invalid_mass_if_function_absent": 0.09999999999999998,
+      "invalid_mass_if_function_present": 0.30000000000000004,
+      "zero_false_violation_rate": 0.3350000000000001,
+      "zero_true_violation_sensitivity": 0.991
+    }
+  }
+}

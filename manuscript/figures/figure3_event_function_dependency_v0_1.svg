@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+<rect width="1200" height="900" fill="white"/>
+<style>text{font-family:Arial,sans-serif;fill:#111}.h{font-size:24px;font-weight:bold}.sh{font-size:18px;font-weight:bold}.b{font-size:14px}.s{font-size:12px}.xs{font-size:10.5px}.box{fill:white;stroke:#333;stroke-width:1.4}.soft{fill:#f7f7f7;stroke:#777;stroke-width:1.1}.bad{fill:#fafafa;stroke:#777;stroke-width:1.1;stroke-dasharray:5 4}.arrow{stroke:#222;stroke-width:1.7;fill:none;marker-end:url(#m)}.dash{stroke:#777;stroke-width:1.3;stroke-dasharray:5 4;fill:none;marker-end:url(#m)}</style>
+<defs><marker id="m" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#222"/></marker></defs>
+<text x="45" y="40" class="h">Figure 3. Hard dependency belongs to biological events and functions</text>
+<text x="45" y="68" class="b">Raw distribution overlap is not automatically the relation that biology requires.</text>
+
+<text x="45" y="112" class="sh">A  Rejected shortcut: raw surface containment</text>
+<rect x="50" y="132" width="530" height="250" rx="10" class="soft"/>
+<rect x="85" y="168" width="195" height="120" rx="7" class="bad"/><text x="182" y="196" class="sh" text-anchor="middle">Dependent role</text><text x="182" y="222" class="b" text-anchor="middle">adult occurrence /</text><text x="182" y="242" class="b" text-anchor="middle">suitability surface</text><text x="182" y="270" class="xs" text-anchor="middle">persistence, dispersal, legacy</text>
+<rect x="350" y="168" width="195" height="120" rx="7" class="bad"/><text x="447" y="196" class="sh" text-anchor="middle">Provider role</text><text x="447" y="222" class="b" text-anchor="middle">occurrence /</text><text x="447" y="242" class="b" text-anchor="middle">suitability surface</text><text x="447" y="270" class="xs" text-anchor="middle">different mobility and sampling</text>
+<line x1="280" y1="228" x2="350" y2="228" class="dash"/>
+<text x="315" y="215" class="s" text-anchor="middle">not required to match</text>
+<text x="315" y="329" class="sh" text-anchor="middle">Adult plant occupancy ⊄ current pollinator occupancy is not a hard contradiction.</text>
+<text x="315" y="353" class="s" text-anchor="middle">Different roles may legitimately use different estimators, predictors, accessible areas and raw scales.</text>
+
+<text x="620" y="112" class="sh">B  Accepted object: event-key implication</text>
+<rect x="625" y="132" width="525" height="250" rx="10" class="soft"/>
+<rect x="660" y="164" width="165" height="76" rx="7" class="box"/><text x="742" y="192" class="sh" text-anchor="middle">E(k)</text><text x="742" y="216" class="b" text-anchor="middle">dependent event</text>
+<line x1="825" y1="202" x2="923" y2="202" class="arrow"/>
+<rect x="933" y="164" width="180" height="76" rx="7" class="box"/><text x="1023" y="192" class="sh" text-anchor="middle">F(k)</text><text x="1023" y="216" class="b" text-anchor="middle">required function</text>
+<rect x="665" y="280" width="440" height="60" rx="7" class="box"/><text x="885" y="305" class="b" text-anchor="middle">same frozen opportunity key k</text><text x="885" y="327" class="s" text-anchor="middle">e.g. plant site × flowering window; host patch × developmental interval</text>
+<text x="885" y="362" class="s" text-anchor="middle">Hard contradiction requires E(k)=true and an adequately authorized F(k)=false.</text>
+
+<text x="45" y="438" class="sh">C  Two valid routes to the required functional side</text>
+<rect x="50" y="458" width="1100" height="210" rx="10" class="soft"/>
+<rect x="80" y="490" width="470" height="140" rx="7" class="box"/>
+<text x="315" y="517" class="sh" text-anchor="middle">Route 1 — complete provider set</text>
+<rect x="105" y="545" width="95" height="48" rx="6" class="box"/><text x="152" y="574" class="b" text-anchor="middle">S₁(k)</text>
+<rect x="220" y="545" width="95" height="48" rx="6" class="box"/><text x="267" y="574" class="b" text-anchor="middle">S₂(k)</text>
+<text x="338" y="574" class="b">…</text>
+<rect x="365" y="545" width="95" height="48" rx="6" class="box"/><text x="412" y="574" class="b" text-anchor="middle">Sᵣ(k)</text>
+<line x1="460" y1="569" x2="510" y2="569" class="arrow"/>
+<text x="315" y="615" class="s" text-anchor="middle">If R(k) is externally complete: F(k)=ORᵣ∈R(k) Sᵣ(k)</text>
+
+<rect x="650" y="490" width="470" height="140" rx="7" class="box"/>
+<text x="885" y="517" class="sh" text-anchor="middle">Route 2 — direct aggregate function</text>
+<rect x="705" y="544" width="355" height="52" rx="6" class="box"/><text x="882" y="565" class="b" text-anchor="middle">independent functional channel F(k)</text><text x="882" y="585" class="s" text-anchor="middle">effective pollination / compatible resource / accessible prey</text>
+<text x="885" y="615" class="s" text-anchor="middle">The channel itself must be adequate for support and absence at the frozen key.</text>
+
+<text x="45" y="724" class="sh">D  Negative evidence is where identifiability matters</text>
+<rect x="50" y="744" width="1100" height="105" rx="10" class="soft"/>
+<rect x="83" y="770" width="280" height="54" rx="6" class="box"/><text x="223" y="793" class="b" text-anchor="middle">represented providers all absent</text><text x="223" y="813" class="s" text-anchor="middle">provider universe incomplete</text>
+<line x1="363" y1="797" x2="440" y2="797" class="arrow"/>
+<rect x="448" y="770" width="210" height="54" rx="6" class="box"/><text x="553" y="802" class="sh" text-anchor="middle">unresolved</text>
+<rect x="718" y="770" width="250" height="54" rx="6" class="box"/><text x="843" y="793" class="b" text-anchor="middle">direct F channel calibrated</text><text x="843" y="813" class="s" text-anchor="middle">F(k)=false adequately established</text>
+<line x1="968" y1="797" x2="1015" y2="797" class="arrow"/>
+<rect x="1023" y="770" width="100" height="54" rx="6" class="box"/><text x="1073" y="793" class="xs" text-anchor="middle">hard negative</text><text x="1073" y="811" class="xs" text-anchor="middle">potentially admissible</text>
+<text x="600" y="875" class="s" text-anchor="middle">Close the alternative-provider universe, or close the aggregate functional observation channel. Neither closure can be assumed from the other.</text>
+</svg>

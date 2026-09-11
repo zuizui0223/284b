@@ -4,7 +4,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT = ROOT / "manuscript" / "PREFIELD_FLAGSHIP_V0_3.md"
-PITCH = ROOT / "manuscript" / "ECOLOGY_LETTERS_300WORD_PITCH_V0_2.md"
+PITCH = ROOT / "manuscript" / "ECOLOGY_LETTERS_300WORD_PITCH_V0_3.md"
 SUMMARY = ROOT / "results" / "pre_field_identifiability_benchmark_summary_v0_1.json"
 V81 = ROOT / "results" / "product_b_level_c_operational_package_v8_1.json"
 

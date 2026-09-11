@@ -19,6 +19,8 @@ Maximum display items: 6
 6. **Table 1 — relation-endpoint claim/evidence matrix**  
    `manuscript/TABLE1_CLAIM_EVIDENCE_MATRIX_V0_1.md`
 
+Canonical captions: `manuscript/FULL_SUBMISSION_FIGURE_CAPTIONS_V0_1.md`.
+
 ## Canonical claim boundary
 
 Use `manuscript/CLAIM_EVIDENCE_LEDGER_V0_4.md`. Older ledger versions are provenance only for submission-facing claims.

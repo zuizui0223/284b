@@ -1,5 +1,6 @@
 import importlib.util
 import math
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -8,6 +9,7 @@ SCRIPT = ROOT / "scripts" / "run_pre_field_identifiability_benchmark.py"
 spec = importlib.util.spec_from_file_location("pre_field_benchmark", SCRIPT)
 bench = importlib.util.module_from_spec(spec)
 assert spec.loader is not None
+sys.modules[spec.name] = bench
 spec.loader.exec_module(bench)
 
 

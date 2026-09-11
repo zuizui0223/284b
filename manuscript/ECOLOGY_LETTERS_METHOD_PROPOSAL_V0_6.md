@@ -82,7 +82,7 @@ The package now includes:
 
 ## Quantitative figure to attach
 
-Use `manuscript/figures/ecology_letters_method_proposal_figure_v0_4.svg`.
+Use `manuscript/figures/ecology_letters_method_proposal_figure_v0_5.svg`.
 
 The figure explicitly distinguishes biological replication (12 taxa) from repeated cell diagnostics and shows the generalized `a1/a0` decomposition. It contains no focal Level-C biological values.
 

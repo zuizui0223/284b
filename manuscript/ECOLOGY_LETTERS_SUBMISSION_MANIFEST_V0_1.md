@@ -7,9 +7,11 @@ This file is the single routing surface for the pre-field Paper 1 package. Older
 - 300-word proposal: `manuscript/ECOLOGY_LETTERS_300WORD_PITCH_V0_5.md`
 - full proposal rationale: `manuscript/ECOLOGY_LETTERS_METHOD_PROPOSAL_V0_5.md`
 - proposal email wrapper: `manuscript/ECOLOGY_LETTERS_PROPOSAL_EMAIL_V0_2.md`
-- proposal figure: `manuscript/figures/ecology_letters_method_proposal_figure_v0_2.svg`
+- proposal figure: `manuscript/figures/ecology_letters_method_proposal_figure_v0_3.svg`
 - closer-antecedent audit: `manuscript/CLOSER_ANTECEDENT_AUDIT_V0_2.md`
 - desk-review positioning matrix: `manuscript/EDITORIAL_POSITIONING_MATRIX_V0_1.md`
+- independent mathematical audit: `manuscript/INDEPENDENT_MATH_AUDIT_V0_1.md`
+- submission cascade: `manuscript/SUBMISSION_CASCADE_V0_1.md`
 - compliance checklist: `manuscript/ECOLOGY_LETTERS_COMPLIANCE_V0_2.md`
 
 ## Full manuscript if proposal is invited
@@ -46,7 +48,7 @@ This file is the single routing surface for the pre-field Paper 1 package. Older
 1. freeze final author list;
 2. insert current affiliation and corresponding-author email;
 3. add one concise qualification sentence for each coauthor only when directly relevant;
-4. export proposal figure v0.2 to a broadly viewable attachment format if required by the editorial office;
+4. use the visually audited v0.3 proposal figure as the attachment; export to another broadly viewable format only if requested by the editorial office;
 5. perform final proofreading of the exact email body without changing scientific thresholds or endpoint semantics.
 
 ## Remaining full-submission fields if invited

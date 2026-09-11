@@ -7,12 +7,15 @@
   "hard_stop_reached": true,
   "hard_stop_reason": "maximum_candidates_screened_reached_before_three_architecture_qualifications",
   "candidate_hunting_closed_for_v3": true,
-  "queries_reached_in_order": [
+  "queries_used_for_candidate_admission_in_order": [
     "obligate pollination reproductive dependence independent monitoring dataset exact site phenology",
     "pollinator exclusion reproductive success independent visitation monitoring same locality season",
     "host dependent development independent host monitoring dataset exact site phenology"
   ],
-  "query_4_not_reached_due_to_hard_stop": "obligate symbiosis stage transition independent partner monitoring exact site time window",
+  "query4_candidate_admission_performed": false,
+  "postcap_query4_metadata_search_deviation_logged": true,
+  "postcap_query4_deviation_receipt": "results/product_b_level_c_v3_postcap_query_deviation.json",
+  "query4_results_quarantined_from_v3": true,
   "screen_state_counts": {
     "architecture_qualified_for_source_qualification": 2,
     "blocked_hard_relation_source": 5,
@@ -27,7 +30,7 @@
   },
   "post_cap_policy": {
     "replacement_candidates_authorized": false,
-    "query_4_screening_authorized": false,
+    "query_4_candidate_screening_authorized": false,
     "v1_or_v2_rescue_authorized": false,
     "architecture_gate_relaxation_authorized": false
   },

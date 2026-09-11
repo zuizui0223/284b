@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50mm" height="60mm" viewBox="0 0 500 600">
+<rect width="500" height="600" fill="white"/>
+<style>
+text{font-family:Arial,sans-serif;fill:#111}.title{font-size:22px;font-weight:bold}.h{font-size:18px;font-weight:bold}.b{font-size:15px}.s{font-size:12px}.tiny{font-size:10px}.box{fill:white;stroke:#333;stroke-width:1.7}.source{fill:#eaf2f8;stroke:#315b7a;stroke-width:1.7}.contract{fill:#f5eef8;stroke:#6c4b7d;stroke-width:2}.open{fill:#eaf7ee;stroke:#3e7250;stroke-width:1.8}.hold{fill:#fff4e5;stroke:#8a6227;stroke-width:1.8}.arrow{stroke:#333;stroke-width:2;fill:none;marker-end:url(#m)}</style>
+<defs><marker id="m" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#333"/></marker></defs>
+
+<text x="250" y="35" class="title" text-anchor="middle">From ecological answers</text>
+<text x="250" y="61" class="title" text-anchor="middle">to defensible relations</text>
+
+<text x="250" y="103" class="h" text-anchor="middle">Independent answers</text>
+<rect x="55" y="122" width="170" height="72" rx="12" class="source"/>
+<text x="140" y="151" class="b" text-anchor="middle">answer A</text>
+<text x="140" y="173" class="s" text-anchor="middle">source / role specific</text>
+<rect x="275" y="122" width="170" height="72" rx="12" class="source"/>
+<text x="360" y="151" class="b" text-anchor="middle">answer B</text>
+<text x="360" y="173" class="s" text-anchor="middle">source / role specific</text>
+<line x1="140" y1="194" x2="210" y2="236" class="arrow"/>
+<line x1="360" y1="194" x2="290" y2="236" class="arrow"/>
+
+<rect x="90" y="238" width="320" height="130" rx="16" class="contract"/>
+<text x="250" y="267" class="h" text-anchor="middle">relation-endpoint contract</text>
+<text x="250" y="294" class="b" text-anchor="middle">1 relation  ·  2 event/key space</text>
+<text x="250" y="318" class="b" text-anchor="middle">3 adapters  ·  4 adequacy</text>
+<text x="250" y="342" class="b" text-anchor="middle">5 opening rule</text>
+<text x="250" y="359" class="tiny" text-anchor="middle">freeze before focal outcomes are viewed</text>
+
+<line x1="250" y1="368" x2="250" y2="405" class="arrow"/>
+<text x="250" y="429" class="h" text-anchor="middle">Only identified states enter the claim</text>
+
+<rect x="35" y="454" width="205" height="104" rx="14" class="open"/>
+<text x="137" y="480" class="h" text-anchor="middle">same target</text>
+<text x="137" y="505" class="b" text-anchor="middle">12 held-out taxa</text>
+<text x="137" y="528" class="b" text-anchor="middle">0 / 12 with envelope</text>
+<text x="137" y="548" class="b" text-anchor="middle">exceedance</text>
+
+<rect x="260" y="454" width="205" height="104" rx="14" class="hold"/>
+<text x="362" y="480" class="h" text-anchor="middle">hard dependency</text>
+<text x="362" y="505" class="b" text-anchor="middle">invalid / missing ≠ absent</text>
+<text x="362" y="528" class="b" text-anchor="middle">unqualified negative</text>
+<text x="362" y="548" class="b" text-anchor="middle">→ unresolved</text>
+
+<text x="250" y="586" class="s" text-anchor="middle">When the falsifying state is not identifiable, new measurement—not stronger interpretation—is required.</text>
+</svg>

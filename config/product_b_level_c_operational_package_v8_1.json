@@ -1,0 +1,30 @@
+{
+  "version": "product_b_level_c_operational_package_v8_1",
+  "state": "prospectively_frozen_before_any_field_calibration_data_entry",
+  "inherits": "product_b_level_c_operational_package_v8",
+  "repair_reason": "v8 contract required a one-sided 95 percent exact-or-more-conservative confidence rule while the frozen v8 evaluator used a Wilson score lower bound",
+  "repair_scope": "confidence_bound_implementation_only",
+  "candidate_ids": ["CREMV3-007", "BELV3-012"],
+  "scientific_thresholds_unchanged": {
+    "sensitivity_min": 0.80,
+    "hard_fnr_max": 0.20,
+    "specificity_min": 0.95,
+    "confidence_rule": "one_sided_95_percent_exact_clopper_pearson"
+  },
+  "minimum_clean_design_unchanged": {
+    "gold_positive_required": 30,
+    "gold_negative_required": 60,
+    "post_hoc_sample_size_extension_after_failure_forbidden": true
+  },
+  "missingness_and_failure_rules_unchanged": true,
+  "candidate_specific_opening_unchanged": true,
+  "focal_cross_role_values_opening_before_gate": false,
+  "hard_invariant_opening_before_gate": false,
+  "soft_crosscheck_opening_before_gate": false,
+  "process_knockout_opening_before_gate": false,
+  "field_calibration_data_seen_before_repair": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_at_v8_1_freeze": 1
+}

@@ -1,0 +1,19 @@
+{
+  "receipt_version": "product_b_level_c_v3_postcap_query_deviation_v1",
+  "deviation": "After candidate 12 closed the finite v3 screen, frozen discovery query 4 was inadvertently issued once as a read-only metadata web search.",
+  "hard_stop_already_reached": true,
+  "query4_candidate_admission_performed": false,
+  "query4_candidate_gate_scoring_performed": false,
+  "query4_source_qualification_performed": false,
+  "query4_focal_values_opened": false,
+  "query4_candidate_replacement_performed": false,
+  "query4_results_quarantined_from_v3": true,
+  "registry_modified_from_query4": false,
+  "qualified_candidate_ids_unchanged": ["CREMV3-007", "BELV3-012"],
+  "candidate_hunting_remains_closed_for_v3": true,
+  "interpretation": "This is a process-deviation receipt, not a scientific result. The metadata search cannot contribute a v3 candidate, rescue, ranking, source qualification, or empirical endpoint.",
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_after_receipt": 1
+}

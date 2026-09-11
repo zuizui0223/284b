@@ -4,7 +4,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT = ROOT / "manuscript" / "PREFIELD_FLAGSHIP_V0_3.md"
-PITCH = ROOT / "manuscript" / "ECOLOGY_LETTERS_300WORD_PITCH_V0_3.md"
+PITCH = ROOT / "manuscript" / "ECOLOGY_LETTERS_300WORD_PITCH_V0_4.md"
+PROPOSAL = ROOT / "manuscript" / "ECOLOGY_LETTERS_METHOD_PROPOSAL_V0_4.md"
+PROPOSAL_FIGURE = ROOT / "manuscript" / "figures" / "ecology_letters_method_proposal_figure_v0_1.svg"
 SUMMARY = ROOT / "results" / "pre_field_identifiability_benchmark_summary_v0_1.json"
 V81 = ROOT / "results" / "product_b_level_c_operational_package_v8_1.json"
 
@@ -28,6 +30,14 @@ def test_unsolicited_method_pitch_is_at_most_300_words():
     pitch = PITCH.read_text(encoding="utf-8")
     body = pitch.split("\n\n", 1)[1]
     assert _word_count(body) <= 300
+
+
+def test_canonical_proposal_and_attachment_exist():
+    assert PROPOSAL.exists()
+    assert PROPOSAL_FIGURE.exists()
+    proposal = PROPOSAL.read_text(encoding="utf-8")
+    assert "prospective relation endpoint" in proposal.lower()
+    assert "1-a" in proposal
 
 
 def test_manuscript_keeps_level_c_focal_claims_closed():

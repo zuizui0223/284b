@@ -1,0 +1,43 @@
+{
+  "result_version": "product_b_level_c_source_architecture_hard_stop_v3",
+  "result_state": "finite_architecture_screen_closed_with_two_qualified_candidates",
+  "screened_candidates": 12,
+  "architecture_qualified_candidates": 2,
+  "qualified_candidate_ids": ["CREMV3-007", "BELV3-012"],
+  "hard_stop_reached": true,
+  "hard_stop_reason": "maximum_candidates_screened_reached_before_three_architecture_qualifications",
+  "candidate_hunting_closed_for_v3": true,
+  "queries_reached_in_order": [
+    "obligate pollination reproductive dependence independent monitoring dataset exact site phenology",
+    "pollinator exclusion reproductive success independent visitation monitoring same locality season",
+    "host dependent development independent host monitoring dataset exact site phenology"
+  ],
+  "query_4_not_reached_due_to_hard_stop": "obligate symbiosis stage transition independent partner monitoring exact site time window",
+  "screen_state_counts": {
+    "architecture_qualified_for_source_qualification": 2,
+    "blocked_hard_relation_source": 5,
+    "blocked_estimand_alignment": 2,
+    "blocked_function_answer_source_identity": 1,
+    "blocked_management_scope": 1,
+    "excluded_prior_level_c_screen": 1
+  },
+  "qualified_architecture_summary": {
+    "CREMV3-007": "external breeding-system R plus distinct same-key fruit X and pollinia-carrying camera Y streams",
+    "BELV3-012": "independent host-specificity R plus distinct natural adult-emergence X and live-oak budbreak Y streams"
+  },
+  "post_cap_policy": {
+    "replacement_candidates_authorized": false,
+    "query_4_screening_authorized": false,
+    "v1_or_v2_rescue_authorized": false,
+    "architecture_gate_relaxation_authorized": false
+  },
+  "source_qualification_authorized_for_qualified_candidates": true,
+  "focal_values_opened_during_architecture_screen": false,
+  "hard_invariant_opening_authorized": false,
+  "soft_crosscheck_opening_authorized": false,
+  "process_knockout_authorized": false,
+  "counts_as_empirical_evidence": false,
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "global_284b_empirical_ledger_after_architecture_screen": 1
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ecology_letters_stage1_release_candidate_v0_2",
-  "source_tree_commit": "36d3d3c414b1ae18ccd27f57c4f109997bdab64e",
+  "source_tree_commit": "8a1dbfb2bc4d03e3ade39e9b6b20173ab71aac4e",
   "canonical_blob_sha1": {
     "config/ecology_letters_stage1_human_metadata_template.json": "fa78c7497aa148fb1f80546bc2a2d861558cdbd5",
     "config/relation_endpoint_contract_example.json": "0851da641504b5e2774a6f9494f7fb82afd43af4",
@@ -17,13 +17,13 @@
     "manuscript/figures/ecology_letters_method_proposal_figure_v0_5.svg": "17d83f6fd55b04f65546826d14a60d27af16f831",
     "results/relation_endpoint_contract_example_freeze_v0_1.json": "70ce79724de8988313346588743bc05e91c8e179",
     "results/relation_layer_separation_v0_1.json": "7521fc6947ed71ea168770d58624199d8f2c05a5",
-    "scripts/audit_ecology_letters_stage1_send_readiness.py": "bde602993bcd1c0ac26a0967627517af6c94c4f0",
+    "scripts/audit_ecology_letters_stage1_send_readiness.py": "58bf4abb73803acc8f6b115c01f9799b7eaed085",
     "scripts/freeze_relation_endpoint_contract.py": "2453f5c5cd4d1e5cb0f0b1b1a277bb44c39e98cc",
     "scripts/relation_endpoint_contract.py": "7529d6e65e7780f470c2d844d943a426f86cf6a7",
     "scripts/relation_endpoint_quickstart.py": "0b39b86f4d132b4c1b19d98b7621980964f8202f",
     "scripts/render_ecology_letters_stage1_email.py": "c822b19f5144ca3370c285f44af3878d8106c673"
   },
-  "package_identity_sha256": "2c14142b95e9dd4b98a363edb4d8391ff53b693c5026fb971d77c773801c9da7",
+  "package_identity_sha256": "2787b4462850458dbbb01f975ef71d7171f553e2f4f7898c851a43a1548fea87",
   "identity_semantics": "sha256(canonical_json(schema_version + source_tree_commit + sorted path->git_blob_sha1 map))",
   "canonical_file_count": 20,
   "human_metadata_embedded": false,

@@ -1,0 +1,127 @@
+# Relation-endpoint quickstart
+
+This quickstart shows how to use the reference implementation as a layer **above** ecological estimators. It does not fit an SDM, occupancy model, JSDM, phenology model or classifier. Those upstream methods produce answers; the relation-endpoint contract determines what joint biological relation those answers are allowed to test.
+
+Run:
+
+`python scripts/relation_endpoint_quickstart.py`
+
+The output is JSON and uses synthetic values only.
+
+## 1. Freeze the biological relation
+
+A contract must now state the relation explicitly.
+
+Soft same-target example:
+
+`relation = "same-target cross-source soft coherence"`
+
+Hard directional example:
+
+`relation = "E(k) -> F(k)"`
+
+`relation_level` names the endpoint class; `relation` states the actual biological/statistical relation being tested. The two are not interchangeable.
+
+## 2. Freeze the common biological key
+
+Examples:
+
+- matched rows for same-target reconstruction;
+- plant site × flowering window;
+- host patch × developmental interval;
+- breeding patch × reproductive season.
+
+Role-specific answers may use different estimators, predictors or accessible areas upstream. The contract requires only that the adapters map them into a defensible common relation space.
+
+## 3. Declare role-specific adapters and adequacy gates
+
+The contract stores:
+
+- left adapter;
+- right adapter;
+- left adequacy gate;
+- right adequacy gate.
+
+If either answer is inadequate, the relation state is `unresolved`. Inadequacy is not discordance and is not biological absence.
+
+## 4. Choose the opening rule
+
+### Soft endpoint
+
+Use `opening_rule="calibrated_soft_ceiling"`.
+
+After both answers pass adequacy, compare relation-specific discordance with a prospectively frozen ceiling.
+
+Possible states:
+
+- `consistent`;
+- `attention_required`;
+- `unresolved`.
+
+`attention_required` is not automatically a biological falsification.
+
+### Hard directional endpoint
+
+Use `opening_rule="hard_implication"` for `E(k) -> F(k)`.
+
+Possible states:
+
+- `no_observed_violation`;
+- `hard_violation_authorized`;
+- `noninformative_for_implication`;
+- `unresolved`.
+
+A hard violation requires all of the following:
+
+- event answer adequate;
+- function answer adequate;
+- `E(k)=true`;
+- function state classified as absent;
+- observation process qualified for negative inference;
+- focal key valid for negative inference.
+
+If any required negative-evidence condition fails, the result remains `unresolved`.
+
+## 5. Why unqualified absence remains unresolved
+
+The quickstart includes two otherwise identical hard-endpoint calls:
+
+- `function_state="absent"` with `observation_process_qualified=False` → `unresolved`;
+- the same negative state with qualified observation and a valid focal key → `hard_violation_authorized`.
+
+This is the core guardrail. A zero or negative label is not sufficient by itself to create a biological contradiction.
+
+## 6. Invalid-state ablation
+
+The quickstart also evaluates the exact class-conditional ablation with
+
+- `a1=P(valid | F=true)=0.70`;
+- `a0=P(valid | F=false)=0.90`;
+- `q=0.95`;
+- `sp=0.99`.
+
+The result shows:
+
+- false-violation inflation from zero collapsing = `1-a1 = 0.30`;
+- apparent sensitivity gain = `1-a0 = 0.10`.
+
+These are properties of deleting the unresolved-state guard, not a comparison against modern detection-aware models.
+
+## 7. Minimal interpretation
+
+The method has three separate questions:
+
+1. **Answer construction:** are the role-specific ecological answers defensible?
+2. **Joint structure:** what relation or coupling exists among those answers?
+3. **Biological authorization:** which declared biological endpoint is that joint structure allowed to support, and what evidence can open or contradict it?
+
+Occupancy models, SDMs, JSDMs, data-fusion models, sensor classifiers and direct measurements can all contribute to questions 1–2. The relation-endpoint contract formalizes question 3.
+
+## Claim boundary
+
+This quickstart is synthetic method documentation only.
+
+- no focal Level-C values are read;
+- no biological dependency is confirmed or falsified;
+- no empirical ledger increment occurs;
+- empirical ledger remains 1 in the pre-field paper.

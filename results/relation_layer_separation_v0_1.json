@@ -1,0 +1,54 @@
+{
+  "result_version": "relation_layer_separation_v0_1",
+  "mathematical_status": "exact_classical_frechet_hoeffding_construction_not_new_probability_theory",
+  "ecological_question": "Do individually valid marginal answers identify the hard relation E(k)->F(k)?",
+  "general_result": {
+    "violation_quantity": "v=P(E=1,F=0)",
+    "lower_bound": "max(0,p_E-p_F)",
+    "upper_bound": "min(p_E,1-p_F)",
+    "nonidentifiable_region": "0<p_E<=p_F<1 gives lower=0 and upper>0, so both zero-violation and positive-violation couplings are compatible with the same marginals",
+    "interpretation": "Marginal answer validity is not sufficient for hard relation validity. Joint/event-key information or an externally frozen adapter/relation is a separate inferential requirement."
+  },
+  "two_world_counterexample": {
+    "shared_marginals": {
+      "p_E": 0.5,
+      "p_F": 0.5
+    },
+    "sharp_violation_bounds": {
+      "lower": 0.0,
+      "upper": 0.5
+    },
+    "dependency_compatible_world": {
+      "cells": {
+        "E0_F0": 0.5,
+        "E0_F1": 0.0,
+        "E1_F0": 0.0,
+        "E1_F1": 0.5
+      },
+      "p_E": 0.5,
+      "p_F": 0.5,
+      "violation_probability_P_E1_F0": 0.0,
+      "hard_implication_E_to_F_holds_almost_surely": true
+    },
+    "dependency_violating_world": {
+      "cells": {
+        "E0_F0": 0.0,
+        "E0_F1": 0.5,
+        "E1_F0": 0.5,
+        "E1_F1": 0.0
+      },
+      "p_E": 0.5,
+      "p_F": 0.5,
+      "violation_probability_P_E1_F0": 0.5,
+      "hard_implication_E_to_F_holds_almost_surely": false
+    },
+    "same_marginal_answers_opposite_relation_status": true
+  },
+  "claim_boundary": {
+    "does_not_claim_frechet_hoeffding_bounds_are_new": true,
+    "does_not_replace_joint_species_distribution_models": true,
+    "does_not_replace_detection_models_or_LIES": true,
+    "does_not_read_focal_level_c_values": true,
+    "empirical_ledger_increment": 0
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "relation_endpoint_contract_freeze_v0_1",
+  "contract": {
+    "contract_id": "generic_pollination_dependency_example",
+    "relation_level": "C_directional_dependency",
+    "relation": "successful_reproduction(k) -> effective_pollination(k)",
+    "key_space": "plant_site x flowering_window",
+    "left_adapter": "reproduction_answer_to_opportunity_key",
+    "right_adapter": "pollination_function_answer_to_opportunity_key",
+    "left_adequacy_gate": "reproduction_answer_adequate",
+    "right_adequacy_gate": "pollination_function_answer_adequate",
+    "opening_rule": "hard_implication"
+  },
+  "canonical_json": "{\"contract_id\":\"generic_pollination_dependency_example\",\"key_space\":\"plant_site x flowering_window\",\"left_adapter\":\"reproduction_answer_to_opportunity_key\",\"left_adequacy_gate\":\"reproduction_answer_adequate\",\"opening_rule\":\"hard_implication\",\"relation\":\"successful_reproduction(k) -> effective_pollination(k)\",\"relation_level\":\"C_directional_dependency\",\"right_adapter\":\"pollination_function_answer_to_opportunity_key\",\"right_adequacy_gate\":\"pollination_function_answer_adequate\"}",
+  "fingerprint_algorithm": "sha256",
+  "fingerprint_sha256": "83c7a631d08e5f25fb8a57e5029e75365aa9be80a8577a32ff8f7fc2a772a41f",
+  "outcome_data_read": false,
+  "empirical_ledger_increment": 0
+}

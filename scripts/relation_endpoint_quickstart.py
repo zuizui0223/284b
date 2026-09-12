@@ -46,6 +46,7 @@ def build_demo_payload() -> dict:
         "soft_contract": {
             "relation": soft.relation,
             "key_space": soft.key_space,
+            "fingerprint_sha256": soft.fingerprint_sha256(),
             "consistent_example": evaluate_soft_key(
                 soft,
                 left_adequate=True,
@@ -71,6 +72,7 @@ def build_demo_payload() -> dict:
         "hard_contract": {
             "relation": hard.relation,
             "key_space": hard.key_space,
+            "fingerprint_sha256": hard.fingerprint_sha256(),
             "function_present": evaluate_hard_directional_key(
                 hard,
                 event_adequate=True,

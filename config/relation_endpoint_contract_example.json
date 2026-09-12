@@ -1,0 +1,11 @@
+{
+  "contract_id": "generic_pollination_dependency_example",
+  "relation_level": "C_directional_dependency",
+  "relation": "successful_reproduction(k) -> effective_pollination(k)",
+  "key_space": "plant_site x flowering_window",
+  "left_adapter": "reproduction_answer_to_opportunity_key",
+  "right_adapter": "pollination_function_answer_to_opportunity_key",
+  "left_adequacy_gate": "reproduction_answer_adequate",
+  "right_adequacy_gate": "pollination_function_answer_adequate",
+  "opening_rule": "hard_implication"
+}

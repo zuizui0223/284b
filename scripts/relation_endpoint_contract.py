@@ -41,6 +41,7 @@ CONTRACT_FIELDS = (
     "left_adequacy_gate",
     "right_adequacy_gate",
     "opening_rule",
+    "opening_rule_reference",
 )
 
 SoftState = Literal["consistent", "attention_required", "unresolved"]
@@ -63,6 +64,7 @@ class RelationEndpointContract:
     left_adequacy_gate: str
     right_adequacy_gate: str
     opening_rule: str
+    opening_rule_reference: str
 
     def validate(self) -> None:
         for name, value in (
@@ -74,6 +76,7 @@ class RelationEndpointContract:
             ("left_adequacy_gate", self.left_adequacy_gate),
             ("right_adequacy_gate", self.right_adequacy_gate),
             ("opening_rule", self.opening_rule),
+            ("opening_rule_reference", self.opening_rule_reference),
         ):
             if not isinstance(value, str) or not value.strip():
                 raise ValueError(f"{name} must be a non-empty string")
@@ -147,7 +150,9 @@ def evaluate_soft_key(
     """Evaluate one calibrated soft-relation key.
 
     `attention_required` is relation discordance under the frozen comparison
-    rule. It is not automatically a biological falsification.
+    rule. It is not automatically a biological falsification. The caller must
+    obtain `frozen_ceiling` from the artifact/protocol identified by the
+    contract's `opening_rule_reference`.
     """
     contract.validate()
     if contract.relation_level not in SOFT_LEVELS:
@@ -175,7 +180,8 @@ def evaluate_hard_directional_key(
 
     A hard biological contradiction is emitted only when the antecedent event
     is adequately positive and a negative function state is authorized by both
-    process qualification and focal-key validity. Unqualified zeros remain
+    process qualification and focal-key validity. The qualification/protocol
+    identity belongs in `opening_rule_reference`. Unqualified zeros remain
     unresolved by construction.
     """
     contract.validate()

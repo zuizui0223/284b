@@ -33,6 +33,15 @@ def test_quickstart_states_are_exactly_expected():
     assert hard["antecedent_false"] == "noninformative_for_implication"
 
 
+def test_quickstart_exposes_frozen_contract_fingerprints():
+    payload = MOD.build_demo_payload()
+    soft_fp = payload["soft_contract"]["fingerprint_sha256"]
+    hard_fp = payload["hard_contract"]["fingerprint_sha256"]
+    assert len(soft_fp) == 64
+    assert len(hard_fp) == 64
+    assert soft_fp != hard_fp
+
+
 def test_quickstart_ablation_matches_generalized_identity():
     r = MOD.build_demo_payload()["invalid_state_ablation"]
     assert abs(r["false_violation_inflation"] - 0.30) < 1e-12
@@ -46,16 +55,20 @@ def test_quickstart_reads_no_focal_level_c_values():
     assert boundary["empirical_ledger_increment"] == 0
 
 
-def test_documentation_explains_relation_field_and_authorization_layer():
+def test_documentation_explains_relation_field_authorization_and_freezing():
     text = DOC.read_text(encoding="utf-8")
-    assert "A contract must now state the relation explicitly" in text
+    assert "A contract must state the relation explicitly" in text
     assert "`relation_level` names the endpoint class; `relation` states the actual" in text
+    assert "fingerprinted with SHA-256" in text
+    assert "The fingerprint is the prospective identity of the relation endpoint" in text
     assert "Biological authorization" in text
     assert "unqualified absence remains unresolved" in text
     assert "empirical ledger remains 1" in text
 
 
-def test_engine_contains_explicit_relation_field():
+def test_engine_contains_explicit_relation_and_fingerprint_surface():
     text = ENGINE.read_text(encoding="utf-8")
     assert "relation: str" in text
     assert '("relation", self.relation)' in text
+    assert "def canonical_json" in text
+    assert "def fingerprint_sha256" in text

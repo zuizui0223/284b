@@ -82,7 +82,22 @@ A hard violation requires all of the following:
 
 If any required negative-evidence condition fails, the result remains `unresolved`.
 
-## 5. Why unqualified absence remains unresolved
+## 5. Primitive levels versus composition-only levels
+
+The current reference engine directly evaluates only the primitive endpoint classes used in the paper:
+
+- Level A — same-target calibrated soft coherence;
+- Level B — relation-specific soft cross-role coherence;
+- Level C — directional hard dependency.
+
+Levels D and E are **composition-only** in the current implementation:
+
+- Level D mutual dependency must be represented by separately frozen directional relations, for example `X -> Y` and `Y -> X`, each with its own event/key semantics and adequacy requirements;
+- Level E life-stage coupling must first declare the biologically relevant transition relation and then use the appropriate supported soft or directional primitive.
+
+The engine deliberately rejects `D_mutual_dependency` and `E_stage_coupling` as direct one-size-fits-all contracts. This prevents the implementation from implying that mutuality or stage coupling has one universal generic opening rule.
+
+## 6. Why unqualified absence remains unresolved
 
 The quickstart includes two otherwise identical hard-endpoint calls:
 
@@ -91,7 +106,7 @@ The quickstart includes two otherwise identical hard-endpoint calls:
 
 This is the core guardrail. A zero or negative label is not sufficient by itself to create a biological contradiction.
 
-## 6. Invalid-state ablation
+## 7. Invalid-state ablation
 
 The quickstart also evaluates the exact class-conditional ablation with
 
@@ -107,7 +122,7 @@ The result shows:
 
 These are properties of deleting the unresolved-state guard, not a comparison against modern detection-aware models.
 
-## 7. Minimal interpretation
+## 8. Minimal interpretation
 
 The method has three separate questions:
 

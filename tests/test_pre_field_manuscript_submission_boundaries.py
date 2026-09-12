@@ -4,15 +4,19 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT = ROOT / "manuscript" / "PREFIELD_FLAGSHIP_V0_7.md"
-PITCH = ROOT / "manuscript" / "ECOLOGY_LETTERS_300WORD_PITCH_V0_7.md"
-PROPOSAL = ROOT / "manuscript" / "ECOLOGY_LETTERS_METHOD_PROPOSAL_V0_7.md"
+PITCH = ROOT / "manuscript" / "ECOLOGY_LETTERS_300WORD_PITCH_V0_8.md"
+PROPOSAL = ROOT / "manuscript" / "ECOLOGY_LETTERS_METHOD_PROPOSAL_V0_9.md"
 PROPOSAL_FIGURE = ROOT / "manuscript" / "figures" / "ecology_letters_method_proposal_figure_v0_5.svg"
 ANTECEDENT_AUDIT = ROOT / "manuscript" / "CLOSER_ANTECEDENT_AUDIT_V0_4.md"
 SEPARATION = ROOT / "manuscript" / "RELATION_LAYER_SEPARATION_V0_1.md"
 REVIEWER2_AUDIT = ROOT / "manuscript" / "REVIEWER2_ADVERSARIAL_AUDIT_V0_1.md"
-COMPLIANCE = ROOT / "manuscript" / "ECOLOGY_LETTERS_COMPLIANCE_V0_4.md"
-MANIFEST = ROOT / "manuscript" / "ECOLOGY_LETTERS_SUBMISSION_MANIFEST_V0_4.md"
+COMPLIANCE = ROOT / "manuscript" / "ECOLOGY_LETTERS_COMPLIANCE_V0_6.md"
+MANIFEST = ROOT / "manuscript" / "ECOLOGY_LETTERS_SUBMISSION_MANIFEST_V0_6.md"
 ENGINE = ROOT / "scripts" / "relation_endpoint_contract.py"
+FREEZER = ROOT / "scripts" / "freeze_relation_endpoint_contract.py"
+QUICKSTART = ROOT / "scripts" / "relation_endpoint_quickstart.py"
+INVITED_BUILDER = ROOT / "scripts" / "build_prefield_flagship_v0_8_candidate.py"
+INVITED_HANDOFF = ROOT / "manuscript" / "INVITED_MANUSCRIPT_V0_8_HANDOFF.md"
 SUMMARY = ROOT / "results" / "pre_field_identifiability_benchmark_summary_v0_1.json"
 GENERALIZED = ROOT / "results" / "pre_field_state_dependent_invalidity_v0_2.json"
 RELATION_SEPARATION = ROOT / "results" / "relation_layer_separation_v0_1.json"
@@ -55,6 +59,8 @@ def test_unsolicited_method_pitch_is_current_and_at_most_300_words():
     assert "cell count is diagnostic rather than independent replication" in body
     assert "not reducible to better marginal models" in body
     assert "`P(E=1,F=0)` can range from 0 to 0.5" in body
+    assert "canonically serialized and SHA-256 fingerprinted" in body
+    assert "calibration/protocol reference" in body
 
 
 def test_canonical_proposal_and_attachment_exist():
@@ -67,6 +73,10 @@ def test_canonical_proposal_and_attachment_exist():
         COMPLIANCE,
         MANIFEST,
         ENGINE,
+        FREEZER,
+        QUICKSTART,
+        INVITED_BUILDER,
+        INVITED_HANDOFF,
     ]:
         assert path.exists(), path
     proposal = PROPOSAL.read_text(encoding="utf-8")
@@ -74,6 +84,9 @@ def test_canonical_proposal_and_attachment_exist():
     assert "relation-endpoint contract" in proposal.lower()
     assert "Why this layer is not reducible to better upstream models" in proposal
     assert "A suitable JSDM may estimate the missing joint coupling" in proposal
+    assert "### Auditable prospective freezing" in proposal
+    assert "opening_rule_reference" in proposal
+    assert "SHA-256 fingerprinted" in proposal
     assert "a1 = P(valid | F=true)" in proposal
     assert "a0 = P(valid | F=false)" in proposal
     assert "12 taxa" in proposal
@@ -202,13 +215,15 @@ def test_v81_repair_is_pre_data_and_nonempirical():
     assert receipt["global_284b_empirical_ledger_after_v8_1"] == 1
 
 
-def test_stage1_manifest_is_v04_and_full_manuscript_stays_v07_until_invitation():
+def test_stage1_manifest_is_v06_and_full_manuscript_stays_v07_until_invitation():
     text = MANIFEST.read_text(encoding="utf-8")
-    assert "ECOLOGY_LETTERS_300WORD_PITCH_V0_7.md" in text
-    assert "ECOLOGY_LETTERS_METHOD_PROPOSAL_V0_7.md" in text
-    assert "ECOLOGY_LETTERS_PROPOSAL_EMAIL_V0_4.md" in text
-    assert "ECOLOGY_LETTERS_COMPLIANCE_V0_4.md" in text
-    assert "The full manuscript remains v0.7 until invitation" in text
+    assert "ECOLOGY_LETTERS_300WORD_PITCH_V0_8.md" in text
+    assert "ECOLOGY_LETTERS_METHOD_PROPOSAL_V0_9.md" in text
+    assert "ECOLOGY_LETTERS_PROPOSAL_EMAIL_V0_6.md" in text
+    assert "ECOLOGY_LETTERS_COMPLIANCE_V0_6.md" in text
+    assert "opening_rule_reference" in text
+    assert "PREFIELD_FLAGSHIP_V0_7.md" in text
+    assert "build_prefield_flagship_v0_8_candidate.py" in text
     assert "Empirical ledger remains **1**" in text
 
 

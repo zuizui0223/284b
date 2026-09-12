@@ -23,6 +23,7 @@ sys.modules[FREEZE_SPEC.name] = FREEZE
 FREEZE_SPEC.loader.exec_module(FREEZE)
 
 EXAMPLE = ROOT / "config" / "relation_endpoint_contract_example.json"
+RECEIPT = ROOT / "results" / "relation_endpoint_contract_example_freeze_v0_1.json"
 EXPECTED_FINGERPRINT = "83c7a631d08e5f25fb8a57e5029e75365aa9be80a8577a32ff8f7fc2a772a41f"
 
 
@@ -46,6 +47,12 @@ def test_freeze_receipt_roundtrips_exact_contract():
     assert receipt["fingerprint_sha256"] == EXPECTED_FINGERPRINT
     assert receipt["outcome_data_read"] is False
     assert receipt["empirical_ledger_increment"] == 0
+
+
+def test_committed_receipt_matches_freeze_utility_exactly():
+    expected = FREEZE.freeze_contract_payload(example_payload())
+    committed = json.loads(RECEIPT.read_text(encoding="utf-8"))
+    assert committed == expected
 
 
 def test_semantic_change_changes_fingerprint():

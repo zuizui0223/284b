@@ -10,7 +10,7 @@ The output is JSON and uses synthetic values only.
 
 ## 1. Freeze the biological relation
 
-A contract must now state the relation explicitly.
+A contract must state the relation explicitly.
 
 Soft same-target example:
 
@@ -44,7 +44,31 @@ The contract stores:
 
 If either answer is inadequate, the relation state is `unresolved`. Inadequacy is not discordance and is not biological absence.
 
-## 4. Choose the opening rule
+## 4. Freeze the contract before focal outcomes
+
+A validated contract can be serialized to deterministic canonical JSON and fingerprinted with SHA-256.
+
+Generic example:
+
+`python scripts/freeze_relation_endpoint_contract.py config/relation_endpoint_contract_example.json`
+
+To write a receipt:
+
+`python scripts/freeze_relation_endpoint_contract.py config/relation_endpoint_contract_example.json --out contract_receipt.json`
+
+The receipt contains:
+
+- the exact validated contract;
+- canonical JSON material;
+- `fingerprint_sha256`;
+- `outcome_data_read=false` for the freeze utility itself;
+- empirical-ledger increment 0.
+
+The fingerprint is the prospective identity of the relation endpoint. Changing the relation, key space, adapters, adequacy rules or opening rule changes the fingerprint. JSON key ordering does not.
+
+This does **not** by itself prove that a researcher refrained from viewing outcomes; it provides an auditable object that can be timestamped, versioned and compared with the contract used at opening.
+
+## 5. Choose the opening rule
 
 ### Soft endpoint
 
@@ -82,7 +106,7 @@ A hard violation requires all of the following:
 
 If any required negative-evidence condition fails, the result remains `unresolved`.
 
-## 5. Primitive levels versus composition-only levels
+## 6. Primitive levels versus composition-only levels
 
 The current reference engine directly evaluates only the primitive endpoint classes used in the paper:
 
@@ -97,7 +121,7 @@ Levels D and E are **composition-only** in the current implementation:
 
 The engine deliberately rejects `D_mutual_dependency` and `E_stage_coupling` as direct one-size-fits-all contracts. This prevents the implementation from implying that mutuality or stage coupling has one universal generic opening rule.
 
-## 6. Why unqualified absence remains unresolved
+## 7. Why unqualified absence remains unresolved
 
 The quickstart includes two otherwise identical hard-endpoint calls:
 
@@ -106,7 +130,7 @@ The quickstart includes two otherwise identical hard-endpoint calls:
 
 This is the core guardrail. A zero or negative label is not sufficient by itself to create a biological contradiction.
 
-## 7. Invalid-state ablation
+## 8. Invalid-state ablation
 
 The quickstart also evaluates the exact class-conditional ablation with
 
@@ -122,7 +146,7 @@ The result shows:
 
 These are properties of deleting the unresolved-state guard, not a comparison against modern detection-aware models.
 
-## 8. Minimal interpretation
+## 9. Minimal interpretation
 
 The method has three separate questions:
 

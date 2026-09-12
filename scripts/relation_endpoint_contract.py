@@ -20,14 +20,28 @@ Level-C values are read in this module.
 
 from __future__ import annotations
 
+import hashlib
+import json
 from dataclasses import dataclass
-from typing import Literal
+from typing import Literal, Mapping
 
 SOFT_LEVELS = {"A_same_target", "B_soft_cross_role"}
 HARD_LEVELS = {"C_directional_dependency"}
 DIRECT_LEVELS = SOFT_LEVELS | HARD_LEVELS
 COMPOSITION_ONLY_LEVELS = {"D_mutual_dependency", "E_stage_coupling"}
 KNOWN_LEVELS = DIRECT_LEVELS | COMPOSITION_ONLY_LEVELS
+
+CONTRACT_FIELDS = (
+    "contract_id",
+    "relation_level",
+    "relation",
+    "key_space",
+    "left_adapter",
+    "right_adapter",
+    "left_adequacy_gate",
+    "right_adequacy_gate",
+    "opening_rule",
+)
 
 SoftState = Literal["consistent", "attention_required", "unresolved"]
 HardState = Literal[
@@ -75,6 +89,51 @@ class RelationEndpointContract:
             raise ValueError("soft endpoints require calibrated_soft_ceiling")
         if self.relation_level in HARD_LEVELS and self.opening_rule != "hard_implication":
             raise ValueError("directional hard endpoints require hard_implication")
+
+    def canonical_payload(self) -> dict[str, str]:
+        """Return the complete validated contract in a stable field schema."""
+        self.validate()
+        return {name: getattr(self, name) for name in CONTRACT_FIELDS}
+
+    def canonical_json(self) -> str:
+        """Return deterministic JSON used as the contract fingerprint material."""
+        return json.dumps(
+            self.canonical_payload(),
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=False,
+        )
+
+    def fingerprint_sha256(self) -> str:
+        """SHA-256 fingerprint of the validated canonical contract JSON."""
+        return hashlib.sha256(self.canonical_json().encode("utf-8")).hexdigest()
+
+
+def contract_from_mapping(payload: Mapping[str, object]) -> RelationEndpointContract:
+    """Construct a contract from an exact JSON-like mapping.
+
+    Unknown or missing fields are rejected so a frozen contract cannot silently
+    acquire or lose semantics during serialization.
+    """
+    keys = set(payload)
+    required = set(CONTRACT_FIELDS)
+    missing = sorted(required - keys)
+    unknown = sorted(keys - required)
+    if missing:
+        raise ValueError(f"missing contract fields: {missing}")
+    if unknown:
+        raise ValueError(f"unknown contract fields: {unknown}")
+
+    values: dict[str, str] = {}
+    for name in CONTRACT_FIELDS:
+        value = payload[name]
+        if not isinstance(value, str):
+            raise ValueError(f"{name} must be a string")
+        values[name] = value
+
+    contract = RelationEndpointContract(**values)
+    contract.validate()
+    return contract
 
 
 def evaluate_soft_key(

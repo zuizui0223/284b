@@ -15,6 +15,7 @@ def soft_contract():
     return MOD.RelationEndpointContract(
         contract_id="level_a_demo",
         relation_level="A_same_target",
+        relation="same-target cross-source soft coherence",
         key_space="same 2000 comparison rows",
         left_adapter="identity_to_common_rows",
         right_adapter="identity_to_common_rows",
@@ -28,6 +29,7 @@ def hard_contract():
     return MOD.RelationEndpointContract(
         contract_id="level_c_demo",
         relation_level="C_directional_dependency",
+        relation="E(k) -> F(k)",
         key_space="site x opportunity window",
         left_adapter="event_to_key",
         right_adapter="function_to_key",
@@ -35,6 +37,30 @@ def hard_contract():
         right_adequacy_gate="function_answer_adequate",
         opening_rule="hard_implication",
     )
+
+
+def test_contract_requires_explicit_biological_relation():
+    c = soft_contract()
+    assert c.relation == "same-target cross-source soft coherence"
+    c.validate()
+
+    missing = MOD.RelationEndpointContract(
+        contract_id="bad",
+        relation_level="A_same_target",
+        relation="",
+        key_space="rows",
+        left_adapter="left",
+        right_adapter="right",
+        left_adequacy_gate="left_ok",
+        right_adequacy_gate="right_ok",
+        opening_rule="calibrated_soft_ceiling",
+    )
+    try:
+        missing.validate()
+    except ValueError as exc:
+        assert "relation must be a non-empty string" in str(exc)
+    else:
+        raise AssertionError("empty biological relation should fail validation")
 
 
 def test_soft_endpoint_preserves_inadequacy_as_unresolved():

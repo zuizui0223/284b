@@ -38,6 +38,7 @@ HardState = Literal[
 class RelationEndpointContract:
     contract_id: str
     relation_level: str
+    relation: str
     key_space: str
     left_adapter: str
     right_adapter: str
@@ -48,6 +49,7 @@ class RelationEndpointContract:
     def validate(self) -> None:
         for name, value in (
             ("contract_id", self.contract_id),
+            ("relation", self.relation),
             ("key_space", self.key_space),
             ("left_adapter", self.left_adapter),
             ("right_adapter", self.right_adapter),

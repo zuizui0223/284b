@@ -6,14 +6,16 @@ formalizes the layer above them: what relation independently generated answers
 are allowed to test, when an endpoint is openable, and which observations must
 remain unresolved.
 
-The reference implementation covers the two endpoint classes demonstrated in
-the pre-field paper:
+The reference implementation directly covers the primitive endpoint classes
+demonstrated in the pre-field paper:
 
 * calibrated soft coherence (Level A and relation-specific Level B checks);
 * hard directional implication E(k) -> F(k) (Level C).
 
-Levels D/E can be composed from these primitives after their relation-specific
-biology is frozen. No focal Level-C values are read here.
+Levels D/E are composition-only in the present implementation. Their biology
+must first be frozen and then represented by supported primitive contracts;
+they are not directly evaluable as one generic endpoint object here. No focal
+Level-C values are read in this module.
 """
 
 from __future__ import annotations
@@ -23,7 +25,9 @@ from typing import Literal
 
 SOFT_LEVELS = {"A_same_target", "B_soft_cross_role"}
 HARD_LEVELS = {"C_directional_dependency"}
-ALL_LEVELS = SOFT_LEVELS | HARD_LEVELS | {"D_mutual_dependency", "E_stage_coupling"}
+DIRECT_LEVELS = SOFT_LEVELS | HARD_LEVELS
+COMPOSITION_ONLY_LEVELS = {"D_mutual_dependency", "E_stage_coupling"}
+KNOWN_LEVELS = DIRECT_LEVELS | COMPOSITION_ONLY_LEVELS
 
 SoftState = Literal["consistent", "attention_required", "unresolved"]
 HardState = Literal[
@@ -59,8 +63,14 @@ class RelationEndpointContract:
         ):
             if not isinstance(value, str) or not value.strip():
                 raise ValueError(f"{name} must be a non-empty string")
-        if self.relation_level not in ALL_LEVELS:
+
+        if self.relation_level not in KNOWN_LEVELS:
             raise ValueError(f"unsupported relation_level: {self.relation_level}")
+        if self.relation_level in COMPOSITION_ONLY_LEVELS:
+            raise ValueError(
+                f"{self.relation_level} is composition-only in the reference implementation; "
+                "represent it with frozen supported primitive contracts rather than a direct evaluator"
+            )
         if self.relation_level in SOFT_LEVELS and self.opening_rule != "calibrated_soft_ceiling":
             raise ValueError("soft endpoints require calibrated_soft_ceiling")
         if self.relation_level in HARD_LEVELS and self.opening_rule != "hard_implication":

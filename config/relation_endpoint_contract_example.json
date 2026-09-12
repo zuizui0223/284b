@@ -7,5 +7,6 @@
   "right_adapter": "pollination_function_answer_to_opportunity_key",
   "left_adequacy_gate": "reproduction_answer_adequate",
   "right_adequacy_gate": "pollination_function_answer_adequate",
-  "opening_rule": "hard_implication"
+  "opening_rule": "hard_implication",
+  "opening_rule_reference": "generic_negative_state_qualification_protocol_v1"
 }

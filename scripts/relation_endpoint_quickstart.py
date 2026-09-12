@@ -28,6 +28,7 @@ def build_demo_payload() -> dict:
         left_adequacy_gate="source_A_answer_exists",
         right_adequacy_gate="source_B_answer_exists",
         opening_rule="calibrated_soft_ceiling",
+        opening_rule_reference="synthetic_reference_envelope_v1",
     )
 
     hard = RelationEndpointContract(
@@ -40,12 +41,14 @@ def build_demo_payload() -> dict:
         left_adequacy_gate="event_answer_exists",
         right_adequacy_gate="function_answer_exists",
         opening_rule="hard_implication",
+        opening_rule_reference="synthetic_negative_state_qualification_v1",
     )
 
     payload = {
         "soft_contract": {
             "relation": soft.relation,
             "key_space": soft.key_space,
+            "opening_rule_reference": soft.opening_rule_reference,
             "fingerprint_sha256": soft.fingerprint_sha256(),
             "consistent_example": evaluate_soft_key(
                 soft,
@@ -72,6 +75,7 @@ def build_demo_payload() -> dict:
         "hard_contract": {
             "relation": hard.relation,
             "key_space": hard.key_space,
+            "opening_rule_reference": hard.opening_rule_reference,
             "fingerprint_sha256": hard.fingerprint_sha256(),
             "function_present": evaluate_hard_directional_key(
                 hard,

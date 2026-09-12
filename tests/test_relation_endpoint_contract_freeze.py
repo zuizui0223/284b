@@ -24,15 +24,16 @@ FREEZE_SPEC.loader.exec_module(FREEZE)
 
 EXAMPLE = ROOT / "config" / "relation_endpoint_contract_example.json"
 RECEIPT = ROOT / "results" / "relation_endpoint_contract_example_freeze_v0_1.json"
-EXPECTED_FINGERPRINT = "83c7a631d08e5f25fb8a57e5029e75365aa9be80a8577a32ff8f7fc2a772a41f"
+EXPECTED_FINGERPRINT = "aeced85ab6708b6d3713e46babbc2c32654dae2d728d5127d1d5c9e05c949da6"
 
 
 def example_payload():
     return json.loads(EXAMPLE.read_text(encoding="utf-8"))
 
 
-def test_example_contract_has_stable_fingerprint():
+def test_example_contract_has_stable_fingerprint_and_opening_reference():
     contract = ENGINE.contract_from_mapping(example_payload())
+    assert contract.opening_rule_reference == "generic_negative_state_qualification_protocol_v1"
     assert contract.fingerprint_sha256() == EXPECTED_FINGERPRINT
     assert len(contract.fingerprint_sha256()) == 64
     assert contract.canonical_json() == contract.canonical_json()
@@ -43,6 +44,7 @@ def test_freeze_receipt_roundtrips_exact_contract():
     receipt = FREEZE.freeze_contract_payload(raw)
     assert receipt["schema_version"] == "relation_endpoint_contract_freeze_v0_1"
     assert receipt["contract"] == raw
+    assert receipt["contract"]["opening_rule_reference"] == "generic_negative_state_qualification_protocol_v1"
     assert receipt["fingerprint_algorithm"] == "sha256"
     assert receipt["fingerprint_sha256"] == EXPECTED_FINGERPRINT
     assert receipt["outcome_data_read"] is False
@@ -64,17 +66,27 @@ def test_semantic_change_changes_fingerprint():
     assert original != mutated
 
 
+def test_opening_reference_change_changes_fingerprint():
+    raw = example_payload()
+    original = ENGINE.contract_from_mapping(raw).fingerprint_sha256()
+    changed = dict(raw)
+    changed["opening_rule_reference"] = "generic_negative_state_qualification_protocol_v2"
+    mutated = ENGINE.contract_from_mapping(changed).fingerprint_sha256()
+    assert original != mutated
+
+
 def test_unknown_or_missing_fields_are_rejected():
     raw = example_payload()
 
-    missing = dict(raw)
-    missing.pop("relation")
-    try:
-        ENGINE.contract_from_mapping(missing)
-    except ValueError as exc:
-        assert "missing contract fields" in str(exc)
-    else:
-        raise AssertionError("missing relation field should fail")
+    for missing_field in ["relation", "opening_rule_reference"]:
+        missing = dict(raw)
+        missing.pop(missing_field)
+        try:
+            ENGINE.contract_from_mapping(missing)
+        except ValueError as exc:
+            assert "missing contract fields" in str(exc)
+        else:
+            raise AssertionError(f"missing {missing_field} should fail")
 
     unknown = dict(raw)
     unknown["posthoc_note"] = "not part of the frozen schema"

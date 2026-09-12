@@ -44,7 +44,20 @@ The contract stores:
 
 If either answer is inadequate, the relation state is `unresolved`. Inadequacy is not discordance and is not biological absence.
 
-## 4. Freeze the contract before focal outcomes
+## 4. Freeze the opening rule and its calibration/protocol reference
+
+The fifth conceptual contract element is not only the opening-rule class. It also identifies **which frozen calibration artifact or qualification protocol supplies that rule**.
+
+The implementation therefore stores both:
+
+- `opening_rule` — for example `calibrated_soft_ceiling` or `hard_implication`;
+- `opening_rule_reference` — the immutable/versioned identifier for the reference envelope, calibration artifact or negative-state qualification protocol used when the endpoint is opened.
+
+For a soft endpoint, the actual `frozen_ceiling` passed to `evaluate_soft_key` must come from the artifact identified by `opening_rule_reference`. For a hard endpoint, the reference should identify the prespecified observation-process qualification / negative-state protocol under which `observation_process_qualified=True` can be asserted.
+
+Changing only `opening_rule_reference` changes the contract fingerprint. Thus the relation cannot keep the same frozen identity while silently switching to another calibration or threshold artifact.
+
+## 5. Fingerprint the contract before focal outcomes
 
 A validated contract can be serialized to deterministic canonical JSON and fingerprinted with SHA-256.
 
@@ -64,17 +77,17 @@ The receipt contains:
 - `outcome_data_read=false` for the freeze utility itself;
 - empirical-ledger increment 0.
 
-The fingerprint is the prospective identity of the relation endpoint. Changing the relation, key space, adapters, adequacy rules or opening rule changes the fingerprint. JSON key ordering does not.
+The fingerprint is the prospective identity of the relation endpoint. Changing the relation, key space, adapters, adequacy rules, opening rule **or its referenced calibration/protocol artifact** changes the fingerprint. JSON key ordering does not.
 
 This does **not** by itself prove that a researcher refrained from viewing outcomes; it provides an auditable object that can be timestamped, versioned and compared with the contract used at opening.
 
-## 5. Choose the opening rule
+## 6. Evaluate the endpoint
 
 ### Soft endpoint
 
 Use `opening_rule="calibrated_soft_ceiling"`.
 
-After both answers pass adequacy, compare relation-specific discordance with a prospectively frozen ceiling.
+After both answers pass adequacy, retrieve the predeclared ceiling from the artifact named by `opening_rule_reference` and compare relation-specific discordance with that ceiling.
 
 Possible states:
 
@@ -86,7 +99,7 @@ Possible states:
 
 ### Hard directional endpoint
 
-Use `opening_rule="hard_implication"` for `E(k) -> F(k)`.
+Use `opening_rule="hard_implication"` for `E(k) -> F(k)` and bind it to the frozen negative-state qualification protocol through `opening_rule_reference`.
 
 Possible states:
 
@@ -101,12 +114,12 @@ A hard violation requires all of the following:
 - function answer adequate;
 - `E(k)=true`;
 - function state classified as absent;
-- observation process qualified for negative inference;
+- observation process qualified under the referenced frozen protocol;
 - focal key valid for negative inference.
 
 If any required negative-evidence condition fails, the result remains `unresolved`.
 
-## 6. Primitive levels versus composition-only levels
+## 7. Primitive levels versus composition-only levels
 
 The current reference engine directly evaluates only the primitive endpoint classes used in the paper:
 
@@ -121,7 +134,7 @@ Levels D and E are **composition-only** in the current implementation:
 
 The engine deliberately rejects `D_mutual_dependency` and `E_stage_coupling` as direct one-size-fits-all contracts. This prevents the implementation from implying that mutuality or stage coupling has one universal generic opening rule.
 
-## 7. Why unqualified absence remains unresolved
+## 8. Why unqualified absence remains unresolved
 
 The quickstart includes two otherwise identical hard-endpoint calls:
 
@@ -130,7 +143,7 @@ The quickstart includes two otherwise identical hard-endpoint calls:
 
 This is the core guardrail. A zero or negative label is not sufficient by itself to create a biological contradiction.
 
-## 8. Invalid-state ablation
+## 9. Invalid-state ablation
 
 The quickstart also evaluates the exact class-conditional ablation with
 
@@ -146,7 +159,7 @@ The result shows:
 
 These are properties of deleting the unresolved-state guard, not a comparison against modern detection-aware models.
 
-## 9. Minimal interpretation
+## 10. Minimal interpretation
 
 The method has three separate questions:
 

@@ -22,6 +22,7 @@ def soft_contract():
         left_adequacy_gate="source_A_adequate",
         right_adequacy_gate="source_B_adequate",
         opening_rule="calibrated_soft_ceiling",
+        opening_rule_reference="synthetic_reference_envelope_v1",
     )
 
 
@@ -36,15 +37,17 @@ def hard_contract():
         left_adequacy_gate="event_answer_adequate",
         right_adequacy_gate="function_answer_adequate",
         opening_rule="hard_implication",
+        opening_rule_reference="synthetic_negative_qualification_v1",
     )
 
 
-def test_contract_requires_explicit_biological_relation():
+def test_contract_requires_explicit_biological_relation_and_opening_reference():
     c = soft_contract()
     assert c.relation == "same-target cross-source soft coherence"
+    assert c.opening_rule_reference == "synthetic_reference_envelope_v1"
     c.validate()
 
-    missing = MOD.RelationEndpointContract(
+    missing_relation = MOD.RelationEndpointContract(
         contract_id="bad",
         relation_level="A_same_target",
         relation="",
@@ -54,13 +57,33 @@ def test_contract_requires_explicit_biological_relation():
         left_adequacy_gate="left_ok",
         right_adequacy_gate="right_ok",
         opening_rule="calibrated_soft_ceiling",
+        opening_rule_reference="ref_v1",
     )
     try:
-        missing.validate()
+        missing_relation.validate()
     except ValueError as exc:
         assert "relation must be a non-empty string" in str(exc)
     else:
         raise AssertionError("empty biological relation should fail validation")
+
+    missing_reference = MOD.RelationEndpointContract(
+        contract_id="bad_reference",
+        relation_level="A_same_target",
+        relation="same-target coherence",
+        key_space="rows",
+        left_adapter="left",
+        right_adapter="right",
+        left_adequacy_gate="left_ok",
+        right_adequacy_gate="right_ok",
+        opening_rule="calibrated_soft_ceiling",
+        opening_rule_reference="",
+    )
+    try:
+        missing_reference.validate()
+    except ValueError as exc:
+        assert "opening_rule_reference must be a non-empty string" in str(exc)
+    else:
+        raise AssertionError("empty opening-rule reference should fail validation")
 
 
 def test_composition_only_levels_are_not_misrepresented_as_direct_evaluators():
@@ -75,6 +98,7 @@ def test_composition_only_levels_are_not_misrepresented_as_direct_evaluators():
             left_adequacy_gate="left_ok",
             right_adequacy_gate="right_ok",
             opening_rule="composed_endpoint",
+            opening_rule_reference="constituent_contract_fingerprints",
         )
         try:
             c.validate()

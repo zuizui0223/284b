@@ -63,6 +63,27 @@ def test_contract_requires_explicit_biological_relation():
         raise AssertionError("empty biological relation should fail validation")
 
 
+def test_composition_only_levels_are_not_misrepresented_as_direct_evaluators():
+    for level in ["D_mutual_dependency", "E_stage_coupling"]:
+        c = MOD.RelationEndpointContract(
+            contract_id="composition_demo",
+            relation_level=level,
+            relation="composed biological relation",
+            key_space="frozen biological key",
+            left_adapter="left",
+            right_adapter="right",
+            left_adequacy_gate="left_ok",
+            right_adequacy_gate="right_ok",
+            opening_rule="composed_endpoint",
+        )
+        try:
+            c.validate()
+        except ValueError as exc:
+            assert "composition-only in the reference implementation" in str(exc)
+        else:
+            raise AssertionError(f"{level} should require supported primitive contracts")
+
+
 def test_soft_endpoint_preserves_inadequacy_as_unresolved():
     c = soft_contract()
     assert MOD.evaluate_soft_key(

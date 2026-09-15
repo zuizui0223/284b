@@ -8,7 +8,7 @@
 
 Across the 12 prospectively held-out taxa, **0 of 12 contained an empirical-envelope exceedance among evaluable cells**. Their prespecified analysis matrices produced 288 repeated diagnostics; both independently reconstructed answers passed adequacy in 283, while five remained unresolved. Each taxon contributed 22–24 evaluable diagnostics.
 
-The 283/283 count is a repeated diagnostic summary, not an independent sample size. The result supports same-target cross-source coherence conditional on answer adequacy and the prospectively frozen empirical source-discordance envelopes; it does not imply exact source invariance, nominal 95% predictive coverage or a general tolerance for cross-role relations. Cell-level margins, including the closest opened diagnostic, are reported in Supplement S1.
+The 283/283 count is a repeated diagnostic summary, not an independent sample size. The result supports same-target cross-source coherence conditional on answer adequacy and the prospectively frozen empirical source-discordance envelopes; it does not imply exact source invariance, nominal 95% predictive coverage or a general tolerance for cross-role relations. Cell-level margins are reported in Supplement S1.
 
 ### Accurate marginals did not determine the hard relation
 

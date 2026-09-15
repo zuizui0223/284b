@@ -57,6 +57,7 @@ def figure1(svg: str) -> str:
     svg = svg.replace("≠ automatic falsification", "≠ falsification")
     svg = svg.replace('x="850" y="630" width="168" height="55"', 'x="850" y="630" width="190" height="55"')
     svg = svg.replace('x1="1018" y1="658" x2="1050" y2="658"', 'x1="1040" y1="658" x2="1050" y2="658"')
+    svg = svg.replace("present / absent / unresolved", "present / absent / ?")
     svg = svg.replace(
         '<text x="1043" y="763" class="xs" text-anchor="middle">hard violation authorized</text>',
         '<text x="1043" y="763" class="xs" text-anchor="middle">hard violation</text>',

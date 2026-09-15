@@ -1,0 +1,73 @@
+name: materialize-paper1-ecology-letters-v1
+
+on:
+  push:
+    branches:
+      - paper/reference-style-release
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: paper/reference-style-release
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build submission-format derivative
+        run: python scripts/build_paper1_ecology_letters_submission_v1.py
+      - name: Verify reference-style and scientific-boundary tests
+        run: python -m unittest tests.test_paper1_ecology_letters_submission_v1 -v
+      - name: Record exact submission identity
+        run: |
+          sha256sum manuscript/PAPER1_ECOLOGY_LETTERS_SUBMISSION_V1.md | tee manuscript/PAPER1_ECOLOGY_LETTERS_SUBMISSION_V1.sha256
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          p = Path('manuscript/PAPER1_ECOLOGY_LETTERS_SUBMISSION_V1.md').read_text(encoding='utf-8')
+          wc = lambda x: len(re.findall(r"\b[\w'’-]+\b", x, flags=re.UNICODE))
+          abstract = p.split('## Abstract', 1)[1].split('## 1. Introduction', 1)[0]
+          main = p.split('## 1. Introduction', 1)[1].split('## Data and code availability', 1)[0]
+          refs = p.split('## References', 1)[1].split('## Proposed display items', 1)[0]
+          displays = p.split('## Proposed display items', 1)[1]
+          reference_entries = len(re.findall(r"^[A-ZÀ-Ž][^\n]*\(\d{4}\)\.", refs, flags=re.MULTILINE))
+          display_items = len(re.findall(r"^\d+\. \*\*", displays, flags=re.MULTILINE))
+          Path('manuscript/PAPER1_ECOLOGY_LETTERS_SUBMISSION_V1_IDENTITY.txt').write_text(
+              f'scientific_source_sha256=66ad208f2a922800cb7f1d14f96b28295de13af4cdbdbec2f8b698b8fa320cc5\n'
+              f'abstract_words={wc(abstract)}\n'
+              f'main_words={wc(main)}\n'
+              f'reference_entries={reference_entries}\n'
+              f'display_items={display_items}\n',
+              encoding='utf-8',
+          )
+          PY
+      - name: Persist exact derivative on branch
+        run: |
+          files='manuscript/PAPER1_ECOLOGY_LETTERS_SUBMISSION_V1.md manuscript/PAPER1_ECOLOGY_LETTERS_SUBMISSION_V1.sha256 manuscript/PAPER1_ECOLOGY_LETTERS_SUBMISSION_V1_IDENTITY.txt'
+          if git diff --quiet -- $files && \
+             git ls-files --error-unmatch manuscript/PAPER1_ECOLOGY_LETTERS_SUBMISSION_V1.md >/dev/null 2>&1 && \
+             git ls-files --error-unmatch manuscript/PAPER1_ECOLOGY_LETTERS_SUBMISSION_V1.sha256 >/dev/null 2>&1 && \
+             git ls-files --error-unmatch manuscript/PAPER1_ECOLOGY_LETTERS_SUBMISSION_V1_IDENTITY.txt >/dev/null 2>&1; then
+            echo 'Submission derivative already materialized.'
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add $files
+            git commit -m 'Materialize Ecology Letters submission derivative v1'
+            git push origin HEAD:paper/reference-style-release
+          fi
+      - name: Upload exact derivative
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper1-ecology-letters-submission-v1
+          path: |
+            manuscript/PAPER1_ECOLOGY_LETTERS_SUBMISSION_V1.md
+            manuscript/PAPER1_ECOLOGY_LETTERS_SUBMISSION_V1.sha256
+            manuscript/PAPER1_ECOLOGY_LETTERS_SUBMISSION_V1_IDENTITY.txt
+          if-no-files-found: error
+          retention-days: 7

@@ -3,7 +3,8 @@
 
 This script is packaging-only. It hashes the exact submission derivative, frozen
 scientific source, supplement, claim/display assets, and executable Method object.
-It does not create a DOI, release, or alter any scientific endpoint.
+The bundle identity depends only on archived content and the frozen scientific
+boundary; git provenance and future DOI/release metadata are recorded separately.
 """
 
 from __future__ import annotations
@@ -49,6 +50,13 @@ EXPECTED_SUBMISSION_SHA256 = "a2f45e2b91953b47f24682e95667533a923680ec65a9b0fef2
 JSON_OUT = ROOT / "manuscript" / "PAPER1_ARCHIVE_IDENTITY_V1.json"
 MD_OUT = ROOT / "manuscript" / "PAPER1_ARCHIVE_IDENTITY_V1.md"
 
+BOUNDARY = {
+    "level_a": "sole_completed_empirical_endpoint",
+    "level_b": "unopened",
+    "level_c": "focal_outcomes_sealed",
+    "empirical_ledger": 1,
+}
+
 
 def sha256(path: Path) -> str:
     h = hashlib.sha256()
@@ -60,6 +68,18 @@ def sha256(path: Path) -> str:
 
 def git_head() -> str:
     return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+
+
+def bundle_identity(science_sha: str, submission_sha: str, entries: list[dict]) -> str:
+    core = {
+        "schema": "paper1_archive_identity_v1",
+        "scientific_source_sha256": science_sha,
+        "submission_derivative_sha256": submission_sha,
+        "scientific_boundary": BOUNDARY,
+        "files": entries,
+    }
+    canonical = json.dumps(core, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    return hashlib.sha256(canonical).hexdigest()
 
 
 def main() -> None:
@@ -84,18 +104,12 @@ def main() -> None:
         "source_commit": git_head(),
         "scientific_source_sha256": science_sha,
         "submission_derivative_sha256": submission_sha,
-        "scientific_boundary": {
-            "level_a": "sole_completed_empirical_endpoint",
-            "level_b": "unopened",
-            "level_c": "focal_outcomes_sealed",
-            "empirical_ledger": 1,
-        },
+        "scientific_boundary": BOUNDARY,
         "doi": None,
         "release_tag": None,
         "files": entries,
+        "bundle_identity_sha256": bundle_identity(science_sha, submission_sha, entries),
     }
-    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
-    payload["bundle_identity_sha256"] = hashlib.sha256(canonical).hexdigest()
 
     JSON_OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     lines = [
@@ -107,6 +121,7 @@ def main() -> None:
         f"- scientific source SHA-256: `{science_sha}`",
         f"- Ecology Letters submission derivative SHA-256: `{submission_sha}`",
         f"- bundle identity SHA-256: `{payload['bundle_identity_sha256']}`",
+        "- bundle identity excludes git commit, DOI and release tag; those are provenance/publication metadata rather than content identity.",
         "- scientific boundary: Level A sole empirical closure; Level B unopened; focal Level-C outcomes sealed; empirical ledger = 1.",
         "",
         "## Included files",

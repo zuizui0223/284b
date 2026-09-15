@@ -23,11 +23,11 @@ READINESS = ROOT / "manuscript" / "PAPER1_FULL_SUBMISSION_READINESS_V0_1.md"
 EXPECTED_SHA256 = "66ad208f2a922800cb7f1d14f96b28295de13af4cdbdbec2f8b698b8fa320cc5"
 FIG_DIR = ROOT / "manuscript" / "figures"
 FIGURES = [
-    FIG_DIR / "figure1_relation_endpoint_contract_v0_2.svg",
-    FIG_DIR / "figure2_level_a_empirical_anchor_v0_2.svg",
-    FIG_DIR / "figure3_relation_layer_and_event_function_v0_2.svg",
-    FIG_DIR / "figure4_parallel_openability_audits_v0_1.svg",
-    FIG_DIR / "figure5_invalid_state_decomposition_v0_3.svg",
+    FIG_DIR / "figure1_relation_endpoint_contract_v1_0.svg",
+    FIG_DIR / "figure2_level_a_empirical_anchor_v1_0.svg",
+    FIG_DIR / "figure3_relation_layer_and_event_function_v1_0.svg",
+    FIG_DIR / "figure4_parallel_openability_audits_v1_0.svg",
+    FIG_DIR / "figure5_invalid_state_decomposition_v1_0.svg",
 ]
 
 
@@ -66,12 +66,16 @@ def test_submission_surface_routes_v010_and_frozen_claim_boundary():
     for phrase in [
         "PREFIELD_FLAGSHIP_V0_10_CANDIDATE.md",
         "PAPER1_SUPPLEMENT_V0_1.md",
-        "FULL_SUBMISSION_DISPLAY_MANIFEST_V0_2.md",
+        "FULL_SUBMISSION_DISPLAY_MANIFEST_V0_3.md",
         "CLAIM_EVIDENCE_LEDGER_V0_5.md",
         "0/12 taxa with an envelope exceedance",
         "FPR_zero-FPR_gated=1-a1",
         "TPR_zero-TPR_gated=1-a0",
         "Empirical ledger: **1**",
+        "figure1_relation_endpoint_contract_v1_0.svg",
+        "figure5_invalid_state_decomposition_v1_0.svg",
+        "6.13 pt",
+        "173 mm",
     ]:
         assert phrase in text
 
@@ -141,6 +145,7 @@ def test_title_page_and_cover_letter_are_v010_aligned_but_human_metadata_remain_
     assert "**Abstract word count:** 146." in title
     assert "**Main-text word count:** 3,408." in title
     assert "16 audited references" in title
+    assert "FULL_SUBMISSION_DISPLAY_MANIFEST_V0_3.md" in title
     assert "editor invitation/approved Method proposal details" in title
     assert "Do not send until" in cover
     assert "0 of 12 taxa" in cover
@@ -149,13 +154,16 @@ def test_title_page_and_cover_letter_are_v010_aligned_but_human_metadata_remain_
     assert "[Insert the Ecology Letters Method invitation" in cover
 
 
-def test_readiness_marks_science_green_but_send_remains_blocked():
+def test_readiness_marks_science_and_figures_green_but_send_remains_blocked():
     text = READINESS.read_text(encoding="utf-8")
     assert EXPECTED_SHA256 in text
     assert "Abstract word count fixed at **146**" in text
     assert "Main-text word count fixed at **3,408**" in text
     assert "Working reference entries fixed at **16**" in text
     assert "Display items fixed at **6**" in text
+    assert "## GREEN — figure production" in text
+    assert "Minimum final-size text fixed at **6.13 pt**" in text
+    assert "490.394 pt = 173 mm" in text
     assert "Do **not** send the full manuscript while any RED item remains unresolved" in text
     assert "Ecology Letters has invited/approved the full Method submission" in text
     assert "Final author list and order confirmed by all authors" in text
@@ -202,7 +210,7 @@ def test_figure_specific_submission_messages_are_preserved():
     assert "falsified dependency" not in fig4.lower()
     assert "FPRzero − FPRgated = 1 − a₁" in fig5
     assert "TPRzero − TPRgated = 1 − a₀" in fig5
-    assert "ablation of the unresolved-state guard" in fig5
+    assert "unresolved-state guard" in fig5
 
 
 def test_supplement_preserves_detail_removed_from_main():

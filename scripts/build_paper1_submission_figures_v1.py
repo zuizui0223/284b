@@ -8,7 +8,6 @@ and limited box/canvas geometry needed to keep text legible at 173 mm width.
 
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -122,6 +121,18 @@ def figure4(svg: str) -> str:
     }
     for old, new in short.items():
         svg = svg.replace(old, new)
+
+    # The original two-line 10.5 px footers had only 12 user units of leading.
+    # Give the 15 px v1 footers real leading and a slightly taller STOP box.
+    svg = svg.replace('x="795" y="332" width="305" height="116"', 'x="795" y="332" width="305" height="136"')
+    svg = svg.replace('x="947" y="434" class="xs"', 'x="947" y="439" class="xs"')
+    svg = svg.replace('x="947" y="446" class="xs"', 'x="947" y="459" class="xs"')
+    svg = svg.replace('x="600" y="483" class="s"', 'x="600" y="497" class="s"')
+
+    svg = svg.replace('x="795" y="610" width="305" height="116"', 'x="795" y="610" width="305" height="136"')
+    svg = svg.replace('x="947" y="712" class="xs"', 'x="947" y="717" class="xs"')
+    svg = svg.replace('x="947" y="724" class="xs"', 'x="947" y="737" class="xs"')
+    svg = svg.replace('x="600" y="761" class="s"', 'x="600" y="775" class="s"')
     return svg
 
 

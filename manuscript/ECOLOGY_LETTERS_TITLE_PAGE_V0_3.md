@@ -18,15 +18,17 @@
 
 **Generated manuscript:** `manuscript/PREFIELD_FLAGSHIP_V0_10_CANDIDATE.md`
 
+**Exact manuscript SHA-256:** `66ad208f2a922800cb7f1d14f96b28295de13af4cdbdbec2f8b698b8fa320cc5`
+
 **Supplement:** `manuscript/PAPER1_SUPPLEMENT_V0_1.md`
 
 **Display package:** `manuscript/FULL_SUBMISSION_DISPLAY_MANIFEST_V0_2.md`
 
 **Claim boundary:** `manuscript/CLAIM_EVIDENCE_LEDGER_V0_5.md`
 
-**Abstract word count:** <=150 by CI; insert exact final count after materialization.
+**Abstract word count:** 146.
 
-**Main-text word count:** <=5,000 by CI; v0.10 is required by CI to be materially shorter than v0.9. Insert exact final count after materialization.
+**Main-text word count:** 3,408.
 
 **Display items:** 6 total (Figures 1–5 + Table 1).
 

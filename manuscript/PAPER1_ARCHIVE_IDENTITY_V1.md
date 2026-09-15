@@ -2,7 +2,7 @@
 
 **Status:** archive candidate; no DOI or public release is asserted by this receipt.
 
-- source commit used to build receipt: `c11f517a2c1eab0ad8a49b76683e2fd47475b032`
+- source commit used to build receipt: `b8c4ba8148494910bd3d8c278df8cbfdbba2a857`
 - scientific source SHA-256: `66ad208f2a922800cb7f1d14f96b28295de13af4cdbdbec2f8b698b8fa320cc5`
 - Ecology Letters submission derivative SHA-256: `a2f45e2b91953b47f24682e95667533a923680ec65a9b0fef2c88a423b75cf84`
 - bundle identity SHA-256: `ebf1d848ac2eaa99f7e15b5f8a95e33262f1f76a768b1f4f8944331b177ff680`

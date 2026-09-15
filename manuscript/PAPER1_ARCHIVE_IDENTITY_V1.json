@@ -1,7 +1,7 @@
 {
   "schema": "paper1_archive_identity_v1",
   "status": "archive_candidate_not_doi_release",
-  "source_commit": "c11f517a2c1eab0ad8a49b76683e2fd47475b032",
+  "source_commit": "b8c4ba8148494910bd3d8c278df8cbfdbba2a857",
   "scientific_source_sha256": "66ad208f2a922800cb7f1d14f96b28295de13af4cdbdbec2f8b698b8fa320cc5",
   "submission_derivative_sha256": "a2f45e2b91953b47f24682e95667533a923680ec65a9b0fef2c88a423b75cf84",
   "scientific_boundary": {

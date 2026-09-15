@@ -118,8 +118,7 @@ def test_v10_keeps_level_c_as_stopping_rule_only():
 def test_v10_routes_provenance_and_feasibility_details_to_supplement():
     built = _build()
     main = _main(built)
-    assert "Supplement S4" in built
-    assert "Supplement S5" in built
+    assert "Supplements S4–S5" in built
     assert "Supplement S6" in built
     for detail in ["Wilson lower bound", "Clopper–Pearson", "28/30", "60/60"]:
         assert detail not in main

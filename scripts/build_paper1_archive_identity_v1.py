@@ -40,6 +40,7 @@ FILES = [
     "scripts/build_paper1_submission_figures_v1.py",
     "scripts/render_paper1_submission_figures.py",
     "scripts/export_paper1_submission_figures.py",
+    "scripts/build_paper1_archive_identity_v1.py",
 ]
 
 EXPECTED_SCIENCE_SHA256 = "66ad208f2a922800cb7f1d14f96b28295de13af4cdbdbec2f8b698b8fa320cc5"
@@ -80,7 +81,7 @@ def main() -> None:
     payload = {
         "schema": "paper1_archive_identity_v1",
         "status": "archive_candidate_not_doi_release",
-        "git_commit": git_head(),
+        "source_commit": git_head(),
         "scientific_source_sha256": science_sha,
         "submission_derivative_sha256": submission_sha,
         "scientific_boundary": {
@@ -102,7 +103,7 @@ def main() -> None:
         "",
         "**Status:** archive candidate; no DOI or public release is asserted by this receipt.",
         "",
-        f"- git commit: `{payload['git_commit']}`",
+        f"- source commit used to build receipt: `{payload['source_commit']}`",
         f"- scientific source SHA-256: `{science_sha}`",
         f"- Ecology Letters submission derivative SHA-256: `{submission_sha}`",
         f"- bundle identity SHA-256: `{payload['bundle_identity_sha256']}`",

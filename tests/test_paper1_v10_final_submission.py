@@ -1,3 +1,4 @@
+import hashlib
 import importlib.util
 import re
 import xml.etree.ElementTree as ET
@@ -14,6 +15,12 @@ SUPP = ROOT / "manuscript" / "PAPER1_SUPPLEMENT_V0_1.md"
 SURFACE = ROOT / "manuscript" / "PAPER1_V0_10_SUBMISSION_SURFACE.md"
 TITLE = ROOT / "manuscript" / "ECOLOGY_LETTERS_TITLE_PAGE_V0_3.md"
 COVER = ROOT / "manuscript" / "ECOLOGY_LETTERS_FULL_COVER_LETTER_V0_2.md"
+COMMITTED = ROOT / "manuscript" / "PREFIELD_FLAGSHIP_V0_10_CANDIDATE.md"
+SHA_FILE = ROOT / "manuscript" / "PREFIELD_FLAGSHIP_V0_10_CANDIDATE.sha256"
+IDENTITY = ROOT / "manuscript" / "PREFIELD_FLAGSHIP_V0_10_IDENTITY.txt"
+SUBMISSION_IDENTITY = ROOT / "manuscript" / "PAPER1_SUBMISSION_IDENTITY_V0_1.md"
+READINESS = ROOT / "manuscript" / "PAPER1_FULL_SUBMISSION_READINESS_V0_1.md"
+EXPECTED_SHA256 = "66ad208f2a922800cb7f1d14f96b28295de13af4cdbdbec2f8b698b8fa320cc5"
 FIG_DIR = ROOT / "manuscript" / "figures"
 FIGURES = [
     FIG_DIR / "figure1_relation_endpoint_contract_v0_2.svg",
@@ -94,11 +101,45 @@ def test_exact_v010_build_respects_limits_and_core_claims():
         assert forbidden not in lower
 
 
+def test_committed_v010_is_exact_builder_output_and_identity_is_frozen():
+    built = _build()
+    committed = COMMITTED.read_text(encoding="utf-8")
+    assert committed == built
+    digest = hashlib.sha256(COMMITTED.read_bytes()).hexdigest()
+    assert digest == EXPECTED_SHA256
+    assert SHA_FILE.read_text(encoding="utf-8").split()[0] == EXPECTED_SHA256
+
+    abstract = committed.split("## Abstract", 1)[1].split("## 1. Introduction", 1)[0]
+    main = committed.split("## 1. Introduction", 1)[1].split("## Data and code availability", 1)[0]
+    refs = committed.split("## Working references", 1)[1].split("## Proposed display items", 1)[0]
+    displays = committed.split("## Proposed display items", 1)[1]
+    assert _word_count(abstract) == 146
+    assert _word_count(main) == 3408
+    assert sum(1 for line in refs.splitlines() if line.startswith("- ")) == 16
+    assert len(re.findall(r"^\d+\. \*\*", displays, flags=re.MULTILINE)) == 6
+
+    identity = IDENTITY.read_text(encoding="utf-8")
+    assert "abstract_words=146" in identity
+    assert "main_words=3408" in identity
+    assert "reference_entries=16" in identity
+    assert "display_items=6" in identity
+
+    receipt = SUBMISSION_IDENTITY.read_text(encoding="utf-8")
+    assert EXPECTED_SHA256 in receipt
+    assert "abstract words: **146**" in receipt
+    assert "main-text words: **3,408**" in receipt
+    assert "working reference entries: **16**" in receipt
+    assert "display items: **6**" in receipt
+
+
 def test_title_page_and_cover_letter_are_v010_aligned_but_human_metadata_remain_blocked():
     title = TITLE.read_text(encoding="utf-8")
     cover = COVER.read_text(encoding="utf-8")
     promoted = "Relation endpoints for ecological inference: when independent answers can support joint biological claims"
     assert promoted in title and promoted in cover
+    assert EXPECTED_SHA256 in title
+    assert "**Abstract word count:** 146." in title
+    assert "**Main-text word count:** 3,408." in title
     assert "16 audited references" in title
     assert "editor invitation/approved Method proposal details" in title
     assert "Do not send until" in cover
@@ -106,6 +147,18 @@ def test_title_page_and_cover_letter_are_v010_aligned_but_human_metadata_remain_
     assert "No focal Level-C biological dependency outcome is opened" in cover
     assert "[Insert verified statement" in cover
     assert "[Insert the Ecology Letters Method invitation" in cover
+
+
+def test_readiness_marks_science_green_but_send_remains_blocked():
+    text = READINESS.read_text(encoding="utf-8")
+    assert EXPECTED_SHA256 in text
+    assert "Abstract word count fixed at **146**" in text
+    assert "Main-text word count fixed at **3,408**" in text
+    assert "Working reference entries fixed at **16**" in text
+    assert "Display items fixed at **6**" in text
+    assert "Do **not** send the full manuscript while any RED item remains unresolved" in text
+    assert "Ecology Letters has invited/approved the full Method submission" in text
+    assert "Final author list and order confirmed by all authors" in text
 
 
 def test_all_submission_figures_parse_and_geometry_stays_inside_canvas():

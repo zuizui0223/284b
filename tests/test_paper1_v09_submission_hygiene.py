@@ -1,3 +1,5 @@
+import importlib.util
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -5,6 +7,29 @@ BIB_AUDIT = ROOT / "manuscript" / "BIBLIOGRAPHY_AUDIT_V0_1.md"
 INTRO = ROOT / "manuscript" / "PAPER1_INTRODUCTION_V0_9_1_CANDIDATE.md"
 REFS = ROOT / "manuscript" / "WORKING_REFERENCES_V0_9_1.md"
 SUPP = ROOT / "manuscript" / "SUPPLEMENT_ROUTING_V0_1.md"
+SOURCE = ROOT / "manuscript" / "PREFIELD_FLAGSHIP_V0_9_CANDIDATE.md"
+BUILDER = ROOT / "scripts" / "build_prefield_flagship_v0_9_1_candidate.py"
+
+
+def _word_count(text: str) -> int:
+    return len(re.findall(r"\b[\w'’-]+\b", text, flags=re.UNICODE))
+
+
+def _load_builder():
+    spec = importlib.util.spec_from_file_location("v091", BUILDER)
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
+def _build() -> str:
+    mod = _load_builder()
+    return mod.build_candidate(
+        SOURCE.read_text(encoding="utf-8"),
+        INTRO.read_text(encoding="utf-8"),
+        REFS.read_text(encoding="utf-8"),
+    )
 
 
 def test_bibliography_audit_contains_direct_and_complementary_antecedents():
@@ -77,3 +102,41 @@ def test_supplement_routing_moves_provenance_and_bulk_diagnostics_out_of_main():
     ]:
         assert phrase in text
     assert "Levels B/D/E should not read as missing empirical results in Paper 1" in text
+
+
+def test_v091_builder_changes_only_status_introduction_and_references():
+    source = SOURCE.read_text(encoding="utf-8")
+    built = _build()
+    assert "noncanonical editorial candidate v0.9.1" in built
+    assert "Blanchet et al. 2020" in built
+    assert "Gould E, Jones CS, Yen JDL" in built
+
+    # Methods through data/code availability must remain byte-identical to v0.9.
+    source_core = source.split("## 2. Methods", 1)[1].split("## Working references", 1)[0]
+    built_core = built.split("## 2. Methods", 1)[1].split("## Working references", 1)[0]
+    assert built_core == source_core
+
+    # Display routing at the bottom is also inherited unchanged from v0.9.
+    source_display = source.split("## Proposed display items", 1)[1]
+    built_display = built.split("## Proposed display items", 1)[1]
+    assert built_display == source_display
+
+
+def test_v091_built_candidate_respects_submission_boundaries():
+    built = _build()
+    abstract = built.split("## Abstract", 1)[1].split("## 1. Introduction", 1)[0]
+    main = built.split("## 1. Introduction", 1)[1].split("## Data and code availability", 1)[0]
+    assert _word_count(abstract) <= 150
+    assert _word_count(main) <= 5000
+    assert "**Empirical ledger:** 1." in built
+    assert "Level A closed; Level B unopened; Level C focal biological outcomes sealed" in built
+    assert "0 of 12 taxa with an exceedance" in built
+    assert "FPR_zero - FPR_gated = 1-a1" in built
+    assert "TPR_zero - TPR_gated = 1-a0" in built
+    for phrase in [
+        "level c confirmed dependency",
+        "level c falsified dependency",
+        "level-c confirmed dependency",
+        "level-c falsified dependency",
+    ]:
+        assert phrase not in built.lower()

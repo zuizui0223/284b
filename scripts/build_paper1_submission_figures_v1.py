@@ -8,6 +8,7 @@ and limited box/canvas geometry needed to keep text legible at 173 mm width.
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -53,6 +54,9 @@ def figure1(svg: str) -> str:
     svg = upgrade_style(svg)
     svg = svg.replace("coherence / dependency /", "coherence / dependency")
     svg = svg.replace("other declared biology", "declared biology")
+    svg = svg.replace("≠ automatic falsification", "≠ falsification")
+    svg = svg.replace('x="850" y="630" width="168" height="55"', 'x="850" y="630" width="190" height="55"')
+    svg = svg.replace('x1="1018" y1="658" x2="1050" y2="658"', 'x1="1040" y1="658" x2="1050" y2="658"')
     svg = svg.replace(
         '<text x="1043" y="763" class="xs" text-anchor="middle">hard violation authorized</text>',
         '<text x="1043" y="763" class="xs" text-anchor="middle">hard violation</text>',
@@ -74,6 +78,12 @@ def figure2(svg: str) -> str:
         "Interpretation: conditional cross-source reproducibility relative to predeclared empirical envelopes—not 283 independent successes.",
         "Conditional cross-source reproducibility relative to frozen envelopes—not 283 independent successes.",
     )
+    # Scientific names in the taxon-level plot should render as scientific names.
+    svg = re.sub(
+        r'(<text x="320" y="[0-9.]+" class="s" text-anchor="end">)([^<]+)(</text>)',
+        r'\1<tspan font-style="italic">\2</tspan>\3',
+        svg,
+    )
     return svg
 
 
@@ -87,6 +97,11 @@ def figure3(svg: str) -> str:
     svg = svg.replace(
         "Established probability theory used as a separation argument, not claimed as a new theorem.",
         "Established probability theory used as a separation argument; not a new theorem.",
+    )
+    svg = svg.replace("otherwise unresolved / noninformative", "else unresolved")
+    svg = svg.replace(
+        "effective pollination / usable resource / prey",
+        "pollination / resource / prey function",
     )
     return svg
 
@@ -121,6 +136,15 @@ def figure4(svg: str) -> str:
     }
     for old, new in short.items():
         svg = svg.replace(old, new)
+
+    svg = svg.replace(
+        '<text x="45" y="292" class="sh">B  Cremastra appendiculata var. variabilis — pollination-function lane</text>',
+        '<text x="45" y="292" class="sh">B  <tspan font-style="italic">Cremastra appendiculata</tspan> var. <tspan font-style="italic">variabilis</tspan> — pollination-function lane</text>',
+    )
+    svg = svg.replace(
+        '<text x="45" y="570" class="sh">C  Belonocnema treatae / live-oak — resource-function lane</text>',
+        '<text x="45" y="570" class="sh">C  <tspan font-style="italic">Belonocnema treatae</tspan> / live-oak — resource-function lane</text>',
+    )
 
     # The original two-line 10.5 px footers had only 12 user units of leading.
     # Give the 15 px v1 footers real leading and a slightly taller STOP box.

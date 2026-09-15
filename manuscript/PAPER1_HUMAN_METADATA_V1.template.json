@@ -1,0 +1,42 @@
+{
+  "schema": "paper1_human_metadata_v1",
+  "journal": "Ecology Letters",
+  "article_type": "Method",
+  "editorial": {
+    "full_method_authorized": false,
+    "authorization_reference": "__REQUIRED__",
+    "authorization_date": "__REQUIRED_YYYY-MM-DD__"
+  },
+  "authors": [
+    {
+      "author_id": "author-1",
+      "name": "__REQUIRED__",
+      "order": 1,
+      "affiliation_ids": [
+        "affil-1"
+      ],
+      "orcid_status": "__REQUIRED_confirmed_or_not_required__",
+      "orcid": "",
+      "credit_roles": []
+    }
+  ],
+  "affiliations": [
+    {
+      "affiliation_id": "affil-1",
+      "text": "__REQUIRED__"
+    }
+  ],
+  "corresponding_author": {
+    "author_id": "author-1",
+    "email": "__REQUIRED__"
+  },
+  "declarations": {
+    "author_order_confirmed": false,
+    "all_authors_approved": false,
+    "not_under_consideration_elsewhere": false,
+    "competing_interests_statement": "__REQUIRED__",
+    "related_work_disclosure": "__REQUIRED__"
+  },
+  "funding_statement": "__REQUIRED__",
+  "acknowledgements": "__REQUIRED__"
+}

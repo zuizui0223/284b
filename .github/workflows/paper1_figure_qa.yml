@@ -19,16 +19,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install rendering dependencies
-        run: python -m pip install --disable-pip-version-check cairosvg pillow
+      - name: Install rendering and PDF-inspection dependencies
+        run: |
+          python -m pip install --disable-pip-version-check cairosvg pillow
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
       - name: Render at 173 mm and compute physical-size metrics
         run: python scripts/render_paper1_submission_figures.py
       - name: Export 173 mm vector PDFs
         run: python scripts/export_paper1_submission_figures.py
       - name: Inspect PDF page sizes and embedded fonts
         run: |
-          command -v pdfinfo
-          command -v pdffonts
           for f in artifacts/paper1_submission_figures/Figure_*.pdf; do
             echo "=== $f ==="
             pdfinfo "$f" | grep -E '^(Page size|File size|PDF version)'

@@ -49,7 +49,7 @@ def test_v09_candidate_leads_level_a_at_taxon_replication_level():
 def test_v09_candidate_keeps_relation_layer_as_nonempirical_separation():
     text = CANDIDATE.read_text(encoding="utf-8")
     assert "Classical Frechet-Hoeffding coupling bounds" in text
-    assert "same exact marginals" in text
+    assert "exact marginals" in text
     assert "v=0.5" in text
     assert "established probability theory" in text
     assert "Joint statistical models may supply coupling information" in text

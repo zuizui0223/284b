@@ -34,7 +34,8 @@ jobs:
           assert p['scientific_boundary']['level_b']=='unopened'
           assert p['scientific_boundary']['level_c']=='focal_outcomes_sealed'
           assert p['doi'] is None and p['release_tag'] is None
-          assert len(p['files'])==24
+          assert len(p['files'])==25
+          assert any(x['path']=='scripts/build_paper1_archive_identity_v1.py' for x in p['files'])
           assert len(p['bundle_identity_sha256'])==64
           PY
       - name: Persist archive receipt on branch

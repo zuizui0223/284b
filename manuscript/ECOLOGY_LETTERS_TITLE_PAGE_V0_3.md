@@ -22,7 +22,7 @@
 
 **Supplement:** `manuscript/PAPER1_SUPPLEMENT_V0_1.md`
 
-**Display package:** `manuscript/FULL_SUBMISSION_DISPLAY_MANIFEST_V0_2.md`
+**Display package:** `manuscript/FULL_SUBMISSION_DISPLAY_MANIFEST_V0_3.md`
 
 **Claim boundary:** `manuscript/CLAIM_EVIDENCE_LEDGER_V0_5.md`
 
@@ -30,7 +30,7 @@
 
 **Main-text word count:** 3,408.
 
-**Display items:** 6 total (Figures 1–5 + Table 1).
+**Display items:** 6 total (Figures 1–5 + Table 1); Figures 1–5 use the 173-mm v1 production route with a 6.13-pt minimum final-size text floor.
 
 **Working references:** 16 audited references in `WORKING_REFERENCES_V0_9_1.md`.
 

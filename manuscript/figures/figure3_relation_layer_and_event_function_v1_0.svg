@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="960" viewBox="0 0 1200 960">
+<rect width="1200" height="960" fill="white"/>
+<style>text{font-family:'Liberation Sans',Arial,sans-serif;fill:#111}.h{font-size:27px;font-weight:bold}.sh{font-size:20px;font-weight:bold}.b{font-size:17px}.s{font-size:16px}.xs{font-size:15px}.n{font-size:29px;font-weight:bold}.box{fill:white;stroke:#333;stroke-width:1.4}.soft{fill:#f7f7f7;stroke:#777;stroke-width:1.1}.dashbox{fill:white;stroke:#777;stroke-width:1.1;stroke-dasharray:5 4}.arrow{stroke:#222;stroke-width:1.7;fill:none;marker-end:url(#m)}.dash{stroke:#777;stroke-width:1.3;stroke-dasharray:5 4;fill:none;marker-end:url(#m)}.cell{fill:white;stroke:#555;stroke-width:1.1}.hit{fill:#efefef;stroke:#333;stroke-width:1.2}</style>
+<defs><marker id="m" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#222"/></marker></defs>
+<text x="45" y="42" class="h">Figure 3. Exact marginals do not determine a biological relation</text>
+<text x="45" y="70" class="b">The relation layer separates statistical answer quality from biological endpoint semantics.</text>
+
+<text x="45" y="112" class="sh">A  Separation: the same perfect marginals support opposite hard-relation status</text>
+<rect x="50" y="132" width="1100" height="318" rx="10" class="soft"/>
+<rect x="405" y="154" width="390" height="72" rx="10" class="box"/>
+<text x="600" y="180" class="sh" text-anchor="middle">Same exact role-specific answers</text>
+<text x="600" y="207" class="n" text-anchor="middle">P(E=1)=0.5   ·   P(F=1)=0.5</text>
+<line x1="520" y1="226" x2="315" y2="274" class="arrow"/>
+<line x1="680" y1="226" x2="885" y2="274" class="arrow"/>
+<text x="300" y="292" class="b" text-anchor="middle">World A: dependency compatible</text>
+<text x="900" y="292" class="b" text-anchor="middle">World B: dependency violated</text>
+<rect x="215" y="310" width="170" height="72" rx="7" class="box"/><text x="300" y="339" class="n" text-anchor="middle">v=0</text><text x="300" y="365" class="s" text-anchor="middle">P(E=1,F=0)=0</text>
+<rect x="815" y="310" width="170" height="72" rx="7" class="box"/><text x="900" y="339" class="n" text-anchor="middle">v=0.5</text><text x="900" y="365" class="s" text-anchor="middle">P(E=1,F=0)=0.5</text>
+<text x="600" y="408" class="b" text-anchor="middle">Classical Fréchet–Hoeffding bounds: max(0,pE−pF) ≤ v ≤ min(pE,1−pF)</text>
+<text x="600" y="432" class="xs" text-anchor="middle">Established probability theory used as a separation argument; not a new theorem.</text>
+
+<text x="45" y="500" class="sh">B  Biological authorization: define the dependency at the event where biology makes a prediction</text>
+<rect x="50" y="520" width="1100" height="185" rx="10" class="soft"/>
+<rect x="84" y="562" width="250" height="88" rx="7" class="dashbox"/><text x="209" y="588" class="b" text-anchor="middle">Rejected shortcut</text><text x="209" y="614" class="s" text-anchor="middle">raw occurrence / suitability</text><text x="209" y="634" class="s" text-anchor="middle">surfaces forced to match</text>
+<line x1="334" y1="606" x2="430" y2="606" class="dash"/>
+<rect x="440" y="562" width="148" height="88" rx="7" class="box"/><text x="514" y="594" class="sh" text-anchor="middle">E(k)</text><text x="514" y="620" class="s" text-anchor="middle">dependent event</text><text x="514" y="640" class="xs" text-anchor="middle">at opportunity k</text>
+<line x1="588" y1="606" x2="676" y2="606" class="arrow"/>
+<rect x="686" y="562" width="160" height="88" rx="7" class="box"/><text x="766" y="594" class="sh" text-anchor="middle">F(k)</text><text x="766" y="620" class="s" text-anchor="middle">required function</text><text x="766" y="640" class="xs" text-anchor="middle">at the same key</text>
+<rect x="892" y="552" width="225" height="108" rx="7" class="box"/><text x="1004" y="580" class="b" text-anchor="middle">Hard contradiction</text><text x="1004" y="606" class="s" text-anchor="middle">E(k)=true</text><text x="1004" y="628" class="s" text-anchor="middle">AND authorized F(k)=false</text><text x="1004" y="649" class="xs" text-anchor="middle">else unresolved</text>
+<text x="600" y="686" class="xs" text-anchor="middle">Different roles may legitimately use different estimators, predictors, accessible areas and raw scales upstream.</text>
+
+<text x="45" y="756" class="sh">C  The required function is not automatically one named provider</text>
+<rect x="50" y="776" width="1100" height="135" rx="10" class="soft"/>
+<rect x="83" y="808" width="310" height="70" rx="7" class="box"/><text x="238" y="834" class="b" text-anchor="middle">Route 1: complete provider set</text><text x="238" y="858" class="s" text-anchor="middle">F(k)=OR over all admissible providers</text>
+<rect x="445" y="808" width="310" height="70" rx="7" class="box"/><text x="600" y="834" class="b" text-anchor="middle">Route 2: direct aggregate function</text><text x="600" y="858" class="s" text-anchor="middle">pollination / resource / prey function</text>
+<rect x="807" y="808" width="310" height="70" rx="7" class="box"/><text x="962" y="834" class="b" text-anchor="middle">Incomplete provider universe</text><text x="962" y="858" class="sh" text-anchor="middle">absence → unresolved</text>
+<text x="600" y="938" class="s" text-anchor="middle">Joint models can estimate coupling; the relation-endpoint contract supplies the biological relation, common key and contradiction rule.</text>
+</svg>

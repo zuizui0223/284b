@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RECEIPT = ROOT / "manuscript" / "PAPER1_ARCHIVE_IDENTITY_V1.json"
 EXPECTED_SCIENCE_SHA = "66ad208f2a922800cb7f1d14f96b28295de13af4cdbdbec2f8b698b8fa320cc5"
 EXPECTED_SUBMISSION_SHA = "a2f45e2b91953b47f24682e95667533a923680ec65a9b0fef2c88a423b75cf84"
-EXPECTED_BUNDLE_SHA = "788ffe715ee12831022e286887b960201bb04af63fda568d421708233d124a84"
+EXPECTED_BUNDLE_SHA = "ebf1d848ac2eaa99f7e15b5f8a95e33262f1f76a768b1f4f8944331b177ff680"
 
 
 def sha256(path: Path) -> str:
@@ -30,6 +30,7 @@ class Paper1ArchiveIdentityV1Tests(unittest.TestCase):
         self.assertEqual(p["scientific_boundary"]["empirical_ledger"], 1)
         self.assertIsNone(p["doi"])
         self.assertIsNone(p["release_tag"])
+        self.assertTrue(p["source_commit"])
 
     def test_all_25_archive_files_exist_and_match_recorded_hashes(self):
         files = self.data["files"]

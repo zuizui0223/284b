@@ -57,7 +57,9 @@ jobs:
           assert abs(w-490.394) < 0.02, w
           PY
             pdffonts "$f" | tee /tmp/fonts.txt
-            awk 'NR>2 { if ($4 != "yes" || $5 != "yes" || $6 != "yes") exit 1 }' /tmp/fonts.txt
+            # Type names such as "CID TrueType" contain whitespace, so inspect
+            # emb/sub/uni relative to the fixed right edge: ... emb sub uni obj gen.
+            awk 'NR>2 { if ($(NF-4) != "yes" || $(NF-3) != "yes" || $(NF-2) != "yes") exit 1 }' /tmp/fonts.txt
           done
       - name: Upload visual-QA and submission-PDF artifact
         uses: actions/upload-artifact@v4

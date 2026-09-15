@@ -2,10 +2,10 @@
 
 **Status:** archive candidate; no DOI or public release is asserted by this receipt.
 
-- source commit used to build receipt: `4b9832db0250e0610877efa79bf476e8a2ea3a97`
+- source commit used to build receipt: `6eaddcb610f7a9047313e8a106a1978f7bff63c9`
 - scientific source SHA-256: `66ad208f2a922800cb7f1d14f96b28295de13af4cdbdbec2f8b698b8fa320cc5`
 - Ecology Letters submission derivative SHA-256: `a2f45e2b91953b47f24682e95667533a923680ec65a9b0fef2c88a423b75cf84`
-- bundle identity SHA-256: `788ffe715ee12831022e286887b960201bb04af63fda568d421708233d124a84`
+- bundle identity SHA-256: `b03b5c34748dfbfe6a45f44e7be2093bf37b63bac7abfa16a89008c37ecdebc2`
 - scientific boundary: Level A sole empirical closure; Level B unopened; focal Level-C outcomes sealed; empirical ledger = 1.
 
 ## Included files

@@ -1,0 +1,5 @@
+scientific_source_sha256=66ad208f2a922800cb7f1d14f96b28295de13af4cdbdbec2f8b698b8fa320cc5
+abstract_words=146
+main_words=3437
+reference_entries=16
+display_items=6

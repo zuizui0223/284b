@@ -18,8 +18,11 @@ jobs:
           python-version: '3.12'
       - name: Build exact v0.10 manuscript
         run: python scripts/build_prefield_flagship_v0_10_candidate.py
-      - name: Verify generated manuscript boundary tests
-        run: python -m unittest discover -s tests -p 'test_paper1_v10_compression.py'
+      - name: Run v0.10 manuscript and final-submission guards
+        run: >-
+          python scripts/run_paper1_function_guards.py
+          tests/test_paper1_v10_compression.py
+          tests/test_paper1_v10_final_submission.py
       - name: Upload exact manuscript
         uses: actions/upload-artifact@v4
         with:

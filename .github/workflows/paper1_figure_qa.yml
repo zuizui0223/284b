@@ -1,0 +1,72 @@
+name: paper1-figure-qa
+
+on:
+  pull_request:
+    paths:
+      - 'manuscript/figures/**'
+      - 'manuscript/FULL_SUBMISSION_DISPLAY_MANIFEST_V0_3.md'
+      - 'manuscript/FULL_SUBMISSION_FIGURE_CAPTIONS_V0_3.md'
+      - 'scripts/build_paper1_submission_figures_v1.py'
+      - 'scripts/render_paper1_submission_figures.py'
+      - 'scripts/export_paper1_submission_figures.py'
+      - '.github/workflows/paper1_figure_qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install rendering and PDF-inspection dependencies
+        run: |
+          python -m pip install --disable-pip-version-check cairosvg pillow
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+      - name: Verify committed v1 SVGs reproduce exactly
+        run: |
+          cp manuscript/figures/figure1_relation_endpoint_contract_v1_0.svg /tmp/f1.svg
+          cp manuscript/figures/figure2_level_a_empirical_anchor_v1_0.svg /tmp/f2.svg
+          cp manuscript/figures/figure3_relation_layer_and_event_function_v1_0.svg /tmp/f3.svg
+          cp manuscript/figures/figure4_parallel_openability_audits_v1_0.svg /tmp/f4.svg
+          cp manuscript/figures/figure5_invalid_state_decomposition_v1_0.svg /tmp/f5.svg
+          python scripts/build_paper1_submission_figures_v1.py
+          cmp /tmp/f1.svg manuscript/figures/figure1_relation_endpoint_contract_v1_0.svg
+          cmp /tmp/f2.svg manuscript/figures/figure2_level_a_empirical_anchor_v1_0.svg
+          cmp /tmp/f3.svg manuscript/figures/figure3_relation_layer_and_event_function_v1_0.svg
+          cmp /tmp/f4.svg manuscript/figures/figure4_parallel_openability_audits_v1_0.svg
+          cmp /tmp/f5.svg manuscript/figures/figure5_invalid_state_decomposition_v1_0.svg
+      - name: Render at 173 mm and compute physical-size metrics
+        run: python scripts/render_paper1_submission_figures.py
+      - name: Export 173 mm vector PDFs
+        run: python scripts/export_paper1_submission_figures.py
+      - name: Verify 173 mm page width and embedded fonts
+        run: |
+          for f in artifacts/paper1_submission_figures/Figure_*.pdf; do
+            echo "=== $f ==="
+            pdfinfo "$f" | grep -E '^(Page size|File size|PDF version)'
+            width=$(pdfinfo "$f" | awk '/^Page size:/ {print $3}')
+            python - "$width" <<'PY'
+          import sys
+          w=float(sys.argv[1])
+          assert abs(w-490.394) < 0.02, w
+          PY
+            pdffonts "$f" | tee /tmp/fonts.txt
+            # Type names such as "CID TrueType" contain whitespace, so inspect
+            # emb/sub/uni relative to the fixed right edge: ... emb sub uni obj gen.
+            awk 'NR>2 { if ($(NF-4) != "yes" || $(NF-3) != "yes" || $(NF-2) != "yes") exit 1 }' /tmp/fonts.txt
+          done
+      - name: Upload visual-QA and submission-PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper1-figure-qa-173mm
+          path: |
+            artifacts/paper1_figure_qa
+            artifacts/paper1_submission_figures
+          if-no-files-found: error
+          retention-days: 7

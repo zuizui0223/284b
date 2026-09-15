@@ -2,7 +2,7 @@
 
 **Target:** Ecology Letters — Method  
 **Scientific manuscript line:** v0.10 compressed relation-endpoint candidate  
-**Status:** scientifically ready for invited-full-submission packaging; exact manuscript identity frozen; administratively blocked from sending until the human/editor/archive items below are supplied.
+**Status:** scientifically and graphically ready for invited-full-submission packaging; exact manuscript identity frozen; administratively blocked from sending until the human/editor/archive items below are supplied.
 
 ## GREEN — scientific package
 
@@ -25,10 +25,18 @@
 - [x] Historical unittest suite and function-style Paper-1 submission guards are both actually executed in CI.
 - [x] Empirical ledger remains **1**.
 
-## YELLOW — production/export checks
+## GREEN — figure production
 
-- [ ] Perform human visual QA after journal-format export/rescaling of Figures 1–5.
-- [ ] Confirm journal-required figure format/resolution/font embedding.
+- [x] Figures 1–5 upgraded to deterministic v1 SVG production assets without changing scientific values.
+- [x] Human visual QA completed on **173-mm / 300-dpi** renders; overlaps/clipping repaired.
+- [x] Minimum final-size text fixed at **6.13 pt** for every graphical figure; CI floor = 6.0 pt.
+- [x] Scientific names italicized where shown in Figures 2 and 4.
+- [x] Vector-PDF export confirmed at **490.394 pt = 173 mm** page width for all five figures.
+- [x] PDF fonts confirmed embedded/subsetted/Unicode-capable (`emb=yes`, `sub=yes`, `uni=yes`) using Liberation Sans regular/bold/italic faces as needed.
+- [x] Production evidence recorded in `PAPER1_DISPLAY_FINAL_QA_V0_2.md`.
+
+## YELLOW — remaining production/archive checks
+
 - [ ] Convert working references to the final journal style if required by the submission system.
 - [ ] Insert immutable repository release/archive identifier and DOI(s).
 
@@ -48,7 +56,7 @@
 
 ## Sending rule
 
-Do **not** send the full manuscript while any RED item remains unresolved. YELLOW items are packaging tasks and should be cleared before final upload but must not be solved by altering scientific thresholds, replacing candidates, opening focal Level-C values or changing the empirical ledger.
+Do **not** send the full manuscript while any RED item remains unresolved. YELLOW items are packaging tasks and must not be solved by altering scientific thresholds, replacing candidates, opening focal Level-C values or changing the empirical ledger.
 
 ## Scientific boundary carried into submission
 

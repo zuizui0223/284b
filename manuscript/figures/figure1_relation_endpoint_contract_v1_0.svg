@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+<rect width="1200" height="900" fill="white"/>
+<style>text{font-family:'Liberation Sans',Arial,sans-serif;fill:#111}.h{font-size:27px;font-weight:bold}.sh{font-size:20px;font-weight:bold}.b{font-size:17px}.s{font-size:16px}.xs{font-size:15px}.n{font-size:29px;font-weight:bold}.box{fill:white;stroke:#333;stroke-width:1.4}.soft{fill:#f7f7f7;stroke:#777;stroke-width:1.1}.dashbox{fill:white;stroke:#777;stroke-width:1.1;stroke-dasharray:5 4}.arrow{stroke:#222;stroke-width:1.7;fill:none;marker-end:url(#m)}.dash{stroke:#777;stroke-width:1.3;stroke-dasharray:5 4;fill:none;marker-end:url(#m)}.cell{fill:white;stroke:#555;stroke-width:1.1}.hit{fill:#efefef;stroke:#333;stroke-width:1.2}</style>
+<defs><marker id="m" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#222"/></marker></defs>
+<text x="45" y="42" class="h">Figure 1. Relation-endpoint authorization is frozen before focal opening</text>
+<text x="45" y="70" class="b">Upstream models generate answers; the contract fixes what joint biological claim those answers may test and which states are admissible.</text>
+
+<text x="45" y="112" class="sh">A  Five-part relation-endpoint contract</text>
+<rect x="50" y="132" width="1100" height="158" rx="10" class="soft"/>
+<rect x="76" y="169" width="186" height="82" rx="7" class="box"/><text x="169" y="196" class="sh" text-anchor="middle">1  Relation</text><text x="169" y="220" class="s" text-anchor="middle">coherence / dependency</text><text x="169" y="238" class="s" text-anchor="middle">declared biology</text>
+<line x1="262" y1="210" x2="292" y2="210" class="arrow"/>
+<rect x="300" y="169" width="186" height="82" rx="7" class="box"/><text x="393" y="196" class="sh" text-anchor="middle">2  Key space</text><text x="393" y="220" class="s" text-anchor="middle">site × opportunity</text><text x="393" y="238" class="s" text-anchor="middle">where relation applies</text>
+<line x1="486" y1="210" x2="516" y2="210" class="arrow"/>
+<rect x="524" y="169" width="186" height="82" rx="7" class="box"/><text x="617" y="196" class="sh" text-anchor="middle">3  Adapters</text><text x="617" y="220" class="s" text-anchor="middle">role-specific answer →</text><text x="617" y="238" class="s" text-anchor="middle">common relation space</text>
+<line x1="710" y1="210" x2="740" y2="210" class="arrow"/>
+<rect x="748" y="169" width="186" height="82" rx="7" class="box"/><text x="841" y="196" class="sh" text-anchor="middle">4  Adequacy</text><text x="841" y="220" class="s" text-anchor="middle">is each answer eligible</text><text x="841" y="238" class="s" text-anchor="middle">for this endpoint?</text>
+<line x1="934" y1="210" x2="964" y2="210" class="arrow"/>
+<rect x="972" y="169" width="154" height="82" rx="7" class="box"/><text x="1049" y="196" class="sh" text-anchor="middle">5  Opening</text><text x="1049" y="220" class="s" text-anchor="middle">calibration +</text><text x="1049" y="238" class="s" text-anchor="middle">state rule</text>
+
+<text x="45" y="338" class="sh">B  Prospectivity is inspectable</text>
+<rect x="50" y="358" width="1100" height="145" rx="10" class="soft"/>
+<rect x="88" y="395" width="260" height="70" rx="7" class="box"/><text x="218" y="421" class="b" text-anchor="middle">complete validated contract</text><text x="218" y="443" class="s" text-anchor="middle">including opening_rule_reference</text>
+<line x1="348" y1="430" x2="430" y2="430" class="arrow"/>
+<rect x="440" y="395" width="265" height="70" rx="7" class="box"/><text x="572" y="421" class="b" text-anchor="middle">canonical deterministic JSON</text><text x="572" y="443" class="s" text-anchor="middle">missing/unknown fields rejected</text>
+<line x1="705" y1="430" x2="787" y2="430" class="arrow"/>
+<rect x="797" y="395" width="300" height="70" rx="7" class="box"/><text x="947" y="421" class="sh" text-anchor="middle">SHA-256 fingerprint</text><text x="947" y="443" class="s" text-anchor="middle">timestampable/versionable audit identity</text>
+<text x="600" y="489" class="xs" text-anchor="middle">Fingerprinting makes endpoint drift inspectable; it is not proof that investigators were outcome-blind.</text>
+
+<text x="45" y="554" class="sh">C  The same contract preserves unresolved states for soft and hard endpoints</text>
+<rect x="50" y="574" width="530" height="236" rx="10" class="soft"/>
+<text x="315" y="605" class="sh" text-anchor="middle">Calibrated soft relation</text>
+<rect x="82" y="630" width="160" height="55" rx="7" class="box"/><text x="162" y="653" class="b" text-anchor="middle">adequate answers +</text><text x="162" y="673" class="s" text-anchor="middle">frozen relation ceiling</text>
+<line x1="242" y1="658" x2="315" y2="658" class="arrow"/>
+<rect x="325" y="630" width="205" height="55" rx="7" class="box"/><text x="427" y="654" class="b" text-anchor="middle">discordance ≤ ceiling?</text><text x="427" y="673" class="s" text-anchor="middle">relation-specific rule</text>
+<rect x="92" y="724" width="130" height="50" rx="6" class="box"/><text x="157" y="755" class="s" text-anchor="middle">consistent</text>
+<rect x="232" y="724" width="150" height="50" rx="6" class="box"/><text x="307" y="747" class="xs" text-anchor="middle">attention_required</text><text x="307" y="763" class="xs" text-anchor="middle">≠ falsification</text>
+<rect x="392" y="724" width="145" height="50" rx="6" class="box"/><text x="464" y="755" class="sh" text-anchor="middle">unresolved</text>
+
+<rect x="625" y="574" width="525" height="236" rx="10" class="soft"/>
+<text x="887" y="605" class="sh" text-anchor="middle">Directional hard relation  E(k) → F(k)</text>
+<rect x="654" y="630" width="144" height="55" rx="7" class="box"/><text x="726" y="653" class="b" text-anchor="middle">E(k) adequate</text><text x="726" y="673" class="s" text-anchor="middle">and positive?</text>
+<line x1="798" y1="658" x2="840" y2="658" class="arrow"/>
+<rect x="850" y="630" width="190" height="55" rx="7" class="box"/><text x="934" y="653" class="b" text-anchor="middle">F(k) state</text><text x="934" y="673" class="s" text-anchor="middle">present / absent / ?</text>
+<line x1="1040" y1="658" x2="1050" y2="658" class="arrow"/>
+<rect x="1058" y="630" width="68" height="55" rx="7" class="box"/><text x="1092" y="649" class="xs" text-anchor="middle">negative</text><text x="1092" y="665" class="xs" text-anchor="middle">qualified</text><text x="1092" y="681" class="xs" text-anchor="middle">?</text>
+<rect x="649" y="724" width="145" height="50" rx="6" class="box"/><text x="721" y="747" class="xs" text-anchor="middle">E=false</text><text x="721" y="763" class="xs" text-anchor="middle">noninformative</text>
+<rect x="804" y="724" width="145" height="50" rx="6" class="box"/><text x="876" y="747" class="xs" text-anchor="middle">F=present</text><text x="876" y="763" class="xs" text-anchor="middle">no violation observed</text>
+<rect x="959" y="724" width="168" height="50" rx="6" class="box"/><text x="1043" y="747" class="xs" text-anchor="middle">F=absent + qualified</text><text x="1043" y="763" class="xs" text-anchor="middle">hard violation</text>
+<text x="887" y="797" class="s" text-anchor="middle">Any inadequate, missing or unqualified negative remains unresolved.</text>
+
+<rect x="210" y="840" width="780" height="42" rx="8" class="dashbox"/>
+<text x="600" y="866" class="b" text-anchor="middle">Answer construction first; biological relation authorization second.</text>
+</svg>

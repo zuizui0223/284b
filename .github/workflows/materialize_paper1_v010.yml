@@ -4,15 +4,18 @@ on:
   push:
     branches:
       - paper/v10-final-submission
+  workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   materialize:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: paper/v10-final-submission
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -23,10 +26,50 @@ jobs:
           python scripts/run_paper1_function_guards.py
           tests/test_paper1_v10_compression.py
           tests/test_paper1_v10_final_submission.py
+      - name: Record exact manuscript identity
+        run: |
+          sha256sum manuscript/PREFIELD_FLAGSHIP_V0_10_CANDIDATE.md | tee manuscript/PREFIELD_FLAGSHIP_V0_10_CANDIDATE.sha256
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          p = Path('manuscript/PREFIELD_FLAGSHIP_V0_10_CANDIDATE.md').read_text(encoding='utf-8')
+          wc = lambda x: len(re.findall(r"\b[\w'’-]+\b", x, flags=re.UNICODE))
+          abstract = p.split('## Abstract', 1)[1].split('## 1. Introduction', 1)[0]
+          main = p.split('## 1. Introduction', 1)[1].split('## Data and code availability', 1)[0]
+          refs = p.split('## Working references', 1)[1].split('## Proposed display items', 1)[0]
+          displays = p.split('## Proposed display items', 1)[1]
+          out = Path('manuscript/PREFIELD_FLAGSHIP_V0_10_IDENTITY.txt')
+          out.write_text(
+              f'abstract_words={wc(abstract)}\n'
+              f'main_words={wc(main)}\n'
+              f'reference_entries={sum(1 for line in refs.splitlines() if line.startswith("- "))}\n'
+              f'display_items={len(re.findall(r"^\\d+\\. \\*\\*", displays, flags=re.MULTILINE))}\n',
+              encoding='utf-8',
+          )
+          PY
+      - name: Persist exact materialized manuscript on branch
+        run: |
+          if git diff --quiet -- manuscript/PREFIELD_FLAGSHIP_V0_10_CANDIDATE.md manuscript/PREFIELD_FLAGSHIP_V0_10_CANDIDATE.sha256 manuscript/PREFIELD_FLAGSHIP_V0_10_IDENTITY.txt && \
+             git ls-files --error-unmatch manuscript/PREFIELD_FLAGSHIP_V0_10_CANDIDATE.md >/dev/null 2>&1 && \
+             git ls-files --error-unmatch manuscript/PREFIELD_FLAGSHIP_V0_10_CANDIDATE.sha256 >/dev/null 2>&1 && \
+             git ls-files --error-unmatch manuscript/PREFIELD_FLAGSHIP_V0_10_IDENTITY.txt >/dev/null 2>&1; then
+            echo 'Exact v0.10 manuscript already materialized.'
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add manuscript/PREFIELD_FLAGSHIP_V0_10_CANDIDATE.md \
+                    manuscript/PREFIELD_FLAGSHIP_V0_10_CANDIDATE.sha256 \
+                    manuscript/PREFIELD_FLAGSHIP_V0_10_IDENTITY.txt
+            git commit -m 'Materialize exact Paper 1 v0.10 manuscript'
+            git push origin HEAD:paper/v10-final-submission
+          fi
       - name: Upload exact manuscript
         uses: actions/upload-artifact@v4
         with:
           name: paper1-v010-materialized
-          path: manuscript/PREFIELD_FLAGSHIP_V0_10_CANDIDATE.md
+          path: |
+            manuscript/PREFIELD_FLAGSHIP_V0_10_CANDIDATE.md
+            manuscript/PREFIELD_FLAGSHIP_V0_10_CANDIDATE.sha256
+            manuscript/PREFIELD_FLAGSHIP_V0_10_IDENTITY.txt
           if-no-files-found: error
           retention-days: 7

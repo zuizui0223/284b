@@ -1,7 +1,7 @@
 {
   "schema": "paper1_archive_identity_v1",
   "status": "archive_candidate_not_doi_release",
-  "git_commit": "1c460d2b78a08c43d0541ea632fa52609c49d119",
+  "source_commit": "4b9832db0250e0610877efa79bf476e8a2ea3a97",
   "scientific_source_sha256": "66ad208f2a922800cb7f1d14f96b28295de13af4cdbdbec2f8b698b8fa320cc5",
   "submission_derivative_sha256": "a2f45e2b91953b47f24682e95667533a923680ec65a9b0fef2c88a423b75cf84",
   "scientific_boundary": {
@@ -94,6 +94,11 @@
       "bytes": 7879
     },
     {
+      "path": "scripts/build_paper1_archive_identity_v1.py",
+      "sha256": "ff20d5274359c81f0d1960df28bfb3f4f3b398bcb1c6ff44944118dc0533cee6",
+      "bytes": 5418
+    },
+    {
       "path": "scripts/build_paper1_ecology_letters_submission_v1.py",
       "sha256": "1060fe133b8fae23b1ed63cb071027fab129ca8681b39972710d16de306aefe6",
       "bytes": 2996
@@ -134,5 +139,5 @@
       "bytes": 4752
     }
   ],
-  "bundle_identity_sha256": "0c4b6250b866fdb2c190e72321887795b984cb4fbb26281be3f9c19b8ec11890"
+  "bundle_identity_sha256": "788ffe715ee12831022e286887b960201bb04af63fda568d421708233d124a84"
 }

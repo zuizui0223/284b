@@ -2,10 +2,10 @@
 
 **Status:** archive candidate; no DOI or public release is asserted by this receipt.
 
-- git commit: `1c460d2b78a08c43d0541ea632fa52609c49d119`
+- source commit used to build receipt: `4b9832db0250e0610877efa79bf476e8a2ea3a97`
 - scientific source SHA-256: `66ad208f2a922800cb7f1d14f96b28295de13af4cdbdbec2f8b698b8fa320cc5`
 - Ecology Letters submission derivative SHA-256: `a2f45e2b91953b47f24682e95667533a923680ec65a9b0fef2c88a423b75cf84`
-- bundle identity SHA-256: `0c4b6250b866fdb2c190e72321887795b984cb4fbb26281be3f9c19b8ec11890`
+- bundle identity SHA-256: `788ffe715ee12831022e286887b960201bb04af63fda568d421708233d124a84`
 - scientific boundary: Level A sole empirical closure; Level B unopened; focal Level-C outcomes sealed; empirical ledger = 1.
 
 ## Included files
@@ -26,6 +26,7 @@
 - `manuscript/figures/figure3_relation_layer_and_event_function_v1_0.svg` — `b6dd16014d831278799dc0f5e1fbbdc8116544d1e6986e33597cbb6c006d1007` — 5477 bytes
 - `manuscript/figures/figure4_parallel_openability_audits_v1_0.svg` — `c25b0beb40141358c73eb6178f878e029d78c231184ff8b01dd99bb754fbee57` — 7431 bytes
 - `manuscript/figures/figure5_invalid_state_decomposition_v1_0.svg` — `3c9124f84b7432f3fba96804ea50c56ecea6a862edbc845e4d9c898daefe58f4` — 7879 bytes
+- `scripts/build_paper1_archive_identity_v1.py` — `ff20d5274359c81f0d1960df28bfb3f4f3b398bcb1c6ff44944118dc0533cee6` — 5418 bytes
 - `scripts/build_paper1_ecology_letters_submission_v1.py` — `1060fe133b8fae23b1ed63cb071027fab129ca8681b39972710d16de306aefe6` — 2996 bytes
 - `scripts/build_paper1_submission_figures_v1.py` — `8177c9ed380f54bfd3e44f08ad5aef7ac549063fc0ed935fbfbf312c4d744745` — 9347 bytes
 - `scripts/build_prefield_flagship_v0_10_candidate.py` — `8f757553b20b503c6a337bf8296c4e6daf3a186312a2dc5be57561a852a56757` — 3506 bytes

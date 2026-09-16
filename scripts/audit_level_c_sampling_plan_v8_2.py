@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Outcome-blind audit of the prospective Level-C v8.2 sampling plan."""
+"""Outcome-blind audit and operational gate for the Level-C v8.2 sampling plan."""
 
 from __future__ import annotations
 
@@ -103,6 +103,57 @@ def audit_plan(path: str | Path) -> dict[str, object]:
     return receipt
 
 
+def evaluate_candidate_against_plan(
+    csv_path: str | Path,
+    candidate_id: str,
+    plan_path: str | Path,
+) -> dict[str, object]:
+    """Require both the unchanged v8.1 gate and the frozen v8.2 resolved targets."""
+    plan_path = Path(plan_path)
+    plan = json.loads(plan_path.read_text(encoding="utf-8"))
+    audit = audit_plan(plan_path)
+    if not audit["sampling_plan_exactly_verified"]:
+        raise ValueError("v8.2 sampling plan failed its outcome-blind audit")
+    if candidate_id not in tuple(plan["candidate_ids"]):
+        raise ValueError("candidate outside frozen v8.2 roster")
+
+    v81_result = _V81.evaluate(Path(csv_path), candidate_id)
+    positive_target = int(audit["positive_target"])
+    negative_target = int(audit["negative_target"])
+    resolved_positive = int(v81_result.get("resolved_gold_positive", 0) or 0)
+    resolved_negative = int(v81_result.get("resolved_gold_negative", 0) or 0)
+    targets_met = resolved_positive >= positive_target and resolved_negative >= negative_target
+    v81_opening = bool(v81_result.get("opening_authorized", False))
+    opening = bool(targets_met and v81_opening)
+
+    if not targets_met:
+        state = "sampling_target_not_reached"
+    elif v81_opening:
+        state = "calibration_pass_at_frozen_sampling_target"
+    else:
+        state = "calibration_not_passed_at_frozen_sampling_target"
+
+    result = dict(v81_result)
+    result.update({
+        "sampling_plan_version": "product_b_level_c_sampling_plan_v8_2",
+        "sampling_plan": str(plan_path),
+        "positive_target": positive_target,
+        "negative_target": negative_target,
+        "resolved_sampling_targets_met": targets_met,
+        "v8_1_opening_authorized": v81_opening,
+        "state": state,
+        "opening_authorized": opening,
+        "counts_as_empirical_evidence": False,
+        "counts_as_empirical_conclusion": False,
+        "empirical_ledger_increment": 0,
+        "note": (
+            "v8.2 requires the prospectively frozen resolved sampling targets before the unchanged "
+            "v8.1 calibration gate can authorize later endpoint opening."
+        ),
+    })
+    return result
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -111,14 +162,25 @@ def main() -> None:
         default=str(ROOT / "config" / "product_b_level_c_sampling_plan_v8_2.json"),
     )
     parser.add_argument("--out")
+    parser.add_argument("--csv")
+    parser.add_argument("--candidate-id")
     args = parser.parse_args()
-    receipt = audit_plan(args.plan)
+
+    if args.csv or args.candidate_id:
+        if not args.csv or not args.candidate_id:
+            parser.error("--csv and --candidate-id must be supplied together")
+        receipt = evaluate_candidate_against_plan(args.csv, args.candidate_id, args.plan)
+        ok = bool(receipt["opening_authorized"])
+    else:
+        receipt = audit_plan(args.plan)
+        ok = bool(receipt["sampling_plan_exactly_verified"])
+
     text = json.dumps(receipt, indent=2, sort_keys=True)
     if args.out:
         Path(args.out).write_text(text + "\n", encoding="utf-8")
     else:
         print(text)
-    if not receipt["sampling_plan_exactly_verified"]:
+    if not ok:
         raise SystemExit(2)
 
 

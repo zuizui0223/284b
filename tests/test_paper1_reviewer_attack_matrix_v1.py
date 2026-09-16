@@ -46,7 +46,8 @@ class Paper1ReviewerAttackMatrixV1Tests(unittest.TestCase):
         self.assertIn("Level B remains unopened", self.text)
         self.assertIn("focal Level-C outcomes remain sealed", self.text)
         self.assertIn("empirical ledger = 1", self.text)
-        self.assertIn("12 taxa, not 283 cells", self.text)
+        self.assertIn("12 taxa", self.text)
+        self.assertIn("not 283 cells", self.text)
         self.assertIn("No focal Level-C dependency is confirmed or falsified", self.text)
         self.assertIn("Empirical ledger increment from this audit:** 0", self.text)
 

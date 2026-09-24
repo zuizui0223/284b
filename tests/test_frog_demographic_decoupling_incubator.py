@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "incubator" / "frog_demographic_decoupling"
 INPUT_SCRIPT = BASE / "scripts" / "audit_input_contract.py"
 JOIN_SCRIPT = BASE / "scripts" / "audit_meetnetten_join.py"
-PROTOCOL = BASE / "protocol_v0_3.json"
+PROTOCOL = BASE / "protocol_v0_4.json"
 README = BASE / "README.md"
 
 
@@ -41,39 +41,63 @@ class FrogDemographicDecouplingIncubatorTests(unittest.TestCase):
         f.close()
         return Path(f.name)
 
-    def test_primary_selection_remains_unopened(self):
-        ps = self.protocol["primary_system_selection"]
-        self.assertEqual(ps["state"], "unresolved_pending_raw_overlap_audit")
-        self.assertIn(
-            "adult-to-downstream association sign or magnitude",
-            ps["forbidden_selection_information"],
+    def test_outcomes_remain_closed_before_raw_overlap_gate(self):
+        self.assertEqual(
+            self.protocol["status"],
+            "pre-outcome_exact_programme_identity_frozen",
         )
         self.assertEqual(self.protocol["outcome_opening_status"], "closed")
-
-    def test_exact_publisher_identity_join_is_the_only_authorized_join(self):
-        contract = self.protocol["meetnetten_identity_contract"]
         self.assertEqual(
-            contract["publisher_repository_commit"],
-            "70cf1c1e9a2b3d32be16bfa6ca12bfea4fd6303a",
+            self.protocol["focal_candidate"]["raw_overlap_state"],
+            "unopened",
+        )
+        self.assertTrue(
+            self.protocol["raw_estimability_gate"][
+                "biological_association_must_remain_closed_during_gate"
+            ]
+        )
+
+    def test_same_species_projects_are_pinned_across_protocols(self):
+        species = {
+            row["scientificName"]: row["publisher_project_key"]
+            for row in self.protocol["focal_candidate"]["species"]
+        }
+        self.assertEqual(species, {"Hyla arborea": 13, "Pelobates fuscus": 152})
+        self.assertEqual(
+            self.protocol["focal_candidate"]["chorus_protocol_ids"], [5, 33]
         )
         self.assertEqual(
-            contract["cross_programme_join_key"],
+            self.protocol["focal_candidate"]["downstream_protocol_ids"], [25, 32]
+        )
+        self.assertIn("same species-specific monitoring projects", self.readme)
+
+    def test_exact_publisher_identity_is_only_authorized_join(self):
+        focal = self.protocol["focal_candidate"]
+        self.assertEqual(
+            focal["analysis_unit_candidate"],
             ["locationID", "scientificName", "calendar_year"],
         )
-        self.assertFalse(contract["coordinate_join_allowed"])
-        self.assertFalse(contract["locality_name_join_allowed"])
+        self.assertTrue(focal["exact_join_authorized"])
+        self.assertTrue(focal["coordinate_or_locality_rescue_forbidden"])
         self.assertEqual(
-            contract["shared_target_species"],
-            ["Hyla arborea", "Pelobates fuscus"],
+            focal["common_location_semantics"],
+            "INBO:MEETNET:LOCATION:<DimLocation.LocationID>",
         )
-        self.assertIn("Exact join", self.readme)
+        self.assertIn("Nearest-coordinate matching", self.readme)
 
-    def test_natterjack_is_not_primary_under_current_snapshot(self):
-        n = self.protocol["independent_validation"]["Natterjack"]
-        self.assertEqual(n["event_records"], 19)
-        self.assertEqual(n["occurrence_records"], 117)
-        self.assertFalse(n["primary_authorized"])
-        self.assertIn("only 19 public events", self.readme)
+    def test_claim_language_prevents_demographic_overreach(self):
+        forbidden = self.protocol["claim_language"][
+            "forbidden_until_additional_data"
+        ]
+        for phrase in [
+            "adult population recruitment",
+            "population persistence",
+            "demographic ghost population",
+            "ecological trap",
+            "local extinction early warning",
+        ]:
+            self.assertIn(phrase, forbidden)
+        self.assertFalse(self.protocol["ecological_target"]["recruitment_word_authorized"])
 
     def test_missing_and_unsurveyed_never_become_absence(self):
         p = self._csv(
@@ -101,7 +125,7 @@ class FrogDemographicDecouplingIncubatorTests(unittest.TestCase):
         self.assertEqual(out["stage_status_counts"]["juvenile"]["absent"], 0)
         self.assertFalse(out["biological_failure_classified"])
 
-    def test_present_zero_is_invalid(self):
+    def test_present_zero_is_invalid_in_normalized_stage_contract(self):
         p = self._csv(
             ["site_id", "event_id", "date", "stage", "status", "count"],
             [

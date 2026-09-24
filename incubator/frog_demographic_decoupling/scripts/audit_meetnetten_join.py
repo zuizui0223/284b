@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """Structural-only join audit for Meetnetten amphibian monitoring exports.
 
-This script deliberately does NOT read individualCount or compute any adult-downstream
-association. It tests whether publisher-defined identities provide enough exact shared
-site-years to justify opening a later ecological model.
+The audit never reads individualCount and never computes an adult-downstream
+association. It asks only whether publisher-defined identities and repeated
+sampling are sufficient to justify opening a later ecological model.
 
-Inputs are normalized extracts containing only:
+Inputs are normalized extracts containing:
   chorus_events: eventID,eventDate,locationID
   chorus_taxa:   eventID,scientificName,occurrenceStatus
   down_events:  eventID,eventDate,locationID
   down_taxa:    eventID,scientificName,occurrenceStatus,lifeStage
 
-No coordinate columns are accepted or used.
+Coordinate and locality fields are deliberately forbidden.
 """
 from __future__ import annotations
 
@@ -31,106 +31,139 @@ DOWN_STAGES = {"larva", "metamorph", "adult"}
 
 
 def _read(path: Path, required: set[str]) -> list[dict[str, str]]:
-    with path.open(newline="", encoding="utf-8") as h:
-        r = csv.DictReader(h)
-        fields = set(r.fieldnames or [])
-        miss = required - fields
-        if miss:
-            raise ValueError(f"{path}: missing columns {sorted(miss)}")
+    with path.open(newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        fields = set(reader.fieldnames or [])
+        missing = required - fields
+        if missing:
+            raise ValueError(f"{path}: missing columns {sorted(missing)}")
         forbidden = {"decimalLatitude", "decimalLongitude", "locality"} & fields
         if forbidden:
-            raise ValueError(f"{path}: spatial rescue columns forbidden in identity audit: {sorted(forbidden)}")
-        return [dict(x) for x in r]
+            raise ValueError(
+                f"{path}: spatial rescue columns forbidden in identity audit: {sorted(forbidden)}"
+            )
+        return [dict(row) for row in reader]
 
 
-def _events(rows: list[dict[str, str]]) -> dict[str, tuple[str, int]]:
-    out = {}
-    for i, r in enumerate(rows, 2):
-        eid = r["eventID"].strip()
-        lid = r["locationID"].strip()
-        if not EVENT_RE.fullmatch(eid):
-            raise ValueError(f"line {i}: invalid eventID")
-        if not LOCATION_RE.fullmatch(lid):
-            raise ValueError(f"line {i}: invalid locationID")
-        if eid in out:
-            raise ValueError(f"duplicate eventID: {eid}")
-        y = date.fromisoformat(r["eventDate"].strip()).year
-        out[eid] = (lid, y)
+def _events(rows: list[dict[str, str]]) -> dict[str, tuple[str, date]]:
+    out: dict[str, tuple[str, date]] = {}
+    for line, row in enumerate(rows, 2):
+        event_id = row["eventID"].strip()
+        location_id = row["locationID"].strip()
+        if not EVENT_RE.fullmatch(event_id):
+            raise ValueError(f"line {line}: invalid eventID")
+        if not LOCATION_RE.fullmatch(location_id):
+            raise ValueError(f"line {line}: invalid locationID")
+        if event_id in out:
+            raise ValueError(f"duplicate eventID: {event_id}")
+        try:
+            event_date = date.fromisoformat(row["eventDate"].strip())
+        except ValueError as exc:
+            raise ValueError(f"line {line}: invalid ISO eventDate") from exc
+        out[event_id] = (location_id, event_date)
     return out
 
 
-def audit(chorus_events: Path, chorus_taxa: Path, down_events: Path, down_taxa: Path) -> dict:
-    ce = _events(_read(chorus_events, {"eventID","eventDate","locationID"}))
-    de = _events(_read(down_events, {"eventID","eventDate","locationID"}))
-    ct = _read(chorus_taxa, {"eventID","scientificName","occurrenceStatus"})
-    dt = _read(down_taxa, {"eventID","scientificName","occurrenceStatus","lifeStage"})
+def audit(
+    chorus_events: Path,
+    chorus_taxa: Path,
+    down_events: Path,
+    down_taxa: Path,
+) -> dict:
+    chorus_event_rows = _read(chorus_events, {"eventID", "eventDate", "locationID"})
+    down_event_rows = _read(down_events, {"eventID", "eventDate", "locationID"})
+    chorus_event_map = _events(chorus_event_rows)
+    down_event_map = _events(down_event_rows)
 
-    chorus_keys = defaultdict(set)
-    down_keys = defaultdict(set)
+    chorus_occ = _read(
+        chorus_taxa, {"eventID", "scientificName", "occurrenceStatus"}
+    )
+    down_occ = _read(
+        down_taxa,
+        {"eventID", "scientificName", "occurrenceStatus", "lifeStage"},
+    )
+
+    chorus_keys: dict[tuple[str, str, int], set[str]] = defaultdict(set)
+    down_keys: dict[tuple[str, str, int], set[str]] = defaultdict(set)
     stage_rows = Counter()
 
-    for i, r in enumerate(ct, 2):
-        eid = r["eventID"].strip()
-        if eid not in ce:
-            raise ValueError(f"chorus taxa line {i}: unknown eventID")
-        sp = r["scientificName"].strip()
-        st = r["occurrenceStatus"].strip()
-        if st not in STATUS:
-            raise ValueError(f"chorus taxa line {i}: invalid occurrenceStatus")
-        if sp in SHARED_TARGETS:
-            lid, y = ce[eid]
-            chorus_keys[(lid, sp, y)].add(eid)
+    for line, row in enumerate(chorus_occ, 2):
+        event_id = row["eventID"].strip()
+        if event_id not in chorus_event_map:
+            raise ValueError(f"chorus taxa line {line}: unknown eventID")
+        species = row["scientificName"].strip()
+        status = row["occurrenceStatus"].strip()
+        if status not in STATUS:
+            raise ValueError(f"chorus taxa line {line}: invalid occurrenceStatus")
+        if species in SHARED_TARGETS:
+            location_id, event_date = chorus_event_map[event_id]
+            chorus_keys[(location_id, species, event_date.year)].add(event_id)
 
-    for i, r in enumerate(dt, 2):
-        eid = r["eventID"].strip()
-        if eid not in de:
-            raise ValueError(f"downstream taxa line {i}: unknown eventID")
-        sp = r["scientificName"].strip()
-        st = r["occurrenceStatus"].strip()
-        stage = r["lifeStage"].strip()
-        if st not in STATUS:
-            raise ValueError(f"downstream taxa line {i}: invalid occurrenceStatus")
+    for line, row in enumerate(down_occ, 2):
+        event_id = row["eventID"].strip()
+        if event_id not in down_event_map:
+            raise ValueError(f"downstream taxa line {line}: unknown eventID")
+        species = row["scientificName"].strip()
+        status = row["occurrenceStatus"].strip()
+        stage = row["lifeStage"].strip()
+        if status not in STATUS:
+            raise ValueError(f"downstream taxa line {line}: invalid occurrenceStatus")
         if stage not in DOWN_STAGES:
-            raise ValueError(f"downstream taxa line {i}: unexpected lifeStage {stage!r}")
-        if sp in SHARED_TARGETS and stage in {"larva","metamorph"}:
-            lid, y = de[eid]
-            down_keys[(lid, sp, y)].add(eid)
-            stage_rows[(sp, stage)] += 1
+            raise ValueError(
+                f"downstream taxa line {line}: unexpected lifeStage {stage!r}"
+            )
+        if species in SHARED_TARGETS and stage in {"larva", "metamorph"}:
+            location_id, event_date = down_event_map[event_id]
+            down_keys[(location_id, species, event_date.year)].add(event_id)
+            stage_rows[(species, stage)] += 1
 
     overlap = set(chorus_keys) & set(down_keys)
-    by_species = Counter(k[1] for k in overlap)
-    repeat_chorus = sum(len(chorus_keys[k]) >= 2 for k in overlap)
-    temporal_order_ok = 0
+    overlap_by_species = Counter(key[1] for key in overlap)
+    repeat_chorus = sum(len(chorus_keys[key]) >= 2 for key in overlap)
+
+    ordered = 0
     for key in overlap:
-        c_dates = [date.fromisoformat(next(r["eventDate"] for r in _read(chorus_events, {"eventID","eventDate","locationID"}) if r["eventID"] == eid)) for eid in chorus_keys[key]]
-        d_dates = [date.fromisoformat(next(r["eventDate"] for r in _read(down_events, {"eventID","eventDate","locationID"}) if r["eventID"] == eid)) for eid in down_keys[key]]
-        if c_dates and d_dates and min(c_dates) <= max(d_dates):
-            temporal_order_ok += 1
+        chorus_dates = [chorus_event_map[event_id][1] for event_id in chorus_keys[key]]
+        downstream_dates = [down_event_map[event_id][1] for event_id in down_keys[key]]
+        if any(c <= d for c in chorus_dates for d in downstream_dates):
+            ordered += 1
 
     return {
         "publisher_identity_join_only": True,
+        "join_key": ["locationID", "scientificName", "calendar_year"],
         "coordinate_join_used": False,
         "shared_location_species_years": len(overlap),
-        "shared_by_species": dict(sorted(by_species.items())),
+        "shared_by_species": dict(sorted(overlap_by_species.items())),
         "shared_units_with_ge2_chorus_events": repeat_chorus,
-        "shared_units_with_chorus_not_after_all_downstream_events": temporal_order_ok,
+        "shared_units_with_at_least_one_chorus_event_not_after_downstream": ordered,
         "downstream_stage_rows": {
-            f"{sp}|{stage}": n for (sp,stage),n in sorted(stage_rows.items())
+            f"{species}|{stage}": count
+            for (species, stage), count in sorted(stage_rows.items())
         },
         "ecological_association_opened": False,
-        "structural_candidate_pass": len(overlap) >= 30 and repeat_chorus >= 20,
+        "structural_candidate_pass": (
+            len(overlap) >= 30
+            and repeat_chorus >= 20
+            and ordered >= 20
+        ),
     }
 
 
 def main() -> None:
-    p=argparse.ArgumentParser()
-    p.add_argument("--chorus-events",type=Path,required=True)
-    p.add_argument("--chorus-taxa",type=Path,required=True)
-    p.add_argument("--down-events",type=Path,required=True)
-    p.add_argument("--down-taxa",type=Path,required=True)
-    args=p.parse_args()
-    print(json.dumps(audit(args.chorus_events,args.chorus_taxa,args.down_events,args.down_taxa),indent=2,sort_keys=True))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--chorus-events", type=Path, required=True)
+    parser.add_argument("--chorus-taxa", type=Path, required=True)
+    parser.add_argument("--down-events", type=Path, required=True)
+    parser.add_argument("--down-taxa", type=Path, required=True)
+    args = parser.parse_args()
+    result = audit(
+        args.chorus_events,
+        args.chorus_taxa,
+        args.down_events,
+        args.down_taxa,
+    )
+    print(json.dumps(result, indent=2, sort_keys=True))
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()

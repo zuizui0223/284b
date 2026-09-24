@@ -10,7 +10,7 @@ from collections import Counter, defaultdict
 from datetime import date
 from pathlib import Path
 
-BASE="https://pasta.lternet.edu/package/data/eml/edi/398/4"
+BASES=["https://pasta-d.lternet.edu/package/data/eml/edi/398/4","https://pasta.lternet.edu/package/data/eml/edi/398/4"]
 ENTITIES={
     "species":"737389d6c2090ee27a3084898f2e7853",
     "weather":"5835a29e0fbe1ba179ee5ffe27121df6",
@@ -23,10 +23,24 @@ REQUIRED=["ScientificName","Location","Sample_Date",*STAGE_FIELDS]
 
 
 def fetch(entity):
-    url=f"{BASE}/{entity}"
-    req=urllib.request.Request(url,headers={"User-Agent":"frog-mohonk-edi-structural-audit/0.1"})
-    with urllib.request.urlopen(req,timeout=90) as r:
-        return r.read()
+    errors=[]
+    for base in BASES:
+        url=f"{base}/{entity}"
+        req=urllib.request.Request(
+            url,
+            headers={
+                "User-Agent":"Mozilla/5.0 frog-mohonk-edi-structural-audit/0.1",
+                "Accept":"text/csv,text/plain,*/*",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req,timeout=90) as r:
+                data=r.read()
+            if data:
+                return data
+        except Exception as exc:
+            errors.append(f"{url}: {exc}")
+    raise RuntimeError("all EDI data endpoints failed: " + " | ".join(errors))
 
 
 def parse_csv(data):

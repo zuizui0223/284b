@@ -1,0 +1,71 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.6",
+  "supersedes": "protocol_v0_5.json",
+  "status": "pre-outcome_hyla_structurally_retained_effort_unresolved",
+  "scientific_independence": "standalone_project_not_284b_paper1",
+  "raw_structural_receipt": "MEETNETTEN_STRUCTURAL_RECEIPT_V0_1.json",
+  "source_versions": {
+    "chorus": {
+      "doi": "10.15468/d4bu8j",
+      "version": "1.27",
+      "sha256": "686c5a7aacc8f49e41a0642ecaa9efd8c3564304b0a4d4b027f3df2debec69fd"
+    },
+    "downstream": {
+      "doi": "10.15468/swgure",
+      "version": "1.24",
+      "sha256": "c2cc960122ea398545edb661318160cd2b5b66a75a73dba8f7a3f61bd9c4f920"
+    }
+  },
+  "focal_species": {
+    "Hyla arborea": {
+      "status": "retained_structurally",
+      "exact_shared_location_species_years": 245,
+      "shared_ge2_chorus_units": ">=233 pooled; species-specific count to be verified in effort audit if needed",
+      "temporal_order": "all pooled shared units pass",
+      "downstream_larva_rows": 448,
+      "downstream_metamorph_rows": 229
+    },
+    "Pelobates fuscus": {
+      "status": "rejected_structurally",
+      "exact_shared_location_species_years": 2,
+      "reentry_forbidden": true
+    }
+  },
+  "unresolved_gate": {
+    "field": "number of sweeps",
+    "first_audit_nonempty_event_coverage": 0,
+    "interpretation": "schema_or_population_issue_unresolved",
+    "allowed_next_read": [
+      "MeasurementOrFact rowType",
+      "measurementType labels",
+      "measurementValue nonempty indicator",
+      "event-level coverage by measurementType"
+    ],
+    "forbidden_next_read": [
+      "adult individualCount",
+      "larval individualCount",
+      "metamorph individualCount",
+      "adult-to-downstream association",
+      "environment-effect direction"
+    ]
+  },
+  "candidate_primary_question": "within Hyla arborea, under what pond conditions does seasonal adult breeding effort cease to translate into larval production?",
+  "metamorph_role": "secondary_only_if_effort_and_stage_structure_pass",
+  "claim_boundaries": {
+    "allowed": [
+      "breeding-to-larval production coupling",
+      "habitat-dependent stage conversion",
+      "downstream offspring production",
+      "stage-specific bottleneck"
+    ],
+    "forbidden": [
+      "adult recruitment",
+      "population persistence",
+      "ecological trap",
+      "demographic ghost population",
+      "local-extinction early warning"
+    ]
+  },
+  "ecological_effects_opened": false
+}

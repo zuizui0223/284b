@@ -12,6 +12,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: frog-structural-overlap-audit
+  cancel-in-progress: true
+
 jobs:
   structural-audit:
     runs-on: ubuntu-latest

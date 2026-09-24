@@ -97,7 +97,7 @@ class FrogDemographicDecouplingIncubatorTests(unittest.TestCase):
             "local extinction early warning",
         ]:
             self.assertIn(phrase, forbidden)
-        self.assertFalse(self.protocol["ecological_target"]["recruitment_word_authorized"])
+        self.assertNotIn("adult recruitment", self.protocol["claim_language"]["allowed"])
 
     def test_missing_and_unsurveyed_never_become_absence(self):
         p = self._csv(

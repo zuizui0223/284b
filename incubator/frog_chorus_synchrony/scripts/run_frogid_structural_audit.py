@@ -1,118 +1,416 @@
 #!/usr/bin/env python3
+"""Outcome-blind structural audit of FrogID v6 using Darwin Core Archive meta.xml.
+
+The source has ~1M occurrence rows. This implementation treats meta.xml as the schema
+authority and streams the core table into a temporary SQLite database. It opens only
+event identity, species identity, date/time, coordinates, recorder, and state. It never
+reads rainfall or computes a weather-synchrony effect.
+"""
 from __future__ import annotations
-import csv, hashlib, io, json, urllib.request, zipfile
-from collections import Counter, defaultdict
+
+import csv
+import hashlib
+import io
+import json
+import sqlite3
+import tempfile
+import urllib.request
+import zipfile
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
-URL="https://dwca-exports.ala.org.au/dr14760.zip"
+URL = "https://dwca-exports.ala.org.au/dr14760.zip"
+NS = {"dwc": "http://rs.tdwg.org/dwc/text/"}
+WANTED = {
+    "eventID",
+    "scientificName",
+    "eventDate",
+    "eventTime",
+    "decimalLatitude",
+    "decimalLongitude",
+    "recordedBy",
+    "stateProvince",
+}
 
-def fetch():
-    req=urllib.request.Request(URL,headers={"User-Agent":"frogid-synchrony-structural-audit/0.2"})
-    with urllib.request.urlopen(req,timeout=180) as r:
-        return r.read()
 
-def parse_best(z):
-    candidates=[]
-    for name in z.namelist():
-        if not name.lower().endswith((".txt",".csv",".tsv")): continue
-        text=z.read(name).decode("utf-8-sig",errors="replace")
-        sample=text[:20000]
-        try:
-            dialect=csv.Sniffer().sniff(sample,delimiters=",\t;|")
-        except Exception:
-            dialect=csv.excel_tab if "\t" in sample else csv.excel
-        reader=csv.DictReader(io.StringIO(text),dialect=dialect)
-        headers=reader.fieldnames or []
-        score=sum(k in headers for k in ["eventID","scientificName","eventDate","decimalLatitude","decimalLongitude"])
-        candidates.append((score,name,headers,list(reader)))
-    if not candidates: raise SystemExit("no tabular file")
-    return max(candidates,key=lambda x:x[0])
+def fetch() -> bytes:
+    req = urllib.request.Request(
+        URL, headers={"User-Agent": "frogid-synchrony-dwca-structural-audit/0.2.1"}
+    )
+    with urllib.request.urlopen(req, timeout=240) as response:
+        return response.read()
+
+
+def local_term(term: str) -> str:
+    if not term:
+        return ""
+    return term.rsplit("/", 1)[-1].rsplit("#", 1)[-1]
+
+
+def decode_sep(value: str | None, default: str) -> str:
+    if value is None:
+        return default
+    return bytes(value, "utf-8").decode("unicode_escape")
+
+
+def core_schema(zf: zipfile.ZipFile):
+    root = ET.fromstring(zf.read("meta.xml"))
+    core = root.find("dwc:core", NS)
+    if core is None:
+        raise SystemExit("DwC-A meta.xml has no core")
+
+    files = core.find("dwc:files", NS)
+    location = files.find("dwc:location", NS) if files is not None else None
+    if location is None or not (location.text or "").strip():
+        raise SystemExit("DwC-A core has no file location")
+
+    id_el = core.find("dwc:id", NS)
+    fields = {}
+    for field in core.findall("dwc:field", NS):
+        name = local_term(field.attrib.get("term", ""))
+        if name in WANTED:
+            fields[name] = int(field.attrib["index"])
+
+    return {
+        "filename": location.text.strip(),
+        "rowType": core.attrib.get("rowType", ""),
+        "encoding": core.attrib.get("encoding", "UTF-8"),
+        "delimiter": decode_sep(core.attrib.get("fieldsTerminatedBy"), "\t"),
+        "quotechar": decode_sep(core.attrib.get("fieldsEnclosedBy"), '"') or '"',
+        "ignoreHeaderLines": int(core.attrib.get("ignoreHeaderLines", "0")),
+        "id_index": int(id_el.attrib["index"]) if id_el is not None else None,
+        "fields": fields,
+    }
+
+
+def field(row: list[str], fields: dict[str, int], name: str) -> str:
+    idx = fields.get(name)
+    if idx is None or idx >= len(row):
+        return ""
+    return row[idx].strip()
+
 
 def main():
-    data=fetch()
-    sha=hashlib.sha256(data).hexdigest()
-    z=zipfile.ZipFile(io.BytesIO(data))
-    score,name,headers,rows=parse_best(z)
-    if score<4: raise SystemExit(f"no suitable occurrence table; best {name} score={score}")
+    data = fetch()
+    source_sha = hashlib.sha256(data).hexdigest()
+    zf = zipfile.ZipFile(io.BytesIO(data))
+    schema = core_schema(zf)
 
-    species_by_event=defaultdict(set)
-    coords_by_event=defaultdict(set)
-    dates_by_event=defaultdict(set)
-    times_by_event=defaultdict(set)
-    users_by_event=defaultdict(set)
-    states=set()
-    n_coord_rows=n_date_rows=n_time_rows=n_user_rows=0
+    missing = sorted({"eventID", "scientificName"} - set(schema["fields"]))
+    if missing:
+        raise SystemExit(f"FrogID core missing required fields: {missing}")
 
-    for r in rows:
-        eid=(r.get("eventID") or "").strip()
-        if not eid: continue
-        sp=(r.get("scientificName") or "").strip()
-        if sp: species_by_event[eid].add(sp)
-        d=(r.get("eventDate") or "").strip()
-        if d:
-            dates_by_event[eid].add(d); n_date_rows+=1
-        t=(r.get("eventTime") or "").strip()
-        if t:
-            times_by_event[eid].add(t); n_time_rows+=1
-        u=(r.get("recordedBy") or "").strip()
-        if u:
-            users_by_event[eid].add(u); n_user_rows+=1
-        st=(r.get("stateProvince") or "").strip()
-        if st: states.add(st)
-        try:
-            lat=float((r.get("decimalLatitude") or "").strip())
-            lon=float((r.get("decimalLongitude") or "").strip())
-            if -90<=lat<=90 and -180<=lon<=180:
-                coords_by_event[eid].add((lat,lon)); n_coord_rows+=1
-        except Exception:
-            pass
+    with tempfile.NamedTemporaryFile(suffix=".sqlite") as tmp:
+        con = sqlite3.connect(tmp.name)
+        con.executescript(
+            """
+            PRAGMA journal_mode=OFF;
+            PRAGMA synchronous=OFF;
+            PRAGMA temp_store=FILE;
+            CREATE TABLE event_species (
+              event_id TEXT NOT NULL,
+              species TEXT NOT NULL,
+              PRIMARY KEY(event_id, species)
+            ) WITHOUT ROWID;
+            CREATE TABLE events (
+              event_id TEXT PRIMARY KEY,
+              coord_present INTEGER NOT NULL DEFAULT 0,
+              coord_first TEXT,
+              coord_consistent INTEGER NOT NULL DEFAULT 1,
+              date_present INTEGER NOT NULL DEFAULT 0,
+              date_first TEXT,
+              date_consistent INTEGER NOT NULL DEFAULT 1,
+              time_present INTEGER NOT NULL DEFAULT 0,
+              time_first TEXT,
+              time_consistent INTEGER NOT NULL DEFAULT 1,
+              recorder_present INTEGER NOT NULL DEFAULT 0,
+              state TEXT
+            );
+            """
+        )
 
-    events=set(species_by_event)|set(dates_by_event)|set(coords_by_event)
-    n=len(events)
-    multi=sum(len(species_by_event[e])>=2 for e in events)
-    coord_events=sum(bool(coords_by_event[e]) for e in events)
-    date_events=sum(bool(dates_by_event[e]) for e in events)
-    time_events=sum(bool(times_by_event[e]) for e in events)
-    user_events=sum(bool(users_by_event[e]) for e in events)
-    coord_consistent=sum(len(coords_by_event[e])<=1 and bool(coords_by_event[e]) for e in events)
-    date_consistent=sum(len(dates_by_event[e])<=1 and bool(dates_by_event[e]) for e in events)
-    time_consistent=sum(len(times_by_event[e])<=1 and bool(times_by_event[e]) for e in events)
+        row_count = 0
+        batch_species = []
+        event_updates: dict[str, tuple] = {}
 
-    richness=Counter(len(species_by_event[e]) for e in events)
-    result={
-      "audit":"frogid_v6_synchrony_structural_v0_2",
-      "source_url":URL,
-      "source_sha256":sha,
-      "archive_files":z.namelist(),
-      "selected_table":name,
-      "selected_headers":headers,
-      "occurrence_rows":len(rows),
-      "events":n,
-      "distinct_species":len({s for v in species_by_event.values() for s in v}),
-      "distinct_states":len(states),
-      "multispecies_events":multi,
-      "event_species_richness_histogram":{str(k):v for k,v in sorted(richness.items())},
-      "coordinate_event_coverage_fraction":coord_events/n if n else 0,
-      "date_event_coverage_fraction":date_events/n if n else 0,
-      "time_event_coverage_fraction":time_events/n if n else 0,
-      "recordedBy_event_coverage_fraction":user_events/n if n else 0,
-      "coordinate_consistency_fraction_all_events":coord_consistent/n if n else 0,
-      "date_consistency_fraction_all_events":date_consistent/n if n else 0,
-      "time_consistency_fraction_all_events":time_consistent/n if n else 0,
-      "structural_gate_pass":(
-        n>=100000 and multi>=10000 and len(states)>=5
-        and (coord_events/n if n else 0)>=0.95
-        and (date_events/n if n else 0)>=0.99
-        and (time_events/n if n else 0)>=0.90
-        and (coord_consistent/n if n else 0)>=0.99
-      ),
-      "rainfall_values_read":False,
-      "weather_synchrony_association_opened":False
+        def flush():
+            nonlocal batch_species, event_updates
+            if batch_species:
+                con.executemany(
+                    "INSERT OR IGNORE INTO event_species(event_id,species) VALUES (?,?)",
+                    batch_species,
+                )
+                batch_species = []
+            if event_updates:
+                for event_id, values in event_updates.items():
+                    (
+                        coord,
+                        date_value,
+                        time_value,
+                        recorder_present,
+                        state,
+                    ) = values
+                    cur = con.execute(
+                        "SELECT coord_first,coord_consistent,date_first,date_consistent,"
+                        "time_first,time_consistent,recorder_present,state "
+                        "FROM events WHERE event_id=?",
+                        (event_id,),
+                    ).fetchone()
+                    if cur is None:
+                        con.execute(
+                            "INSERT INTO events(event_id,coord_present,coord_first,"
+                            "coord_consistent,date_present,date_first,date_consistent,"
+                            "time_present,time_first,time_consistent,recorder_present,state)"
+                            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                            (
+                                event_id,
+                                int(bool(coord)),
+                                coord or None,
+                                1,
+                                int(bool(date_value)),
+                                date_value or None,
+                                1,
+                                int(bool(time_value)),
+                                time_value or None,
+                                1,
+                                int(recorder_present),
+                                state or None,
+                            ),
+                        )
+                    else:
+                        (
+                            old_coord,
+                            coord_ok,
+                            old_date,
+                            date_ok,
+                            old_time,
+                            time_ok,
+                            old_rec,
+                            old_state,
+                        ) = cur
+                        new_coord_ok = int(
+                            bool(coord_ok)
+                            and (not coord or not old_coord or coord == old_coord)
+                        )
+                        new_date_ok = int(
+                            bool(date_ok)
+                            and (
+                                not date_value
+                                or not old_date
+                                or date_value == old_date
+                            )
+                        )
+                        new_time_ok = int(
+                            bool(time_ok)
+                            and (
+                                not time_value
+                                or not old_time
+                                or time_value == old_time
+                            )
+                        )
+                        con.execute(
+                            "UPDATE events SET "
+                            "coord_present=?,coord_first=COALESCE(coord_first,?),coord_consistent=?,"
+                            "date_present=?,date_first=COALESCE(date_first,?),date_consistent=?,"
+                            "time_present=?,time_first=COALESCE(time_first,?),time_consistent=?,"
+                            "recorder_present=?,state=COALESCE(state,?) WHERE event_id=?",
+                            (
+                                int(bool(old_coord) or bool(coord)),
+                                coord or None,
+                                new_coord_ok,
+                                int(bool(old_date) or bool(date_value)),
+                                date_value or None,
+                                new_date_ok,
+                                int(bool(old_time) or bool(time_value)),
+                                time_value or None,
+                                new_time_ok,
+                                int(bool(old_rec) or recorder_present),
+                                state or None,
+                                event_id,
+                            ),
+                        )
+                event_updates = {}
+            con.commit()
+
+        raw = zf.open(schema["filename"])
+        text = io.TextIOWrapper(
+            raw,
+            encoding=schema["encoding"].replace("-", ""),
+            errors="replace",
+            newline="",
+        )
+        reader = csv.reader(
+            text,
+            delimiter=schema["delimiter"],
+            quotechar=schema["quotechar"],
+        )
+        for _ in range(schema["ignoreHeaderLines"]):
+            next(reader, None)
+
+        for row in reader:
+            row_count += 1
+            event_id = field(row, schema["fields"], "eventID")
+            if not event_id:
+                continue
+            species = field(row, schema["fields"], "scientificName")
+            if species:
+                batch_species.append((event_id, species))
+
+            lat = field(row, schema["fields"], "decimalLatitude")
+            lon = field(row, schema["fields"], "decimalLongitude")
+            coord = ""
+            try:
+                la = float(lat)
+                lo = float(lon)
+                if -90 <= la <= 90 and -180 <= lo <= 180:
+                    coord = f"{la:.8f},{lo:.8f}"
+            except Exception:
+                pass
+
+            date_value = field(row, schema["fields"], "eventDate")
+            time_value = field(row, schema["fields"], "eventTime")
+            recorder = field(row, schema["fields"], "recordedBy")
+            state = field(row, schema["fields"], "stateProvince")
+
+            # Batch keeps only the latest row's structural values; flush logic compares
+            # those with the already persisted event. To preserve within-batch conflicts,
+            # merge before assignment here.
+            old = event_updates.get(event_id)
+            if old is None:
+                event_updates[event_id] = (
+                    coord,
+                    date_value,
+                    time_value,
+                    bool(recorder),
+                    state,
+                )
+            else:
+                old_coord, old_date, old_time, old_rec, old_state = old
+                # Sentinel conflict strings remain unequal to real values and therefore
+                # cause consistency failure at flush.
+                merged_coord = (
+                    old_coord
+                    if not coord
+                    else coord
+                    if not old_coord
+                    else old_coord
+                    if old_coord == coord
+                    else "__CONFLICT_COORD__"
+                )
+                merged_date = (
+                    old_date
+                    if not date_value
+                    else date_value
+                    if not old_date
+                    else old_date
+                    if old_date == date_value
+                    else "__CONFLICT_DATE__"
+                )
+                merged_time = (
+                    old_time
+                    if not time_value
+                    else time_value
+                    if not old_time
+                    else old_time
+                    if old_time == time_value
+                    else "__CONFLICT_TIME__"
+                )
+                event_updates[event_id] = (
+                    merged_coord,
+                    merged_date,
+                    merged_time,
+                    old_rec or bool(recorder),
+                    old_state or state,
+                )
+
+            if row_count % 20000 == 0:
+                flush()
+
+        flush()
+
+        event_count = con.execute("SELECT COUNT(*) FROM events").fetchone()[0]
+        multispecies = con.execute(
+            "SELECT COUNT(*) FROM ("
+            "SELECT event_id FROM event_species GROUP BY event_id HAVING COUNT(*)>=2)"
+        ).fetchone()[0]
+        distinct_species = con.execute(
+            "SELECT COUNT(DISTINCT species) FROM event_species"
+        ).fetchone()[0]
+        richness_rows = con.execute(
+            "SELECT richness,COUNT(*) FROM ("
+            "SELECT event_id,COUNT(*) richness FROM event_species GROUP BY event_id)"
+            " GROUP BY richness ORDER BY richness"
+        ).fetchall()
+        richness = {str(k): v for k, v in richness_rows}
+
+        stats = con.execute(
+            "SELECT "
+            "SUM(coord_present),SUM(date_present),SUM(time_present),SUM(recorder_present),"
+            "SUM(CASE WHEN coord_present=1 AND coord_consistent=1 THEN 1 ELSE 0 END),"
+            "SUM(CASE WHEN date_present=1 AND date_consistent=1 THEN 1 ELSE 0 END),"
+            "SUM(CASE WHEN time_present=1 AND time_consistent=1 THEN 1 ELSE 0 END)"
+            " FROM events"
+        ).fetchone()
+        (
+            coord_events,
+            date_events,
+            time_events,
+            recorder_events,
+            coord_consistent,
+            date_consistent,
+            time_consistent,
+        ) = [int(x or 0) for x in stats]
+
+        states = con.execute(
+            "SELECT COUNT(DISTINCT state) FROM events WHERE state IS NOT NULL AND state<>''"
+        ).fetchone()[0]
+
+    def frac(value):
+        return value / event_count if event_count else 0.0
+
+    result = {
+        "audit": "frogid_v6_synchrony_structural_v0_2_1",
+        "source_url": URL,
+        "source_sha256": source_sha,
+        "archive_files": zf.namelist(),
+        "dwca_core": {
+            "filename": schema["filename"],
+            "rowType": schema["rowType"],
+            "encoding": schema["encoding"],
+            "delimiter_repr": repr(schema["delimiter"]),
+            "ignoreHeaderLines": schema["ignoreHeaderLines"],
+            "mapped_fields": sorted(schema["fields"]),
+        },
+        "occurrence_rows": row_count,
+        "events": event_count,
+        "distinct_species": distinct_species,
+        "distinct_states": int(states),
+        "multispecies_events": int(multispecies),
+        "event_species_richness_histogram": richness,
+        "coordinate_event_coverage_fraction": frac(coord_events),
+        "date_event_coverage_fraction": frac(date_events),
+        "time_event_coverage_fraction": frac(time_events),
+        "recordedBy_event_coverage_fraction": frac(recorder_events),
+        "coordinate_consistency_fraction_all_events": frac(coord_consistent),
+        "date_consistency_fraction_all_events": frac(date_consistent),
+        "time_consistency_fraction_all_events": frac(time_consistent),
+        "structural_gate_pass": (
+            event_count >= 100000
+            and multispecies >= 10000
+            and states >= 5
+            and frac(coord_events) >= 0.95
+            and frac(date_events) >= 0.99
+            and frac(time_events) >= 0.90
+            and frac(coord_consistent) >= 0.99
+        ),
+        "rainfall_values_read": False,
+        "weather_synchrony_association_opened": False,
     }
     Path("frog_frogid_v6_synchrony_structural_v0_2.json").write_text(
-      json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8"
+        json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
-    print(json.dumps(result,indent=2,sort_keys=True))
+    print(json.dumps(result, indent=2, sort_keys=True))
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()

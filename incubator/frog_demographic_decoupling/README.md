@@ -1,68 +1,100 @@
-# Frog demographic decoupling — standalone-project incubator v0.2
+# Frog demographic decoupling — standalone-project incubator v0.3
 
-This branch is an **incubator only** for a new empirical amphibian project. It is scientifically separate from 284b Paper 1 and must not be merged into the Paper 1 claim surface. Protocol v0.2 supersedes v0.1 after a publisher-metadata audit showed that the initially named Natterjack primary system has only 19 public sampling events.
+This branch is an **incubator only** for a new empirical amphibian project. It is scientifically separate from 284b Paper 1 and must not be merged into the Paper 1 claim surface.
 
 ## Ecological question
 
-**Where in the amphibian life cycle does environmental stress first break the link between breeding activity and downstream reproductive success?**
+> **Under what habitat conditions does adult breeding effort cease to translate into downstream offspring production?**
 
-Candidate sequence:
+The intended biological sequence is:
 
 ```
-adult breeding activity -> eggs -> larvae/tadpoles -> terrestrial juveniles
+calling/breeding adults -> eggs -> larvae -> metamorphs -> juveniles
 ```
 
-A juvenile-recruitment endpoint is **not guaranteed**. If same-cohort juvenile timing and stage-specific observation are not identifiable, the project will prospectively stop at the richest supported upstream transition rather than call a missing juvenile record recruitment failure.
+The project will analyse only the richest stage transition that the public monitoring data actually identify. It will not call a larval or metamorph record “recruitment to the adult population.”
 
-## Novelty boundary
+## Current strongest candidate
 
-Greenberg, Zarnoch & Austin (2017, Ecosphere 8:e01789, DOI 10.1002/ecs2.1789) already showed that adult breeding effort, hydroregime and weather can differentially predict juvenile recruitment across six anuran species.
+The strongest candidate is now the pair of standardized Flemish **Meetnetten** programmes, not the tiny Natterjack full-chain dataset.
 
-The target here is narrower and more mechanistic:
+### Adult breeding activity
+**Chorus counts**, DOI `10.15468/d4bu8j`
+- 963 sampling events;
+- 1,436 occurrence rows;
+- repeated calling-male counts;
+- target species include `Hyla arborea` and `Pelobates fuscus`.
 
-> **stage-localized demographic decoupling** — identify which explicit life-cycle transition becomes limiting under environmental stress, account for the stage observation process, and require recurrence in an independent standardized monitoring programme before generalizing.
+### Downstream production
+**Larvae and metamorph counts**, DOI `10.15468/swgure`
+- 697 sampling events;
+- 2,995 occurrence rows;
+- 3,741 measurement/fact rows;
+- explicit larva/metamorph stages;
+- number of sweeps plus pond depth, permanence, fish, pH, shade, surface and water-quality measurements;
+- target species include the same `Hyla arborea` and `Pelobates fuscus`.
 
-## Primary dataset status
+## Exact join — no spatial matching
 
-**UNRESOLVED — pending raw structural estimability and join audit.**
+The publisher's public source repository shows that both datasets derive `locationID` from the same Meetnetten `DimLocation.LocationID` and serialize it as:
 
-We will not choose a primary dataset using transition effect sizes, signs, significance, posterior support or model fit.
+```
+INBO:MEETNET:LOCATION:<six digits>
+```
 
-Current candidates:
+Therefore the only authorized cross-programme join candidate is exact:
 
-- **Meetnetten chorus counts** — 963 events / 1,436 occurrences; adult breeding activity.
-- **Meetnetten larvae & metamorphs** — 697 events / 2,995 occurrences / 3,741 measurement-fact rows; downstream reproductive-success sampling plus pond environment.
-- **PINK coastal Flanders** — >1,900 occurrences from 243 ponds and >10 species; repeated within-programme observations of calls, eggs and larvae.
-- **Natterjack sightings** — only 19 events / 117 occurrences; full conceptual stage coverage but too small to predeclare as primary.
-- **Mohonk Preserve** — long-term hydroclimate validation; juvenile field excluded from same-cohort recruitment unless phenology proves compatibility.
-- **CROA** — optional recent external replication.
+```
+locationID × scientificName × calendar_year
+```
 
-For the two large Meetnetten programmes, **Hyla arborea** and **Pelobates fuscus** are shared target species. Cross-programme analysis is allowed only if publisher-provided site/event identity or a prospectively frozen deterministic identity bridge can join them. Coordinate-nearest matching is forbidden.
+Nearest coordinates, generalized-grid overlap and fuzzy locality names are forbidden. The **number of actual shared site-years has not yet been opened**.
 
-## Candidate hypotheses
+Shared target species are frozen prospectively to:
 
-**H1 — Stage-localized bottleneck.** Environmental stress does not weaken all stages equally.
+- `Hyla arborea`
+- `Pelobates fuscus`
 
-**H2 — Hydroperiod mechanism.** Aquatic-habitat persistence and pond state explain the downstream bottleneck.
+See `MEETNETTEN_SOURCE_IDENTITY_AUDIT_V0_1.md` and `protocol_v0_3.json`.
 
-**H3 — Strategy dependence.** Bottleneck location differs among species with different breeding/development strategies.
+## Candidate ecological estimand
 
-**H4 — Recurrence.** Broad amphibian claims require the transition-level pattern to recur in an independent programme.
+The first candidate relationship is:
 
-## What happens next
+> seasonal adult breeding effort -> larval/metamorph production
 
-The next analysis is **estimability only**:
+Adult effort will be summarized from repeated valid chorus visits; downstream abundance retains sampling effort (number of sweeps). Pond state then tests whether the conversion of adult breeding effort into offspring production changes with environmental context.
 
-1. inspect raw publisher archives;
-2. count site-years and repeat visits;
-3. freeze source-specific stage mappings;
-4. separate explicit absence from missing and unsurveyed states;
-5. test deterministic fixed-site identity across Meetnetten programmes;
-6. audit stage timing/cohort compatibility;
-7. select the richest identifiable endpoint without viewing ecological effect direction.
+This is **not** an absence test. An observed downstream zero remains an observed zero under a known sampling effort unless a later observation model justifies a stronger state.
 
-See `protocol_v0_2.json` and `DATA_SOURCE_AUDIT_V0_2.md`.
+## Prior-art boundary
+
+Greenberg, Zarnoch & Austin (2017, Ecosphere 8:e01789, DOI 10.1002/ecs2.1789) already showed that adult breeding effort, hydroregime and weather can differentially predict juvenile recruitment among anuran species.
+
+The new target is therefore not “breeding effort sometimes fails to predict recruitment.” It is:
+
+> **localize the demographic bottleneck to an explicit life-stage transition, identify the habitat context that changes stage conversion, and require recurrence in an independent monitoring programme before generalizing.**
+
+## Independent validation candidates
+
+- **PINK coastal Flanders** — >1,900 occurrences, 243 ponds, >10 species, repeated within-programme surveys that listen for adults and search for eggs/larvae.
+- **Mohonk Preserve** — long-term hydroclimate validation of upstream adult/egg/larva transitions; juvenile field not used as same-cohort recruitment without phenology proof.
+- **Natterjack sightings** — full conceptual stage coverage but only 19 public events / 117 occurrence rows; feasibility example only.
+- **CROA** — recent external replication candidate.
+
+## Next gate
+
+No adult-downstream association is open yet. First:
+
+1. materialize the current publisher DwC-A tables;
+2. count exact shared `locationID × species × year` units;
+3. verify repeated chorus visits and downstream temporal ordering;
+4. audit larva versus metamorph frequencies;
+5. quantify number-of-sweeps coverage;
+6. only then freeze and fit the biological model.
+
+`scripts/audit_meetnetten_join.py` performs this join audit without reading counts or computing an ecological association.
 
 ## Working title
 
-**Where the life cycle breaks: stage-specific demographic decoupling across amphibian monitoring programmes**
+**Where the life cycle breaks: habitat-dependent conversion of amphibian breeding effort into offspring production**

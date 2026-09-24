@@ -131,7 +131,20 @@ def main():
 
         row_count = 0
         batch_species = []
-        event_updates: dict[str, tuple] = {}
+        event_updates: dict[str, dict[str, object]] = {}
+        states_seen: set[str] = set()
+
+        def merge_value(rec, prefix, value):
+            if not value:
+                return
+            present_key = f"{prefix}_present"
+            first_key = f"{prefix}_first"
+            ok_key = f"{prefix}_consistent"
+            if not rec[present_key]:
+                rec[present_key] = True
+                rec[first_key] = value
+            elif rec[first_key] != value:
+                rec[ok_key] = False
 
         def flush():
             nonlocal batch_species, event_updates
@@ -142,17 +155,11 @@ def main():
                 )
                 batch_species = []
             if event_updates:
-                for event_id, values in event_updates.items():
-                    (
-                        coord,
-                        date_value,
-                        time_value,
-                        recorder_present,
-                        state,
-                    ) = values
+                for event_id, rec in event_updates.items():
                     cur = con.execute(
-                        "SELECT coord_first,coord_consistent,date_first,date_consistent,"
-                        "time_first,time_consistent,recorder_present,state "
+                        "SELECT coord_present,coord_first,coord_consistent,"
+                        "date_present,date_first,date_consistent,"
+                        "time_present,time_first,time_consistent,recorder_present,state "
                         "FROM events WHERE event_id=?",
                         (event_id,),
                     ).fetchone()
@@ -164,68 +171,53 @@ def main():
                             " VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
                             (
                                 event_id,
-                                int(bool(coord)),
-                                coord or None,
-                                1,
-                                int(bool(date_value)),
-                                date_value or None,
-                                1,
-                                int(bool(time_value)),
-                                time_value or None,
-                                1,
-                                int(recorder_present),
-                                state or None,
+                                int(rec["coord_present"]),
+                                rec["coord_first"],
+                                int(rec["coord_consistent"]),
+                                int(rec["date_present"]),
+                                rec["date_first"],
+                                int(rec["date_consistent"]),
+                                int(rec["time_present"]),
+                                rec["time_first"],
+                                int(rec["time_consistent"]),
+                                int(rec["recorder_present"]),
+                                rec["state"] or None,
                             ),
                         )
                     else:
                         (
-                            old_coord,
-                            coord_ok,
-                            old_date,
-                            date_ok,
-                            old_time,
-                            time_ok,
-                            old_rec,
-                            old_state,
+                            old_cp, old_coord, old_cok,
+                            old_dp, old_date, old_dok,
+                            old_tp, old_time, old_tok,
+                            old_rec, old_state,
                         ) = cur
-                        new_coord_ok = int(
-                            bool(coord_ok)
-                            and (not coord or not old_coord or coord == old_coord)
-                        )
-                        new_date_ok = int(
-                            bool(date_ok)
-                            and (
-                                not date_value
-                                or not old_date
-                                or date_value == old_date
-                            )
-                        )
-                        new_time_ok = int(
-                            bool(time_ok)
-                            and (
-                                not time_value
-                                or not old_time
-                                or time_value == old_time
-                            )
-                        )
+                        coord_ok = bool(old_cok) and bool(rec["coord_consistent"])
+                        if old_cp and rec["coord_present"] and old_coord != rec["coord_first"]:
+                            coord_ok = False
+                        date_ok = bool(old_dok) and bool(rec["date_consistent"])
+                        if old_dp and rec["date_present"] and old_date != rec["date_first"]:
+                            date_ok = False
+                        time_ok = bool(old_tok) and bool(rec["time_consistent"])
+                        if old_tp and rec["time_present"] and old_time != rec["time_first"]:
+                            time_ok = False
                         con.execute(
                             "UPDATE events SET "
-                            "coord_present=?,coord_first=COALESCE(coord_first,?),coord_consistent=?,"
-                            "date_present=?,date_first=COALESCE(date_first,?),date_consistent=?,"
-                            "time_present=?,time_first=COALESCE(time_first,?),time_consistent=?,"
-                            "recorder_present=?,state=COALESCE(state,?) WHERE event_id=?",
+                            "coord_present=?,coord_first=?,coord_consistent=?,"
+                            "date_present=?,date_first=?,date_consistent=?,"
+                            "time_present=?,time_first=?,time_consistent=?,"
+                            "recorder_present=?,state=? WHERE event_id=?",
                             (
-                                int(bool(old_coord) or bool(coord)),
-                                coord or None,
-                                new_coord_ok,
-                                int(bool(old_date) or bool(date_value)),
-                                date_value or None,
-                                new_date_ok,
-                                int(bool(old_time) or bool(time_value)),
-                                time_value or None,
-                                new_time_ok,
-                                int(bool(old_rec) or recorder_present),
-                                state or None,
+                                int(bool(old_cp) or bool(rec["coord_present"])),
+                                old_coord or rec["coord_first"],
+                                int(coord_ok),
+                                int(bool(old_dp) or bool(rec["date_present"])),
+                                old_date or rec["date_first"],
+                                int(date_ok),
+                                int(bool(old_tp) or bool(rec["time_present"])),
+                                old_time or rec["time_first"],
+                                int(time_ok),
+                                int(bool(old_rec) or bool(rec["recorder_present"])),
+                                old_state or rec["state"] or None,
                                 event_id,
                             ),
                         )
@@ -275,53 +267,23 @@ def main():
             # Batch keeps only the latest row's structural values; flush logic compares
             # those with the already persisted event. To preserve within-batch conflicts,
             # merge before assignment here.
-            old = event_updates.get(event_id)
-            if old is None:
-                event_updates[event_id] = (
-                    coord,
-                    date_value,
-                    time_value,
-                    bool(recorder),
-                    state,
-                )
-            else:
-                old_coord, old_date, old_time, old_rec, old_state = old
-                # Sentinel conflict strings remain unequal to real values and therefore
-                # cause consistency failure at flush.
-                merged_coord = (
-                    old_coord
-                    if not coord
-                    else coord
-                    if not old_coord
-                    else old_coord
-                    if old_coord == coord
-                    else "__CONFLICT_COORD__"
-                )
-                merged_date = (
-                    old_date
-                    if not date_value
-                    else date_value
-                    if not old_date
-                    else old_date
-                    if old_date == date_value
-                    else "__CONFLICT_DATE__"
-                )
-                merged_time = (
-                    old_time
-                    if not time_value
-                    else time_value
-                    if not old_time
-                    else old_time
-                    if old_time == time_value
-                    else "__CONFLICT_TIME__"
-                )
-                event_updates[event_id] = (
-                    merged_coord,
-                    merged_date,
-                    merged_time,
-                    old_rec or bool(recorder),
-                    old_state or state,
-                )
+            rec = event_updates.get(event_id)
+            if rec is None:
+                rec = {
+                    "coord_present": False, "coord_first": None, "coord_consistent": True,
+                    "date_present": False, "date_first": None, "date_consistent": True,
+                    "time_present": False, "time_first": None, "time_consistent": True,
+                    "recorder_present": False, "state": None,
+                }
+                event_updates[event_id] = rec
+            merge_value(rec, "coord", coord)
+            merge_value(rec, "date", date_value)
+            merge_value(rec, "time", time_value)
+            rec["recorder_present"] = bool(rec["recorder_present"]) or bool(recorder)
+            if state:
+                states_seen.add(state)
+                if not rec["state"]:
+                    rec["state"] = state
 
             if row_count % 20000 == 0:
                 flush()
@@ -361,9 +323,7 @@ def main():
             time_consistent,
         ) = [int(x or 0) for x in stats]
 
-        states = con.execute(
-            "SELECT COUNT(DISTINCT state) FROM events WHERE state IS NOT NULL AND state<>''"
-        ).fetchone()[0]
+        states = len(states_seen)
 
     def frac(value):
         return value / event_count if event_count else 0.0

@@ -1,0 +1,35 @@
+name: frog NAAMP chorus synchrony structural audit
+
+on:
+  push:
+    branches:
+      - incubator/frog-chorus-synchrony-v1
+    paths:
+      - "incubator/frog_chorus_synchrony/**"
+      - ".github/workflows/frog_naamp_synchrony_structural.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frog-naamp-synchrony-structural
+  cancel-in-progress: true
+
+jobs:
+  structural-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run NAAMP outcome-blind structural audit
+        run: python incubator/frog_chorus_synchrony/scripts/run_naamp_structural_audit.py
+      - name: Upload sanitized structural receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: frog-naamp-chorus-synchrony-structural-v0-1
+          path: frog_naamp_chorus_synchrony_structural_v0_1.json
+          if-no-files-found: error

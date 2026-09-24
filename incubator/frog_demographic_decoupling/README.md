@@ -1,112 +1,68 @@
-# Frog demographic decoupling — standalone-project incubator v0.1
+# Frog demographic decoupling — standalone-project incubator v0.2
 
-This branch is an **incubator only** for a new empirical amphibian project. It is scientifically separate from 284b Paper 1 and must not be merged into the Paper 1 claim surface. The intended next step is extraction to a dedicated repository once the raw-data gates below are passed.
+This branch is an **incubator only** for a new empirical amphibian project. It is scientifically separate from 284b Paper 1 and must not be merged into the Paper 1 claim surface. Protocol v0.2 supersedes v0.1 after a publisher-metadata audit showed that the initially named Natterjack primary system has only 19 public sampling events.
 
-## Core ecological question
+## Ecological question
 
-**Where in the amphibian life cycle does environmental stress first break the link between breeding activity and successful recruitment?**
+**Where in the amphibian life cycle does environmental stress first break the link between breeding activity and downstream reproductive success?**
 
-We treat the life cycle as a sequence of stage transitions rather than a binary presence/absence problem:
+Candidate sequence:
 
 ```
 adult breeding activity -> eggs -> larvae/tadpoles -> terrestrial juveniles
 ```
 
-The project is not intended to show merely that adult breeding effort and recruitment can be weakly associated. That antecedent already exists. Greenberg, Zarnoch & Austin (2017, Ecosphere 8:e01789, DOI 10.1002/ecs2.1789) analysed 22 years at eight wetlands and showed that breeding effort, hydroregime and weather can differentially predict juvenile recruitment across six anuran species.
+A juvenile-recruitment endpoint is **not guaranteed**. If same-cohort juvenile timing and stage-specific observation are not identifiable, the project will prospectively stop at the richest supported upstream transition rather than call a missing juvenile record recruitment failure.
 
-The new target is **stage-localized demographic decoupling**: estimate which transition fails, under what environmental conditions, and whether the same transition-level signature recurs in independent standardized monitoring programmes.
+## Novelty boundary
 
-## Data roles
+Greenberg, Zarnoch & Austin (2017, Ecosphere 8:e01789, DOI 10.1002/ecs2.1789) already showed that adult breeding effort, hydroregime and weather can differentially predict juvenile recruitment across six anuran species.
 
-### Primary full-chain system — Flanders Natterjack toad
-- Dataset: Meetnetten.be — Sightings for Natterjack toad in Flanders, Belgium.
-- DOI: 10.15468/2xfw8y.
-- Period: 2016–2023.
-- Standardized design: three nocturnal visits per site/year.
-- Recorded life stages: egg strings, tadpoles, terrestrial juveniles <2 cm, terrestrial juveniles >2 cm, adults observed, adults heard/calling males.
-- Role: primary full-chain `adult -> egg -> larva -> juvenile` analysis.
+The target here is narrower and more mechanistic:
 
-### Independent multi-species stage validation — PINK coastal Flanders
-- Dataset: PINK — Amphibia monitoring for the permanent surveillance of coastal areas in Flanders, Belgium.
-- DOI: 10.15468/jvtefa.
-- Period: 2007–2016.
-- Scope: 243 ponds, >10 species, repeated pond visits.
-- Protocol includes calling adults plus egg/larval observations.
-- Role: multi-species validation of upstream transition decoupling. Juvenile recruitment is not assumed available.
+> **stage-localized demographic decoupling** — identify which explicit life-cycle transition becomes limiting under environmental stress, account for the stage observation process, and require recurrence in an independent standardized monitoring programme before generalizing.
 
-### Independent standardized Flanders networks
-- Chorus counts for Amphibia: DOI 10.15468/d4bu8j.
-- Larvae and metamorph counts for Amphibia: DOI 10.15468/swgure.
-- Role: supplementary cross-programme validation if fixed-site identities and time units can be joined without reconstruction ambiguity.
+## Primary dataset status
 
-### Long-term hydroclimate validation — Mohonk Preserve
-- Dataset DOI: 10.15468/dypfbs.
-- Data paper: Garretson et al. 2020, DOI 10.3897/BDJ.8.e50121.
-- 11 vernal pools, 1931–2020; consistent monitoring from 1991 onward.
-- Fields include chorus code/count, adults, amplectant pairs, egg masses, tadpoles/larvae, juveniles and paired environmental measurements.
-- **Boundary:** sampling is concentrated in spring, so current-year juvenile recruitment is not assumed identifiable. Mohonk is provisionally limited to `adult/call -> egg -> larva` and hydroclimate effects unless raw timing proves otherwise.
+**UNRESOLVED — pending raw structural estimability and join audit.**
 
-### Optional contemporary urban replication — CROA, southern France
-- Dataset DOI: 10.15468/xfz3uy.
-- Since 2023, up to three visits/grid/year.
-- Records adult, juvenile, egg mass, tadpole and calling behaviour.
-- Role: external replication only after adequate temporal depth and stage counts are demonstrated.
+We will not choose a primary dataset using transition effect sizes, signs, significance, posterior support or model fit.
 
-## Primary estimands
+Current candidates:
 
-For site `s`, year `t`, stage `k`, define latent seasonal occurrence `Z[s,t,k]`.
+- **Meetnetten chorus counts** — 963 events / 1,436 occurrences; adult breeding activity.
+- **Meetnetten larvae & metamorphs** — 697 events / 2,995 occurrences / 3,741 measurement-fact rows; downstream reproductive-success sampling plus pond environment.
+- **PINK coastal Flanders** — >1,900 occurrences from 243 ponds and >10 species; repeated within-programme observations of calls, eggs and larvae.
+- **Natterjack sightings** — only 19 events / 117 occurrences; full conceptual stage coverage but too small to predeclare as primary.
+- **Mohonk Preserve** — long-term hydroclimate validation; juvenile field excluded from same-cohort recruitment unless phenology proves compatibility.
+- **CROA** — optional recent external replication.
 
-Primary transition parameters:
-- `T_AE = P(Egg=1 | AdultBreeding=1)`
-- `T_EL = P(Larva=1 | Egg=1)`
-- `T_LJ = P(Juvenile=1 | Larva=1)`
+For the two large Meetnetten programmes, **Hyla arborea** and **Pelobates fuscus** are shared target species. Cross-programme analysis is allowed only if publisher-provided site/event identity or a prospectively frozen deterministic identity bridge can join them. Coordinate-nearest matching is forbidden.
 
-Primary decoupling metric:
-- `D_AJ = 1 - P(Juvenile=1 | AdultBreeding=1)`
+## Candidate hypotheses
 
-No observed zero is automatically interpreted as a biological failure. Stage-specific observation/detection is modelled from repeated visits and date/phenology where estimable.
+**H1 — Stage-localized bottleneck.** Environmental stress does not weaken all stages equally.
 
-## Hypotheses
+**H2 — Hydroperiod mechanism.** Aquatic-habitat persistence and pond state explain the downstream bottleneck.
 
-**H1 — Stage-localized decoupling.**
-Transition probabilities are not equally sensitive to environmental stress; at least one downstream transition weakens more strongly than the upstream adult-to-egg transition.
+**H3 — Strategy dependence.** Bottleneck location differs among species with different breeding/development strategies.
 
-**H2 — Hydroclimate modulation.**
-Dry/warm conditions and reduced aquatic-habitat persistence reduce downstream transition probabilities, with the strongest effect expected on aquatic-development-to-juvenile recruitment where full-chain data permit that endpoint.
+**H4 — Recurrence.** Broad amphibian claims require the transition-level pattern to recur in an independent programme.
 
-**H3 — Reproductive-strategy heterogeneity.**
-The location and strength of the bottleneck differ among species or programmes with different breeding and larval-development strategies.
+## What happens next
 
-**H4 — Cross-programme recurrence.**
-A transition-level signature observed in the primary Natterjack system must recur in at least one independent monitoring programme before any broad amphibian-general claim is made.
+The next analysis is **estimability only**:
 
-## Hard gates before outcome analysis
+1. inspect raw publisher archives;
+2. count site-years and repeat visits;
+3. freeze source-specific stage mappings;
+4. separate explicit absence from missing and unsurveyed states;
+5. test deterministic fixed-site identity across Meetnetten programmes;
+6. audit stage timing/cohort compatibility;
+7. select the richest identifiable endpoint without viewing ecological effect direction.
 
-1. Preserve raw sampling-event identity and visit date.
-2. Demonstrate repeat visits within site-year.
-3. Quantify stage-specific positive counts before fitting any decoupling model.
-4. Require explicit stage coding; do not infer life stage from free text unless a frozen mapping is documented.
-5. Separate structural absence, explicit `absent`, missing record and missing survey.
-6. Do not classify recruitment failure until a stage-specific detection model is estimable.
-7. Mohonk juvenile counts are excluded from the primary recruitment endpoint unless cohort timing can be shown to match the same breeding cycle.
-8. Any cross-dataset join must use publisher-provided site/event identifiers or a prospectively frozen deterministic mapping. No coordinate-nearest rescue.
-9. Environmental covariates must be defined before outcome-based model selection.
-10. Greenberg et al. 2017 is treated as prior art; novelty cannot be “breeding effort does not always predict recruitment.”
-
-## First decision after raw-data import
-
-The first raw-data task is an **estimability audit**, not hypothesis testing. The audit reports:
-- number of sites and site-years;
-- visits per site-year;
-- positive detections per stage;
-- explicit absences vs missing rows;
-- overlap of stages within site-year;
-- date distribution of each stage;
-- candidate stage-specific detection replication.
-
-Only after this audit passes will the confirmatory model be frozen.
+See `protocol_v0_2.json` and `DATA_SOURCE_AUDIT_V0_2.md`.
 
 ## Working title
 
 **Where the life cycle breaks: stage-specific demographic decoupling across amphibian monitoring programmes**
-

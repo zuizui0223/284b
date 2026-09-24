@@ -1,99 +1,135 @@
-# Frog demographic decoupling — standalone-project incubator v0.3
+# Frog demographic decoupling — standalone-project incubator v0.4
 
 This branch is an **incubator only** for a new empirical amphibian project. It is scientifically separate from 284b Paper 1 and must not be merged into the Paper 1 claim surface.
 
 ## Ecological question
 
-> **Under what habitat conditions does adult breeding effort cease to translate into downstream offspring production?**
+> **Under what pond conditions does adult breeding effort cease to translate into downstream larval or metamorph production?**
 
-The intended biological sequence is:
+The biological sequence of interest is:
 
 ```
 calling/breeding adults -> eggs -> larvae -> metamorphs -> juveniles
 ```
 
-The project will analyse only the richest stage transition that the public monitoring data actually identify. It will not call a larval or metamorph record “recruitment to the adult population.”
+Only the richest transition actually identifiable from the public monitoring data will be analysed. Larvae or metamorphs are **downstream offspring production**, not automatically recruitment into the adult population.
 
-## Current strongest candidate
+## Focal candidate — same monitoring projects, different life-stage protocols
 
-The strongest candidate is now the pair of standardized Flemish **Meetnetten** programmes, not the tiny Natterjack full-chain dataset.
+The strongest design is the pair of standardized Flemish **Meetnetten** programmes.
 
 ### Adult breeding activity
 **Chorus counts**, DOI `10.15468/d4bu8j`
-- 963 sampling events;
-- 1,436 occurrence rows;
+- current public snapshot: 963 sampling events / 1,436 occurrence rows;
 - repeated calling-male counts;
-- target species include `Hyla arborea` and `Pelobates fuscus`.
+- `Hyla arborea` is target species under publisher ProjectKey **13**;
+- `Pelobates fuscus` is target species under publisher ProjectKey **152**.
 
 ### Downstream production
 **Larvae and metamorph counts**, DOI `10.15468/swgure`
-- 697 sampling events;
-- 2,995 occurrence rows;
-- 3,741 measurement/fact rows;
-- explicit larva/metamorph stages;
-- number of sweeps plus pond depth, permanence, fish, pH, shade, surface and water-quality measurements;
-- target species include the same `Hyla arborea` and `Pelobates fuscus`.
+- current public snapshot: 697 events / 2,995 occurrences / 3,741 measurement-or-fact rows;
+- explicit `larva` / `metamorph` stages;
+- `Hyla arborea` again uses ProjectKey **13**;
+- `Pelobates fuscus` again uses ProjectKey **152**;
+- observation effort includes number of sweeps;
+- pond context includes maximum depth, permanent water column, fish presence, pH, shade, pond surface and water quality.
 
-## Exact join — no spatial matching
+Thus the candidate comparison links **different protocols within the same species-specific monitoring projects**, rather than combining unrelated datasets post hoc.
 
-The publisher's public source repository shows that both datasets derive `locationID` from the same Meetnetten `DimLocation.LocationID` and serialize it as:
+## Exact identity contract
+
+At publisher source commit `inbo/meetnetten-occurrences@70cf1c1e9a2b3d32be16bfa6ca12bfea4fd6303a`, both event views derive:
 
 ```
-INBO:MEETNET:LOCATION:<six digits>
+locationID = INBO:MEETNET:LOCATION:<DimLocation.LocationID>
+eventID = INBO:MEETNET:EVENT:<FieldworkSampleID>
+parentEventID = INBO:MEETNET:VISITID:<FieldworkVisitID>
 ```
 
-Therefore the only authorized cross-programme join candidate is exact:
+The only authorized seasonal linkage is therefore:
 
 ```
 locationID × scientificName × calendar_year
 ```
 
-Nearest coordinates, generalized-grid overlap and fuzzy locality names are forbidden. The **number of actual shared site-years has not yet been opened**.
+Nearest-coordinate matching, generalized-grid overlap and fuzzy locality matching are forbidden.
 
-Shared target species are frozen prospectively to:
+The actual raw overlap count is **still unopened**.
 
-- `Hyla arborea`
-- `Pelobates fuscus`
-
-See `MEETNETTEN_SOURCE_IDENTITY_AUDIT_V0_1.md` and `protocol_v0_3.json`.
+See:
+- `protocol_v0_4.json`
+- `MEETNETTEN_PROGRAMME_IDENTITY_AUDIT_V0_2.md`
+- `scripts/audit_meetnetten_join.py`
 
 ## Candidate ecological estimand
 
-The first candidate relationship is:
+The first biological relationship is:
 
-> seasonal adult breeding effort -> larval/metamorph production
+> **seasonal adult calling-male abundance -> larval production**
 
-Adult effort will be summarized from repeated valid chorus visits; downstream abundance retains sampling effort (number of sweeps). Pond state then tests whether the conversion of adult breeding effort into offspring production changes with environmental context.
+with metamorph production secondary only if its raw sample structure is adequate.
 
-This is **not** an absence test. An observed downstream zero remains an observed zero under a known sampling effort unless a later observation model justifies a stronger state.
+Adult effort is summarized prospectively from repeated chorus visits. Downstream abundance retains number of sweeps as observation effort. Pond state then tests whether the conversion of breeding effort into offspring production changes with environmental context.
+
+An observed downstream zero is an observed survey outcome under a declared effort. It is not automatically total reproductive failure.
+
+## Prospective hypotheses
+
+**H1 — Baseline coupling.** Within species, greater seasonal calling-male abundance is associated with greater larval production when habitat permits successful development.
+
+**H2 — Habitat-dependent conversion.** The adult-to-larva relationship changes with pond conditions rather than being a fixed conversion across sites and years.
+
+**H3 — Stage specificity.** If metamorph data are structurally adequate, habitat effects on adult-to-metamorph conversion can differ from effects on adult-to-larva conversion.
+
+**H4 — Species heterogeneity.** `Hyla arborea` and `Pelobates fuscus` can differ in the habitat conditions that weaken breeding-to-offspring conversion.
+
+**H5 — External recurrence.** Any broad amphibian claim requires recurrence in an independent monitoring programme.
 
 ## Prior-art boundary
 
-Greenberg, Zarnoch & Austin (2017, Ecosphere 8:e01789, DOI 10.1002/ecs2.1789) already showed that adult breeding effort, hydroregime and weather can differentially predict juvenile recruitment among anuran species.
+Greenberg, Zarnoch & Austin (2017, *Ecosphere* 8:e01789, DOI `10.1002/ecs2.1789`) already showed that adult breeding effort, hydroregime and weather can differentially predict juvenile recruitment among anuran species.
 
-The new target is therefore not “breeding effort sometimes fails to predict recruitment.” It is:
+Therefore this project does **not** claim to discover that breeding effort can be weakly related to later reproduction.
 
-> **localize the demographic bottleneck to an explicit life-stage transition, identify the habitat context that changes stage conversion, and require recurrence in an independent monitoring programme before generalizing.**
+The prospective novelty is:
+
+> **localize the bottleneck to an explicit life-stage transition, identify the habitat context that changes stage conversion, compare that bottleneck between species, and require independent-programme recurrence before generalizing.**
+
+## Claims currently allowed
+
+- breeding-to-larval production coupling;
+- habitat-dependent stage conversion;
+- downstream offspring production;
+- stage-specific bottleneck.
+
+## Claims currently forbidden
+
+Without additional demographic data, do not claim:
+- recruitment into the adult population;
+- population persistence;
+- demographic ghost populations;
+- ecological traps;
+- local-extinction early warning.
 
 ## Independent validation candidates
 
-- **PINK coastal Flanders** — >1,900 occurrences, 243 ponds, >10 species, repeated within-programme surveys that listen for adults and search for eggs/larvae.
-- **Mohonk Preserve** — long-term hydroclimate validation of upstream adult/egg/larva transitions; juvenile field not used as same-cohort recruitment without phenology proof.
+- **PINK coastal Flanders** — >1,900 occurrences, 243 ponds, >10 species, repeated within-programme surveys of calls, eggs and larvae.
+- **Mohonk Preserve** — long-term hydroclimate validation of adult/egg/larva transitions; juvenile field excluded as same-cohort recruitment unless phenology proves compatibility.
 - **Natterjack sightings** — full conceptual stage coverage but only 19 public events / 117 occurrence rows; feasibility example only.
 - **CROA** — recent external replication candidate.
 
-## Next gate
+## Next unopened gate
 
-No adult-downstream association is open yet. First:
+Before any adult-to-offspring association or environmental-effect direction is calculated:
 
-1. materialize the current publisher DwC-A tables;
+1. materialize the current publisher DwC-A event/occurrence tables;
 2. count exact shared `locationID × species × year` units;
-3. verify repeated chorus visits and downstream temporal ordering;
-4. audit larva versus metamorph frequencies;
-5. quantify number-of-sweeps coverage;
-6. only then freeze and fit the biological model.
+3. require at least 30 exact shared units;
+4. verify at least 20 shared units with >=2 chorus visits;
+5. verify at least 20 units with a chorus observation not later than the downstream survey;
+6. audit larva versus metamorph frequencies and number-of-sweeps coverage.
 
-`scripts/audit_meetnetten_join.py` performs this join audit without reading counts or computing an ecological association.
+`scripts/audit_meetnetten_join.py` performs only this structural audit and deliberately cannot read abundance values or emit the ecological result.
 
 ## Working title
 

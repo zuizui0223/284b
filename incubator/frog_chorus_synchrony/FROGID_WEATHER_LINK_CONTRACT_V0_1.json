@@ -1,0 +1,66 @@
+{
+  "project": "frog-chorus-synchrony",
+  "validation_contract_version": "0.1",
+  "status": "FrogID_weather_link_sample_frozen_before_weather_opening",
+  "source_pin": {
+    "dwca_sha256": "f5dd70ed07956e3e37de4fb04692b83a9d726eae2312767c9eda2dcbf61f759d",
+    "release_compatible": "FrogID 7.0",
+    "recordings": 655502
+  },
+  "deterministic_sample": {
+    "rule": "retain eventID when first byte of SHA256(UTF-8 eventID) is < 16",
+    "nominal_fraction": "1/16",
+    "outcome_independent": true,
+    "cannot_change_after_weather_opening": true
+  },
+  "location_filter": {
+    "require_numeric_coordinates": true,
+    "max_coordinate_uncertainty_m": 25000,
+    "reason": "validation weather is ERA5 0.25-degree scale; records coarser than ~one ERA5 cell are excluded structurally"
+  },
+  "weather_grid": {
+    "model": "ERA5",
+    "access_layer": "Open-Meteo Historical Weather API",
+    "spatial_resolution": "0.25 degree",
+    "event_cell_rule": "round latitude and longitude to nearest 0.25 degree before weather request",
+    "cell_selection": "nearest",
+    "timezone": "auto",
+    "daily_variable": "precipitation_sum",
+    "unit": "mm"
+  },
+  "rainfall_metric": {
+    "wet_day_threshold_mm": 1,
+    "threshold_basis": "ETCCDI wet-day convention",
+    "event_day_excluded": true,
+    "definition": "number of consecutive days immediately before eventDate with precipitation <1 mm, capped at 30; 0 means previous local calendar day was wet",
+    "cap_days": 30,
+    "transform": "zscore(log1p(antecedent_dry_days))",
+    "directional_hypothesis": "beta < 0"
+  },
+  "response": {
+    "unit": "FrogID eventID / recording",
+    "value": "1 if >=2 distinct scientificName records in eventID, else 0",
+    "conditioning": "conditional on a submitted expert-validated frog recording",
+    "absence_claim": false
+  },
+  "planned_adjustments": [
+    "C(stateProvince)",
+    "C(month)",
+    "zscore(calendar year)",
+    "sin/cos local event hour if eventTime parseable on >=90% of sampled events"
+  ],
+  "dependence": {
+    "primary_cluster": "rounded 0.25-degree weather cell",
+    "recorder_sensitivity": "two-way or recorder-clustered sensitivity only if recordedBy coverage >=90%"
+  },
+  "support_rule": "rain/dryness beta < 0, two-sided p < 0.05, and 95% CI excludes 0",
+  "structural_sample_gate": {
+    "minimum_retained_recordings": 25000,
+    "minimum_multispecies_recordings": 10000,
+    "minimum_weather_cells": 200,
+    "maximum_weather_cells_for_batch_pipeline": 8000,
+    "recorder_coverage_fraction_for_sensitivity": 0.9
+  },
+  "weather_values_opened": false,
+  "validation_effect_opened": false
+}

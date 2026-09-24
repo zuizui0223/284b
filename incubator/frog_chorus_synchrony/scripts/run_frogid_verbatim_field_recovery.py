@@ -17,7 +17,7 @@ from collections import defaultdict
 from pathlib import Path
 
 URL="https://dwca-exports.ala.org.au/dr14760.zip"
-EXPECTED_SHA="e0f87176607db7a065016f9b2b3ec85e81145907c4238633b48a31af92c8afe2"
+EXPECTED_SHA="f5dd70ed07956e3e37de4fb04692b83a9d726eae2312767c9eda2dcbf61f759d"
 
 def fetch():
     req=urllib.request.Request(URL,headers={"User-Agent":"frogid-verbatim-field-recovery/0.2.1"})

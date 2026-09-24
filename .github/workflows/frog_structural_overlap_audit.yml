@@ -1,0 +1,31 @@
+name: frog structural overlap audit
+
+on:
+  push:
+    branches:
+      - incubator/frog-demographic-decoupling-v1
+    paths:
+      - "incubator/frog_demographic_decoupling/**"
+      - ".github/workflows/frog_structural_overlap_audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  structural-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run fixed-version structural audit
+        run: python incubator/frog_demographic_decoupling/scripts/run_meetnetten_structural_audit.py
+      - name: Upload sanitized structural receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: frog-meetnetten-structural-audit-v0-1
+          path: frog_meetnetten_structural_audit_v0_1.json
+          if-no-files-found: error

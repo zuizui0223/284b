@@ -1,0 +1,36 @@
+name: frog FrogID weather-link sample audit
+
+on:
+  push:
+    branches:
+      - incubator/frog-chorus-synchrony-v1
+    paths:
+      - "incubator/frog_chorus_synchrony/FROGID_WEATHER_LINK_CONTRACT_V0_1.json"
+      - "incubator/frog_chorus_synchrony/scripts/run_frogid_weather_link_sample_audit.py"
+      - ".github/workflows/frog_frogid_weather_link_sample.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frog-frogid-weather-link-sample
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run deterministic FrogID sample audit
+        run: python incubator/frog_chorus_synchrony/scripts/run_frogid_weather_link_sample_audit.py
+      - name: Upload sanitized sample receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: frog-frogid-weather-link-sample-v0-1
+          path: frog_frogid_weather_link_sample_v0_1.json
+          if-no-files-found: error

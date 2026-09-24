@@ -9,7 +9,7 @@ from __future__ import annotations
 import csv, hashlib, io, json, re, urllib.request
 import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 ITEM_ID="657ca143d34e23d35331ce9d"
@@ -91,6 +91,25 @@ def semantic_flags(text):
     }
 
 
+def parse_date(value):
+    s=(value or "").strip()
+    if not s:
+        return None
+    candidates=[s, s.split(" ")[0], s.split("T")[0]]
+    formats=("%Y-%m-%d","%m/%d/%Y","%m/%d/%y","%Y/%m/%d")
+    for candidate in candidates:
+        for fmt in formats:
+            try:
+                return datetime.strptime(candidate,fmt).date()
+            except ValueError:
+                pass
+    # Final structural-only fallback: extract a four-digit year but do not invent month/day.
+    m=re.search(r"(19|20)\\d{2}",s)
+    if m:
+        return date(int(m.group(0)),1,1)
+    return None
+
+
 def main():
     item=get_json(ITEM_URL)
     csv_data=get_bytes(find_file(item,CSV_NAME))
@@ -114,11 +133,9 @@ def main():
         rawdate=(row.get("date") or "").strip()
         site=(row.get("site_name") or "").strip()
         if not rawdate or not site: continue
-        try:
-            d=date.fromisoformat(rawdate[:10])
-        except ValueError:
+        d=parse_date(rawdate)
+        if d is None or d.year<2003:
             continue
-        if d.year<2003: continue
         key=(site,d.year)
         all_site_years.add(key)
         visits[key].add(rawdate)

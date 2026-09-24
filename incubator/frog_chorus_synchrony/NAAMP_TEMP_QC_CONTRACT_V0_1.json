@@ -1,0 +1,39 @@
+{
+  "project": "frog-chorus-synchrony",
+  "qc_contract_version": "0.1",
+  "status": "post_opening_predictor_qc_frozen_before_qc_refit",
+  "reason": "opened temperature secondary contained a physically implausible maximum run-mean of 66.6 C",
+  "original_secondary_receipt": "NAAMP_SECONDARY_RECEIPT_V0_1.json",
+  "original_result_must_remain_primary_secondary_record": true,
+  "qc_rule": {
+    "plausible_run_mean_temp_c_min": -10,
+    "plausible_run_mean_temp_c_max": 45,
+    "justification": "broad physical plausibility bounds for nocturnal eastern/central US amphibian surveys; chosen to remove impossible/extreme coding or scale errors rather than optimize effect size",
+    "no_alternate_bounds_after_opening": true
+  },
+  "qc_refit": {
+    "same_formula": "prop ~ rain_z + temp_z + C(State) + C(RunNumber) + C(RouteType) + year_z",
+    "same_cluster": "State + ':' + RouteNumber",
+    "same_temp_summary": "mean converted C temperature across >=8 valid sampled stops",
+    "zscore_recomputed_after_qc_filter": true,
+    "support_rule": "beta_temp > 0 and two-sided cluster-robust p < 0.05 and 95% CI excludes 0"
+  },
+  "scale_stratified_sensitivities": [
+    {
+      "TempScale": "F",
+      "minimum_runs": 500,
+      "minimum_routes": 50
+    },
+    {
+      "TempScale": "C",
+      "minimum_runs": 500,
+      "minimum_routes": 50
+    }
+  ],
+  "forbidden": [
+    "do not relabel likely scale errors by guessing alternate units",
+    "do not tune bounds to maximize significance",
+    "do not drop a temperature scale because its effect is weaker",
+    "do not replace rainfall primary with temperature"
+  ]
+}

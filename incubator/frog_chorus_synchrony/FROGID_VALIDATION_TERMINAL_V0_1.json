@@ -1,0 +1,41 @@
+{
+  "programme": "frog-chorus-synchrony",
+  "validation": "FrogID v6",
+  "terminal_status": "closed_structural_gate_before_weather",
+  "source_dataset": {
+    "doi": "10.15468/wazqft",
+    "version": "6.0",
+    "declared_records": 974120,
+    "declared_species": 226
+  },
+  "opened_structural_facts": {
+    "events": 658670,
+    "multispecies_events": 142279,
+    "distinct_species": 226,
+    "coordinate_coverage_fraction": 1,
+    "coordinate_consistency_fraction": 1,
+    "date_coverage_fraction": 1,
+    "date_consistency_fraction": 1,
+    "recordedBy_coverage_fraction": 1,
+    "eventTime_core_coverage_fraction": 0,
+    "distinct_stateProvince_core": 0
+  },
+  "frozen_gate_failures": [
+    "eventTime coverage 0.0 < 0.90",
+    "stateProvince count 0 < 5"
+  ],
+  "attempted_exact_recovery": {
+    "allowed_surface": "same ALA DwC-A archive only",
+    "result": "verbatim_occurrence.txt absent from current FrogID v6 archive",
+    "recovery_pass": false
+  },
+  "prohibited_rescues": [
+    "do not drop the time requirement after seeing it is absent",
+    "do not infer state from coordinates",
+    "do not infer event time from upload metadata or submission order",
+    "do not open rainfall effects using a relaxed FrogID validation contract",
+    "do not select states/regions after seeing synchrony response"
+  ],
+  "weather_values_read": false,
+  "validation_effect_opened": false
+}

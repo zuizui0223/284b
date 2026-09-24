@@ -2,10 +2,14 @@
   "project": "frog-demographic-decoupling",
   "version": "0.10.2",
   "supersedes": "protocol_v0_10_1.json",
-  "status": "RMNP_wide_schema_date_parser_repair",
-  "repair_scope": "date parsing only",
+  "status": "RMNP_wide_schema_stage_code_and_date_parser_repair",
+  "repair_scope": [
+    "stage-code categorical parsing",
+    "date/year parsing"
+  ],
   "outcome_blind": true,
   "immutable_source_sha256": "aa42c97dcc506b96f832c2ea4180f057527b1efeec302586d06801751c1cda3a",
+  "immutable_metadata_sha256": "b4d7926a1eadfc469c8bb491bd2553477ea6eb197b442fd7508595f9313cece3",
   "publisher_stage_semantics_already_established": {
     "Pseudacris maculata": {
       "A": "Adult",
@@ -26,6 +30,24 @@
       "P": "Paedomorph (aquatic adult)"
     }
   },
+  "frozen_wide_species_map": {
+    "psma_stage": "Pseudacris maculata",
+    "lisy_stage": "Lithobates sylvaticus",
+    "amma_stage": "Ambystoma mavortium"
+  },
+  "allowed_reads": [
+    "raw categorical strings from psma_stage/lisy_stage/amma_stage",
+    "marginal row count of each stage code per stage column",
+    "marginal site-year count of each stage code per stage column",
+    "FGDC definition of each stage code",
+    "site_name and date/year only for replication structure"
+  ],
+  "forbidden_reads": [
+    "psma/lisy/amma values",
+    "joint adult versus egg/larval state within a site-year",
+    "fish/weather/temperature/depth values",
+    "stage transition association magnitude or direction"
+  ],
   "date_formats_allowed": [
     "%Y-%m-%d",
     "%m/%d/%Y",
@@ -33,13 +55,11 @@
     "%Y/%m/%d"
   ],
   "fallback_year_extraction_allowed": true,
-  "forbidden_changes": [
-    "species mapping",
-    "stage-code meaning",
-    "2003-2022 primary epoch",
-    "structural thresholds",
-    "reading psma/lisy/amma values",
-    "opening adult-downstream associations"
-  ],
+  "structural_gate": {
+    "post2002_site_years_minimum": 100,
+    "post2002_site_years_ge2_visits_minimum": 50,
+    "taxa_with_observed_documented_upstream_and_downstream_codes_minimum": 2,
+    "every_observed_nonmissing_stage_code_must_be_documented": true
+  },
   "model_opening_state": "closed"
 }

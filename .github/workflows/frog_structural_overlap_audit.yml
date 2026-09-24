@@ -25,11 +25,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run fixed-version structural audit
+      - name: Run fixed-version structural overlap audit
         run: python incubator/frog_demographic_decoupling/scripts/run_meetnetten_structural_audit.py
-      - name: Upload sanitized structural receipt
+      - name: Run downstream effort-schema audit
+        run: python incubator/frog_demographic_decoupling/scripts/run_meetnetten_effort_schema_audit.py
+      - name: Upload sanitized structural receipts
         uses: actions/upload-artifact@v4
         with:
-          name: frog-meetnetten-structural-audit-v0-1
-          path: frog_meetnetten_structural_audit_v0_1.json
+          name: frog-meetnetten-structural-audits-v0-1
+          path: |
+            frog_meetnetten_structural_audit_v0_1.json
+            frog_meetnetten_effort_schema_v0_1.json
           if-no-files-found: error

@@ -1,0 +1,60 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.7",
+  "supersedes": "protocol_v0_6.json",
+  "status": "meetnetten_structural_fail_transition_to_PINK",
+  "meetnetten": {
+    "exact_hyla_location_species_years": 245,
+    "identity_replication_time_order": "pass",
+    "quantitative_effort_gate": "fail",
+    "reason": "current downstream DwC-A v1.24 exposes no exact number-of-sweeps measurement type",
+    "confirmatory_count_model_authorized": false,
+    "binary_rescue_authorized": false,
+    "reentry_after_PINK_result_forbidden": true
+  },
+  "focal_candidate": {
+    "rank": 2,
+    "name": "PINK within-programme amphibian monitoring",
+    "dataset_doi": "10.15468/jvtefa",
+    "dataset_uuid": "fca6d6a7-c13d-4f6e-96e1-0513e30b816c",
+    "temporal_scope": [
+      "2007-04-03",
+      "2016-07-15"
+    ],
+    "ponds_reported": 243,
+    "protocol": {
+      "periods_per_pond": 3,
+      "adult_call_listening": true,
+      "egg_larva_search": true,
+      "second_period_scoop_net": true,
+      "third_period_net_only": true,
+      "larval_surface_target": "at least one third of pond surface"
+    },
+    "primary_target_species_before_schema_audit": "Hyla arborea",
+    "reason": "Hyla is an explicit PINK focal taxon and preserves continuity with the structurally retained Meetnetten species without using Meetnetten ecological outcomes"
+  },
+  "allowed_next_opening": [
+    "DwC-A row types and field names",
+    "distinct lifeStage/behavior/sex/occurrenceStatus labels",
+    "event dates and exact event/location identifiers",
+    "counts of visits per pond-year",
+    "structural counts of rows by stage/behavior label",
+    "whether adult call, egg, and larva states are explicitly encoded"
+  ],
+  "forbidden_next_opening": [
+    "individualCount values",
+    "stage-transition effect sizes",
+    "adult-to-larva association direction",
+    "environmental effect direction",
+    "choosing another species because its outcome is stronger"
+  ],
+  "PINK_structural_gate": {
+    "minimum_pond_years": 30,
+    "minimum_pond_years_with_ge2_periods": 20,
+    "explicit_adult_call_encoding_required": true,
+    "explicit_egg_or_larva_encoding_required": true,
+    "deterministic_stage_mapping_required": true,
+    "missing_record_not_zero": true
+  },
+  "ecological_effects_opened": false
+}

@@ -30,7 +30,7 @@ START_DATE = "2017-10-01"
 END_DATE = "2024-11-09"
 WET_MM = 1.0
 DRY_CAP = 30
-BATCH_SIZE = 20
+BATCH_SIZE = 10
 
 
 def fetch_bytes(url: str, timeout: int = 180) -> bytes:
@@ -228,7 +228,7 @@ def weather_request(cells):
         "timezone": "auto",
         "models": "era5",
         "cell_selection": "nearest",
-        "elevation": "nan",
+        "elevation": ",".join("nan" for _ in cells),
     }
     url = WEATHER_URL + "?" + urllib.parse.urlencode(params)
     last_error = None

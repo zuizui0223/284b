@@ -1,0 +1,45 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.10.2",
+  "supersedes": "protocol_v0_10_1.json",
+  "status": "RMNP_wide_schema_date_parser_repair",
+  "repair_scope": "date parsing only",
+  "outcome_blind": true,
+  "immutable_source_sha256": "aa42c97dcc506b96f832c2ea4180f057527b1efeec302586d06801751c1cda3a",
+  "publisher_stage_semantics_already_established": {
+    "Pseudacris maculata": {
+      "A": "Adult",
+      "E": "Egg or egg mass",
+      "L": "larval stage (aquatic)",
+      "M": "Metamorph"
+    },
+    "Lithobates sylvaticus": {
+      "A": "Adult",
+      "E": "Egg or Egg Mass",
+      "L": "Larvae (aquatic stage)",
+      "M": "Metamorph"
+    },
+    "Ambystoma mavortium": {
+      "A": "Adult",
+      "E": "Egg or Egg Mass",
+      "L": "Larvae",
+      "P": "Paedomorph (aquatic adult)"
+    }
+  },
+  "date_formats_allowed": [
+    "%Y-%m-%d",
+    "%m/%d/%Y",
+    "%m/%d/%y",
+    "%Y/%m/%d"
+  ],
+  "fallback_year_extraction_allowed": true,
+  "forbidden_changes": [
+    "species mapping",
+    "stage-code meaning",
+    "2003-2022 primary epoch",
+    "structural thresholds",
+    "reading psma/lisy/amma values",
+    "opening adult-downstream associations"
+  ],
+  "model_opening_state": "closed"
+}

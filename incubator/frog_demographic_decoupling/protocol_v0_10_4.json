@@ -1,0 +1,80 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.10.4",
+  "supersedes": "protocol_v0_10_3.json",
+  "status": "RMNP_stage_token_normalization_preoutcome",
+  "outcome_blind": true,
+  "primary_taxon": {
+    "scientific_name": "Pseudacris maculata",
+    "selection_basis": "largest structurally observed adult and larval stage coverage before joint-state opening"
+  },
+  "validation_taxon": {
+    "scientific_name": "Lithobates sylvaticus",
+    "status": "parallel_validation_if_normalized_structure_estimable"
+  },
+  "secondary_taxon": {
+    "scientific_name": "Ambystoma mavortium",
+    "status": "secondary_only",
+    "reason": "paedomorphosis complicates adult-stage semantics"
+  },
+  "normalization_rule": {
+    "delimiter": ",",
+    "trim_whitespace": true,
+    "preserve_case": true,
+    "token_reordering_irrelevant": true,
+    "duplicate_tokens_collapse": true,
+    "any_unknown_token_fails_closed": true
+  },
+  "allowed_tokens_by_stage_column": {
+    "psma_stage": [
+      "A",
+      "E",
+      "J",
+      "L",
+      "M",
+      "NA",
+      "U"
+    ],
+    "lisy_stage": [
+      "A",
+      "E",
+      "J",
+      "L",
+      "M",
+      "NA",
+      "U"
+    ],
+    "amma_stage": [
+      "A",
+      "E",
+      "J",
+      "L",
+      "NA",
+      "P",
+      "U"
+    ]
+  },
+  "allowed_structural_reads": [
+    "tokenized stage codes",
+    "marginal row counts by token",
+    "marginal site-year counts by token",
+    "site-year counts with any adult token",
+    "site-year counts with any downstream E/L token",
+    "replicate-visit counts"
+  ],
+  "forbidden_reads": [
+    "psma/lisy/amma values",
+    "joint adult and downstream stage states within same site-year",
+    "adult-to-downstream association",
+    "environmental covariate values or effects"
+  ],
+  "pass_rule": {
+    "primary_adult_site_years_minimum": 50,
+    "primary_downstream_site_years_minimum": 30,
+    "post2002_site_years_ge2_visits_minimum": 50,
+    "validation_adult_site_years_minimum": 5,
+    "validation_downstream_site_years_minimum": 10,
+    "unknown_tokens_allowed": 0
+  },
+  "joint_model_opening_state": "closed"
+}

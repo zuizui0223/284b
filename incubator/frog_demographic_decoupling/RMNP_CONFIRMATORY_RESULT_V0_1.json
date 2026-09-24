@@ -1,0 +1,87 @@
+{
+  "endpoint": "rmnp_stage_filtering_confirmatory_v0_1",
+  "source_commit": "4d34b659d956d2baa99b992f9f07c8adf10d2d10",
+  "workflow_run": 36013773738,
+  "artifact_id": 10813214121,
+  "artifact_digest": "sha256:73f78dd579bdc1a64f39a559076cec9aa54ba3d0e8dc8f0a2d92455e7ccf293c",
+  "source_sha256": "aa42c97dcc506b96f832c2ea4180f057527b1efeec302586d06801751c1cda3a",
+  "software": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "statsmodels": "0.15.0"
+  },
+  "sample": {
+    "site_years": 110,
+    "sites": 67,
+    "adult_positive_site_years": 24,
+    "reproductive_positive_site_years": 32,
+    "fish_present_site_years": 23,
+    "fish_not_observed_site_years": 87
+  },
+  "primary": {
+    "estimand": "reproductive_stage:fish_present",
+    "beta": 0.0930427598001074,
+    "robust_se": 0.9133745168943741,
+    "odds_ratio": 1.0975086635158218,
+    "ci95": [
+      -1.6971383977095371,
+      1.8832239173097518
+    ],
+    "p_value": 0.9188622109256179,
+    "prespecified_direction": "negative",
+    "decision": "not_supported"
+  },
+  "secondary_temporal": {
+    "estimand": "reproductive_stage:year_centered",
+    "beta": -0.08129982878939988,
+    "robust_se": 0.07910331808933234,
+    "odds_ratio": 0.9219172326737304,
+    "ci95": [
+      -0.23633948330210702,
+      0.07373982572330727
+    ],
+    "p_value": 0.3040591521001266,
+    "decision": "no_evidence_of_stage_specific_temporal_divergence"
+  },
+  "common_year_effect_primary": {
+    "beta": 0.15752757954433405,
+    "odds_ratio_per_year": 1.1706130425107992,
+    "ci95": [
+      0.08955942195549732,
+      0.22549573713317078
+    ],
+    "p_value": 0.0000055579251170911155,
+    "interpretation_boundary": "common stage-evidence trend only; not demographic decoupling"
+  },
+  "sensitivities": {
+    "high_effort_stage_x_fish": {
+      "beta": 0.46980054790155973,
+      "odds_ratio": 1.5996751028407112,
+      "ci95": [
+        -1.2894480531197352,
+        2.2290491489228548
+      ],
+      "p_value": 0.600695356268311,
+      "decision": "same_null_conclusion"
+    },
+    "depth_complete_case_stage_x_fish": {
+      "beta": -0.08366260079455548,
+      "odds_ratio": 0.9197415238094888,
+      "ci95": [
+        -3.05951734180175,
+        2.8921921402126394
+      ],
+      "p_value": 0.9560571662627223,
+      "decision": "same_null_conclusion"
+    }
+  },
+  "claim_boundary": {
+    "stage_evidence_not_true_absence": true,
+    "causal_fish_claim_authorized": false,
+    "adult_recruitment_claim_authorized": false,
+    "ecological_trap_claim_authorized": false,
+    "early_warning_claim_authorized": false
+  },
+  "terminal_status": "primary_hypothesis_not_supported_secondary_stage_divergence_not_supported"
+}

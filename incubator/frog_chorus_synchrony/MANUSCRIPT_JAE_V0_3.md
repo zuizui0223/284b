@@ -14,7 +14,7 @@
 
 ## Keywords
 
-acoustic community; anurans; ecoacoustics; environmental cue; rainfall; temporal niche; synchrony; weather
+acoustic community; anurans; ecoacoustics; environmental cue; rainfall; synchrony; temporal niche; weather
 
 ## Introduction
 

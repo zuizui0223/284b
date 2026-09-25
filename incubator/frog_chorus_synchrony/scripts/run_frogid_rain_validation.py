@@ -30,7 +30,7 @@ START_DATE = "2017-10-01"
 END_DATE = "2024-11-09"
 WET_MM = 1.0
 DRY_CAP = 30
-BATCH_SIZE = 10
+BATCH_SIZE = 50
 
 
 def fetch_bytes(url: str, timeout: int = 180) -> bytes:

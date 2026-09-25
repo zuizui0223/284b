@@ -1,4 +1,0 @@
-abstract_words=146
-main_words=3408
-reference_entries=16
-display_items=6

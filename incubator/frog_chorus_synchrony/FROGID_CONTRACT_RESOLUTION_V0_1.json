@@ -1,0 +1,12 @@
+{
+  "project": "frog-chorus-synchrony",
+  "resolution_version": "0.1",
+  "status": "contract_conflict_resolved_before_weather_effect_opening",
+  "authoritative_contract": "FROGID_VALIDATION_MODEL_CONTRACT_V0_1.json",
+  "authoritative_reason": "this contract was frozen earlier on the branch together with its deterministic sample and executable validation script before any FrogID weather effect was opened",
+  "retired_unopened_duplicate": "FROGID_RAIN_VALIDATION_CONTRACT_V1_0.json",
+  "retired_reason": "later duplicate design introduced during workflow continuation; no matching effect script replaced the already-frozen executable contract and no weather effect was opened under it",
+  "scientific_changes_to_authoritative_contract": false,
+  "weather_effect_opened_at_resolution": false,
+  "prohibited": "do not choose between contracts based on which result is stronger"
+}

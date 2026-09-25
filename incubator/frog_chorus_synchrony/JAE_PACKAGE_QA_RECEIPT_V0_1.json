@@ -1,0 +1,46 @@
+{
+  "package": "frog-jae-submission-package",
+  "version": "0.3",
+  "source_commit": "91ed566f05e7a7df1e87c080855776808e3827a9",
+  "workflow_run": 36089586423,
+  "workflow_job": 107928926789,
+  "manuscript": {
+    "path": "incubator/frog_chorus_synchrony/MANUSCRIPT_JAE_V0_3.md",
+    "abstract_words": 299,
+    "total_words": 3111,
+    "keywords": 8,
+    "jae_initial_word_limit": 8500,
+    "anonymization_guard": "pass"
+  },
+  "figures": {
+    "figure1": {
+      "path": "incubator/frog_chorus_synchrony/figures/FIGURE_1_DESIGN_V0_1.svg",
+      "sha256": "68cd2e91ddea232ec66fa29bad923bb689a3ecc83d59673cbefa3e4b6b25d534",
+      "width_mm": 180,
+      "height_mm": 108
+    },
+    "figure2": {
+      "path": "incubator/frog_chorus_synchrony/figures/FIGURE_2_EFFECTS_V0_1.svg",
+      "sha256": "d57a78def5118fcb50062bf522c31ffc2ca288979700daf15666c16445fa47d6",
+      "width_mm": 180,
+      "height_mm": 115
+    }
+  },
+  "submission_artifact": {
+    "id": 10845077861,
+    "digest": "sha256:dc1741a7563fb17d2d5b6ad6dc6b2a808ed7a2d90ea1084918f8f56c4509a73c",
+    "files": 4
+  },
+  "standalone_export": {
+    "artifact_id": 10845137590,
+    "artifact_digest": "sha256:eea2e3b783bef5f7d0168d225ed1f88ed5e3f6373c18488d019c9c369b410a70",
+    "file_sha256_manifest_sha256": "099b17cfba2625b1e9eb67cba31908f2cdd26eff0be1a20d6f592387251aa475",
+    "manifest_entries": 48,
+    "artifact_files": 49,
+    "canonical_content_identity": "16960cbf4f5f5f3aa9175115b108125409acfe9c7e2ef013e23d90a9b4cd27da",
+    "missing_files": 0,
+    "hash_mismatches": 0
+  },
+  "scientific_claim_changed": false,
+  "status": "submission_package_ci_green_content_export_verified"
+}

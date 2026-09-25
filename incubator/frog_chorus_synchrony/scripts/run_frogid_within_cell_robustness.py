@@ -81,7 +81,10 @@ def main():
     base.fit_model=within_cell_fit
     base.main()
     src=Path("frog_frogid_rain_validation_earthmover_v0_2.json")
-    payload=json.loads(src.read_text(encoding="utf-8"))
+    raw=src.read_text(encoding="utf-8")
+    if raw.endswith("\\n"):
+        raw=raw[:-2]
+    payload=json.loads(raw)
     result={
       "analysis":"frogid_within_weather_cell_spatial_confounding_v0_1_1",
       "contract":"SPATIAL_CONFOUNDING_ROBUSTNESS_CONTRACT_V0_1_1.json",

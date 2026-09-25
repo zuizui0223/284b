@@ -1,71 +1,137 @@
-# Frog chorus synchrony — standalone empirical incubator v0.1
+# Frog chorus synchrony — standalone empirical programme v1.0
 
-This branch starts a **fresh empirical programme** after the previous stage-resolved frog programme was prospectively closed. It is not a rescue, retuning, or continuation of the failed fish × reproductive-stage hypothesis.
+This branch contains a **fresh empirical amphibian programme**, scientifically separate from 284b Paper 1 and from the prospectively closed stage-filtering frog programme.
 
-## Ecological question
+## Main ecological question
 
-> **Do short-term weather pulses synchronize breeding activity across frog species, temporarily compressing temporal niche partitioning within local choruses?**
+> **Does recent rainfall synchronize breeding calls across frog species, increasing the probability that multiple species call within the same short acoustic observation window?**
 
-The biological object is a **standardized calling assemblage** observed during one listening event, not species occupancy, recruitment, or life-stage conversion.
+The response is community-level **co-calling synchrony**, not species occupancy, demographic recruitment, or acoustic-frequency partitioning.
 
-## Primary data source
+## Main result — independent support in two acoustic systems
 
-North American Amphibian Monitoring Program (NAAMP), USGS data release:
-- DOI: `10.5066/F7G44NG0`
-- ScienceBase item: `583dc314e4b0d1899f9dea8d`
-- standardized core era: **2001–2015**
-- design: fixed routes, 10 wetland-associated stops, 5-minute listening surveys, repeated seasonal sampling periods, local survey conditions recorded.
+### 1. NAAMP — standardized North American monitoring
 
-The programme covered much of the eastern and central United States under a unified protocol.
+USGS North American Amphibian Monitoring Program (DOI `10.5066/F7G44NG0`), 2001–2015.
 
-## Why this is a new question
+Primary unit = standardized route-run. Each run contains repeated 5-minute wetland-associated listening stops.
 
-Prior NAAMP work estimated occupancy and occupancy trends. Frog phenology studies have tested species-specific calling responses to temperature/rainfall, and FrogID has been used to test calling phenology, co-occurrence, and acoustic niche partitioning.
+Frozen primary:
+- 9,399 runs
+- 900 routes
+- 93,383 sampled stops
+- 41,020 multi-species calling stops
+- predictor = `z(log1p DaysSinceRain)`
+- beta = **-0.0312**
+- OR = **0.969**
+- 95% OR CI = **[0.941, 0.998]**
+- p = **0.0388**
+- frozen support rule = **PASS**
 
-This programme instead asks whether **weather changes the number and composition of species calling together during the same standardized observation window**.
+Interpretation: multi-species calling is slightly more common closer to recent rainfall.
 
-The target is therefore dynamic community synchrony, not:
-- occupancy trend;
-- species-specific first calling date;
-- stage-specific reproductive filtering;
-- acoustic-frequency partitioning.
+The effect is small. The >=8-stop sensitivity passes (p=0.043), whereas the complete-10-stop sensitivity narrowly crosses zero (p=0.058).
 
-## Prospective hypotheses
+### 2. FrogID — independent Australian validation
 
-**H1 — Pulse synchrony.**
-Warm/wet survey conditions increase within-event calling-species richness relative to otherwise comparable survey events.
+Expert-validated FrogID call recordings, deterministic outcome-blind 1/16 sample from the pinned public release.
 
-**H2 — Rainfall compression.**
-Recent rainfall produces a stronger increase in co-calling richness than temperature alone where rainfall metadata are available under the NAAMP protocol.
+Frozen validation:
+- 40,754 recordings
+- 18,174 recordings with >=2 calling species
+- 1,623 independent ERA5 weather cells
+- 13,148 recorders
+- rainfall = Earthmover public Icechunk ERA5 hourly total precipitation, aggregated to local calendar days
+- response = multi-species vs single-species recording, **conditional on a recording already containing at least one calling frog**
+- beta(dryness) = **-0.1592**
+- OR = **0.8528**
+- 95% OR CI = **[0.8273, 0.8792]**
+- p = **1.13e-24**
+- frozen support rule = **PASS**
+- recorder-cluster sensitivity = **PASS**
 
-**H3 — Seasonal-position dependence.**
-The synchronizing effect of weather is strongest near the shoulders of the local breeding season, when normally staggered species can be pulled into the same calling window.
+The external validation is classified prospectively as **independent_support_robust**.
 
-**H4 — Community reconfiguration.**
-Weather pulses change not only richness but also the topology of event-level co-calling networks: species pairs that rarely call together under ordinary conditions become temporarily connected.
+## Current ecological conclusion
 
-## Hard boundaries
+> **Across independent North American and Australian acoustic monitoring systems, frog species are more likely to overlap within the same short calling window closer to recent rainfall.**
 
-- One event = one standardized stop-level listening period when that identity is recoverable.
-- Multiple species in the same event are direct co-calling evidence.
-- A species absent from an event is **not** automatically a biological absence unless the source table/protocol makes non-detection interpretable for that event.
-- No causal climate claim is authorized from observational weather associations.
-- No species pair, region, or weather variable may be chosen because it gives the strongest effect.
-- No reuse of the previous frog programme's opened outcomes.
+The FrogID validation is important because it conditions on an already-active frog recording. Therefore the replicated result cannot be explained solely by rainfall increasing the probability that *any* frog calls.
 
-## First gate
+A defensible interpretation is **weather-triggered community synchrony**: shared environmental cues transiently compress temporal separation among calling species.
 
-Before any weather–synchrony association is opened, perform a structural audit only:
-1. inventory immutable/raw USGS files;
-2. identify route/stop/survey/date identity;
-3. identify species and call-index fields;
-4. identify weather/temperature/rain/wind fields;
-5. count standardized 2001–2015 survey events;
-6. count events with at least two species records only as an estimability quantity;
-7. freeze one event key and one primary weather variable family.
+## Temperature
 
-No regression coefficient or effect direction is opened during this gate.
+NAAMP also shows a strong positive association between ambient temperature and event-level multispecies calling overlap after:
+- physical plausibility QC (-10 to 45 °C);
+- separate checks within source Celsius and Fahrenheit strata;
+- flexible day-of-year adjustment.
+
+This temperature signal has **not** received the independent external validation obtained for rainfall, so rainfall remains the cross-dataset result.
+
+## Prespecified negatives
+
+Two predictions were not supported in NAAMP:
+
+### Seasonal-shoulder amplification
+Rain × breeding-season shoulder:
+- beta = -0.0462
+- p = 0.082
+- **not supported**
+
+### Pairwise network densification
+Rain effect on co-calling network density:
+- beta = -0.00636
+- p = 0.724
+- repeat-edge sensitivity p = 0.790
+- **not supported**
+
+Thus rainfall is not supported as a driver of pairwise network rewiring.
+
+## External validation trail
+
+### Sunshine Coast survey
+The biological survey structure was adequate:
+- 120 parent surveys
+- 121 multi-species call quadrats
+- 11 years
+
+But only 63.3% of parent surveys had deterministic registry coordinates, below the frozen 90% weather-link gate. The programme was closed **before** any weather effect was opened.
+
+### FrogID
+The current compatible public release passed all structural gates:
+- 655,502 recordings
+- 291,617 multi-species recordings
+- 100% event-time/date/coordinate coverage in the structural audit
+- 8 states/territories
+
+A deterministic 1/16 sample was frozen before ERA5 weather values were opened.
+
+## Inference boundaries
+
+Allowed:
+- recent rainfall is **associated with** greater short-window multispecies calling overlap;
+- the direction receives independent support across NAAMP and FrogID;
+- the FrogID result shows the pattern exists conditional on at least one species already calling;
+- warmer conditions are associated with greater overlap in NAAMP.
+
+Not allowed:
+- rainfall **causes** interspecific synchrony;
+- rainfall produces interspecific facilitation;
+- rainfall rewires pairwise calling networks;
+- the NAAMP and FrogID odds ratios are directly comparable or meta-analytic replicates;
+- co-calling implies demographic interaction, competition, or reproductive success.
+
+## Key receipts
+
+- `NAAMP_MODEL_CONTRACT_V0_1.json`
+- `NAAMP_PRIMARY_RECEIPT_V0_1.json`
+- `NAAMP_SYNTHESIS_RECEIPT_V0_1.json`
+- `FROG_SYNTHESIS_CONTRACT_V0_1.json`
+- `FROGID_VALIDATION_MODEL_CONTRACT_V0_4.json`
+- `FROGID_VALIDATION_RECEIPT_V0_2.json`
+- `FROG_CROSS_DATASET_SYNTHESIS_V0_1.json`
 
 ## Working title
 
-**Weather pulses compress temporal niches in frog breeding communities**
+**Rainfall recency predicts multispecies frog chorus synchrony across continental acoustic monitoring systems**

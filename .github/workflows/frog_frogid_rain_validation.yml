@@ -1,4 +1,5 @@
 name: frog FrogID rain external validation
+# retriggered after contract-resolution receipt; scientific contract unchanged
 
 on:
   push:

@@ -1,0 +1,51 @@
+name: frog JAE anonymous DOCX
+
+on:
+  push:
+    branches:
+      - incubator/frog-chorus-synchrony-v1
+    paths:
+      - "incubator/frog_chorus_synchrony/MANUSCRIPT_JAE_V0_3.md"
+      - "incubator/frog_chorus_synchrony/scripts/build_jae_anonymous_docx.py"
+      - ".github/workflows/frog_jae_docx.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frog-jae-anonymous-docx
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check -q python-docx==1.2.0
+      - name: Re-run manuscript guard
+        run: python incubator/frog_chorus_synchrony/scripts/audit_jae_submission.py
+      - name: Build anonymous main DOCX
+        run: python incubator/frog_chorus_synchrony/scripts/build_jae_anonymous_docx.py
+      - name: Verify continuous line numbers and page-number field
+        run: |
+          python - <<'PY'
+          from zipfile import ZipFile
+          p="build/FROG_JAE_ANON_MAIN_V0_3.docx"
+          with ZipFile(p) as z:
+              document=z.read("word/document.xml").decode("utf-8")
+              footer=z.read("word/footer1.xml").decode("utf-8")
+          assert "<w:lnNumType" in document
+          assert 'w:restart="continuous"' in document
+          assert "PAGE" in footer
+          print("DOCX structural QA PASS")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frog-jae-anonymous-main-docx-v0-3
+          path: build/FROG_JAE_ANON_MAIN_V0_3.docx
+          if-no-files-found: error

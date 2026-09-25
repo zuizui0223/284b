@@ -4,7 +4,7 @@ import json, math
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[3]
 BASE=ROOT/"incubator"/"frog_chorus_synchrony"
 OUT=BASE/"figures"
 OUT.mkdir(parents=True,exist_ok=True)

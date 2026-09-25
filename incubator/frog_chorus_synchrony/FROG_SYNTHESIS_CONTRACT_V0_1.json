@@ -1,0 +1,51 @@
+{
+  "project": "frog-chorus-synchrony",
+  "synthesis_contract_version": "0.1",
+  "status": "frozen_while_FrogID_validation_running_before_result_opening",
+  "naamp_primary": {
+    "beta": -0.03117247036378344,
+    "p_value": 0.03876324235953538,
+    "support": true,
+    "qualifier": "small effect; one of two prespecified sensitivities narrowly crosses zero"
+  },
+  "frogid_validation_classification": {
+    "independent_support": {
+      "rule": "FrogID primary frozen support_rule_pass == true",
+      "broad_claim": "recent rainfall is associated with greater event-level multispecies calling overlap in both standardized NAAMP and independent FrogID recordings"
+    },
+    "directionally_consistent_but_not_validated": {
+      "rule": "primary beta < 0 but frozen support_rule_pass == false",
+      "broad_claim_forbidden": true,
+      "wording": "FrogID is directionally consistent but does not independently validate the NAAMP rain effect"
+    },
+    "null_or_ambiguous": {
+      "rule": "primary beta confidence interval includes 0 without frozen support",
+      "broad_claim_forbidden": true
+    },
+    "contradictory": {
+      "rule": "primary beta > 0 and two-sided p < 0.05 with CI excluding 0",
+      "broad_claim_forbidden": true,
+      "wording": "independent FrogID evidence points in the opposite direction"
+    }
+  },
+  "sensitivity_policy": {
+    "primary_controls_validation": true,
+    "sensitivities_cannot_upgrade_failed_primary": true,
+    "if_primary_passes_and_all_sensitivities_pass": "independent_support_robust",
+    "if_primary_passes_and_any_sensitivity_fails": "independent_support_qualified_robustness"
+  },
+  "mechanism_boundary": {
+    "naamp_network_density_not_supported": true,
+    "seasonal_shoulder_not_supported": true,
+    "interpretation_if_external_support": "shared weather activation can synchronize event-level calling overlap without detectable pairwise network densification",
+    "interaction_or_causal_mechanism_not_authorized": true
+  },
+  "prohibited_post_result_actions": [
+    "do not change FrogID sample fraction",
+    "do not change wet-day threshold",
+    "do not change dry-day cap or transform",
+    "do not switch to rainfall amount if dry-spell validation fails",
+    "do not select a state/month/recorder subset for validation",
+    "do not replace primary with a sensitivity analysis"
+  ]
+}

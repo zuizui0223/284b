@@ -28,7 +28,7 @@
 - [x] anonymized main manuscript
 - [x] separate human title-page template
 - [x] figures materialized with legends
-- [ ] final double-spaced submission document/PDF with continuous line and page numbers
+- [x] final double-spaced submission document/PDF with continuous line and page numbers (13-page render verified; see `JAE_FINAL_FORMAT_QA_V0_1.*`)
 - [x] statement of intended data/code archive
 
 ## Reproducibility package

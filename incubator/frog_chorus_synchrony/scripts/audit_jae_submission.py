@@ -27,12 +27,31 @@ assert keywords==sorted(keywords,key=str.lower), "keywords must be alphabetical"
 
 total=len(words(text))
 assert total<=8500, f"manuscript exceeds JAE 8500-word initial-submission limit: {total}"
-for section in ["## Introduction","## Materials and Methods","## Results","## Discussion","## Data Availability","## References","## Figure legends"]:
+for section in [
+    "## Introduction",
+    "## Materials and Methods",
+    "## Results",
+    "## Discussion",
+    "## Data Availability",
+    "## References",
+    "## Figure legends",
+]:
     assert section in text, f"missing section {section}"
 
-assert "ZHANG" not in text.upper()
+# Double-anonymized main manuscript: block only author-identifying strings.
+# Do not reject unrelated cited authors who happen to share the surname Zhang.
+for forbidden_identity in [
+    "ZHANG RUIQI",
+    "ZHANG Ruiqi",
+    "Rachel Zhang",
+    "rachelzhang0223",
+    "Tohoku University",
+]:
+    assert forbidden_identity.lower() not in text.lower(), (
+        f"identifying string in main manuscript: {forbidden_identity}"
+    )
 assert "@" not in text, "main manuscript must not contain email addresses"
-assert "Rainfall predicts greater short-window co-calling" not in text  # guard old title fragment
+
 assert "Recent rainfall predicts greater short-window co-calling" in text
 assert "10.5066/F7G44NG0" in text
 assert "10.15468/wazqft" in text

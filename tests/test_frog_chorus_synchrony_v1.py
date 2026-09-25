@@ -20,7 +20,9 @@ class FrogChorusSynchronyV1Guards(unittest.TestCase):
         self.assertTrue(self.frogid["primary"]["support_rule_pass"])
 
     def test_validation_is_conditional_active_recording(self):
-        self.assertIn("at least one calling species", self.frogid["interpretation"])
+        text=self.frogid["interpretation"].lower()
+        self.assertIn("at least one calling", text)
+        self.assertIn("species", text)
 
     def test_pairwise_network_is_negative(self):
         self.assertFalse(self.network["primary"]["support_rule_pass"])

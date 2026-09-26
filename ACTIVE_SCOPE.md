@@ -1,35 +1,56 @@
-# Active scope: Level A standalone report
+# Active scope
 
 Effective repository focus: 2026-09-26.
 
-## In scope
+284b now has **two active outputs with different evidentiary status**.
 
-1. Independent ecological reconstructions from PRESERVED_SPECIMEN and HUMAN_OBSERVATION records.
-2. Same target, same estimand and source-symmetric comparison geometry.
-3. Core CHELSA bio1-bio19 predictor universe.
-4. Three prespecified accessible-area radii: 150, 300 and 500 km.
-5. Eight prespecified modelling procedures.
-6. Prospectively frozen procedure-by-area source-discordance envelopes.
-7. Twelve fresh held-out taxa as the independent biological replication level.
-8. Unresolved cells retained as unresolved when either source-specific answer fails adequacy.
+## Track 1 — Level-A empirical short report
 
-## Focal endpoint
+The submission-facing empirical paper is restricted to same-target cross-source reproducibility:
 
-same_target_cross_source_reproducibility_heldout12_core19_v0_4
+- independent PRESERVED_SPECIMEN and HUMAN_OBSERVATION answers;
+- same target and estimand;
+- core CHELSA bio1-bio19 predictor universe;
+- M = 150, 300 and 500 km;
+- eight prespecified procedures;
+- frozen procedure-by-M source-discordance envelopes;
+- 12 fresh held-out taxa as the independent biological replication level;
+- 283 evaluable diagnostics and 5 unresolved;
+- 0/12 taxa with an envelope exceedance.
 
-The endpoint closed with 283 evaluable diagnostics, 5 unresolved diagnostics and 0 of 12 held-out taxa containing an envelope exceedance.
+The active manuscript is `manuscript/LEVEL_A_SHORT_REPORT_V0_1.md`.
 
-## Explicitly out of scope for the active paper
+## Track 2 — evidence-boundary structural result
 
-- Level B or Level C cross-role dependency claims.
-- Cremastra, Belonocnema or SMIL001 focal dependency conclusions.
-- Functional-absence calibration as a focal result.
-- Relation-layer coupling mathematics as a headline contribution.
-- Zero-collapse / unresolved-state ablation as a headline contribution.
-- v5-v7 candidate-search programs.
-- Process knockout or necessity claims.
-- Any claim that 283 diagnostics are independent replicates.
-- Any claim that the frozen nearest-rank q95 envelope is a nominal 95% predictive interval.
-- Any claim of universal specimen-versus-observation source invariance.
+The exact invalid-state result remains active because it is a positive methodological result:
 
-These materials are retained under legacy/pre_level_a_focus/ for provenance.
+- `FPR_zero - FPR_gated = 1-a1`;
+- `TPR_zero - TPR_gated = 1-a0`;
+- equal-validity corollary: both equal `1-a`;
+- process qualification does not by itself control false-discovery fraction.
+
+See `docs/evidence_boundary_structural_result.md`.
+
+This track is not inserted into the Level-A short report.
+
+## Legacy
+
+The following remain provenance but are not active scientific claims:
+
+- unresolved Level-B/Level-C candidate programs;
+- Cremastra, Belonocnema and SMIL001 focal dependency attempts;
+- v5-v7 candidate hunting beyond utility code still required by Level A;
+- previous flagship manuscript packaging;
+- candidate-specific field calibration plans and unopened focal endpoints.
+
+These are retained under `legacy/pre_level_a_focus/`.
+
+## Boundaries
+
+Do not claim:
+- 283 independent biological replicates;
+- universal specimen/observation source invariance;
+- nominal 95% coverage for the empirical q95 envelope;
+- Level-C dependency confirmation or falsification;
+- process necessity or causal mechanism;
+- that the structural identity estimates how common any observation regime is in nature.

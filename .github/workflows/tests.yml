@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run active Level-A unittest suite
+      - name: Run active unittest suite
         run: python -m unittest discover -s tests -v
-      - name: Run Paper 1 function-style submission guards
-        run: python scripts/run_paper1_function_guards.py
+      - name: Run Level-A submission guards
+        run: python scripts/run_level_a_submission_guards.py

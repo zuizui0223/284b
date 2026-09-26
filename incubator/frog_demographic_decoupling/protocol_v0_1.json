@@ -1,0 +1,91 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.1",
+  "status": "pre-outcome_estimability_only",
+  "scientific_independence": "standalone_project_not_284b_paper1",
+  "primary_system": {
+    "name": "Flanders Natterjack toad sightings",
+    "dataset_doi": "10.15468/2xfw8y",
+    "dataset_uuid": "099911ec-84c6-453f-995a-3ad064ec9d71",
+    "years": [
+      2016,
+      2023
+    ],
+    "target_taxon": "Epidalea calamita",
+    "expected_visits_per_site_year": 3,
+    "stages": [
+      "adult_breeding",
+      "egg",
+      "larva",
+      "juvenile"
+    ],
+    "full_chain_candidate": true
+  },
+  "validation_systems": [
+    {
+      "name": "PINK coastal Flanders amphibian monitoring",
+      "dataset_doi": "10.15468/jvtefa",
+      "dataset_uuid": "fca6d6a7-c13d-4f6e-96e1-0513e30b816c",
+      "role": "multi_species_upstream_transition_validation"
+    },
+    {
+      "name": "Meetnetten chorus counts",
+      "dataset_doi": "10.15468/d4bu8j",
+      "dataset_uuid": "9bd8310b-0914-411f-a4ba-0cefdd85df80",
+      "role": "supplementary_adult_breeding_activity"
+    },
+    {
+      "name": "Meetnetten larvae and metamorph counts",
+      "dataset_doi": "10.15468/swgure",
+      "dataset_uuid": "89d08c4f-4727-45be-83d4-1fd96ddee81d",
+      "role": "supplementary_downstream_stage"
+    },
+    {
+      "name": "Mohonk Preserve vernal pools",
+      "dataset_doi": "10.15468/dypfbs",
+      "dataset_uuid": "a391a15f-033b-42fa-8bdc-b74014b05e28",
+      "role": "long_term_adult_egg_larva_hydroclimate_validation",
+      "juvenile_primary_endpoint_authorized": false
+    },
+    {
+      "name": "CROA southern France",
+      "dataset_doi": "10.15468/xfz3uy",
+      "dataset_uuid": "9fd8ed05-3ae6-453a-878a-c0a272a2b849",
+      "role": "optional_contemporary_external_replication"
+    }
+  ],
+  "stage_order": [
+    "adult_breeding",
+    "egg",
+    "larva",
+    "juvenile"
+  ],
+  "primary_estimands": [
+    "P(egg|adult_breeding)",
+    "P(larva|egg)",
+    "P(juvenile|larva)",
+    "1-P(juvenile|adult_breeding)"
+  ],
+  "hypotheses": {
+    "H1": "environmental stress creates stage-localized rather than uniform loss of life-cycle coupling",
+    "H2": "dry/warm or low-water-persistence conditions disproportionately reduce downstream transition probabilities",
+    "H3": "bottleneck location differs among reproductive strategies",
+    "H4": "broad claims require recurrence in at least one independent monitoring programme"
+  },
+  "gates": {
+    "preserve_sampling_event_identity": true,
+    "repeated_visits_required": true,
+    "positive_stage_counts_before_modeling": true,
+    "explicit_stage_mapping_required": true,
+    "distinguish_absence_missingness_unsurveyed": true,
+    "stage_detection_estimability_required_for_negative_failure": true,
+    "coordinate_nearest_join_forbidden": true,
+    "environmental_covariates_freeze_before_outcome_selection": true,
+    "mohonk_same_cohort_juvenile_required_before_recruitment_use": true
+  },
+  "prior_art_boundary": {
+    "citation": "Greenberg CH, Zarnoch SJ, Austin JD. 2017. Ecosphere 8:e01789. DOI 10.1002/ecs2.1789",
+    "cannot_claim": "novel discovery that breeding effort can be weakly associated with juvenile recruitment",
+    "target_novelty": "stage-specific bottleneck localization with observation-aware inference and cross-programme recurrence"
+  }
+}

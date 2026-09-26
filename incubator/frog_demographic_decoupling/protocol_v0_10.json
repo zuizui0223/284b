@@ -1,0 +1,80 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.10",
+  "supersedes": "protocol_v0_9.json",
+  "status": "RMNP_USGS_stage_state_structural_audit_preoutcome",
+  "scientific_independence": "standalone_project_not_284b_paper1",
+  "prior_candidates": {
+    "Meetnetten": "closed_structural_effort_failure",
+    "PINK": "closed_structural_adult_call_encoding_failure",
+    "Mohonk_EDI": "blocked_by_repository_auth_change_not_scientific_failure"
+  },
+  "source": {
+    "title": "Amphibian (chorus frog, wood frog, tiger salamander) surveys in Rocky Mountain National Park (1986-2022)",
+    "doi": "10.5066/P9EX70L7",
+    "sciencebase_item_id": "657ca143d34e23d35331ce9d",
+    "public_domain": true,
+    "standardized_primary_epoch": [
+      2003,
+      2022
+    ],
+    "reason_epoch": "post-2002 data were collected under an occupancy framework with waterbodies visited at least twice during the active season"
+  },
+  "taxa": [
+    "Pseudacris maculata",
+    "Lithobates sylvaticus",
+    "Ambystoma mavortium"
+  ],
+  "no_taxon_selection_by_outcome": true,
+  "ecological_question": "conditional on adult-stage occupancy, when and where does reproductive-stage evidence fail to occur, and does environmental stress change that adult-to-reproductive-state coupling?",
+  "stage_state_concept": {
+    "upstream": "adult-stage or aural adult evidence, using only explicit source coding",
+    "downstream": "egg and/or larval pre-metamorphic evidence, using only explicit source coding",
+    "forbidden_inference": [
+      "generic species presence is not automatically adult-stage evidence",
+      "missing stage record is not absence",
+      "juvenile/metamorph evidence is not adult recruitment unless source design identifies that transition"
+    ]
+  },
+  "existing_2025_prior_art": {
+    "citation": "Kissel AM, Watry MK, Bredeweg E, Muths E. 2025. Ecosphere 16:e70210. DOI 10.1002/ecs2.70210",
+    "analyzed": [
+      "species occupancy",
+      "colonization",
+      "persistence",
+      "climate",
+      "visitor use",
+      "habitat complexity",
+      "wetland proportion"
+    ],
+    "cannot_claim": "novel analysis of overall RMNP amphibian occupancy or persistence",
+    "target_difference": "stage-conditional reproductive-state occupancy within occupied wetlands"
+  },
+  "allowed_structural_opening": [
+    "ScienceBase file names, sizes, hashes and media types",
+    "tabular file headers",
+    "distinct nonnumeric categorical labels for species, life stage, observation/detection method and survey status",
+    "site and visit identifiers",
+    "dates and years",
+    "counts of rows/site-years/visits by taxon and categorical life-stage label",
+    "missingness indicators for structural fields"
+  ],
+  "forbidden_before_model_freeze": [
+    "abundance or count values",
+    "adult-to-reproductive association direction or magnitude",
+    "climate or visitor-use effect direction",
+    "selecting a taxon or life stage because it produces a stronger result",
+    "reusing the 2025 paper's fitted occupancy outcomes as our response"
+  ],
+  "structural_gate": {
+    "stable_site_identifier_required": true,
+    "stable_visit_identifier_or_site_date_required": true,
+    "explicit_taxon_required": true,
+    "explicit_stage_or_observation_class_required": true,
+    "post2002_site_years_minimum": 100,
+    "post2002_site_years_with_ge2_visits_minimum": 50,
+    "retained_taxa_minimum": 2,
+    "each_retained_taxon_requires_both_upstream_and_downstream_explicit_labels": true
+  },
+  "model_opening_state": "closed"
+}

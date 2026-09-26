@@ -1,0 +1,35 @@
+{
+  "audit": "rmnp_stage_code_value_repair_v0_2",
+  "source_commit": "9d5212d96405dddc49095efba7db1902374953b8",
+  "workflow_run": 36012342402,
+  "artifact_id": 10813815209,
+  "artifact_digest": "sha256:f8b3d459661abf6e423a3b4963e28b70220d3a39e906a38ed0ba2ddfc25f26c5",
+  "csv_sha256": "aa42c97dcc506b96f832c2ea4180f057527b1efeec302586d06801751c1cda3a",
+  "metadata_xml_sha256": "b4d7926a1eadfc469c8bb491bd2553477ea6eb197b442fd7508595f9313cece3",
+  "post2002_site_years": 1177,
+  "post2002_site_years_ge2_visits": 577,
+  "marginal_stage_site_years": {
+    "Pseudacris maculata": {
+      "adult": 77,
+      "egg": 13,
+      "larva": 42,
+      "metamorph": 4
+    },
+    "Lithobates sylvaticus": {
+      "adult": 7,
+      "egg": 9,
+      "larva": 16,
+      "metamorph": 1
+    },
+    "Ambystoma mavortium": {
+      "adult": 12,
+      "egg": 13,
+      "larva": 4,
+      "paedomorph": 5
+    }
+  },
+  "schema_issue": "raw stage cells may contain comma-separated combinations such as 'A, E' and 'A, L'; v0.10.2 treated them as undocumented atomic codes",
+  "ecological_joint_state_opened": false,
+  "environment_values_read": false,
+  "decision": "normalize comma-separated stage cells prospectively before any adult-downstream joint-state analysis"
+}

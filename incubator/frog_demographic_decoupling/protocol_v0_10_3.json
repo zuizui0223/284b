@@ -1,0 +1,33 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.10.3",
+  "supersedes": "protocol_v0_10_2.json",
+  "status": "RMNP_field_semantics_preoutcome_audit",
+  "allowed_read": "FGDC definitions only for prespecified species/stage/survey/habitat columns",
+  "requested_fields": [
+    "psma",
+    "psma_stage",
+    "lisy",
+    "lisy_stage",
+    "amma",
+    "amma_stage",
+    "fish",
+    "perc_surveyed",
+    "weather",
+    "wind",
+    "air_temp_c",
+    "water_temp_c",
+    "site_length_m",
+    "site_width_m",
+    "max_depth",
+    "date",
+    "site_name"
+  ],
+  "forbidden": [
+    "CSV values from psma/lisy/amma",
+    "joint stage-state frequencies beyond already opened structural stage-code counts",
+    "any climate/habitat effect estimate"
+  ],
+  "selection_rule_after_dictionary": "choose the narrowest explicit adult/reproductive state mapping supported by publisher definitions; do not infer adult state from generic presence unless metadata explicitly supports it",
+  "model_opening_state": "closed"
+}

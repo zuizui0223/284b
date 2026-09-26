@@ -1,0 +1,43 @@
+{
+  "audit": "meetnetten_structural_overlap_v0_1",
+  "source_commit": "7506450c744e95cc452698d11b9b4d8250de64b6",
+  "workflow_run": 35993220978,
+  "artifact_id": 10804874449,
+  "abundance_columns_read": false,
+  "adult_downstream_association_opened": false,
+  "environment_effect_direction_opened": false,
+  "source_versions": {
+    "chorus": {
+      "doi": "10.15468/d4bu8j",
+      "version": "1.27",
+      "sha256": "686c5a7aacc8f49e41a0642ecaa9efd8c3564304b0a4d4b027f3df2debec69fd",
+      "bytes": 44543
+    },
+    "downstream": {
+      "doi": "10.15468/swgure",
+      "version": "1.24",
+      "sha256": "c2cc960122ea398545edb661318160cd2b5b66a75a73dba8f7a3f61bd9c4f920",
+      "bytes": 63088
+    }
+  },
+  "shared_location_species_years": 247,
+  "shared_by_species": {
+    "Hyla arborea": 245,
+    "Pelobates fuscus": 2
+  },
+  "shared_units_with_ge2_chorus_events": 233,
+  "shared_units_with_chorus_not_after_downstream": 247,
+  "shared_units_with_number_of_sweeps_metadata": 0,
+  "downstream_stage_row_counts": {
+    "Hyla arborea|larva": 448,
+    "Hyla arborea|metamorph": 229,
+    "Pelobates fuscus|larva": 4,
+    "Pelobates fuscus|metamorph": 2
+  },
+  "current_decision": {
+    "hyla_structural_overlap": "pass",
+    "pelobates_structural_overlap": "fail_too_few_shared_units",
+    "effort_metadata_gate": "unresolved_zero_coverage_requires_schema_audit",
+    "overall_primary_gate": "pending_effort_schema_audit"
+  }
+}

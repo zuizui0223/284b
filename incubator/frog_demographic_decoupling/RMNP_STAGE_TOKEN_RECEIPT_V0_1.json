@@ -1,0 +1,28 @@
+{
+  "audit": "rmnp_stage_token_normalization_v0_1",
+  "source_commit": "78dc2e8553a83e1f744da5086616159079a3b9b7",
+  "workflow_run": 36012683283,
+  "artifact_id": 10813575307,
+  "artifact_digest": "sha256:fd77bb15864455f9f61899aba4efd85bcd0317e3b5ef5c3db45f03d286dff3a1",
+  "post2002_site_years": 1177,
+  "post2002_site_years_ge2_visits": 577,
+  "unknown_tokens": {},
+  "structural_gate_pass": true,
+  "primary": {
+    "taxon": "Pseudacris maculata",
+    "adult_site_years": 77,
+    "downstream_E_or_L_site_years": 58
+  },
+  "validation": {
+    "taxon": "Lithobates sylvaticus",
+    "adult_site_years": 7,
+    "downstream_E_or_L_site_years": 24
+  },
+  "secondary": {
+    "taxon": "Ambystoma mavortium",
+    "adult_site_years": 13,
+    "downstream_E_or_L_site_years": 19
+  },
+  "joint_state_opened": false,
+  "environment_values_read": false
+}

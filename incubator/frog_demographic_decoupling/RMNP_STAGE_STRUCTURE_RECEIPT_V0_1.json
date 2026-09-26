@@ -1,0 +1,84 @@
+{
+  "audit": "RMNP_STAGE_STRUCTURE_V0_1",
+  "sciencebase_item_id": "657ca143d34e23d35331ce9d",
+  "doi": "10.5066/P9EX70L7",
+  "csv": {
+    "name": "ROMO_data_release.csv",
+    "sha256": "aa42c97dcc506b96f832c2ea4180f057527b1efeec302586d06801751c1cda3a",
+    "bytes": 546256
+  },
+  "metadata_xml_sha256": "b4d7926a1eadfc469c8bb491bd2553477ea6eb197b442fd7508595f9313cece3",
+  "post2002_site_years": 1177,
+  "post2002_site_years_ge2_visits": 577,
+  "stage_semantics": {
+    "Pseudacris maculata": {
+      "column": "psma_stage",
+      "A": "Adult",
+      "E": "Egg or egg mass",
+      "L": "larval stage (aquatic)",
+      "J": "Juvenile",
+      "M": "Metamorph"
+    },
+    "Lithobates sylvaticus": {
+      "column": "lisy_stage",
+      "A": "Adult",
+      "E": "Egg or Egg Mass",
+      "L": "Larvae (aquatic stage)",
+      "J": "Juvenile",
+      "M": "Metamorph"
+    },
+    "Ambystoma mavortium": {
+      "column": "amma_stage",
+      "A": "Adult",
+      "E": "Egg or Egg Mass",
+      "L": "Larvae",
+      "J": "Juvenile",
+      "P": "Paedomorph (aquatic adult)"
+    }
+  },
+  "structural_stage_site_years": {
+    "Pseudacris maculata": {
+      "A": 77,
+      "E": 13,
+      "L": 42,
+      "J": 94,
+      "M": 4
+    },
+    "Lithobates sylvaticus": {
+      "A": 7,
+      "E": 9,
+      "L": 16,
+      "J": 9,
+      "M": 1
+    },
+    "Ambystoma mavortium": {
+      "A": 12,
+      "E": 13,
+      "L": 4,
+      "J": 12,
+      "P": 5
+    }
+  },
+  "species_detection_semantics": {
+    "psma": {
+      "0": "not detected",
+      "1": "detected",
+      "NA": "No Data"
+    },
+    "lisy": {
+      "0": "not detected",
+      "1": "detected",
+      "NA": "No Data"
+    },
+    "amma": {
+      "0": "not detected",
+      "1": "detected",
+      "NA": "No Data"
+    }
+  },
+  "selected_primary_for_model_freeze": "Pseudacris maculata",
+  "selection_basis": "largest prospectively opened structural adult-stage coverage; no adult-to-reproductive association or environmental effect was inspected",
+  "abundance_values_read": false,
+  "adult_reproductive_association_opened": false,
+  "environment_effect_direction_opened": false
+}

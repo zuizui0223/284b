@@ -1,0 +1,138 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.4.1",
+  "supersedes": "protocol_v0_4.json",
+  "status": "pre-outcome_exact_programme_identity_with_current_archive_revalidation_required",
+  "scientific_independence": "standalone_project_not_284b_paper1",
+  "focal_candidate": {
+    "programme_family": "Meetnetten.be",
+    "analysis_unit_candidate": [
+      "locationID",
+      "scientificName",
+      "calendar_year"
+    ],
+    "species": [
+      {
+        "scientificName": "Hyla arborea",
+        "publisher_project_key": 13
+      },
+      {
+        "scientificName": "Pelobates fuscus",
+        "publisher_project_key": 152
+      }
+    ],
+    "chorus_protocol_ids": [
+      5,
+      33
+    ],
+    "downstream_protocol_ids": [
+      25,
+      32
+    ],
+    "common_location_semantics": "INBO:MEETNET:LOCATION:<DimLocation.LocationID>",
+    "exact_join_authorized": true,
+    "coordinate_or_locality_rescue_forbidden": true,
+    "raw_overlap_state": "unopened"
+  },
+  "adult_breeding_side": {
+    "dataset_doi": "10.15468/d4bu8j",
+    "public_snapshot": {
+      "publication_date": "2026-02-26",
+      "event_records": 963,
+      "occurrence_records": 1436
+    },
+    "field": "individualCount",
+    "repeated_sampling": "at least two chorus counts for Hyla arborea and Pelobates fuscus according to publisher protocol",
+    "seasonal_summary_candidate": "maximum valid adult-male calling count within locationID x species x year",
+    "zero_policy": "only explicit occurrenceStatus=absent row is zero; missing target row is not zero"
+  },
+  "downstream_side": {
+    "dataset_doi": "10.15468/swgure",
+    "public_snapshot": {
+      "publication_date": "2026-02-26",
+      "event_records": 697,
+      "occurrence_records": 2995,
+      "measurement_or_fact_records": 3741
+    },
+    "allowed_stages": [
+      "larva",
+      "metamorph"
+    ],
+    "primary_stage_before_raw_counts": "larva",
+    "secondary_stage": "metamorph_if_structurally_estimable",
+    "count_field": "individualCount",
+    "effort_field": "number of sweeps",
+    "pond_context": [
+      "maximum depth",
+      "permanent water column",
+      "fish present",
+      "pH",
+      "shade",
+      "pond surface",
+      "water quality",
+      "sampling effort type"
+    ],
+    "zero_policy": "observed zero under declared effort; never automatically latent reproductive failure"
+  },
+  "ecological_question": "under what pond conditions does adult breeding effort cease to translate into downstream larval or metamorph production?",
+  "ecological_hypotheses": {
+    "H1_baseline_coupling": "within a species, greater seasonal calling-male abundance is associated with greater downstream larval production when habitat permits successful development",
+    "H2_context_dependence": "the adult-to-larva relationship changes with pond conditions rather than being a fixed conversion across sites and years",
+    "H3_stage_specificity": "if metamorph data are structurally adequate, environmental effects on adult-to-metamorph conversion can differ from effects on adult-to-larva conversion",
+    "H4_species_heterogeneity": "Hyla arborea and Pelobates fuscus can differ in the habitat conditions that weaken breeding-to-offspring conversion",
+    "H5_external_recurrence": "a broad claim requires recurrence in PINK, Mohonk, or another independent monitoring programme"
+  },
+  "claim_language": {
+    "allowed": [
+      "breeding-to-larval production coupling",
+      "habitat-dependent stage conversion",
+      "downstream offspring production",
+      "stage-specific bottleneck"
+    ],
+    "forbidden_until_additional_data": [
+      "adult population recruitment",
+      "population persistence",
+      "demographic ghost population",
+      "ecological trap",
+      "local extinction early warning"
+    ]
+  },
+  "raw_estimability_gate": {
+    "exact_shared_location_species_years_minimum": 30,
+    "shared_units_with_at_least_two_chorus_visits_minimum": 20,
+    "shared_units_with_chorus_not_after_downstream_minimum": 20,
+    "larval_effort_information_required": true,
+    "biological_association_must_remain_closed_during_gate": true
+  },
+  "source_code_provenance": {
+    "repository": "inbo/meetnetten-occurrences",
+    "commit": "70cf1c1e9a2b3d32be16bfa6ca12bfea4fd6303a",
+    "chorus_event_source": "datasets/5+33 meetnetten-amfibieen-roepkoren-occurrences/sql/vwGBIF_INBO_meetnetten_toads and frogs calling choirs_events.sql",
+    "chorus_occurrence_source": "datasets/5+33 meetnetten-amfibieen-roepkoren-occurrences/sql/vwGBIF_INBO_meetnetten_toads and frogs calling choirs_occurrences.sql",
+    "downstream_event_source": "datasets/25+32 meetnetten-amfibieen-larven-metamorfen-occurrences/sql/vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_events.sql",
+    "downstream_occurrence_source": "datasets/25+32 meetnetten-amfibieen-larven-metamorfen-occurrences/sql/vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_occurrence.sql"
+  },
+  "prior_art_boundary": {
+    "citation": "Greenberg CH, Zarnoch SJ, Austin JD. 2017. Ecosphere 8:e01789. DOI 10.1002/ecs2.1789",
+    "cannot_claim": "first evidence that breeding effort and later reproductive output can be weakly coupled",
+    "target_novelty": "same-programme stage conversion localized to explicit adult and downstream protocols, habitat context, species heterogeneity, and independent recurrence"
+  },
+  "outcome_opening_status": "closed",
+  "current_archive_revalidation": {
+    "required": true,
+    "reason": "publisher source SQL documents identity semantics but contains historical extraction-date filters, whereas the current GBIF/IPT release covers 2016-2023",
+    "current_release_date": "2026-02-26",
+    "chorus_current_temporal_coverage": "2016-01-01/2023-12-31",
+    "must_reconfirm_in_current_dwca": [
+      "eventID format",
+      "parentEventID format",
+      "locationID format",
+      "Hyla arborea present on both protocol sides",
+      "Pelobates fuscus present on both protocol sides",
+      "explicit present/absent occurrenceStatus",
+      "lifeStage and sampling-effort fields"
+    ],
+    "source_sql_may_define_join_semantics_but_cannot_supply_current_overlap_counts": true,
+    "outcome_values_forbidden_during_revalidation": true
+  }
+}

@@ -1,0 +1,32 @@
+name: frog RMNP primary estimability
+
+on:
+  push:
+    branches:
+      - incubator/frog-demographic-decoupling-v1
+    paths:
+      - "incubator/frog_demographic_decoupling/RMNP_MODEL_CONTRACT_V0_12.json"
+      - "incubator/frog_demographic_decoupling/scripts/run_rmnp_primary_estimability.py"
+      - ".github/workflows/frog_rmnp_primary_estimability.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run primary estimability audit
+        run: python incubator/frog_demographic_decoupling/scripts/run_rmnp_primary_estimability.py
+      - name: Upload estimability receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: frog-rmnp-primary-estimability-v0-1
+          path: frog_rmnp_primary_estimability_v0_1.json
+          if-no-files-found: error

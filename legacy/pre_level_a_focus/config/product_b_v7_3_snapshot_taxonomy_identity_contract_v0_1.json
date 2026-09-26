@@ -1,0 +1,58 @@
+{
+  "contract_version": "product_b_v7_3_snapshot_taxonomy_identity_v0.1",
+  "engineering_only": true,
+  "confirmatory_claims_allowed": false,
+  "snapshot_date": "2026-08-01",
+  "snapshot_bucket": "gbif-open-data-us-east-1",
+  "snapshot_object_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "snapshot_schema_sha256": "8298545ad22ddc1e064ae6e2ca8dbc592fcd47ab87f1018e0699fc68474571aa",
+  "allowed_snapshot_columns": [
+    "species",
+    "specieskey",
+    "taxonkey",
+    "scientificname",
+    "taxonrank"
+  ],
+  "raw_rows_may_be_persisted": false,
+  "matched_row_counts_may_be_persisted": false,
+  "per_file_counts_may_be_persisted": false,
+  "spatial_columns_may_be_projected": false,
+  "occurrence_identifiers_may_be_projected": false,
+  "dataset_or_recorder_columns_may_be_projected": false,
+  "pair_must_be_frozen_before_snapshot_taxonomy_access": true,
+  "admissible_name_set_must_be_frozen_before_snapshot_taxonomy_access": true,
+  "new_names_after_snapshot_taxonomy_access_forbidden": true,
+  "required_pass_rule": {
+    "minimum_distinct_taxonomy_tuples": 1,
+    "exactly_one_nonblank_specieskey": true,
+    "all_species_names_must_be_predeclared": true,
+    "undeclared_species_concepts_forbidden": true
+  },
+  "sampling_authorization_from_this_gate": false,
+  "sampling_floors_unchanged": {
+    "minimum_independent_records": 50,
+    "minimum_unique_10km_cells": 30,
+    "minimum_effective_10km_cells": 10.0
+  },
+  "firewalled_pairs": [
+    "OPM_FIG_001",
+    "OPM_YUC_001",
+    "OPM_YUC_002",
+    "SEN001",
+    "EPV001",
+    "HTR001",
+    "KIM001",
+    "JOS001",
+    "JOS002",
+    "JOS003"
+  ],
+  "forbidden": [
+    "use_JOS003_as_v7_3_input",
+    "rescan_JOS003_with_alternative_taxonomy_names",
+    "select_new_pair_from_snapshot_occurrence_counts",
+    "read_coordinates_country_dates_gbifid_occurrenceid_dataset_or_recorder_during_taxonomy_identity_gate",
+    "persist_matched_row_count",
+    "add_taxonomy_name_after_snapshot_identity_results_are_seen",
+    "interpret_identity_gate_pass_as_ecological_evidence"
+  ]
+}

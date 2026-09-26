@@ -1,0 +1,205 @@
+import importlib.util
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+SPEC = importlib.util.spec_from_file_location(
+    "relation_endpoint_contract", ROOT / "scripts" / "relation_endpoint_contract.py"
+)
+MOD = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = MOD
+SPEC.loader.exec_module(MOD)
+
+
+def soft_contract():
+    return MOD.RelationEndpointContract(
+        contract_id="level_a_demo",
+        relation_level="A_same_target",
+        relation="same-target cross-source soft coherence",
+        key_space="same 2000 comparison rows",
+        left_adapter="identity_to_common_rows",
+        right_adapter="identity_to_common_rows",
+        left_adequacy_gate="source_A_adequate",
+        right_adequacy_gate="source_B_adequate",
+        opening_rule="calibrated_soft_ceiling",
+        opening_rule_reference="synthetic_reference_envelope_v1",
+    )
+
+
+def hard_contract():
+    return MOD.RelationEndpointContract(
+        contract_id="level_c_demo",
+        relation_level="C_directional_dependency",
+        relation="E(k) -> F(k)",
+        key_space="site x opportunity window",
+        left_adapter="event_to_key",
+        right_adapter="function_to_key",
+        left_adequacy_gate="event_answer_adequate",
+        right_adequacy_gate="function_answer_adequate",
+        opening_rule="hard_implication",
+        opening_rule_reference="synthetic_negative_qualification_v1",
+    )
+
+
+def test_contract_requires_explicit_biological_relation_and_opening_reference():
+    c = soft_contract()
+    assert c.relation == "same-target cross-source soft coherence"
+    assert c.opening_rule_reference == "synthetic_reference_envelope_v1"
+    c.validate()
+
+    missing_relation = MOD.RelationEndpointContract(
+        contract_id="bad",
+        relation_level="A_same_target",
+        relation="",
+        key_space="rows",
+        left_adapter="left",
+        right_adapter="right",
+        left_adequacy_gate="left_ok",
+        right_adequacy_gate="right_ok",
+        opening_rule="calibrated_soft_ceiling",
+        opening_rule_reference="ref_v1",
+    )
+    try:
+        missing_relation.validate()
+    except ValueError as exc:
+        assert "relation must be a non-empty string" in str(exc)
+    else:
+        raise AssertionError("empty biological relation should fail validation")
+
+    missing_reference = MOD.RelationEndpointContract(
+        contract_id="bad_reference",
+        relation_level="A_same_target",
+        relation="same-target coherence",
+        key_space="rows",
+        left_adapter="left",
+        right_adapter="right",
+        left_adequacy_gate="left_ok",
+        right_adequacy_gate="right_ok",
+        opening_rule="calibrated_soft_ceiling",
+        opening_rule_reference="",
+    )
+    try:
+        missing_reference.validate()
+    except ValueError as exc:
+        assert "opening_rule_reference must be a non-empty string" in str(exc)
+    else:
+        raise AssertionError("empty opening-rule reference should fail validation")
+
+
+def test_composition_only_levels_are_not_misrepresented_as_direct_evaluators():
+    for level in ["D_mutual_dependency", "E_stage_coupling"]:
+        c = MOD.RelationEndpointContract(
+            contract_id="composition_demo",
+            relation_level=level,
+            relation="composed biological relation",
+            key_space="frozen biological key",
+            left_adapter="left",
+            right_adapter="right",
+            left_adequacy_gate="left_ok",
+            right_adequacy_gate="right_ok",
+            opening_rule="composed_endpoint",
+            opening_rule_reference="constituent_contract_fingerprints",
+        )
+        try:
+            c.validate()
+        except ValueError as exc:
+            assert "composition-only in the reference implementation" in str(exc)
+        else:
+            raise AssertionError(f"{level} should require supported primitive contracts")
+
+
+def test_soft_endpoint_preserves_inadequacy_as_unresolved():
+    c = soft_contract()
+    assert MOD.evaluate_soft_key(
+        c,
+        left_adequate=False,
+        right_adequate=True,
+        discordance=0.9,
+        frozen_ceiling=0.2,
+    ) == "unresolved"
+
+
+def test_soft_endpoint_uses_frozen_ceiling_only_after_both_answers_exist():
+    c = soft_contract()
+    assert MOD.evaluate_soft_key(
+        c,
+        left_adequate=True,
+        right_adequate=True,
+        discordance=0.19,
+        frozen_ceiling=0.20,
+    ) == "consistent"
+    assert MOD.evaluate_soft_key(
+        c,
+        left_adequate=True,
+        right_adequate=True,
+        discordance=0.21,
+        frozen_ceiling=0.20,
+    ) == "attention_required"
+
+
+def test_hard_endpoint_never_turns_unqualified_absence_into_violation():
+    c = hard_contract()
+    assert MOD.evaluate_hard_directional_key(
+        c,
+        event_adequate=True,
+        function_answer_adequate=True,
+        event_positive=True,
+        function_state="absent",
+        observation_process_qualified=False,
+        key_valid_for_negative_inference=True,
+    ) == "unresolved"
+    assert MOD.evaluate_hard_directional_key(
+        c,
+        event_adequate=True,
+        function_answer_adequate=True,
+        event_positive=True,
+        function_state="absent",
+        observation_process_qualified=True,
+        key_valid_for_negative_inference=False,
+    ) == "unresolved"
+
+
+def test_hard_endpoint_authorizes_only_qualified_valid_negative():
+    c = hard_contract()
+    assert MOD.evaluate_hard_directional_key(
+        c,
+        event_adequate=True,
+        function_answer_adequate=True,
+        event_positive=True,
+        function_state="absent",
+        observation_process_qualified=True,
+        key_valid_for_negative_inference=True,
+    ) == "hard_violation_authorized"
+
+
+def test_implication_is_noninformative_when_antecedent_is_false():
+    c = hard_contract()
+    assert MOD.evaluate_hard_directional_key(
+        c,
+        event_adequate=True,
+        function_answer_adequate=True,
+        event_positive=False,
+        function_state="absent",
+        observation_process_qualified=True,
+        key_valid_for_negative_inference=True,
+    ) == "noninformative_for_implication"
+
+
+def test_state_dependent_validity_generalizes_equal_a_identity():
+    r = MOD.hard_rule_operating_characteristics(
+        valid_if_function_present=0.70,
+        valid_if_function_absent=0.90,
+        key_sensitivity=0.95,
+        specificity=0.99,
+    )
+    assert abs(r["false_violation_inflation"] - 0.30) < 1e-12
+    assert abs(r["apparent_sensitivity_gain"] - 0.10) < 1e-12
+
+    equal = MOD.hard_rule_operating_characteristics(
+        valid_if_function_present=0.68,
+        valid_if_function_absent=0.68,
+        key_sensitivity=0.90,
+        specificity=0.98,
+    )
+    assert abs(equal["false_violation_inflation"] - 0.32) < 1e-12
+    assert abs(equal["apparent_sensitivity_gain"] - 0.32) < 1e-12

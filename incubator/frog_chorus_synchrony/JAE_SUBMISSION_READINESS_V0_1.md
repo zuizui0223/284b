@@ -1,4 +1,4 @@
-# JAE submission readiness v0.3
+# JAE submission readiness v0.4
 
 ## Scientific
 
@@ -16,7 +16,8 @@
 - [x] intended Zenodo archive stated in the main manuscript
 - [x] Figure 1/2 SVGs generated deterministically and committed
 - [x] clean standalone reproducibility export built and hash-verified (48 content entries; 0 missing; 0 mismatches)
-- [ ] standalone public repository created from the verified export
+- [x] latest scientific branch and standalone archive cross-checked: 8/8 core Git blobs identical
+- [ ] standalone public repository/release created from the verified export
 - [ ] final archive DOI inserted
 
 ## JAE initial-submission format
@@ -37,7 +38,8 @@
 - [x] SHA-256 manifest
 - [x] canonical content identity `16960cbf4f5f5f3aa9175115b108125409acfe9c7e2ef013e23d90a9b4cd27da`
 - [x] integrated CI artifact
-- [ ] public repository / release
+- [x] clean archive branch created: `archive/frog-chorus-synchrony-standalone-v1`
+- [ ] public standalone repository / release
 - [ ] Zenodo snapshot and DOI
 
 ## Human metadata — do not infer
@@ -65,8 +67,12 @@
 
 ## Remaining non-human work
 
-Only two technical publication steps remain:
-1. render the final double-spaced, line-numbered submission document/PDF;
-2. publish the already verified standalone export and mint/insert its archive DOI.
+Only one publication workflow remains:
 
-No additional ecological outcome search is required.
+1. publish the already verified standalone export as a public repository/release;
+2. archive that release and mint a DOI;
+3. insert the DOI into the manuscript/package.
+
+The final double-spaced, line-numbered JAE submission document/PDF is already complete and verified.
+
+**No additional ecological outcome search is required.**

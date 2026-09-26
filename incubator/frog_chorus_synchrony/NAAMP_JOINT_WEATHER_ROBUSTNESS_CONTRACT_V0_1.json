@@ -1,0 +1,32 @@
+{
+  "project": "frog-chorus-synchrony",
+  "robustness_contract_version": "0.1",
+  "status": "post_opening_mechanism_robustness_frozen_before_readback",
+  "purpose": "distinguish acute temperature association from seasonal-date confounding and report the already-fitted joint-model rain coefficient",
+  "source_pins": {
+    "Runs": "ec6b314fe4cd8ec8c048a973e576c8810ea12b21c739c1140e3a12123c611730",
+    "Stops": "28138cdaab43a56ecad8df3b523060c812edfad018c20c67b14581c569a84b0f",
+    "Counts": "60a3f6bc29402cd81fb01155923baaa07bccd172bce8b94fe1051d3ae25e7086"
+  },
+  "data_rule": "same [-10,45] C plausible-temperature filter used in NAAMP_TEMP_QC_CONTRACT_V0_1, >=8 valid stop temperatures",
+  "joint_readback": {
+    "formula": "prop ~ rain_z + temp_z + C(State) + C(RunNumber) + C(RouteType) + year_z",
+    "report_terms": [
+      "rain_z",
+      "temp_z"
+    ],
+    "new_terms_forbidden": true
+  },
+  "seasonal_date_robustness": {
+    "doy_definition": "calendar day of year parsed from SurveyDate",
+    "formula": "prop ~ rain_z + temp_z + bs(doy, df=5, degree=3) + C(State) + C(RunNumber) + C(RouteType) + year_z",
+    "report_terms": [
+      "rain_z",
+      "temp_z"
+    ],
+    "temperature_robust_if": "temp_z remains >0 with 95% cluster-robust CI excluding 0",
+    "rain_robust_if": "rain_z remains <0 with 95% cluster-robust CI excluding 0"
+  },
+  "covariance": "cluster robust by State:RouteNumber",
+  "causal_language_forbidden": true
+}

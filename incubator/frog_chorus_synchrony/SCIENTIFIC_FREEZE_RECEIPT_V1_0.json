@@ -1,0 +1,62 @@
+{
+  "package": "frog-chorus-synchrony-scientific-freeze",
+  "version": "1.0",
+  "checked_latest_branch_commit": "e2d24341f41d5a54dadd776cc58e477b81d03357",
+  "standalone_archive_branch": "archive/frog-chorus-synchrony-standalone-v1",
+  "standalone_archive_commit": "8616df05b3dc0d2417e8f2e0f2f91221c2722111",
+  "standalone_archive_tree": "fb534743e229082328858943f9a544b7f4716907",
+  "canonical_content_identity": "16960cbf4f5f5f3aa9175115b108125409acfe9c7e2ef013e23d90a9b4cd27da",
+  "checked_core_blobs": [
+    {
+      "name": "MANUSCRIPT_JAE_V0_3.md",
+      "blob_sha": "71060f6b156f89f10aec93f4252c9bb2b5815600",
+      "match": true
+    },
+    {
+      "name": "CLAIM_BOUNDARY_V1_1.json",
+      "blob_sha": "32076fe1752d36f3939596c53339cbdb4de2b991",
+      "match": true
+    },
+    {
+      "name": "FROG_CROSS_DATASET_SYNTHESIS_V0_1.json",
+      "blob_sha": "4940af344edbb79a59c94151f575ed9614a9261b",
+      "match": true
+    },
+    {
+      "name": "NAAMP_PRIMARY_RECEIPT_V0_1.json",
+      "blob_sha": "3aa82ad9814ae60e46f1d470b5c4fce27d7701cb",
+      "match": true
+    },
+    {
+      "name": "FROGID_VALIDATION_RECEIPT_V0_2.json",
+      "blob_sha": "c34a27cdaa1e62273f9cc61e8fbdf43e7d9cc84c",
+      "match": true
+    },
+    {
+      "name": "SPATIAL_CONFOUNDING_ROBUSTNESS_RECEIPT_V0_1.json",
+      "blob_sha": "61073304f259cff8694123ffaf8eace6e8248a46",
+      "match": true
+    },
+    {
+      "name": "figures/FIGURE_1_DESIGN_V0_1.svg",
+      "blob_sha": "080ccf491f8ffc9ffdbb3c4dd3aaeaa7fd2dc4f6",
+      "match": true
+    },
+    {
+      "name": "figures/FIGURE_2_EFFECTS_V0_1.svg",
+      "blob_sha": "96eadfc9dd53f89bef9aedf957e1d5d25d6083e4",
+      "match": true
+    }
+  ],
+  "all_checked_core_blobs_match": true,
+  "scientific_claim_changed_after_archive": false,
+  "submission_formatting_completed_after_archive": true,
+  "publication_state": {
+    "standalone_public_repository_created": false,
+    "github_release_created": false,
+    "zenodo_snapshot_created": false,
+    "doi_inserted": false
+  },
+  "remaining_nonhuman_blocker": "publish verified standalone export and mint/insert archive DOI",
+  "additional_ecological_outcome_search_required": false
+}

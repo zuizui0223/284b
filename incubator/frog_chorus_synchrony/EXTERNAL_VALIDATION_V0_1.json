@@ -1,0 +1,60 @@
+{
+  "project": "frog-chorus-synchrony",
+  "validation_version": "0.1",
+  "status": "external_validation_structural_audit_preoutcome",
+  "primary_result_locked": "NAAMP_PRIMARY_RECEIPT_V0_1.json",
+  "source": {
+    "name": "Sunshine Coast Annual Frog and Toad Field Survey",
+    "doi": "10.15468/fyfqmx",
+    "dwca_url": "https://dwca-exports.ala.org.au/dr24697.zip",
+    "publisher": "Atlas of Living Australia",
+    "standardized_method": "10 x 10 m quadrats along 100 m transects; 10-minute survey per quadrat; audio recordings used for verification",
+    "years_expected": [
+      2017,
+      2025
+    ]
+  },
+  "fresh_validation_question": "Within an independent standardized survey, are multi-species calling events structurally common enough to test whether recent rainfall predicts chorus synchrony?",
+  "event_hierarchy": {
+    "quadrat_event": "eventID",
+    "survey_parent": "parentEventID",
+    "site": "locationID"
+  },
+  "calling_evidence_rule": {
+    "allowed_source_fields": [
+      "occurrenceRemarks",
+      "behavior",
+      "samplingProtocol",
+      "eventID",
+      "parentEventID"
+    ],
+    "positive_call_requires": "publisher field explicitly indicating HEARD/calling/acoustic evidence",
+    "seen_only_not_counted_as_call": true,
+    "missing_not_absence": true
+  },
+  "allowed_structural_reads": [
+    "DwC-A file names and hashes",
+    "eventID parentEventID locationID eventDate eventTime",
+    "scientificName occurrenceStatus occurrenceRemarks behavior",
+    "counts of parent surveys quadrats and years",
+    "marginal counts of call-evidence labels",
+    "number of quadrat events with >=2 positively calling species",
+    "number of parent surveys with >=1 multi-species calling quadrat",
+    "coordinate coverage only for future weather linkage"
+  ],
+  "forbidden_before_weather_contract": [
+    "rainfall values",
+    "weather-synchrony association",
+    "species-pair weather effects",
+    "site selection based on synchrony response",
+    "changing HEARD/call semantics after seeing weather"
+  ],
+  "structural_gate": {
+    "minimum_parent_surveys": 50,
+    "minimum_quadrat_events": 300,
+    "minimum_multispecies_call_quadrats": 30,
+    "minimum_years": 3,
+    "coordinate_coverage_fraction_min": 0.9
+  },
+  "validation_effect_opened": false
+}

@@ -1,0 +1,46 @@
+{
+  "project": "frog-chorus-synchrony",
+  "secondary_contract_version": "0.1",
+  "status": "frozen_after_secondary_semantics_before_secondary_effect_opening",
+  "primary_receipt": "NAAMP_PRIMARY_RECEIPT_V0_1.json",
+  "primary_result_must_not_be_replaced": true,
+  "source_pins": {
+    "Runs": "ec6b314fe4cd8ec8c048a973e576c8810ea12b21c739c1140e3a12123c611730",
+    "Stops": "28138cdaab43a56ecad8df3b523060c812edfad018c20c67b14581c569a84b0f",
+    "Counts": "60a3f6bc29402cd81fb01155923baaa07bccd172bce8b94fe1051d3ae25e7086"
+  },
+  "common_response": {
+    "unit": "RunID",
+    "successes": "number of sampled non-skipped stops with >=2 distinct species having CallingIndex in {'1','2','3'}",
+    "trials": "number of sampled non-skipped stops",
+    "model_family": "binomial_logit",
+    "cluster": "State + ':' + RouteNumber"
+  },
+  "temperature_secondary": {
+    "eligibility": "primary-eligible run with >=8 sampled stops having numeric AirTemp and TempScale in {'C','F'}",
+    "conversion": "C unchanged; F converted as (F-32)*5/9",
+    "run_summary": "arithmetic mean AirTemp_C across eligible sampled stops",
+    "transform": "zscore(mean AirTemp_C)",
+    "formula": "prop ~ rain_z + temp_z + C(State) + C(RunNumber) + C(RouteType) + year_z",
+    "directional_hypothesis": "beta_temp > 0",
+    "support_rule": "beta_temp > 0 and two-sided cluster-robust p < 0.05 and 95% CI excludes 0",
+    "sensitivity": "complete 10-stop primary runs with >=8 valid temperature stops",
+    "cannot_replace_rain_primary": true
+  },
+  "seasonal_shoulder_secondary": {
+    "state_last_window_rule": "within each State among 2001-2015 UnifiedProtocol==1 runs, last_window=max numeric RunNumber; states with last_window not in {3,4} are excluded",
+    "shoulder_rule": "shoulder=1 when RunNumber==1 or RunNumber==state_last_window; otherwise 0",
+    "formula": "prop ~ rain_z + rain_z:shoulder + C(State) + C(RunNumber) + C(RouteType) + year_z",
+    "directional_hypothesis": "beta_rain_x_shoulder < 0",
+    "biological_interpretation": "recent rainfall is more strongly associated with multi-species chorus synchrony in the first/last state-specific sampling windows than in middle windows",
+    "support_rule": "beta_rain_x_shoulder < 0 and two-sided cluster-robust p < 0.05 and 95% CI excludes 0",
+    "sensitivity": "restrict to states whose observed last_window is 4",
+    "cannot_be_redefined_after_opening": true
+  },
+  "h4_network": {
+    "state": "remains_closed_until_pair_universe_and_network_metric_are_frozen",
+    "no_edge_selection_by_effect": true
+  },
+  "causal_language_forbidden": true,
+  "secondary_effects_opened": false
+}

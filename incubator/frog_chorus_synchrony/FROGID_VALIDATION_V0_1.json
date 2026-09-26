@@ -1,0 +1,59 @@
+{
+  "project": "frog-chorus-synchrony",
+  "validation_version": "0.2",
+  "supersedes": "EXTERNAL_VALIDATION_V0_1.json",
+  "status": "FrogID_structural_validation_preweather",
+  "primary_result_locked": "NAAMP_PRIMARY_RECEIPT_V0_1.json",
+  "source": {
+    "name": "FrogID",
+    "doi": "10.15468/wazqft",
+    "dataset_version": "6.0 public ALA/GBIF DwC-A",
+    "dwca_url": "https://dwca-exports.ala.org.au/dr14760.zip",
+    "publication_date": "2025-07-01",
+    "project_span": [
+      "2017-11-10",
+      "2023-11-09"
+    ],
+    "records_reported": 974120,
+    "species_reported": 226
+  },
+  "identity_contract": {
+    "eventID": "one FrogID submission / audio recording",
+    "occurrenceID": "one species occurrence record within a submission",
+    "multispecies_event": "same eventID contains >=2 distinct scientificName values",
+    "source_basis": "FrogID dataset paper explicitly states one submission can contain multiple frog species calling"
+  },
+  "positive_call_semantics": {
+    "behavior": "FrogID database contains calling frogs only",
+    "samplingProtocol": "call recording",
+    "no_zero_or_absence_inference": true
+  },
+  "allowed_structural_reads": [
+    "archive files and hashes",
+    "eventID occurrenceID scientificName eventDate eventTime",
+    "decimalLatitude decimalLongitude coordinateUncertaintyInMeters",
+    "behavior samplingProtocol occurrenceStatus",
+    "number of distinct eventIDs",
+    "number of eventIDs with >=2 distinct species",
+    "eventTime coverage",
+    "coordinate and coordinate-uncertainty coverage",
+    "count of multispecies events with uncertainty <=3000 m",
+    "marginal number of species per event"
+  ],
+  "forbidden_before_weather_contract": [
+    "rainfall or temperature values",
+    "weather-synchrony effect direction",
+    "species-pair weather effects",
+    "geographic subset chosen by synchrony richness",
+    "coordinate-uncertainty cutoff other than the prospectively frozen 3000 m",
+    "any comparison with NAAMP effect size"
+  ],
+  "structural_gate": {
+    "minimum_recording_events": 100000,
+    "minimum_multispecies_recording_events": 10000,
+    "minimum_multispecies_events_uncertainty_le_3000m": 5000,
+    "event_time_coverage_fraction_min": 0.8,
+    "coordinate_coverage_fraction_min": 0.9
+  },
+  "validation_effect_opened": false
+}

@@ -1,0 +1,36 @@
+name: frog FrogID external validation structural audit
+
+on:
+  push:
+    branches:
+      - incubator/frog-chorus-synchrony-v1
+    paths:
+      - "incubator/frog_chorus_synchrony/EXTERNAL_VALIDATION_V0_2.json"
+      - "incubator/frog_chorus_synchrony/scripts/run_frogid_validation_audit.py"
+      - ".github/workflows/frog_frogid_validation_structural.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frog-frogid-validation-structural
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run outcome-blind FrogID structural audit
+        run: python incubator/frog_chorus_synchrony/scripts/run_frogid_validation_audit.py
+      - name: Upload sanitized receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: frog-frogid-validation-structural-v0-3
+          path: frog_frogid_validation_structural_v0_3.json
+          if-no-files-found: error

@@ -1,0 +1,25 @@
+name: frog Sunshine registry-complete structural gate
+on:
+  push:
+    branches: [incubator/frog-chorus-synchrony-v1]
+    paths:
+      - "incubator/frog_chorus_synchrony/EXTERNAL_VALIDATION_V0_1_4.json"
+      - "incubator/frog_chorus_synchrony/scripts/run_sunshine_registry_subset.py"
+      - ".github/workflows/frog_sunshine_registry_subset.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python incubator/frog_chorus_synchrony/scripts/run_sunshine_registry_subset.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frog-sunshine-registry-subset-v0-1-4
+          path: frog_sunshine_registry_subset_v0_1_4.json
+          if-no-files-found: error

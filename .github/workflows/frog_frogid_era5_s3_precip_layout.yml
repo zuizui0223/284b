@@ -1,0 +1,35 @@
+name: frog FrogID ERA5 S3 precipitation layout audit
+
+on:
+  push:
+    branches:
+      - incubator/frog-chorus-synchrony-v1
+    paths:
+      - "incubator/frog_chorus_synchrony/scripts/run_frogid_era5_s3_precip_layout.py"
+      - ".github/workflows/frog_frogid_era5_s3_precip_layout.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frog-frogid-era5-s3-precip-layout
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check -q boto3
+      - name: Audit accumulated surface forecast layout
+        run: python incubator/frog_chorus_synchrony/scripts/run_frogid_era5_s3_precip_layout.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frog-frogid-era5-s3-precip-layout-v0-1
+          path: frog_frogid_era5_s3_precip_layout_v0_1.json
+          if-no-files-found: error

@@ -1,0 +1,34 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.12.1",
+  "supersedes": "RMNP_MODEL_CONTRACT_V0_12.json",
+  "status": "pre_effect_direction_missingness_repair",
+  "empirical_effect_directions_opened": false,
+  "estimability_receipt": {
+    "eligible_site_years": 113,
+    "fish_known_site_years": 110,
+    "fish_present_site_years": 23,
+    "fish_not_observed_site_years": 87,
+    "reproductive_positive_site_years": 32,
+    "adult_positive_site_years": 24,
+    "depth_known_site_years": 59,
+    "complete_primary_model_site_years": 57
+  },
+  "unchanged_confirmatory_estimand": "reproductive_stage:fish_present",
+  "unchanged_directional_hypothesis": "negative",
+  "primary_formula_repaired": "stage_evidence ~ reproductive_stage + fish_present + reproductive_stage:fish_present + year_centered + max_effort + n_visits",
+  "reason": "depth availability would discard nearly half of otherwise eligible repeated-survey site-years; this missingness decision is made before any effect sign or magnitude is opened",
+  "depth_role_after_repair": "sensitivity-only complete-case adjustment; cannot override primary result",
+  "secondary_temporal_formula": "stage_evidence ~ reproductive_stage + year_centered + reproductive_stage:year_centered + fish_present + max_effort + n_visits",
+  "high_effort_sensitivity": {
+    "eligibility": "max_effort >= 0.875",
+    "same_primary_formula": true
+  },
+  "inference": {
+    "family": "binomial GEE logit",
+    "working_correlation": "exchangeable",
+    "cluster": "site_name",
+    "robust_covariance": true,
+    "alpha": 0.05
+  }
+}

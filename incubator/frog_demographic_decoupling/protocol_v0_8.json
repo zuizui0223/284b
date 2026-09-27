@@ -1,0 +1,62 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.8",
+  "supersedes": "protocol_v0_7.json",
+  "status": "PINK_structural_fail_transition_to_Mohonk",
+  "closed_candidates": {
+    "Meetnetten": {
+      "reason": "quantitative downstream effort unavailable in current public archive",
+      "ecological_outcomes_opened": false
+    },
+    "PINK": {
+      "reason": "adult calling/breeding activity not explicitly encoded in current public archive; focal Hyla has only six larval rows",
+      "ecological_outcomes_opened": false
+    }
+  },
+  "focal_candidate": {
+    "rank": 3,
+    "name": "Mohonk Preserve vernal-pool amphibian breeding ecology",
+    "dataset_doi": "10.15468/dypfbs",
+    "dataset_uuid": "a391a15f-033b-42fa-8bdc-b74014b05e28",
+    "gbif_archive": "https://ipt.gbif.us/archive.do?r=mohonk-amphibian-spring-sampling",
+    "long_term_scope": [
+      "1931-04-21",
+      "2020-04-12"
+    ],
+    "pools_reported": 11,
+    "consistent_sampling_from": 1991,
+    "candidate_transition_chain": [
+      "adult_or_call",
+      "egg_mass",
+      "tadpole_or_larva"
+    ],
+    "juvenile_same_cohort_authorized": false
+  },
+  "allowed_next_opening": [
+    "Darwin Core rowType and field names",
+    "distinct lifeStage/behavior/occurrenceStatus/occurrenceRemarks labels",
+    "species names and structural row counts",
+    "event dates and pool identifiers",
+    "whether call/adult, egg, and larval states survive the GBIF transformation",
+    "year/pool replication structure"
+  ],
+  "forbidden_next_opening": [
+    "individualCount values",
+    "egg-mass count values",
+    "tadpole count values",
+    "transition associations",
+    "hydroclimate effect directions",
+    "juvenile recruitment claims"
+  ],
+  "Mohonk_structural_gate": {
+    "minimum_pool_years_since_1991": 50,
+    "minimum_years": 20,
+    "explicit_upstream_breeding_state_required": true,
+    "explicit_egg_or_larva_state_required": true,
+    "deterministic_stage_mapping_required": true,
+    "same_cohort_juvenile_not_required": true,
+    "missing_record_not_zero": true
+  },
+  "ecological_target_if_pass": "which upstream life-history transition (adult/call→egg or egg→larva) is most sensitive to hydroclimate variation across long-term vernal-pool monitoring?",
+  "ecological_effects_opened": false
+}

@@ -1,0 +1,35 @@
+{
+  "audit": "pink_structural_schema_v0_1",
+  "workflow_run": 35995295771,
+  "artifact_id": 10805384633,
+  "artifact_digest": "sha256:c42603b42d1b03572ce4698918a764b254adbbb85ff4634659a2a575cb2d8b9a",
+  "source_sha256": "7f5fc2523ab226f22cfd8adf199e3964dd474284f0a23dd2c40733106522a735",
+  "archive_bytes": 43070,
+  "core_event_count": 100,
+  "site_year_count": 74,
+  "site_years_ge2_events": 26,
+  "site_years_ge3_events": 0,
+  "behavior_labels": {},
+  "lifeStage_labels": {
+    "Adult": 978,
+    "Subadult": 13,
+    "egg": 87,
+    "juvenile": 53,
+    "larvae": 590,
+    "unknown": 252
+  },
+  "focal_Hyla": {
+    "occurrence_rows": 6,
+    "lifeStage": {
+      "larvae": 6
+    },
+    "occurrenceStatus": {
+      "present": 6
+    },
+    "explicit_call_rows": 0
+  },
+  "individual_count_read": false,
+  "stage_association_opened": false,
+  "decision": "fail_PINK_adult_call_encoding_gate",
+  "next_candidate": "Mohonk"
+}

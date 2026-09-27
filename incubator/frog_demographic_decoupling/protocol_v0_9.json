@@ -1,0 +1,75 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.9",
+  "supersedes": "protocol_v0_8.json",
+  "status": "Mohonk_EDI_original_package_structural_audit",
+  "closed_derivatives": {
+    "Mohonk_GBIF": {
+      "reason": "lifeStage preserved but pool identity omitted from occurrence core",
+      "biological_outcomes_opened": false
+    }
+  },
+  "source_package": {
+    "package_id": "edi.398.4",
+    "species_entity": "737389d6c2090ee27a3084898f2e7853",
+    "weather_entity": "5835a29e0fbe1ba179ee5ffe27121df6",
+    "location_entity": "ceaabc36d68cdfb681122ce1f0941420",
+    "immutable_revision": true
+  },
+  "focal_species": {
+    "primary": {
+      "scientific_name": "Lithobates sylvaticus",
+      "common_name": "Wood Frog",
+      "reason": "spring vernal-pool breeder with directly observed chorus, egg masses and tadpole/larval stages in the fixed source schema"
+    },
+    "parallel_validation": {
+      "scientific_name": "Pseudacris crucifer crucifer",
+      "common_name": "Spring Peeper",
+      "role": "opens only if the same structural stage-coverage gate passes"
+    }
+  },
+  "required_species_columns": [
+    "ScientificName",
+    "Location",
+    "Sample_Date",
+    "ChorusCode",
+    "ChorusCount",
+    "Live_n",
+    "AmplectantPairs_n",
+    "EggMass_n",
+    "TadLarv_n"
+  ],
+  "structural_gate": {
+    "primary_min_distinct_pools": 8,
+    "primary_min_years_since_1991": 20,
+    "primary_min_pool_years_since_1991": 150,
+    "primary_min_pool_years_ge2_visits": 100,
+    "primary_min_nonempty_fraction": {
+      "ChorusCode": 0.75,
+      "EggMass_n": 0.75,
+      "TadLarv_n": 0.75
+    },
+    "weather_same_pool_date_join_fraction_min": 0.75,
+    "count_values_must_remain_unread": true
+  },
+  "allowed_next_opening": [
+    "CSV headers",
+    "species row counts",
+    "distinct Location labels",
+    "date/year/month structure",
+    "pool-year visit counts",
+    "empty versus non-empty indicators for stage columns",
+    "weather-table headers and empty/non-empty coverage",
+    "exact Location × Sample_Date join coverage"
+  ],
+  "forbidden_next_opening": [
+    "ChorusCode numeric values",
+    "ChorusCount numeric values",
+    "EggMass_n numeric values",
+    "TadLarv_n numeric values",
+    "adult/egg/larva association signs or effect sizes",
+    "hydroclimate effect directions"
+  ],
+  "ecological_target_if_pass": "identify which early life-cycle link in Wood Frog breeding is most sensitive to hydroclimate variation across repeated vernal-pool monitoring",
+  "ecological_effects_opened": false
+}

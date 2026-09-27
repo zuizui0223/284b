@@ -1,0 +1,142 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.3",
+  "supersedes": "protocol_v0_2.json",
+  "status": "pre-outcome_join_and_estimability_only",
+  "scientific_independence": "standalone_project_not_284b_paper1",
+  "primary_system_selection": {
+    "state": "unresolved_pending_raw_overlap_audit",
+    "forbidden_selection_information": [
+      "adult-to-downstream association sign or magnitude",
+      "environment interaction sign or magnitude",
+      "p values, posterior probabilities, Bayes factors or information criteria",
+      "which species gives the more interesting ecological result"
+    ]
+  },
+  "meetnetten_identity_contract": {
+    "publisher_repository": "inbo/meetnetten-occurrences",
+    "publisher_repository_commit": "70cf1c1e9a2b3d32be16bfa6ca12bfea4fd6303a",
+    "chorus_dataset_doi": "10.15468/d4bu8j",
+    "larvae_dataset_doi": "10.15468/swgure",
+    "event_id_rule": "INBO:MEETNET:EVENT:<6 digit FieldworkSampleID>",
+    "parent_event_id_rule": "INBO:MEETNET:VISITID:<6 digit FieldworkVisitID>",
+    "location_id_rule": "INBO:MEETNET:LOCATION:<6 digit DimLocation.LocationID>",
+    "source_database_identity": "both publisher SQL views derive locationID from the same dbo.DimLocation LocationID",
+    "cross_programme_join_key": [
+      "locationID",
+      "scientificName",
+      "calendar_year"
+    ],
+    "coordinate_join_allowed": false,
+    "locality_name_join_allowed": false,
+    "raw_overlap_count_state": "unopened",
+    "shared_target_species": [
+      "Hyla arborea",
+      "Pelobates fuscus"
+    ]
+  },
+  "source_observation_contract": {
+    "chorus": {
+      "event_records_current": 963,
+      "occurrence_records_current": 1436,
+      "repeated_visits_by_protocol": true,
+      "occurrence_status": [
+        "present",
+        "absent"
+      ],
+      "count_field": "individualCount",
+      "sex_expected": "male",
+      "life_stage_allowed": [
+        "larva",
+        "adult",
+        "metamorph"
+      ],
+      "target_adult_index_candidate": "maximum adult male individualCount across valid chorus visits within locationID x species x year",
+      "explicit_absence_rule": "zero is permitted only when a target-species occurrence row is explicitly occurrenceStatus=absent; missing row is not zero"
+    },
+    "larvae_metamorph": {
+      "event_records_current": 697,
+      "occurrence_records_current": 2995,
+      "measurement_fact_records_current": 3741,
+      "occurrence_status": [
+        "present",
+        "absent"
+      ],
+      "count_field": "individualCount",
+      "life_stage_allowed": [
+        "larva",
+        "adult",
+        "metamorph"
+      ],
+      "larva_effort_field": "number of sweeps",
+      "environment_fields": [
+        "maximum depth",
+        "permanent water column",
+        "pH",
+        "fish present",
+        "shade",
+        "pond surface",
+        "water quality",
+        "sampling effort type"
+      ],
+      "larval_index_candidate": "larval individualCount with number_of_sweeps retained as observation effort",
+      "metamorph_index_candidate": "metamorph individualCount analysed only if raw positive and effort coverage passes the estimability gate",
+      "explicit_absence_rule": "zero is not upgraded to true reproductive failure; it remains an observed zero under the declared sampling effort"
+    }
+  },
+  "ecological_target": {
+    "main_question": "when does adult breeding effort cease to translate into downstream larval or metamorph production?",
+    "primary_candidate_estimand": "species-specific slope linking adult chorus index to downstream stage abundance at exact shared location-year",
+    "decoupling_definition": "environment-dependent weakening of the adult-breeding to downstream-stage relationship, not simple adult presence with a downstream zero",
+    "candidate_environment_modifiers": [
+      "fish present",
+      "permanent water column",
+      "water quality",
+      "maximum depth"
+    ],
+    "adjustment_covariates": [
+      "number of sweeps",
+      "pond surface",
+      "shade",
+      "calendar year"
+    ],
+    "recruitment_word_authorized": false,
+    "reason": "larvae/metamorphs are downstream reproductive output but are not automatically recruits to the adult population"
+  },
+  "independent_validation": {
+    "PINK": {
+      "doi": "10.15468/jvtefa",
+      "role": "within-programme repeated adult-call egg larva validation",
+      "ponds": 243,
+      "occurrence_records_lower_bound": 1900,
+      "species_lower_bound": 10,
+      "raw_stage_encoding_state": "unresolved"
+    },
+    "Mohonk": {
+      "doi": "10.15468/dypfbs",
+      "role": "long-term hydroclimate adult-egg-larva validation",
+      "juvenile_same_cohort_authorized": false
+    },
+    "Natterjack": {
+      "doi": "10.15468/2xfw8y",
+      "role": "small full-chain feasibility example",
+      "event_records": 19,
+      "occurrence_records": 117,
+      "primary_authorized": false
+    }
+  },
+  "raw_overlap_gate": {
+    "minimum_shared_location_years_structural_screen": 30,
+    "minimum_chorus_repeat_location_years": 20,
+    "minimum_shared_species": 1,
+    "require_explicit_locationID": true,
+    "require_nonzero_number_of_sweeps_coverage_for_count_model": true,
+    "note": "these are structural estimability screens, not power thresholds and not evidence for ecological effects"
+  },
+  "prior_art_boundary": {
+    "citation": "Greenberg CH, Zarnoch SJ, Austin JD. 2017. Ecosphere 8:e01789. DOI 10.1002/ecs2.1789",
+    "cannot_claim": "first demonstration that breeding effort and recruitment/reproductive output can decouple",
+    "target_novelty": "localize the bottleneck to a declared life-stage transition and test whether environmental context changes conversion of breeding effort into downstream production across independent monitoring programmes"
+  },
+  "outcome_opening_status": "closed"
+}

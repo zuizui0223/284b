@@ -1,0 +1,124 @@
+{
+  "project": "frog-demographic-decoupling",
+  "model_contract_version": "0.1",
+  "status": "pre-outcome_conditional_on_effort_gate",
+  "focal_species": "Hyla arborea",
+  "source_versions": {
+    "chorus": {
+      "doi": "10.15468/d4bu8j",
+      "version": "1.27",
+      "sha256": "686c5a7aacc8f49e41a0642ecaa9efd8c3564304b0a4d4b027f3df2debec69fd"
+    },
+    "downstream": {
+      "doi": "10.15468/swgure",
+      "version": "1.24",
+      "sha256": "c2cc960122ea398545edb661318160cd2b5b66a75a73dba8f7a3f61bd9c4f920"
+    }
+  },
+  "analysis_frame": {
+    "identity": [
+      "locationID",
+      "scientificName",
+      "calendar_year"
+    ],
+    "event_level_response": true,
+    "downstream_event_must_have_prior_or_same_day_chorus": true,
+    "coordinate_join_forbidden": true,
+    "pelobates_excluded_confirmatory": true
+  },
+  "adult_predictor": {
+    "name": "A_pre",
+    "definition": "maximum adult-male individualCount among valid chorus events at the same locationID and calendar year with eventDate <= downstream eventDate",
+    "transform": "log1p_then_zscore_within_focal_analysis_frame",
+    "rationale": "preserves temporal order and avoids summing repeated counts of the same seasonal breeding population"
+  },
+  "primary_response": {
+    "stage": "larva",
+    "variable": "individualCount",
+    "unit": "downstream sampling event",
+    "distribution": "negative_binomial_2",
+    "link": "log",
+    "effort_rule": {
+      "required_field": "number of sweeps",
+      "if_nonempty_coverage_ge_0_80": "use log(number_of_sweeps) as fixed exposure offset",
+      "if_nonempty_coverage_lt_0_80": "Meetnetten confirmatory count model fails structural gate; do not replace with uncalibrated binary absence model",
+      "minimum_nonempty_coverage_fraction": 0.8
+    }
+  },
+  "secondary_response": {
+    "stage": "metamorph",
+    "status": "opens_only_if_structural_stage_count_and_effort_gate_pass",
+    "cannot_replace_primary_if_larva_result_is_weak": true
+  },
+  "random_effects": [
+    "locationID random intercept"
+  ],
+  "calendar_time": {
+    "primary": "calendar year as centered fixed effect",
+    "sensitivity": "year random intercept only if >=5 years represented after complete-case structural filtering"
+  },
+  "baseline_model": {
+    "formula": "larva_count ~ offset(log(sweeps)) + z_log1p_A_pre + year_centered + (1|locationID)",
+    "purpose": "estimate breeding-effort to larval-production coupling"
+  },
+  "habitat_modifier_priority": [
+    {
+      "rank": 1,
+      "variable": "fish present",
+      "required_structural_variation": "both TRUE and FALSE represented in >=20 exact Hyla location-years with valid effort",
+      "model_term": "z_log1p_A_pre * fish_present"
+    },
+    {
+      "rank": 2,
+      "variable": "permanent water column",
+      "required_structural_variation": "both TRUE and FALSE represented in >=20 exact Hyla location-years with valid effort",
+      "model_term": "z_log1p_A_pre * permanent_water"
+    },
+    {
+      "rank": 3,
+      "variable": "water quality",
+      "required_structural_variation": "at least two prespecified publisher levels each represented in >=20 exact Hyla location-years with valid effort",
+      "model_term": "z_log1p_A_pre * water_quality"
+    },
+    {
+      "rank": 4,
+      "variable": "maximum depth",
+      "required_structural_variation": "at least two publisher depth classes each represented in >=20 exact Hyla location-years with valid effort",
+      "model_term": "z_log1p_A_pre * maximum_depth"
+    }
+  ],
+  "modifier_selection_rule": "use the first variable in priority order that passes its structural variation gate; selection cannot use larval counts or effect estimates",
+  "adjustments": [
+    {
+      "variable": "pond surface",
+      "role": "precision/confounding adjustment if nonmissing coverage >=0.80",
+      "coding": "publisher ordinal categories"
+    },
+    {
+      "variable": "shade",
+      "role": "precision/confounding adjustment if nonmissing coverage >=0.80",
+      "coding": "publisher ordinal categories"
+    }
+  ],
+  "primary_estimand": "interaction between z_log1p_A_pre and the first structurally qualified habitat modifier on expected larval count per sweep",
+  "interpretation": {
+    "positive_baseline_slope": "greater observed adult breeding effort is associated with greater downstream larval production under the reference habitat state",
+    "modifier_interaction": "habitat-dependent change in breeding-to-larval conversion",
+    "forbidden_causal_language": true,
+    "forbidden_terms": [
+      "adult recruitment",
+      "persistence",
+      "ecological trap",
+      "early warning",
+      "population growth rate"
+    ]
+  },
+  "sensitivity_set": [
+    "replace adult maximum with mean of valid prior chorus counts",
+    "exclude downstream events occurring before the second chorus visit",
+    "fit zero-inflated negative binomial only if posterior predictive / residual diagnostics show excess zeros; not selected by p-value",
+    "aggregate to one downstream event per location-year using the earliest valid June-mid-July event as a sensitivity analysis"
+  ],
+  "multiplicity_policy": "only the structurally selected first habitat modifier is confirmatory; remaining modifier interactions are secondary and reported without winner-picking",
+  "ecological_outcomes_opened": false
+}

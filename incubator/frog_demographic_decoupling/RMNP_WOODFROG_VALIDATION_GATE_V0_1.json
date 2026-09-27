@@ -1,0 +1,21 @@
+{
+  "audit": "rmnp_woodfrog_validation_estimability_v0_1",
+  "source_commit": "c0e62aa16944602619366ca5956fa0eb2df8a795",
+  "workflow_run": 36014159753,
+  "artifact_id": 10814535356,
+  "artifact_digest": "sha256:e34f2ccde3a7ed51216690c4cbfacdb3000f6bb72300a8a55016e20d9e5097e9",
+  "eligible_site_years": 20,
+  "adult_positive_site_years": 2,
+  "reproductive_positive_site_years": 10,
+  "fish_known_site_years": 20,
+  "fish_present_site_years": 1,
+  "fish_not_observed_site_years": 19,
+  "frozen_gate": {
+    "eligible_min": 30,
+    "adult_positive_min": 5,
+    "reproductive_positive_min": 10
+  },
+  "pass": false,
+  "effect_directions_opened": false,
+  "terminal_decision": "validation_not_estimable_do_not_fit_effect_model"
+}

@@ -1,0 +1,36 @@
+name: frog RMNP ScienceBase structural audit
+
+on:
+  push:
+    branches:
+      - incubator/frog-demographic-decoupling-v1
+    paths:
+      - "incubator/frog_demographic_decoupling/protocol_v0_10.json"
+      - "incubator/frog_demographic_decoupling/scripts/run_rmnp_sciencebase_structural_audit.py"
+      - ".github/workflows/frog_rmnp_sciencebase_structural_audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frog-rmnp-sciencebase-structural-audit
+  cancel-in-progress: true
+
+jobs:
+  structural-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run outcome-blind RMNP file/schema audit
+        run: python incubator/frog_demographic_decoupling/scripts/run_rmnp_sciencebase_structural_audit.py
+      - name: Upload sanitized RMNP structural receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: frog-rmnp-sciencebase-structural-v0-1
+          path: frog_rmnp_sciencebase_structural_v0_1.json
+          if-no-files-found: error

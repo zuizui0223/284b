@@ -1,0 +1,86 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.5",
+  "supersedes": "protocol_v0_4.json",
+  "status": "pre-outcome_structural_priority_frozen",
+  "scientific_independence": "standalone_project_not_284b_paper1",
+  "primary_candidate": {
+    "programme_family": "Meetnetten.be",
+    "unit": [
+      "locationID",
+      "scientificName",
+      "calendar_year"
+    ],
+    "species": [
+      "Hyla arborea",
+      "Pelobates fuscus"
+    ],
+    "adult_dataset_doi": "10.15468/d4bu8j",
+    "downstream_dataset_doi": "10.15468/swgure",
+    "outcome_opened": false
+  },
+  "structural_selection_order": [
+    {
+      "rank": 1,
+      "candidate": "Meetnetten exact-ID adult-call -> larva/metamorph",
+      "pass_if": [
+        ">=30 exact shared locationID x species x year units",
+        ">=20 shared units with >=2 chorus visits",
+        ">=20 shared units with at least one chorus event not later than downstream survey",
+        "larval sampling-effort metadata present on analyzable downstream events"
+      ],
+      "failure_action": "reject as primary without examining adult-downstream effect sign or magnitude"
+    },
+    {
+      "rank": 2,
+      "candidate": "PINK within-programme call/egg/larva transitions",
+      "dataset_doi": "10.15468/jvtefa",
+      "pass_if": [
+        "raw archive has explicit or prospectively mappable stage/observation semantics",
+        "repeat visits can be assigned to pond x year",
+        ">=30 structurally analyzable pond-year-stage units for at least one declared transition"
+      ],
+      "failure_action": "reject as primary without examining transition effect sign or magnitude"
+    },
+    {
+      "rank": 3,
+      "candidate": "Mohonk adult/call -> egg -> larva long-term transitions",
+      "dataset_doi": "10.15468/dypfbs",
+      "pass_if": [
+        "stage timing is compatible within breeding season",
+        "repeat observations identify upstream transition states",
+        "juvenile field remains excluded unless same-cohort timing is independently demonstrated"
+      ],
+      "failure_action": "retain only as descriptive or supplementary validation"
+    }
+  ],
+  "no_rescue_rules": [
+    "a candidate that fails a structural gate cannot be reinstated because another candidate gives a weak/null/unfavourable ecological result",
+    "no coordinate-nearest or fuzzy locality matching",
+    "no changing focal species after ecological outcomes are inspected",
+    "no changing downstream stage from larva to metamorph because one gives a stronger result",
+    "no interpreting missing target rows as zero",
+    "no use of the words recruitment, persistence, ecological trap, or early warning unless additional demographic evidence directly supports them"
+  ],
+  "focal_hypotheses": {
+    "H1": "seasonal calling-male abundance is positively associated with larval production under suitable pond conditions",
+    "H2": "pond conditions modify the slope linking breeding effort to larval production",
+    "H3": "if metamorph data pass the structural gate, habitat modifiers of adult-to-metamorph conversion may differ from those of adult-to-larva conversion",
+    "H4": "the habitat-dependent conversion function may differ between Hyla arborea and Pelobates fuscus",
+    "H5": "a broad amphibian claim requires recurrence in an independent monitoring programme"
+  },
+  "candidate_environment_modifiers": [
+    "fish present",
+    "permanent water column",
+    "water quality",
+    "maximum depth"
+  ],
+  "planned_adjustments": [
+    "number of sweeps",
+    "pond surface",
+    "shade",
+    "calendar year"
+  ],
+  "model_family_state": "not_yet_frozen_pending_structural_event_layout_only",
+  "ecological_effects_opened": false
+}

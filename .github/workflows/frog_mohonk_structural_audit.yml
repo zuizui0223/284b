@@ -1,0 +1,36 @@
+name: frog Mohonk structural audit
+
+on:
+  push:
+    branches:
+      - incubator/frog-demographic-decoupling-v1
+    paths:
+      - "incubator/frog_demographic_decoupling/scripts/run_mohonk_structural_audit.py"
+      - "incubator/frog_demographic_decoupling/protocol_v0_8.json"
+      - ".github/workflows/frog_mohonk_structural_audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frog-mohonk-structural-audit
+  cancel-in-progress: true
+
+jobs:
+  structural-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run Mohonk structural schema audit
+        run: python incubator/frog_demographic_decoupling/scripts/run_mohonk_structural_audit.py
+      - name: Upload sanitized Mohonk structural receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: frog-mohonk-structural-schema-v0-1
+          path: frog_mohonk_structural_schema_v0_1.json
+          if-no-files-found: error

@@ -1,0 +1,90 @@
+{
+  "project": "frog-demographic-decoupling",
+  "model_contract_version": "0.2",
+  "status": "confirmatory_contract_frozen_before_psma_and_environment_value_opening",
+  "focal_species": "Pseudacris maculata",
+  "primary_epoch": [
+    2003,
+    2022
+  ],
+  "source_sha256": "aa42c97dcc506b96f832c2ea4180f057527b1efeec302586d06801751c1cda3a",
+  "biological_unit": "site_name x calendar_year",
+  "eligibility": {
+    "adult_confirmed": true,
+    "adult_definition": "at least one valid visit whose psma_stage contains code A",
+    "minimum_adult_confirmed_site_years": 50,
+    "minimum_adult_confirmed_site_years_with_ge2_valid_reproductive_observation_visits": 30,
+    "minimum_reproductive_positive_site_years": 15,
+    "fail_action": "do not fit confirmatory reproductive-state model"
+  },
+  "reproductive_state": {
+    "latent_name": "R_st",
+    "meaning": "egg and/or larval stage was available/detectable during the season at an adult-confirmed site-year",
+    "positive_stage_codes": [
+      "E",
+      "L"
+    ],
+    "deliberately_excluded_stage_codes": [
+      "J",
+      "M"
+    ],
+    "rationale": "juvenile/metamorph stages were not added after seeing their larger structural counts"
+  },
+  "visit_observation_rule": {
+    "psma_NA": "visit unusable for reproductive detection",
+    "psma_0": "valid reproductive non-detection y=0",
+    "psma_1_stage_contains_E_or_L": "reproductive detection y=1",
+    "psma_1_stage_contains_A_but_not_E_or_L": "valid reproductive non-detection y=0",
+    "psma_1_stage_only_J_or_M_or_U_or_NA": "reproductive observation unresolved for this endpoint"
+  },
+  "detection_model": {
+    "formula": "logit(p_R_visit) = g0 + g1*z_doy + g2*z_doy^2 + survey_fraction_effect",
+    "survey_fraction_mapping": {
+      "100": 1,
+      "0-25": 0.125,
+      "26-50": 0.38,
+      "51-75": 0.63,
+      "76-99": 0.875
+    },
+    "missing_percent_surveyed": "drop visit from endpoint observation model",
+    "weather_wind": "secondary detection sensitivity only, not primary process covariates"
+  },
+  "process_model": {
+    "formula": "logit(theta_siteyear) = b0 + b_depth*shallow + b_fish*fish_present + b_year*z_year + b_area*z_log_area",
+    "primary_estimand": "b_depth",
+    "secondary_estimand": "b_fish",
+    "theta_definition": "P(R_st=1 | adult stage confirmed in site-year)",
+    "shallow_definition": "first valid max_depth in site-year is <=1 m",
+    "deeper_definition": "first valid max_depth in site-year is >1 m",
+    "fish_definition": "Y if fish observed on any valid visit; N if at least one determination and none Y; otherwise missing",
+    "area_definition": "first valid site_length_m x site_width_m; log1p transformed",
+    "year_definition": "calendar year centered and scaled across eligible site-years"
+  },
+  "hypotheses": {
+    "H1": "shallower wetlands have lower reproductive-stage occupancy conditional on confirmed adults",
+    "H2": "fish presence is associated with lower reproductive-stage occupancy conditional on confirmed adults",
+    "H3": "any temporal trend is estimated jointly but is not used to retune H1/H2"
+  },
+  "likelihood": {
+    "state": "single-season occupancy likelihood for R_st within adult-confirmed site-years",
+    "zero_false_positive_assumption": "E/L detections have negligible false-positive error",
+    "site_year_dependence": "uncertainty by site-cluster bootstrap",
+    "bootstrap_clusters": "site_name",
+    "bootstrap_replicates": 500
+  },
+  "multiplicity": "H1 depth is primary; fish is prespecified secondary. No modifier winner-picking.",
+  "sensitivity": [
+    "E-only downstream endpoint",
+    "L-only downstream endpoint",
+    "require >=2 valid endpoint visits after the first adult-A detection date",
+    "include weather and wind in reproductive detection submodel"
+  ],
+  "forbidden_claims": [
+    "adult population recruitment",
+    "population growth rate",
+    "ecological trap",
+    "causal effect of depth or fish",
+    "local extinction early warning"
+  ],
+  "outcome_opening_state": "closed"
+}

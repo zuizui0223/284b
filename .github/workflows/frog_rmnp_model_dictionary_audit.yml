@@ -1,0 +1,32 @@
+name: frog RMNP model dictionary audit
+
+on:
+  push:
+    branches:
+      - incubator/frog-demographic-decoupling-v1
+    paths:
+      - "incubator/frog_demographic_decoupling/protocol_v0_11.json"
+      - "incubator/frog_demographic_decoupling/scripts/run_rmnp_model_dictionary_audit.py"
+      - ".github/workflows/frog_rmnp_model_dictionary_audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dictionary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Read FGDC metadata only
+        run: python incubator/frog_demographic_decoupling/scripts/run_rmnp_model_dictionary_audit.py
+      - name: Upload dictionary receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: frog-rmnp-model-dictionary-v0-1
+          path: frog_rmnp_fgdc_model_dictionary_v0_1.json
+          if-no-files-found: error

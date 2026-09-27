@@ -1,0 +1,89 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.12",
+  "status": "RMNP_primary_model_frozen_before_joint_state_opening",
+  "source": {
+    "doi": "10.5066/P9EX70L7",
+    "csv_sha256": "aa42c97dcc506b96f832c2ea4180f057527b1efeec302586d06801751c1cda3a",
+    "epoch": [
+      2003,
+      2022
+    ]
+  },
+  "primary_taxon": "Pseudacris maculata",
+  "validation_taxon": "Lithobates sylvaticus",
+  "analysis_unit": "site_name x calendar_year x stage_class",
+  "site_year_eligibility": [
+    "year 2003-2022",
+    "at least two survey dates",
+    "at least one non-NA psma survey result",
+    "species detected at least once (psma=1)",
+    "at least one non-NA perc_surveyed value"
+  ],
+  "stage_classes": {
+    "adult": "any normalized A token observed in site-year",
+    "reproductive": "any normalized E or L token observed in site-year"
+  },
+  "interpretation_boundary": "0 means no evidence of that stage in the eligible repeated-survey site-year, not proven biological absence",
+  "survey_effort": {
+    "max_percent_surveyed_midpoint": {
+      "100": 1,
+      "0-25": 0.125,
+      "26-50": 0.38,
+      "51-75": 0.63,
+      "76-99": 0.875
+    },
+    "additional_covariate": "number of valid survey dates"
+  },
+  "fish_state": {
+    "present": "Y on any eligible visit",
+    "not_observed": "at least one N and no Y",
+    "unknown": "all NA or blank; excluded from fish interaction model"
+  },
+  "depth_state": {
+    "coding": {
+      "< or = 1": 0,
+      ">1 - <2": 1,
+      ">2": 2
+    },
+    "site_year_summary": "maximum known depth class",
+    "role": "adjustment_covariate"
+  },
+  "primary_model": {
+    "family": "binomial GEE logit",
+    "long_rows_per_site_year": [
+      "adult",
+      "reproductive"
+    ],
+    "formula": "stage_evidence ~ reproductive_stage + fish_present + reproductive_stage:fish_present + year_centered + max_effort + n_visits + depth_class",
+    "cluster": "site_name",
+    "primary_estimand": "reproductive_stage:fish_present",
+    "directional_hypothesis": "negative: fish presence disproportionately reduces reproductive-stage evidence relative to adult-stage evidence"
+  },
+  "secondary_model": {
+    "formula": "stage_evidence ~ reproductive_stage + year_centered + reproductive_stage:year_centered + max_effort + n_visits + depth_class",
+    "estimand": "reproductive_stage:year_centered",
+    "interpretation": "long-term divergence of reproductive-stage evidence relative to adult-stage evidence"
+  },
+  "primary_model_estimability_gate": {
+    "eligible_site_years_minimum": 100,
+    "fish_present_site_years_minimum": 20,
+    "fish_not_observed_site_years_minimum": 20,
+    "reproductive_positive_site_years_minimum": 20
+  },
+  "fallback_if_fish_gate_fails": "secondary temporal stage-divergence model becomes confirmatory without inspecting effect direction",
+  "validation_gate": {
+    "eligible_wood_frog_site_years_minimum": 30,
+    "adult_positive_site_years_minimum": 5,
+    "reproductive_positive_site_years_minimum": 10
+  },
+  "forbidden_claims": [
+    "reproductive failure for a site-year with no E/L evidence",
+    "adult recruitment",
+    "population growth rate",
+    "ecological trap",
+    "causal fish effect",
+    "extinction early warning"
+  ],
+  "outcome_opening_authorized_after_commit": true
+}

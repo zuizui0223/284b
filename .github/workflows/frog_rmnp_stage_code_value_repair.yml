@@ -1,0 +1,36 @@
+name: frog RMNP stage-code value repair
+
+on:
+  push:
+    branches:
+      - incubator/frog-demographic-decoupling-v1
+    paths:
+      - "incubator/frog_demographic_decoupling/protocol_v0_10_2.json"
+      - "incubator/frog_demographic_decoupling/scripts/run_rmnp_stage_code_value_repair.py"
+      - ".github/workflows/frog_rmnp_stage_code_value_repair.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frog-rmnp-stage-code-value-repair
+  cancel-in-progress: true
+
+jobs:
+  schema-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run stage-code value repair
+        run: python incubator/frog_demographic_decoupling/scripts/run_rmnp_stage_code_value_repair.py
+      - name: Upload sanitized stage-code receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: frog-rmnp-stage-code-value-repair-v0-2
+          path: frog_rmnp_stage_code_value_repair_v0_2.json
+          if-no-files-found: error

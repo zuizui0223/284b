@@ -1,0 +1,53 @@
+{
+  "audit": "meetnetten_effort_schema_v0_1",
+  "workflow_run": 35994543793,
+  "artifact_id": 10805004256,
+  "artifact_digest": "sha256:3904cb84b61ba3a96af5566ab05bbb78ca6d4a6e8c63066d0b9ff1f69f071f20",
+  "source_sha256": "c2cc960122ea398545edb661318160cd2b5b66a75a73dba8f7a3f61bd9c4f920",
+  "measurement_extension_found": true,
+  "number_of_sweeps_exact_label_present": false,
+  "number_of_sweeps_nonempty_events": 0,
+  "measurement_types": {
+    "": {
+      "rows": 3044,
+      "nonempty_value_rows": 2393,
+      "event_count": 505,
+      "events_with_nonempty_value": 421
+    },
+    "oppervlakte waterpartij": {
+      "rows": 6,
+      "nonempty_value_rows": 0,
+      "event_count": 6,
+      "events_with_nonempty_value": 0
+    },
+    "pH (zuurtegraad)": {
+      "rows": 263,
+      "nonempty_value_rows": 117,
+      "event_count": 263,
+      "events_with_nonempty_value": 117
+    },
+    "permanente waterkolom": {
+      "rows": 7,
+      "nonempty_value_rows": 0,
+      "event_count": 7,
+      "events_with_nonempty_value": 0
+    },
+    "sampling effort type": {
+      "rows": 399,
+      "nonempty_value_rows": 398,
+      "event_count": 399,
+      "events_with_nonempty_value": 398
+    },
+    "waterkwaliteit": {
+      "rows": 22,
+      "nonempty_value_rows": 13,
+      "event_count": 22,
+      "events_with_nonempty_value": 13
+    }
+  },
+  "occurrence_abundance_read": false,
+  "ecological_association_opened": false,
+  "decision": "fail_meetnetten_confirmatory_count_model_under_frozen_effort_rule",
+  "rescue_by_inference_from_blank_measurement_rows_forbidden": true,
+  "next_candidate": "PINK"
+}

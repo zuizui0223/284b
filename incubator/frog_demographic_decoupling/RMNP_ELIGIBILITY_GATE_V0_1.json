@@ -1,0 +1,92 @@
+{
+  "project": "frog-demographic-decoupling",
+  "gate_version": "RMNP_ELIGIBILITY_V0_1",
+  "parent_model_contract": "RMNP_MODEL_CONTRACT_V0_2.json",
+  "status": "frozen_before_rmnp_psma_environment_value_opening",
+  "source_sha256": "aa42c97dcc506b96f832c2ea4180f057527b1efeec302586d06801751c1cda3a",
+  "epoch": [
+    2003,
+    2022
+  ],
+  "focal_species": "Pseudacris maculata",
+  "row_identity": [
+    "site_name",
+    "date"
+  ],
+  "duplicate_row_policy": "fail_closed_if_duplicate_site_date",
+  "adult_confirmation": {
+    "required": "psma == 1 and psma_stage contains A"
+  },
+  "endpoint_visit_rules": {
+    "requires_nonmissing_percent_surveyed": true,
+    "psma_NA": "invalid",
+    "psma_0": "valid_y0",
+    "psma_1_EL": "valid_y1",
+    "psma_1_A_without_EL": "valid_y0",
+    "psma_1_only_J_M_U_NA_or_blank": "unresolved"
+  },
+  "endpoint_site_year_gate": {
+    "adult_confirmed_site_years_min": 50,
+    "adult_confirmed_site_years_with_ge2_valid_endpoint_visits_min": 30,
+    "reproductive_positive_adult_confirmed_site_years_min": 15
+  },
+  "process_covariate_rules": {
+    "max_depth": {
+      "annual_value": "first valid visit in chronological order",
+      "shallow_labels": [
+        "< or = 1",
+        "<=1",
+        "≤1",
+        "< or = 1 m"
+      ],
+      "deeper_labels": [
+        ">1 - <2",
+        ">2",
+        ">1-<2",
+        ">1 - <2 m",
+        ">2 m"
+      ],
+      "unknown": "missing"
+    },
+    "fish": {
+      "annual_value": "Y if any valid visit Y; else N if at least one valid determination N and no Y; otherwise missing",
+      "allowed": [
+        "Y",
+        "N"
+      ]
+    },
+    "area": {
+      "annual_value": "first chronological visit with positive finite site_length_m and site_width_m",
+      "transform": "log1p(length_m * width_m)"
+    },
+    "year": "center and scale over confirmatory complete-case site-years"
+  },
+  "process_estimability_gate": {
+    "complete_case_site_years_min": 40,
+    "shallow_site_years_min": 10,
+    "deeper_site_years_min": 10,
+    "fish_Y_site_years_min_for_secondary": 10,
+    "fish_N_site_years_min_for_secondary": 10,
+    "fish_failure_action": "omit prespecified secondary fish coefficient but do not alter primary depth model",
+    "depth_failure_action": "confirmatory RMNP primary model stops"
+  },
+  "allowed_outputs": [
+    "adult-confirmed site-year count",
+    "valid endpoint visit count distribution",
+    "adult-confirmed site-years with >=2 valid endpoint visits",
+    "reproductive-positive adult-confirmed site-year count",
+    "complete-case count",
+    "shallow/deeper counts",
+    "fish Y/N/missing counts",
+    "area completeness",
+    "year range",
+    "duplicate site-date count"
+  ],
+  "forbidden_outputs": [
+    "odds ratios",
+    "adult-to-reproductive association direction",
+    "depth or fish effect direction",
+    "fitted coefficients",
+    "predicted probabilities"
+  ]
+}

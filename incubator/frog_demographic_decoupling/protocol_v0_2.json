@@ -1,0 +1,174 @@
+{
+  "project": "frog-demographic-decoupling",
+  "version": "0.2",
+  "supersedes": "protocol_v0_1.json",
+  "status": "pre-outcome_estimability_and_join_audit_only",
+  "scientific_independence": "standalone_project_not_284b_paper1",
+  "primary_system_selection": {
+    "state": "unresolved_pending_raw_estimability_audit",
+    "reason": "no candidate is authorized as primary before structural sample-size, stage-coding, repeat-visit, and deterministic-join audits",
+    "forbidden_selection_information": [
+      "transition coefficient sign",
+      "transition effect magnitude",
+      "environmental association direction",
+      "model fit favourability",
+      "significance or posterior support for demographic decoupling"
+    ],
+    "allowed_selection_information": [
+      "publisher-declared sampling design",
+      "number of sampling events",
+      "number of occurrence rows",
+      "number of sites or ponds",
+      "years covered",
+      "explicit life-stage fields or protocol",
+      "repeat-visit structure",
+      "deterministic site/event identifier compatibility",
+      "stage-specific positive counts used only for estimability"
+    ]
+  },
+  "candidate_systems": [
+    {
+      "name": "Meetnetten chorus counts",
+      "dataset_doi": "10.15468/d4bu8j",
+      "dataset_uuid": "9bd8310b-0914-411f-a4ba-0cefdd85df80",
+      "current_metadata_snapshot": "2026-02-26",
+      "event_records": 963,
+      "occurrence_records": 1436,
+      "target_species": [
+        "Hyla arborea",
+        "Epidalea calamita",
+        "Pelobates fuscus"
+      ],
+      "role": "large_adult_breeding_activity_candidate",
+      "join_status": "unresolved"
+    },
+    {
+      "name": "Meetnetten larvae and metamorph counts",
+      "dataset_doi": "10.15468/swgure",
+      "dataset_uuid": "89d08c4f-4727-45be-83d4-1fd96ddee81d",
+      "current_metadata_snapshot": "2026-02-26",
+      "event_records": 697,
+      "occurrence_records": 2995,
+      "measurement_or_fact_records": 3741,
+      "target_species": [
+        "Triturus cristatus",
+        "Hyla arborea",
+        "Pelobates fuscus"
+      ],
+      "role": "large_downstream_reproductive_success_candidate",
+      "join_status": "unresolved",
+      "shared_target_species_with_chorus": [
+        "Hyla arborea",
+        "Pelobates fuscus"
+      ]
+    },
+    {
+      "name": "PINK coastal Flanders amphibian monitoring",
+      "dataset_doi": "10.15468/jvtefa",
+      "dataset_uuid": "fca6d6a7-c13d-4f6e-96e1-0513e30b816c",
+      "years": [
+        2007,
+        2016
+      ],
+      "ponds": 243,
+      "occurrence_records_lower_bound": 1900,
+      "species_lower_bound": 10,
+      "repeated_periods_per_pond": 3,
+      "protocol_observes": [
+        "calling adults",
+        "eggs",
+        "larvae"
+      ],
+      "role": "large_within_programme_multispecies_upstream_stage_candidate",
+      "juvenile_endpoint_authorized": false
+    },
+    {
+      "name": "Flanders Natterjack sightings",
+      "dataset_doi": "10.15468/2xfw8y",
+      "dataset_uuid": "099911ec-84c6-453f-995a-3ad064ec9d71",
+      "current_metadata_snapshot": "2026-02-26",
+      "event_records": 19,
+      "occurrence_records": 117,
+      "target_species": [
+        "Epidalea calamita"
+      ],
+      "publisher_protocol_stages": [
+        "calling adults",
+        "observed adults",
+        "egg strings",
+        "tadpoles",
+        "terrestrial juveniles"
+      ],
+      "role": "small_full_chain_feasibility_or_calibration_candidate",
+      "primary_authorized": false,
+      "reason_primary_not_authorized": "current public event count is only 19"
+    },
+    {
+      "name": "Mohonk Preserve vernal pools",
+      "dataset_doi": "10.15468/dypfbs",
+      "dataset_uuid": "a391a15f-033b-42fa-8bdc-b74014b05e28",
+      "role": "long_term_adult_egg_larva_hydroclimate_validation",
+      "juvenile_primary_endpoint_authorized": false,
+      "reason": "same-breeding-cycle interpretation of juvenile field requires raw date/cohort audit"
+    },
+    {
+      "name": "CROA southern France",
+      "dataset_doi": "10.15468/xfz3uy",
+      "dataset_uuid": "9fd8ed05-3ae6-453a-878a-c0a272a2b849",
+      "role": "optional_contemporary_external_replication",
+      "primary_authorized": false,
+      "reason": "short temporal depth since 2023"
+    }
+  ],
+  "stage_order": [
+    "adult_breeding",
+    "egg",
+    "larva",
+    "juvenile"
+  ],
+  "endpoint_policy": {
+    "full_chain_estimands_authorized": false,
+    "upstream_estimands_candidate": [
+      "P(egg|adult_breeding)",
+      "P(larva|adult_breeding)",
+      "P(larva|egg)"
+    ],
+    "juvenile_estimands_candidate": [
+      "P(juvenile|larva)",
+      "P(juvenile|adult_breeding)"
+    ],
+    "juvenile_estimands_open_only_if": "same-cohort stage timing and observation estimability are demonstrated"
+  },
+  "hypotheses": {
+    "H1": "environmental stress produces stage-localized rather than uniform weakening of life-cycle coupling",
+    "H2": "hydroperiod and aquatic-habitat conditions explain which downstream transition becomes limiting",
+    "H3": "bottleneck location differs among species with different reproductive and larval-development strategies",
+    "H4": "a broad amphibian claim requires recurrence in at least one independent monitoring programme"
+  },
+  "primary_selection_rule": [
+    "audit each candidate without fitting transition-response models",
+    "reject candidates lacking repeat-visit or explicit stage information needed for the intended endpoint",
+    "for cross-programme analysis require publisher-provided compatible site/event identity or a frozen deterministic identity bridge established without outcome values",
+    "select the richest endpoint supported by at least 30 site-years and adequate repeat visits; this is a structural screen, not a power or significance threshold",
+    "if juvenile timing/detection is not identifiable, downgrade the endpoint prospectively to adult-to-egg/larva rather than infer recruitment",
+    "record all candidate exclusions and do not return to a rejected candidate because another candidate gives an unfavourable ecological result"
+  ],
+  "gates": {
+    "preserve_sampling_event_identity": true,
+    "repeated_visits_required": true,
+    "explicit_stage_mapping_required": true,
+    "distinguish_absence_missingness_unsurveyed": true,
+    "stage_detection_estimability_required_for_negative_failure": true,
+    "coordinate_nearest_join_forbidden": true,
+    "cross_programme_join_requires_publisher_identity_or_preoutcome_bridge": true,
+    "environmental_covariates_freeze_before_outcome_selection": true,
+    "mohonk_same_cohort_juvenile_required_before_recruitment_use": true,
+    "natterjack_primary_forbidden_under_current_19_event_snapshot": true
+  },
+  "prior_art_boundary": {
+    "citation": "Greenberg CH, Zarnoch SJ, Austin JD. 2017. Ecosphere 8:e01789. DOI 10.1002/ecs2.1789",
+    "cannot_claim": "novel discovery that adult breeding effort can be weakly associated with juvenile recruitment",
+    "target_novelty": "stage-specific bottleneck localization with observation-aware inference and recurrence across independent standardized monitoring programmes"
+  },
+  "empirical_outcome_status": "unopened_for_candidate_selection"
+}

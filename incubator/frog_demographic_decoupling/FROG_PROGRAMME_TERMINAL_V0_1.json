@@ -1,0 +1,49 @@
+{
+  "programme": "frog-stage-resolved-occupancy-v0.1",
+  "terminal_status": "closed_without_support_for_stage_specific_filtering_hypothesis",
+  "primary": {
+    "taxon": "Pseudacris maculata",
+    "endpoint": "reproductive_stage_x_fish_present",
+    "beta": 0.0930427598001074,
+    "odds_ratio": 1.0975086635158218,
+    "ci95": [
+      -1.6971383977095371,
+      1.8832239173097518
+    ],
+    "p_value": 0.9188622109256179,
+    "decision": "not_supported"
+  },
+  "secondary_temporal": {
+    "endpoint": "reproductive_stage_x_year",
+    "beta": -0.08129982878939988,
+    "p_value": 0.3040591521001266,
+    "decision": "not_supported"
+  },
+  "sensitivities": {
+    "high_effort_p": 0.600695356268311,
+    "depth_complete_case_p": 0.9560571662627223,
+    "conclusion": "same_null"
+  },
+  "frozen_validation": {
+    "taxon": "Lithobates sylvaticus",
+    "eligible_site_years": 20,
+    "adult_positive_site_years": 2,
+    "reproductive_positive_site_years": 10,
+    "required": {
+      "eligible": 30,
+      "adult_positive": 5,
+      "reproductive_positive": 10
+    },
+    "gate_pass": false,
+    "ecological_effect_opened": false
+  },
+  "prohibited_rescues": [
+    "do not switch to Ambystoma because primary was null",
+    "do not select another habitat interaction after opening fish",
+    "do not redefine reproductive stage",
+    "do not reinterpret common positive year effect as stage-specific decoupling",
+    "do not call no E/L evidence reproductive failure"
+  ],
+  "scientific_takeaway": "The prespecified RMNP analysis does not provide evidence that fish presence or time selectively alters reproductive-stage evidence relative to adult-stage evidence within occupied Pseudacris maculata site-years.",
+  "status_for_publication": "negative_empirical_programme_not_currently_a_compelling_standalone_positive_ecology_paper"
+}

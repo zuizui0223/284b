@@ -1,0 +1,37 @@
+{
+  "schema": "284b.ecology_letters_invited_m1_m2_submission_manifest.v1",
+  "status": "scientifically_ready_human_metadata_and_rendering_pending",
+  "target": "Ecology Letters",
+  "article_type": "Method",
+  "manuscript": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_V1.md",
+  "claim_ledger": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_CLAIM_LEDGER_V1.md",
+  "figure_plan": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_FIGURE_PLAN_V1.md",
+  "cover_letter": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_COVER_LETTER_V1.md",
+  "title_page": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_TITLE_PAGE_V1.md",
+  "readiness": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_SUBMISSION_READINESS_V1.md",
+  "scientific_core": {
+    "m1": "exact invalid-state decomposition plus FDF separation",
+    "m2": "Level-A prospectively held-out cross-source reproducibility",
+    "level_a_independent_taxa": 12,
+    "diagnostics_prespecified": 288,
+    "diagnostics_evaluable": 283,
+    "diagnostics_unresolved": 5,
+    "taxa_with_envelope_exceedance": 0
+  },
+  "excluded_from_focal_submission": [
+    "Level-C candidate systems",
+    "Cremastra",
+    "Belonocnema",
+    "SMIL001",
+    "unopened dependency outcomes",
+    "candidate-hunting STOP narrative"
+  ],
+  "fallback": "manuscript/LEVEL_A_SHORT_REPORT_V0_1.md",
+  "remaining_blockers": [
+    "human author metadata",
+    "permanent archive DOI",
+    "final rendered figures",
+    "final journal formatting",
+    "final policy-aligned disclosures"
+  ]
+}

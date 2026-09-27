@@ -1,0 +1,75 @@
+{
+  "project": "frog-climate-cue-decoupling",
+  "version": "0.1",
+  "status": "preoutcome_public_archive_structural_audit",
+  "scientific_independence": "fresh_programme_not_descended_from_RMNP_null_branch",
+  "ecological_question": "When temperature and rainfall breeding cues disagree, does frog calling change relative to periods when cues are coherent?",
+  "prior_art": {
+    "citation": "Thompson MM, Rowley JJL, Poore AGB, Callaghan CT. 2022. Diversity and Distributions 28:2375-2387. DOI 10.1111/ddi.13634",
+    "cannot_claim": "first continental analysis showing meteorological predictors of Australian frog calling",
+    "unresolved_target": "consequence of disagreement/uncoupling among historically associated breeding cues"
+  },
+  "frogid": {
+    "doi": "10.15468/wazqft",
+    "gbif_uuid": "47c9fee2-619a-481c-a114-386bc4748256",
+    "ala_dwca": "https://dwca-exports.ala.org.au/dr14760.zip",
+    "expected_release_label": "dataset 7.0",
+    "expected_start": "2017-11-10",
+    "expected_end": "2024-11-09",
+    "expected_records_min": 1000000,
+    "expected_species_min": 200
+  },
+  "spatial_contract": {
+    "grid_degrees": 0.25,
+    "exact_coordinate_interpretation_forbidden": true,
+    "reason": "public sensitive FrogID records may be buffered to protect localities"
+  },
+  "project_year_definition": {
+    "start_month": 11,
+    "start_day": 10,
+    "end_month": 11,
+    "end_day": 9,
+    "label_by_end_year": true
+  },
+  "time_split": {
+    "reference_project_years": [
+      2018,
+      2019,
+      2020
+    ],
+    "confirmatory_project_years": [
+      2021,
+      2022,
+      2023,
+      2024
+    ]
+  },
+  "species_structural_gate": {
+    "records_total_min": 1000,
+    "project_years_with_ge50_records_min": 6,
+    "occupied_quarter_degree_cells_min": 20,
+    "reference_records_required": true,
+    "confirmatory_records_required": true
+  },
+  "allowed_structural_reads": [
+    "archive SHA-256 and byte size",
+    "Darwin Core field names",
+    "minimum and maximum eventDate",
+    "row count",
+    "distinct scientificName count",
+    "marginal records per species and project-year",
+    "marginal occupied 0.25 degree cells per species",
+    "eventID uniqueness and event-to-species multiplicity",
+    "coordinate uncertainty / data-generalization categories"
+  ],
+  "forbidden_reads": [
+    "within-project-year calling date distributions",
+    "phenology onset/median/peak",
+    "temperature/rainfall values",
+    "species-specific cue-response directions",
+    "cue-conflict effects",
+    "selection based on any climate or phenology result"
+  ],
+  "climate_source_selection_state": "unopened",
+  "ecological_outcomes_opened": false
+}

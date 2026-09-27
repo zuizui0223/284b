@@ -1,0 +1,31 @@
+name: FrogID cue-decoupling structural audit
+
+on:
+  push:
+    branches:
+      - incubator/frog-climate-cue-decoupling-v1
+    paths:
+      - "incubator/frog_climate_cue_decoupling/**"
+      - ".github/workflows/frogid_cue_structural_audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Audit current public FrogID DwC-A
+        run: python incubator/frog_climate_cue_decoupling/scripts/audit_frogid_public_archive.py
+      - name: Upload structural receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: frogid-cue-structural-v0-1
+          path: frogid_structural_audit_v0_1.json
+          if-no-files-found: error

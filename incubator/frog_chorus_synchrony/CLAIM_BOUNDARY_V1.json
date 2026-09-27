@@ -1,0 +1,62 @@
+{
+  "programme": "frog-chorus-synchrony",
+  "version": "1.0",
+  "status": "validated_empirical_programme",
+  "primary_claim": "Across independent North American and Australian acoustic monitoring systems, more recent rainfall is associated with greater short-window overlap in frog calling activity across species.",
+  "interpretation": "shared environmental activation is consistent with transient compression of temporal separation among calling species",
+  "empirical_support": {
+    "NAAMP": {
+      "design": "standardized route-stop acoustic monitoring",
+      "n_runs": 9399,
+      "n_routes": 900,
+      "sampled_stops": 93383,
+      "multi_species_stops": 41020,
+      "OR_per_sd_dryness": 0.9693083816894524,
+      "CI95": [
+        0.9410724573004646,
+        0.9983914963451574
+      ],
+      "p": 0.03876324235953538,
+      "sensitivity_ge8": "pass",
+      "sensitivity_complete10": "narrow_null"
+    },
+    "FrogID": {
+      "design": "expert-validated short call recordings conditional on >=1 calling species",
+      "n_recordings": 40754,
+      "multi_species_recordings": 18174,
+      "weather_cells": 1623,
+      "recorders": 13148,
+      "OR_per_sd_dryness": 0.8528222811782705,
+      "CI95": [
+        0.8272635436861047,
+        0.8791706691599076
+      ],
+      "p": 1.1250682677078932e-24,
+      "weather_cell_cluster": "pass",
+      "recorder_cluster": "pass"
+    }
+  },
+  "prespecified_negatives": {
+    "NAAMP_seasonal_shoulder": {
+      "p": 0.08195479546236245,
+      "supported": false
+    },
+    "NAAMP_pairwise_network_density": {
+      "p": 0.7243629701236499,
+      "supported": false
+    }
+  },
+  "temperature": {
+    "status": "NAAMP_only_secondary",
+    "independent_validation": false,
+    "interpretation_authorized": "warmer conditions are associated with greater event-level multispecies calling overlap in NAAMP after plausibility QC and flexible day-of-year adjustment"
+  },
+  "prohibited": [
+    "causal rainfall claim",
+    "interspecific facilitation claim",
+    "pairwise network rewiring claim",
+    "demographic or reproductive-success inference",
+    "direct meta-analysis of NAAMP and FrogID odds ratios",
+    "first-ever rainfall effect on frog calling or species richness"
+  ]
+}

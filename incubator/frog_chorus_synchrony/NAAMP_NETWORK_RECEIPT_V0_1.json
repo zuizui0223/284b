@@ -1,0 +1,29 @@
+{
+  "programme": "frog-chorus-synchrony",
+  "analysis": "naamp_chorus_network_H4_v0_1",
+  "workflow_run": 36066634944,
+  "artifact_id": 10836751253,
+  "artifact_digest": "sha256:d24dad97318173556fdf45ab88f1ede94168821a67f0bad329eb1c08406e17b4",
+  "primary": {
+    "n_runs": 8180,
+    "n_routes": 881,
+    "pair_trials": 70311,
+    "pair_successes": 50119,
+    "beta_rain_z": -0.006358035595322421,
+    "ci95_beta": [
+      -0.04169645075333981,
+      0.028980379562694968
+    ],
+    "odds_ratio": 0.9936621339441377,
+    "p_value": 0.7243629701236499,
+    "support_rule_pass": false
+  },
+  "repeat_edge_sensitivity": {
+    "beta_rain_z": -0.005136281710095846,
+    "p_value": 0.7897758881116099,
+    "support_rule_pass": false
+  },
+  "decision": "not_supported",
+  "interpretation": "rain timing does not measurably change pairwise co-calling network density conditional on the species pool in complete 10-stop runs",
+  "individual_edge_effects_opened": false
+}

@@ -1,0 +1,63 @@
+{
+  "package": "frog-jae-final-format",
+  "version": "0.1",
+  "date": "2026-09-25",
+  "source": {
+    "manuscript_path": "incubator/frog_chorus_synchrony/MANUSCRIPT_JAE_V0_3.md",
+    "manuscript_git_blob": "71060f6b156f89f10aec93f4252c9bb2b5815600",
+    "builder_path": "incubator/frog_chorus_synchrony/scripts/build_jae_anonymous_docx.py",
+    "builder_git_blob": "339874e4187fef695a51ceafc04edffadcab3c0d"
+  },
+  "generated_artifacts": {
+    "docx": {
+      "filename": "FROG_JAE_ANON_MAIN_V0_3.docx",
+      "sha256": "84db6a9bbc7367317820ad6a812ac7431aa07ad02d3378cf84da0edcdd0f6cc4"
+    },
+    "pdf": {
+      "filename": "FROG_JAE_ANON_MAIN_V0_3.pdf",
+      "sha256": "2fdf5991081aa39b7d421f8eaab748799b58f7277a0ef33fc74df79f00fe128a"
+    }
+  },
+  "format": {
+    "page_size": "A4",
+    "margins_in": 1,
+    "font": "Times New Roman 12 pt",
+    "line_spacing": "double",
+    "line_numbers": "continuous",
+    "page_numbers": "footer continuous",
+    "pages": 13,
+    "single_column": true
+  },
+  "visual_qa": {
+    "pages_inspected": "1-13",
+    "clipping": false,
+    "overlap": false,
+    "missing_glyphs": false,
+    "broken_page_numbers": false,
+    "broken_line_numbers": false,
+    "pdf_preflight": "openable_unencrypted_text_pdf_13_pages"
+  },
+  "anonymity": {
+    "core_creator_blank": true,
+    "last_modified_by_blank": true,
+    "exact_identity_scan_terms": [
+      "ruiqi",
+      "rachelzhang",
+      "rachelzhang0223@gmail.com",
+      "zuizui0223"
+    ],
+    "exact_identity_hits": 0
+  },
+  "current_JAE_initial_submission_alignment": {
+    "checked_on": "2026-09-25",
+    "research_article_word_limit": 8500,
+    "abstract_limit": 350,
+    "keyword_limit": 8,
+    "double_spaced_required": true,
+    "line_and_page_numbers_required": true,
+    "double_anonymized_review": true,
+    "data_archive_intent_required": true
+  },
+  "scientific_claim_changed": false,
+  "status": "final_anonymous_main_docx_pdf_render_verified"
+}

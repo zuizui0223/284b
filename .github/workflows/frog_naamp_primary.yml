@@ -1,0 +1,38 @@
+name: frog NAAMP chorus synchrony primary
+
+on:
+  push:
+    branches:
+      - incubator/frog-chorus-synchrony-v1
+    paths:
+      - "incubator/frog_chorus_synchrony/NAAMP_MODEL_CONTRACT_V0_1.*"
+      - "incubator/frog_chorus_synchrony/scripts/run_naamp_primary.py"
+      - ".github/workflows/frog_naamp_primary.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frog-naamp-chorus-synchrony-primary
+  cancel-in-progress: true
+
+jobs:
+  primary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install analysis dependencies
+        run: python -m pip install --disable-pip-version-check -q numpy pandas scipy statsmodels patsy
+      - name: Run frozen primary analysis
+        run: python incubator/frog_chorus_synchrony/scripts/run_naamp_primary.py
+      - name: Upload primary receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: frog-naamp-chorus-synchrony-primary-v0-1
+          path: frog_naamp_chorus_synchrony_primary_v0_1.json
+          if-no-files-found: error

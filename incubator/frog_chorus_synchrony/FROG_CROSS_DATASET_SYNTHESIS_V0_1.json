@@ -1,0 +1,51 @@
+{
+  "programme": "frog-chorus-synchrony",
+  "status": "cross_dataset_rain_synchrony_supported",
+  "decision_contract": "FROG_SYNTHESIS_CONTRACT_V0_1.json",
+  "naamp": {
+    "design": "standardized route-stop acoustic monitoring",
+    "n_runs": 9399,
+    "n_routes": 900,
+    "sampled_stops": 93383,
+    "multispecies_stops": 41020,
+    "beta_dryness": -0.03117247036378344,
+    "odds_ratio_per_sd": 0.9693083816894524,
+    "ci95_or": [
+      0.9410724573004646,
+      0.9983914963451574
+    ],
+    "p_value": 0.03876324235953538,
+    "support": true,
+    "robustness": "small effect; >=8-stop sensitivity passes, complete-10-stop sensitivity narrowly crosses zero"
+  },
+  "frogid": {
+    "design": "independent expert-validated short call recordings, conditional on >=1 calling species",
+    "n_recordings": 40754,
+    "multispecies_recordings": 18174,
+    "weather_cells": 1623,
+    "beta_dryness": -0.1592040988266493,
+    "odds_ratio_per_sd": 0.8528222811782705,
+    "ci95_or": [
+      0.8272635436861047,
+      0.8791706691599076
+    ],
+    "p_value": 1.1250682677078932e-24,
+    "support": true,
+    "robustness": "weather-cell and recorder clustering both pass"
+  },
+  "cross_dataset_classification": "independent_support_robust",
+  "supported_claim": "Across two independent acoustic monitoring systems, more recent rainfall is associated with greater short-window overlap in frog calling activity across species.",
+  "strengthened_interpretation": "The FrogID validation is conditional on at least one species already calling, so the replicated rain association cannot be explained solely by rainfall increasing the probability that any frog is acoustically active.",
+  "not_supported": [
+    "seasonal-shoulder amplification in NAAMP",
+    "rain-driven pairwise co-calling network densification in NAAMP"
+  ],
+  "temperature": {
+    "status": "supported_in_NAAMP_only",
+    "note": "positive temperature association survives plausibility QC and source-scale stratification, but it has not been independently validated here"
+  },
+  "mechanistic_boundary": "Results support event-level community synchrony/shared environmental activation, not causal interspecific facilitation or pairwise network rewiring.",
+  "causal_claim_authorized": false,
+  "effect_sizes_meta_analyzed": false,
+  "reason_no_meta_analysis": "NAAMP and FrogID use different sampling units, observation designs, and rainfall measurements."
+}

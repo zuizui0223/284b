@@ -1,0 +1,56 @@
+name: frog JAE submission package QA
+
+on:
+  push:
+    branches:
+      - incubator/frog-chorus-synchrony-v1
+    paths:
+      - "incubator/frog_chorus_synchrony/**"
+      - ".github/workflows/frog_jae_submission_qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frog-jae-submission-qa
+  cancel-in-progress: true
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Audit JAE manuscript
+        run: python incubator/frog_chorus_synchrony/scripts/audit_jae_submission.py
+      - name: Build submission figures
+        run: python incubator/frog_chorus_synchrony/scripts/build_submission_figures.py
+      - name: Verify SVG physical width
+        run: |
+          grep -q 'width="180mm"' incubator/frog_chorus_synchrony/figures/FIGURE_1_DESIGN_V0_1.svg
+          grep -q 'width="180mm"' incubator/frog_chorus_synchrony/figures/FIGURE_2_EFFECTS_V0_1.svg
+      - name: Build standalone reproducibility export
+        run: python incubator/frog_chorus_synchrony/scripts/build_standalone_export.py
+      - name: Verify standalone hash manifest
+        run: |
+          test -s build/frog-chorus-synchrony-standalone/FILE_SHA256.json
+          test -s build/frog-chorus-synchrony-standalone/README.md
+      - name: Upload submission package
+        uses: actions/upload-artifact@v4
+        with:
+          name: frog-jae-submission-package-v0-3
+          path: |
+            incubator/frog_chorus_synchrony/MANUSCRIPT_JAE_V0_3.md
+            incubator/frog_chorus_synchrony/JAE_TITLE_PAGE_V0_1.template.md
+            incubator/frog_chorus_synchrony/figures/*.svg
+          if-no-files-found: error
+      - name: Upload standalone reproducibility package
+        uses: actions/upload-artifact@v4
+        with:
+          name: frog-chorus-synchrony-standalone-v0-1
+          path: build/frog-chorus-synchrony-standalone/
+          if-no-files-found: error

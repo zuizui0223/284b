@@ -1,0 +1,48 @@
+{
+  "project": "frog-chorus-synchrony",
+  "validation_version": "0.1.4",
+  "supersedes": "EXTERNAL_VALIDATION_V0_1_3.json",
+  "status": "sunshine_registry_complete_parent_subset_preweather",
+  "source_sha256": "ef55f7fc903583ade788d2ed0c32668bc6a9a48fca8706c07a706e365fa6d97b",
+  "call_semantics": {
+    "positive_codes": [
+      "HEA",
+      "SHD"
+    ],
+    "definitions": {
+      "HEA": "Heard",
+      "SHD": "Seen and Heard"
+    },
+    "basis": [
+      "Sunshine Coast dataset description states frogs are counted by sightings or hearing their calls",
+      "independent Queensland frog-survey codebook explicitly defines HEA=heard, SEE=seen, SHD=seen and heard, HAN=handled/captured"
+    ],
+    "OPP_unmapped_excluded": true
+  },
+  "structural_repair": {
+    "reason": "full parent-survey set has 0.633 coordinate coverage, but exact verbatim locationID identifies a publisher-defined site registry with four unambiguous coordinates",
+    "eligibility": "retain a parent survey only when all child eventIDs resolve to exactly one verbatim locationID, that locationID has one unique event-table coordinate pair across the full archive, and parent survey has one exact date",
+    "response_blind": true,
+    "no_site_selected_by_calling_response": true,
+    "coordinate_average_forbidden": true,
+    "nearest_coordinate_rescue_forbidden": true
+  },
+  "allowed_reads": [
+    "eligible parent-survey and quadrat counts",
+    "eligible years and exact site labels",
+    "number of HEA/SHD species per child event",
+    "number of eligible child events with >=2 HEA/SHD species",
+    "number of eligible parents with >=1 multi-species-call child",
+    "no weather values"
+  ],
+  "gate": {
+    "minimum_eligible_parent_surveys": 50,
+    "minimum_eligible_parent_surveys_ge8_quadrats": 35,
+    "minimum_eligible_quadrat_events": 300,
+    "minimum_multispecies_call_quadrats": 30,
+    "minimum_parents_with_any_multispecies_call": 20,
+    "minimum_years": 3,
+    "coordinate_coverage_by_definition": 1
+  },
+  "weather_effect_opened": false
+}

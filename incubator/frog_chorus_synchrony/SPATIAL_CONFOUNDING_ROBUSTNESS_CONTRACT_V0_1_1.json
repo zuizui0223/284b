@@ -1,0 +1,12 @@
+{
+  "project": "frog-chorus-synchrony",
+  "repair_version": "0.1.1",
+  "supersedes": "SPATIAL_CONFOUNDING_ROBUSTNESS_CONTRACT_V0_1.json",
+  "status": "nonempirical_computational_repair_before_frogid_spatial_effect_opening",
+  "failure": "statsmodels ConditionalLogit exceeded Python recursion depth in large weather-cell strata before any FrogID spatial robustness coefficient was produced",
+  "scientific_target_unchanged": "estimate the rain association using only within-ERA5-cell variation so time-invariant cell-level species-pool differences cannot generate the diagnostic slope",
+  "revised_frogid_estimator": "linear probability model with exact within-cell demeaning of outcome, dry_z, month indicators, year_z, sin_hour and cos_hour; no intercept; ERA5-cell cluster-robust covariance",
+  "why_repair_is_nonempirical": "the change is driven solely by optimizer/computational failure; no FrogID within-cell effect estimate, sign, CI or p-value was opened",
+  "no_upgrade_rule": "diagnostic cannot replace or upgrade the frozen FrogID primary; it is reported regardless of sign",
+  "classification_from_v0_1_retained": true
+}

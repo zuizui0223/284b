@@ -1,0 +1,28 @@
+{
+  "programme": "frog-chorus-synchrony",
+  "validation": "FrogID",
+  "structural_audit_run": 36069339054,
+  "source_url": "https://dwca-exports.ala.org.au/dr14760.zip",
+  "source_sha256": "f5dd70ed07956e3e37de4fb04692b83a9d726eae2312767c9eda2dcbf61f759d",
+  "occurrence_rows": 1183011,
+  "distinct_recordings": 655502,
+  "multispecies_recordings_ge2": 291617,
+  "multispecies_recordings_ge3": 135049,
+  "max_species_per_recording": 13,
+  "min_event_date": "2017-11-10",
+  "max_event_date": "2024-11-09",
+  "v7_compatible_by_frozen_rule": true,
+  "behavior": {
+    "calling": 1183011
+  },
+  "samplingProtocol": {
+    "call recording": 1183011
+  },
+  "coordinate_coverage_fraction": 1,
+  "event_date_coverage_fraction": 1,
+  "event_time_coverage_fraction": 1,
+  "states_territories": 8,
+  "structural_gate_pass": true,
+  "weather_values_read": false,
+  "weather_synchrony_association_opened": false
+}

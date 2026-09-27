@@ -1,0 +1,46 @@
+{
+  "programme": "frog-chorus-synchrony",
+  "analysis": "naamp_temperature_qc_v0_1",
+  "workflow_run": 36066395100,
+  "artifact_id": 10837071292,
+  "artifact_digest": "sha256:b46f74367a121f38b3b67753e7510c1512982a6e41654daa2d4463fed2e3f51e",
+  "qc_bounds_c": [
+    -10,
+    45
+  ],
+  "excluded_runs": 2,
+  "plausible_filtered": {
+    "n_runs": 8200,
+    "n_routes": 814,
+    "beta": 0.3882411131691611,
+    "ci95_beta": [
+      0.3346410675321358,
+      0.4418411588061864
+    ],
+    "odds_ratio": 1.4743852351310867,
+    "ci95_or": [
+      1.397438709069388,
+      1.5555686324305278
+    ],
+    "p_value": 9.61613221221027e-46,
+    "support_rule_pass": true
+  },
+  "scale_stratified": {
+    "C": {
+      "n_runs": 1246,
+      "beta": 0.27491826048553875,
+      "odds_ratio": 1.3164230666874648,
+      "p_value": 0.000005450136252993264,
+      "support_rule_pass": true
+    },
+    "F": {
+      "n_runs": 6954,
+      "beta": 0.41496300711288847,
+      "odds_ratio": 1.5143147207823684,
+      "p_value": 8.673947510945293e-45,
+      "support_rule_pass": true
+    }
+  },
+  "conclusion": "temperature association survives physical plausibility filtering and is positive within both source temperature scales",
+  "causal_claim_authorized": false
+}

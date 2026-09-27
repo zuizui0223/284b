@@ -1,0 +1,31 @@
+name: frog NAAMP chorus network H4
+
+on:
+  push:
+    branches:
+      - incubator/frog-chorus-synchrony-v1
+    paths:
+      - "incubator/frog_chorus_synchrony/NAAMP_NETWORK_CONTRACT_V0_1.json"
+      - "incubator/frog_chorus_synchrony/scripts/run_naamp_network.py"
+      - ".github/workflows/frog_naamp_network.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  network:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check -q numpy pandas scipy statsmodels patsy
+      - run: python incubator/frog_chorus_synchrony/scripts/run_naamp_network.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frog-naamp-chorus-network-H4-v0-1
+          path: frog_naamp_chorus_network_H4_v0_1.json
+          if-no-files-found: error

@@ -1,0 +1,58 @@
+{
+  "programme": "frog-chorus-synchrony",
+  "validation": "FrogID independent rain synchrony validation",
+  "analysis": "frogid_rain_synchrony_external_validation_v0_2",
+  "contract": "FROGID_VALIDATION_MODEL_CONTRACT_V0_4.json",
+  "workflow_run": 36078205549,
+  "artifact_id": 10841376446,
+  "artifact_digest": "sha256:4112655b68be9076cf99566cf86c47f08a1a300ed120a4660819d1bbf5c0c2c5",
+  "frozen_sample": {
+    "recordings": 40754,
+    "multispecies_recordings": 18174,
+    "weather_cells": 1623,
+    "recorders": 13148,
+    "coordinate_uncertainty_le10km_recordings": 40754
+  },
+  "ERA5": {
+    "provider": "Earthmover public Icechunk ERA5",
+    "variable": "tp",
+    "chunks_read": 470,
+    "required_daily_weather_sha256": "a0db2fc9eff2cb3cc9556094238ce3459cb3edf108ee06130e2846b97e70d9c1"
+  },
+  "primary": {
+    "beta": -0.1592040988266493,
+    "se_cluster": 0.015524704427897423,
+    "ci95_beta": [
+      -0.18963196037595775,
+      -0.12877623727734083
+    ],
+    "odds_ratio_per_sd_log1p_dry_days": 0.8528222811782705,
+    "ci95_or": [
+      0.8272635436861047,
+      0.8791706691599076
+    ],
+    "p_value": 1.1250682677078932e-24,
+    "cluster": "0.25-degree ERA5 cell",
+    "support_rule_pass": true
+  },
+  "sensitivities": {
+    "coordinate_uncertainty_le10km": {
+      "support_rule_pass": true,
+      "note": "identical frozen sample because all retained deterministic-sample recordings are <=10 km uncertainty"
+    },
+    "recorder_cluster": {
+      "beta": -0.1592040988266493,
+      "ci95_beta": [
+        -0.18530699487995025,
+        -0.13310120277334833
+      ],
+      "p_value": 6.18658875336071e-33,
+      "support_rule_pass": true
+    }
+  },
+  "frozen_classification": "independent_support_robust",
+  "interpretation": "Conditional on an expert-validated FrogID recording containing at least one calling frog species, more recent rainfall is associated with a higher probability that multiple frog species are calling in the same short recording.",
+  "naamp_primary_replaced": false,
+  "causal_claim_authorized": false,
+  "post_opening_retuning_performed": false
+}

@@ -1,0 +1,89 @@
+{
+  "project": "frog-chorus-synchrony",
+  "validation_contract_version": "0.4",
+  "supersedes": "FROGID_VALIDATION_MODEL_CONTRACT_V0_3.json",
+  "status": "final_ERA5_transport_frozen_before_validation_weather_values",
+  "scientific_contract_unchanged": true,
+  "frogid_sample": {
+    "source_sha256": "f5dd70ed07956e3e37de4fb04692b83a9d726eae2312767c9eda2dcbf61f759d",
+    "selection": "first byte SHA256(eventID) < 16",
+    "recordings": 40754,
+    "multispecies_recordings": 18174,
+    "weather_cells": 1623
+  },
+  "weather_source": {
+    "provider": "Earthmover public Icechunk ERA5",
+    "bucket": "earthmover-icechunk-era5",
+    "prefix": "icechunkV2",
+    "region": "us-east-1",
+    "branch": "main",
+    "group": "single/temporal",
+    "variable": "tp",
+    "variable_definition": "Total precipitation",
+    "units": "m",
+    "accumulation": "1 hour ending at valid_time",
+    "dimensions": [
+      "valid_time",
+      "latitude",
+      "longitude"
+    ],
+    "resolution_degrees": 0.25,
+    "chunks": [
+      8736,
+      12,
+      12
+    ],
+    "source_identity_reason": "documented as bit-for-bit identical to source ECMWF ERA5 values"
+  },
+  "transport_feasibility": {
+    "required_unique_tp_chunks": 470,
+    "raw_uncompressed_upper_bound_gb": 2.36500992,
+    "gate_pass": true
+  },
+  "point_mapping": {
+    "event_cell": "event latitude/longitude rounded to nearest 0.25 degree before ERA5 lookup",
+    "longitude_convention": "convert to [0,360) for ERA5",
+    "spatial_selection": "nearest exact ERA5 0.25-degree grid coordinate",
+    "coordinate_uncertainty_max_m": 25000
+  },
+  "local_day_aggregation": {
+    "timezone": "timezonefinder timezone_at() on original event coordinates",
+    "hourly_interval_assignment": "assign each 1-hour accumulation to local calendar date using interval midpoint valid_time - 30 minutes",
+    "hourly_to_daily": "sum tp * 1000 to mm by local calendar day",
+    "small_negative_tolerance_m": -1e-8,
+    "small_negative_handling": "values in [-1e-8,0) set to 0; any value < -1e-8 fails closed",
+    "missing_hour_handling": "any missing/nonfinite required hourly value fails closed"
+  },
+  "rainfall_metric": {
+    "wet_day_threshold_mm": 1,
+    "event_day_excluded": true,
+    "definition": "count consecutive complete local calendar days immediately before eventDate with daily precipitation <1 mm; stop at first wet day; cap at 30",
+    "cap_days": 30,
+    "transform": "zscore(log1p(antecedent_dry_days))",
+    "directional_hypothesis": "beta < 0"
+  },
+  "response": {
+    "unit": "FrogID eventID / recording",
+    "outcome": "1 if >=2 distinct expert-validated scientificName records share eventID; else 0",
+    "absence_claim": false
+  },
+  "model": {
+    "formula": "multi ~ dry_z + C(state) * C(month) + year_z + sin_hour + cos_hour",
+    "primary_cluster": "rounded 0.25-degree ERA5 cell",
+    "support_rule": "beta dry_z < 0, two-sided cluster-robust p < 0.05, and 95% CI excludes 0",
+    "sensitivities": [
+      "coordinate uncertainty <=10 km with same cell clustering",
+      "full frozen sample clustered by recorder"
+    ]
+  },
+  "prohibited_changes": [
+    "no sample redefinition after weather values are opened",
+    "no alternative wet-day threshold",
+    "no different dry-spell cap",
+    "no alternative rainfall transform",
+    "no weather-source switch based on validation result",
+    "no state/month subset selection",
+    "no replacement of NAAMP primary by FrogID"
+  ],
+  "validation_effect_opening_state": "authorized_only_after_this_contract_commit"
+}

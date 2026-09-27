@@ -1,0 +1,37 @@
+{
+  "programme": "frog-chorus-synchrony",
+  "validation_candidate": "Sunshine Coast Annual Frog and Toad Field Survey",
+  "structural_audit": "sunshine_coast_chorus_validation_structural_v0_1",
+  "source_sha256": "ef55f7fc903583ade788d2ed0c32668bc6a9a48fca8706c07a706e365fa6d97b",
+  "result": {
+    "quadrat_events": 713,
+    "parent_surveys": 0,
+    "years": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "call_evidence_rows": 0,
+    "multispecies_call_quadrats": 0,
+    "coordinate_coverage_fraction": 0,
+    "structural_gate_pass": false
+  },
+  "decision": "closed_structural_failure",
+  "reason": "public DwC-A does not preserve explicit HEARD/calling evidence or usable parent-survey/coordinate structure required for external weather validation",
+  "prohibited_rescues": [
+    "do not treat generic Field Observation as calling evidence",
+    "do not treat seen records as heard records",
+    "do not reconstruct parent surveys from spatial proximity",
+    "do not infer coordinates from locality names"
+  ],
+  "weather_effect_opened": false,
+  "next_candidate": "FrogID"
+}

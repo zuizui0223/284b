@@ -1,0 +1,39 @@
+name: frog FrogID rain external validation
+# retriggered after contract-resolution receipt; scientific contract unchanged
+
+on:
+  push:
+    branches:
+      - incubator/frog-chorus-synchrony-v1
+    paths:
+      - "incubator/frog_chorus_synchrony/FROGID_VALIDATION_MODEL_CONTRACT_V0_1.*"
+      - "incubator/frog_chorus_synchrony/scripts/run_frogid_rain_validation.py"
+      - ".github/workflows/frog_frogid_rain_validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frog-frogid-rain-validation
+  cancel-in-progress: true
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install analysis dependencies
+        run: python -m pip install --disable-pip-version-check -q numpy pandas scipy statsmodels patsy
+      - name: Run frozen FrogID ERA5 validation
+        run: python incubator/frog_chorus_synchrony/scripts/run_frogid_rain_validation.py
+      - name: Upload validation receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: frog-frogid-rain-validation-v0-1
+          path: frog_frogid_rain_validation_v0_1.json
+          if-no-files-found: error

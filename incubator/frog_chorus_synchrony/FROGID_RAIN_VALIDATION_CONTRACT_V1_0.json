@@ -1,0 +1,94 @@
+{
+  "project": "frog-chorus-synchrony",
+  "validation_contract_version": "1.0",
+  "status": "frozen_before_FrogID_weather_effect_opening",
+  "parent_primary": "NAAMP_PRIMARY_RECEIPT_V0_1.json",
+  "frogid_structure": "FROGID_STRUCTURAL_RECEIPT_V0_3.json",
+  "source_pins": {
+    "FrogID_DwCA": {
+      "url": "https://dwca-exports.ala.org.au/dr14760.zip",
+      "sha256": "f5dd70ed07956e3e37de4fb04692b83a9d726eae2312767c9eda2dcbf61f759d"
+    },
+    "rainfall": {
+      "provider": "SILO, Queensland Government",
+      "variable": "daily_rain",
+      "grid_resolution_degrees": 0.05,
+      "annual_url_template": "https://s3-ap-southeast-2.amazonaws.com/silo-open-data/Official/annual/daily_rain/{year}.daily_rain.nc",
+      "years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ]
+    }
+  },
+  "eligibility": {
+    "eventID_required": true,
+    "eventDate_required": true,
+    "valid_coordinate_required": true,
+    "coordinateUncertaintyInMeters_max": 3000,
+    "recordedBy_policy": "use as cluster if nonmissing on >=90% of otherwise eligible events; otherwise cluster by 0.5-degree analysis cell",
+    "minimum_eligible_events": 100000,
+    "minimum_eligible_multispecies_events": 30000,
+    "minimum_analysis_cells_with_ge20_events": 100
+  },
+  "response": {
+    "unit": "FrogID eventID = one audio submission/recording",
+    "value": "1 if >=2 distinct scientificName records share eventID; 0 if exactly 1",
+    "name": "multi_species_recording",
+    "presence_only_boundary": "0 means one identified calling species in that submitted recording, not biological absence of other frogs"
+  },
+  "rainfall_exposure": {
+    "window": "three complete calendar days before eventDate: D-3 through D-1",
+    "value": "sum of SILO daily_rain mm at nearest 0.05-degree grid cell",
+    "same_day_rain_excluded": true,
+    "reason": "avoid using rainfall that may have occurred after the recording on eventDate",
+    "transform": "log1p(rain3_mm), demean within fixed 0.5-degree analysis cell, then global z-score",
+    "directional_hypothesis": "beta_rain_within > 0"
+  },
+  "analysis_cell": {
+    "resolution_degrees": 0.5,
+    "definition": "floor latitude and longitude to fixed 0.5-degree bins",
+    "minimum_events_per_cell": 20,
+    "role": "remove persistent spatial differences in baseline rainfall regime and frog richness without selecting regions by outcome"
+  },
+  "model": {
+    "family": "binomial_logit",
+    "formula": "multi_species_recording ~ rain3_within_z + C(stateProvince) + C(month) + year_z",
+    "primary_term": "rain3_within_z",
+    "covariance": "one-way cluster robust",
+    "cluster_primary": "recordedBy if >=90% coverage else analysis_cell",
+    "support_rule": "beta > 0, two-sided cluster-robust p < 0.05, 95% CI excludes 0"
+  },
+  "sensitivities": [
+    {
+      "name": "ge3_species",
+      "response": "1 if >=3 distinct species in eventID, else 0",
+      "same_predictors": true
+    },
+    {
+      "name": "uncertainty_le_1000m",
+      "filter": "coordinateUncertaintyInMeters <= 1000",
+      "same_primary_response": true
+    },
+    {
+      "name": "one_recording_per_user_day",
+      "filter": "deterministically keep lexicographically smallest eventID within recordedBy x eventDate",
+      "same_primary_response": true
+    }
+  ],
+  "forbidden": [
+    "same-day rainfall",
+    "changing the 3-day rainfall window after opening",
+    "selecting a state or species pair after opening",
+    "choosing a coordinate-uncertainty cutoff other than 3000 m primary / 1000 m sensitivity",
+    "substituting temperature if rainfall validation is null",
+    "claiming FrogID single-species recordings prove other species were absent",
+    "causal rainfall language"
+  ],
+  "weather_effect_opened": false
+}

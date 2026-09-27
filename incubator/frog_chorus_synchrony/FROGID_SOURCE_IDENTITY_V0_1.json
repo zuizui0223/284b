@@ -1,0 +1,33 @@
+{
+  "project": "frog-chorus-synchrony",
+  "source_identity_version": "0.1",
+  "status": "FrogID_v6_inner_file_identity_audit",
+  "logical_dataset": {
+    "doi": "10.15468/wazqft",
+    "publisher_version": "6.0",
+    "publication_date": "2025-07-01",
+    "temporal_scope": [
+      "2017-11-10",
+      "2023-11-09"
+    ],
+    "declared_records": 974120,
+    "declared_species": 226
+  },
+  "problem": "ALA dr14760.zip container SHA changed across downloads, so the generated ZIP is not a stable byte-level identity",
+  "identity_rule": {
+    "download_twice": true,
+    "stable_objects": [
+      "meta.xml",
+      "DwC-A core file named by meta.xml",
+      "verbatim_occurrence.txt"
+    ],
+    "pass_if": "all three inner-file SHA-256 hashes agree across two independent downloads",
+    "zip_sha_may_differ": true
+  },
+  "forbidden_reads": [
+    "occurrence values",
+    "event synchrony response",
+    "weather values",
+    "weather-synchrony association"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "project": "frog-chorus-synchrony",
+  "model_contract_version": "0.1",
+  "status": "frozen_before_weather_effect_opening",
+  "source_pins": {
+    "Runs": "ec6b314fe4cd8ec8c048a973e576c8810ea12b21c739c1140e3a12123c611730",
+    "Stops": "28138cdaab43a56ecad8df3b523060c812edfad018c20c67b14581c569a84b0f",
+    "Counts": "60a3f6bc29402cd81fb01155923baaa07bccd172bce8b94fe1051d3ae25e7086",
+    "Species": "ac97118a3a1ccd72a94136009e9696173dabd29b042ac63e474a74c5a9fcd1cb"
+  },
+  "analysis_epoch": [
+    2001,
+    2015
+  ],
+  "eligible_run": "UnifiedProtocol == 1, valid RunID, numeric DaysSinceRain >= 0, at least one non-skipped stop",
+  "event_identity": [
+    "RunID",
+    "StopNumber"
+  ],
+  "sampled_stop": "SkippedStop == '0'",
+  "positive_call": "CallingIndex in {'1','2','3'} according to publisher metadata",
+  "stop_synchrony": "number of distinct positively calling species >= 2",
+  "primary_response": {
+    "unit": "RunID",
+    "successes": "number of sampled stops with stop_synchrony=true",
+    "trials": "number of sampled non-skipped stops",
+    "model_family": "binomial_logit"
+  },
+  "primary_predictor": {
+    "raw": "DaysSinceRain",
+    "transform": "zscore(log1p(DaysSinceRain)) across eligible runs",
+    "directional_hypothesis": "beta < 0",
+    "biological_interpretation": "more recent rainfall is associated with a higher probability that a sampled stop hosts a multi-species chorus"
+  },
+  "fixed_adjustments": [
+    "C(State)",
+    "C(RunNumber)",
+    "C(RouteType)",
+    "zscore(SurveyYear)"
+  ],
+  "dependence": {
+    "covariance": "cluster_robust",
+    "cluster": "State + ':' + RouteNumber",
+    "reason": "repeated runs of the same route are not independent"
+  },
+  "primary_support_rule": "beta_rain < 0 and two-sided cluster-robust p < 0.05 and 95% CI excludes 0",
+  "effect_reporting": [
+    "beta on logit scale",
+    "odds ratio per 1 SD increase in log1p DaysSinceRain",
+    "95% cluster-robust CI",
+    "two-sided p value"
+  ],
+  "sensitivities": [
+    {
+      "name": "complete_route",
+      "filter": "trials == 10",
+      "same_model": true
+    },
+    {
+      "name": "minimum_eight_stops",
+      "filter": "trials >= 8",
+      "same_model": true
+    }
+  ],
+  "secondary_temperature": {
+    "state": "closed_until_TempScale_semantics_are_frozen",
+    "cannot_replace_primary_if_rain_is_null": true
+  },
+  "h3_seasonal_shoulder": {
+    "state": "closed_until_RunNumber_distribution_and_protocol_semantics_are_frozen",
+    "cannot_be_defined_after_primary_effect_is_opened": true
+  },
+  "h4_network": {
+    "state": "secondary_and_must_be_opened_regardless_of_primary_sign_if_later_authorized",
+    "no_edge_selection_by_effect": true
+  },
+  "causal_language_forbidden": true,
+  "outcome_opening_state": "authorized_only_after_this_contract_commit"
+}

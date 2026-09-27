@@ -1,0 +1,56 @@
+{
+  "programme": "frog-chorus-synchrony",
+  "analysis": "naamp_chorus_synchrony_secondary_v0_1",
+  "contract_commit": "5e3b9b4954bb9df44f7743647abddaa3966c0840",
+  "workflow_run": 36066073285,
+  "artifact_id": 10837095383,
+  "artifact_digest": "sha256:12ee3d697ee9fab0ba2f7e7a74947b41756789f868077b3f226ae7f7b439302d",
+  "temperature": {
+    "n_runs": 8202,
+    "beta": 0.376811149579077,
+    "ci95_beta": [
+      0.31699053210041384,
+      0.4366317670577402
+    ],
+    "odds_ratio_per_sd_mean_air_temp_c": 1.4576290095248,
+    "ci95_or": [
+      1.3729895725365149,
+      1.5474861367541397
+    ],
+    "p_value": 5.129060946331863e-35,
+    "frozen_support_rule_pass": true,
+    "complete_10_stop_sensitivity": {
+      "beta": 0.37627185458736123,
+      "ci95_beta": [
+        0.31533868942175913,
+        0.43720501975296333
+      ],
+      "p_value": 1.0171534358297663e-33,
+      "support_rule_pass": true
+    },
+    "qc_status": "provisional_supported_pending_extreme_temperature_sensitivity",
+    "observed_run_mean_temp_c_range": [
+      -4.777777777777778,
+      66.6
+    ],
+    "red_flag": "66.6 C run mean is physically implausible for the survey context and requires predictor-only QC before ecological interpretation is finalized"
+  },
+  "seasonal_shoulder": {
+    "n_runs": 9398,
+    "beta_rain_x_shoulder": -0.04622927345855332,
+    "ci95_beta": [
+      -0.09831899190846183,
+      0.005860444991355185
+    ],
+    "p_value": 0.08195479546236245,
+    "frozen_support_rule_pass": false,
+    "four_window_states_sensitivity": {
+      "beta": 0.02359884595400897,
+      "p_value": 0.6280675687087598,
+      "support_rule_pass": false
+    },
+    "decision": "not_supported"
+  },
+  "primary_rain_result_replaced": false,
+  "network_effect_opened": false
+}

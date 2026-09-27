@@ -1,0 +1,60 @@
+{
+  "project": "frog-chorus-synchrony",
+  "network_contract_version": "0.1",
+  "status": "frozen_before_H4_network_effect_opening",
+  "preregistered_origin": "protocol_v0_1 H4 community reconfiguration",
+  "source_pins": {
+    "Runs": "ec6b314fe4cd8ec8c048a973e576c8810ea12b21c739c1140e3a12123c611730",
+    "Stops": "28138cdaab43a56ecad8df3b523060c812edfad018c20c67b14581c569a84b0f",
+    "Counts": "60a3f6bc29402cd81fb01155923baaa07bccd172bce8b94fe1051d3ae25e7086"
+  },
+  "eligibility": {
+    "primary_epoch": [
+      2001,
+      2015
+    ],
+    "UnifiedProtocol": "1",
+    "complete_route_only": "exactly 10 non-skipped sampled stops",
+    "positive_call": "CallingIndex in {'1','2','3'}",
+    "minimum_distinct_positive_species_in_run": 2
+  },
+  "network_metric": {
+    "run_species_pool": "union of distinct positively calling species across all 10 sampled stops",
+    "pair_trials": "all unordered pairs among the run species pool = choose(S,2)",
+    "pair_successes": "unordered species pairs observed positively calling together at >=1 of the same 10 stops",
+    "response": "pair_successes / pair_trials",
+    "no_pair_selection": true,
+    "no_species_selection": true
+  },
+  "primary_predictor": {
+    "raw": "DaysSinceRain",
+    "transform": "zscore(log1p(DaysSinceRain))",
+    "directional_hypothesis": "beta < 0",
+    "interpretation": "recent rainfall is associated with denser within-run co-calling networks conditional on the species pool present during that run"
+  },
+  "fixed_adjustments": [
+    "C(State)",
+    "C(RunNumber)",
+    "C(RouteType)",
+    "zscore(SurveyYear)",
+    "C(pool_richness)"
+  ],
+  "covariance": {
+    "type": "cluster_robust",
+    "cluster": "State + ':' + RouteNumber"
+  },
+  "model_family": "binomial_logit with pair_trials as frequency weights",
+  "support_rule": "beta_rain < 0 and two-sided cluster-robust p < 0.05 and 95% CI excludes 0",
+  "sensitivity": {
+    "name": "exclude_pair_successes_seen_at_only_one_stop",
+    "rule": "pair is a success only if it co-calls at >=2 of 10 stops",
+    "interpretation": "tests whether rainfall signal reflects repeated within-run network overlap rather than one-stop coincidences"
+  },
+  "forbidden": [
+    "no edge chosen by effect size",
+    "no species subset chosen after opening",
+    "no threshold on DaysSinceRain chosen after opening",
+    "no causal rainfall language"
+  ],
+  "network_effect_opened": false
+}

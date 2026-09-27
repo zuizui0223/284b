@@ -1,0 +1,54 @@
+{
+  "project": "frog-chorus-synchrony",
+  "validation_version": "0.1.3",
+  "supersedes": "EXTERNAL_VALIDATION_V0_1_2.json",
+  "status": "sunshine_verbatim_single_source_call_mapping_preweather",
+  "source_sha256": "ef55f7fc903583ade788d2ed0c32668bc6a9a48fca8706c07a706e365fa6d97b",
+  "repair_reason": "verbatim occurrence and normalized occurrence use nonidentical occurrenceID namespaces; verbatim occurrence already contains eventID scientificName occurrenceRemarks and locationID so no cross-occurrence join is required",
+  "call_source": {
+    "table": "verbatim_occurrence.txt",
+    "positive_codes": [
+      "HEA",
+      "SHD"
+    ],
+    "definitions": {
+      "HEA": "Heard",
+      "SHD": "Seen and Heard"
+    },
+    "evidence_reference": "Queensland Wildlife Data Return identification-method codes"
+  },
+  "event_source": {
+    "table": "event.txt",
+    "fields": [
+      "eventID",
+      "parentEventID",
+      "eventDate",
+      "decimalLatitude",
+      "decimalLongitude"
+    ]
+  },
+  "geometry_registry": {
+    "site_identity": "verbatim locationID",
+    "event_to_site": "unique nonempty locationID among verbatim occurrences sharing eventID",
+    "site_coordinate": "authorized only when all nonmissing event-table coordinate pairs linked to that locationID across the entire dataset are exactly identical",
+    "parent_coordinate": "site-coordinate registry lookup when all child events with known site identity resolve to one locationID",
+    "coordinate_averaging_forbidden": true
+  },
+  "response_candidate": "for each parent survey, number of child quadrat eventIDs with >=2 distinct HEA/SHD species divided by number of child quadrat eventIDs",
+  "forbidden_before_weather_contract": [
+    "rainfall values",
+    "weather-synchrony association",
+    "coordinate-nearest weather joins",
+    "changing HEA/SHD semantics",
+    "dropping surveys based on synchrony response"
+  ],
+  "structural_gate": {
+    "minimum_parent_surveys": 50,
+    "minimum_parent_surveys_with_ge8_quadrats": 40,
+    "minimum_multispecies_call_quadrats": 30,
+    "minimum_parent_surveys_with_any_multispecies_call": 20,
+    "minimum_years": 3,
+    "site_registry_parent_coordinate_coverage_fraction_min": 0.9
+  },
+  "validation_effect_opened": false
+}

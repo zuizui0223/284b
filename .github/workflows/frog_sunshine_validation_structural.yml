@@ -1,0 +1,36 @@
+name: frog Sunshine Coast external validation structural audit
+
+on:
+  push:
+    branches:
+      - incubator/frog-chorus-synchrony-v1
+    paths:
+      - "incubator/frog_chorus_synchrony/EXTERNAL_VALIDATION_V0_1.json"
+      - "incubator/frog_chorus_synchrony/scripts/run_sunshine_coast_validation_audit.py"
+      - ".github/workflows/frog_sunshine_validation_structural.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frog-sunshine-validation-structural
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run outcome-blind external validation audit
+        run: python incubator/frog_chorus_synchrony/scripts/run_sunshine_coast_validation_audit.py
+      - name: Upload sanitized receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: frog-sunshine-validation-structural-v0-1
+          path: frog_sunshine_coast_validation_structural_v0_1.json
+          if-no-files-found: error

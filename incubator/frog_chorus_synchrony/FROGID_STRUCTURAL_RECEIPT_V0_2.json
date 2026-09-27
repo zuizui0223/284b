@@ -1,0 +1,26 @@
+{
+  "programme": "frog-chorus-synchrony",
+  "validation": "FrogID v6",
+  "receipt_version": "0.2",
+  "source_sha256": "e0f87176607db7a065016f9b2b3ec85e81145907c4238633b48a31af92c8afe2",
+  "structural_result": {
+    "occurrence_rows": 974120,
+    "events": 658670,
+    "distinct_species": 226,
+    "multispecies_events": 142279,
+    "coordinate_event_coverage_fraction": 1,
+    "coordinate_consistency_fraction_all_events": 1,
+    "date_event_coverage_fraction": 1,
+    "date_consistency_fraction_all_events": 1,
+    "event_time_coverage_fraction": 0,
+    "recordedBy_event_coverage_fraction": 1,
+    "distinct_states": 0
+  },
+  "gate_status": "pending_exact_verbatim_field_recovery",
+  "gate_failed_in_core_because": [
+    "eventTime coverage 0 < 0.90",
+    "stateProvince absent"
+  ],
+  "ecological_effect_opened": false,
+  "rainfall_values_read": false
+}

@@ -1,0 +1,26 @@
+{
+  "package": "frog-chorus-synchrony-standalone-archive-branch",
+  "version": "0.1",
+  "archive_branch": "archive/frog-chorus-synchrony-standalone-v1",
+  "archive_commit": "8616df05b3dc0d2417e8f2e0f2f91221c2722111",
+  "archive_tree": "fb534743e229082328858943f9a544b7f4716907",
+  "source_commit": "91ed566f05e7a7df1e87c080855776808e3827a9",
+  "file_count": 49,
+  "content_entries": 48,
+  "canonical_content_identity": "16960cbf4f5f5f3aa9175115b108125409acfe9c7e2ef013e23d90a9b4cd27da",
+  "file_sha256_manifest_sha256": "099b17cfba2625b1e9eb67cba31908f2cdd26eff0be1a20d6f592387251aa475",
+  "verification": {
+    "root_file_count_matches_artifact": true,
+    "FILE_SHA256_present": true,
+    "README_present": true,
+    "source_blobs_taken_from_QA_source_commit": true,
+    "later_branch_edits_excluded": true
+  },
+  "boundary": {
+    "standalone_repository_created": false,
+    "github_release_created": false,
+    "zenodo_doi_created": false,
+    "reason": "available connector can create branches/files but not a new repository, release, or Zenodo deposition"
+  },
+  "scientific_claim_changed": false
+}

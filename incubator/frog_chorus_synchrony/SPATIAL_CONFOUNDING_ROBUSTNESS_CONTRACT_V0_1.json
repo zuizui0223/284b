@@ -1,0 +1,53 @@
+{
+  "project": "frog-chorus-synchrony",
+  "robustness_version": "0.1",
+  "status": "post_opening_spatial_confounding_diagnostic_frozen_before_diagnostic_effects",
+  "primary_claim_locked": "CLAIM_BOUNDARY_V1.json",
+  "purpose": "test whether the rain-synchrony direction persists when inference is driven by weather variation within the same spatial sampling unit rather than between spatial units with different species pools",
+  "no_upgrade_rule": "these diagnostics cannot upgrade a failed primary or be used to redefine the primary effect; they are reported regardless of direction",
+  "naamp": {
+    "unit": "route-run",
+    "spatial_stratum": "State:RouteNumber",
+    "response": "multispecies-calling stops / sampled non-skipped stops",
+    "exposure": "same frozen rain_z = z(log1p DaysSinceRain)",
+    "estimator": "weighted within-route fixed-effects linear-probability diagnostic",
+    "weights": "sampled stops per run",
+    "adjustments": [
+      "within-route centered RunNumber dummies",
+      "within-route centered year_z"
+    ],
+    "covariance": "route-cluster robust",
+    "interpretation": "sign of within-route association on probability scale; not a replacement for primary binomial OR",
+    "directional_consistency": "beta_rain_within < 0"
+  },
+  "frogid": {
+    "unit": "expert-validated recording",
+    "spatial_stratum": "frozen 0.25-degree ERA5 cell",
+    "response": "multi-species recording vs one-species recording, conditional on >=1 calling species",
+    "exposure": "same frozen dry_z from FROGID_VALIDATION_MODEL_CONTRACT_V0_4",
+    "estimator": "conditional logistic regression stratified by ERA5 cell",
+    "adjustments": [
+      "month indicators",
+      "year_z",
+      "sin_hour",
+      "cos_hour"
+    ],
+    "state_effect": "absorbed geographically by cell stratum and therefore not separately estimated",
+    "interpretation": "within-weather-cell odds association; not a replacement for the frozen validation OR",
+    "directional_consistency": "beta_dry_within < 0"
+  },
+  "diagnostic_classification": {
+    "spatially_robust": "both diagnostics negative and 95% CI exclude 0",
+    "directionally_consistent_qualified": "both diagnostics negative but one or both CI include 0",
+    "mixed": "diagnostic signs differ",
+    "spatial_contradiction": "either diagnostic is significantly positive"
+  },
+  "prohibited": [
+    "no new spatial subset after results",
+    "no dropping low-richness routes/cells based on outcome",
+    "no alternate rain transform",
+    "no alternate wet-day threshold or dry-spell cap",
+    "no replacing the main manuscript effect size with these diagnostics"
+  ],
+  "effects_opened": false
+}

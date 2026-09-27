@@ -1,0 +1,17 @@
+{
+  "programme": "frog-chorus-synchrony",
+  "validation_candidate": "Sunshine Coast Annual Frog and Toad Field Survey",
+  "structural_audit_run": 36066758932,
+  "artifact_id": 10836069039,
+  "artifact_digest": "sha256:f2977654da71a1752d7355efa5e5c0fdad257711c3723f2a369ed1eeeffbb844",
+  "source_sha256": "ef55f7fc903583ade788d2ed0c32668bc6a9a48fca8706c07a706e365fa6d97b",
+  "quadrat_events": 713,
+  "years": 11,
+  "parent_surveys": 0,
+  "coordinate_coverage_fraction": 0,
+  "multispecies_call_quadrats": 0,
+  "decision": "structural_fail_public_DwCA_loses_call_and_parent_event_semantics",
+  "rainfall_values_read": false,
+  "weather_synchrony_association_opened": false,
+  "no_rescue": true
+}

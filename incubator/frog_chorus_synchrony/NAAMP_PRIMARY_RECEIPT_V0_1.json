@@ -1,0 +1,58 @@
+{
+  "programme": "frog-chorus-synchrony",
+  "analysis": "naamp_chorus_synchrony_primary_v0_1",
+  "contract_commit": "23eeaa6e0111848170fe5e332aabba509c37820b",
+  "workflow_run": 36018292786,
+  "artifact_id": 10814834999,
+  "artifact_digest": "sha256:680df4a14b216df2f21e9a858fce43e785e21c0d34fcd8205f65b3239333d896",
+  "primary": {
+    "n_runs": 9399,
+    "n_routes": 900,
+    "sampled_stops": 93383,
+    "multi_species_stops": 41020,
+    "beta": -0.03117247036378344,
+    "se_cluster": 0.015083272912782804,
+    "ci95_beta": [
+      -0.0607351420418263,
+      -0.0016097986857405884
+    ],
+    "odds_ratio_per_sd_log1p_days_since_rain": 0.9693083816894524,
+    "ci95_or": [
+      0.9410724573004646,
+      0.9983914963451574
+    ],
+    "p_value": 0.03876324235953538,
+    "frozen_support_rule_pass": true
+  },
+  "sensitivities": {
+    "complete_10_stops": {
+      "beta": -0.02931865348187162,
+      "ci95_beta": [
+        -0.05962630637622164,
+        0.0009889994124784064
+      ],
+      "p_value": 0.05795919369753962,
+      "support_rule_pass": false
+    },
+    "ge8_stops": {
+      "beta": -0.030578705990007074,
+      "ci95_beta": [
+        -0.06021486817471313,
+        -0.0009425438053010174
+      ],
+      "p_value": 0.04314553708661916,
+      "support_rule_pass": true
+    }
+  },
+  "interpretation": "weak positive evidence for the preregistered direction: multi-species chorus synchrony is higher more recently after rainfall, with small effect size and one of two prespecified sensitivities narrowly crossing zero",
+  "prohibited_overstatement": [
+    "do not call the effect large",
+    "do not call rainfall causal",
+    "do not claim all sensitivities pass",
+    "do not choose another rainfall transform after opening",
+    "do not replace the primary with temperature if temperature is stronger"
+  ],
+  "secondary_temperature_opened": false,
+  "h3_seasonal_shoulder_opened": false,
+  "h4_network_opened": false
+}

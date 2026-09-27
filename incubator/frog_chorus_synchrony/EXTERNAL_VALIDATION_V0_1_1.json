@@ -1,0 +1,38 @@
+{
+  "project": "frog-chorus-synchrony",
+  "validation_version": "0.1.1",
+  "supersedes": "EXTERNAL_VALIDATION_V0_1.json",
+  "status": "sunshine_dwca_table_mapping_repair_preoutcome",
+  "repair_reason": "initial audit selected processed occurrence.txt; ALA record surface shows event hierarchy and raw SEE/HEARD semantics may reside in event/verbatim tables",
+  "source_sha256": "ef55f7fc903583ade788d2ed0c32668bc6a9a48fca8706c07a706e365fa6d97b",
+  "identity_join": {
+    "occurrence_species": "occurrence.txt by occurrenceID",
+    "call_semantics": "verbatim_occurrence.txt by occurrenceID",
+    "event_hierarchy": "event.txt by eventID",
+    "spatial_matching_forbidden": true,
+    "fuzzy_event_matching_forbidden": true
+  },
+  "allowed_reads": [
+    "headers of event.txt occurrence.txt verbatim_occurrence.txt",
+    "occurrenceID eventID parentEventID locationID",
+    "scientificName occurrenceStatus",
+    "verbatim occurrenceRemarks behavior samplingProtocol or equivalent raw labels",
+    "eventDate eventTime decimalLatitude decimalLongitude",
+    "marginal raw call-evidence label counts",
+    "number of exact eventIDs with >=2 species explicitly labelled HEARD/calling"
+  ],
+  "forbidden_reads": [
+    "rainfall values",
+    "weather-synchrony association",
+    "post hoc call labels not explicitly present in source",
+    "coordinate-nearest joins"
+  ],
+  "structural_gate": {
+    "minimum_parent_surveys": 50,
+    "minimum_quadrat_events": 300,
+    "minimum_multispecies_call_quadrats": 30,
+    "minimum_years": 3,
+    "coordinate_coverage_fraction_min": 0.9
+  },
+  "validation_effect_opened": false
+}

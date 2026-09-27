@@ -1,0 +1,57 @@
+{
+  "programme": "frog-chorus-synchrony",
+  "receipt_version": "SPATIAL_CONFOUNDING_ROBUSTNESS_RECEIPT_V0_1",
+  "status": "spatially_robust",
+  "contract": "SPATIAL_CONFOUNDING_ROBUSTNESS_CONTRACT_V0_1.json",
+  "frogid_repair_contract": "SPATIAL_CONFOUNDING_ROBUSTNESS_CONTRACT_V0_1_1.json",
+  "workflow_run": 36084825817,
+  "workflow_head_sha": "93084ee8ba80fdf7f6e247a6569988b80fb6018e",
+  "artifacts": {
+    "NAAMP": {
+      "artifact_id": 10843327695,
+      "artifact_digest": "sha256:ffc693c5ffc47e023113fc57ae8e4bbf68da3cdd0d955e8c3c2d31c8ae1e37e3",
+      "estimator": "weighted within-route fixed-effects linear probability diagnostic",
+      "n_runs": 9256,
+      "n_routes": 797,
+      "sampled_stops": 91972,
+      "beta_rain_within_probability_scale": -0.013674663688558793,
+      "se_route_cluster": 0.003218384250399528,
+      "ci95_beta": [
+        -0.019982580907752807,
+        -0.00736674646936478
+      ],
+      "p_value": 0.00002148016767757064,
+      "direction_negative": true,
+      "ci_excludes_zero_negative": true
+    },
+    "FrogID": {
+      "artifact_id": 10843139842,
+      "artifact_digest": "sha256:b12b53d83ec8d0c4219969d9e410f192a430611614f3f49ca96c2f5aefc946b3",
+      "estimator": "within-ERA5-cell fixed-effects linear probability diagnostic",
+      "n_recordings": 40020,
+      "informative_weather_cells": 1071,
+      "multi_species_recordings": 17832,
+      "beta_dry_within_probability_scale": -0.04264901148705778,
+      "se_cell_cluster": 0.004645706097669998,
+      "ci95_beta": [
+        -0.05175442812124909,
+        -0.03354359485286646
+      ],
+      "p_value": 4.2986132160301344e-20,
+      "direction_negative": true,
+      "ci_excludes_zero_negative": true,
+      "required_daily_weather_sha256": "a0db2fc9eff2cb3cc9556094238ce3459cb3edf108ee06130e2846b97e70d9c1"
+    }
+  },
+  "frozen_classification_rule": "spatially_robust if both diagnostics are negative and both 95% CIs exclude zero",
+  "frozen_classification": "spatially_robust",
+  "interpretation": "The replicated rain-recency association persists when estimated from temporal weather variation within the same NAAMP route and within the same FrogID ERA5 cell, making static spatial differences in local frog species pools an insufficient explanation for the observed direction.",
+  "primary_effects_replaced": false,
+  "causal_claim_authorized": false,
+  "prohibited_overstatement": [
+    "do not interpret fixed-effects diagnostics as causal rainfall effects",
+    "do not replace original logistic odds ratios with probability-scale diagnostic coefficients",
+    "do not claim spatial confounding is eliminated for all time-varying local factors",
+    "do not infer interspecific facilitation or network rewiring"
+  ]
+}

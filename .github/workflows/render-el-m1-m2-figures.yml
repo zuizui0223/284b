@@ -1,0 +1,52 @@
+name: Render EL M1+M2 figures
+
+on:
+  push:
+    branches:
+      - paper/el-m1-m2-figures-v1
+    paths:
+      - 'scripts/render_el_m1_m2_figures.py'
+      - 'results/reviewer2_level_a_structure_audit_v0_1.json'
+      - 'results/product_b_same_target_core19_v0_4_heldout_final_receipt.json'
+      - 'results/pre_field_state_dependent_invalidity_v0_2.json'
+      - '.github/workflows/render-el-m1-m2-figures.yml'
+  pull_request:
+    paths:
+      - 'scripts/render_el_m1_m2_figures.py'
+      - 'results/reviewer2_level_a_structure_audit_v0_1.json'
+      - 'results/product_b_same_target_core19_v0_4_heldout_final_receipt.json'
+      - 'results/pre_field_state_dependent_invalidity_v0_2.json'
+      - '.github/workflows/render-el-m1-m2-figures.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: pip install matplotlib numpy
+      - name: Render
+        run: python scripts/render_el_m1_m2_figures.py
+      - name: Verify
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('manuscript/generated/el_m1_m2_v1/manifest.json')
+          m=json.loads(p.read_text())
+          assert m['figure_count']==4
+          for i in range(1,5):
+              assert list(p.parent.glob(f'figure_{i}_*.pdf'))
+              assert list(p.parent.glob(f'figure_{i}_*.png'))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: el-m1-m2-figures-v1
+          path: manuscript/generated/el_m1_m2_v1
+          if-no-files-found: error

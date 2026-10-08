@@ -22,7 +22,7 @@
 - [ ] Final main-text word count verified on the submission derivative.
 - [ ] Final reference formatting verified.
 - [ ] Figures rendered and visually inspected.
-- [ ] Figure accessibility / alt text completed.
+- [x] Figure accessibility / alt text drafted and matched to frozen evidence; see Figure Captions v1.
 - [ ] Supplement assembled only from evidence needed by the M1+M2 paper.
 - [ ] Anonymous/review manuscript generated if required by the current portal.
 

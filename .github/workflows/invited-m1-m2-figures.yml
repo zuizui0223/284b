@@ -1,0 +1,32 @@
+name: Invited M1+M2 manuscript figures
+on:
+  pull_request:
+    paths:
+      - 'scripts/build_invited_m1_m2_figures.py'
+      - 'tests/test_invited_m1_m2_figures.py'
+      - '.github/workflows/invited-m1-m2-figures.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  figures:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install figure/test dependencies
+        run: python -m pip install matplotlib numpy pytest
+      - name: Verify frozen sources and figure output
+        run: python -m pytest -q tests/test_invited_m1_m2_figures.py
+      - name: Build manuscript figures
+        run: |
+          python scripts/build_invited_m1_m2_figures.py --output-dir build/invited_m1_m2_figures
+      - uses: actions/upload-artifact@v4
+        with:
+          name: invited-m1-m2-figures-v1
+          path: build/invited_m1_m2_figures/
+          if-no-files-found: error

@@ -112,7 +112,7 @@ def fig2_level_a(out,audit,empirical):
     order=sorted(ratios,key=lambda k:ratios[k])
     fig,ax=plt.subplots(figsize=(9.1,5.9))
     vals=[ratios[k] for k in order]
-    labels=[r"$\it{"+x.split()[0]+"}$ "+x.split()[1] for x in order]
+    labels=[r"$\mathit{"+x.split()[0]+"}$ "+x.split()[1] for x in order]
     colors=[GOLD if x=="Nothofagus betuloides" else BLUE for x in order]
     bars=ax.barh(np.arange(len(order)),vals,height=0.7,color=colors)
     ax.set_yticks(np.arange(len(order)),labels)

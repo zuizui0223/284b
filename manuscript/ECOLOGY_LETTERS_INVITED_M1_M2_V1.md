@@ -99,13 +99,17 @@ A representative frozen audit with `a1=0.70`, `a0=0.90`, `q=0.95` and `sp=0.99` 
 
 Observation-process qualification answers whether a negative state is admissible. It does not determine whether a called violation is likely to be true.
 
-Let `pi` be the prevalence of true biological violations. Among qualified valid keys,
+The false-discovery fraction must be indexed to the population on which prevalence is defined. Among valid keys, let `pi_valid=P(F=false | valid key)`. Then
 
-`FDF = (1-pi)(1-q) / [(1-pi)(1-q) + pi sp]`.
+`FDF_valid = (1-pi_valid)(1-q) / [(1-pi_valid)(1-q) + pi_valid sp]`.
 
-The valid-key fraction cancels. Thus preserving invalid keys as unresolved prevents invalid-state mass from entering the endpoint, but the reliability of a positive violation call still depends on the base rate and on later replication or aggregation rules.
+For a violation prevalence `pi_all=P(F=false)` across *all* at-risk keys, however, class-dependent key validity must be retained:
 
-For example, with `pi=0.10`, `q=0.80` and `sp=0.99`, the false-discovery fraction is approximately 0.645. A measurement gate can therefore be necessary for admissible hard inference without being sufficient for endpoint-level evidentiary reliability.
+`FDF_all = (1-pi_all)a1(1-q) / [(1-pi_all)a1(1-q) + pi_all a0 sp]`.
+
+Indeed, `pi_valid = pi_all a0 / [(1-pi_all)a1 + pi_all a0]`. The valid-key fraction cancels **only when `a1=a0>0`, or when prevalence has already been conditioned on valid keys**. Where no qualified violation calls are possible, FDF is undefined rather than zero.
+
+With `pi_valid=0.10`, `q=0.80` and `sp=0.99`, FDF is approximately 0.645, as in the original illustration. Holding the *population* prevalence at `pi_all=0.10` with illustrative class-dependent validity `a1=0.70`, `a0=0.90` instead gives `pi_valid=0.125` and FDF approximately 0.586 for the same `q` and `sp`. These are analytic scenarios, not empirical frequency estimates. A measurement gate can be necessary for admissible hard inference without being sufficient for endpoint-level evidentiary reliability; replication or aggregation remains a separate requirement.
 
 ## 6. Discussion
 

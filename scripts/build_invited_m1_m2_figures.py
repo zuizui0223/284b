@@ -261,7 +261,8 @@ def main():
        "Four authored figures in PDF, SVG and 300-dpi PNG are derived from the "
        "frozen Level-A empirical receipt, Reviewer-2 structure audit and invalid-state "
        "mathematical audit. Figure 4 retains the documented FDF parameters "
-       "(q=.8, sp=.99, π_all=.1) and contrasts equal with class-specific validity "\n\n"
+       "(q=.8, sp=.99, π_all=.1) and contrasts equal with class-specific validity "
+       "as analytic illustrations, not empirical estimates.\n\n"
        "Independent biological n=12 taxa. The 283 evaluable cells are repeated "
        "sensitivity diagnostics, not independent replicates. The nearest-rank q95 "
        "reference envelope is not a nominal 95% predictive interval.\n",

@@ -30,3 +30,18 @@ def test_figure_package_from_frozen_receipts(tmp_path):
             p=tmp_path/(stem+suffix)
             assert p.exists() and p.stat().st_size>4000
     assert (tmp_path/"FIGURE_README.md").exists()
+
+
+def test_figure4_population_prevalence_conditioning():
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from build_invited_m1_m2_figures import fdf_population
+    equal = fdf_population(0.10, 0.80, 0.99)
+    dependent = fdf_population(0.10, 0.80, 0.99, a1=0.70, a0=0.90)
+    assert abs(equal - 0.6451612903225806) < 1e-12
+    assert abs(dependent - (0.126 / 0.2151)) < 1e-12
+    captions = (ROOT / "manuscript" /
+                "ECOLOGY_LETTERS_INVITED_M1_M2_FIGURE_CAPTIONS_V1.md"
+               ).read_text(encoding="utf-8")
+    assert "π_all" in captions
+    assert "π_valid" in captions
+    assert "0.586" in captions

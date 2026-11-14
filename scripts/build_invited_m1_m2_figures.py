@@ -186,38 +186,60 @@ def fig3_invalidity(out,invalid):
     save(fig,out/"figure3_invalidity")
 
 
-def fdf(pi,q,sp):
-    return (1-pi)*(1-q)/((1-pi)*(1-q)+pi*sp)
+from relation_endpoint_contract import qualified_violation_false_discovery_fraction
+
+
+def fdf_population(pi, q, sp, a1=1.0, a0=1.0):
+    """Qualified-call FDF with prevalence defined before validity filtering."""
+    return qualified_violation_false_discovery_fraction(
+        violation_prevalence=float(pi),
+        valid_if_function_present=a1,
+        valid_if_function_absent=a0,
+        key_sensitivity=q,
+        specificity=sp,
+    )
 
 
 def fig4_fdf(out):
-    # The frozen illustrative parameters in docs/evidence_boundary_structural_result.md.
-    q,sp,anchor=0.8,0.99,0.1
-    expect=0.645
-    actual=fdf(anchor,q,sp)
-    assert abs(actual-expect)<0.001
-    xs=np.linspace(0.005,0.8,501)
-    ys=fdf(xs,q,sp)
-    fig,ax=plt.subplots(figsize=(8.5,4.4))
-    ax.plot(xs,ys,lw=2.6,color=BLUE)
-    ax.scatter([anchor],[actual],s=75,color=GOLD,zorder=4)
-    ax.axvline(anchor,color=MUTED,linestyle=":",lw=1.0)
-    ax.axhline(actual,color=MUTED,linestyle=":",lw=1.0)
-    ax.annotate(f"π = 0.10   |   FDF ≈ {actual:.3f}",(anchor,actual),
-                xytext=(0.31,0.80),textcoords="axes fraction",
-                arrowprops={"arrowstyle":"->","color":MUTED},
-                fontsize=10,fontweight="bold")
-    ax.set(xlim=(0,0.8),ylim=(0,1.0),
-           xlabel="Prevalence of true violations (π)",
-           ylabel="False-discovery fraction among qualified calls")
-    ax.set_title("Figure 4  |  Measurement qualification does not guarantee attribution",
-                 loc="left",fontsize=13,fontweight="bold",pad=15)
-    ax.grid(True,color=GRID,lw=0.75)
-    fig.text(0.14,0.01,
-       "Illustrative, not empirically estimated: valid-key sensitivity q = 0.80; specificity sp = 0.99. "
-       "No nominal confidence interval is implied.",fontsize=8.7,color=MUTED)
-    fig.tight_layout(rect=[0,0.06,1,1])
-    save(fig,out/"figure4_fdf")
+    # Analytic illustrations only; no focal Level-C biological data are read.
+    q, sp, anchor = 0.8, 0.99, 0.10
+    equal_anchor = fdf_population(anchor, q, sp)
+    dependent_anchor = fdf_population(anchor, q, sp, a1=0.70, a0=0.90)
+    assert math.isclose(equal_anchor, 0.18 / (0.18 + 0.099), abs_tol=1e-12)
+    assert math.isclose(dependent_anchor, 0.126 / (0.126 + 0.0891), abs_tol=1e-12)
+
+    xs = np.linspace(0.005, 0.8, 501)
+    eq = np.asarray([fdf_population(x, q, sp) for x in xs])
+    dep = np.asarray([fdf_population(x, q, sp, a1=0.70, a0=0.90) for x in xs])
+    fig, ax = plt.subplots(figsize=(9.2, 4.6))
+    ax.plot(xs, eq, lw=2.6, color=BLUE, label="Equal validity: a₁ = a₀")
+    ax.plot(xs, dep, lw=2.4, color=GOLD, linestyle="--",
+            label="Class dependent: a₁ = 0.70, a₀ = 0.90")
+    ax.scatter([anchor, anchor], [equal_anchor, dependent_anchor],
+               s=65, color=[BLUE, GOLD], edgecolor="white", zorder=4)
+    ax.axvline(anchor, color=MUTED, linestyle=":", lw=1.0)
+    ax.annotate(f"Equal: {equal_anchor:.3f}", (anchor, equal_anchor),
+                xytext=(0.29, 0.84), textcoords="axes fraction",
+                arrowprops={"arrowstyle": "->", "color": BLUE},
+                fontsize=9.5, color=BLUE)
+    ax.annotate(f"Class-dependent: {dependent_anchor:.3f}",
+                (anchor, dependent_anchor),
+                xytext=(0.36, 0.64), textcoords="axes fraction",
+                arrowprops={"arrowstyle": "->", "color": GOLD},
+                fontsize=9.5, color=GOLD)
+    ax.set(xlim=(0, 0.8), ylim=(0, 1.0),
+           xlabel="True-violation prevalence across all at-risk keys (π_all)",
+           ylabel="False-discovery fraction among qualified violation calls")
+    ax.set_title("Figure 4  |  Qualified-call reliability and validity selection",
+                 loc="left", fontsize=12.5, fontweight="bold", pad=15)
+    ax.legend(loc="upper right", fontsize=8.8, frameon=False)
+    ax.grid(True, color=GRID, lw=0.75)
+    fig.text(0.13, 0.012,
+        "Analytic illustration (q=0.80, sp=0.99, π_all=0.10), not empirical missingness estimates. "
+        "The simplified FDF formula uses prevalence among valid keys.",
+        fontsize=8.4, color=MUTED)
+    fig.tight_layout(rect=[0, 0.07, 1, 1])
+    save(fig, out/"figure4_fdf")
 
 
 def main():
@@ -238,8 +260,8 @@ def main():
        "# Invited Ecology Letters M1+M2 figure package\n\n"
        "Four authored figures in PDF, SVG and 300-dpi PNG are derived from the "
        "frozen Level-A empirical receipt, Reviewer-2 structure audit and invalid-state "
-       "mathematical audit. Figure 4 uses the previously documented illustrative "
-       "FDF parameter scenario (q=.8, sp=.99, π=.1), not a real-world estimate.\n\n"
+       "mathematical audit. Figure 4 retains the documented FDF parameters "
+       "(q=.8, sp=.99, π_all=.1) and contrasts equal with class-specific validity "\n\n"
        "Independent biological n=12 taxa. The 283 evaluable cells are repeated "
        "sensitivity diagnostics, not independent replicates. The nearest-rank q95 "
        "reference envelope is not a nominal 95% predictive interval.\n",

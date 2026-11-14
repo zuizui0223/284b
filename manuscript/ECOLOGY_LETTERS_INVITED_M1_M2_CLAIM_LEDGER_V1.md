@@ -21,6 +21,7 @@ No focal Level-B/Level-C biological candidate result is needed for the manuscrip
 | EL6 | exact analytic | If `a1=a0=a`, both increments equal `1-a`. |
 | EL7 | exact analytic | Process qualification does not control endpoint false-discovery fraction; at `pi_valid=.10,q=.80,sp=.99`, FDF is approximately .645. | 
 | EL7a | exact analytic | If `pi_all` is defined before validity filtering, FDF also depends on class-specific validity `a1,a0`; the simplification using `pi_all` requires `a1=a0>0`. |
+| EL7b | exact analytic | With nondegenerate probabilities, class validity multiplies FDF odds by `a1/a0` relative to equal validity at fixed population prevalence and `q,sp`. |
 | EL8 | synthesis | Preserving unresolved states can prevent unsupported negatives without preventing positive closure when the required evidence is present. |
 
 ## Prohibited claims

@@ -19,7 +19,8 @@ No focal Level-B/Level-C biological candidate result is needed for the manuscrip
 | EL4 | exact analytic | `FPR_zero - FPR_gated = 1-a1`. |
 | EL5 | exact analytic | `TPR_zero - TPR_gated = 1-a0`. |
 | EL6 | exact analytic | If `a1=a0=a`, both increments equal `1-a`. |
-| EL7 | exact analytic | Process qualification does not control endpoint false-discovery fraction; at `pi=.10,q=.80,sp=.99`, FDF is approximately .645. |
+| EL7 | exact analytic | Process qualification does not control endpoint false-discovery fraction; at `pi_valid=.10,q=.80,sp=.99`, FDF is approximately .645. | 
+| EL7a | exact analytic | If `pi_all` is defined before validity filtering, FDF also depends on class-specific validity `a1,a0`; the simplification using `pi_all` requires `a1=a0>0`. |
 | EL8 | synthesis | Preserving unresolved states can prevent unsupported negatives without preventing positive closure when the required evidence is present. |
 
 ## Prohibited claims

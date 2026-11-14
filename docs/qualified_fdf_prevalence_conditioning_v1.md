@@ -36,8 +36,19 @@ conditional-valid formula gives
 The two expressions are identical once their prevalence denominators are
 matched. In particular, if `a1=a0>0`, then `pi_valid=pi_all` and the
 valid-key factor cancels. If `a1!=a0`, **it does not cancel for a fixed
-population prevalence**. If qualified calls have zero probability, FDF is
-undefined (not zero).
+population prevalence**.
+
+An exact corollary makes the selection effect transparent. For nondegenerate
+probabilities (0 < FDF < 1), the false-discovery *odds* are
+
+`FDF_all/(1-FDF_all) = [(1-pi_all)/pi_all] * [a1/a0] * [(1-q)/sp]`.
+
+Thus relative to equal validity at the same population prevalence and
+conditional detection characteristics, the FDF odds are multiplied by
+`a1/a0`. Higher validity for compatible versus violating keys increases
+false-discovery odds; the reverse reduces them. This is a theoretical
+selection statement, not a directional ecological prediction.
+If qualified calls have zero probability, FDF is undefined (not zero).
 
 ## Source-safe illustrative numbers
 

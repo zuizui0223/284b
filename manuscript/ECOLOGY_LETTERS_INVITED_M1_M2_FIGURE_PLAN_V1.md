@@ -51,10 +51,13 @@ Message: added decisiveness is not free.
 
 ## Figure 4 — Qualification versus reliability
 
-Plot FDF against true violation prevalence for representative q/sp combinations.
+Plot FDF against **population** true-violation prevalence, explicitly distinguishing equal-validity and class-dependent-validity cases using the same illustrative `q=.80, sp=.99`.
 
-Mark:
-`pi=.10, q=.80, sp=.99 -> FDF≈.645`.
+Mark at `pi_all=.10`:
+- equal validity (`a1=a0>0`): FDF≈.645;
+- class-dependent validity (`a1=.70, a0=.90`): `pi_valid=.125`, FDF≈.586.
+
+The original single-curve expression uses `pi_valid` (prevalence among valid keys), not automatically `pi_all`.
 
 Message: admissible measurement is distinct from reliable endpoint-level attribution; aggregation/replication remains a separate layer.
 

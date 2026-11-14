@@ -107,7 +107,11 @@ For a violation prevalence `pi_all=P(F=false)` across *all* at-risk keys, howeve
 
 `FDF_all = (1-pi_all)a1(1-q) / [(1-pi_all)a1(1-q) + pi_all a0 sp]`.
 
-Indeed, `pi_valid = pi_all a0 / [(1-pi_all)a1 + pi_all a0]`. The valid-key fraction cancels **only when `a1=a0>0`, or when prevalence has already been conditioned on valid keys**. Where no qualified violation calls are possible, FDF is undefined rather than zero.
+Indeed, `pi_valid = pi_all a0 / [(1-pi_all)a1 + pi_all a0]`. The valid-key fraction cancels **only when `a1=a0>0`, or when prevalence has already been conditioned on valid keys**. More generally, for nondegenerate probabilities the false-discovery odds obey the exact identity
+
+`FDF_all/(1-FDF_all) = [(1-pi_all)/pi_all] (a1/a0) [(1-q)/sp]`.
+
+The class-validity ratio `a1/a0` therefore multiplies false-discovery odds at fixed population prevalence and conditional detection characteristics. Where no qualified violation calls are possible, FDF is undefined rather than zero.
 
 With `pi_valid=0.10`, `q=0.80` and `sp=0.99`, FDF is approximately 0.645, as in the original illustration. Holding the *population* prevalence at `pi_all=0.10` with illustrative class-dependent validity `a1=0.70`, `a0=0.90` instead gives `pi_valid=0.125` and FDF approximately 0.586 for the same `q` and `sp`. These are analytic scenarios, not empirical frequency estimates. A measurement gate can be necessary for admissible hard inference without being sufficient for endpoint-level evidentiary reliability; replication or aggregation remains a separate requirement.
 

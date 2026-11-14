@@ -20,8 +20,25 @@ The first two panels compare the gated and zero-collapsed false-violation and tr
 
 **Alt text:** Two paired bar charts show that coding invalid keys as zero increases both false-violation calls and apparent true-violation sensitivity. A third panel plots the downward line 1 minus valid-key fraction, marking increments of 0.30 and 0.10 for two different classes. The difference between those marks emphasizes class-dependent validity.
 
-## Figure 4. False-discovery fraction among qualified negative-state calls
+## Figure 4. Qualified-call reliability and prevalence conditioning
 
-The false-discovery fraction for a qualified hard-relation violation call is plotted against the prevalence `π` of true violations under the illustrative fixed valid-key sensitivity `q=0.80` and specificity `sp=0.99`: `FDF=(1−π)(1−q)/[(1−π)(1−q)+πsp]`. At `π=0.10`, `FDF≈0.645`. Qualification of a valid observation key does not itself guarantee reliable attribution; base rate and later replication/aggregation are distinct inferential requirements. The curve is theoretical, not an estimate from the 12 held-out taxa.
+The false-discovery fraction (FDF) among qualified hard-violation calls is
+plotted against the true-violation prevalence `π_all` **before** the validity
+gate. The two curves use illustrative valid-key sensitivity `q=0.80` and
+specificity `sp=0.99`. The solid curve assumes equal nonzero class validity
+(`a₁=a₀`), in which case `π_valid=π_all` and
+`FDF=(1−π_all)(1−q)/[(1−π_all)(1−q)+π_all sp]`. The dashed curve allows
+class-dependent validity (`a₁=0.70,a₀=0.90`), for which the corresponding
+population-prevalence formula must retain `a₁,a₀` in both terms. At
+`π_all=0.10`, the respective FDF values are 0.645 and 0.586; the latter
+has `π_valid=0.125`. The curves are analytical illustrations, not estimates
+of natural missingness, false discovery or focal Level-C interactions.
+Qualified observations are necessary for admissible negative inference, but
+do not automatically guarantee attribution reliability.
 
-**Alt text:** A downward curve shows the theoretical fraction of falsely called violations as the true-violation prevalence rises. A highlighted point at prevalence 0.10 has a false-discovery fraction of about 0.645. The chart explicitly labels its sensitivity and specificity as illustrative rather than estimated.
+**Alt text:** Two descending theoretical FDF curves are plotted against
+population true-violation prevalence. A solid equal-validity curve and a
+dashed class-dependent-validity curve are highlighted at population prevalence
+0.10, with FDF values of 0.645 and 0.586 respectively. The caption explains
+that the difference comes from how validity changes the composition of
+qualified calls rather than from any new biological observations.

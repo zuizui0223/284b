@@ -41,6 +41,18 @@ def test_population_prevalence_requires_class_specific_validity():
                     valid_if_function_absent=1,
                     key_sensitivity=q, specificity=sp)
     assert math.isclose(actual, recovered, rel_tol=0, abs_tol=1e-12)
+    equal = fdf(violation_prevalence=pi,
+                valid_if_function_present=1,
+                valid_if_function_absent=1,
+                key_sensitivity=q, specificity=sp)
+    odds = lambda x: x / (1 - x)
+    assert math.isclose(odds(actual) / odds(equal), a1 / a0,
+                        rel_tol=0, abs_tol=1e-12)
+    reversed_validity = fdf(violation_prevalence=pi,
+                            valid_if_function_present=a0,
+                            valid_if_function_absent=a1,
+                            key_sensitivity=q, specificity=sp)
+    assert reversed_validity > equal > actual
 
 
 def test_zero_qualified_calls_are_undefined_not_perfect():

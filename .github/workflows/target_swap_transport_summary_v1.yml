@@ -1,0 +1,42 @@
+name: Archived target-swap climate support summary
+on:
+  push:
+    branches:
+      - analysis/284b-target-identity-controls-20261115
+    paths:
+      - scripts/audit_target_swap_transport_strata_v1.py
+      - tests/test_target_transport_summary_v1.py
+      - .github/workflows/target_swap_transport_summary_v1.yml
+permissions:
+  contents: write
+concurrency:
+  group: target-swap-strata-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  stratified-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate pinned sources and taxon-level accounting
+        run: python -m unittest discover -s tests -p 'test_target_transport_summary_v1.py' -v
+      - name: Compute and archive descriptive support strata
+        run: |
+          python scripts/audit_target_swap_transport_strata_v1.py \
+            --out results/target_identity_controls_v1/transport_stratified_summary_v1.json
+      - name: Commit only deterministic summary after synchronizing branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/target_identity_controls_v1/transport_stratified_summary_v1.json
+          if git diff --cached --quiet; then
+            echo "No changed summary"
+            exit 0
+          fi
+          git commit -m "Archive taxon-aware target-swap climate support audit"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

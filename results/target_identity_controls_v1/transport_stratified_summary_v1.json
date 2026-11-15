@@ -1,0 +1,553 @@
+{
+  "all19_row_support_minimum": {
+    "0.50": {
+      "cells": 227,
+      "flagged": 118,
+      "silence_fraction": 0.4801762114537445,
+      "silent": 109,
+      "target_taxa": 10
+    },
+    "0.70": {
+      "cells": 172,
+      "flagged": 69,
+      "silence_fraction": 0.5988372093023255,
+      "silent": 103,
+      "target_taxa": 8
+    },
+    "0.80": {
+      "cells": 102,
+      "flagged": 40,
+      "silence_fraction": 0.6078431372549019,
+      "silent": 62,
+      "target_taxa": 6
+    },
+    "0.85": {
+      "cells": 46,
+      "flagged": 23,
+      "silence_fraction": 0.5,
+      "silent": 23,
+      "target_taxa": 3
+    },
+    "0.90": {
+      "cells": 22,
+      "flagged": 13,
+      "silence_fraction": 0.4090909090909091,
+      "silent": 9,
+      "target_taxa": 1
+    }
+  },
+  "correlation_12_taxa_descriptive_only": -0.6021165001225288,
+  "correlation_36_target_M_blocks_descriptive_only": -0.5428347218372533,
+  "empirical_ledger_increment": 0,
+  "flagged_mean_feature_coverage": 0.9440078149920255,
+  "limitations": [
+    "Previously opened targets and post hoc overlap thresholds are not confirmatory.",
+    "Donor comparison-frame quantiles are only a proxy for training support, and cannot rule out model extrapolation.",
+    "A climate-support stratum changes species composition; differences across strata are not causal.",
+    "12 taxon-level units; 36 taxon×M blocks and 280 procedure×M cells are correlated.",
+    "A mismatch in source taxon name is a known metadata error, not a known ecological-process violation.",
+    "No new Level-A endpoint or Level-C claim, no mechanism or method superiority."
+  ],
+  "mean_feature_support_minimum": {
+    "0.90": {
+      "cells": 266,
+      "flagged": 151,
+      "silence_fraction": 0.4323308270676692,
+      "silent": 115,
+      "target_taxa": 12
+    },
+    "0.95": {
+      "cells": 180,
+      "flagged": 76,
+      "silence_fraction": 0.5777777777777777,
+      "silent": 104,
+      "target_taxa": 9
+    },
+    "0.97": {
+      "cells": 102,
+      "flagged": 38,
+      "silence_fraction": 0.6274509803921569,
+      "silent": 64,
+      "target_taxa": 5
+    },
+    "0.98": {
+      "cells": 62,
+      "flagged": 24,
+      "silence_fraction": 0.6129032258064516,
+      "silent": 38,
+      "target_taxa": 3
+    },
+    "0.99": {
+      "cells": 22,
+      "flagged": 13,
+      "silence_fraction": 0.4090909090909091,
+      "silent": 9,
+      "target_taxa": 1
+    }
+  },
+  "overall": {
+    "cells": 280,
+    "flagged": 165,
+    "silence_fraction": 0.4107142857142857,
+    "silent": 115,
+    "target_taxa": 12
+  },
+  "schema": "284b.target_identity_climate_stratification_v1",
+  "silent_mean_feature_coverage": 0.9700320366132723,
+  "source_git_blobs": {
+    "config/target_identity_controls_v1.json": "026584e141e157e80adc81cbe68020fc53832dae",
+    "results/target_identity_controls_v1/climate_transport_cells_v1.csv": "a0077b9ade7aa21af21e730ef655bc78731fffd9",
+    "results/target_identity_controls_v1/climate_transport_proxy_v1.json": "ac47ee9d70874a5120a5e8b89ef1f0acecb455ea",
+    "results/target_identity_controls_v1/target_identity_results_v1.json": "2e142c78e374d947cdcf7fee74eeb77208bca02b"
+  },
+  "status": "retrospective_descriptive_and_posthoc_strata_not_confirmatory",
+  "target_M_table": [
+    {
+      "M_km": 150,
+      "all19_row_coverage": 0.55,
+      "evaluable": 8,
+      "flag_fraction": 0.625,
+      "flags": 5,
+      "mean_feature_coverage": 0.9059736842105263,
+      "taxon": "Abies lasiocarpa"
+    },
+    {
+      "M_km": 300,
+      "all19_row_coverage": 0.69,
+      "evaluable": 7,
+      "flag_fraction": 1.0,
+      "flags": 7,
+      "mean_feature_coverage": 0.9495,
+      "taxon": "Abies lasiocarpa"
+    },
+    {
+      "M_km": 500,
+      "all19_row_coverage": 0.7485,
+      "evaluable": 8,
+      "flag_fraction": 1.0,
+      "flags": 8,
+      "mean_feature_coverage": 0.9621315789473684,
+      "taxon": "Abies lasiocarpa"
+    },
+    {
+      "M_km": 150,
+      "all19_row_coverage": 0.8375,
+      "evaluable": 8,
+      "flag_fraction": 0.75,
+      "flags": 6,
+      "mean_feature_coverage": 0.9789736842105263,
+      "taxon": "Artemisia tridentata"
+    },
+    {
+      "M_km": 300,
+      "all19_row_coverage": 0.8515,
+      "evaluable": 8,
+      "flag_fraction": 0.625,
+      "flags": 5,
+      "mean_feature_coverage": 0.9837105263157895,
+      "taxon": "Artemisia tridentata"
+    },
+    {
+      "M_km": 500,
+      "all19_row_coverage": 0.865,
+      "evaluable": 8,
+      "flag_fraction": 0.625,
+      "flags": 5,
+      "mean_feature_coverage": 0.9859210526315789,
+      "taxon": "Artemisia tridentata"
+    },
+    {
+      "M_km": 150,
+      "all19_row_coverage": 0.632,
+      "evaluable": 8,
+      "flag_fraction": 0.875,
+      "flags": 7,
+      "mean_feature_coverage": 0.9543421052631579,
+      "taxon": "Atriplex canescens"
+    },
+    {
+      "M_km": 300,
+      "all19_row_coverage": 0.6155,
+      "evaluable": 8,
+      "flag_fraction": 0.75,
+      "flags": 6,
+      "mean_feature_coverage": 0.9461578947368421,
+      "taxon": "Atriplex canescens"
+    },
+    {
+      "M_km": 500,
+      "all19_row_coverage": 0.5865,
+      "evaluable": 8,
+      "flag_fraction": 1.0,
+      "flags": 8,
+      "mean_feature_coverage": 0.9427368421052632,
+      "taxon": "Atriplex canescens"
+    },
+    {
+      "M_km": 150,
+      "all19_row_coverage": 0.854,
+      "evaluable": 8,
+      "flag_fraction": 0.0,
+      "flags": 0,
+      "mean_feature_coverage": 0.9870263157894736,
+      "taxon": "Avicennia germinans"
+    },
+    {
+      "M_km": 300,
+      "all19_row_coverage": 0.847,
+      "evaluable": 8,
+      "flag_fraction": 0.125,
+      "flags": 1,
+      "mean_feature_coverage": 0.9857105263157895,
+      "taxon": "Avicennia germinans"
+    },
+    {
+      "M_km": 500,
+      "all19_row_coverage": 0.8145,
+      "evaluable": 8,
+      "flag_fraction": 0.0,
+      "flags": 0,
+      "mean_feature_coverage": 0.9821578947368421,
+      "taxon": "Avicennia germinans"
+    },
+    {
+      "M_km": 150,
+      "all19_row_coverage": 0.709,
+      "evaluable": 8,
+      "flag_fraction": 0.375,
+      "flags": 3,
+      "mean_feature_coverage": 0.9577894736842105,
+      "taxon": "Avicennia marina"
+    },
+    {
+      "M_km": 300,
+      "all19_row_coverage": 0.7265,
+      "evaluable": 8,
+      "flag_fraction": 0.25,
+      "flags": 2,
+      "mean_feature_coverage": 0.9615526315789473,
+      "taxon": "Avicennia marina"
+    },
+    {
+      "M_km": 500,
+      "all19_row_coverage": 0.7125,
+      "evaluable": 8,
+      "flag_fraction": 0.25,
+      "flags": 2,
+      "mean_feature_coverage": 0.9626578947368422,
+      "taxon": "Avicennia marina"
+    },
+    {
+      "M_km": 150,
+      "all19_row_coverage": 0.466,
+      "evaluable": 8,
+      "flag_fraction": 1.0,
+      "flags": 8,
+      "mean_feature_coverage": 0.8988421052631579,
+      "taxon": "Encelia farinosa"
+    },
+    {
+      "M_km": 300,
+      "all19_row_coverage": 0.539,
+      "evaluable": 8,
+      "flag_fraction": 1.0,
+      "flags": 8,
+      "mean_feature_coverage": 0.924921052631579,
+      "taxon": "Encelia farinosa"
+    },
+    {
+      "M_km": 500,
+      "all19_row_coverage": 0.569,
+      "evaluable": 8,
+      "flag_fraction": 1.0,
+      "flags": 8,
+      "mean_feature_coverage": 0.9311315789473684,
+      "taxon": "Encelia farinosa"
+    },
+    {
+      "M_km": 150,
+      "all19_row_coverage": 0.916,
+      "evaluable": 6,
+      "flag_fraction": 0.5,
+      "flags": 3,
+      "mean_feature_coverage": 0.9911315789473685,
+      "taxon": "Eucalyptus delegatensis"
+    },
+    {
+      "M_km": 300,
+      "all19_row_coverage": 0.9155,
+      "evaluable": 8,
+      "flag_fraction": 0.625,
+      "flags": 5,
+      "mean_feature_coverage": 0.9905526315789474,
+      "taxon": "Eucalyptus delegatensis"
+    },
+    {
+      "M_km": 500,
+      "all19_row_coverage": 0.914,
+      "evaluable": 8,
+      "flag_fraction": 0.625,
+      "flags": 5,
+      "mean_feature_coverage": 0.9908421052631579,
+      "taxon": "Eucalyptus delegatensis"
+    },
+    {
+      "M_km": 150,
+      "all19_row_coverage": 0.4025,
+      "evaluable": 6,
+      "flag_fraction": 1.0,
+      "flags": 6,
+      "mean_feature_coverage": 0.8806315789473684,
+      "taxon": "Eucalyptus globulus"
+    },
+    {
+      "M_km": 300,
+      "all19_row_coverage": 0.4495,
+      "evaluable": 8,
+      "flag_fraction": 1.0,
+      "flags": 8,
+      "mean_feature_coverage": 0.9011842105263158,
+      "taxon": "Eucalyptus globulus"
+    },
+    {
+      "M_km": 500,
+      "all19_row_coverage": 0.4065,
+      "evaluable": 8,
+      "flag_fraction": 1.0,
+      "flags": 8,
+      "mean_feature_coverage": 0.9040263157894737,
+      "taxon": "Eucalyptus globulus"
+    },
+    {
+      "M_km": 150,
+      "all19_row_coverage": 0.8215,
+      "evaluable": 8,
+      "flag_fraction": 0.0,
+      "flags": 0,
+      "mean_feature_coverage": 0.9786052631578948,
+      "taxon": "Laguncularia racemosa"
+    },
+    {
+      "M_km": 300,
+      "all19_row_coverage": 0.7825,
+      "evaluable": 8,
+      "flag_fraction": 0.0,
+      "flags": 0,
+      "mean_feature_coverage": 0.973078947368421,
+      "taxon": "Laguncularia racemosa"
+    },
+    {
+      "M_km": 500,
+      "all19_row_coverage": 0.7985,
+      "evaluable": 8,
+      "flag_fraction": 0.0,
+      "flags": 0,
+      "mean_feature_coverage": 0.9759473684210527,
+      "taxon": "Laguncularia racemosa"
+    },
+    {
+      "M_km": 150,
+      "all19_row_coverage": 0.748,
+      "evaluable": 7,
+      "flag_fraction": 1.0,
+      "flags": 7,
+      "mean_feature_coverage": 0.9652894736842105,
+      "taxon": "Larix laricina"
+    },
+    {
+      "M_km": 300,
+      "all19_row_coverage": 0.79,
+      "evaluable": 7,
+      "flag_fraction": 1.0,
+      "flags": 7,
+      "mean_feature_coverage": 0.9686315789473684,
+      "taxon": "Larix laricina"
+    },
+    {
+      "M_km": 500,
+      "all19_row_coverage": 0.8295,
+      "evaluable": 8,
+      "flag_fraction": 1.0,
+      "flags": 8,
+      "mean_feature_coverage": 0.9748421052631578,
+      "taxon": "Larix laricina"
+    },
+    {
+      "M_km": 150,
+      "all19_row_coverage": 0.4255,
+      "evaluable": 7,
+      "flag_fraction": 0.5714285714285714,
+      "flags": 4,
+      "mean_feature_coverage": 0.9353421052631579,
+      "taxon": "Nothofagus antarctica"
+    },
+    {
+      "M_km": 300,
+      "all19_row_coverage": 0.438,
+      "evaluable": 8,
+      "flag_fraction": 0.75,
+      "flags": 6,
+      "mean_feature_coverage": 0.9279736842105263,
+      "taxon": "Nothofagus antarctica"
+    },
+    {
+      "M_km": 500,
+      "all19_row_coverage": 0.384,
+      "evaluable": 8,
+      "flag_fraction": 0.875,
+      "flags": 7,
+      "mean_feature_coverage": 0.9050789473684211,
+      "taxon": "Nothofagus antarctica"
+    },
+    {
+      "M_km": 150,
+      "all19_row_coverage": 0.787,
+      "evaluable": 8,
+      "flag_fraction": 0.0,
+      "flags": 0,
+      "mean_feature_coverage": 0.962078947368421,
+      "taxon": "Nothofagus betuloides"
+    },
+    {
+      "M_km": 300,
+      "all19_row_coverage": 0.8155,
+      "evaluable": 8,
+      "flag_fraction": 0.125,
+      "flags": 1,
+      "mean_feature_coverage": 0.9666842105263158,
+      "taxon": "Nothofagus betuloides"
+    },
+    {
+      "M_km": 500,
+      "all19_row_coverage": 0.806,
+      "evaluable": 8,
+      "flag_fraction": 0.125,
+      "flags": 1,
+      "mean_feature_coverage": 0.9665,
+      "taxon": "Nothofagus betuloides"
+    }
+  ],
+  "taxon_table": [
+    {
+      "donor": "Larix laricina",
+      "evaluable": 23,
+      "flag_fraction": 0.8695652173913043,
+      "flags": 20,
+      "mean_all19_row_coverage": 0.6616521739130435,
+      "mean_feature_coverage": 0.938754004576659,
+      "silent": 3,
+      "taxon": "Abies lasiocarpa"
+    },
+    {
+      "donor": "Atriplex canescens",
+      "evaluable": 24,
+      "flag_fraction": 0.6666666666666666,
+      "flags": 16,
+      "mean_all19_row_coverage": 0.8513333333333334,
+      "mean_feature_coverage": 0.9828684210526316,
+      "silent": 8,
+      "taxon": "Artemisia tridentata"
+    },
+    {
+      "donor": "Encelia farinosa",
+      "evaluable": 24,
+      "flag_fraction": 0.875,
+      "flags": 21,
+      "mean_all19_row_coverage": 0.6113333333333334,
+      "mean_feature_coverage": 0.9477456140350877,
+      "silent": 3,
+      "taxon": "Atriplex canescens"
+    },
+    {
+      "donor": "Avicennia marina",
+      "evaluable": 24,
+      "flag_fraction": 0.041666666666666664,
+      "flags": 1,
+      "mean_all19_row_coverage": 0.8385,
+      "mean_feature_coverage": 0.9849649122807017,
+      "silent": 23,
+      "taxon": "Avicennia germinans"
+    },
+    {
+      "donor": "Laguncularia racemosa",
+      "evaluable": 24,
+      "flag_fraction": 0.2916666666666667,
+      "flags": 7,
+      "mean_all19_row_coverage": 0.716,
+      "mean_feature_coverage": 0.9606666666666667,
+      "silent": 17,
+      "taxon": "Avicennia marina"
+    },
+    {
+      "donor": "Artemisia tridentata",
+      "evaluable": 24,
+      "flag_fraction": 1.0,
+      "flags": 24,
+      "mean_all19_row_coverage": 0.5246666666666666,
+      "mean_feature_coverage": 0.9182982456140351,
+      "silent": 0,
+      "taxon": "Encelia farinosa"
+    },
+    {
+      "donor": "Eucalyptus globulus",
+      "evaluable": 22,
+      "flag_fraction": 0.5909090909090909,
+      "flags": 13,
+      "mean_all19_row_coverage": 0.9150909090909091,
+      "mean_feature_coverage": 0.9908157894736842,
+      "silent": 9,
+      "taxon": "Eucalyptus delegatensis"
+    },
+    {
+      "donor": "Eucalyptus delegatensis",
+      "evaluable": 22,
+      "flag_fraction": 1.0,
+      "flags": 22,
+      "mean_all19_row_coverage": 0.42104545454545456,
+      "mean_feature_coverage": 0.8966124401913875,
+      "silent": 0,
+      "taxon": "Eucalyptus globulus"
+    },
+    {
+      "donor": "Avicennia germinans",
+      "evaluable": 24,
+      "flag_fraction": 0.0,
+      "flags": 0,
+      "mean_all19_row_coverage": 0.8008333333333333,
+      "mean_feature_coverage": 0.9758771929824561,
+      "silent": 24,
+      "taxon": "Laguncularia racemosa"
+    },
+    {
+      "donor": "Abies lasiocarpa",
+      "evaluable": 22,
+      "flag_fraction": 1.0,
+      "flags": 22,
+      "mean_all19_row_coverage": 0.791,
+      "mean_feature_coverage": 0.9698265550239235,
+      "silent": 0,
+      "taxon": "Larix laricina"
+    },
+    {
+      "donor": "Nothofagus betuloides",
+      "evaluable": 23,
+      "flag_fraction": 0.7391304347826086,
+      "flags": 17,
+      "mean_all19_row_coverage": 0.41541304347826086,
+      "mean_feature_coverage": 0.9222528604118994,
+      "silent": 6,
+      "taxon": "Nothofagus antarctica"
+    },
+    {
+      "donor": "Nothofagus antarctica",
+      "evaluable": 24,
+      "flag_fraction": 0.08333333333333333,
+      "flags": 2,
+      "mean_all19_row_coverage": 0.8028333333333334,
+      "mean_feature_coverage": 0.9650877192982457,
+      "silent": 22,
+      "taxon": "Nothofagus betuloides"
+    }
+  ],
+  "unresolved": 8
+}

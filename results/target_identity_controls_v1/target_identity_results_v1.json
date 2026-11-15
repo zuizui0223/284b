@@ -1,0 +1,135 @@
+{
+  "artifact_checksum_gates": true,
+  "cannot_claim": [
+    "biological violation",
+    "true species niche difference",
+    "nominal sensitivity/specificity",
+    "causal inference",
+    "new independent test taxa",
+    "equal domain adequacy for donor models on target frame"
+  ],
+  "computed_wrong_target_cells": 280,
+  "empirical_ledger_increment": 0,
+  "matched_flags_on_wrong_target": 165,
+  "matched_taxa_with_any_wrong_target_flag": 11,
+  "model_original_surface_reconstruction_verified": 280,
+  "original_288_cell_total": 288,
+  "original_endpoint_unchanged": true,
+  "pooled_flags_on_wrong_target": 148,
+  "pooled_q95": 0.4124382962339767,
+  "pooled_taxa_with_any_wrong_target_flag": 12,
+  "schema": "284b.target_identity_controls_results_v1",
+  "status": "exploratory_retrospective_constructed_identity_mismatch",
+  "taxon_summary": [
+    {
+      "donor": "Atriplex canescens",
+      "evaluable": 24,
+      "matched_flags": 16,
+      "median_wrong_minus_same_distance": 0.289186067617881,
+      "pooled_flags": 12,
+      "taxon": "Artemisia tridentata",
+      "unresolved": 0
+    },
+    {
+      "donor": "Encelia farinosa",
+      "evaluable": 24,
+      "matched_flags": 21,
+      "median_wrong_minus_same_distance": 0.38675725167666086,
+      "pooled_flags": 21,
+      "taxon": "Atriplex canescens",
+      "unresolved": 0
+    },
+    {
+      "donor": "Artemisia tridentata",
+      "evaluable": 24,
+      "matched_flags": 24,
+      "median_wrong_minus_same_distance": 0.4681784770456066,
+      "pooled_flags": 24,
+      "taxon": "Encelia farinosa",
+      "unresolved": 0
+    },
+    {
+      "donor": "Avicennia marina",
+      "evaluable": 24,
+      "matched_flags": 1,
+      "median_wrong_minus_same_distance": 0.14727647031921168,
+      "pooled_flags": 1,
+      "taxon": "Avicennia germinans",
+      "unresolved": 0
+    },
+    {
+      "donor": "Laguncularia racemosa",
+      "evaluable": 24,
+      "matched_flags": 7,
+      "median_wrong_minus_same_distance": 0.21958095589329243,
+      "pooled_flags": 1,
+      "taxon": "Avicennia marina",
+      "unresolved": 0
+    },
+    {
+      "donor": "Avicennia germinans",
+      "evaluable": 24,
+      "matched_flags": 0,
+      "median_wrong_minus_same_distance": 0.032230825459699464,
+      "pooled_flags": 1,
+      "taxon": "Laguncularia racemosa",
+      "unresolved": 0
+    },
+    {
+      "donor": "Nothofagus betuloides",
+      "evaluable": 23,
+      "matched_flags": 17,
+      "median_wrong_minus_same_distance": 0.22890731629888655,
+      "pooled_flags": 14,
+      "taxon": "Nothofagus antarctica",
+      "unresolved": 1
+    },
+    {
+      "donor": "Nothofagus antarctica",
+      "evaluable": 24,
+      "matched_flags": 2,
+      "median_wrong_minus_same_distance": 0.06226233832139447,
+      "pooled_flags": 3,
+      "taxon": "Nothofagus betuloides",
+      "unresolved": 0
+    },
+    {
+      "donor": "Eucalyptus delegatensis",
+      "evaluable": 22,
+      "matched_flags": 22,
+      "median_wrong_minus_same_distance": 0.3973021498196917,
+      "pooled_flags": 22,
+      "taxon": "Eucalyptus globulus",
+      "unresolved": 2
+    },
+    {
+      "donor": "Larix laricina",
+      "evaluable": 23,
+      "matched_flags": 20,
+      "median_wrong_minus_same_distance": 0.2864955326240536,
+      "pooled_flags": 19,
+      "taxon": "Abies lasiocarpa",
+      "unresolved": 1
+    },
+    {
+      "donor": "Eucalyptus globulus",
+      "evaluable": 22,
+      "matched_flags": 13,
+      "median_wrong_minus_same_distance": 0.15359302506794079,
+      "pooled_flags": 10,
+      "taxon": "Eucalyptus delegatensis",
+      "unresolved": 2
+    },
+    {
+      "donor": "Abies lasiocarpa",
+      "evaluable": 22,
+      "matched_flags": 22,
+      "median_wrong_minus_same_distance": 0.4507286198266699,
+      "pooled_flags": 20,
+      "taxon": "Larix laricina",
+      "unresolved": 2
+    }
+  ],
+  "unresolved_wrong_target_cells": 8,
+  "wrong_target_cells_below_same_target_distance": 8
+}

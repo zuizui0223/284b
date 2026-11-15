@@ -1,0 +1,152 @@
+{
+  "schema": "284b.target_identity_controls_v1",
+  "status": "PREDECLARED_BEFORE_TARGET_SWAP_MODEL_SCORING",
+  "design_frozen_on": "2026-11-15",
+  "claim_strength": "retrospective_artifact_reanalysis_constructed_target_mismatch_only",
+  "empirical_ledger_increment": 0,
+  "source_frozen_endpoint": {
+    "run_id": 34439487385,
+    "artifact_id": 10137399646,
+    "source_cell_sha256": "d9194ea416dcc3bbae339167e271d3cbcd522327b41fe573325770a94bd90b0d"
+  },
+  "source_frame_qualification": {
+    "run_id": 34245807165
+  },
+  "model_scoring_reference": {
+    "repo": "zuizui0223/sdmr",
+    "commit_sha": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+    "routine": "sdmr.model.score_ecological_suitability"
+  },
+  "pair_rule": "One fixed donor per target selected by taxon ecological stratum/name, before scoring donor models on target frames. All 12 fixed pairs retained; no rescue or replacement.",
+  "eligible_pair": "The target's original paired cell was evaluable AND donor's HUMAN_OBSERVATION answer was adequate for same M,procedure AND target/donor prediction models and frame checksums match. Otherwise unresolved, no zero imputation.",
+  "positive_label": "target PRESERVED_SPECIMEN vs own HUMAN_OBSERVATION",
+  "synthetic_negative_label": "target PRESERVED_SPECIMEN vs distinct donor taxon's HUMAN_OBSERVATION model evaluated on target's exact 2000 predictor rows",
+  "interpretation": "Known identity mismatch in model inputs, not verified biological process violation; donor predictions on another taxon's geographic frame may extrapolate.",
+  "reference": "24 pre-frozen q95 ceilings; pooled q95 from signed reference as descriptive comparator. No threshold re-tuning.",
+  "scoring_checks": "Before any donor cross-target result, each donor model must reproduce its original signed same-taxon HUMAN_OBSERVATION 2000-row score surface within 1e-10; no scored cell failure is silently dropped.",
+  "analysis_unit": "target taxon (n=12); 24 procedure-area sensitivity cells per taxon; all original n and unresolved included",
+  "entries": [
+    {
+      "index": 0,
+      "taxon": "Artemisia tridentata",
+      "donor_index": 1,
+      "donor_taxon": "Atriplex canescens",
+      "fit_artifact_id": 10089523542,
+      "fit_artifact_digest": "sha256:43ae62899e3a335a00b3ee666f534aee02cfaf9cab517df13d9eb542092350c8",
+      "frame_artifact_id": 10065445666,
+      "frame_artifact_digest": "sha256:85b9f7e349ca07ba007d43b72ef5a7ab8524688039b9737b4034508b8f3f4bc5"
+    },
+    {
+      "index": 1,
+      "taxon": "Atriplex canescens",
+      "donor_index": 2,
+      "donor_taxon": "Encelia farinosa",
+      "fit_artifact_id": 10089524564,
+      "fit_artifact_digest": "sha256:adc169b9691c921d73667c24f8a4546a2da5c2f0b3a83b46b80070691f451261",
+      "frame_artifact_id": 10065911006,
+      "frame_artifact_digest": "sha256:d47397f738a04e8e04e8bd3e16c5204cec287e1896d232a977d5c3abbf4438c1"
+    },
+    {
+      "index": 2,
+      "taxon": "Encelia farinosa",
+      "donor_index": 0,
+      "donor_taxon": "Artemisia tridentata",
+      "fit_artifact_id": 10089527320,
+      "fit_artifact_digest": "sha256:c0d643ecd7a63c544d311e1ace73018e1631de3ea3966ce5519dd348eab49ad1",
+      "frame_artifact_id": 10066129063,
+      "frame_artifact_digest": "sha256:f8c8bd870823430f64abb35fca7013c1caeff4277e88a81e41b78073643f85f5"
+    },
+    {
+      "index": 3,
+      "taxon": "Avicennia germinans",
+      "donor_index": 4,
+      "donor_taxon": "Avicennia marina",
+      "fit_artifact_id": 10089523408,
+      "fit_artifact_digest": "sha256:8e89cad47c2fbbf27e7df696a067639118857ae31a8c2960c4cb3fc7a99fbb7b",
+      "frame_artifact_id": 10066112150,
+      "frame_artifact_digest": "sha256:da04b69a4b4b76af8ac897812c28eeaabee5b17fb48b791d1541884d4e9eddb2"
+    },
+    {
+      "index": 4,
+      "taxon": "Avicennia marina",
+      "donor_index": 5,
+      "donor_taxon": "Laguncularia racemosa",
+      "fit_artifact_id": 10089527674,
+      "fit_artifact_digest": "sha256:b02cc60deae3ecc7fb0a5d3929cdce846a5620680e0884852fc30eccdce21de2",
+      "frame_artifact_id": 10066036790,
+      "frame_artifact_digest": "sha256:54fc36d2fa50a59dda44fd7c7f2e0040a23094a8db4efc321db36225299299ac"
+    },
+    {
+      "index": 5,
+      "taxon": "Laguncularia racemosa",
+      "donor_index": 3,
+      "donor_taxon": "Avicennia germinans",
+      "fit_artifact_id": 10089527180,
+      "fit_artifact_digest": "sha256:1e65a04d9610e64f5dd0b46c34a811d1c72d8cacf4559431657c89c121155d78",
+      "frame_artifact_id": 10067156409,
+      "frame_artifact_digest": "sha256:65013de94aa486767a4f27a27e3df8735982dc036977866a37a383f7a9683566"
+    },
+    {
+      "index": 6,
+      "taxon": "Nothofagus antarctica",
+      "donor_index": 7,
+      "donor_taxon": "Nothofagus betuloides",
+      "fit_artifact_id": 10089528001,
+      "fit_artifact_digest": "sha256:718c80bf6a54d4ce486d1c5d3c28505a78810246324320efdb063b432642f64e",
+      "frame_artifact_id": 10068744077,
+      "frame_artifact_digest": "sha256:52fcbfda4279e23fa1f3b70e0799d0a4e526c33b68c20c096d0a754c68d60e7c"
+    },
+    {
+      "index": 7,
+      "taxon": "Nothofagus betuloides",
+      "donor_index": 6,
+      "donor_taxon": "Nothofagus antarctica",
+      "fit_artifact_id": 10089528842,
+      "fit_artifact_digest": "sha256:0f260f330e8c6d6b202b56988b0201e196ba474accb1cce21b5c3062dc30e459",
+      "frame_artifact_id": 10068506170,
+      "frame_artifact_digest": "sha256:1732964bc43131122b5a6fc7b5920a46abfcc03d4f2bfc30d76e99b00990f0b7"
+    },
+    {
+      "index": 8,
+      "taxon": "Eucalyptus globulus",
+      "donor_index": 10,
+      "donor_taxon": "Eucalyptus delegatensis",
+      "fit_artifact_id": 10089526766,
+      "fit_artifact_digest": "sha256:b5af301b632d8cbe50a7916a2f55e438c004b352b0dbe9c2bcf43f486037ff2f",
+      "frame_artifact_id": 10069068890,
+      "frame_artifact_digest": "sha256:c519e277275cc39f420972c73655a1576fd75c58e173ed57a3a69a4289f7a091"
+    },
+    {
+      "index": 9,
+      "taxon": "Abies lasiocarpa",
+      "donor_index": 11,
+      "donor_taxon": "Larix laricina",
+      "fit_artifact_id": 10089528003,
+      "fit_artifact_digest": "sha256:0c2ecba01f9f2868f713f29639412c7b3f9e2c981d2ebe0d0958d9c444720cda",
+      "frame_artifact_id": 10069664366,
+      "frame_artifact_digest": "sha256:a1da21a899b8039ccb8754243627fd31fc0009e518762c0f5b33dcd785ea5d62"
+    },
+    {
+      "index": 10,
+      "taxon": "Eucalyptus delegatensis",
+      "donor_index": 8,
+      "donor_taxon": "Eucalyptus globulus",
+      "fit_artifact_id": 10089523860,
+      "fit_artifact_digest": "sha256:39c77c6cac5375f77ee3f280bd5a0c62c0a84c9aaeb845f0b19c981b905d81b5",
+      "frame_artifact_id": 10068956619,
+      "frame_artifact_digest": "sha256:79ab021f6f8251a177e3d6c6cc431432044d41317229220344bdd82f19a77695"
+    },
+    {
+      "index": 11,
+      "taxon": "Larix laricina",
+      "donor_index": 9,
+      "donor_taxon": "Abies lasiocarpa",
+      "fit_artifact_id": 10089524000,
+      "fit_artifact_digest": "sha256:51aa2f517ea8951a0cf94fca214defcad30301e97b505d338ddfcef9322cec67",
+      "frame_artifact_id": 10069910761,
+      "frame_artifact_digest": "sha256:b54a49dacb364ae2ae7c646ebed17937c5b82ec5c220453b1e995fc50a9d044c"
+    }
+  ],
+  "reference_csv_sha256": "3fc1a76e78fb1581b20fd15a129fb82775b196658b8329c612d3b513dc4a869c",
+  "original_reference_artifact_id": 10137248940
+}

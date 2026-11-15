@@ -1,0 +1,35 @@
+{
+  "schema": "284b.original_GBIF_NEON_datasetkey_pilot.v1",
+  "status": "PREREGISTERED_PROVENANCE_ONLY_NO_NEON_BIOLOGICAL_OUTCOME",
+  "initial_scope": "pilot_first_frozen_taxon_only",
+  "GBIF_snapshot_date": "2026-08-01",
+  "original_fit_code": "scripts/run_same_target_layer1_baseline_fit_taxon.py",
+  "original_frozen_species_registry": "registry/product_b_same_target_source_identity_pass_taxa_v0_1.csv",
+  "original_heldout_taxa_count": 12,
+  "independent_NEON_validation_taxa_count": 7,
+  "pilot": {
+    "taxon": "Artemisia tridentata",
+    "original_registry_index": 0,
+    "specieskey": "GX2B",
+    "source_thinning_cell_size_degrees": 0.05,
+    "expected_thinned_model_presence_counts": {
+      "PRESERVED_SPECIMEN": 3285,
+      "HUMAN_OBSERVATION": 4516
+    },
+    "original_signed_core19_model_artifact_id": 10089523542,
+    "original_signed_core19_model_artifact_digest": "sha256:43ae62899e3a335a00b3ee666f534aee02cfaf9cab517df13d9eb542092350c8",
+    "model_presence_count_source": "fit_inventory.csv within original signed core19 heldout fit artifact"
+  },
+  "known_NEON_GBIF_dataset_keys": [
+    "3fed506c-d04f-4cd4-b373-bd602572f39b"
+  ],
+  "no_original_raw_records_preserved": true,
+  "no_donor_model_refitting": true,
+  "no_plot_species_outcomes_read": true,
+  "output_only_aggregate_datasetkey_counts": true,
+  "do_not_persist_any_GBIF_occurrenceIDs_coordinates_eventDates": true,
+  "if_source_counts_not_reproduced": "STOP_AND_MARK_SOURCE_LINEAGE_UNRESOLVED",
+  "if_datasetkey_detected": "POTENTIAL_DIRECT_NEON_VOUCHER_OVERLAP__NO_EXTERNAL_INDEPENDENCE",
+  "if_no_known_datasetkey_detected": "ONLY_THIS_DATASETKEY_NOT_FOUND__DO_NOT_DECLARE_FULL_INDEPENDENCE",
+  "empirical_ledger_increment": 0
+}

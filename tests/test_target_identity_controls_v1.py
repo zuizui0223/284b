@@ -2,12 +2,19 @@
 import unittest
 from pathlib import Path
 import sys
-import numpy as np
+# The default repo unittest job intentionally has no numerical dependencies.
+# Run these tests in the dedicated target-identity workflow when numpy is present.
+try:
+    import numpy as np
+except ModuleNotFoundError:
+    np = None
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from audit_target_identity_controls_v1 import discordance, nearest_rank_q95
+if np is not None:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    from audit_target_identity_controls_v1 import discordance, nearest_rank_q95
 
 
+@unittest.skipIf(np is None, "numpy is provided by the dedicated model-control workflow")
 class TestIdentityControls(unittest.TestCase):
     def test_discordance(self):
         x = np.ones(2000)

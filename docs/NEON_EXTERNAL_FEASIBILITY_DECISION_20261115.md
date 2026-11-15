@@ -76,23 +76,66 @@ Primary potential interval: 2020–2024. Historical 2013–2019 site-month
 metadata remains documented but is not silently considered equivalent
 to the post-2020 fully flagged survey protocol.
 
-## Geographical and scale mismatch that could invalidate the test
+## Geographical support audit and revised validation grain
 
-A 400 m² plot-scale detection label and a CHELSA-bioclimate
-distribution surface do not have the same spatial grain.
-Before reading NEON species labels, require a *label-blind* spatial
-estimability check using released plot coordinates: both frozen
-source-specific models must generate more than one distinguishable
-score across a site's plot keys. A site where all plot locations
-collapse to one CHELSA climate cell cannot test within-site ranking;
-it must not be interpreted as ecological evidence for or against the
-model. If fewer than three independent sites provide score contrast
-and qualified complete surveys for a taxon, that taxon's
-**within-site discrimination endpoint is unestimable**.
+A 400 m² plot (20 × 20 m) and CHELSA V2.1 `bio1`–`bio19`
+climatologies (approximately kilometre-scale) **do not describe the
+same spatial grain**. Site-internal plots may share the same model
+predictor cell, giving identical predictions even when observed
+species differ. A within-site plot-level ranking test is therefore
+**not a defensible primary estimand without positive evidence of
+within-site predictor-score variation**.
 
-The original seven-taxon candidate list and the rule requiring at
-least three externally evaluable taxa remain frozen; there must be no
-post-outcome taxon substitutions or adaptive threshold changes.
+The primary candidate estimand is instead **between-site relative
+ranking** of complete 400 m² plot-bout detection fractions against
+two frozen source-specific climate-suitability model scores.
+Sites, and then taxa, are the independent units; plot bouts within
+one site are repeated/clustered measurements, not independent
+macroclimate gradients. Even at site scale, a failure to detect a
+species is not identified biological absence, and no causal inference
+is licensed.
+
+### Source-only geography completed before species labels
+
+The `RELEASE-2026` public site metadata were successfully audited for
+all 47 plant-product sites. They span **20 NEON ecological domains**
+with 1,081 site-centroid pairs. The smallest pairwise centroid
+distance is **1.697 km**, and no pair is within 1 km. This confirms
+that sites provide geographically distinct centroids, **not**
+that all sites have different CHELSA predictor vectors.
+
+Separately, exactly seven signed historical `core19` comparison-frame
+ZIPs (each with three M radii and 2,000 pre-frozen rows per radius)
+were verified by artifact and internal parquet SHA-256. For each of
+7 taxa × 3 M × 47 NEON site centroids = **987** possible combinations,
+we computed the nearest geodesic distance from a site centroid to a
+frozen source-blind comparison point. Using a predeclared 25 km
+*geographic proximity proxy*, **all 21 taxon×M settings** had at
+least **three** NEON site centroids near an original comparison
+point (observed 4–16 sites per taxon×M). Thus geography alone does
+not immediately rule out the seven-taxon screen.
+
+This is **not proof** that the sites lie in the full biologically
+accessible region for each taxon, that any focal species was detected
+at NEON, that the historical models can produce distinct CHELSA
+predictions at the actual field plots, or that their GBIF training
+records are independent from NEON. The sample of 2,000 frame points
+does not define the full M geometry. No taxon has been substituted,
+and no NEON plant record or plot coordinate has been opened.
+
+Source receipts:
+`results/neon_site_geography_preflight_v1.json`,
+`results/neon_frame_site_proximity_v1.json`, and
+`results/neon_frame_site_proximity_cells_v1.csv`.
+New estimand design version is **separate** from the originally frozen
+`config/neon_external_validation_preflight_v1.json`, which is not
+silently redefined after metadata review.
+
+The original seven-taxon candidate list and minimum three evaluable
+taxa remain unchanged. Without full survey completeness, enough
+species-level variation, a source-independence audit, and identifiable
+between-site model-score contrast, external validation remains
+**STOP/UNRESOLVED**.
 
 ## Publication boundary and next gate
 

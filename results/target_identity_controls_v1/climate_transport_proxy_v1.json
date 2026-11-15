@@ -1,0 +1,78 @@
+{
+  "all_evaluable_mean_feature_coverage": 0.954696334586466,
+  "cells": 288,
+  "empirical_ledger_increment": 0,
+  "evaluable": 280,
+  "flagged_mean_feature_coverage": 0.9440078149920258,
+  "interpretation": "Donor comparison-frame quantiles are an environmental-support proxy; they do not define true donor training support, causal ecological similarity, or out-of-sample generalization.",
+  "matched_flags": 165,
+  "no_cell_removed_or_retuned": true,
+  "not_flagged": 115,
+  "not_flagged_mean_feature_coverage": 0.9700320366132723,
+  "pair_m_pairs": 36,
+  "per_target": [
+    {
+      "mean_feature_coverage": 0.9828684210526316,
+      "mean_rows_all19_covered": 0.8513333333333334,
+      "taxon": "Artemisia tridentata"
+    },
+    {
+      "mean_feature_coverage": 0.9477456140350878,
+      "mean_rows_all19_covered": 0.6113333333333334,
+      "taxon": "Atriplex canescens"
+    },
+    {
+      "mean_feature_coverage": 0.9182982456140351,
+      "mean_rows_all19_covered": 0.5246666666666667,
+      "taxon": "Encelia farinosa"
+    },
+    {
+      "mean_feature_coverage": 0.9849649122807017,
+      "mean_rows_all19_covered": 0.8385000000000001,
+      "taxon": "Avicennia germinans"
+    },
+    {
+      "mean_feature_coverage": 0.9606666666666667,
+      "mean_rows_all19_covered": 0.7160000000000001,
+      "taxon": "Avicennia marina"
+    },
+    {
+      "mean_feature_coverage": 0.975877192982456,
+      "mean_rows_all19_covered": 0.8008333333333333,
+      "taxon": "Laguncularia racemosa"
+    },
+    {
+      "mean_feature_coverage": 0.9227982456140351,
+      "mean_rows_all19_covered": 0.41583333333333333,
+      "taxon": "Nothofagus antarctica"
+    },
+    {
+      "mean_feature_coverage": 0.9650877192982455,
+      "mean_rows_all19_covered": 0.8028333333333334,
+      "taxon": "Nothofagus betuloides"
+    },
+    {
+      "mean_feature_coverage": 0.8952807017543859,
+      "mean_rows_all19_covered": 0.41950000000000004,
+      "taxon": "Eucalyptus globulus"
+    },
+    {
+      "mean_feature_coverage": 0.939201754385965,
+      "mean_rows_all19_covered": 0.6628333333333334,
+      "taxon": "Abies lasiocarpa"
+    },
+    {
+      "mean_feature_coverage": 0.990842105263158,
+      "mean_rows_all19_covered": 0.9151666666666668,
+      "taxon": "Eucalyptus delegatensis"
+    },
+    {
+      "mean_feature_coverage": 0.9695877192982456,
+      "mean_rows_all19_covered": 0.7891666666666667,
+      "taxon": "Larix laricina"
+    }
+  ],
+  "schema": "284b.target_swap_transport_proxy.v1",
+  "status": "posthoc_descriptive_donor_comparison_frame_proxy_only",
+  "taxa": 12
+}

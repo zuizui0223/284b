@@ -1,0 +1,320 @@
+{
+  "NEON_plot_locations_read": false,
+  "NEON_species_outcomes_read": false,
+  "count_taxon_M_with_at_least_three_sites_within_25km": 21,
+  "empirical_ledger_increment": 0,
+  "external_validation_authorized": false,
+  "limitations": [
+    "Distances compare NEON site centroids to a sample of 2000 frozen source-blind background comparison rows, not to complete species accessible areas or training records",
+    "No site-level taxon detection or complete survey availability was evaluated",
+    "NEON site centroid is not an exact plot location and may be several km from some plots",
+    "Closeness does not prove a model can discriminate detections or that its environmental predictor vectors differ",
+    "Seven candidate taxa remain unchanged regardless of spatial support counts"
+  ],
+  "model_predictions_run": false,
+  "original_frozen_M_per_taxon": 3,
+  "primary_distance_cutoff_km": 25,
+  "schema": "284b.neon_original_frame_site_distance_proxy.v1",
+  "signed_frame_archives_verified": 7,
+  "site_metadata_inventory_count": 47,
+  "status": "historical_frame_neon_centroid_proximity_proxy_only",
+  "taxon_M_site_rows": 987,
+  "taxon_M_summary": [
+    {
+      "M_km": 150,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 446.1434163466546,
+      "nearest_site_dist_km": 6.186867779599852,
+      "site_count_within_cutoffs_km": {
+        "10": 1,
+        "100": 17,
+        "25": 4,
+        "50": 11
+      },
+      "taxon": "Abies lasiocarpa",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 300,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 300.3071898166169,
+      "nearest_site_dist_km": 3.2198589266923947,
+      "site_count_within_cutoffs_km": {
+        "10": 4,
+        "100": 19,
+        "25": 8,
+        "50": 17
+      },
+      "taxon": "Abies lasiocarpa",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 500,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 184.40520054104067,
+      "nearest_site_dist_km": 3.703679264840746,
+      "site_count_within_cutoffs_km": {
+        "10": 3,
+        "100": 22,
+        "25": 7,
+        "50": 13
+      },
+      "taxon": "Abies lasiocarpa",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 150,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 341.50092750988466,
+      "nearest_site_dist_km": 4.7603517592916464,
+      "site_count_within_cutoffs_km": {
+        "10": 1,
+        "100": 15,
+        "25": 9,
+        "50": 13
+      },
+      "taxon": "Artemisia tridentata",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 300,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 194.4577439554682,
+      "nearest_site_dist_km": 0.7698125978173959,
+      "site_count_within_cutoffs_km": {
+        "10": 4,
+        "100": 19,
+        "25": 9,
+        "50": 15
+      },
+      "taxon": "Artemisia tridentata",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 500,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 46.82634287766967,
+      "nearest_site_dist_km": 5.398618092442686,
+      "site_count_within_cutoffs_km": {
+        "10": 4,
+        "100": 29,
+        "25": 16,
+        "50": 25
+      },
+      "taxon": "Artemisia tridentata",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 150,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 154.299304635736,
+      "nearest_site_dist_km": 6.019652361660682,
+      "site_count_within_cutoffs_km": {
+        "10": 2,
+        "100": 21,
+        "25": 11,
+        "50": 20
+      },
+      "taxon": "Atriplex canescens",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 300,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 75.14683927334389,
+      "nearest_site_dist_km": 4.274727612735286,
+      "site_count_within_cutoffs_km": {
+        "10": 2,
+        "100": 27,
+        "25": 11,
+        "50": 22
+      },
+      "taxon": "Atriplex canescens",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 500,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 44.29859129443357,
+      "nearest_site_dist_km": 3.1540216058565296,
+      "site_count_within_cutoffs_km": {
+        "10": 5,
+        "100": 32,
+        "25": 13,
+        "50": 27
+      },
+      "taxon": "Atriplex canescens",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 150,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 839.649443582135,
+      "nearest_site_dist_km": 7.54058510815409,
+      "site_count_within_cutoffs_km": {
+        "10": 1,
+        "100": 6,
+        "25": 4,
+        "50": 5
+      },
+      "taxon": "Avicennia germinans",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 300,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 660.9723195131941,
+      "nearest_site_dist_km": 6.47038344246958,
+      "site_count_within_cutoffs_km": {
+        "10": 2,
+        "100": 9,
+        "25": 5,
+        "50": 9
+      },
+      "taxon": "Avicennia germinans",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 500,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 492.98780600673257,
+      "nearest_site_dist_km": 4.080662462598638,
+      "site_count_within_cutoffs_km": {
+        "10": 2,
+        "100": 11,
+        "25": 4,
+        "50": 7
+      },
+      "taxon": "Avicennia germinans",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 150,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 1341.4573044310087,
+      "nearest_site_dist_km": 3.2065774189785055,
+      "site_count_within_cutoffs_km": {
+        "10": 1,
+        "100": 9,
+        "25": 5,
+        "50": 8
+      },
+      "taxon": "Encelia farinosa",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 300,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 1199.2272414300746,
+      "nearest_site_dist_km": 8.129644001457741,
+      "site_count_within_cutoffs_km": {
+        "10": 3,
+        "100": 12,
+        "25": 9,
+        "50": 11
+      },
+      "taxon": "Encelia farinosa",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 500,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 986.8605042504541,
+      "nearest_site_dist_km": 7.1059382396453765,
+      "site_count_within_cutoffs_km": {
+        "10": 3,
+        "100": 12,
+        "25": 5,
+        "50": 12
+      },
+      "taxon": "Encelia farinosa",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 150,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 511.53669235660345,
+      "nearest_site_dist_km": 3.129337115332629,
+      "site_count_within_cutoffs_km": {
+        "10": 2,
+        "100": 9,
+        "25": 7,
+        "50": 9
+      },
+      "taxon": "Laguncularia racemosa",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 300,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 362.86444084225,
+      "nearest_site_dist_km": 13.812966349961847,
+      "site_count_within_cutoffs_km": {
+        "10": 0,
+        "100": 14,
+        "25": 4,
+        "50": 12
+      },
+      "taxon": "Laguncularia racemosa",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 500,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 160.62364517388448,
+      "nearest_site_dist_km": 12.40958794191392,
+      "site_count_within_cutoffs_km": {
+        "10": 0,
+        "100": 20,
+        "25": 4,
+        "50": 12
+      },
+      "taxon": "Laguncularia racemosa",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 150,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 305.55065491594866,
+      "nearest_site_dist_km": 0.10681053049022818,
+      "site_count_within_cutoffs_km": {
+        "10": 3,
+        "100": 13,
+        "25": 5,
+        "50": 13
+      },
+      "taxon": "Larix laricina",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 300,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 161.92880297490393,
+      "nearest_site_dist_km": 3.714222471907385,
+      "site_count_within_cutoffs_km": {
+        "10": 4,
+        "100": 21,
+        "25": 10,
+        "50": 19
+      },
+      "taxon": "Larix laricina",
+      "three_site_25km_heuristic_met": true
+    },
+    {
+      "M_km": 500,
+      "NEON_sites_total": 47,
+      "median_site_nearest_dist_km": 91.75062387270903,
+      "nearest_site_dist_km": 6.279651284954824,
+      "site_count_within_cutoffs_km": {
+        "10": 2,
+        "100": 24,
+        "25": 9,
+        "50": 17
+      },
+      "taxon": "Larix laricina",
+      "three_site_25km_heuristic_met": true
+    }
+  ],
+  "unresolved_actual_accessible_area": true,
+  "unresolved_within_site_plant_plot_predictor_contrast": true
+}

@@ -16,6 +16,9 @@ import sys
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
+# The original v7.2 snapshot transport was archived after the Level-A
+# experiment. Keep the live root's active product_b_v5 modules first.
+sys.path.append(str(ROOT/"legacy/pre_level_a_focus"))
 CONTRACT=ROOT/"config/original_gbif_neon_datasetkey_pilot_v1.json"
 REGISTRY=ROOT/"registry/product_b_same_target_source_identity_pass_taxa_v0_1.csv"
 

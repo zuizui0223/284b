@@ -71,6 +71,44 @@ fitted ecological models. Eight constructed wrong-target scores were
 **numerically closer** to the focal PRESERVED_SPECIMEN scores than the
 legitimate same-target HUMAN_OBSERVATION score for the same cell.
 
+## Environmental transport sensitivity (post-hoc)
+
+The 280 source-swapped cells also inherit climate-support estimates from the
+original target/donor comparison frames, without refitting either model.
+For each target×M group, we measured the fraction of its 2,000 rows that
+fall within the 1st–99th percentile of the **donor's comparison-frame**
+distribution for each of the 19 CHELSA variables. These percentiles are
+**not the training range of the donor model**, so this is a proxy for
+environmental transport, not a formal extrapolation guarantee.
+
+Mean per-feature coverage is **0.944** among the 165 swaps flagged by the
+frozen procedure×M ceiling and **0.970** among the 115 swaps still inside
+the ceiling. The broad association is consistent with some higher
+discordance under poorer climate matching, but is observational and
+confounded by fixed species-pair membership.
+
+Importantly, a high-overlap slice still contains undetected wrong-target
+pairs. Among cells with mean per-feature coverage ≥0.95, **104/180**
+(57.8%, spanning nine target species) remain within the original q95
+ceiling. Requiring at least 80% of target rows to be within the donor's
+1st–99th percentile band for **all 19 variables simultaneously** retains
+102 cells from six target species, and **62/102 (60.8%)** still fall within
+the ceiling.
+
+These support thresholds were examined **after** results were available,
+and the cell subsamples are not independent biological replicates.
+They cannot establish that the donor model was evaluated wholly within
+its source training domain; neither can they prove that species have
+equivalent ecological niches. The narrower finding is that the
+numerically silent identity mismatches are not restricted to obvious
+climate-frame non-overlap cases. Independent biological truth is still
+absent.
+
+The stratified source-hash-verified audit is archived at
+`results/target_identity_controls_v1/transport_stratified_summary_v1.json`.
+It retains the full 288-cell denominator, 12 taxa, 36 target×M groups, and
+an empirical-ledger increment of zero.
+
 ## Interpretation and prior-art boundary
 
 The strongest supported point is **a falsifying counterexample to the

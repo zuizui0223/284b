@@ -63,6 +63,73 @@ These illustrate the headroom of the existing thresholds; they **do not**
 reconstruct source-specific surfaces, mimic real mechanisms, or estimate
 detection power for a genuine biological incompatibility.
 
+## Score-level alignment control: reconstructed original models
+
+This extension goes beyond modifying the scalar distance. It uses the signed
+12 held-out **model-fit ZIPs**, whose identities and SHA-256 values are frozen
+in `source_manifest.json` of the original held-out endpoint archive.
+For every one of the 283 open cells, the independently modelled
+PRESERVED_SPECIMEN and HUMAN_OBSERVATION scores were joined by their
+**exact same 2,000 comparison-row IDs**. Recomputed 1−Schoener D equals
+the original receipt (tolerance <1e−10) for all **283/283**.
+
+For each original valid pair, the human-observation scores were shuffled
+across those same 2,000 row IDs with 12 deterministic, reproducible seeds.
+The manipulation retains the taxon, procedure, accessible-area radius, every
+score and score marginal, but destroys the association between score and
+geographic comparison row. We also tested partial convex mixing
+`q_lambda = (1-lambda)*q_original + lambda*q_shuffled`.
+The reference remains completely unchanged.
+
+### Exploratory comparison to the simple pooled-q95 benchmark
+
+The pooled comparator uses a nearest-rank q95 across all 1,024 reference
+comparisons rather than the frozen 24 procedure×M ceilings. Each row in
+the following table contains **3,396 correlated cell×seed constructs**
+(283 cells × 12 repetitions). These are *not* independent biological
+replicates or confirmatory sensitivity estimates.
+
+| Fraction of shuffled-score contribution | Original matched q95 flags | Pooled q95 flags |
+|---|---:|---:|
+| 0 (original real pairs; 283 cells, not 3,396) | 0/283 | 2/283 |
+| 0.25 | 0/3,396 | 0/3,396 |
+| 0.50 | 170/3,396 (5.0%) | 53/3,396 (1.6%) |
+| 0.75 | 2,076/3,396 (61.1%) | 1,702/3,396 (50.1%) |
+| 1.00 | 3,211/3,396 (94.6%) | 3,016/3,396 (88.8%) |
+
+The matched reference catches more of these *constructed spatial mismatches*
+at the overall descriptive level while flagging fewer original pairs, but
+the advantage is **not universal across taxa**: several taxa show the
+opposite direction for particular partial perturbations. The pooled
+reference is a useful simple comparator, not a proven fair calibration
+alternative for every procedure×M.
+
+An exact upper-bound test also anti-aligns ranks of the two source scores,
+the maximum total-variation discordance possible under a permutation of
+one score vector's fixed marginal values. **282/283** cells can then cross
+the frozen ceiling. One cell cannot, even under this maximal rearrangement:
+*Eucalyptus globulus*, 300 km, `niche_forward|logit_l2_C0.1_degree1`,
+where maximum discordance is about 0.326 versus threshold about 0.412.
+This is a diagnostic nonidentifiability under fixed score marginals,
+not a true biological counterexample.
+
+**Interpretation:** This is evidence of *algorithmic discriminatory
+response to deliberate spatial-score misalignment*, not evidence that 284b
+outperforms existing methods on genuine ecological inconsistencies. The
+comparison was specified after the original Level-A endpoint opened.
+No nominal sensitivity/specificity, p-value, or causal biological claim is
+licensed by these data. The original 0/12 held-out endpoint remains intact.
+
+### What to test next, prospectively
+
+A genuine out-of-sample method comparison would freeze the relation rule and
+the negative-control mechanisms *before* opening fresh biological taxa and
+would compare matched-q95, pooled-q95, complete-case and missing-as-zero
+baselines. It should include both technical row misalignment and ecologically
+interpretable process/target mismatches with known labels and a separate
+score-adequacy analysis. Taxa, not permutations or procedure×M cells, must
+be the replication units.
+
 ## Critical inferential boundaries
 
 - The 47 reference taxa are not a fresh random test set; the reference
@@ -87,9 +154,8 @@ held-out all-pass result is conditioned on a reference panel with higher
 discordance and does not establish superiority over simpler SDM
 source-comparison methods.*
 
-Before claiming method superiority or biological discriminability, a new,
-prospectively specified experiment needs independently verified negative
-controls (e.g. correctly aligned versus deliberately misaligned
-source-specific prediction surfaces on the same common cell IDs) and a
-strictly separated calibration and test panel. Such a contrast must not
-reinterpret 1−Schoener D alone as a gold-standard biological violation.
+Before claiming general superiority or biological discriminability, a new,
+prospectively specified experiment needs independently verified ecological
+negative controls, independent validation taxa and a strictly separated
+calibration/test panel. The present post-hoc score-alignment manipulation
+is a useful diagnostic but not that confirmatory experiment.

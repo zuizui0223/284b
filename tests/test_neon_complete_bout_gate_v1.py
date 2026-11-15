@@ -84,6 +84,13 @@ class PlantBoutTests(unittest.TestCase):
         state=evaluate_400m2_bout(a,b,focal_scientific_name="Artemisia tridentata")
         self.assertEqual(state["state"],"unresolved")
 
+    def test_family_level_unidentified_plant_blocks_negative_label(self):
+        a,b=fixture()
+        b[0].update({"targetTaxaPresent":"Y","scientificName":"Asteraceae",
+                     "taxonRank":"FAMILY"})
+        out=evaluate_400m2_bout(a,b,focal_scientific_name="Artemisia tridentata")
+        self.assertEqual(out["state"],"unresolved")
+
     def test_event_and_date_constraints(self):
         a,b=fixture()
         b[0]["eventID"]="WRONG_PLOT.1.2021"

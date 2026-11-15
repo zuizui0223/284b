@@ -1,0 +1,71 @@
+name: Level-A score-alignment negative controls
+on:
+  push:
+    branches:
+      - analysis/level-a-discriminability-audit-20261115
+    paths:
+      - 'scripts/audit_level_a_surface_controls_v1.py'
+      - 'integration_tests/test_level_a_surface_controls_v1.py'
+      - '.github/workflows/level_a_surface_controls_v1.yml'
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  surface-controls:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install parquet and array dependencies
+        run: python -m pip install numpy pandas pyarrow
+      - name: Verify score-alignment test harness
+        run: python -m unittest discover -s integration_tests -p 'test_level_a_surface_controls_v1.py' -v
+      - name: Fetch originally signed heldout source archives
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p build/heldout_sources results/level_a_discriminability_v1
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/10137399646/zip" > /tmp/heldout_endpoint.zip
+          unzip -p /tmp/heldout_endpoint.zip source_manifest.json > results/level_a_discriminability_v1/source_manifest_heldout.json
+          python - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          m=json.loads(pathlib.Path("results/level_a_discriminability_v1/source_manifest_heldout.json").read_text())
+          entries=m["heldout_taxon_artifacts"]
+          assert len(entries)==12
+          dest=pathlib.Path("build/heldout_sources")
+          for e in entries:
+              p=dest/f"{e['id']}.zip"
+              with p.open("wb") as f:
+                  subprocess.run(["gh","api",f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{e['id']}/zip"],stdout=f,check=True)
+              sha=hashlib.sha256(p.read_bytes()).hexdigest()
+              assert sha==e["digest"].split(":",1)[1], e["name"]
+              print(e["name"], "verified")
+          PY
+      - name: Reconstruct original overlap and evaluate reproducible score controls
+        run: |
+          python scripts/audit_level_a_surface_controls_v1.py \
+            --manifest results/level_a_discriminability_v1/source_manifest_heldout.json \
+            --heldout results/level_a_discriminability_v1/core19_heldout_final_cells.csv \
+            --reference-audit results/level_a_discriminability_v1/level_a_discriminability_audit_v1.json \
+            --artifact-dir build/heldout_sources \
+            --out-json results/level_a_discriminability_v1/level_a_surface_controls_v1.json \
+            --out-csv results/level_a_discriminability_v1/level_a_surface_controls_cells_v1.csv \
+            --reps 12
+      - name: Archive verified provenance and derived scalar controls only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/level_a_discriminability_v1/source_manifest_heldout.json
+          git add results/level_a_discriminability_v1/level_a_surface_controls_v1.json
+          git add results/level_a_discriminability_v1/level_a_surface_controls_cells_v1.csv
+          if git diff --cached --quiet; then
+            echo "No changed audit outputs"
+            exit 0
+          fi
+          git commit -m "Archive provenance-checked score-misalignment stress results"
+          git push origin "HEAD:$GITHUB_REF_NAME"

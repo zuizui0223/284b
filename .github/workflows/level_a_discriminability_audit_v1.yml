@@ -1,0 +1,54 @@
+name: Level-A retrospective discriminability audit
+on:
+  push:
+    branches:
+      - analysis/level-a-discriminability-audit-20261115
+    paths:
+      - 'scripts/audit_level_a_discriminability_v1.py'
+      - 'tests/test_level_a_discriminability_v1.py'
+      - 'docs/level_a_discriminability_audit_v1.md'
+      - '.github/workflows/level_a_discriminability_audit_v1.yml'
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  frozen-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit-test quantile implementation
+        run: python -m unittest discover -s tests -p 'test_level_a_discriminability_v1.py' -v
+      - name: Retrieve the previously opened signed artifact contents
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p results/level_a_discriminability_v1
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/10137399646/zip" > /tmp/level_a_heldout.zip
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/10137248940/zip" > /tmp/level_a_reference.zip
+          unzip -p /tmp/level_a_heldout.zip final/core19_heldout_final_cells.csv > results/level_a_discriminability_v1/core19_heldout_final_cells.csv
+          unzip -p /tmp/level_a_reference.zip final/core19_pairing_cells.csv > results/level_a_discriminability_v1/core19_pairing_cells.csv
+          unzip -p /tmp/level_a_reference.zip final/core19_reference_ceiling.csv > results/level_a_discriminability_v1/core19_reference_ceiling.csv
+      - name: Verify frozen hashes and recompute taxon-level diagnostics
+        run: |
+          python scripts/audit_level_a_discriminability_v1.py \
+            --heldout results/level_a_discriminability_v1/core19_heldout_final_cells.csv \
+            --reference results/level_a_discriminability_v1/core19_pairing_cells.csv \
+            --ceilings results/level_a_discriminability_v1/core19_reference_ceiling.csv \
+            --out results/level_a_discriminability_v1/level_a_discriminability_audit_v1.json
+      - name: Archive verified already-opened scalar receipts and audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/level_a_discriminability_v1/
+          if git diff --cached --quiet; then
+            echo "No changed audit outputs"
+            exit 0
+          fi
+          git commit -m "Archive SHA-verified Level-A scalar inputs and exploratory audit"
+          git push origin "HEAD:$GITHUB_REF_NAME"

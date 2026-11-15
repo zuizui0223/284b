@@ -1,0 +1,70 @@
+{
+  "antirank_cells_above_ceiling": 282,
+  "antirank_cells_above_pooled_q95": 282,
+  "antirank_cells_unable_to_exceed_ceiling_given_marginals": 1,
+  "antirank_taxa_with_any_above_ceiling": 12,
+  "artifact_ids": [
+    10089523408,
+    10089523542,
+    10089523860,
+    10089524000,
+    10089524564,
+    10089526766,
+    10089527180,
+    10089527320,
+    10089527674,
+    10089528001,
+    10089528003,
+    10089528842
+  ],
+  "artifact_sha256_from_original_manifest_verified": true,
+  "cells_with_any_random_shuffle_exceedance": 270,
+  "empirical_ledger_increment": 0,
+  "limitations": [
+    "Synthetic score permutation disrupts spatial matching; no biologically verified mismatch labels exist.",
+    "Anti-rank controls are mathematical extremes under preserved score marginals, not realistic species differences.",
+    "Permutations and procedure-by-area cells within each taxon are correlated, not independent species replicates.",
+    "No nominal sensitivity, specificity, accuracy advantage, Level-C evidence, or causal mechanism is inferred."
+  ],
+  "original_cells_above_pooled_q95": 2,
+  "original_cells_reconstructed": 283,
+  "original_exceedance_cells": 0,
+  "original_taxa_reconstructed": 12,
+  "perturbation_gradient": {
+    "0.25": {
+      "cell_permutation_trials": 3396,
+      "matched_ceiling_exceed_trials": 0,
+      "matched_taxa_with_any_exceedance": 0,
+      "pooled_ceiling_exceed_trials": 0,
+      "pooled_taxa_with_any_exceedance": 0
+    },
+    "0.5": {
+      "cell_permutation_trials": 3396,
+      "matched_ceiling_exceed_trials": 170,
+      "matched_taxa_with_any_exceedance": 5,
+      "pooled_ceiling_exceed_trials": 53,
+      "pooled_taxa_with_any_exceedance": 3
+    },
+    "0.75": {
+      "cell_permutation_trials": 3396,
+      "matched_ceiling_exceed_trials": 2076,
+      "matched_taxa_with_any_exceedance": 12,
+      "pooled_ceiling_exceed_trials": 1702,
+      "pooled_taxa_with_any_exceedance": 12
+    },
+    "1": {
+      "cell_permutation_trials": 3396,
+      "matched_ceiling_exceed_trials": 3211,
+      "matched_taxa_with_any_exceedance": 12,
+      "pooled_ceiling_exceed_trials": 3016,
+      "pooled_taxa_with_any_exceedance": 12
+    }
+  },
+  "pooled_q95_from_reference_only": 0.4124382962339767,
+  "random_permutations_per_cell": 12,
+  "random_shuffle_cell_replicates": 3396,
+  "random_shuffle_exceed_cell_replicates": 3211,
+  "schema": "284b.level_a_score_alignment_stress_audit.v1",
+  "status": "exploratory_constructed_negative_control_not_confirmatory",
+  "taxa_with_any_random_shuffle_exceedance": 12
+}

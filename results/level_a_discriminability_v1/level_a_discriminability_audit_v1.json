@@ -1,0 +1,484 @@
+{
+  "empirical_ledger_increment": 0,
+  "exploratory_comparators": {
+    "additive_distance_stress_only": {
+      "0.025": {
+        "cells": 1,
+        "taxa": 1
+      },
+      "0.05": {
+        "cells": 6,
+        "taxa": 4
+      },
+      "0.1": {
+        "cells": 22,
+        "taxa": 5
+      },
+      "0.2": {
+        "cells": 115,
+        "taxa": 10
+      }
+    },
+    "heldout_cells_above_pooled_q95": 2,
+    "heldout_taxa_above_pooled_q95": [
+      "Nothofagus antarctica",
+      "Nothofagus betuloides"
+    ],
+    "pooled_q95": 0.4124382962339767
+  },
+  "heldout": {
+    "cell_weighted_mean_discordance": 0.18648426678660046,
+    "cell_weighted_median_reference_ecdf": 0.20454545454545456,
+    "cells": 288,
+    "cells_below_reference_median": 229,
+    "evaluable": 283,
+    "taxa": 12,
+    "taxa_exceeding_original_frozen_q95": 0,
+    "taxon_table": [
+      {
+        "evaluable": 24,
+        "maximum_observed_to_reference_ratio": 0.8653296014370238,
+        "mean_discordance": 0.22943470864684137,
+        "median_reference_ecdf": 0.37796442687747034,
+        "taxon": "Abies lasiocarpa"
+      },
+      {
+        "evaluable": 24,
+        "maximum_observed_to_reference_ratio": 0.5499244428882422,
+        "mean_discordance": 0.11418439638494611,
+        "median_reference_ecdf": 0.045454545454545456,
+        "taxon": "Artemisia tridentata"
+      },
+      {
+        "evaluable": 24,
+        "maximum_observed_to_reference_ratio": 0.6361881519005159,
+        "mean_discordance": 0.15252077216828736,
+        "median_reference_ecdf": 0.12335692618806876,
+        "taxon": "Atriplex canescens"
+      },
+      {
+        "evaluable": 24,
+        "maximum_observed_to_reference_ratio": 0.5087724307381237,
+        "mean_discordance": 0.1548655986603054,
+        "median_reference_ecdf": 0.16704545454545455,
+        "taxon": "Avicennia germinans"
+      },
+      {
+        "evaluable": 24,
+        "maximum_observed_to_reference_ratio": 0.6468467181323011,
+        "mean_discordance": 0.14916799284427157,
+        "median_reference_ecdf": 0.15108695652173915,
+        "taxon": "Avicennia marina"
+      },
+      {
+        "evaluable": 24,
+        "maximum_observed_to_reference_ratio": 0.6433254313772625,
+        "mean_discordance": 0.14939881107677397,
+        "median_reference_ecdf": 0.09970311726867886,
+        "taxon": "Encelia farinosa"
+      },
+      {
+        "evaluable": 24,
+        "maximum_observed_to_reference_ratio": 0.8945224348157355,
+        "mean_discordance": 0.24436973103125909,
+        "median_reference_ecdf": 0.45971867007672634,
+        "taxon": "Eucalyptus delegatensis"
+      },
+      {
+        "evaluable": 22,
+        "maximum_observed_to_reference_ratio": 0.8823781958663326,
+        "mean_discordance": 0.25746420011857457,
+        "median_reference_ecdf": 0.6046905222437138,
+        "taxon": "Eucalyptus globulus"
+      },
+      {
+        "evaluable": 24,
+        "maximum_observed_to_reference_ratio": 0.7512867026349138,
+        "mean_discordance": 0.17953623530245158,
+        "median_reference_ecdf": 0.2052139037433155,
+        "taxon": "Laguncularia racemosa"
+      },
+      {
+        "evaluable": 22,
+        "maximum_observed_to_reference_ratio": 0.5401321450930584,
+        "mean_discordance": 0.13168650032229137,
+        "median_reference_ecdf": 0.07238372093023256,
+        "taxon": "Larix laricina"
+      },
+      {
+        "evaluable": 23,
+        "maximum_observed_to_reference_ratio": 0.9152644230417644,
+        "mean_discordance": 0.2576208679677785,
+        "median_reference_ecdf": 0.5227272727272727,
+        "taxon": "Nothofagus antarctica"
+      },
+      {
+        "evaluable": 24,
+        "maximum_observed_to_reference_ratio": 0.9882317590060091,
+        "mean_discordance": 0.2218739258702793,
+        "median_reference_ecdf": 0.30772946859903383,
+        "taxon": "Nothofagus betuloides"
+      }
+    ],
+    "unresolved": 5
+  },
+  "limitations": [
+    "Reference LOO reuses the same taxon panel and cannot establish a nominal false-alarm rate.",
+    "Reference and heldout taxa are not exchangeable random samples.",
+    "Each taxon contributes correlated procedure-by-area cells, not independent replicates.",
+    "Pooled q95 ignores procedure/area heterogeneity; flagged pairs have no ground-truth labels.",
+    "Additive-distance stress is algebraic, not a biological mismatch or a sensitivity estimate.",
+    "No real hard-relation violation, Level-C effect, or causal mechanism is tested."
+  ],
+  "original_endpoint_modified": false,
+  "reference": {
+    "cell_weighted_mean_discordance": 0.2497993873869012,
+    "evaluable_cells": 1024,
+    "loo_cells_with_exceedance": 65,
+    "loo_taxa_with_exceedance": 11,
+    "loo_taxa_without_exceedance": 36,
+    "loo_taxon_table": [
+      {
+        "evaluable": 24,
+        "exceedances": 7,
+        "maximum_observed_to_loo_ratio": 1.1961584660862596,
+        "mean_discordance": 0.3456599247896358,
+        "taxon": "Abies amabilis"
+      },
+      {
+        "evaluable": 18,
+        "exceedances": 1,
+        "maximum_observed_to_loo_ratio": 1.0476207237015065,
+        "mean_discordance": 0.30583035946856996,
+        "taxon": "Abies grandis"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 17,
+        "maximum_observed_to_loo_ratio": 1.52390581286741,
+        "mean_discordance": 0.4193204224578418,
+        "taxon": "Abies magnifica"
+      },
+      {
+        "evaluable": 23,
+        "exceedances": 1,
+        "maximum_observed_to_loo_ratio": 1.0226765384870788,
+        "mean_discordance": 0.3184085598498069,
+        "taxon": "Abies procera"
+      },
+      {
+        "evaluable": 5,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.6863033166629321,
+        "mean_discordance": 0.26576379776808556,
+        "taxon": "Abies sibirica"
+      },
+      {
+        "evaluable": 23,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.7152604506444791,
+        "mean_discordance": 0.2041957780502933,
+        "taxon": "Acacia melanoxylon"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 22,
+        "maximum_observed_to_loo_ratio": 1.3658381036981437,
+        "mean_discordance": 0.4221802361318615,
+        "taxon": "Acorus calamus"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.8142267409476093,
+        "mean_discordance": 0.24063273614233333,
+        "taxon": "Aegiceras corniculatum"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.9660742781763726,
+        "mean_discordance": 0.3251168602476326,
+        "taxon": "Alisma plantago-aquatica"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.7382564203309413,
+        "mean_discordance": 0.18189490429753305,
+        "taxon": "Ambrosia dumosa"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.4517672425317721,
+        "mean_discordance": 0.13726028460281153,
+        "taxon": "Artemisia filifolia"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.3916336720413127,
+        "mean_discordance": 0.11842376644333148,
+        "taxon": "Atriplex confertifolia"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.7374706703159112,
+        "mean_discordance": 0.2119632299227542,
+        "taxon": "Atriplex lentiformis"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.7857310747004047,
+        "mean_discordance": 0.24444029778502746,
+        "taxon": "Butomus umbellatus"
+      },
+      {
+        "evaluable": 16,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.8396246015413039,
+        "mean_discordance": 0.2950554464570389,
+        "taxon": "Carpinus betulus"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.8381644734399185,
+        "mean_discordance": 0.2429276863739801,
+        "taxon": "Ceriops tagal"
+      },
+      {
+        "evaluable": 13,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.9488756325469571,
+        "mean_discordance": 0.33958402034198465,
+        "taxon": "Chamaecyparis lawsoniana"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.8480628214211376,
+        "mean_discordance": 0.255373935365255,
+        "taxon": "Cornus sanguinea"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.8419772867446494,
+        "mean_discordance": 0.26242968220336604,
+        "taxon": "Ephedra nevadensis"
+      },
+      {
+        "evaluable": 22,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.7751680014478745,
+        "mean_discordance": 0.1773927786247731,
+        "taxon": "Eucalyptus baxteri"
+      },
+      {
+        "evaluable": 20,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.821914919983366,
+        "mean_discordance": 0.2297896015269111,
+        "taxon": "Eucalyptus nitens"
+      },
+      {
+        "evaluable": 18,
+        "exceedances": 1,
+        "maximum_observed_to_loo_ratio": 1.0556162674454421,
+        "mean_discordance": 0.2957462251725708,
+        "taxon": "Eucalyptus viminalis"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.9545439273735914,
+        "mean_discordance": 0.2596230664697268,
+        "taxon": "Euonymus europaeus"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.8595603587145653,
+        "mean_discordance": 0.2793062571065262,
+        "taxon": "Geranium dissectum"
+      },
+      {
+        "evaluable": 20,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.4067457500747541,
+        "mean_discordance": 0.10453645055369767,
+        "taxon": "Gutierrezia sarothrae"
+      },
+      {
+        "evaluable": 22,
+        "exceedances": 2,
+        "maximum_observed_to_loo_ratio": 1.010424303264406,
+        "mean_discordance": 0.3103048253903377,
+        "taxon": "Leersia oryzoides"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.8846448857806654,
+        "mean_discordance": 0.2820910193128423,
+        "taxon": "Ligustrum vulgare"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.4437362993151568,
+        "mean_discordance": 0.12899613994781217,
+        "taxon": "Lumnitzera racemosa"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.9393560444357412,
+        "mean_discordance": 0.2411240092326189,
+        "taxon": "Onoclea sensibilis"
+      },
+      {
+        "evaluable": 12,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.7922185282603688,
+        "mean_discordance": 0.3122204340526643,
+        "taxon": "Picea obovata"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 2,
+        "maximum_observed_to_loo_ratio": 1.0981739808880313,
+        "mean_discordance": 0.277232331066743,
+        "taxon": "Pinus flexilis"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.7030765983027412,
+        "mean_discordance": 0.2066080001878691,
+        "taxon": "Pinus ponderosa"
+      },
+      {
+        "evaluable": 9,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.6252225421548032,
+        "mean_discordance": 0.22507589051533233,
+        "taxon": "Pinus sibirica"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.782522459065728,
+        "mean_discordance": 0.21863825497528055,
+        "taxon": "Pinus strobus"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 10,
+        "maximum_observed_to_loo_ratio": 1.2093058926604836,
+        "mean_discordance": 0.36742660919059156,
+        "taxon": "Polystichum setiferum"
+      },
+      {
+        "evaluable": 22,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.9920265397679113,
+        "mean_discordance": 0.31066566295480297,
+        "taxon": "Populus tremula"
+      },
+      {
+        "evaluable": 18,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.936853306631369,
+        "mean_discordance": 0.32074598706721125,
+        "taxon": "Quercus petraea"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.45958428095532455,
+        "mean_discordance": 0.1414853036602879,
+        "taxon": "Sonneratia alba"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.9245926937229779,
+        "mean_discordance": 0.2536962798038478,
+        "taxon": "Sparganium erectum"
+      },
+      {
+        "evaluable": 20,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.7354705405543667,
+        "mean_discordance": 0.22025073454272218,
+        "taxon": "Tilia cordata"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 1,
+        "maximum_observed_to_loo_ratio": 1.2479137563013505,
+        "mean_discordance": 0.23263732366253484,
+        "taxon": "Tsuga canadensis"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.9028956226560132,
+        "mean_discordance": 0.2740326441137994,
+        "taxon": "Tsuga mertensiana"
+      },
+      {
+        "evaluable": 23,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.837097335705593,
+        "mean_discordance": 0.23022126971602905,
+        "taxon": "Veronica arvensis"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.5920048274102306,
+        "mean_discordance": 0.18588337853684903,
+        "taxon": "Viburnum opulus"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.7419190563768355,
+        "mean_discordance": 0.2218349389430551,
+        "taxon": "Viola arvensis"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 1,
+        "maximum_observed_to_loo_ratio": 1.3667966121458972,
+        "mean_discordance": 0.2817947809098161,
+        "taxon": "Woodwardia fimbriata"
+      },
+      {
+        "evaluable": 24,
+        "exceedances": 0,
+        "maximum_observed_to_loo_ratio": 0.46215365092038946,
+        "mean_discordance": 0.1143666624744338,
+        "taxon": "Xylocarpus granatum"
+      }
+    ],
+    "taxa": 47
+  },
+  "schema": "284b.level_a_retrospective_discriminability_audit.v1",
+  "sha256_inputs": {
+    "core19_heldout_final_cells.csv": "d9194ea416dcc3bbae339167e271d3cbcd522327b41fe573325770a94bd90b0d",
+    "core19_pairing_cells.csv": "3fc1a76e78fb1581b20fd15a129fb82775b196658b8329c612d3b513dc4a869c",
+    "core19_reference_ceiling.csv": "10759c6e0ffc70ff403c0eabd9c7ce30765ebbf1ce6403fa29562a7c7bb2b039"
+  },
+  "source_artifact_ids": {
+    "heldout": 10137399646,
+    "reference": 10137248940
+  },
+  "status": "exploratory_posthoc_not_confirmatory"
+}

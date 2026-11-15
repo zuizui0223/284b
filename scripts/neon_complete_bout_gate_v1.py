@@ -77,6 +77,11 @@ def evaluate_400m2_bout(
     for r in rows:
         present = str(r["targetTaxaPresent"]).strip() == "Y"
         if not present:
+            # A protocol-level no-taxa sentinel must never carry an identified
+            # species or morphospecies record. Contradictory survey rows cannot
+            # be treated as a trustworthy non-detection.
+            if str(r["scientificName"] or "").strip() or str(r["morphospeciesID"] or "").strip():
+                return _unresolved("contradictory_targetTaxaPresent_N_with_taxon_metadata")
             continue
         name = str(r["scientificName"] or "").strip()
         rank = str(r["taxonRank"] or "").strip().upper()

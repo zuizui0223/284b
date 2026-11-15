@@ -99,7 +99,11 @@ def run():
                 headers={"Accept":"application/json",
                          "User-Agent":"284b-site-metadata-only-spatial-grain-audit/1.0"})
     with urlopen(req,timeout=40) as h:
-        raw=h.read(8_000_000)
+        # The NEON /sites endpoint embeds every site's product-month metadata;
+        # a response can exceed 8 MB even though we retain only 47 centroids.
+        raw=h.read(80_000_001)
+        if len(raw) > 80_000_000:
+            raise RuntimeError("NEON sites metadata exceeds 80 MB predeclared cap")
     return summarize(json.loads(raw),c,i,raw)
 
 

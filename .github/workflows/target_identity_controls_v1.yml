@@ -1,0 +1,77 @@
+name: Fixed 284b target-identity model swaps
+on:
+  push:
+    branches:
+      - analysis/284b-target-identity-controls-20261115
+    paths:
+      - 'config/target_identity_controls_v1.json'
+      - 'scripts/audit_target_identity_controls_v1.py'
+      - 'tests/test_target_identity_controls_v1.py'
+      - '.github/workflows/target_identity_controls_v1.yml'
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  fixed-target-swaps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install original compatible modelling libraries
+        run: |
+          python -m pip install --disable-pip-version-check numpy pandas pyarrow joblib scikit-learn
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check -e ./sdmr
+      - name: Unit-test exact-discordance and fail-closed helpers
+        run: python -m unittest discover -s tests -p 'test_target_identity_controls_v1.py' -v
+      - name: Download predeclared historical model and comparison-frame archives
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p build/target_identity_source results/target_identity_controls_v1
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/10137399646/zip" > /tmp/original_heldout.zip
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/10137248940/zip" > /tmp/original_ref.zip
+          unzip -p /tmp/original_heldout.zip final/core19_heldout_final_cells.csv > build/target_identity_source/core19_heldout_final_cells.csv
+          unzip -p /tmp/original_ref.zip final/core19_pairing_cells.csv > build/target_identity_source/core19_pairing_cells.csv
+          python - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          design=json.loads(pathlib.Path("config/target_identity_controls_v1.json").read_text())
+          root=pathlib.Path("build/target_identity_source")
+          assert len(design["entries"]) == 12
+          for entry in design["entries"]:
+              for mode in ("fit", "frame"):
+                  art_id=entry[f"{mode}_artifact_id"]
+                  path=root/f"{mode}_{entry['index']}.zip"
+                  with path.open("wb") as f:
+                      subprocess.run(["gh","api",f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{art_id}/zip"],
+                                     stdout=f,check=True)
+                  sha=hashlib.sha256(path.read_bytes()).hexdigest()
+                  assert "sha256:"+sha == entry[f"{mode}_artifact_digest"], (entry["taxon"],mode)
+                  print(entry["taxon"],mode,"verified",flush=True)
+          PY
+      - name: Reproduce all donor model scores and evaluate fixed species switches
+        run: |
+          python scripts/audit_target_identity_controls_v1.py \
+            --manifest config/target_identity_controls_v1.json \
+            --root build/target_identity_source \
+            --heldout build/target_identity_source/core19_heldout_final_cells.csv \
+            --reference build/target_identity_source/core19_pairing_cells.csv \
+            --out-json results/target_identity_controls_v1/target_identity_results_v1.json \
+            --out-csv results/target_identity_controls_v1/target_identity_cells_v1.csv
+      - name: Archive auditable derived scalar results only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/target_identity_controls_v1/
+          if git diff --cached --quiet; then
+            echo "No changed derived scalar outputs"
+            exit 0
+          fi
+          git commit -m "Archive target-identity control results from pinned source models"
+          git push origin "HEAD:$GITHUB_REF_NAME"

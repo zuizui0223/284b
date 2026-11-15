@@ -33,8 +33,13 @@ def antirank_maximum(a, b) -> float:
     return discordance(np.sort(a), np.sort(b)[::-1])
 
 
-def evaluate(manifest_path: Path, heldout_csv: Path, artifact_dir: Path,
-             out_json: Path, out_csv: Path, reps: int = 12) -> None:
+def evaluate(manifest_path: Path, heldout_csv: Path, reference_audit: Path,
+             artifact_dir: Path, out_json: Path, out_csv: Path, reps: int = 12) -> None:
+    prior_audit = json.loads(reference_audit.read_text(encoding="utf-8"))
+    assert prior_audit["schema"] == "284b.level_a_retrospective_discriminability_audit.v1"
+    pooled = float(prior_audit["exploratory_comparators"]["pooled_q95"])
+    assert abs(pooled - 0.4124382962339767) < 1e-12
+    levels = (0.25, 0.5, 0.75, 1.0)
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     entries = manifest["heldout_taxon_artifacts"]
     assert len(entries) == 12 and 1 <= reps <= 40
@@ -86,26 +91,54 @@ def evaluate(manifest_path: Path, heldout_csv: Path, artifact_dir: Path,
                 maximal = antirank_maximum(pa, pb)
                 assert maximal + 1e-12 >= d
                 shuffled = []
+                matched_counts = {lam: 0 for lam in levels}
+                pooled_counts = {lam: 0 for lam in levels}
                 for rep in range(reps):
                     token = f"{taxon}|{m}|{procedure}|perm{rep}".encode()
                     seed = int.from_bytes(hashlib.sha256(token).digest()[:8], "big")
                     order = np.random.default_rng(seed).permutation(len(pb))
-                    ds = discordance(pa, pb[order])
-                    assert ds <= maximal + 1e-10
-                    shuffled.append(ds)
-                computed.append({
+                    qpermuted = pb[order]
+                    for lam in levels:
+                        trial = (1 - lam) * pb + lam * qpermuted
+                        ds = discordance(pa, trial)
+                        assert ds <= maximal + 1e-10
+                        matched_counts[lam] += int(ds > ceiling)
+                        pooled_counts[lam] += int(ds > pooled)
+                        if lam == 1.0:
+                            shuffled.append(ds)
+                item = {
                     "taxon": taxon, "M_km": m, "procedure": procedure,
                     "observed_distance": d, "frozen_ceiling": ceiling,
                     "max_reassignment_distance": maximal,
                     "random_shuffle_mean_distance": float(np.mean(shuffled)),
-                    "random_shuffle_exceed_count": int(sum(x > ceiling for x in shuffled)),
+                    "random_shuffle_exceed_count": matched_counts[1.0],
                     "permutations": reps, "max_reassignment_exceeds": bool(maximal > ceiling),
-                })
+                    "original_exceeds_pooled": bool(d > pooled),
+                    "max_reassignment_exceeds_pooled": bool(maximal > pooled),
+                }
+                for lam in levels:
+                    item[f"matched_exceed_count_{lam:g}"] = matched_counts[lam]
+                    item[f"pooled_exceed_count_{lam:g}"] = pooled_counts[lam]
+                computed.append(item)
 
     assert len(computed) == 283 and len({x["taxon"] for x in computed}) == 12
     by_taxon = defaultdict(list)
     for row in computed:
         by_taxon[row["taxon"]].append(row)
+    gradient = {}
+    for lam in levels:
+        k = f"{lam:g}"
+        matched_key = f"matched_exceed_count_{k}"
+        pooled_key = f"pooled_exceed_count_{k}"
+        gradient[k] = {
+            "cell_permutation_trials": len(computed) * reps,
+            "matched_ceiling_exceed_trials": sum(x[matched_key] for x in computed),
+            "pooled_ceiling_exceed_trials": sum(x[pooled_key] for x in computed),
+            "matched_taxa_with_any_exceedance":
+                sum(any(x[matched_key] > 0 for x in rows) for rows in by_taxon.values()),
+            "pooled_taxa_with_any_exceedance":
+                sum(any(x[pooled_key] > 0 for x in rows) for rows in by_taxon.values()),
+        }
     result = {
         "schema": "284b.level_a_score_alignment_stress_audit.v1",
         "status": "exploratory_constructed_negative_control_not_confirmatory",
@@ -114,6 +147,9 @@ def evaluate(manifest_path: Path, heldout_csv: Path, artifact_dir: Path,
         "original_cells_reconstructed": len(computed),
         "original_taxa_reconstructed": len(by_taxon),
         "original_exceedance_cells": sum(x["observed_distance"] > x["frozen_ceiling"] for x in computed),
+        "original_cells_above_pooled_q95": sum(x["original_exceeds_pooled"] for x in computed),
+        "pooled_q95_from_reference_only": pooled,
+        "perturbation_gradient": gradient,
         "random_permutations_per_cell": reps,
         "random_shuffle_cell_replicates": len(computed) * reps,
         "random_shuffle_exceed_cell_replicates":
@@ -123,6 +159,7 @@ def evaluate(manifest_path: Path, heldout_csv: Path, artifact_dir: Path,
         "taxa_with_any_random_shuffle_exceedance":
             sum(any(x["random_shuffle_exceed_count"] > 0 for x in rows) for rows in by_taxon.values()),
         "antirank_cells_above_ceiling": sum(x["max_reassignment_exceeds"] for x in computed),
+        "antirank_cells_above_pooled_q95": sum(x["max_reassignment_exceeds_pooled"] for x in computed),
         "antirank_taxa_with_any_above_ceiling":
             sum(any(x["max_reassignment_exceeds"] for x in rows) for rows in by_taxon.values()),
         "antirank_cells_unable_to_exceed_ceiling_given_marginals":
@@ -153,11 +190,13 @@ def main() -> None:
     p.add_argument("--manifest", type=Path, required=True)
     p.add_argument("--heldout", type=Path, required=True)
     p.add_argument("--artifact-dir", type=Path, required=True)
+    p.add_argument("--reference-audit", type=Path, required=True)
     p.add_argument("--out-json", type=Path, required=True)
     p.add_argument("--out-csv", type=Path, required=True)
     p.add_argument("--reps", type=int, default=12)
     a = p.parse_args()
-    evaluate(a.manifest, a.heldout, a.artifact_dir, a.out_json, a.out_csv, a.reps)
+    evaluate(a.manifest, a.heldout, a.reference_audit,
+             a.artifact_dir, a.out_json, a.out_csv, a.reps)
 
 
 if __name__ == "__main__":

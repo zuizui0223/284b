@@ -77,6 +77,13 @@ class PlantBoutTests(unittest.TestCase):
         self.assertEqual(evaluate_400m2_bout(a,b,focal_scientific_name="Artemisia tridentata")["state"],
                          "unresolved")
 
+    def test_contradictory_empty_subplot_sentinel_is_not_an_absence(self):
+        a,b=fixture()
+        a[0].update({"targetTaxaPresent":"N","scientificName":"Artemisia tridentata",
+                     "taxonRank":"SPECIES"})
+        state=evaluate_400m2_bout(a,b,focal_scientific_name="Artemisia tridentata")
+        self.assertEqual(state["state"],"unresolved")
+
     def test_event_and_date_constraints(self):
         a,b=fixture()
         b[0]["eventID"]="WRONG_PLOT.1.2021"

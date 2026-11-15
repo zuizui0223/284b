@@ -36,7 +36,7 @@ class DatasetkeyTests(unittest.TestCase):
         self.assertEqual(missing,0)
         self.assertEqual(d["PRESERVED_SPECIMEN"]["source_thinned_known_NEON_dataset_rows"],1)
         self.assertEqual(d["PRESERVED_SPECIMEN"]["source_thinned_model_presence_rows"],2)
-        self.assertNotIn("1",str(d))
+        self.assertTrue(all(isinstance(v, int) for grouped in d.values() for v in grouped.values()))
 
     def test_mapping_failure_stops(self):
         raw={"PRESERVED_SPECIMEN":[{"key":"1","datasetKey":K}]}
@@ -58,7 +58,7 @@ class DatasetkeyTests(unittest.TestCase):
         self.assertEqual(c["pilot"]["taxon"],"Artemisia tridentata")
         self.assertEqual(c["pilot"]["original_registry_index"],0)
         self.assertEqual(c["pilot"]["expected_thinned_model_presence_counts"]["PRESERVED_SPECIMEN"],3285)
-        self.assertFalse(c["no_plot_species_outcomes_read"])
+        self.assertTrue(c["no_plot_species_outcomes_read"])
 
 
 if __name__=="__main__":

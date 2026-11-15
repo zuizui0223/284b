@@ -12,8 +12,8 @@ def fixture():
          "siteLongitude":-110-i*.07,"domainCode":"D14","stateCode":"AZ"}
         for i in range(47)
     ]
-    return {"data":coords}, {"site_metadata_url":"https://example.invalid/"},
-           {"site_month_by_site":{x["siteCode"]:{} for x in coords}}
+    return ({"data":coords}, {"site_metadata_url":"https://example.invalid/"},
+            {"site_month_by_site":{x["siteCode"]:{} for x in coords}})
 
 
 class TestSiteGeometry(unittest.TestCase):

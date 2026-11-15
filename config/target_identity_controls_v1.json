@@ -146,5 +146,7 @@
       "frame_artifact_id": 10069910761,
       "frame_artifact_digest": "sha256:b54a49dacb364ae2ae7c646ebed17937c5b82ec5c220453b1e995fc50a9d044c"
     }
-  ]
+  ],
+  "reference_csv_sha256": "3fc1a76e78fb1581b20fd15a129fb82775b196658b8329c612d3b513dc4a869c",
+  "original_reference_artifact_id": 10137248940
 }

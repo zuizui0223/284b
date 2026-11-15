@@ -6,6 +6,8 @@ on:
     paths:
       - 'config/target_identity_controls_v1.json'
       - 'scripts/audit_target_identity_controls_v1.py'
+      - 'scripts/audit_target_swap_climate_transport_v1.py'
+      - 'integration_tests/test_target_swap_climate_transport_v1.py'
       - 'tests/test_target_identity_controls_v1.py'
       - '.github/workflows/target_identity_controls_v1.yml'
 permissions:
@@ -28,7 +30,9 @@ jobs:
           git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
           python -m pip install --disable-pip-version-check -e ./sdmr
       - name: Unit-test exact-discordance and fail-closed helpers
-        run: python -m unittest discover -s tests -p 'test_target_identity_controls_v1.py' -v
+        run: |
+          python -m unittest discover -s tests -p 'test_target_identity_controls_v1.py' -v
+          python -m unittest discover -s integration_tests -p 'test_target_swap_climate_transport_v1.py' -v
       - name: Download predeclared historical model and comparison-frame archives
         env:
           GH_TOKEN: ${{ github.token }}
@@ -64,6 +68,14 @@ jobs:
             --reference build/target_identity_source/core19_pairing_cells.csv \
             --out-json results/target_identity_controls_v1/target_identity_results_v1.json \
             --out-csv results/target_identity_controls_v1/target_identity_cells_v1.csv
+      - name: Quantify climate-frame transport coverage without filtering cells
+        run: |
+          python scripts/audit_target_swap_climate_transport_v1.py \
+            --manifest config/target_identity_controls_v1.json \
+            --root build/target_identity_source \
+            --cells results/target_identity_controls_v1/target_identity_cells_v1.csv \
+            --out-json results/target_identity_controls_v1/climate_transport_proxy_v1.json \
+            --out-csv results/target_identity_controls_v1/climate_transport_cells_v1.csv
       - name: Archive auditable derived scalar results only
         run: |
           git config user.name "github-actions[bot]"

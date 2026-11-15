@@ -51,6 +51,7 @@ jobs:
           python scripts/audit_level_a_surface_controls_v1.py \
             --manifest results/level_a_discriminability_v1/source_manifest_heldout.json \
             --heldout results/level_a_discriminability_v1/core19_heldout_final_cells.csv \
+            --reference-audit results/level_a_discriminability_v1/level_a_discriminability_audit_v1.json \
             --artifact-dir build/heldout_sources \
             --out-json results/level_a_discriminability_v1/level_a_surface_controls_v1.json \
             --out-csv results/level_a_discriminability_v1/level_a_surface_controls_cells_v1.csv \

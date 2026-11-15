@@ -1,5 +1,6 @@
 {
   "antirank_cells_above_ceiling": 282,
+  "antirank_cells_above_pooled_q95": 282,
   "antirank_cells_unable_to_exceed_ceiling_given_marginals": 1,
   "antirank_taxa_with_any_above_ceiling": 12,
   "artifact_ids": [
@@ -25,9 +26,41 @@
     "Permutations and procedure-by-area cells within each taxon are correlated, not independent species replicates.",
     "No nominal sensitivity, specificity, accuracy advantage, Level-C evidence, or causal mechanism is inferred."
   ],
+  "original_cells_above_pooled_q95": 2,
   "original_cells_reconstructed": 283,
   "original_exceedance_cells": 0,
   "original_taxa_reconstructed": 12,
+  "perturbation_gradient": {
+    "0.25": {
+      "cell_permutation_trials": 3396,
+      "matched_ceiling_exceed_trials": 0,
+      "matched_taxa_with_any_exceedance": 0,
+      "pooled_ceiling_exceed_trials": 0,
+      "pooled_taxa_with_any_exceedance": 0
+    },
+    "0.5": {
+      "cell_permutation_trials": 3396,
+      "matched_ceiling_exceed_trials": 170,
+      "matched_taxa_with_any_exceedance": 5,
+      "pooled_ceiling_exceed_trials": 53,
+      "pooled_taxa_with_any_exceedance": 3
+    },
+    "0.75": {
+      "cell_permutation_trials": 3396,
+      "matched_ceiling_exceed_trials": 2076,
+      "matched_taxa_with_any_exceedance": 12,
+      "pooled_ceiling_exceed_trials": 1702,
+      "pooled_taxa_with_any_exceedance": 12
+    },
+    "1": {
+      "cell_permutation_trials": 3396,
+      "matched_ceiling_exceed_trials": 3211,
+      "matched_taxa_with_any_exceedance": 12,
+      "pooled_ceiling_exceed_trials": 3016,
+      "pooled_taxa_with_any_exceedance": 12
+    }
+  },
+  "pooled_q95_from_reference_only": 0.4124382962339767,
   "random_permutations_per_cell": 12,
   "random_shuffle_cell_replicates": 3396,
   "random_shuffle_exceed_cell_replicates": 3211,

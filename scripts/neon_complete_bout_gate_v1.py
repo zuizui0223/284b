@@ -91,15 +91,19 @@ def evaluate_400m2_bout(
         if not name or morph:
             ambiguous = True
             continue
+        if rank not in {"SPECIES", "SUBSPECIES", "VARIETY"}:
+            # Genus/family/higher-rank or questionable plant identifications
+            # cannot license a negative focal-species inference.
+            ambiguous = True
+            continue
         if genus == target_genus:
             if rank != "SPECIES" or qualifier:
                 ambiguous = True
                 continue
             if name == focal_scientific_name:
                 definitely_detected = True
-        # A different identified genus is not evidence for the focal species.
-        if rank not in {"SPECIES", "SUBSPECIES", "VARIETY"} and not genus:
-            ambiguous = True
+        # A reliably identified species of another genus is not evidence
+        # that the focal taxon occurred in this completed plot.
     if definitely_detected:
         return {"state": "detected", "reason": "exact_focal_taxon_record_on_complete_bout"}
     if ambiguous:

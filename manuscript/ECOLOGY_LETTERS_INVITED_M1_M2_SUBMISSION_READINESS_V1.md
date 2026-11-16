@@ -26,6 +26,17 @@
 - [ ] Supplement assembled only from evidence needed by the M1+M2 paper.
 - [ ] Anonymous/review manuscript generated if required by the current portal.
 
+## Data-integrity blocker (added 16 November 2026)
+
+- [x] Historical GBIF source object-set change identified: 9,705 Parquet files at the September freeze versus 10,215 in the November public directory.
+- [x] All 510 restored file names are divisible by 20 and carry 2026-10-23 object timestamps; excluding them exactly recovers the frozen full-object SHA-256.
+- [x] Original 12-taxon Level-A endpoint left untouched and correctly characterized as conditional on the earlier incomplete public GBIF object set.
+- [ ] Original *Artemisia tridentata* signed presence counts re-established using exactly the recovered 9,705 Parquet paths (audit launched, not yet accepted).
+- [ ] Impact of the subsequently restored GBIF Parquet records on the original 12-taxon and 47-taxon reference conclusions assessed in a separately versioned pre-specified sensitivity study.
+- [ ] Full source-completeness caveat and evidence boundary reconciled in the final paper, supplement, data availability statement and editorial cover letter.
+
+**Submission hold:** even when author metadata, formatting and figures are complete, do not label the invited paper fully reproducible from the current public GBIF August-2026 directory, or submit as if source completeness were already audited. Historical conditional reproducibility and correctness against a complete data source are different estimands.
+
 ## Reproducibility
 
 - [x] Level-A machine-readable endpoint receipt retained.
@@ -53,4 +64,4 @@
 
 No new ecological endpoint hunting belongs in this manuscript.
 
-Once the human metadata, archive DOI, figures and final formatting are complete, submit the frozen M1+M2 invited manuscript. The Level-A-only Ecology Report remains a fallback, not a parallel simultaneous submission.
+Once the human metadata, archive DOI, figures, final formatting **and source-completeness robustness or a fully justified editorial limitation** are resolved, consider submission of the frozen M1+M2 invited manuscript. Until then the newly identified GBIF missing20 issue is a material submission hold. The Level-A-only Ecology Report remains a fallback, not a parallel simultaneous submission.

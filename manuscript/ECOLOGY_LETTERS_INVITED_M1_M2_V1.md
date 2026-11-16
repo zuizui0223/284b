@@ -136,7 +136,13 @@ on 23 October 2026. Excluding those files reproduces the complete original
 historical Level-A evaluation was performed against the earlier incomplete
 source. The original 12-taxon frozen result remains a valid conditional
 statement about that data version; it does **not** establish invariance to
-the subsequently restored records. No completed model-refit sensitivity
+the subsequently restored records. A subsequent descriptive scan confined
+to the 510 restored files found raw `PRESENT` records for **all 12 held-out
+and all 47 reference taxa**, with 15,329 versus 2,688 additional
+HUMAN_OBSERVATION versus PRESERVED_SPECIMEN rows in the held-out panel
+and 335,772 versus 19,058 in the reference panel. These are **raw records,
+not additional admitted model presences**; their effects on ecological
+predictions and q95 calibration have not been estimated. No completed model-refit sensitivity
 analysis to the repaired source has yet been demonstrated. Consequently,
 source completeness must be treated as an explicit *generalisability and
 submission-readiness limitation* rather than silently implying the currently

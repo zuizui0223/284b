@@ -1,0 +1,68 @@
+name: "GBIF repaired 10215 source: 12 frozen taxa admitted/thinned inputs"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'config/gbif_restored510_heldout12_source_thinning_v1.json'
+      - 'scripts/audit_gbif_repaired_heldout12_thinning_v1.py'
+      - 'tests/test_gbif_repaired_heldout12_thinning_v1.py'
+      - '.github/workflows/gbif_repaired_heldout12_thinning_v1.yml'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: gbif-repaired-heldout12-source-thinning-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  all-taxa-source-thinning:
+    runs-on: ubuntu-latest
+    timeout-minutes: 58
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Test 12 frozen taxa and source count gate (no occurrence records)
+        run: python -m unittest discover -s tests -p 'test_gbif_repaired_heldout12_thinning_v1.py' -v
+      - name: Verify original 12 signed per-source fit archives
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p build/repaired_source_original_fits
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess
+          cfg=json.loads(pathlib.Path('config/gbif_restored510_heldout12_source_thinning_v1.json').read_text())
+          for e in cfg['all_12_original_taxa']:
+              path=pathlib.Path('build/repaired_source_original_fits')/f"fit_{e['original_index']}.zip"
+              with path.open('wb') as fp:
+                  subprocess.run(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{e['fit_artifact_id']}/zip"],stdout=fp,check=True)
+              assert "sha256:"+hashlib.sha256(path.read_bytes()).hexdigest()==e['fit_artifact_digest'],e['taxon']
+          print("12 frozen model ZIP digests verified")
+          PY
+      - name: Recompute repaired original GBIF source admission/thinning using historical code
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check -q -e './sdmr[cloud,parquet,geo]'
+          python scripts/audit_gbif_repaired_heldout12_thinning_v1.py \
+            --fit-dir build/repaired_source_original_fits \
+            --out results/gbif_repaired_heldout12_thinning_v1.json
+      - name: Retain only aggregate source-input counts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gbif-repaired-heldout12-thinned-inputs-v1
+          path: results/gbif_repaired_heldout12_thinning_v1.json
+          if-no-files-found: warn
+      - name: Commit qualified aggregate source-input receipt
+        if: always()
+        run: |
+          if [ ! -f results/gbif_repaired_heldout12_thinning_v1.json ]; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_heldout12_thinning_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive repaired GBIF source-thinning effect on 12 originally frozen taxa"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

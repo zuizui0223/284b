@@ -72,9 +72,63 @@ need either a separately versioned leakage-excluded model fit plus a new
 holdout, or demonstrably disjoint independent plot/event labels,
 supported by record-lineage verification, before any NEON plant labels
 are opened. The seven candidate taxa remain fixed without
-outcome-based replacement. An additional historic-source provenance
-audit covering **all seven** is underway in a separate locked workflow,
-and is not yet an external prediction result.
+outcome-based replacement. The historical provenance audit has now finished for **all seven**
+fixed taxa. It remains a source-level audit, **not** a NEON external
+accuracy experiment; the explicit seven-taxon authorization gate
+remains STOP.
+
+## Full seven-taxon source-lineage audit (16 November)
+
+The previously frozen seven-taxon NEON candidate list was now audited
+**in full**, using a single scan over the precise original 9,705
+Parquet files and independently SHA-checked archived 48-model fit
+inventories for every taxon. Both original PRESERVED_SPECIMEN and
+HUMAN_OBSERVATION 0.05°-thinned model input counts were reproduced
+**exactly for 7/7** taxa.
+
+| Fixed candidate taxon | Known NEON Biorepository GBIF dataset rows in original fitted input |
+|---|---:|
+| *Artemisia tridentata* | 2 |
+| *Atriplex canescens* | 3 |
+| *Encelia farinosa* | 0 |
+| *Avicennia germinans* | 0 |
+| *Laguncularia racemosa* | 0 |
+| *Abies lasiocarpa* | 0 |
+| *Larix laricina* | 1 |
+| **Total** | **6 in 3 taxa** |
+
+All **six** model-input rows were in PRESERVED_SPECIMEN
+(6/12,923 thinned specimen inputs across seven taxa);
+zero from that **specific** NEON voucher dataset were in
+HUMAN_OBSERVATION (0/21,830). Those two denominators are
+summaries of original fitted inputs, **not** estimates of
+independent replication or predictions. `Abies lasiocarpa`
+had twelve raw NEON Biorepository voucher rows in the historical
+snapshot but **none survived original quality/collision/thinning**
+and therefore no direct inputs from that dataset entered its
+fitted model.
+
+The complete source provenance is
+`results/neon_seven_taxon_original_source_lineage_v1.json`
+and the reproducible source-eligibility decision is
+`results/neon_seven_taxon_independence_authorization_v1.json`.
+The latter is **STOP**: no NEON field plot labels have been
+opened or qualified as independent external truth.
+
+Three species demonstrably reuse at least one known NEON-supplied
+GBIF dataset input. In four species that *one* datasetKey was
+not observed after source thinning, but republished record
+aliases and exact shared site/event origins remain untested.
+**Zero known datasetKey rows does not establish complete independence.**
+
+At the same time, the 6 source-data inputs are **not verified
+identical** to any proposed 2020–2024 NEON vegetation plot
+labels. Their causal or numerical impact on the original
+SDMs has not been estimated. Hence this audit neither shows
+that NEON plot validation is impossible nor authorizes such
+validation under the frozen models. A leakage-free source
+refit plus explicit site/event exclusion and independent
+evaluation is a separate possible experiment.
 
 ## Why treating plot non-detection as species absence is unsafe
 
@@ -163,10 +217,11 @@ between-site model-score contrast, external validation remains
 
 ## Publication boundary and next gate
 
-1. **Accept the first historic-source lineage finding.** At least two
-   NEON voucher rows entered the original *Artemisia* specimen model.
-   Finish the seven fixed taxa provenance check, and audit alternative
-   NEON/GBIF publication channels before any blanket independence claim.
+1. **Accept the full historic-source lineage audit.** At least six
+   NEON voucher rows entered original specimen models for three of the
+   seven fixed taxa, with source input-count parity established for all
+   seven. Audit alternative NEON/GBIF publication channels before any
+   blanket independence claim.
    Direct voucher provenance and exact plot-outcome reuse are different.
    Independently validate only a separately qualified disjoint-source
    model or disjoint site/event holdout with documented exclusions.

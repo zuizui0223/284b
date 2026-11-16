@@ -1,0 +1,37 @@
+name: "NEON voucher-source independence authorization gate v1"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'scripts/authorize_neon_source_independence_v1.py'
+      - 'tests/test_neon_source_independence_authorization_v1.py'
+      - '.github/workflows/neon_source_independence_authorization_v1.yml'
+permissions:
+  contents: write
+concurrency:
+  group: neon-source-independence-auth-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  refuse-unqualified-external-independence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Verify known-NEON-source reuse blocks unconditional validation
+        run: python -m unittest discover -s tests -p 'test_neon_source_independence_authorization_v1.py' -v
+      - name: Write independent-source STOP receipt from signed historical source replay
+        run: |
+          python scripts/authorize_neon_source_independence_v1.py \
+            --out results/neon_source_independence_authorization_v1.json
+      - name: Commit provenance STOP receipt without species labels
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/neon_source_independence_authorization_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive known NEON voucher training-source dependence STOP gate"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

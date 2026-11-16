@@ -51,6 +51,50 @@ The 510 added Parquet objects are ~4.99% of the current file count
 (**not** proof that they represent precisely 4.99% of taxon records).
 These metadata checks did not read a single GBIF occurrence row.
 
+## Restored-file raw occurrence exposure of both frozen panels
+
+For a targeted descriptive source-integrity check, **only the 510 restored
+Parquet objects** were scanned. The species inventories were not selected
+using these outcomes: all **12 originally frozen held-out taxa** (12
+snapshot `specieskey` values) and all **47 original successor-reference
+taxa** (79 frozen historical `specieskey` values) were retained. Only
+`specieskey`, `basisofrecord`, `occurrencestatus`, and `datasetkey`
+were projected. Raw identifiers and coordinates were not saved, and no
+NEON field observations or model predictions were evaluated.
+
+| Original analysis panel | Restored `HUMAN_OBSERVATION` raw `PRESENT` records | Restored `PRESERVED_SPECIMEN` raw `PRESENT` records | Taxa with at least one restored record |
+|---|---:|---:|---:|
+| Level-A held-out panel | **15,329** | **2,688** | **12/12** |
+| Reference calibration panel | **335,772** | **19,058** | **47/47** |
+
+These are records selected by the historical taxon concept keys and
+GBIF occurrence status, **not** spatially thinned/model-admitted counts,
+and they do not describe additional unique presence locations or
+independent plot observations. It would be wrong to treat these counts
+as the magnitude or direction of a model prediction shift.
+
+Both source modes and both reference/held-out panels are materially
+exposed to the repaired source, with a *much larger raw HUMAN_OBSERVATION
+restoration count*. Consequently, the original 24 q95 calibration
+envelopes and the 12-taxon held-out comparison could both change.
+The evidence does not determine the sign of their changes.
+Scanning **only the restored files** found zero direct NEON voucher
+`datasetKey` rows in those subsets; it provides **no** guarantee
+about historical 9,705-file model inputs or duplicated data under
+other GBIF publication keys.
+
+Results:
+- `results/gbif_restored510_heldout12_exposure_v1.json`
+- `results/gbif_restored510_reference47_exposure_v1.json`
+
+A future restored-source sensitivity analysis is now specified
+**before any corrected model outcome is opened**, at
+`config/gbif_missing20_restoration_sensitivity_v1.json`.
+Its 47+12 biological units, 24 procedure×M reference cells and
+original adequacy/quantile rules are immutable. It must report missing
+and unestimable states, may not replace taxa, and cannot be counted
+as an independent fresh-taxon ecological validation.
+
 ## Consequences for 284b
 
 1. The Level-A 12-taxon held-out result (0/12 above frozen envelopes;

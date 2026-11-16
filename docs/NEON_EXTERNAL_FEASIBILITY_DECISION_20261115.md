@@ -27,30 +27,54 @@ nor independence from original model fitting is established.
   and repeated site-month audit:
   `results/neon_release_site_month_inventory_v2.json`.
 
-## Independent-data leakage is an actual risk, not a confirmed event
+## Source lineage audit: known NEON voucher dependency confirmed (16 November)
 
-GBIF registry `3fed506c-d04f-4cd4-b373-bd602572f39b` is the
-**NEON Biorepository Terrestrial Plant Collection (Herbarium Vouchers)**;
-registered **2020-05-22** (DOI 10.15468/bmmg36), six years before
-284b's original **2026-08-01** GBIF snapshot.
+GBIF registry `3fed506c-d04f-4cd4-b373-bd602572f39b` identifies
+the **NEON Biorepository Terrestrial Plant Collection (Herbarium Vouchers)**,
+registered 2020-05-22, before the original 2026-08-01 GBIF source snapshot
+(DOI 10.15468/bmmg36).
 
-That does **not** prove an individual NEON voucher was included in the
-old source-model likelihood; it establishes a possible historical
-republication route. The old model reader used `datasetkey`, `gbifid`,
-`occurrenceid`, `catalognumber`, event date and coordinates in memory,
-but under the old source contract raw row identifiers were not retained.
-A metadata-only GBIF registry audit verifies this publication path:
-`results/neon_gbif_registry_risk_v1.json`.
+The original frozen public snapshot **initially contained only 9,705 GBIF
+Parquet objects**, while 510 numbered multiple-of-20 files were subsequently
+restored on 2026-10-23. A naive November scan of all 10,215 files falsely
+failed the source-count parity check (3,420 instead of 3,285 thinned specimen
+presences for *Artemisia tridentata*). Explicitly restricting the re-scan to
+the **exact original 9,705 objects** (canonical full S3 manifest
+`1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e`)
+successfully reconstructed both signed source-specific denominators:
+**3,285 PRESERVED_SPECIMEN and 4,516 HUMAN_OBSERVATION**.
 
-To inspect actual model-input membership without opening NEON species
-outcomes, a **single predeclared taxon pilot** has been launched using
-the exact original public GBIF snapshot. Its first requirement is to
-reproduce the original signed model source-thinning counts for
-*Artemisia tridentata*: 3,285 PRESERVED_SPECIMEN and 4,516
-HUMAN_OBSERVATION presences. It outputs only aggregate datasetKey counts.
-No conclusions should be based on this pilot until its signed audit
-receipt and CI result are available. Absence of one known dataset key
-would **not** establish complete third-source independence.
+The source-lineage check then established that **24 raw specimen records**
+were from the specific NEON Biorepository voucher GBIF dataset. After
+the original exact quality/admission/cross-mode-collision filters and 0.05°
+source-specific spatial thinning, **2 actual input rows** still had that
+NEON datasetKey in the original PRESERVED_SPECIMEN model source; **0** in
+HUMAN_OBSERVATION. This is a **verified source-level dependency**, not
+merely a potential registry publication route. Signed archive identities
+and raw model-input denominators were checked in Actions run
+`43790470181`, receipt
+`results/neon_original_gbif_historical_replay_v2.json`.
+
+**Inferential distinction:** these two records were GBIF specimens
+published by a NEON biorepository. Their inclusion means that the
+historical *Artemisia* specimen model **cannot be advertised as entirely
+source-independent of NEON-derived biological materials**. It does
+**not** demonstrate that either voucher was collected in any exact
+2020–2024 NEON DP1.10058.001 plot-bout proposed for validation;
+that record-level/plot-level overlap remains unknown. Neither
+the two-row magnitude nor its possible impact on fitted predictions
+has been measured.
+
+This result changes the status of the planned external study:
+**no unconditional independent NEON validation of the frozen historical
+*Artemisia* specimen model**. To claim clean independence one would
+need either a separately versioned leakage-excluded model fit plus a new
+holdout, or demonstrably disjoint independent plot/event labels,
+supported by record-lineage verification, before any NEON plant labels
+are opened. The seven candidate taxa remain fixed without
+outcome-based replacement. An additional historic-source provenance
+audit covering **all seven** is underway in a separate locked workflow,
+and is not yet an external prediction result.
 
 ## Why treating plot non-detection as species absence is unsafe
 
@@ -139,10 +163,13 @@ between-site model-score contrast, external validation remains
 
 ## Publication boundary and next gate
 
-1. **Complete the exact-snapshot source datasetKey provenance pilot.**
-   If direct NEON-voucher inputs are found, the current historical
-   source model cannot be claimed to be independent of that voucher
-   source. If none are found, other overlap channels still need audit.
+1. **Accept the first historic-source lineage finding.** At least two
+   NEON voucher rows entered the original *Artemisia* specimen model.
+   Finish the seven fixed taxa provenance check, and audit alternative
+   NEON/GBIF publication channels before any blanket independence claim.
+   Direct voucher provenance and exact plot-outcome reuse are different.
+   Independently validate only a separately qualified disjoint-source
+   model or disjoint site/event holdout with documented exclusions.
 2. Verify NEON raw-table schema, complete event coverage, real per-taxon
    presence/nondetection gate counts, and any site-level score variation
    only under a separately versioned and authorized opening contract.

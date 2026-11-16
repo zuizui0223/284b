@@ -1,0 +1,179 @@
+{
+  "NEON_field_outcomes_read": false,
+  "actual_identity_overlap_with_NEON_DP1_plot_events_verified": false,
+  "all_seven_original_source_counts_verified": true,
+  "authorized_to_open_NEON_taxon_plot_labels": false,
+  "eligible_taxa_established_for_external_validation": 0,
+  "empirical_ledger_increment": 0,
+  "extra_claims_prohibited": [
+    "Species with zero rows from this one dataset are independent of all NEON observation records",
+    "The six NEON vouchers are necessarily the same records as 2020-2024 vegetation plot outcomes",
+    "Six inputs establish a large impact on fitted ecological distributions",
+    "A successful source lineage audit implies source-independent ecological prediction correctness"
+  ],
+  "known_NEON_voucher_GBIF_datasetkey": "3fed506c-d04f-4cd4-b373-bd602572f39b",
+  "known_NEON_voucher_datasetkey_total_input_rows": 6,
+  "known_NEON_voucher_model_inputs_by_mode": {
+    "HUMAN_OBSERVATION": 0,
+    "PRESERVED_SPECIMEN": 6
+  },
+  "known_NEON_voucher_raw_records_by_mode": {
+    "HUMAN_OBSERVATION": 0,
+    "PRESERVED_SPECIMEN": 41
+  },
+  "original_level_A_frozen_0_of_12_unchanged": true,
+  "original_source_snapshot": "2026-08-01__9705_frozen_S3_Parquet_objects",
+  "other_NEON_publication_channels_excluded": false,
+  "predeclared_taxa": 7,
+  "schema": "284b.neon_seven_taxon_independence_authorization.v1",
+  "source_independence_overall_qualified": false,
+  "source_thinned_original_model_inputs_by_mode": {
+    "HUMAN_OBSERVATION": 21830,
+    "PRESERVED_SPECIMEN": 12923
+  },
+  "status": "SOURCE_LEVEL_INDEPENDENCE_NOT_ESTABLISHED__LABEL_GATE_CLOSED",
+  "taxa_with_known_NEON_voucher_datasetkey_inputs": 3,
+  "taxa_without_that_one_datasetkey_after_thinning": 4,
+  "taxon_results": [
+    {
+      "all_NEON_publications_absent_from_training_proven": false,
+      "eligible_for_unqualified_NEON_external_accuracy_claim": false,
+      "known_NEON_datasetkey_thinned_source_input_rows": 2,
+      "known_NEON_voucher_input_counts": {
+        "HUMAN_OBSERVATION": {
+          "known_NEON_voucher_dataset_model_inputs": 0,
+          "raw_NEON_voucher_dataset_records": 0,
+          "reproduced_original_thinned_n": 4516
+        },
+        "PRESERVED_SPECIMEN": {
+          "known_NEON_voucher_dataset_model_inputs": 2,
+          "raw_NEON_voucher_dataset_records": 24,
+          "reproduced_original_thinned_n": 3285
+        }
+      },
+      "same_plot_bout_reuse_known": false,
+      "state": "CONFIRMED_KNOWN_NEON_SOURCE_DATASET_REUSE",
+      "taxon": "Artemisia tridentata"
+    },
+    {
+      "all_NEON_publications_absent_from_training_proven": false,
+      "eligible_for_unqualified_NEON_external_accuracy_claim": false,
+      "known_NEON_datasetkey_thinned_source_input_rows": 3,
+      "known_NEON_voucher_input_counts": {
+        "HUMAN_OBSERVATION": {
+          "known_NEON_voucher_dataset_model_inputs": 0,
+          "raw_NEON_voucher_dataset_records": 0,
+          "reproduced_original_thinned_n": 2990
+        },
+        "PRESERVED_SPECIMEN": {
+          "known_NEON_voucher_dataset_model_inputs": 3,
+          "raw_NEON_voucher_dataset_records": 4,
+          "reproduced_original_thinned_n": 2686
+        }
+      },
+      "same_plot_bout_reuse_known": false,
+      "state": "CONFIRMED_KNOWN_NEON_SOURCE_DATASET_REUSE",
+      "taxon": "Atriplex canescens"
+    },
+    {
+      "all_NEON_publications_absent_from_training_proven": false,
+      "eligible_for_unqualified_NEON_external_accuracy_claim": false,
+      "known_NEON_datasetkey_thinned_source_input_rows": 0,
+      "known_NEON_voucher_input_counts": {
+        "HUMAN_OBSERVATION": {
+          "known_NEON_voucher_dataset_model_inputs": 0,
+          "raw_NEON_voucher_dataset_records": 0,
+          "reproduced_original_thinned_n": 2590
+        },
+        "PRESERVED_SPECIMEN": {
+          "known_NEON_voucher_dataset_model_inputs": 0,
+          "raw_NEON_voucher_dataset_records": 0,
+          "reproduced_original_thinned_n": 1259
+        }
+      },
+      "same_plot_bout_reuse_known": false,
+      "state": "NO_KNOWN_DATASETKEY_IN_MODEL_INPUT__OTHER_LEAKAGE_UNRESOLVED",
+      "taxon": "Encelia farinosa"
+    },
+    {
+      "all_NEON_publications_absent_from_training_proven": false,
+      "eligible_for_unqualified_NEON_external_accuracy_claim": false,
+      "known_NEON_datasetkey_thinned_source_input_rows": 0,
+      "known_NEON_voucher_input_counts": {
+        "HUMAN_OBSERVATION": {
+          "known_NEON_voucher_dataset_model_inputs": 0,
+          "raw_NEON_voucher_dataset_records": 0,
+          "reproduced_original_thinned_n": 1474
+        },
+        "PRESERVED_SPECIMEN": {
+          "known_NEON_voucher_dataset_model_inputs": 0,
+          "raw_NEON_voucher_dataset_records": 0,
+          "reproduced_original_thinned_n": 1253
+        }
+      },
+      "same_plot_bout_reuse_known": false,
+      "state": "NO_KNOWN_DATASETKEY_IN_MODEL_INPUT__OTHER_LEAKAGE_UNRESOLVED",
+      "taxon": "Avicennia germinans"
+    },
+    {
+      "all_NEON_publications_absent_from_training_proven": false,
+      "eligible_for_unqualified_NEON_external_accuracy_claim": false,
+      "known_NEON_datasetkey_thinned_source_input_rows": 0,
+      "known_NEON_voucher_input_counts": {
+        "HUMAN_OBSERVATION": {
+          "known_NEON_voucher_dataset_model_inputs": 0,
+          "raw_NEON_voucher_dataset_records": 0,
+          "reproduced_original_thinned_n": 1450
+        },
+        "PRESERVED_SPECIMEN": {
+          "known_NEON_voucher_dataset_model_inputs": 0,
+          "raw_NEON_voucher_dataset_records": 0,
+          "reproduced_original_thinned_n": 1365
+        }
+      },
+      "same_plot_bout_reuse_known": false,
+      "state": "NO_KNOWN_DATASETKEY_IN_MODEL_INPUT__OTHER_LEAKAGE_UNRESOLVED",
+      "taxon": "Laguncularia racemosa"
+    },
+    {
+      "all_NEON_publications_absent_from_training_proven": false,
+      "eligible_for_unqualified_NEON_external_accuracy_claim": false,
+      "known_NEON_datasetkey_thinned_source_input_rows": 0,
+      "known_NEON_voucher_input_counts": {
+        "HUMAN_OBSERVATION": {
+          "known_NEON_voucher_dataset_model_inputs": 0,
+          "raw_NEON_voucher_dataset_records": 0,
+          "reproduced_original_thinned_n": 2471
+        },
+        "PRESERVED_SPECIMEN": {
+          "known_NEON_voucher_dataset_model_inputs": 0,
+          "raw_NEON_voucher_dataset_records": 12,
+          "reproduced_original_thinned_n": 1056
+        }
+      },
+      "same_plot_bout_reuse_known": false,
+      "state": "NO_KNOWN_DATASETKEY_IN_MODEL_INPUT__OTHER_LEAKAGE_UNRESOLVED",
+      "taxon": "Abies lasiocarpa"
+    },
+    {
+      "all_NEON_publications_absent_from_training_proven": false,
+      "eligible_for_unqualified_NEON_external_accuracy_claim": false,
+      "known_NEON_datasetkey_thinned_source_input_rows": 1,
+      "known_NEON_voucher_input_counts": {
+        "HUMAN_OBSERVATION": {
+          "known_NEON_voucher_dataset_model_inputs": 0,
+          "raw_NEON_voucher_dataset_records": 0,
+          "reproduced_original_thinned_n": 6339
+        },
+        "PRESERVED_SPECIMEN": {
+          "known_NEON_voucher_dataset_model_inputs": 1,
+          "raw_NEON_voucher_dataset_records": 1,
+          "reproduced_original_thinned_n": 2019
+        }
+      },
+      "same_plot_bout_reuse_known": false,
+      "state": "CONFIRMED_KNOWN_NEON_SOURCE_DATASET_REUSE",
+      "taxon": "Larix laricina"
+    }
+  ]
+}

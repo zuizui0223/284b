@@ -1,0 +1,250 @@
+{
+  "do_not_infer": [
+    "admitted spatially thinned additions; source-specific model input change magnitude",
+    "statistically independent observation counts; model refit response; ecological truth",
+    "whether original q95 frozen-envelope conclusion persists in repaired-source experiment",
+    "model fitting overlap with independent NEON plot labels"
+  ],
+  "empirical_ledger_increment": 0,
+  "frozen_original_Level_A_unchanged": true,
+  "heldout12_taxon_source_contrasts": [
+    {
+      "human_minus_preserved_fraction_pp": -6.055612192715912,
+      "sources": {
+        "HUMAN_OBSERVATION": {
+          "additional_vs_original_raw_fraction": 0.052119934410869054,
+          "original_raw_count": 8538,
+          "restored_raw_count": 445
+        },
+        "PRESERVED_SPECIMEN": {
+          "additional_vs_original_raw_fraction": 0.11267605633802817,
+          "original_raw_count": 5112,
+          "restored_raw_count": 576
+        }
+      },
+      "taxon": "Abies lasiocarpa"
+    },
+    {
+      "human_minus_preserved_fraction_pp": 13.610914207842889,
+      "sources": {
+        "HUMAN_OBSERVATION": {
+          "additional_vs_original_raw_fraction": 0.17236133122028527,
+          "original_raw_count": 15775,
+          "restored_raw_count": 2719
+        },
+        "PRESERVED_SPECIMEN": {
+          "additional_vs_original_raw_fraction": 0.03625218914185639,
+          "original_raw_count": 11420,
+          "restored_raw_count": 414
+        }
+      },
+      "taxon": "Artemisia tridentata"
+    },
+    {
+      "human_minus_preserved_fraction_pp": 1.1976629136647445,
+      "sources": {
+        "HUMAN_OBSERVATION": {
+          "additional_vs_original_raw_fraction": 0.06547334162917584,
+          "original_raw_count": 10447,
+          "restored_raw_count": 684
+        },
+        "PRESERVED_SPECIMEN": {
+          "additional_vs_original_raw_fraction": 0.053496712492528395,
+          "original_raw_count": 10038,
+          "restored_raw_count": 537
+        }
+      },
+      "taxon": "Atriplex canescens"
+    },
+    {
+      "human_minus_preserved_fraction_pp": -1.570902585067661,
+      "sources": {
+        "HUMAN_OBSERVATION": {
+          "additional_vs_original_raw_fraction": 0.01145079399373447,
+          "original_raw_count": 27771,
+          "restored_raw_count": 318
+        },
+        "PRESERVED_SPECIMEN": {
+          "additional_vs_original_raw_fraction": 0.02715981984441108,
+          "original_raw_count": 7327,
+          "restored_raw_count": 199
+        }
+      },
+      "taxon": "Avicennia germinans"
+    },
+    {
+      "human_minus_preserved_fraction_pp": 4.146804330612785,
+      "sources": {
+        "HUMAN_OBSERVATION": {
+          "additional_vs_original_raw_fraction": 0.07932427469702534,
+          "original_raw_count": 27230,
+          "restored_raw_count": 2160
+        },
+        "PRESERVED_SPECIMEN": {
+          "additional_vs_original_raw_fraction": 0.03785623139089749,
+          "original_raw_count": 4702,
+          "restored_raw_count": 178
+        }
+      },
+      "taxon": "Avicennia marina"
+    },
+    {
+      "human_minus_preserved_fraction_pp": 1.7092420490750486,
+      "sources": {
+        "HUMAN_OBSERVATION": {
+          "additional_vs_original_raw_fraction": 0.05589149670322162,
+          "original_raw_count": 29271,
+          "restored_raw_count": 1636
+        },
+        "PRESERVED_SPECIMEN": {
+          "additional_vs_original_raw_fraction": 0.03879907621247113,
+          "original_raw_count": 4330,
+          "restored_raw_count": 168
+        }
+      },
+      "taxon": "Encelia farinosa"
+    },
+    {
+      "human_minus_preserved_fraction_pp": 3.6466749761712736,
+      "sources": {
+        "HUMAN_OBSERVATION": {
+          "additional_vs_original_raw_fraction": 0.04342327150084317,
+          "original_raw_count": 2372,
+          "restored_raw_count": 103
+        },
+        "PRESERVED_SPECIMEN": {
+          "additional_vs_original_raw_fraction": 0.006956521739130435,
+          "original_raw_count": 575,
+          "restored_raw_count": 4
+        }
+      },
+      "taxon": "Eucalyptus delegatensis"
+    },
+    {
+      "human_minus_preserved_fraction_pp": 0.8716220434631515,
+      "sources": {
+        "HUMAN_OBSERVATION": {
+          "additional_vs_original_raw_fraction": 0.04304161726002834,
+          "original_raw_count": 138308,
+          "restored_raw_count": 5953
+        },
+        "PRESERVED_SPECIMEN": {
+          "additional_vs_original_raw_fraction": 0.03432539682539683,
+          "original_raw_count": 5040,
+          "restored_raw_count": 173
+        }
+      },
+      "taxon": "Eucalyptus globulus"
+    },
+    {
+      "human_minus_preserved_fraction_pp": -1.6611273752886253,
+      "sources": {
+        "HUMAN_OBSERVATION": {
+          "additional_vs_original_raw_fraction": 0.010293200249532126,
+          "original_raw_count": 25648,
+          "restored_raw_count": 264
+        },
+        "PRESERVED_SPECIMEN": {
+          "additional_vs_original_raw_fraction": 0.02690447400241838,
+          "original_raw_count": 6616,
+          "restored_raw_count": 178
+        }
+      },
+      "taxon": "Laguncularia racemosa"
+    },
+    {
+      "human_minus_preserved_fraction_pp": 1.586664568374989,
+      "sources": {
+        "HUMAN_OBSERVATION": {
+          "additional_vs_original_raw_fraction": 0.050746428954999465,
+          "original_raw_count": 18622,
+          "restored_raw_count": 945
+        },
+        "PRESERVED_SPECIMEN": {
+          "additional_vs_original_raw_fraction": 0.034879783271249576,
+          "original_raw_count": 5906,
+          "restored_raw_count": 206
+        }
+      },
+      "taxon": "Larix laricina"
+    },
+    {
+      "human_minus_preserved_fraction_pp": 2.2593645815635632,
+      "sources": {
+        "HUMAN_OBSERVATION": {
+          "additional_vs_original_raw_fraction": 0.05071315372424723,
+          "original_raw_count": 1262,
+          "restored_raw_count": 64
+        },
+        "PRESERVED_SPECIMEN": {
+          "additional_vs_original_raw_fraction": 0.028119507908611598,
+          "original_raw_count": 1138,
+          "restored_raw_count": 32
+        }
+      },
+      "taxon": "Nothofagus antarctica"
+    },
+    {
+      "human_minus_preserved_fraction_pp": 0.9494704628292417,
+      "sources": {
+        "HUMAN_OBSERVATION": {
+          "additional_vs_original_raw_fraction": 0.04834605597964377,
+          "original_raw_count": 786,
+          "restored_raw_count": 38
+        },
+        "PRESERVED_SPECIMEN": {
+          "additional_vs_original_raw_fraction": 0.03885135135135135,
+          "original_raw_count": 592,
+          "restored_raw_count": 23
+        }
+      },
+      "taxon": "Nothofagus betuloides"
+    }
+  ],
+  "notable_heldout": {
+    "largest_human_restoration_fraction_taxon": "Artemisia tridentata",
+    "largest_preserved_restoration_fraction_taxon": "Abies lasiocarpa",
+    "taxa_human_relative_restoration_exceeds_preserved": 9,
+    "taxa_preserved_relative_restoration_exceeds_human": 3
+  },
+  "panels": {
+    "heldout12": {
+      "extra_fraction_over_original_raw_by_mode": {
+        "HUMAN_OBSERVATION": 0.05008986047119563,
+        "PRESERVED_SPECIMEN": 0.04280527422128798
+      },
+      "newly_restored_raw_present_records_by_mode": {
+        "HUMAN_OBSERVATION": 15329,
+        "PRESERVED_SPECIMEN": 2688
+      },
+      "original_raw_present_records_by_mode": {
+        "HUMAN_OBSERVATION": 306030,
+        "PRESERVED_SPECIMEN": 62796
+      },
+      "original_raw_total": 368826,
+      "restored_fraction_of_original_raw_total": 0.048849593033029125,
+      "restored_raw_total": 18017,
+      "taxa": 12
+    },
+    "reference47": {
+      "extra_fraction_over_original_raw_by_mode": {
+        "HUMAN_OBSERVATION": 0.049221638100197106,
+        "PRESERVED_SPECIMEN": 0.058979175628460286
+      },
+      "newly_restored_raw_present_records_by_mode": {
+        "HUMAN_OBSERVATION": 335772,
+        "PRESERVED_SPECIMEN": 19058
+      },
+      "original_raw_present_records_by_mode": {
+        "HUMAN_OBSERVATION": 6821634,
+        "PRESERVED_SPECIMEN": 323131
+      },
+      "original_raw_total": 7144765,
+      "restored_fraction_of_original_raw_total": 0.04966293503005347,
+      "restored_raw_total": 354830,
+      "taxa": 47
+    }
+  },
+  "schema": "284b.gbif_missing20_raw_source_mode_imbalance.v1",
+  "status": "retrospective_descriptive_only"
+}

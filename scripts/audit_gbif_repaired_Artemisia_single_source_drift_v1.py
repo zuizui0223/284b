@@ -70,9 +70,13 @@ def inspect(original_zip:Path,repaired_dir:Path)->tuple[dict,list[dict]]:
     new=pd.read_parquet(BytesIO(new_data))
     keycols=["source","M_km","procedure"]
     required=set(keycols+["comparison_row_id","ecological_score"])
-    for df in (old,new):
-        if required-set(df):
-            raise ValueError("Missing required original or repaired source score columns")
+    if required-set(old):
+        raise ValueError("Original signed model source scores are missing columns")
+    if required-set(new):
+        # A fully unresolved repaired fit can legitimately have no sealed
+        # prediction rows; preserve 48 explicit unresolved inventory states.
+        if not new.empty or rc.get("sealed_fit_cells", -1)!=0:
+            raise ValueError("Repaired source fit claims sealed predictions but lacks required columns")
     if len(old_rows)!=48 or len(new_rows)!=48:
         raise ValueError("Original or new source fit inventory is not exactly 48")
     old_i={(r["source"],int(r["M_km"]),r["procedure"]):r for r in old_rows}
@@ -81,8 +85,8 @@ def inspect(original_zip:Path,repaired_dir:Path)->tuple[dict,list[dict]]:
         raise ValueError("Source-by-M-by-procedure universe changed")
     old_groups={(source,int(m),proc):x.sort_values("comparison_row_id")
                 for (source,m,proc),x in old.groupby(keycols)}
-    new_groups={(source,int(m),proc):x.sort_values("comparison_row_id")
-                for (source,m,proc),x in new.groupby(keycols)}
+    new_groups=({(source,int(m),proc):x.sort_values("comparison_row_id")
+                for (source,m,proc),x in new.groupby(keycols)} if not new.empty else {})
     outcomes=[]
     for (source,m,proc),a in sorted(old_i.items()):
         b=new_i[(source,m,proc)]

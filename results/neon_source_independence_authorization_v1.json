@@ -1,0 +1,28 @@
+{
+  "NEON_plant_outcomes_read": false,
+  "NEON_source_voucher_metadata_from_GBIF_only": true,
+  "authorization_to_open_NEON_plant_outcomes": false,
+  "blanket_independence_from_all_NEON_derived_biological_materials": false,
+  "cleanly_refitted_voucher_excluded_model_qualified": false,
+  "disjoint_plot_event_external_accuracy_evaluation_qualified": false,
+  "empirical_ledger_increment": 0,
+  "exact_overlap_with_proposed_NEON_plot_bout_labels_established": false,
+  "historical_model_sources": [
+    "PRESERVED_SPECIMEN",
+    "HUMAN_OBSERVATION"
+  ],
+  "historical_thinned_model_input_counts": {
+    "HUMAN_OBSERVATION": 4516,
+    "PRESERVED_SPECIMEN": 3285
+  },
+  "known_NEON_voucher_inputs_by_source": {
+    "HUMAN_OBSERVATION": 0,
+    "PRESERVED_SPECIMEN": 2
+  },
+  "original_284b_Level_A_empirical_endpoint_unchanged": true,
+  "schema": "284b.neon_independence_authorization_gate.v1",
+  "state": "CONFIRMED_NEON_VOUCHER_DATASET_IN_FROZEN_MODEL_SOURCE",
+  "stop_rule": "Do not call the original frozen model and NEON independently sampled as entire data sources. This does not establish identity with a particular NEON plot-bout; it must be evaluated separately before source-independent external validation.",
+  "taxon": "Artemisia tridentata",
+  "verified_known_NEON_voucher_dataset_model_inputs": 2
+}

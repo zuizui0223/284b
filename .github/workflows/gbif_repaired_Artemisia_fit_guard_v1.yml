@@ -1,0 +1,28 @@
+name: "Repaired GBIF fixed-center pilot: static science and source drift tests"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'scripts/fit_gbif_repaired_Artemisia_fixed_original_centers_v1.py'
+      - 'scripts/audit_gbif_repaired_Artemisia_single_source_drift_v1.py'
+      - 'integration_tests/test_gbif_repaired_Artemisia_fixed_original_centers_v1.py'
+      - 'tests/test_gbif_repaired_Artemisia_fit_invariance_v1.py'
+      - '.github/workflows/gbif_repaired_Artemisia_fit_guard_v1.yml'
+permissions:
+  contents: read
+jobs:
+  source-fit-implementation-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Freeze exact eight-method fitting and source adequacy logic
+        run: |
+          python -m py_compile scripts/fit_gbif_repaired_Artemisia_fixed_original_centers_v1.py scripts/audit_gbif_repaired_Artemisia_single_source_drift_v1.py
+          python -m unittest discover -s tests -p 'test_gbif_repaired_Artemisia_fit_invariance_v1.py' -v
+      - name: Check within-source TV metric, no q95 and no model selection
+        run: |
+          python -m pip install --disable-pip-version-check -q numpy pandas pyarrow
+          python -m unittest discover -s integration_tests -p 'test_gbif_repaired_Artemisia_fixed_original_centers_v1.py' -v

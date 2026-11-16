@@ -1,0 +1,103 @@
+name: "GBIF repaired reference47 exact source-thinning audit"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'config/gbif_repaired_reference47_thinning_v1.json'
+      - 'scripts/audit_gbif_repaired_reference47_thinning_shard_v1.py'
+      - 'scripts/aggregate_gbif_repaired_reference47_thinning_v1.py'
+      - 'tests/test_gbif_repaired_reference47_thinning_v1.py'
+      - '.github/workflows/gbif_repaired_reference47_thinning_v1.yml'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: repaired-GBIF-reference47-thinning-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  audited-reference-shards:
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        shard: [0,1,2,3,4,5,6,7]
+    runs-on: ubuntu-latest
+    timeout-minutes: 95
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check all 47 frozen signed model identities and source-accounting rules
+        run: python -m unittest discover -s tests -p 'test_gbif_repaired_reference47_thinning_v1.py' -v
+      - name: Fetch only this shard's exact original successor fit ZIPs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHARD_INDEX: ${{ matrix.shard }}
+        run: |
+          set -euo pipefail
+          mkdir -p signed_reference_models
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess
+          cfg=json.loads(pathlib.Path('config/gbif_repaired_reference47_thinning_v1.json').read_text())
+          shard=int(os.environ['SHARD_INDEX'])
+          members=[e for e in cfg['taxon_fit_entries'] if e['index']%8==shard]
+          assert len(members) in (5,6), (shard,len(members))
+          for e in members:
+              dest=pathlib.Path('signed_reference_models')/f"ref_fit_{e['index']}.zip"
+              with dest.open('wb') as o:
+                  subprocess.run(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{e['signed_original_fit_artifact_id']}/zip"],stdout=o,check=True)
+              fingerprint=hashlib.sha256(dest.read_bytes()).hexdigest()
+              assert 'sha256:'+fingerprint==e['signed_original_fit_artifact_digest'],e['taxon']
+              print('signed',shard,e['index'],e['taxon'],flush=True)
+          PY
+      - name: Recreate original successor source code and compare repaired GBIF admitted/thinned records
+        env:
+          SHARD_INDEX: ${{ matrix.shard }}
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check -q -e './sdmr[cloud,parquet,geo]'
+          mkdir -p output_shards
+          python scripts/audit_gbif_repaired_reference47_thinning_shard_v1.py \
+            --fit-dir signed_reference_models \
+            --shard-index "$SHARD_INDEX" \
+            --out "output_shards/reference_shard_${SHARD_INDEX}.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: repaired-reference47-thinning-shard-${{ matrix.shard }}
+          path: output_shards/reference_shard_${{ matrix.shard }}.json
+          if-no-files-found: error
+          retention-days: 45
+
+  combine-only-if-all-8-qualified:
+    needs: audited-reference-shards
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: repaired-reference47-thinning-shard-*
+          path: shards
+          merge-multiple: true
+      - name: Reject any missing/corrupted/reference-swapped source shard
+        run: |
+          python -m unittest discover -s tests -p 'test_gbif_repaired_reference47_thinning_v1.py' -v
+          python scripts/aggregate_gbif_repaired_reference47_thinning_v1.py \
+            --shard-dir shards \
+            --out results/gbif_repaired_reference47_thinning_v1.json
+      - name: Archive only source-input results, not model predictions
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_reference47_thinning_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive repaired GBIF input changes across all 47 original reference taxa"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

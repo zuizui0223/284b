@@ -13,7 +13,7 @@ NEW=ROOT/"scripts/fit_gbif_repaired_Artemisia_fixed_original_centers_v1.py"
 
 def model_body(path:Path)->str:
     code=path.read_text(encoding="utf-8")
-    start="    for m in (150, 300, 500):\n        background = backgrounds[m]"
+    start="    for m in (150,300,500):\n        background = backgrounds[m]"
     stop="    predictions=pd.DataFrame(prediction_rows)"
     if code.count(start)!=1 or code.count(stop)!=1:
         raise ValueError("Original model fitting body could not be isolated")

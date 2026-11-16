@@ -81,12 +81,19 @@ jobs:
           unzip -qq /tmp/original_Artemisia_core19_frame.zip -d original_frame
           python - <<'PY'
           import hashlib,json,pathlib
-          source=json.loads(pathlib.Path('prior_centers/results/gbif_original_centers_Artemisia_v1.json').read_text())
+          import shutil
+          roots=pathlib.Path('prior_centers')
+          receipts=list(roots.rglob('gbif_original_centers_Artemisia_v1.json'))
+          center_paths=list(roots.rglob('Artemisia_original_centers.npy'))
+          assert len(receipts)==len(center_paths)==1, (receipts,center_paths)
+          source=json.loads(receipts[0].read_text())
           committed=json.loads(pathlib.Path('results/gbif_original_centers_Artemisia_v1.json').read_text())
           assert source==committed
           assert source['status']=='historical_Artemisia_center_hash_reconstructed'
-          centers=pathlib.Path('prior_centers/results/geometry_pilot/Artemisia_original_centers.npy').read_bytes()
+          centers=center_paths[0].read_bytes()
           assert hashlib.sha256(centers).hexdigest()==source['centers_np_array_SHA256']
+          pathlib.Path('verified_center').mkdir(exist_ok=True)
+          shutil.copyfile(center_paths[0],'verified_center/centers.npy')
           print('original geometry SHA-256 and metadata receipt exactly match')
           PY
       - name: Refit all eight methods and three M with repaired source and original fixed centers
@@ -95,7 +102,7 @@ jobs:
             --panel heldout \
             --taxon-index 0 \
             --core19-frame-dir original_frame \
-            --historical-centers-npy prior_centers/results/geometry_pilot/Artemisia_original_centers.npy \
+            --historical-centers-npy verified_center/centers.npy \
             --historical-centers-receipt results/gbif_original_centers_Artemisia_v1.json \
             --chelsa-manifest sdmr/configs/chelsa_v2_1_plant_candidates.csv \
             --output-dir fit

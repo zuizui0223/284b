@@ -1,0 +1,48 @@
+name: "GBIF restored-510 original reference47 raw source exposure"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'scripts/audit_gbif_restored510_reference47_v1.py'
+      - 'tests/test_gbif_restored510_reference47_v1.py'
+      - '.github/workflows/gbif_restored510_reference47_exposure_v1.yml'
+permissions:
+  contents: write
+concurrency:
+  group: gbif-restored510-reference47-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  source-coverage-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Test original 47 reference taxa / 79 frozen historical keys
+        run: python -m unittest discover -s tests -p 'test_gbif_restored510_reference47_v1.py' -v
+      - name: Install S3 Parquet reader
+        run: python -m pip install -q pyarrow
+      - name: Scan only the restored 510 source objects for the original reference panel
+        run: |
+          python scripts/audit_gbif_restored510_reference47_v1.py \
+            --out results/gbif_restored510_reference47_exposure_v1.json
+      - name: Archive aggregate results if available
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gbif-restored510-reference47-exposure
+          path: results/gbif_restored510_reference47_exposure_v1.json
+          if-no-files-found: warn
+      - name: Commit reproducible aggregate counts, no occurrence IDs
+        if: always()
+        run: |
+          if [ ! -f results/gbif_restored510_reference47_exposure_v1.json ]; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+users.noreply.github.com@users.noreply.github.com"
+          git add results/gbif_restored510_reference47_exposure_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive original 47-reference source exposure to October GBIF restoration"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

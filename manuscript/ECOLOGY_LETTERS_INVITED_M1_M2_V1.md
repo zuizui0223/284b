@@ -125,6 +125,28 @@ This suggests a general design principle for ecological synthesis: **separate an
 
 The empirical result should be interpreted narrowly. The independent biological replication is 12 taxa, not 283 cells. The five unresolved cells are not failures, and the empirical q95 envelopes are not nominal prediction intervals. The exact invalid-state identities are structural results, not estimates of how often missingness or observation failure occurs in nature.
 
+**Post-freeze source-data integrity caveat (16 November 2026).** The
+GBIF 2026-08-01 public cloud occurrence snapshot used for this Level-A
+experiment was later found to have been missing 510 Parquet objects from the
+currently repaired directory. The original September frozen object set
+contained 9,705 Parquet files, whereas the repaired November listing contains
+10,215. Exactly 510 files with numeric names divisible by 20 were restored
+on 23 October 2026. Excluding those files reproduces the complete original
+9,706-object ETag/size/timestamp manifest SHA-256, confirming that the
+historical Level-A evaluation was performed against the earlier incomplete
+source. The original 12-taxon frozen result remains a valid conditional
+statement about that data version; it does **not** establish invariance to
+the subsequently restored records. No completed model-refit sensitivity
+analysis to the repaired source has yet been demonstrated. Consequently,
+source completeness must be treated as an explicit *generalisability and
+submission-readiness limitation* rather than silently implying the currently
+public download reproduces the held-out endpoint. See the separately
+versioned post-freeze audit in
+`docs/GBIF_AUG2026_MISSING20_SOURCE_INTEGRITY_20261116.md` on
+the NEON external-validation audit branch and upstream
+`gbif/occurrence#609`. No new independent empirical endpoint is
+claimed from this metadata inspection.
+
 The broader value of the framework is asymmetrical error control. An endpoint may remain unresolved when the evidence required for a claim is absent, but it cannot manufacture the missing state. Conversely, when the required answers are adequate and a prospective relation is satisfied, the framework permits a positive conclusion. In this sense, evidence-bounded inference is not a rule for saying less; it is a rule for saying exactly what the available evidence authorizes.
 
 ## 7. Open research statement

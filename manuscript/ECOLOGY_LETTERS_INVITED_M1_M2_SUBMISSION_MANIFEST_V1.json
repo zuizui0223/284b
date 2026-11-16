@@ -1,6 +1,6 @@
 {
   "schema": "284b.ecology_letters_invited_m1_m2_submission_manifest.v1",
-  "status": "scientifically_ready_human_metadata_and_rendering_pending",
+  "status": "HOLD_UPSTREAM_GBIF_SOURCE_COMPLETENESS_SENSITIVITY_UNRESOLVED",
   "target": "Ecology Letters",
   "article_type": "Method",
   "manuscript": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_V1.md",
@@ -28,10 +28,24 @@
   ],
   "fallback": "manuscript/LEVEL_A_SHORT_REPORT_V0_1.md",
   "remaining_blockers": [
+    "upstream GBIF public snapshot completeness integrity and repaired-source robustness/explicit editorial limitation",
     "human author metadata",
     "permanent archive DOI",
     "final rendered figures",
     "final journal formatting",
     "final policy-aligned disclosures"
-  ]
+  ],
+  "post_freeze_source_integrity": {
+    "audit_date": "2026-11-16",
+    "old_parquet_objects": 9705,
+    "repaired_parquet_objects": 10215,
+    "restored_modulo20_files": 510,
+    "restoration_time_utc": "2026-10-23T15:41:19Z/2026-10-23T15:42:18Z",
+    "exact_old_metadata_object_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+    "exact_old_manifest_recovered_after_excluding_restored_files": true,
+    "biological_robustness_to_file_restoration_tested": false,
+    "parent_level_a_endpoint_unchanged": true,
+    "source_document": "docs/GBIF_AUG2026_MISSING20_SOURCE_INTEGRITY_20261116.md (separate NEON audit branch)",
+    "new_confirmatory_endpoint_count": 0
+  }
 }

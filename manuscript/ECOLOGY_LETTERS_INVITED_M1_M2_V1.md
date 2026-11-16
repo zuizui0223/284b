@@ -140,10 +140,18 @@ the subsequently restored records. A subsequent descriptive scan confined
 to the 510 restored files found raw `PRESENT` records for **all 12 held-out
 and all 47 reference taxa**, with 15,329 versus 2,688 additional
 HUMAN_OBSERVATION versus PRESERVED_SPECIMEN rows in the held-out panel
-and 335,772 versus 19,058 in the reference panel. These are **raw records,
-not additional admitted model presences**; their effects on ecological
-predictions and q95 calibration have not been estimated. No completed model-refit sensitivity
-analysis to the repaired source has yet been demonstrated. Consequently,
+and 335,772 versus 19,058 in the reference panel. These are **raw records, not additional admitted model presences**.
+A separate integrity-controlled reapplication of the original source
+admission and 0.05° thinning to the repaired 10,215-file snapshot
+reproduced raw-record denominators for **all 12 held-out taxa** and
+found that the source-model input counts changed in all 12: across
+taxa, PRESERVED_SPECIMEN thinned inputs increased from **15,654 to
+16,134** (+3.07%), and HUMAN_OBSERVATION from **31,727 to 32,675**
+(+2.99%). These are input-count differences, **not effects on fitted
+models**, paired Schoener D, or the reference envelopes. A separate
+47-taxon original-reference source-input audit is in progress; no
+completed model-refit/q95 recalibration sensitivity analysis to the
+repaired source has yet been demonstrated. Consequently,
 source completeness must be treated as an explicit *generalisability and
 submission-readiness limitation* rather than silently implying the currently
 public download reproduces the held-out endpoint. See the separately

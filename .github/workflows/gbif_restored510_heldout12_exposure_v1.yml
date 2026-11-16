@@ -1,4 +1,4 @@
-name: GBIF backfilled 510 objects: original heldout-12 raw occurrence exposure
+name: "GBIF restored-510 heldout12 source exposure"
 on:
   push:
     branches: [analysis/neon-external-truth-preflight-20261115]

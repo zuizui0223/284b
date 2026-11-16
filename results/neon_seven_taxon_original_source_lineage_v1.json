@@ -1,0 +1,280 @@
+{
+  "NEON_plant_files_downloaded": false,
+  "NEON_plot_species_labels_read": false,
+  "October_restored_files_excluded": 510,
+  "empirical_ledger_increment": 0,
+  "frozen_candidate_taxa": 7,
+  "full_independent_external_validation_authorized": false,
+  "historical_parquet_objects_scanned": 9705,
+  "interpretation": "A matched source denominator licenses a per-dataset-key dependency audit, not independence from all NEON labels or other GBIF copies. A dataset key found in original model inputs disqualifies blanket unqualified source-level independence; direct plot label overlap remains unknown.",
+  "known_NEON_voucher_dataset_thinned_model_input_rows_total": 6,
+  "model_refit_performed": false,
+  "original_LevelA_endpoint_unmodified": true,
+  "original_source_snapshot": "2026-08-01",
+  "recovered_original_object_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "schema": "284b.neon_historical_model_source_lineage7_results.v1",
+  "status": "seven_original_source_denominators_reproduced",
+  "taxa_exactly_matching_both_signed_source_counts": 7,
+  "taxa_with_known_NEON_voucher_dataset_in_training": 3,
+  "taxon_level_source_provenance": [
+    {
+      "full_independence_of_NEON_plots_verified": false,
+      "known_NEON_datasetkey_model_input_rows": 2,
+      "raw_missing_datasetkey_rows": 0,
+      "signed_original_fit_artifact_id": 10089523542,
+      "signed_source_n": {
+        "HUMAN_OBSERVATION": 4516,
+        "PRESERVED_SPECIMEN": 3285
+      },
+      "source_count_reproduced": {
+        "HUMAN_OBSERVATION": true,
+        "PRESERVED_SPECIMEN": true
+      },
+      "source_counts": {
+        "HUMAN_OBSERVATION": {
+          "distinct_dataset_keys_post_thin": 6,
+          "quality_retained_before_thinning": 15358,
+          "raw_known_NEON_dataset_rows": 0,
+          "raw_scanned_records": 15775,
+          "source_thinned_known_NEON_dataset_rows": 0,
+          "source_thinned_missing_datasetkey_rows": 0,
+          "source_thinned_model_presence_rows": 4516
+        },
+        "PRESERVED_SPECIMEN": {
+          "distinct_dataset_keys_post_thin": 116,
+          "quality_retained_before_thinning": 6480,
+          "raw_known_NEON_dataset_rows": 24,
+          "raw_scanned_records": 11420,
+          "source_thinned_known_NEON_dataset_rows": 2,
+          "source_thinned_missing_datasetkey_rows": 0,
+          "source_thinned_model_presence_rows": 3285
+        }
+      },
+      "specieskey": "GX2B",
+      "state": "known_NEON_voucher_dataset_in_historical_training",
+      "taxon": "Artemisia tridentata"
+    },
+    {
+      "full_independence_of_NEON_plots_verified": false,
+      "known_NEON_datasetkey_model_input_rows": 3,
+      "raw_missing_datasetkey_rows": 0,
+      "signed_original_fit_artifact_id": 10089524564,
+      "signed_source_n": {
+        "HUMAN_OBSERVATION": 2990,
+        "PRESERVED_SPECIMEN": 2686
+      },
+      "source_count_reproduced": {
+        "HUMAN_OBSERVATION": true,
+        "PRESERVED_SPECIMEN": true
+      },
+      "source_counts": {
+        "HUMAN_OBSERVATION": {
+          "distinct_dataset_keys_post_thin": 8,
+          "quality_retained_before_thinning": 10016,
+          "raw_known_NEON_dataset_rows": 0,
+          "raw_scanned_records": 10447,
+          "source_thinned_known_NEON_dataset_rows": 0,
+          "source_thinned_missing_datasetkey_rows": 0,
+          "source_thinned_model_presence_rows": 2990
+        },
+        "PRESERVED_SPECIMEN": {
+          "distinct_dataset_keys_post_thin": 148,
+          "quality_retained_before_thinning": 4719,
+          "raw_known_NEON_dataset_rows": 4,
+          "raw_scanned_records": 10038,
+          "source_thinned_known_NEON_dataset_rows": 3,
+          "source_thinned_missing_datasetkey_rows": 0,
+          "source_thinned_model_presence_rows": 2686
+        }
+      },
+      "specieskey": "JLB9",
+      "state": "known_NEON_voucher_dataset_in_historical_training",
+      "taxon": "Atriplex canescens"
+    },
+    {
+      "full_independence_of_NEON_plots_verified": false,
+      "known_NEON_datasetkey_model_input_rows": 0,
+      "raw_missing_datasetkey_rows": 0,
+      "signed_original_fit_artifact_id": 10089527320,
+      "signed_source_n": {
+        "HUMAN_OBSERVATION": 2590,
+        "PRESERVED_SPECIMEN": 1259
+      },
+      "source_count_reproduced": {
+        "HUMAN_OBSERVATION": true,
+        "PRESERVED_SPECIMEN": true
+      },
+      "source_counts": {
+        "HUMAN_OBSERVATION": {
+          "distinct_dataset_keys_post_thin": 11,
+          "quality_retained_before_thinning": 28681,
+          "raw_known_NEON_dataset_rows": 0,
+          "raw_scanned_records": 29271,
+          "source_thinned_known_NEON_dataset_rows": 0,
+          "source_thinned_missing_datasetkey_rows": 0,
+          "source_thinned_model_presence_rows": 2590
+        },
+        "PRESERVED_SPECIMEN": {
+          "distinct_dataset_keys_post_thin": 82,
+          "quality_retained_before_thinning": 2675,
+          "raw_known_NEON_dataset_rows": 0,
+          "raw_scanned_records": 4330,
+          "source_thinned_known_NEON_dataset_rows": 0,
+          "source_thinned_missing_datasetkey_rows": 0,
+          "source_thinned_model_presence_rows": 1259
+        }
+      },
+      "specieskey": "39N69",
+      "state": "known_NEON_voucher_datasetkey_not_observed",
+      "taxon": "Encelia farinosa"
+    },
+    {
+      "full_independence_of_NEON_plots_verified": false,
+      "known_NEON_datasetkey_model_input_rows": 0,
+      "raw_missing_datasetkey_rows": 0,
+      "signed_original_fit_artifact_id": 10089523408,
+      "signed_source_n": {
+        "HUMAN_OBSERVATION": 1474,
+        "PRESERVED_SPECIMEN": 1253
+      },
+      "source_count_reproduced": {
+        "HUMAN_OBSERVATION": true,
+        "PRESERVED_SPECIMEN": true
+      },
+      "source_counts": {
+        "HUMAN_OBSERVATION": {
+          "distinct_dataset_keys_post_thin": 71,
+          "quality_retained_before_thinning": 26385,
+          "raw_known_NEON_dataset_rows": 0,
+          "raw_scanned_records": 27771,
+          "source_thinned_known_NEON_dataset_rows": 0,
+          "source_thinned_missing_datasetkey_rows": 0,
+          "source_thinned_model_presence_rows": 1474
+        },
+        "PRESERVED_SPECIMEN": {
+          "distinct_dataset_keys_post_thin": 155,
+          "quality_retained_before_thinning": 3654,
+          "raw_known_NEON_dataset_rows": 0,
+          "raw_scanned_records": 7327,
+          "source_thinned_known_NEON_dataset_rows": 0,
+          "source_thinned_missing_datasetkey_rows": 0,
+          "source_thinned_model_presence_rows": 1253
+        }
+      },
+      "specieskey": "K35N",
+      "state": "known_NEON_voucher_datasetkey_not_observed",
+      "taxon": "Avicennia germinans"
+    },
+    {
+      "full_independence_of_NEON_plots_verified": false,
+      "known_NEON_datasetkey_model_input_rows": 0,
+      "raw_missing_datasetkey_rows": 0,
+      "signed_original_fit_artifact_id": 10089527180,
+      "signed_source_n": {
+        "HUMAN_OBSERVATION": 1450,
+        "PRESERVED_SPECIMEN": 1365
+      },
+      "source_count_reproduced": {
+        "HUMAN_OBSERVATION": true,
+        "PRESERVED_SPECIMEN": true
+      },
+      "source_counts": {
+        "HUMAN_OBSERVATION": {
+          "distinct_dataset_keys_post_thin": 58,
+          "quality_retained_before_thinning": 23623,
+          "raw_known_NEON_dataset_rows": 0,
+          "raw_scanned_records": 25648,
+          "source_thinned_known_NEON_dataset_rows": 0,
+          "source_thinned_missing_datasetkey_rows": 0,
+          "source_thinned_model_presence_rows": 1450
+        },
+        "PRESERVED_SPECIMEN": {
+          "distinct_dataset_keys_post_thin": 181,
+          "quality_retained_before_thinning": 3243,
+          "raw_known_NEON_dataset_rows": 0,
+          "raw_scanned_records": 6616,
+          "source_thinned_known_NEON_dataset_rows": 0,
+          "source_thinned_missing_datasetkey_rows": 0,
+          "source_thinned_model_presence_rows": 1365
+        }
+      },
+      "specieskey": "3RXYC",
+      "state": "known_NEON_voucher_datasetkey_not_observed",
+      "taxon": "Laguncularia racemosa"
+    },
+    {
+      "full_independence_of_NEON_plots_verified": false,
+      "known_NEON_datasetkey_model_input_rows": 0,
+      "raw_missing_datasetkey_rows": 0,
+      "signed_original_fit_artifact_id": 10089528003,
+      "signed_source_n": {
+        "HUMAN_OBSERVATION": 2471,
+        "PRESERVED_SPECIMEN": 1056
+      },
+      "source_count_reproduced": {
+        "HUMAN_OBSERVATION": true,
+        "PRESERVED_SPECIMEN": true
+      },
+      "source_counts": {
+        "HUMAN_OBSERVATION": {
+          "distinct_dataset_keys_post_thin": 15,
+          "quality_retained_before_thinning": 8302,
+          "raw_known_NEON_dataset_rows": 0,
+          "raw_scanned_records": 8538,
+          "source_thinned_known_NEON_dataset_rows": 0,
+          "source_thinned_missing_datasetkey_rows": 0,
+          "source_thinned_model_presence_rows": 2471
+        },
+        "PRESERVED_SPECIMEN": {
+          "distinct_dataset_keys_post_thin": 122,
+          "quality_retained_before_thinning": 2935,
+          "raw_known_NEON_dataset_rows": 12,
+          "raw_scanned_records": 5112,
+          "source_thinned_known_NEON_dataset_rows": 0,
+          "source_thinned_missing_datasetkey_rows": 0,
+          "source_thinned_model_presence_rows": 1056
+        }
+      },
+      "specieskey": "8KDX",
+      "state": "known_NEON_voucher_datasetkey_not_observed",
+      "taxon": "Abies lasiocarpa"
+    },
+    {
+      "full_independence_of_NEON_plots_verified": false,
+      "known_NEON_datasetkey_model_input_rows": 1,
+      "raw_missing_datasetkey_rows": 0,
+      "signed_original_fit_artifact_id": 10089524000,
+      "signed_source_n": {
+        "HUMAN_OBSERVATION": 6339,
+        "PRESERVED_SPECIMEN": 2019
+      },
+      "source_count_reproduced": {
+        "HUMAN_OBSERVATION": true,
+        "PRESERVED_SPECIMEN": true
+      },
+      "source_counts": {
+        "HUMAN_OBSERVATION": {
+          "distinct_dataset_keys_post_thin": 16,
+          "quality_retained_before_thinning": 17289,
+          "raw_known_NEON_dataset_rows": 0,
+          "raw_scanned_records": 18622,
+          "source_thinned_known_NEON_dataset_rows": 0,
+          "source_thinned_missing_datasetkey_rows": 0,
+          "source_thinned_model_presence_rows": 6339
+        },
+        "PRESERVED_SPECIMEN": {
+          "distinct_dataset_keys_post_thin": 128,
+          "quality_retained_before_thinning": 2850,
+          "raw_known_NEON_dataset_rows": 1,
+          "raw_scanned_records": 5906,
+          "source_thinned_known_NEON_dataset_rows": 1,
+          "source_thinned_missing_datasetkey_rows": 0,
+          "source_thinned_model_presence_rows": 2019
+        }
+      },
+      "specieskey": "6NYVX",
+      "state": "known_NEON_voucher_dataset_in_historical_training",
+      "taxon": "Larix laricina"
+    }
+  ]
+}

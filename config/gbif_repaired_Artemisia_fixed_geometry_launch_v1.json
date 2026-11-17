@@ -33,5 +33,10 @@
   "NEON_species_outcomes_allowed": false,
   "new_empirical_endpoint_count": 0,
   "independent_biological_confirmation": false,
-  "full_47ref_plus12heldout_source_robustness_not_yet_achieved": true
+  "full_47ref_plus12heldout_source_robustness_not_yet_achieved": true,
+  "retry_revision": "v1_import_path_only_pre_model_fit",
+  "previous_failed_run_id": 43999810286,
+  "previous_failure_boundary": "ModuleNotFoundError scripts.run_same_target_layer1_baseline_fit_taxon before input scan or fit; no ecological outcome opened",
+  "model_science_procedures_unchanged": true,
+  "expected_engineering_preflight": "source helper import smoke gate before model computation"
 }

@@ -42,8 +42,37 @@ Using the **9705 original frozen file set**, each of seven predeclared NEON-cand
 
 Source-thinned presence deltas do not determine how the eight SDM procedures, spatial folds, predicted ecological-suitability maps, model adequacy or calibrated reference q95 ceilings will change. The reference cohort itself contained additional raw records in all **47/47** fixed reference taxa; therefore the old q95 baseline cannot simply be re-used as if its calibration distribution were unaffected.
 
-An eight-shard source audit for all 47 frozen original reference taxa, using 47 signed model-fit ZIPs and the same repaired 10215-file source, is specified and running in Actions workflow
-`gbif_repaired_reference47_thinning_v1.yml`. Its evidence must not be anticipated.
+The eight-shard source-input audit for **all 47 fixed original reference taxa** has now
+**completed successfully** in Actions run `43901310863`. All eight shards
+passed, all original signed reference model-fit ZIP digests and 79 historical
+taxon keys matched, and every taxon's repaired raw source counts equalled
+its original raw counts plus the independently counted October backfill.
+
+| Reference calibration source | September original source-thinned inputs | Repaired 10,215-file source-thinned inputs | Delta | Relative delta |
+|---|---:|---:|---:|---:|
+| PRESERVED_SPECIMEN | **87,979** | **91,223** | **+3,244** | **+3.69%** |
+| HUMAN_OBSERVATION | **978,446** | **1,000,586** | **+22,140** | **+2.26%** |
+
+**All 47/47 reference taxa** changed their original effective source-input
+population in at least one mode; the PRESERVED_SPECIMEN count changed in
+45/47 and HUMAN_OBSERVATION in 47/47. No taxon had a net decreased
+source-thinned count in either mode. This is not a claim that the underlying
+0.05° representative input row identity is unchanged when counts happen to
+match.
+
+Notable heterogeneous changes, pre-existing fixed taxa only:
+*Artemisia filifolia* +26.73% PRESERVED_SPECIMEN input count,
+*Onoclea sensibilis* +480 specimen inputs and +804 human-observation
+inputs, *Populus tremula* +2,051 human-observation inputs,
+*Viburnum opulus* +2,000 human-observation inputs.
+These illustrate that a uniform 5% completeness correction is invalid
+at the per-species/per-source modeling grain.
+
+Verified machine receipt:
+`results/gbif_repaired_reference47_thinning_v1.json`.
+Even with 47+12 input populations reconstructed, **no repaired 47-taxon
+model predictions, 24 reference q95 envelopes or repaired 12-taxon
+paired-source agreement outcomes** have yet been computed.
 
 The two legitimate upcoming research estimands are now separated in
 `config/gbif_missing20_fixed_vs_rebuilt_geometry_v1.json`:

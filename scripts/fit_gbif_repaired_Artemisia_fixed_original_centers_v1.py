@@ -24,6 +24,9 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 import sys
+# Running as 'python scripts/<file>.py' does not guarantee repository root
+# is on sys.path. The original source helpers live in the scripts namespace.
+sys.path.insert(0, str(ROOT))
 sys.path.append(str(ROOT / "legacy/pre_level_a_focus"))
 BASE_FIT = ROOT / "config/product_b_same_target_source_model_fit_contract_v0_1.json"
 FRAME = ROOT / "config/product_b_same_target_source_common_frame_contract_v0_1.json"

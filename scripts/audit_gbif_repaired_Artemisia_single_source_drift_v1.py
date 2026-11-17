@@ -56,7 +56,7 @@ def inspect(original_zip:Path,repaired_dir:Path)->tuple[dict,list[dict]]:
     rc=json.loads((repaired_dir/"contract.json").read_text(encoding="utf-8"))
     if (rc.get("result_version")!=REPAIRED_RESULT or
             rc.get("GBIF_source_arm")!="repaired_2026-08-01_10215_parquet_files" or
-            rc.get("original_12_block_centers_inherited_from_SHA_verified_original") is not True or
+            rc.get("original_12_block_centers_sha256")!="b9a5db3a5e0324abfdd38626727c170911cfc8994321eb0d24e6d995cd088a15" or
             rc.get("taxon")!="Artemisia tridentata" or rc.get("taxon_index")!=0):
         raise ValueError("Repaired fit is not the predeclared single-taxon fixed-geometry arm")
     if rc.get("paired_discordance_computed") is not False or rc.get("reference_ceiling_opened_or_read") is not False:

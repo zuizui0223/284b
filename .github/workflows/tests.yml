@@ -18,5 +18,13 @@ jobs:
           python-version: "3.12"
       - name: Run active unittest suite
         run: python -m unittest discover -s tests -v
+      - name: Install positive-core guard dependencies
+        run: python -m pip install pytest
+      - name: Run positive-core pytest guards (not collected by unittest)
+        run: |
+          python -m pytest -q \
+            tests/test_el_invited_m1_m2_positive_core.py \
+            tests/test_el_invited_m1_m2_submission_package.py \
+            tests/test_qualified_fdf_prevalence.py
       - name: Run Level-A submission guards
         run: python scripts/run_level_a_submission_guards.py

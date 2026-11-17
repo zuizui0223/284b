@@ -6,7 +6,7 @@ PAPER = ROOT / "manuscript" / "ECOLOGY_LETTERS_INVITED_M1_M2_V1.md"
 LEDGER = ROOT / "manuscript" / "ECOLOGY_LETTERS_INVITED_M1_M2_CLAIM_LEDGER_V1.md"
 
 def _abstract(text: str) -> str:
-    m = re.search(r"## Abstract\\n\\n(.*?)\\n\\n## 1\\.", text, flags=re.S)
+    m = re.search(r"## Abstract\n\n(.*?)\n\n## 1\.", text, flags=re.S)
     assert m
     return m.group(1)
 
@@ -25,8 +25,8 @@ def test_replication_boundary():
     assert "five remained unresolved" in text
 
 def test_abstract_is_method_length_safe():
-    words = re.findall(r"\\b[\\w=-]+\\b", _abstract(PAPER.read_text(encoding="utf-8")))
-    assert len(words) <= 150
+    words = re.findall(r"\b[\w=-]+\b", _abstract(PAPER.read_text(encoding="utf-8")))
+    assert 80 <= len(words) <= 150
 
 def test_claim_ledger_prohibits_pseudoreplication_and_level_c():
     text = LEDGER.read_text(encoding="utf-8")

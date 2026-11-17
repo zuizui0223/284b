@@ -25,13 +25,19 @@ The frozen state-dependent audit gives a representative example with `a1=0.70`, 
 
 ## Qualification does not control false discovery
 
-For biological violation prevalence `pi`, a qualified process with sensitivity `q` and specificity `sp` can still have false-discovery fraction
+Let `pi_valid=P(F=false | valid key)` be the prevalence of true violations *among valid keys*. Among qualified valid-key violation calls,
 
-`FDF = (1-pi)(1-q) / [(1-pi)(1-q) + pi*sp]`.
+`FDF_valid = (1-pi_valid)(1-q) / [(1-pi_valid)(1-q) + pi_valid*sp]`.
 
-At `pi=0.10`, `q=0.80`, and `sp=0.99`, `FDF ≈ 0.645`.
+At `pi_valid=0.10`, `q=0.80`, and `sp=0.99`, `FDF ≈ 0.645`. This remains the original illustrative calculation.
 
-Therefore a measurement gate can authorize whether a negative state is admissible without guaranteeing that a called violation is reliable on its own. Replication or aggregation rules remain a separate evidentiary layer.
+Crucially, if prevalence `pi_all` is instead defined over *all* at-risk keys, class-dependent validity does not cancel:
+
+`FDF_all = (1-pi_all)*a1*(1-q) / [(1-pi_all)*a1*(1-q) + pi_all*a0*sp]`.
+
+The conditional prevalence is `pi_valid = pi_all*a0 / [(1-pi_all)*a1 + pi_all*a0]`. Thus `pi_valid=pi_all` when `a1=a0>0`, but not generally. For illustration, `pi_all=.10, a1=.70, a0=.90, q=.80, sp=.99` gives `pi_valid=.125` and `FDF_all≈.586`. A zero probability of qualified calls makes FDF undefined.
+
+Therefore a measurement gate can authorize whether a negative state is admissible without guaranteeing that a called violation is reliable on its own. Replication or aggregation rules remain a separate evidentiary layer. See `docs/qualified_fdf_prevalence_conditioning_v1.md` for the explicit derivation.
 
 ## Scope
 

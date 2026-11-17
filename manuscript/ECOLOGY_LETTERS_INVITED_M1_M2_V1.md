@@ -99,13 +99,21 @@ A representative frozen audit with `a1=0.70`, `a0=0.90`, `q=0.95` and `sp=0.99` 
 
 Observation-process qualification answers whether a negative state is admissible. It does not determine whether a called violation is likely to be true.
 
-Let `pi` be the prevalence of true biological violations. Among qualified valid keys,
+The false-discovery fraction must be indexed to the population on which prevalence is defined. Among valid keys, let `pi_valid=P(F=false | valid key)`. Then
 
-`FDF = (1-pi)(1-q) / [(1-pi)(1-q) + pi sp]`.
+`FDF_valid = (1-pi_valid)(1-q) / [(1-pi_valid)(1-q) + pi_valid sp]`.
 
-The valid-key fraction cancels. Thus preserving invalid keys as unresolved prevents invalid-state mass from entering the endpoint, but the reliability of a positive violation call still depends on the base rate and on later replication or aggregation rules.
+For a violation prevalence `pi_all=P(F=false)` across *all* at-risk keys, however, class-dependent key validity must be retained:
 
-For example, with `pi=0.10`, `q=0.80` and `sp=0.99`, the false-discovery fraction is approximately 0.645. A measurement gate can therefore be necessary for admissible hard inference without being sufficient for endpoint-level evidentiary reliability.
+`FDF_all = (1-pi_all)a1(1-q) / [(1-pi_all)a1(1-q) + pi_all a0 sp]`.
+
+Indeed, `pi_valid = pi_all a0 / [(1-pi_all)a1 + pi_all a0]`. The valid-key fraction cancels **only when `a1=a0>0`, or when prevalence has already been conditioned on valid keys**. More generally, for nondegenerate probabilities the false-discovery odds obey the exact identity
+
+`FDF_all/(1-FDF_all) = [(1-pi_all)/pi_all] (a1/a0) [(1-q)/sp]`.
+
+The class-validity ratio `a1/a0` therefore multiplies false-discovery odds at fixed population prevalence and conditional detection characteristics. Where no qualified violation calls are possible, FDF is undefined rather than zero.
+
+With `pi_valid=0.10`, `q=0.80` and `sp=0.99`, FDF is approximately 0.645, as in the original illustration. Holding the *population* prevalence at `pi_all=0.10` with illustrative class-dependent validity `a1=0.70`, `a0=0.90` instead gives `pi_valid=0.125` and FDF approximately 0.586 for the same `q` and `sp`. These are analytic scenarios, not empirical frequency estimates. A measurement gate can be necessary for admissible hard inference without being sufficient for endpoint-level evidentiary reliability; replication or aggregation remains a separate requirement.
 
 ## 6. Discussion
 
@@ -116,6 +124,48 @@ The exact decomposition explains why the unresolved state is not optional bookke
 This suggests a general design principle for ecological synthesis: **separate answer construction from endpoint authorization**. Better upstream models can improve ecological answers, but the joint claim still requires a declared relation and an observation state capable of supporting or contradicting it. The relation endpoint therefore complements, rather than replaces, occupancy models, data fusion, JSDMs, model-adequacy analysis and preregistration.
 
 The empirical result should be interpreted narrowly. The independent biological replication is 12 taxa, not 283 cells. The five unresolved cells are not failures, and the empirical q95 envelopes are not nominal prediction intervals. The exact invalid-state identities are structural results, not estimates of how often missingness or observation failure occurs in nature.
+
+**Post-freeze source-data integrity caveat (16 November 2026).** The
+GBIF 2026-08-01 public cloud occurrence snapshot used for this Level-A
+experiment was later found to have been missing 510 Parquet objects from the
+currently repaired directory. The original September frozen object set
+contained 9,705 Parquet files, whereas the repaired November listing contains
+10,215. Exactly 510 files with numeric names divisible by 20 were restored
+on 23 October 2026. Excluding those files reproduces the complete original
+9,706-object ETag/size/timestamp manifest SHA-256, confirming that the
+historical Level-A evaluation was performed against the earlier incomplete
+source. The original 12-taxon frozen result remains a valid conditional
+statement about that data version; it does **not** establish invariance to
+the subsequently restored records. A subsequent descriptive scan confined
+to the 510 restored files found raw `PRESENT` records for **all 12 held-out
+and all 47 reference taxa**, with 15,329 versus 2,688 additional
+HUMAN_OBSERVATION versus PRESERVED_SPECIMEN rows in the held-out panel
+and 335,772 versus 19,058 in the reference panel. These are **raw records, not additional admitted model presences**.
+A separate integrity-controlled reapplication of the original source
+admission and 0.05° thinning to the repaired 10,215-file snapshot
+reproduced raw-record denominators for **all 12 held-out taxa** and
+found that the source-model input counts changed in all 12: across
+taxa, PRESERVED_SPECIMEN thinned inputs increased from **15,654 to
+16,134** (+3.07%), and HUMAN_OBSERVATION from **31,727 to 32,675**
+(+2.99%). These are input-count differences, **not effects on fitted
+models**, paired Schoener D, or the reference envelopes. A parallel
+eight-shard reapplication to **all 47 original reference taxa** also
+passed independent source-input checks: PRESERVED_SPECIMEN thinned
+inputs changed **87,979 → 91,223** (+3.69%) and HUMAN_OBSERVATION
+**978,446 → 1,000,586** (+2.26%). All 47 reference taxa changed at
+least one source-input count. Because both the calibration distribution
+and the held-out predictions can change, the original source-q95
+envelopes cannot be assumed to remain valid. No completed model-refit
+or q95 recalibration sensitivity analysis to the repaired source has
+yet been demonstrated. Consequently,
+source completeness must be treated as an explicit *generalisability and
+submission-readiness limitation* rather than silently implying the currently
+public download reproduces the held-out endpoint. See the separately
+versioned post-freeze audit in
+`docs/GBIF_AUG2026_MISSING20_SOURCE_INTEGRITY_20261116.md` on
+the NEON external-validation audit branch and upstream
+`gbif/occurrence#609`. No new independent empirical endpoint is
+claimed from this metadata inspection.
 
 The broader value of the framework is asymmetrical error control. An endpoint may remain unresolved when the evidence required for a claim is absent, but it cannot manufacture the missing state. Conversely, when the required answers are adequate and a prospective relation is satisfied, the framework permits a positive conclusion. In this sense, evidence-bounded inference is not a rule for saying less; it is a rule for saying exactly what the available evidence authorizes.
 

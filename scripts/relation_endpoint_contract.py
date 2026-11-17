@@ -246,3 +246,58 @@ def hard_rule_operating_characteristics(
         "invalid_mass_if_function_present": 1.0 - a1,
         "invalid_mass_if_function_absent": 1.0 - a0,
     }
+
+
+def qualified_violation_false_discovery_fraction(
+    *,
+    violation_prevalence: float,
+    valid_if_function_present: float,
+    valid_if_function_absent: float,
+    key_sensitivity: float,
+    specificity: float,
+) -> float | None:
+    """FDF among valid-key hard-violation calls, for *population* prevalence.
+
+    Among at-risk biological keys, pi=P(F=false), a1=P(valid|F=true),
+    a0=P(valid|F=false), q=P(detect F|valid,F=true), and
+    sp=P(call F absent|valid,F=false).
+
+    False calls have mass (1-pi)*a1*(1-q); true calls have mass
+    pi*a0*sp. The simplified expression without a1/a0 is valid only
+    when pi denotes prevalence *among valid keys*, or a1=a0>0.
+    Returns None if no qualified violation calls can occur.
+    """
+    for name, value in (
+        ("violation_prevalence", violation_prevalence),
+        ("valid_if_function_present", valid_if_function_present),
+        ("valid_if_function_absent", valid_if_function_absent),
+        ("key_sensitivity", key_sensitivity),
+        ("specificity", specificity),
+    ):
+        if not 0.0 <= value <= 1.0:
+            raise ValueError(f"{name} must be in [0, 1]")
+    pi = violation_prevalence
+    false_calls = (1.0 - pi) * valid_if_function_present * (1.0 - key_sensitivity)
+    true_calls = pi * valid_if_function_absent * specificity
+    call_mass = false_calls + true_calls
+    return false_calls / call_mass if call_mass > 0.0 else None
+
+
+def valid_key_violation_prevalence(
+    *,
+    violation_prevalence: float,
+    valid_if_function_present: float,
+    valid_if_function_absent: float,
+) -> float | None:
+    """P(F=false | valid) from population prevalence and class-specific validity."""
+    for name, value in (
+        ("violation_prevalence", violation_prevalence),
+        ("valid_if_function_present", valid_if_function_present),
+        ("valid_if_function_absent", valid_if_function_absent),
+    ):
+        if not 0.0 <= value <= 1.0:
+            raise ValueError(f"{name} must be in [0, 1]")
+    pi = violation_prevalence
+    true_valid = pi * valid_if_function_absent
+    false_valid = (1.0 - pi) * valid_if_function_present
+    return true_valid / (true_valid + false_valid) if true_valid + false_valid > 0 else None

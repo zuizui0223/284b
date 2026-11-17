@@ -22,7 +22,8 @@ def require(ok,message):
 def extract(panel,receipt):
     n,schema,status=EXPECT[panel]
     require(receipt.get("schema")==schema and receipt.get("status")==status,panel+" invalid receipt")
-    require(receipt.get("NEON_plot_species_outcomes_read") is False and receipt.get("empirical_ledger_increment")==0,panel+" endpoint boundary")
+    neon_key="NEON_plot_species_outcomes_read" if panel=="heldout" else "NEON_plant_plot_outcomes_read"
+    require(receipt.get(neon_key) is False and receipt.get("empirical_ledger_increment")==0,panel+" endpoint boundary")
     if panel=="heldout":
         require(receipt.get("frozen_original_heldout_taxa")==12 and receipt.get("taxa_qualified_repaired_raw_parity")==12
                 and receipt.get("original_fit_ZIP_SHA_verified")==12

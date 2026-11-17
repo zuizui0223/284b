@@ -148,10 +148,16 @@ found that the source-model input counts changed in all 12: across
 taxa, PRESERVED_SPECIMEN thinned inputs increased from **15,654 to
 16,134** (+3.07%), and HUMAN_OBSERVATION from **31,727 to 32,675**
 (+2.99%). These are input-count differences, **not effects on fitted
-models**, paired Schoener D, or the reference envelopes. A separate
-47-taxon original-reference source-input audit is in progress; no
-completed model-refit/q95 recalibration sensitivity analysis to the
-repaired source has yet been demonstrated. Consequently,
+models**, paired Schoener D, or the reference envelopes. A parallel
+eight-shard reapplication to **all 47 original reference taxa** also
+passed independent source-input checks: PRESERVED_SPECIMEN thinned
+inputs changed **87,979 → 91,223** (+3.69%) and HUMAN_OBSERVATION
+**978,446 → 1,000,586** (+2.26%). All 47 reference taxa changed at
+least one source-input count. Because both the calibration distribution
+and the held-out predictions can change, the original source-q95
+envelopes cannot be assumed to remain valid. No completed model-refit
+or q95 recalibration sensitivity analysis to the repaired source has
+yet been demonstrated. Consequently,
 source completeness must be treated as an explicit *generalisability and
 submission-readiness limitation* rather than silently implying the currently
 public download reproduces the held-out endpoint. See the separately

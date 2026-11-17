@@ -55,6 +55,15 @@ jobs:
           git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
           git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
           python -m pip install --disable-pip-version-check -q -e './sdmr[cloud,parquet,geo]'
+      - name: Preflight Python import path before fetching/replaying any GBIF model records
+        run: |
+          python - <<'PY'
+          import runpy
+          m=runpy.run_path('scripts/fit_gbif_repaired_Artemisia_fixed_original_centers_v1.py',run_name='preflight_not_main')
+          modes,*_=m['_helpers']('heldout')
+          assert modes==('PRESERVED_SPECIMEN','HUMAN_OBSERVATION')
+          print('original source helpers importable from script context')
+          PY
       - name: Unit test frozen source score comparison and no-paired-D contract
         run: python -m unittest discover -s integration_tests -p 'test_gbif_repaired_Artemisia_fixed_original_centers_v1.py' -v
       - name: Download exact historical centers, qualification and original fitted scores

@@ -1,0 +1,37 @@
+{
+  "schema": "284b.gbif_repaired_Artemisia_fixed_geometry_launch.v1",
+  "state": "CENTER_HASH_VERIFIED_FIT_PILOT_ONLY",
+  "original_taxon": "Artemisia tridentata",
+  "original_taxon_index": 0,
+  "historical_center_source_run_id": 43904180690,
+  "historical_center_source_job_conclusion": "success",
+  "historical_center_artifact_id": 14246778466,
+  "historical_center_artifact_digest": "sha256:e4a1d8ac8013b45c61510e2cc489530b00abed41893cc0c91e539c8a68c2a517",
+  "historical_12block_centers_sha256": "b9a5db3a5e0324abfdd38626727c170911cfc8994321eb0d24e6d995cd088a15",
+  "historical_center_npy_sha256": "e44a82ad12803d547f8e401ad87f87f30fd9a477aff4b24f0d9d05886545e704",
+  "historical_source_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "repaired_source_manifest_sha256": "ca0d9844cd6816b4e4d550a0152db489b5e6a4c5129f8700fe2f1d818b954cd2",
+  "historical_source_thinned_counts": {
+    "PRESERVED_SPECIMEN": 3285,
+    "HUMAN_OBSERVATION": 4516
+  },
+  "repaired_source_thinned_counts": {
+    "PRESERVED_SPECIMEN": 3420,
+    "HUMAN_OBSERVATION": 4757
+  },
+  "fixed_original_M_frame_sha256_by_M": {
+    "150": "38f2385c78cc56ab988b76830dfbb7783474e91795e8a44bcf8370d7a47203c5",
+    "300": "d05a4d394cfd7e8ec6b6b87b6d4ea22b054b4b22fe177a4b7b647a52be9e8771",
+    "500": "7c56010831f4982bf855b6ad15060baa8f6c45222ecb1c66a988b21b68cd96e5"
+  },
+  "original_8_procedure_library_and_adequacy_loop_hash_guard": "tested byte-identical in run 43906801792",
+  "original_core19_qualification_zip_artifact_id": 10065445666,
+  "original_signed_fit_zip_artifact_id": 10089523542,
+  "result": "one historical-taxon source-specific before/after suitability shift, 48 original source-method-M cells",
+  "paired_source_D_or_reference_q95_allowed": false,
+  "M_or_taxon_selection_allowed": false,
+  "NEON_species_outcomes_allowed": false,
+  "new_empirical_endpoint_count": 0,
+  "independent_biological_confirmation": false,
+  "full_47ref_plus12heldout_source_robustness_not_yet_achieved": true
+}

@@ -34,7 +34,7 @@ jobs:
           assert l['reference_taxa']==47 and l['fit_cells_expected']==2256
           assert l['source_manifest_sha256']=='ca0d9844cd6816b4e4d550a0152db489b5e6a4c5129f8700fe2f1d818b954cd2'
           assert g['reference_taxa_original_geometry_exactly_reproduced']==47
-          assert g['reference_taxa_expected']==47 and g['reference_q95_computed'] is False if 'reference_q95_computed' in g else g['calibration_reference_q95_opened'] is False
+          assert g['reference_taxa_expected']==47 and g['calibration_reference_q95_opened'] is False
           assert m['frozen_taxon_count']==47 and a['completed_and_verified_shards']==8
           assert l['geometry_aggregate_original_status']==g['status']
           assert l['original_geometry_run_id']>0

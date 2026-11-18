@@ -15,7 +15,7 @@
   "original_reference_frame_artifact_id": 10066646765,
   "original_reference_frame_artifact_digest": "sha256:3f0cc137181e28bef5190ebad7cac41aebdcd633a8def8eaf539ac5bf923b09b",
   "original_reference_fit_artifact_id": 10090599087,
-  "original_reference_fit_artifact_digest": "sha256:79db81b175f7dc91443ed27f1e3bb73ba42d9b27bdf6ba8973da361e128bd55a",
+  "original_reference_fit_artifact_digest": "sha256:9a817480d8f023246fe3dc9fedee01a6bf4e95a05418d854937610d78e58c99b",
   "expected_repaired_source_thinned_counts": {
     "PRESERVED_SPECIMEN": 990,
     "HUMAN_OBSERVATION": 6710

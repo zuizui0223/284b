@@ -81,7 +81,9 @@ jobs:
           for key,hashkey,path in targets:
               with open(path,'wb') as f:
                   subprocess.run(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{cfg[key]}/zip"],stdout=f,check=True)
-              assert 'sha256:'+hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()==cfg[hashkey]
+              observed='sha256:'+hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()
+              if observed != cfg[hashkey]:
+                  raise RuntimeError(f'Signed archive mismatch for {key}: expected {cfg[hashkey]}, observed {observed}')
           with zipfile.ZipFile('/tmp/Abies_reference_centers.zip') as z:
               z.extractall('prior_centers')
           with zipfile.ZipFile('/tmp/Abies_reference_frame.zip') as z:

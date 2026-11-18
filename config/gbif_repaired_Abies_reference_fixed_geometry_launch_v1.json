@@ -1,0 +1,39 @@
+{
+  "schema": "284b.gbif_repaired_Abies_reference_fixed_geometry_launch.v1",
+  "status": "PREDECLARED_REFERENCE_INDEX1_ABIES_FIXED_GEOMETRY_REFIT_ONLY",
+  "panel": "successor",
+  "original_reference_index": 1,
+  "taxon": "Abies grandis",
+  "historical_specieskeys": [
+    "2685361",
+    "8KCY"
+  ],
+  "historical_center_source_run_id": 44000689837,
+  "historical_center_artifact_id": 14292768042,
+  "historical_center_artifact_digest": "sha256:7460e8f8eecd2e4b963089acf751b318afb44458170ba454e6cb410afaa7fd87",
+  "historical_center_sha256": "9eb19bf125fdd06c5e2b9ef901c869c23db6cd9aa88feb1305dffed79ff37f7e",
+  "original_reference_frame_artifact_id": 10066646765,
+  "original_reference_frame_artifact_digest": "sha256:3f0cc137181e28bef5190ebad7cac41aebdcd633a8def8eaf539ac5bf923b09b",
+  "original_reference_fit_artifact_id": 10090599087,
+  "original_reference_fit_artifact_digest": "sha256:79db81b175f7dc91443ed27f1e3bb73ba42d9b27bdf6ba8973da361e128bd55a",
+  "expected_repaired_source_thinned_counts": {
+    "PRESERVED_SPECIMEN": 990,
+    "HUMAN_OBSERVATION": 6710
+  },
+  "original_source_thinned_counts": {
+    "PRESERVED_SPECIMEN": 958,
+    "HUMAN_OBSERVATION": 6566
+  },
+  "fixed_M_km": [
+    150,
+    300,
+    500
+  ],
+  "fixed_procedures": 8,
+  "fixed_source_modes": 2,
+  "expected_fit_cells": 48,
+  "reference47_q95_opened": false,
+  "heldout12_endpoint_opened": false,
+  "biological_confirmation": false,
+  "empirical_ledger_increment": 0
+}

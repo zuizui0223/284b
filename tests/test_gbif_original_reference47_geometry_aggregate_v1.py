@@ -34,6 +34,7 @@ class Reference47GeometryAggregation(unittest.TestCase):
         o=aggregate(self.manifest,self.receipts)
         self.assertEqual(o["reference_taxa_original_geometry_exactly_reproduced"],47)
         self.assertEqual(o["repaired_source_reference_model_refits_completed"],0)
+        self.assertEqual(set(o["reference_taxa"][1]["original_comparison_frame_sha256_by_M"]),{"150","300","500"})
         self.assertFalse(o["calibration_reference_q95_opened"])
         self.assertEqual(o["submission_status"],"HOLD")
     def test_fail_closed_missing_duplicate_and_changed_taxon(self):

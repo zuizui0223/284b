@@ -49,6 +49,7 @@ def aggregate(manifest,receipts):
         rows.append({
            "index":e["index"],"taxon":e["taxon"],
            "original_center_sha256":r["original_center_sha256"],
+           "original_comparison_frame_sha256_by_M":r["original_comparison_frame_sha256_by_M"],
            "original_geometry_cells":r["original_common_pooled_geometry_cells"],
            "center_npy_sha256":r["center_npy_sha256"],
            "original_comparison_frame_sha256_by_M":r["original_comparison_frame_sha256_by_M"],

@@ -39,7 +39,7 @@ def check(fit,drift,geometry,source,ref_source):
     must(geometry.get("model_training_or_refitting_performed") is False and geometry.get("ecological_prediction_scores_opened") is False,"reference geometry pilot opened scores")
     must(source.get("taxa_qualified_repaired_raw_parity")==12 and ref_source.get("completed_and_verified_shards")==8 and ref_source.get("prespecified_reference_taxa")==47,"full panel source audit not qualified")
     must(source.get("repaired_SDM_models_fit") is False and ref_source.get("original_24_calibration_q95_refitted") is False,"input-only receipts misrepresented")
-    must(all(x.get("empirical_ledger_increment")==0 for x in (fit,drift,geometry,source,ref_source)),"unexpected empirical endpoint")
+    must(fit.get("counts_as_empirical_conclusion") is False and all(x.get("empirical_ledger_increment")==0 for x in (drift,geometry,source,ref_source)),"unexpected empirical endpoint")
     return {
         "schema":"284b.gbif_repaired_scaleout_technical_gate.v1",
         "status":"PILOTS_PASS_FULL_59_REFIT_NOT_YET_COMPLETE",

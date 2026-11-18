@@ -51,6 +51,7 @@ def aggregate(manifest,receipts):
            "original_center_sha256":r["original_center_sha256"],
            "original_geometry_cells":r["original_common_pooled_geometry_cells"],
            "center_npy_sha256":r["center_npy_sha256"],
+           "original_comparison_frame_sha256_by_M":r["original_comparison_frame_sha256_by_M"],
            "original_source_thinned_counts":r["original_source_thinned_counts"],
            "original_qualification_artifact_id":e["original_qualification_artifact_id"],
         })

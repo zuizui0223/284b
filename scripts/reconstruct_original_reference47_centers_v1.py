@@ -124,6 +124,18 @@ def reconstruct(index:int,frame_zip:Path,fit_zip:Path,out_npy:Path):
         if old_thin!=prev["original_signed_thinned_n"]:
             raise RuntimeError("Original signed fit source count differs from original source audit")
 
+    # Audit the live S3 object metadata against both original and repaired
+    # manifests before selecting the historical 9705 Parquet paths.
+    from scripts.check_original_gbif_object_manifest_v1 import list_objects
+    from scripts.recover_gbif_aug_snapshot_missing20_v1 import partition_historical
+    from product_b_v7_2.snapshot_transport import object_manifest_sha256
+    live=list_objects("occurrence/2026-08-01/")
+    if object_manifest_sha256(live)!=recovery["current_manifest_sha256"]:
+        raise RuntimeError("Current repaired GBIF object manifest differs from signed inventory")
+    historic,restored,unknown=partition_historical(live)
+    if (unknown or len(historic)!=9706 or len(restored)!=510
+        or object_manifest_sha256(historic)!=manifest["original_source_manifest_sha256"]):
+        raise RuntimeError("Historical/restored GBIF object manifest boundary changed")
     fs=pafs.S3FileSystem(anonymous=True,region=EXPECTED_REGION)
     infos=fs.get_file_info(pafs.FileSelector(DATASET_PATH,recursive=False))
     paths=frozen_parquet_paths([x.path for x in infos if x.type==pa.fs.FileType.File])

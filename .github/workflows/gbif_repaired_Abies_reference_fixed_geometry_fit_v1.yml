@@ -1,0 +1,151 @@
+name: "Refit signed Abies reference against repaired GBIF source (no q95)"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'config/gbif_repaired_Abies_reference_fixed_geometry_launch_v1.json'
+      - 'scripts/fit_gbif_repaired_Abies_reference_fixed_original_centers_v1.py'
+      - 'tests/test_gbif_repaired_Abies_reference_fit_v1.py'
+      - '.github/workflows/gbif_repaired_Abies_reference_fixed_geometry_fit_v1.yml'
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: gbif-repaired-Abies-ref-fixed-geometry
+  cancel-in-progress: false
+jobs:
+  refit-one-original-reference-taxon:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test unchanged scientific fit loop and frozen pilot identity
+        run: |
+          python -m unittest discover -s tests -p 'test_gbif_repaired_Abies_reference_fit_v1.py' -v
+          python -m py_compile scripts/fit_gbif_repaired_Abies_reference_fixed_original_centers_v1.py
+      - name: Verify pinned successful reference geometry artifact and signer inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os,pathlib,subprocess
+          cfg=json.loads(pathlib.Path('config/gbif_repaired_Abies_reference_fixed_geometry_launch_v1.json').read_text())
+          assert cfg['status']=='PREDECLARED_REFERENCE_INDEX1_ABIES_FIXED_GEOMETRY_REFIT_ONLY'
+          assert cfg['panel']=='successor' and cfg['original_reference_index']==1 and cfg['taxon']=='Abies grandis'
+          assert cfg['historical_specieskeys']==['2685361','8KCY']
+          assert cfg['expected_fit_cells']==48
+          assert not cfg['reference47_q95_opened'] and not cfg['heldout12_endpoint_opened']
+          assert cfg['empirical_ledger_increment']==0
+          run=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{cfg['historical_center_source_run_id']}"],text=True))
+          assert run['status']=='completed' and run['conclusion']=='success'
+          assert run['head_branch']=='analysis/neon-external-truth-preflight-20261115'
+          arts=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{run['id']}/artifacts?per_page=100"],text=True))['artifacts']
+          a=[z for z in arts if z['name']=='Abies-grandis-original-reference-centers-v1']
+          assert len(a)==1 and a[0]['id']==cfg['historical_center_artifact_id']
+          assert a[0]['digest']==cfg['historical_center_artifact_digest'] and not a[0]['expired']
+          print('signed dual-key Abies original geometry attested')
+          PY
+      - name: Install pinned original modeling dependencies
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check -q -e './sdmr[cloud,parquet,geo]'
+      - name: Verify original reference model helper can be imported
+        run: |
+          python - <<'PY'
+          import runpy
+          mod=runpy.run_path('scripts/fit_gbif_repaired_Abies_reference_fixed_original_centers_v1.py',run_name='do_not_fit')
+          modes,*_=mod['_helpers']('successor')
+          assert modes==('PRESERVED_SPECIMEN','HUMAN_OBSERVATION')
+          print('reference model helper import preflight passed')
+          PY
+      - name: Download signed centers and original reference qualification/model ZIPs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p prior_centers original_frame verified_center
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess,zipfile,shutil
+          cfg=json.loads(pathlib.Path('config/gbif_repaired_Abies_reference_fixed_geometry_launch_v1.json').read_text())
+          targets=[
+              ('historical_center_artifact_id','historical_center_artifact_digest','/tmp/Abies_reference_centers.zip'),
+              ('original_reference_frame_artifact_id','original_reference_frame_artifact_digest','/tmp/Abies_reference_frame.zip'),
+              ('original_reference_fit_artifact_id','original_reference_fit_artifact_digest','/tmp/Abies_original_fit.zip'),
+          ]
+          for key,hashkey,path in targets:
+              with open(path,'wb') as f:
+                  subprocess.run(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{cfg[key]}/zip"],stdout=f,check=True)
+              assert 'sha256:'+hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()==cfg[hashkey]
+          with zipfile.ZipFile('/tmp/Abies_reference_centers.zip') as z:
+              z.extractall('prior_centers')
+          with zipfile.ZipFile('/tmp/Abies_reference_frame.zip') as z:
+              z.extractall('original_frame')
+          a=list(pathlib.Path('prior_centers').rglob('gbif_original_reference_Abies_grandis_centers_v1.json'))
+          c=list(pathlib.Path('prior_centers').rglob('Abies_grandis_centers.npy'))
+          assert len(a)==len(c)==1,(a,c)
+          signed=json.loads(a[0].read_text())
+          committed=json.loads(pathlib.Path('results/gbif_original_reference_Abies_grandis_centers_v1.json').read_text())
+          assert signed==committed
+          assert signed['status']=='historical_Abies_grandis_reference_center_hash_reconstructed'
+          assert signed['recomputed_centers_SHA256']==cfg['historical_center_sha256']
+          assert hashlib.sha256(c[0].read_bytes()).hexdigest()==signed['centers_np_array_SHA256']
+          shutil.copyfile(c[0],'verified_center/centers.npy')
+          print('original signed reference frame, model and center arrays checked')
+          PY
+      - name: Refit all 48 Abies reference source/procedure/M cells on original geometry
+        run: |
+          python scripts/fit_gbif_repaired_Abies_reference_fixed_original_centers_v1.py \
+            --panel successor \
+            --taxon-index 1 \
+            --core19-frame-dir original_frame \
+            --historical-centers-npy verified_center/centers.npy \
+            --historical-centers-receipt results/gbif_original_reference_Abies_grandis_centers_v1.json \
+            --chelsa-manifest sdmr/configs/chelsa_v2_1_plant_candidates.csv \
+            --output-dir fit
+      - name: Fail closed on unexpected model/source or incomplete source fit
+        run: |
+          python - <<'PY'
+          import json,pathlib,shutil
+          c=json.loads(pathlib.Path('fit/contract.json').read_text())
+          launch=json.loads(pathlib.Path('config/gbif_repaired_Abies_reference_fixed_geometry_launch_v1.json').read_text())
+          assert c['taxon']=='Abies grandis' and c['taxon_index']==1 and c['panel']=='successor'
+          assert c['historical_specieskeys']==launch['historical_specieskeys']
+          assert c['GBIF_source_arm']=='repaired_2026-08-01_10215_parquet_files'
+          assert c['original_12_block_centers_sha256']==launch['historical_center_sha256']
+          assert c['expected_fit_cells']==48 and c['sealed_fit_cells']+c['unresolved_fit_cells']==48
+          assert c['repaired_source_thinned_presence_count']==launch['expected_repaired_source_thinned_counts']
+          assert c['original_signed_comparison_frames_unchanged'] and c['background_rows_resampled_during_refit'] is False
+          assert c['paired_discordance_computed'] is False and c['reference_ceiling_opened_or_read'] is False
+          assert c['heldout_pairing_opened'] is False and c['counts_as_empirical_conclusion'] is False
+          pathlib.Path('results').mkdir(exist_ok=True)
+          shutil.copyfile('fit/contract.json','results/gbif_repaired_Abies_reference_fixedcenters_fit_contract_v1.json')
+          assert c['unresolved_fit_cells']==0,('Unresolved reference source fit cells',c['unresolved_fit_cells'])
+          print('reference Abies repaired-source 48-cell fit complete; q95 remains sealed')
+          PY
+      - name: Archive fitted models and original geometry (not a q95 endpoint)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gbif-repaired-Abies-reference-fixed-old-geometry-fit
+          path: |
+            fit/
+            results/gbif_repaired_Abies_reference_fixedcenters_fit_contract_v1.json
+          if-no-files-found: warn
+          retention-days: 45
+      - name: Commit non-biological reference fit contract
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_Abies_reference_fixedcenters_fit_contract_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive verified Abies reference repaired-source 48-cell fit"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

@@ -1,0 +1,28 @@
+{
+  "authorized_next_step": "Prepare signed original-geometry reconstruction for all fixed 47 reference taxa before repaired refits; never infer full-panel success from pilots.",
+  "empirical_ledger_increment": 0,
+  "full_reference_model_refit_complete": false,
+  "heldout_pilot": {
+    "human_median_tv": 0.018778625727311756,
+    "sealed_cells": 48,
+    "specimen_median_tv": 0.012490942512058359,
+    "taxon": "Artemisia tridentata",
+    "within_source_comparable_cells": 48
+  },
+  "independent_biological_evidence": false,
+  "q95_recalibrated": false,
+  "reference_geometry_pilot": {
+    "historical_keys": 2,
+    "original_center_sha256": "9eb19bf125fdd06c5e2b9ef901c869c23db6cd9aa88feb1305dffed79ff37f7e",
+    "pooled_cells": 7244,
+    "taxon": "Abies grandis"
+  },
+  "repaired_heldout_endpoint_opened": false,
+  "schema": "284b.gbif_repaired_scaleout_technical_gate.v1",
+  "source_inputs_audited": {
+    "heldout_taxa": 12,
+    "reference_taxa": 47
+  },
+  "status": "PILOTS_PASS_FULL_59_REFIT_NOT_YET_COMPLETE",
+  "submission_status": "HOLD"
+}

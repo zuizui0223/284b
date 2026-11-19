@@ -126,6 +126,7 @@ def main():
     p.add_argument("--ref-fit-audit",type=Path,required=True)
     p.add_argument("--heldout-fit-audit",type=Path,required=True)
     p.add_argument("--original-receipt",type=Path,required=True)
+    p.add_argument("--original-cells",type=Path,required=True)
     p.add_argument("--source-manifest",type=Path,required=True)
     p.add_argument("--out-cells",type=Path,required=True)
     p.add_argument("--out-final",type=Path,required=True)
@@ -134,6 +135,9 @@ def main():
     ref_raw=a.ref_summary.read_bytes();ref=json.loads(ref_raw)
     table_raw=a.ref_table.read_bytes()
     historical=json.loads(a.original_receipt.read_text(encoding="utf-8"))
+    historical_cells_raw=a.original_cells.read_bytes()
+    _require(hashlib.sha256(historical_cells_raw).hexdigest()==historical["cells_sha256"],
+             "Original signed historical 288-cell outcome CSV SHA-256 changed")
     ref_fit_raw=a.ref_fit_audit.read_bytes();ref_fit=json.loads(ref_fit_raw)
     heldout_fit_raw=a.heldout_fit_audit.read_bytes();heldout_fit=json.loads(heldout_fit_raw)
     verify_preopening(ref,ref_fit,heldout_fit,historical,hashlib.sha256(table_raw).hexdigest())
@@ -168,6 +172,31 @@ def main():
 
     base=json.loads(a.out_final.read_text(encoding="utf-8"))
     scores=pd.read_csv(a.out_cells)
+    historical_scores=pd.read_csv(a.original_cells)
+    key_columns=["taxon","M_km","procedure"]
+    _require(len(historical_scores)==288 and historical_scores[key_columns].duplicated().sum()==0
+             and scores[key_columns].duplicated().sum()==0,
+             "Original/repaired heldout 288-cell key uniqueness violated")
+    historical_scores["M_km"]=historical_scores["M_km"].astype(int)
+    scores["M_km"]=scores["M_km"].astype(int)
+    original_keys=set(tuple(r) for r in historical_scores[key_columns].itertuples(index=False,name=None))
+    repaired_keys=set(tuple(r) for r in scores[key_columns].itertuples(index=False,name=None))
+    _require(len(original_keys)==288 and original_keys==repaired_keys,
+             "Original heldout taxon × procedure × M universe cannot change")
+    original_open={
+        tuple(r) for r in historical_scores.loc[
+            historical_scores["paired_prediction_surface_opened"].astype(bool),key_columns
+        ].itertuples(index=False,name=None)
+    }
+    repaired_open={
+        tuple(r) for r in scores.loc[
+            scores["paired_prediction_surface_opened"].astype(bool),key_columns
+        ].itertuples(index=False,name=None)
+    }
+    _require(len(original_open)==283 and len(repaired_open)==int(base["paired_prediction_surfaces_opened_cells"]),
+             "Historical original open-cell cardinality or repaired opened count changed")
+    lost_original_open=original_open-repaired_open
+    added_repaired_open=repaired_open-original_open
     _require(len(scores)==288 and base["heldout_taxa"]==12
              and base["heldout_cells_expected"]==288
              and base["heldout_cells_audited"]==288
@@ -190,6 +219,8 @@ def main():
     ].unique().tolist())
     _require(set(alerts).issubset({c["taxon"] for c,_ in models}),"Attention taxa outside frozen 12")
 
+    full_comparability=(len(lost_original_open)==0)
+    robust_to_source_completeness=(len(alerts)==0 and full_comparability)
     base.update({
       "result_version":FINAL_RESULT,
       "terminal_class":"postfreeze_source_completeness_sensitivity",
@@ -201,7 +232,16 @@ def main():
       "repaired_heldout_taxa_with_attention":len(alerts),
       "repaired_heldout_taxa_with_attention_names":alerts,
       "historical_heldout_opened_cells":283,
-      "source_completeness_0_of_12_robust":len(alerts)==0,
+      "source_completeness_0_of_12_robust":robust_to_source_completeness,
+      "historical_original_opened_cells_retained":283-len(lost_original_open),
+      "historical_original_opened_cells_lost":len(lost_original_open),
+      "historical_original_opened_cells_lost_keys":[
+          {"taxon":taxon,"M_km":m,"procedure":procedure}
+          for taxon,m,procedure in sorted(lost_original_open)
+      ],
+      "newly_evaluable_repaired_cells":len(added_repaired_open),
+      "full_original_283_cell_evaluability_preserved":full_comparability,
+      "historical_signed_288_cells_sha256":hashlib.sha256(historical_cells_raw).hexdigest(),
       "historical_result_replaced":False,
       "source_completeness_is_new_independent_replication":False,
       "counts_as_empirical_conclusion":False,
@@ -216,8 +256,13 @@ def main():
       "submission_status":"HOLD_FOR_SENSITIVITY_REVIEW",
       "claim_strength":"retrospective_upstream_source_completeness_robustness_not_new_independent_biological_confirmation",
     })
-    base["status"]=("historical_0of12_robust_to_repaired_source"
-                    if len(alerts)==0 else "historical_0of12_not_robust_to_repaired_source")
+    base["status"]=(
+        "historical_0of12_not_robust_to_repaired_source"
+        if alerts else (
+            "historical_0of12_robust_to_repaired_source"
+            if full_comparability else "repaired_source_no_attention_but_original_283_cell_coverage_decreased"
+        )
+    )
     base["final_endpoint_fingerprint"]=hashlib.sha256(
         (base["cells_sha256"]+base["reference_summary_sha256"]+
          base["reference_table_sha256"]+historical["final_endpoint_fingerprint"]).encode("utf-8")

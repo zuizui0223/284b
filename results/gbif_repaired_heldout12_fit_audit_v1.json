@@ -1,0 +1,126 @@
+{
+  "NEON_field_outcomes_read": false,
+  "empirical_ledger_increment": 0,
+  "heldout12_paired_discordance_opened": false,
+  "heldout_taxa_expected": 12,
+  "heldout_taxa_verified": 12,
+  "independent_biological_confirmation": false,
+  "reference_q95_opened": false,
+  "schema": "284b.gbif_repaired_heldout12_source_fit_audit.v1",
+  "source_fit_cells_expected": 576,
+  "source_fit_cells_sealed": 576,
+  "source_fit_cells_unresolved": 0,
+  "source_score_rows_verified": 1152000,
+  "status": "ALL_12_REPAIRED_HELDOUT_SOURCE_MODELS_INTEGRITY_VERIFIED_PAIRING_CLOSED",
+  "submission_status": "HOLD",
+  "taxa": [
+    {
+      "index": 0,
+      "original_center_sha256": "b9a5db3a5e0324abfdd38626727c170911cfc8994321eb0d24e6d995cd088a15",
+      "repaired_prediction_sha256": "fa46c661fde2a4d751e85153b4aac3623138ae71996b476d734806b64b367f5e",
+      "score_rows_verified": 96000,
+      "sealed_source_cells": 48,
+      "taxon": "Artemisia tridentata",
+      "unresolved_source_cells": 0
+    },
+    {
+      "index": 1,
+      "original_center_sha256": "e56076ae81c4f5b60f8534a053c959072730027e741890411602e51d6cd36352",
+      "repaired_prediction_sha256": "b457948ebebe11ccdb44a708c356a750c49b9f4245697593a7c47295807c217a",
+      "score_rows_verified": 96000,
+      "sealed_source_cells": 48,
+      "taxon": "Atriplex canescens",
+      "unresolved_source_cells": 0
+    },
+    {
+      "index": 2,
+      "original_center_sha256": "17ee5a4d2424bc6cb3424a2a47483d7b985f75e8829ac4ad1d2ac1365f2f4908",
+      "repaired_prediction_sha256": "9be31d789d6d622ab986e833c6e82f0ed06bf86d5212bdddc1f279a4a39140ed",
+      "score_rows_verified": 96000,
+      "sealed_source_cells": 48,
+      "taxon": "Encelia farinosa",
+      "unresolved_source_cells": 0
+    },
+    {
+      "index": 3,
+      "original_center_sha256": "a1d1bec9adcd35ed03e5391b304f23d92d5606e4d2de64748ef08603010b68da",
+      "repaired_prediction_sha256": "a9b5e3bf8f785c01c11828fe2892cbe297a530550aa6681db3751e352015dc75",
+      "score_rows_verified": 96000,
+      "sealed_source_cells": 48,
+      "taxon": "Avicennia germinans",
+      "unresolved_source_cells": 0
+    },
+    {
+      "index": 4,
+      "original_center_sha256": "88013c8c48994cb202bf645ac9e24d710bc048bd9b503509044ac1bff72bf5c4",
+      "repaired_prediction_sha256": "9d04c5353706c66f1e051c6994fb1ff94e014254b7bdc991418e7946bb23237a",
+      "score_rows_verified": 96000,
+      "sealed_source_cells": 48,
+      "taxon": "Avicennia marina",
+      "unresolved_source_cells": 0
+    },
+    {
+      "index": 5,
+      "original_center_sha256": "d298e522200ccdaa29142566cb27fd4c01aa7b8ce32c2e2ca2d30728c1f2e6b5",
+      "repaired_prediction_sha256": "fbc7bea181af65c13faf8471df8408345626d2db262ae198abb3dd91c04735e5",
+      "score_rows_verified": 96000,
+      "sealed_source_cells": 48,
+      "taxon": "Laguncularia racemosa",
+      "unresolved_source_cells": 0
+    },
+    {
+      "index": 6,
+      "original_center_sha256": "2d205ce5158c04b34e140e6d847c831124ae42e730b6f897484edcd688c4269a",
+      "repaired_prediction_sha256": "5fe34ac79f8ea61061b84008dff9708cc52cfe324da7c217d34ba9421e739c20",
+      "score_rows_verified": 96000,
+      "sealed_source_cells": 48,
+      "taxon": "Nothofagus antarctica",
+      "unresolved_source_cells": 0
+    },
+    {
+      "index": 7,
+      "original_center_sha256": "df8ba01e12f741e13914368dc6aaa729cd8942b1d7540f58ee6baf90e7c99b93",
+      "repaired_prediction_sha256": "289ec90f6bcb91a6c4ce5b8c496133350450d9b225c39713b791435fba804594",
+      "score_rows_verified": 96000,
+      "sealed_source_cells": 48,
+      "taxon": "Nothofagus betuloides",
+      "unresolved_source_cells": 0
+    },
+    {
+      "index": 8,
+      "original_center_sha256": "8e0dc633dfff059ccb73cc9bab8b21b26e3df01939e6cb804e46134ff0999c7f",
+      "repaired_prediction_sha256": "f1b7614c8ad27febaa1b08a62710ca7d81d014fd60108fad438910d58f372c5f",
+      "score_rows_verified": 96000,
+      "sealed_source_cells": 48,
+      "taxon": "Eucalyptus globulus",
+      "unresolved_source_cells": 0
+    },
+    {
+      "index": 9,
+      "original_center_sha256": "1318f10d4a96c7b958623c8aaaa691f7248ac0c0f80bb8a8124048b15bb4e0ff",
+      "repaired_prediction_sha256": "350f75ab74573ebfae52e8a80b0d901f4e990cdcb4cf8886b56397a4177f1327",
+      "score_rows_verified": 96000,
+      "sealed_source_cells": 48,
+      "taxon": "Abies lasiocarpa",
+      "unresolved_source_cells": 0
+    },
+    {
+      "index": 10,
+      "original_center_sha256": "2bf429a01a9fc8c93931b59b5ed42882177460a198ef543838746e8f8261a623",
+      "repaired_prediction_sha256": "94771c6691a1f67bc4b8a1a64dc490488207d9b7d3c42fbb9a5b839220791689",
+      "score_rows_verified": 96000,
+      "sealed_source_cells": 48,
+      "taxon": "Eucalyptus delegatensis",
+      "unresolved_source_cells": 0
+    },
+    {
+      "index": 11,
+      "original_center_sha256": "17c6b22f8e9a5cfbce5efbfca374ee045c3e418b5d537aaf3ff6d0ab048bf2c3",
+      "repaired_prediction_sha256": "4a749ad5a7ae1eb04ec7c4517ae0cb404e08ecef010f7dc87df14abf3b8aafb1",
+      "score_rows_verified": 96000,
+      "sealed_source_cells": 48,
+      "taxon": "Larix laricina",
+      "unresolved_source_cells": 0
+    }
+  ]
+}

@@ -1,0 +1,379 @@
+{
+  "all_taxa_signed_original_fit_and_qualification_provenance": true,
+  "all_taxa_three_original_frame_hashes_verified": true,
+  "empirical_ledger_increment": 0,
+  "heldout_taxa_original_spatial_geometry_complete": 12,
+  "independent_biological_replication": false,
+  "original_heldout12_receipt_sha256": "aeddef8cc43568416a0224ea623ba6329b6e3038a267de4b960cc3af2ef8424e",
+  "original_historical_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "original_reference47_receipt_sha256": "bb4f221884af9f4b4800adb1f0267c91d1e2b5f05b5e4f867ecc35f4824b554a",
+  "original_reference_and_heldout_no_taxon_overlap": true,
+  "original_signed_historical_parquet_count": 9705,
+  "reference_taxa_original_spatial_geometry_complete": 47,
+  "repaired_heldout_paired_D_opened": false,
+  "repaired_heldout_source_model_refits_verified": false,
+  "repaired_reference_q95_recalibrated": false,
+  "repaired_reference_source_model_refits_verified": false,
+  "schema": "284b.gbif_original_59taxon_geometry_provenance_lock.v1",
+  "status": "59_ORIGINAL_HISTORICAL_GEOMETRIES_SIGNED_DISJOINT_NO_REPAIRED_OUTCOMES",
+  "submission_status": "HOLD",
+  "taxa": [
+    {
+      "index": 0,
+      "original_center_sha256": "fd3c3fd0b3e6b88bef0caff9d62f0422249c193ca589d2155bbb6b6120ddc361",
+      "panel": "reference",
+      "taxon": "Abies amabilis"
+    },
+    {
+      "index": 1,
+      "original_center_sha256": "9eb19bf125fdd06c5e2b9ef901c869c23db6cd9aa88feb1305dffed79ff37f7e",
+      "panel": "reference",
+      "taxon": "Abies grandis"
+    },
+    {
+      "index": 2,
+      "original_center_sha256": "40e723cb3ffa899a9abc6a522aedb2bf3e670c69208cf21267739bf63b446b35",
+      "panel": "reference",
+      "taxon": "Abies magnifica"
+    },
+    {
+      "index": 3,
+      "original_center_sha256": "85c7095a12c770625a51f727cc08522506a2ec61650ac353a8715516e5fdd76e",
+      "panel": "reference",
+      "taxon": "Abies procera"
+    },
+    {
+      "index": 4,
+      "original_center_sha256": "457d7fd581bd34d4a57666af9f794b7f2422f943de6d14b27e031a0909e30960",
+      "panel": "reference",
+      "taxon": "Abies sibirica"
+    },
+    {
+      "index": 5,
+      "original_center_sha256": "3287c9e4421c57836501325006cdf1ec85c3b214ef00ba1a62399c41155f13b0",
+      "panel": "reference",
+      "taxon": "Acacia melanoxylon"
+    },
+    {
+      "index": 6,
+      "original_center_sha256": "e757ed48bd2b9fd1b28e42db052a7c71e968d71ed3603566abe098841ddf1076",
+      "panel": "reference",
+      "taxon": "Acorus calamus"
+    },
+    {
+      "index": 7,
+      "original_center_sha256": "e1e0f3647013f60c7308b6b60fcf173e6f4e344e42226cddb2f941e241cb1e29",
+      "panel": "reference",
+      "taxon": "Aegiceras corniculatum"
+    },
+    {
+      "index": 8,
+      "original_center_sha256": "b7f5be9890ab0b833fd8eb5c6dffe571377e5a79b483e685667d178382a3d53e",
+      "panel": "reference",
+      "taxon": "Alisma plantago-aquatica"
+    },
+    {
+      "index": 9,
+      "original_center_sha256": "b0c87d972725330fa9fafe36beb40be07fb1f05ae64d156c3e618339b5eee74b",
+      "panel": "reference",
+      "taxon": "Ambrosia dumosa"
+    },
+    {
+      "index": 10,
+      "original_center_sha256": "e22ae1ee5a659c47df843fbf99acfb3cd81ba41b17c7b375b2ec680ebd6e989a",
+      "panel": "reference",
+      "taxon": "Artemisia filifolia"
+    },
+    {
+      "index": 11,
+      "original_center_sha256": "d54064525ff210ac97ae21183a54166a93735e28027a1769c3d08b5326b0aada",
+      "panel": "reference",
+      "taxon": "Atriplex confertifolia"
+    },
+    {
+      "index": 12,
+      "original_center_sha256": "704fbf19f0fdf37796f67355d39d25b7bb9319ab4782855376802d3c69184a7b",
+      "panel": "reference",
+      "taxon": "Atriplex lentiformis"
+    },
+    {
+      "index": 13,
+      "original_center_sha256": "9275b96896f3fffba1b0228f6d61386de2190e867b25fc323e5a62e1f93424e0",
+      "panel": "reference",
+      "taxon": "Butomus umbellatus"
+    },
+    {
+      "index": 14,
+      "original_center_sha256": "46e0d465d07d10cb4887d11002a67a58ac9fd9eebef31050d3e89c7890bca4b4",
+      "panel": "reference",
+      "taxon": "Carpinus betulus"
+    },
+    {
+      "index": 15,
+      "original_center_sha256": "a1aac6d8318138727f4c75c2eaee4fbba97639ba1c87143b442b41f55ee519a6",
+      "panel": "reference",
+      "taxon": "Ceriops tagal"
+    },
+    {
+      "index": 16,
+      "original_center_sha256": "ea36231f9c50b90592476ea53df6b51d3950ca8ce73ad0ef61146d7f238b37b0",
+      "panel": "reference",
+      "taxon": "Chamaecyparis lawsoniana"
+    },
+    {
+      "index": 17,
+      "original_center_sha256": "1dbef0ae16607209990809e4819ba0b68f69afe107b97aafefca9ca1ba881596",
+      "panel": "reference",
+      "taxon": "Cornus sanguinea"
+    },
+    {
+      "index": 18,
+      "original_center_sha256": "9f5dcd1010e30659e33b585a4d3447c5fd81696915b09613227efc25e97897e0",
+      "panel": "reference",
+      "taxon": "Ephedra nevadensis"
+    },
+    {
+      "index": 19,
+      "original_center_sha256": "4f1e963e901d7f27c3c957d64d29a86a38f7918492a70e32375d5afd5a1e9abf",
+      "panel": "reference",
+      "taxon": "Eucalyptus baxteri"
+    },
+    {
+      "index": 20,
+      "original_center_sha256": "6e851565b8048eb5d7c3d56de183d6f29889f7e20881c64d106ee93e51c5309d",
+      "panel": "reference",
+      "taxon": "Eucalyptus nitens"
+    },
+    {
+      "index": 21,
+      "original_center_sha256": "6571084655c70c535702e99f28b8bf677c5a813d15da00ff6d20e3f8ee6c9a21",
+      "panel": "reference",
+      "taxon": "Eucalyptus viminalis"
+    },
+    {
+      "index": 22,
+      "original_center_sha256": "57351560146c2404f48122d1adaaef29dba5f4cd04ba9f7767bae115fba2700d",
+      "panel": "reference",
+      "taxon": "Euonymus europaeus"
+    },
+    {
+      "index": 23,
+      "original_center_sha256": "bb217dced25c1eb268d8ea53b7da1eba9b3df8f89004666bce8eaa2cca418ae0",
+      "panel": "reference",
+      "taxon": "Geranium dissectum"
+    },
+    {
+      "index": 24,
+      "original_center_sha256": "a41cbb22d76d3ec4bae97e683b25fe956c2076f9855627408a9bc9eea61f75e4",
+      "panel": "reference",
+      "taxon": "Gutierrezia sarothrae"
+    },
+    {
+      "index": 25,
+      "original_center_sha256": "e2fc57fdd5401f1ad39b96ff37cdd6de4632e37654767fb201dea52943a121a7",
+      "panel": "reference",
+      "taxon": "Leersia oryzoides"
+    },
+    {
+      "index": 26,
+      "original_center_sha256": "0374209e8a91837be7d2ca409cedac28d300765bc2d03dcc435517670eb8cc9d",
+      "panel": "reference",
+      "taxon": "Ligustrum vulgare"
+    },
+    {
+      "index": 27,
+      "original_center_sha256": "01b73bd74bfb63ddea7a8b91bc855422cfb96c56ba47f87e80b40132e6eb9cce",
+      "panel": "reference",
+      "taxon": "Lumnitzera racemosa"
+    },
+    {
+      "index": 28,
+      "original_center_sha256": "2693ae971f82f814b76063389c62e52e1f0b0af8c01a6ccab5ac4e3155006f5a",
+      "panel": "reference",
+      "taxon": "Onoclea sensibilis"
+    },
+    {
+      "index": 29,
+      "original_center_sha256": "fa65f7c6f4e8ff9e45d20ae9564afebfbb35e05180cac5adc35f668e5114a1b2",
+      "panel": "reference",
+      "taxon": "Picea obovata"
+    },
+    {
+      "index": 30,
+      "original_center_sha256": "6fe6a9ec4e91d7a40e9051c2f88351543610d79f1d8766a22810b291d1101333",
+      "panel": "reference",
+      "taxon": "Pinus flexilis"
+    },
+    {
+      "index": 31,
+      "original_center_sha256": "bd096aaab3e2fdce895ca9c4f8345c154ee1680d88e17dfe949cf130407ba54f",
+      "panel": "reference",
+      "taxon": "Pinus ponderosa"
+    },
+    {
+      "index": 32,
+      "original_center_sha256": "5dfd165adcd27d8208bc097461c3f7db4775d460aab33e393e96720a4015fc6d",
+      "panel": "reference",
+      "taxon": "Pinus sibirica"
+    },
+    {
+      "index": 33,
+      "original_center_sha256": "60d852db585837e0dd23709fe181b5f9e429c8d54b52ba5982db10cb2fd46c10",
+      "panel": "reference",
+      "taxon": "Pinus strobus"
+    },
+    {
+      "index": 34,
+      "original_center_sha256": "2d544dd884699022838b2b3ae109e37d6368f2f6a290b3d20a844730a0a37688",
+      "panel": "reference",
+      "taxon": "Polystichum setiferum"
+    },
+    {
+      "index": 35,
+      "original_center_sha256": "5d1c023800b845a10c80d5acffbc0f625d90438885e0d2dc5da448277f8e8dce",
+      "panel": "reference",
+      "taxon": "Populus tremula"
+    },
+    {
+      "index": 36,
+      "original_center_sha256": "3c8d72d67f941da83d11adf6cbc821f4288a1152be13efc450366016c2eae674",
+      "panel": "reference",
+      "taxon": "Quercus petraea"
+    },
+    {
+      "index": 37,
+      "original_center_sha256": "601155a67c73214ea49720932eec3cfeb526adafc3187f1e0118d6e4958fb672",
+      "panel": "reference",
+      "taxon": "Sonneratia alba"
+    },
+    {
+      "index": 38,
+      "original_center_sha256": "42fc50a42f133e1fef267f249b06965515ea68dff7afa4edf068d91fed8dc4d4",
+      "panel": "reference",
+      "taxon": "Sparganium erectum"
+    },
+    {
+      "index": 39,
+      "original_center_sha256": "cd4216ac23c32c7fc4650d9c190bd174f0bc7f6c0a6b778791bc33a3f69427f2",
+      "panel": "reference",
+      "taxon": "Tilia cordata"
+    },
+    {
+      "index": 40,
+      "original_center_sha256": "52e214d899c686f00daafcfa002da1732367512d34d59b6e58c6f9ea51e11f75",
+      "panel": "reference",
+      "taxon": "Tsuga canadensis"
+    },
+    {
+      "index": 41,
+      "original_center_sha256": "68c888011ab830e58f3119f5d983f089aadb57c00c0eeb87b55a00f2ec3ff754",
+      "panel": "reference",
+      "taxon": "Tsuga mertensiana"
+    },
+    {
+      "index": 42,
+      "original_center_sha256": "88c4029d6d374edca6e776d36f39595f24f9f000ad7ae989f93a9b3adfeb6480",
+      "panel": "reference",
+      "taxon": "Veronica arvensis"
+    },
+    {
+      "index": 43,
+      "original_center_sha256": "f42759c8cd12e5899d85b90fb4a9c91d004990f1382b700deeb8ba9923596631",
+      "panel": "reference",
+      "taxon": "Viburnum opulus"
+    },
+    {
+      "index": 44,
+      "original_center_sha256": "78be50d1627d72e89e094426dd1be810b47ad98f88215cf2b30bd872e0c8628f",
+      "panel": "reference",
+      "taxon": "Viola arvensis"
+    },
+    {
+      "index": 45,
+      "original_center_sha256": "0999ac6e57ec5854b3b6f0e477ec03f981a80583f93ed89931068e433ef4dfbf",
+      "panel": "reference",
+      "taxon": "Woodwardia fimbriata"
+    },
+    {
+      "index": 46,
+      "original_center_sha256": "28fc888a4d5963ce9120b424de3ba63cc93c9943fcaab2255ddf43f3d07345c5",
+      "panel": "reference",
+      "taxon": "Xylocarpus granatum"
+    },
+    {
+      "index": 0,
+      "original_center_sha256": "b9a5db3a5e0324abfdd38626727c170911cfc8994321eb0d24e6d995cd088a15",
+      "panel": "heldout",
+      "taxon": "Artemisia tridentata"
+    },
+    {
+      "index": 1,
+      "original_center_sha256": "e56076ae81c4f5b60f8534a053c959072730027e741890411602e51d6cd36352",
+      "panel": "heldout",
+      "taxon": "Atriplex canescens"
+    },
+    {
+      "index": 2,
+      "original_center_sha256": "17ee5a4d2424bc6cb3424a2a47483d7b985f75e8829ac4ad1d2ac1365f2f4908",
+      "panel": "heldout",
+      "taxon": "Encelia farinosa"
+    },
+    {
+      "index": 3,
+      "original_center_sha256": "a1d1bec9adcd35ed03e5391b304f23d92d5606e4d2de64748ef08603010b68da",
+      "panel": "heldout",
+      "taxon": "Avicennia germinans"
+    },
+    {
+      "index": 4,
+      "original_center_sha256": "88013c8c48994cb202bf645ac9e24d710bc048bd9b503509044ac1bff72bf5c4",
+      "panel": "heldout",
+      "taxon": "Avicennia marina"
+    },
+    {
+      "index": 5,
+      "original_center_sha256": "d298e522200ccdaa29142566cb27fd4c01aa7b8ce32c2e2ca2d30728c1f2e6b5",
+      "panel": "heldout",
+      "taxon": "Laguncularia racemosa"
+    },
+    {
+      "index": 6,
+      "original_center_sha256": "2d205ce5158c04b34e140e6d847c831124ae42e730b6f897484edcd688c4269a",
+      "panel": "heldout",
+      "taxon": "Nothofagus antarctica"
+    },
+    {
+      "index": 7,
+      "original_center_sha256": "df8ba01e12f741e13914368dc6aaa729cd8942b1d7540f58ee6baf90e7c99b93",
+      "panel": "heldout",
+      "taxon": "Nothofagus betuloides"
+    },
+    {
+      "index": 8,
+      "original_center_sha256": "8e0dc633dfff059ccb73cc9bab8b21b26e3df01939e6cb804e46134ff0999c7f",
+      "panel": "heldout",
+      "taxon": "Eucalyptus globulus"
+    },
+    {
+      "index": 9,
+      "original_center_sha256": "1318f10d4a96c7b958623c8aaaa691f7248ac0c0f80bb8a8124048b15bb4e0ff",
+      "panel": "heldout",
+      "taxon": "Abies lasiocarpa"
+    },
+    {
+      "index": 10,
+      "original_center_sha256": "2bf429a01a9fc8c93931b59b5ed42882177460a198ef543838746e8f8261a623",
+      "panel": "heldout",
+      "taxon": "Eucalyptus delegatensis"
+    },
+    {
+      "index": 11,
+      "original_center_sha256": "17c6b22f8e9a5cfbce5efbfca374ee045c3e418b5d537aaf3ff6d0ab048bf2c3",
+      "panel": "heldout",
+      "taxon": "Larix laricina"
+    }
+  ],
+  "taxa_total": 59,
+  "unique_spatial_center_hashes": 59,
+  "unique_taxon_names": 59
+}

@@ -1,0 +1,103 @@
+name: "Repaired GBIF reference47 pre-D eligibility, no paired-source D"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths: ['config/gbif_repaired_reference47_preD_launch_v1.json']
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: gbif-repaired-reference47-preD
+  cancel-in-progress: false
+jobs:
+  eligibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - id: auth
+        name: Require signed 47 reference fit artifacts and no opened q95
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p 'test_gbif_repaired_reference47_preD_v1.py' -v
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess
+          a=json.loads(pathlib.Path('config/gbif_repaired_reference47_preD_launch_v1.json').read_text())
+          raw=pathlib.Path('results/gbif_repaired_reference47_fit_audit_v1.json').read_bytes()
+          audit=json.loads(raw)
+          assert a['status']=='SIGNED_REPAIRED_REFERENCE47_FITS_VERIFIED_PREFLIGHT_PRE_D_ONLY'
+          assert hashlib.sha256(raw).hexdigest()==a['fit_audit_sha256']
+          assert audit['status']=='ALL_47_REPAIRED_REFERENCE_SOURCE_FITS_INTEGRITY_VERIFIED_NO_Q95'
+          assert audit['reference_taxa_verified']==47 and audit['fit_cells_expected']==2256
+          assert audit['calibration_24_q95_opened'] is False
+          assert audit['heldout12_paired_discordance_opened'] is False
+          assert a['reference_q95_opened'] is False and a['heldout12_opened'] is False
+          assert a['empirical_ledger_increment']==0
+          rid=a['reference47_fit_run_id']
+          run=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{rid}"],text=True))
+          assert run['status']=='completed' and run['conclusion']=='success'
+          assert run['head_sha']==a['reference47_fit_run_sha']
+          assert run['head_branch']=='analysis/neon-external-truth-preflight-20261115'
+          arts=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{rid}/artifacts?per_page=100"],text=True))['artifacts']
+          labels={f'gbif-repaired-reference47-fit-taxon-{i}':str(i) for i in range(47)}
+          selected=[x for x in arts if x['name'] in labels]
+          assert len(selected)==47 and len({x['name'] for x in selected})==47
+          assert all(not x['expired'] and x['digest'] for x in selected)
+          assert {labels[x['name']]:{'id':x['id'],'digest':x['digest']} for x in selected}==a['source_fit_artifacts']
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as f:
+              f.write(f'run_id={rid}\n')
+          print('47 restored GBIF reference artifacts verified; no paired data opened')
+          PY
+      - name: Install reference adequacy dependencies
+        run: python -m pip install -q numpy pandas pyarrow
+      - uses: actions/download-artifact@v4
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.auth.outputs.run_id }}
+          pattern: gbif-repaired-reference47-fit-taxon-*
+          path: source_fits
+          digest-mismatch: error
+      - name: Apply reviewed original adequacy pre-D method unchanged
+        env:
+          PYTHONPATH: '.:legacy/pre_level_a_focus'
+        run: |
+          python scripts/audit_gbif_repaired_reference47_preD_v1.py \
+            --input-root source_fits \
+            --source-fit-audit results/gbif_repaired_reference47_fit_audit_v1.json \
+            --out results/gbif_repaired_reference47_preD_feasibility_v1.json
+      - name: Block premature q95 and heldout claims
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open('results/gbif_repaired_reference47_preD_feasibility_v1.json'))
+          assert x['result_version']=='284b.gbif_repaired_reference47_preD_feasibility.v1'
+          assert x['candidate_pair_cells']==1128 and x['reference_cells_expected']==24
+          assert x['minimum_eligible_taxa_per_procedure_M']==30
+          for k in ('paired_prediction_surfaces_read','schoener_d_computed',
+                    'reference_ceiling_computed','reference_q95_recalibrated',
+                    'heldout_12_paired_discordance_read','heldout12_repaired_sensitivity_opened'):
+              assert x[k] is False,k
+          assert x['empirical_ledger_increment']==0 and x['submission_status']=='HOLD'
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gbif-repaired-reference47-preD-feasibility
+          path: results/gbif_repaired_reference47_preD_feasibility_v1.json
+          if-no-files-found: error
+          retention-days: 45
+      - name: Archive metadata, keep paired-source D and q95 closed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_reference47_preD_feasibility_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive restored-GBIF reference47 adequacy gate before q95"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

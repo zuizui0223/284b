@@ -1,0 +1,19 @@
+{
+  "schema": "284b.gbif_original_reference47_geometry_scaleout_authorization.v1",
+  "status": "PILOT_VERIFIED_REFERENCE47_GEOMETRY_REPLAY_ONLY",
+  "reference_taxa": 47,
+  "portable_pilot_reference_index": 1,
+  "portable_pilot_run_id": 44302274720,
+  "portable_pilot_run_sha": "99ec72025bd832501dcce2d998ed799bd5f3c10a",
+  "portable_pilot_artifact_id": 14428676711,
+  "portable_pilot_artifact_digest": "sha256:7d99bb7717afeece405590d2a9e380ecfffd6cf2dab571607c4763682b56ca5e",
+  "portable_pilot_sha256": "5bddba6273b409e4732c7d1f713cf737209f9c7c4290f0de12c31d7aea4675d2",
+  "original_reference_manifest": "config/gbif_original_reference47_geometry_manifest_v1.json",
+  "historical_source_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "verification": "all 47 original 12-block center arrays must reproduce the original 9705-object signed source and frozen core19 center SHA",
+  "no_model_fit": true,
+  "no_q95": true,
+  "no_paired_discordance": true,
+  "no_heldout_outcome": true,
+  "empirical_ledger_increment": 0
+}

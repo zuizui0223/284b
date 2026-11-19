@@ -18,12 +18,23 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - name: Verify reference47 1-taxon portable pilot and original SHA conservation
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           python -m unittest discover -s tests -p 'test_gbif_original_reference47_geometry_v1.py' -v
           python -m unittest discover -s tests -p 'test_gbif_original_reference47_geometry_aggregate_v1.py' -v
           python - <<'PY'
-          import json,pathlib
+          import json,pathlib,os,subprocess
           s=json.loads(pathlib.Path('config/gbif_original_reference47_geometry_scaleout_v1.json').read_text())
+          run=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{s['portable_pilot_run_id']}"],text=True))
+          assert run['status']=='completed' and run['conclusion']=='success'
+          assert run['head_sha']==s['portable_pilot_run_sha']
+          assert run['head_branch']=='analysis/neon-external-truth-preflight-20261115'
+          arts=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{run['id']}/artifacts?per_page=100"],text=True))['artifacts']
+          matching=[a for a in arts if a['name']=='gbif-reference47-geometry-portable-index1-pilot']
+          assert len(matching)==1 and not matching[0]['expired']
+          assert matching[0]['id']==s['portable_pilot_artifact_id']
+          assert matching[0]['digest']==s['portable_pilot_artifact_digest']
           p=json.loads(pathlib.Path('results/gbif_original_reference47_geometry_pilot_index1_v1.json').read_text())
           old=json.loads(pathlib.Path('results/gbif_original_reference_Abies_grandis_centers_v1.json').read_text())
           m=json.loads(pathlib.Path('config/gbif_original_reference47_geometry_manifest_v1.json').read_text())

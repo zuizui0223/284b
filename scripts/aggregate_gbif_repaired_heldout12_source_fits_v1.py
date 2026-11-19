@@ -44,7 +44,6 @@ def check_inputs(manifest,geometry,source_audit):
     return e,g,raw
 
 def audit_one(entry,geometry,source,contract,inventory,prediction):
-    import numpy as np,pandas as pd
     i=entry["index"]
     require(contract.get("result_version")==FIT_RESULT
             and contract.get("panel")=="heldout"
@@ -99,6 +98,7 @@ def audit_one(entry,geometry,source,contract,inventory,prediction):
             "Heldout source model signed sealed/unresolved totals mismatch")
     require(prediction.is_file() and hashlib.sha256(prediction.read_bytes()).hexdigest()==contract["prediction_surface_sha256"],
             "Repaired heldout prediction score file digest mismatch")
+    import numpy as np,pandas as pd
     score=pd.read_parquet(prediction)
     needed={"source","M_km","procedure","comparison_row_id","ecological_score"}
     require(needed.issubset(score.columns),"Heldout source prediction schema incomplete")

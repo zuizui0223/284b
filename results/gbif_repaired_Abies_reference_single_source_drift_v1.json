@@ -1,0 +1,47 @@
+{
+  "NEON_field_outcomes_read": false,
+  "cross_source_paired_discordance_computed": false,
+  "empirical_ledger_increment": 0,
+  "full_repaired_12taxon_endpoint_opened": false,
+  "historical_original_core19_frame_SHA256_by_M": {
+    "150": "87ed7254cb0fd21f996ead64ed95e51f92d64021d145b2c50b092c227c06c578",
+    "300": "4b07eafa24a70643d0b21eaddd82d52514affd3797ad75349a28a6419cc347c0",
+    "500": "6dfb33886ea8c5e795646d3cd229cdb19df49568392f74cb8ea977eddb0760cc"
+  },
+  "historical_source_fit_SHA256": "sha256:9a817480d8f023246fe3dc9fedee01a6bf4e95a05418d854937610d78e58c99b",
+  "limitations": [
+    "Single predeclared taxon (n=1); 48 correlated source-cell comparisons, no independent taxa.",
+    "Original and repaired within-source predictions are evaluated on identical frozen background rows and original spatial block centers.",
+    "Comparing each source with itself across two versions is not a test of between-source coherence or biological truth.",
+    "The all-47 repaired q95 and 12-taxon heldout sensitivity remain separate and uncomputed."
+  ],
+  "original_level_A_0_of_12_unchanged": true,
+  "original_reference_taxon_index": 1,
+  "paired_source_reference_discordance_opened": false,
+  "repaired_47taxon_q95_calibrated": false,
+  "repaired_model_prediction_SHA256": "5f7bff07e1b06c75cba1058a19b02b57f40c101eaaf4ca55c7560b452bbc5566",
+  "schema": "284b.gbif_repaired_Abies_reference_original_center_single_source_prediction_drift.v1",
+  "source_cells_expected": 48,
+  "source_cells_safely_comparable": 48,
+  "source_mode_summaries": {
+    "HUMAN_OBSERVATION": {
+      "cells_expected": 24,
+      "comparable": 24,
+      "median_tv_when_comparable": 0.0016867607414912155,
+      "unresolved": 0
+    },
+    "PRESERVED_SPECIMEN": {
+      "cells_expected": 24,
+      "comparable": 24,
+      "median_tv_when_comparable": 0.009603642674858588,
+      "unresolved": 0
+    }
+  },
+  "source_modes": [
+    "PRESERVED_SPECIMEN",
+    "HUMAN_OBSERVATION"
+  ],
+  "status": "reference_one_taxon_within_source_prediction_drift_only",
+  "taxon": "Abies grandis",
+  "unresolved_source_cells": 0
+}

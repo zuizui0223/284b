@@ -1,0 +1,31 @@
+{
+  "center_npy_sha256": "e44a82ad12803d547f8e401ad87f87f30fd9a477aff4b24f0d9d05886545e704",
+  "empirical_ledger_increment": 0,
+  "historical_source_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "historical_source_parquet_count": 9705,
+  "historical_specieskey": "GX2B",
+  "neon_field_outcomes_read": false,
+  "original_center_sha256": "b9a5db3a5e0324abfdd38626727c170911cfc8994321eb0d24e6d995cd088a15",
+  "original_comparison_frame_sha256_by_M": {
+    "150": "38f2385c78cc56ab988b76830dfbb7783474e91795e8a44bcf8370d7a47203c5",
+    "300": "d05a4d394cfd7e8ec6b6b87b6d4ea22b054b4b22fe177a4b7b647a52be9e8771",
+    "500": "7c56010831f4982bf855b6ad15060baa8f6c45222ecb1c66a988b21b68cd96e5"
+  },
+  "original_fit_artifact_id": 10089523542,
+  "original_pooled_geometry_cells": 6932,
+  "original_qualification_artifact_id": 10065445666,
+  "original_source_thinned_counts": {
+    "HUMAN_OBSERVATION": 4516,
+    "PRESERVED_SPECIMEN": 3285
+  },
+  "paired_discordance_computed": false,
+  "reconstructed_center_sha256": "b9a5db3a5e0324abfdd38626727c170911cfc8994321eb0d24e6d995cd088a15",
+  "reference_q95_opened": false,
+  "repaired_heldout_endpoint_opened": false,
+  "repaired_model_fit_performed": false,
+  "schema": "284b.gbif_original_heldout12_center_reconstruction.v1",
+  "source_rows_or_coordinates_exported": false,
+  "status": "ORIGINAL_SIGNED_HELDOUT_GEOMETRY_EXACTLY_REPRODUCED",
+  "taxon": "Artemisia tridentata",
+  "taxon_index": 0
+}

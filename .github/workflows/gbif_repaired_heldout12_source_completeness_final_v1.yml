@@ -1,0 +1,246 @@
+name: "One-shot repaired-GBIF source-completeness 12-heldout sensitivity"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths: ['config/gbif_repaired_heldout12_final_launch_v1.json']
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: gbif-repaired-20260801-heldout12-one-shot-sensitivity
+  cancel-in-progress: false
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    outputs:
+      reference_run: ${{ steps.gate.outputs.reference_run }}
+      heldout_run: ${{ steps.gate.outputs.heldout_run }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - id: gate
+        name: Require SHA-pinned 47-reference q95 and 12-source fits, and original 0/12 historical receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p 'test_gbif_repaired_heldout12_source_completeness_v1.py' -v
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess
+          if os.environ.get('GITHUB_RUN_ATTEMPT')!='1':
+              raise RuntimeError('Postfreeze source-completeness sensitivity is one-shot; rerun forbidden')
+          launch=json.loads(pathlib.Path('config/gbif_repaired_heldout12_final_launch_v1.json').read_text())
+          assert launch['status']=='SIGNED_REPAIRED_REFERENCE47_Q95_AND_HELDOUT12_AUTHORIZE_SOURCE_SENSITIVITY_ONCE'
+          assert launch['endpoint_id']=='gbif_20260801_restored510_historical_levelA_source_sensitivity_v1'
+          assert launch['original_12taxon_universe_frozen'] and launch['original_24_reference_cells_frozen']
+          assert launch['new_independent_ecological_confirmation'] is False
+          assert launch['empirical_ledger_increment']==0
+          assert launch['one_shot'] is True and launch['M_or_taxa_reselection_allowed'] is False
+
+          files=[
+              ('reference_summary_sha256','results/gbif_repaired_reference47_q95_summary_v1.json'),
+              ('reference_table_sha256','results/gbif_repaired_reference47_q95_ceiling_v1.csv'),
+              ('reference_fit_audit_sha256','results/gbif_repaired_reference47_fit_audit_v1.json'),
+              ('heldout_fit_audit_sha256','results/gbif_repaired_heldout12_fit_audit_v1.json'),
+          ]
+          for field,path in files:
+              observed=hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()
+              if observed!=launch[field]:raise RuntimeError(f'Signed final source digest changed: {path}')
+          ref=json.loads(pathlib.Path(files[0][1]).read_text())
+          rf=json.loads(pathlib.Path(files[2][1]).read_text())
+          hf=json.loads(pathlib.Path(files[3][1]).read_text())
+          orig=json.loads(pathlib.Path('results/product_b_same_target_core19_v0_4_heldout_final_receipt.json').read_text())
+          assert ref['reference_cells_frozen']==24 and ref['reference_cells_unresolved']==0
+          assert ref['minimum_distinct_calibration_taxa_per_reference_cell']==30
+          assert ref['heldout12_repaired_source_outcomes_opened'] is False
+          assert rf['reference_taxa_verified']==47 and rf['fit_cells_expected']==2256
+          assert hf['heldout_taxa_verified']==12 and hf['source_fit_cells_expected']==576
+          assert orig['heldout']['paired_prediction_surfaces_opened_cells']==283
+          assert orig['heldout']['paired_crosscheck_attention_required']==0
+          assert orig['do_not_recount_same_endpoint'] is True
+          assert launch['original_final_artifact_id']==orig['final_artifact']['id']
+          assert launch['original_final_artifact_digest']==orig['final_artifact']['digest']
+
+          def verified_artifacts(rid,headsha,prefix,n,expected):
+              run=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{rid}"],text=True))
+              assert run['status']=='completed' and run['conclusion']=='success'
+              assert run['head_branch']=='analysis/neon-external-truth-preflight-20261115'
+              assert run['head_sha']==headsha
+              arts=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{rid}/artifacts?per_page=100"],text=True))['artifacts']
+              ids={f'{prefix}{i}':str(i) for i in range(n)}
+              matches=[a for a in arts if a['name'] in ids]
+              assert len(matches)==n and len({a['name'] for a in matches})==n
+              assert all(not a['expired'] and a['digest'] for a in matches)
+              assert {ids[a['name']]:{'id':a['id'],'digest':a['digest']} for a in matches}==expected
+              return arts
+          ref_run=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{launch['reference_q95_run_id']}"],text=True))
+          assert ref_run['status']=='completed' and ref_run['conclusion']=='success'
+          assert ref_run['head_branch']=='analysis/neon-external-truth-preflight-20261115'
+          assert ref_run['head_sha']==launch['reference_q95_run_sha']
+          refarts=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{ref_run['id']}/artifacts?per_page=100"],text=True))['artifacts']
+          refmatch=[a for a in refarts if a['name']=='gbif-repaired-reference47-24q95-no-heldout']
+          assert len(refmatch)==1 and not refmatch[0]['expired']
+          assert refmatch[0]['id']==launch['reference_q95_artifact_id']
+          assert refmatch[0]['digest']==launch['reference_q95_artifact_digest']
+          verified_artifacts(
+              launch['heldout12_fit_run_id'],launch['heldout12_fit_run_sha'],
+              'gbif-repaired-heldout12-fit-taxon-',12,launch['heldout12_fit_artifacts']
+          )
+          original_run=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{orig['final_run_id']}"],text=True))
+          assert original_run['status']=='completed' and original_run['conclusion']=='success'
+          assert original_run['head_sha']==orig['final_run_head_sha']
+          artifacts=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{original_run['id']}/artifacts?per_page=100"],text=True))['artifacts']
+          exact=[a for a in artifacts if a['name']==orig['final_artifact']['name']]
+          assert len(exact)==1 and not exact[0]['expired']
+          assert exact[0]['id']==orig['final_artifact']['id'] and exact[0]['digest']==orig['final_artifact']['digest']
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as f:
+              f.write(f"reference_run={launch['reference_q95_run_id']}\nheldout_run={launch['heldout12_fit_run_id']}\n")
+          print('All 24 reference q95 cells, exact 12 heldout fits and signed original 283/288 historic cells authorized')
+          PY
+
+  evaluate-once:
+    needs: authorize
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install unchanged original heldout classification and Parquet dependencies
+        run: python -m pip install -q numpy pandas pyarrow
+      - uses: actions/download-artifact@v4
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.heldout_run }}
+          pattern: gbif-repaired-heldout12-fit-taxon-*
+          path: restored_heldout_models
+          digest-mismatch: error
+      - uses: actions/download-artifact@v4
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.reference_run }}
+          name: gbif-repaired-reference47-24q95-no-heldout
+          path: reference_q95_artifact
+          digest-mismatch: error
+      - name: Download original signed historical endpoint, never substitute newly selected taxa
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p historical_endpoint
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess,zipfile
+          r=json.loads(pathlib.Path('results/product_b_same_target_core19_v0_4_heldout_final_receipt.json').read_text())
+          launch=json.loads(pathlib.Path('config/gbif_repaired_heldout12_final_launch_v1.json').read_text())
+          out='/tmp/signed_original_heldout12_final.zip'
+          with open(out,'wb') as f:
+              subprocess.run(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{launch['original_final_artifact_id']}/zip"],stdout=f,check=True)
+          assert 'sha256:'+hashlib.sha256(pathlib.Path(out).read_bytes()).hexdigest()==launch['original_final_artifact_digest']
+          with zipfile.ZipFile(out) as z:z.extractall('historical_endpoint')
+          original=list(pathlib.Path('historical_endpoint').rglob('core19_heldout_final_cells.csv'))
+          assert len(original)==1
+          assert hashlib.sha256(original[0].read_bytes()).hexdigest()==r['cells_sha256']
+          pathlib.Path('/tmp/historical_288_cells_path.txt').write_text(str(original[0].resolve()))
+          print('Original 283/288 source-paired heldout cells independently SHA-verified')
+          PY
+      - name: Resolve exact q95 reference artifact table paths and verify source SHA
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib
+          base=pathlib.Path('reference_q95_artifact')
+          paths=[
+             ('gbif_repaired_reference47_q95_summary_v1.json','/tmp/restored_q95_summary_path.txt'),
+             ('gbif_repaired_reference47_q95_ceiling_v1.csv','/tmp/restored_q95_table_path.txt')
+          ]
+          cfg=json.loads(pathlib.Path('config/gbif_repaired_heldout12_final_launch_v1.json').read_text())
+          for filename,txt in paths:
+              found=list(base.rglob(filename))
+              assert len(found)==1,found
+              expected=cfg['reference_summary_sha256'] if filename.endswith('.json') else cfg['reference_table_sha256']
+              assert hashlib.sha256(found[0].read_bytes()).hexdigest()==expected
+              pathlib.Path(txt).write_text(str(found[0].resolve()))
+          PY
+      - name: Freeze repaired-source signed source manifest before first heldout pairing
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          a=json.loads(pathlib.Path('config/gbif_repaired_heldout12_final_launch_v1.json').read_text())
+          source={
+             'endpoint':'gbif_20260801_restored510_historical_levelA_source_sensitivity_v1',
+             'original_historical_source_manifest_sha256':'1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e',
+             'repaired_source_manifest':'2026-08-01_10215_parquet_objects',
+             'reference_q95_run_id':a['reference_q95_run_id'],
+             'reference_q95_artifact_id':a['reference_q95_artifact_id'],
+             'reference_q95_artifact_digest':a['reference_q95_artifact_digest'],
+             'heldout12_fit_run_id':a['heldout12_fit_run_id'],
+             'heldout12_fit_artifacts':a['heldout12_fit_artifacts'],
+             'original_final_artifact_id':a['original_final_artifact_id'],
+             'original_final_artifact_digest':a['original_final_artifact_digest'],
+             'independent_biological_replication':False,
+             'historical_endpoint_replaced':False,
+             'process_knockout_opened':False,
+          }
+          pathlib.Path('source_manifest.json').write_text(json.dumps(source,indent=2,sort_keys=True)+'\n')
+          PY
+      - name: Open original 12 taxa under repaired 24 q95 once, with all 283 original opened cells required for robustness
+        env:
+          PYTHONPATH: '.:legacy/pre_level_a_focus'
+        run: |
+          python scripts/evaluate_gbif_repaired_heldout12_source_completeness_v1.py \
+            --input-root restored_heldout_models \
+            --ref-summary "$(cat /tmp/restored_q95_summary_path.txt)" \
+            --ref-table "$(cat /tmp/restored_q95_table_path.txt)" \
+            --ref-fit-audit results/gbif_repaired_reference47_fit_audit_v1.json \
+            --heldout-fit-audit results/gbif_repaired_heldout12_fit_audit_v1.json \
+            --original-receipt results/product_b_same_target_core19_v0_4_heldout_final_receipt.json \
+            --original-cells "$(cat /tmp/historical_288_cells_path.txt)" \
+            --source-manifest source_manifest.json \
+            --out-cells results/gbif_repaired_heldout12_sensitivity_cells_v1.csv \
+            --out-final results/gbif_repaired_heldout12_sensitivity_v1.json
+      - name: Retrospective source sensitivity is not a new independent biological endpoint
+        run: |
+          python - <<'PY'
+          import json
+          c=json.load(open('results/gbif_repaired_heldout12_sensitivity_v1.json'))
+          assert c['result_version']=='284b.gbif_repaired_source_completeness_heldout12_sensitivity.v1'
+          assert c['terminal_class']=='postfreeze_source_completeness_sensitivity'
+          assert c['heldout_cells_expected']==c['heldout_cells_audited']==288
+          assert c['reference_cells_frozen']==24
+          assert c['historical_heldout_opened_cells']==283
+          assert c['paired_prediction_surfaces_opened_cells']+c['paired_prediction_surfaces_kept_closed_cells']==288
+          assert c['historical_result_replaced'] is False
+          assert c['source_completeness_is_new_independent_replication'] is False
+          assert c['counts_as_empirical_evidence'] is False
+          assert c['counts_as_empirical_conclusion'] is False
+          assert c['empirical_ledger_increment']==0
+          assert c['submission_status']=='HOLD_FOR_SENSITIVITY_REVIEW'
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gbif-repaired-20260801-heldout12-source-completeness-sensitivity
+          path: |
+            results/gbif_repaired_heldout12_sensitivity_cells_v1.csv
+            results/gbif_repaired_heldout12_sensitivity_v1.json
+            source_manifest.json
+          retention-days: 45
+          if-no-files-found: error
+      - name: Preserve explicit retrospective result and keep historic endpoint unchanged
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_heldout12_sensitivity_cells_v1.csv
+          git add results/gbif_repaired_heldout12_sensitivity_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive original 0-of-12 repaired-GBIF source-completeness sensitivity without evidence recount"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

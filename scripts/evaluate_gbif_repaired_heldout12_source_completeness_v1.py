@@ -239,6 +239,9 @@ def main():
     robust_to_source_completeness=coverage["robust"]
     base.update({
       "result_version":FINAL_RESULT,
+      "endpoint_id":"gbif_20260801_restored510_historical_levelA_source_sensitivity_v1",
+      "reference_result_version":REFERENCE_RESULT,
+      "heldout_fit_result_version":HELDOUT_RESULT,
       "terminal_class":"postfreeze_source_completeness_sensitivity",
       "source_arm":"repaired_2026-08-01_10215_parquet_files",
       "historical_source_arm":"original_2026-08-01_9705_parquet_files",
@@ -273,9 +276,23 @@ def main():
       "claim_strength":"retrospective_upstream_source_completeness_robustness_not_new_independent_biological_confirmation",
     })
     base["status"]=coverage["status"]
+    fingerprint_data={
+        "endpoint_id":base["endpoint_id"],
+        "result_version":FINAL_RESULT,
+        "cells_sha256":base["cells_sha256"],
+        "source_manifest_sha256":hashlib.sha256(a.source_manifest.read_bytes()).hexdigest(),
+        "reference_summary_sha256":base["reference_summary_sha256"],
+        "reference_table_sha256":base["reference_table_sha256"],
+        "reference_fit_audit_sha256":base["postfreeze_reference_fit_audit_sha256"],
+        "heldout_fit_audit_sha256":base["postfreeze_heldout_fit_audit_sha256"],
+        "historical_288_cells_sha256":base["historical_signed_288_cells_sha256"],
+        "historical_endpoint_fingerprint":historical["final_endpoint_fingerprint"],
+        "historical_cells_retained":base["historical_original_opened_cells_retained"],
+        "taxa_with_attention":base["repaired_heldout_taxa_with_attention"],
+        "status":base["status"],
+    }
     base["final_endpoint_fingerprint"]=hashlib.sha256(
-        (base["cells_sha256"]+base["reference_summary_sha256"]+
-         base["reference_table_sha256"]+historical["final_endpoint_fingerprint"]).encode("utf-8")
+        json.dumps(fingerprint_data,sort_keys=True,separators=(",",":")).encode("utf-8")
     ).hexdigest()
     a.out_final.write_text(json.dumps(base,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     print(json.dumps({k:base[k] for k in ("result_version","terminal_class","status",

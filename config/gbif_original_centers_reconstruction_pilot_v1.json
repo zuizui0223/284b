@@ -1,0 +1,33 @@
+{
+  "schema": "284b.gbif_missing20_original_center_reconstruction_pilot.v1",
+  "status": "PREDECLARED_HISTORICAL_SOURCE_GEOMETRY_TEST_ONLY",
+  "taxon": "Artemisia tridentata",
+  "taxon_index": 0,
+  "snapshot_date": "2026-08-01",
+  "historical_parquet_count": 9705,
+  "historical_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "preflight_frame_artifact_id": 10065445666,
+  "preflight_frame_artifact_digest": "sha256:85b9f7e349ca07ba007d43b72ef5a7ab8524688039b9737b4034508b8f3f4bc5",
+  "expected_original_common_geometry_cells": 6932,
+  "expected_original_12block_centers_sha256": "b9a5db3a5e0324abfdd38626727c170911cfc8994321eb0d24e6d995cd088a15",
+  "expected_source_thinned_counts": {
+    "PRESERVED_SPECIMEN": 3285,
+    "HUMAN_OBSERVATION": 4516
+  },
+  "source_code": "scripts/run_same_target_layer1_baseline_fit_taxon.py",
+  "spatial_partition_code": "sdmr.validation.make_presence_spatial_partition",
+  "fixed_sdmr_commit": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+  "comparison_frame_m_km": [
+    150,
+    300,
+    500
+  ],
+  "comparison_rows_each": 2000,
+  "output_center_npy_artifact_only": true,
+  "no_biological_prediction_scored": true,
+  "no_q95_reference_opened": true,
+  "no_new_empirical_endpoint": true,
+  "no_NEON_plot_labels_read": true,
+  "empirical_ledger_increment": 0,
+  "stop": "Source hash, signed 0.05-degree thinned counts, 6932 pooled geometry cells and exact old block centers float64 SHA must all match before any fixed-geometry refit."
+}

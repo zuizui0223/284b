@@ -1,0 +1,58 @@
+name: "Verify SHA-sealed original 59-taxon source geometry, no model outcome"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'scripts/verify_gbif_original_59taxon_geometry_lock_v1.py'
+      - 'tests/test_gbif_original_59taxon_geometry_lock_v1.py'
+      - '.github/workflows/gbif_original_59taxon_geometry_lock_v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: gbif-original-59taxon-geometry-lock
+  cancel-in-progress: false
+jobs:
+  original-59-lock:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify reference47 and heldout12 original source and geometry provenance
+        run: |
+          python -m unittest discover -s tests -p 'test_gbif_original_59taxon_geometry_lock_v1.py' -v
+          python scripts/verify_gbif_original_59taxon_geometry_lock_v1.py \
+            --reference results/gbif_original_reference47_geometry_complete_v1.json \
+            --heldout results/gbif_original_heldout12_geometry_complete_v1.json \
+            --out results/gbif_original_59taxon_geometry_lock_v1.json
+      - name: Require exact 59, original 9705-file source, zero independent empirical endpoints
+        run: |
+          python - <<'PY'
+          import json
+          s=json.load(open('results/gbif_original_59taxon_geometry_lock_v1.json'))
+          assert s['status']=='59_ORIGINAL_HISTORICAL_GEOMETRIES_SIGNED_DISJOINT_NO_REPAIRED_OUTCOMES'
+          assert s['reference_taxa_original_spatial_geometry_complete']==47
+          assert s['heldout_taxa_original_spatial_geometry_complete']==12
+          assert s['taxa_total']==59
+          assert s['unique_taxon_names']==59 and s['unique_spatial_center_hashes']==59
+          assert s['original_reference_and_heldout_no_taxon_overlap'] is True
+          assert s['repaired_reference_source_model_refits_verified'] is False
+          assert s['repaired_heldout_source_model_refits_verified'] is False
+          assert s['repaired_reference_q95_recalibrated'] is False
+          assert s['repaired_heldout_paired_D_opened'] is False
+          assert s['independent_biological_replication'] is False
+          assert s['empirical_ledger_increment']==0 and s['submission_status']=='HOLD'
+          PY
+      - name: Archive source-only geometry provenance receipt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_original_59taxon_geometry_lock_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive exact disjoint original 59-taxon spatial geometries"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

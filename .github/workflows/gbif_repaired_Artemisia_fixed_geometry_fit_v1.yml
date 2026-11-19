@@ -1,0 +1,152 @@
+name: "One-taxon repaired GBIF fixed-original-centers model-fit pilot"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'config/gbif_repaired_Artemisia_fixed_geometry_launch_v1.json'
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: gbif-repaired-fixed-centers-Artemisia-pilot-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  signed-repaired-source-fit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Verify launch authorization from successful historical-center source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('config/gbif_repaired_Artemisia_fixed_geometry_launch_v1.json')
+          launch=json.loads(p.read_text(encoding='utf-8'))
+          assert launch['schema']=='284b.gbif_repaired_Artemisia_fixed_geometry_launch.v1'
+          assert launch['state']=='CENTER_HASH_VERIFIED_FIT_PILOT_ONLY'
+          assert launch['historical_12block_centers_sha256']=='b9a5db3a5e0324abfdd38626727c170911cfc8994321eb0d24e6d995cd088a15'
+          assert launch['original_taxon_index']==0 and launch['original_taxon']=='Artemisia tridentata'
+          assert launch['paired_source_D_or_reference_q95_allowed'] is False
+          assert launch['new_empirical_endpoint_count']==0
+          print('single-taxon source-fit contract verified')
+          PY
+          python - <<'PY'
+          import json,os,pathlib,subprocess
+          d=json.loads(pathlib.Path('config/gbif_repaired_Artemisia_fixed_geometry_launch_v1.json').read_text())
+          run=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{d['historical_center_source_run_id']}"],text=True))
+          assert run['status']=='completed' and run['conclusion']=='success'
+          assert run['head_branch']=='analysis/neon-external-truth-preflight-20261115'
+          artifacts=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{run['id']}/artifacts?per_page=100"],text=True))['artifacts']
+          results=[x for x in artifacts if x['name']=='Artemisia-historical-block-centers-pilot']
+          assert len(results)==1 and not results[0]['expired']
+          assert results[0]['id']==d['historical_center_artifact_id']
+          assert results[0]['digest']==d['historical_center_artifact_digest']
+          print('verified completed signed center run and exact artifact',run['id'])
+          PY
+      - name: Install original model/array/Parquet libraries
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check -q -e './sdmr[cloud,parquet,geo]'
+      - name: Preflight Python import path before fetching/replaying any GBIF model records
+        run: |
+          python - <<'PY'
+          import runpy
+          m=runpy.run_path('scripts/fit_gbif_repaired_Artemisia_fixed_original_centers_v1.py',run_name='preflight_not_main')
+          modes,*_=m['_helpers']('heldout')
+          assert modes==('PRESERVED_SPECIMEN','HUMAN_OBSERVATION')
+          print('original source helpers importable from script context')
+          PY
+      - name: Unit test frozen source score comparison and no-paired-D contract
+        run: python -m unittest discover -s integration_tests -p 'test_gbif_repaired_Artemisia_fixed_original_centers_v1.py' -v
+      - name: Download exact historical centers, qualification and original fitted scores
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p prior_centers original_frame
+          python - <<'PY'
+          import json,os,pathlib,subprocess
+          launch=json.loads(pathlib.Path('config/gbif_repaired_Artemisia_fixed_geometry_launch_v1.json').read_text())
+          targets=[
+              (launch['historical_center_artifact_id'],'/tmp/original_centers_pilot.zip',launch['historical_center_artifact_digest']),
+              (10065445666,'/tmp/original_Artemisia_core19_frame.zip','sha256:85b9f7e349ca07ba007d43b72ef5a7ab8524688039b9737b4034508b8f3f4bc5'),
+              (10089523542,'/tmp/original_Artemisia_source_fit.zip','sha256:43ae62899e3a335a00b3ee666f534aee02cfaf9cab517df13d9eb542092350c8')
+          ]
+          import hashlib
+          for artifact,path,expected in targets:
+              with open(path,'wb') as out:
+                  subprocess.run(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{artifact}/zip"],stdout=out,check=True)
+              assert 'sha256:'+hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()==expected
+          PY
+          unzip -qq /tmp/original_centers_pilot.zip -d prior_centers
+          unzip -qq /tmp/original_Artemisia_core19_frame.zip -d original_frame
+          python - <<'PY'
+          import hashlib,json,pathlib
+          import shutil
+          roots=pathlib.Path('prior_centers')
+          receipts=list(roots.rglob('gbif_original_centers_Artemisia_v1.json'))
+          center_paths=list(roots.rglob('Artemisia_original_centers.npy'))
+          assert len(receipts)==len(center_paths)==1, (receipts,center_paths)
+          source=json.loads(receipts[0].read_text())
+          committed=json.loads(pathlib.Path('results/gbif_original_centers_Artemisia_v1.json').read_text())
+          assert source==committed
+          assert source['status']=='historical_Artemisia_center_hash_reconstructed'
+          centers=center_paths[0].read_bytes()
+          assert hashlib.sha256(centers).hexdigest()==source['centers_np_array_SHA256']
+          pathlib.Path('verified_center').mkdir(exist_ok=True)
+          shutil.copyfile(center_paths[0],'verified_center/centers.npy')
+          print('original geometry SHA-256 and metadata receipt exactly match')
+          PY
+      - name: Refit all eight methods and three M with repaired source and original fixed centers
+        run: |
+          python scripts/fit_gbif_repaired_Artemisia_fixed_original_centers_v1.py \
+            --panel heldout \
+            --taxon-index 0 \
+            --core19-frame-dir original_frame \
+            --historical-centers-npy verified_center/centers.npy \
+            --historical-centers-receipt results/gbif_original_centers_Artemisia_v1.json \
+            --chelsa-manifest sdmr/configs/chelsa_v2_1_plant_candidates.csv \
+            --output-dir fit
+      - name: Score within-source source-restoration change only (no cross-mode D)
+        run: |
+          mkdir -p results
+          python scripts/audit_gbif_repaired_Artemisia_single_source_drift_v1.py \
+            --original-fit-zip /tmp/original_Artemisia_source_fit.zip \
+            --repaired-dir fit \
+            --out-json results/gbif_repaired_Artemisia_single_source_drift_v1.json \
+            --out-csv results/gbif_repaired_Artemisia_single_source_drift_cells_v1.csv
+          cp fit/contract.json results/gbif_repaired_Artemisia_fixedcenters_fit_contract_v1.json
+      - name: Preserve source-specific fitted models as archive (not a new Level-A endpoint)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gbif-repaired-Artemisia-fixed-old-geometry-source-fit
+          path: |
+            fit/
+            results/gbif_repaired_Artemisia_single_source_drift_v1.json
+            results/gbif_repaired_Artemisia_single_source_drift_cells_v1.csv
+            results/gbif_repaired_Artemisia_fixedcenters_fit_contract_v1.json
+          if-no-files-found: warn
+          retention-days: 45
+      - name: Commit summary-only source restoration diagnostics, no model binaries
+        if: always()
+        run: |
+          if [ ! -f results/gbif_repaired_Artemisia_single_source_drift_v1.json ]; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_Artemisia_single_source_drift_v1.json
+          git add results/gbif_repaired_Artemisia_single_source_drift_cells_v1.csv
+          git add results/gbif_repaired_Artemisia_fixedcenters_fit_contract_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive 48-cell Artemisia single-source repaired-GBIF fixed-geometry technical pilot"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

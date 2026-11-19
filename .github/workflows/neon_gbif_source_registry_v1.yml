@@ -1,0 +1,47 @@
+name: NEON GBIF source-publisher metadata risk v1
+on:
+  push:
+    branches:
+      - analysis/neon-external-truth-preflight-20261115
+    paths:
+      - 'scripts/audit_neon_gbif_registry_risk_v1.py'
+      - 'tests/test_neon_gbif_registry_risk_v1.py'
+      - 'config/neon_external_metadata_dependency_gate_v2.json'
+      - '.github/workflows/neon_gbif_source_registry_v1.yml'
+permissions:
+  contents: write
+concurrency:
+  group: neon-gbif-registry-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  registry-source-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check registry and non-contamination assertions
+        run: python -m unittest discover -s tests -p 'test_neon_gbif_registry_risk_v1.py' -v
+      - name: Fetch GBIF dataset registry metadata (no occurrence records)
+        run: |
+          python scripts/audit_neon_gbif_registry_risk_v1.py \
+            --out results/neon_gbif_registry_risk_v1.json
+      - name: Archive audit receipt (metadata only)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: neon-gbif-metadata-risk-v1
+          path: results/neon_gbif_registry_risk_v1.json
+          if-no-files-found: warn
+      - name: Commit source risk receipt after synchronizing branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/neon_gbif_registry_risk_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive GBIF publication-path risk for NEON voucher records"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

@@ -1,0 +1,28 @@
+{
+  "NEON_voucher_source_model_overlap_checked": false,
+  "PRESERVED_SPECIMEN_model_reconstruction_mismatch_recorded": true,
+  "cause_of_different_thinned_counts_established": false,
+  "current_citation_sha256": "022a524b59c4c037b28f252c08294e0f22c5eb7b3bce5c52a0a5fc6016f17050",
+  "current_object_count": 10216,
+  "current_object_manifest_sha256": "ca0d9844cd6816b4e4d550a0152db489b5e6a4c5129f8700fe2f1d818b954cd2",
+  "current_parquet_object_count": 10215,
+  "difference": 135,
+  "empirical_ledger_increment": 0,
+  "external_validation_authorized": false,
+  "interpretation": "Matching S3 object metadata only constrains transport drift; it does not prove identical bytes or identical admitted training records. A mismatch means the historical source must be treated as drifted.",
+  "match_checks": {
+    "citation_sha256": true,
+    "object_count": false,
+    "object_manifest_sha256": false,
+    "parquet_count": false
+  },
+  "occurrence_rows_read": false,
+  "original_object_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "reconstruction_nov15_thinned_count": 3420,
+  "reconstruction_original_thinned_count": 3285,
+  "schema": "284b.original_gbif_snapshot_object_integrity_v1",
+  "source_GBIF_monthly_snapshot": "2026-08-01",
+  "source_original_audit": "legacy/pre_level_a_focus/results/product_b_v7_2_snapshot_metadata_freeze_v0_1.json",
+  "species_outcomes_read": false,
+  "status": "SOURCE_SNAPSHOT_OBJECT_DRIFT_STOP"
+}

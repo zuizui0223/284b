@@ -1,0 +1,45 @@
+{
+  "NEON_field_outcomes_read": false,
+  "cross_source_paired_discordance_computed": false,
+  "empirical_ledger_increment": 0,
+  "full_repaired_12taxon_endpoint_opened": false,
+  "historical_original_core19_frame_SHA256_by_M": {
+    "150": "38f2385c78cc56ab988b76830dfbb7783474e91795e8a44bcf8370d7a47203c5",
+    "300": "d05a4d394cfd7e8ec6b6b87b6d4ea22b054b4b22fe177a4b7b647a52be9e8771",
+    "500": "7c56010831f4982bf855b6ad15060baa8f6c45222ecb1c66a988b21b68cd96e5"
+  },
+  "historical_source_fit_SHA256": "sha256:43ae62899e3a335a00b3ee666f534aee02cfaf9cab517df13d9eb542092350c8",
+  "limitations": [
+    "Single predeclared taxon (n=1); 48 correlated source-cell comparisons, no independent taxa.",
+    "Original and repaired within-source predictions are evaluated on identical frozen background rows and original spatial block centers.",
+    "Comparing each source with itself across two versions is not a test of between-source coherence or biological truth.",
+    "The 47-reference repaired q95 and 12-taxon heldout sensitivity remain separate and uncomputed."
+  ],
+  "original_level_A_0_of_12_unchanged": true,
+  "repaired_47taxon_q95_calibrated": false,
+  "repaired_model_prediction_SHA256": "fa46c661fde2a4d751e85153b4aac3623138ae71996b476d734806b64b367f5e",
+  "schema": "284b.gbif_repaired_Artemisia_original_center_single_source_prediction_drift.v1",
+  "source_cells_expected": 48,
+  "source_cells_safely_comparable": 48,
+  "source_mode_summaries": {
+    "HUMAN_OBSERVATION": {
+      "cells_expected": 24,
+      "comparable": 24,
+      "median_tv_when_comparable": 0.018778625727311756,
+      "unresolved": 0
+    },
+    "PRESERVED_SPECIMEN": {
+      "cells_expected": 24,
+      "comparable": 24,
+      "median_tv_when_comparable": 0.012490942512058359,
+      "unresolved": 0
+    }
+  },
+  "source_modes": [
+    "PRESERVED_SPECIMEN",
+    "HUMAN_OBSERVATION"
+  ],
+  "status": "exploratory_within_source_prediction_drift_only",
+  "taxon": "Artemisia tridentata",
+  "unresolved_source_cells": 0
+}

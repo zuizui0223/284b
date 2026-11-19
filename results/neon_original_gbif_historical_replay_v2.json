@@ -1,0 +1,51 @@
+{
+  "GBIF_public_snapshot_date": "2026-08-01",
+  "NEON_plant_dataset_downloaded": false,
+  "NEON_plot_species_outcomes_read": false,
+  "biological_endpoint_opened": false,
+  "current_repaired_s3_parquet_files_EXCLUDED": 510,
+  "empirical_ledger_increment": 0,
+  "frozen_historical_object_manifest_SHA256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "full_external_source_independence_verified": false,
+  "historical_s3_parquet_files_read": 9705,
+  "known_NEON_datasetkey": "3fed506c-d04f-4cd4-b373-bd602572f39b",
+  "known_NEON_training_rows_in_thinned_sources": 2,
+  "original_12taxon_endpoint_unchanged": true,
+  "original_model_counts_recovered": {
+    "HUMAN_OBSERVATION": true,
+    "PRESERVED_SPECIMEN": true
+  },
+  "original_model_expected_source_counts": {
+    "HUMAN_OBSERVATION": 4516,
+    "PRESERVED_SPECIMEN": 3285
+  },
+  "original_specieskey": "GX2B",
+  "possible_other_voucher_publishing_paths_remain": true,
+  "raw_GBIF_coordinates_persisted": false,
+  "raw_GBIF_record_identifiers_persisted": false,
+  "raw_missing_dataset_keys": 0,
+  "schema": "284b.original_GBIF_NEON_datasetkey_historical_replay.v2",
+  "source_counts": {
+    "HUMAN_OBSERVATION": {
+      "distinct_dataset_keys_post_thin": 6,
+      "quality_retained_before_thinning": 15358,
+      "raw_known_NEON_dataset_rows": 0,
+      "raw_scanned_records": 15775,
+      "source_thinned_known_NEON_dataset_rows": 0,
+      "source_thinned_missing_datasetkey_rows": 0,
+      "source_thinned_model_presence_rows": 4516
+    },
+    "PRESERVED_SPECIMEN": {
+      "distinct_dataset_keys_post_thin": 116,
+      "quality_retained_before_thinning": 6480,
+      "raw_known_NEON_dataset_rows": 24,
+      "raw_scanned_records": 11420,
+      "source_thinned_known_NEON_dataset_rows": 2,
+      "source_thinned_missing_datasetkey_rows": 0,
+      "source_thinned_model_presence_rows": 3285
+    }
+  },
+  "status": "SIGNED_SOURCE_INPUTS_RECONSTRUCTED_WITH_KNOWN_NEON_VOUCHER_DATASET_ROWS",
+  "taxon": "Artemisia tridentata",
+  "why_no_external_accuracy_result": "No independently verified source/target leakage exclusions and no authorized plot outcomes have been evaluated."
+}

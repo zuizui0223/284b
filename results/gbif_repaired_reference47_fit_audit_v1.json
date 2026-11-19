@@ -1,0 +1,1153 @@
+{
+  "M_km": [
+    150,
+    300,
+    500
+  ],
+  "calibration_24_q95_opened": false,
+  "empirical_ledger_increment": 0,
+  "fit_cells_expected": 2256,
+  "fit_cells_sealed": 2256,
+  "fit_cells_unresolved": 0,
+  "heldout12_paired_discordance_opened": false,
+  "independent_empirical_biological_evidence": false,
+  "predictor_count": 19,
+  "procedure_count": 8,
+  "reference_taxa_expected": 47,
+  "reference_taxa_verified": 47,
+  "schema": "284b.gbif_repaired_reference47_source_fit_audit.v1",
+  "source_arm": "repaired_2026-08-01_10215_parquet_files",
+  "source_prediction_rows_integrity_verified": 4512000,
+  "status": "ALL_47_REPAIRED_REFERENCE_SOURCE_FITS_INTEGRITY_VERIFIED_NO_Q95",
+  "submission_status": "HOLD",
+  "taxa": [
+    {
+      "historical_key_count": 1,
+      "index": 0,
+      "model_prediction_sha256": "22207f7a83b1c4e5ab1fbc53cf4f70a17c3b18a92fecab8cdc4cf1fe3496ac27",
+      "original_geometry_sha256": "fd3c3fd0b3e6b88bef0caff9d62f0422249c193ca589d2155bbb6b6120ddc361",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 961,
+        "PRESERVED_SPECIMEN": 237
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Abies amabilis",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 1,
+      "model_prediction_sha256": "e0096431d41f1f693957942b14c442d4748fa8ee3757a9cebfe480dd1a05caa9",
+      "original_geometry_sha256": "9eb19bf125fdd06c5e2b9ef901c869c23db6cd9aa88feb1305dffed79ff37f7e",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 6710,
+        "PRESERVED_SPECIMEN": 990
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Abies grandis",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 2,
+      "model_prediction_sha256": "7471628718df46f98de610106fdd24e393108eb7fc20168dae9d01ac471fe509",
+      "original_geometry_sha256": "40e723cb3ffa899a9abc6a522aedb2bf3e670c69208cf21267739bf63b446b35",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 471,
+        "PRESERVED_SPECIMEN": 307
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Abies magnifica",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 3,
+      "model_prediction_sha256": "4a27c91310c191b0fe6b3b6ea480a616d247e94045c622c084f98fc9eec8bf9b",
+      "original_geometry_sha256": "85c7095a12c770625a51f727cc08522506a2ec61650ac353a8715516e5fdd76e",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 2375,
+        "PRESERVED_SPECIMEN": 410
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Abies procera",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 4,
+      "model_prediction_sha256": "9c584e9453b8bce44d36df8b5260f65960065322cd9a57958b94d7244736ef06",
+      "original_geometry_sha256": "457d7fd581bd34d4a57666af9f794b7f2422f943de6d14b27e031a0909e30960",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 1846,
+        "PRESERVED_SPECIMEN": 293
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Abies sibirica",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 5,
+      "model_prediction_sha256": "73643ed08f716f1c1432c8f0dd87421019bba3905d7d86c78683783dd3c71c6d",
+      "original_geometry_sha256": "3287c9e4421c57836501325006cdf1ec85c3b214ef00ba1a62399c41155f13b0",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 9782,
+        "PRESERVED_SPECIMEN": 1515
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Acacia melanoxylon",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 6,
+      "model_prediction_sha256": "0dab0c7b77c0e1dbdb7113f31175a448b22f9cc3eef631a4a5d81a99af0b55ff",
+      "original_geometry_sha256": "e757ed48bd2b9fd1b28e42db052a7c71e968d71ed3603566abe098841ddf1076",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 13590,
+        "PRESERVED_SPECIMEN": 2562
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Acorus calamus",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 7,
+      "model_prediction_sha256": "c79bf769b5d1a285592b393fd0d726a5e33f640a55a2b77e14d1cbcc04c06c0e",
+      "original_geometry_sha256": "e1e0f3647013f60c7308b6b60fcf173e6f4e344e42226cddb2f941e241cb1e29",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 718,
+        "PRESERVED_SPECIMEN": 755
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Aegiceras corniculatum",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 8,
+      "model_prediction_sha256": "292c56267df8d4630bd016ad25dc5b2ed3ed2ac08a69e703b7c533e81f9d01d0",
+      "original_geometry_sha256": "b7f5be9890ab0b833fd8eb5c6dffe571377e5a79b483e685667d178382a3d53e",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 59063,
+        "PRESERVED_SPECIMEN": 4700
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Alisma plantago-aquatica",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 9,
+      "model_prediction_sha256": "7b9ba7a51ad0cbccdec9c68cec5b9476f31cb2b24be90bf54a87d0cc3724cd44",
+      "original_geometry_sha256": "b0c87d972725330fa9fafe36beb40be07fb1f05ae64d156c3e618339b5eee74b",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 1631,
+        "PRESERVED_SPECIMEN": 1138
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Ambrosia dumosa",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 10,
+      "model_prediction_sha256": "ce329eb7ed39b423c88c1dc02a74d6f5084383ec80c30a687631b6686bad5f42",
+      "original_geometry_sha256": "e22ae1ee5a659c47df843fbf99acfb3cd81ba41b17c7b375b2ec680ebd6e989a",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 808,
+        "PRESERVED_SPECIMEN": 697
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Artemisia filifolia",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 11,
+      "model_prediction_sha256": "756d050b3ae051e85c980d5232ef0fa3782140cfc9d8f4b5d8e8efbd59359609",
+      "original_geometry_sha256": "d54064525ff210ac97ae21183a54166a93735e28027a1769c3d08b5326b0aada",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 1016,
+        "PRESERVED_SPECIMEN": 1040
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Atriplex confertifolia",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 12,
+      "model_prediction_sha256": "7191008d8754c44db735c2d282faa092172d1290fe29a9b2af879fbb2239fb84",
+      "original_geometry_sha256": "704fbf19f0fdf37796f67355d39d25b7bb9319ab4782855376802d3c69184a7b",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 540,
+        "PRESERVED_SPECIMEN": 404
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Atriplex lentiformis",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 13,
+      "model_prediction_sha256": "ff7adb4e76e82f0175691f5d81accead72d440de69d28984d0639512fea07f1a",
+      "original_geometry_sha256": "9275b96896f3fffba1b0228f6d61386de2190e867b25fc323e5a62e1f93424e0",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 21860,
+        "PRESERVED_SPECIMEN": 2148
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Butomus umbellatus",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 14,
+      "model_prediction_sha256": "fc54bbef0298950d167be1c1e3d8d43db08bdd698fcbca455424b11f08a140ac",
+      "original_geometry_sha256": "46e0d465d07d10cb4887d11002a67a58ac9fd9eebef31050d3e89c7890bca4b4",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 53069,
+        "PRESERVED_SPECIMEN": 2018
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Carpinus betulus",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 15,
+      "model_prediction_sha256": "26367c2b335ee8b9fe1f903876918771b9ba7638ad981daee6bb974473d68ba5",
+      "original_geometry_sha256": "a1aac6d8318138727f4c75c2eaee4fbba97639ba1c87143b442b41f55ee519a6",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 1258,
+        "PRESERVED_SPECIMEN": 527
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Ceriops tagal",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 16,
+      "model_prediction_sha256": "3d07ed90d230e5367983b5bea34b601178b4dfd199aa5684a0de576b13e83941",
+      "original_geometry_sha256": "ea36231f9c50b90592476ea53df6b51d3950ca8ce73ad0ef61146d7f238b37b0",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 10545,
+        "PRESERVED_SPECIMEN": 973
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Chamaecyparis lawsoniana",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 17,
+      "model_prediction_sha256": "588b3cdb3e14751a18b0f19f0219f8cd31a1657f85928feff4f2292ebb9c0c8b",
+      "original_geometry_sha256": "1dbef0ae16607209990809e4819ba0b68f69afe107b97aafefca9ca1ba881596",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 60546,
+        "PRESERVED_SPECIMEN": 2486
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Cornus sanguinea",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 18,
+      "model_prediction_sha256": "73adf3e93f69da7f7b0f65f9f20e7839c8880feab228e9fcb04dc30b4e0e84cb",
+      "original_geometry_sha256": "9f5dcd1010e30659e33b585a4d3447c5fd81696915b09613227efc25e97897e0",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 744,
+        "PRESERVED_SPECIMEN": 741
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Ephedra nevadensis",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 19,
+      "model_prediction_sha256": "01160ae4b32d57fb3b542081c42c5445cf6924847e518006e5a4def62f5ce618",
+      "original_geometry_sha256": "4f1e963e901d7f27c3c957d64d29a86a38f7918492a70e32375d5afd5a1e9abf",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 1233,
+        "PRESERVED_SPECIMEN": 424
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Eucalyptus baxteri",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 20,
+      "model_prediction_sha256": "3fbfff91e8175af633b0f790e83fa2aa41e08c54118cdedf8151e64ec7abd709",
+      "original_geometry_sha256": "6e851565b8048eb5d7c3d56de183d6f29889f7e20881c64d106ee93e51c5309d",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 207,
+        "PRESERVED_SPECIMEN": 113
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Eucalyptus nitens",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 21,
+      "model_prediction_sha256": "64d32e6897846dab81e944d91973614706ccefe20d90183ae420f17edb3be37e",
+      "original_geometry_sha256": "6571084655c70c535702e99f28b8bf677c5a813d15da00ff6d20e3f8ee6c9a21",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 4379,
+        "PRESERVED_SPECIMEN": 1572
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Eucalyptus viminalis",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 22,
+      "model_prediction_sha256": "4394f2107a5fd4628d5d5ad5d8a5f63daf76c5f65e4af7757ba42f533256dcf7",
+      "original_geometry_sha256": "57351560146c2404f48122d1adaaef29dba5f4cd04ba9f7767bae115fba2700d",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 65052,
+        "PRESERVED_SPECIMEN": 2484
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Euonymus europaeus",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 23,
+      "model_prediction_sha256": "e0f48fe07c7845fdba61b6d7989035ce21624ae967f92e357fb6ddb290a5bd90",
+      "original_geometry_sha256": "bb217dced25c1eb268d8ea53b7da1eba9b3df8f89004666bce8eaa2cca418ae0",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 53872,
+        "PRESERVED_SPECIMEN": 3907
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Geranium dissectum",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 24,
+      "model_prediction_sha256": "34d9b7e99a4739b8a58f40ce034aedd56b19117f44369fe9d90c2607847465d2",
+      "original_geometry_sha256": "a41cbb22d76d3ec4bae97e683b25fe956c2076f9855627408a9bc9eea61f75e4",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 2341,
+        "PRESERVED_SPECIMEN": 2942
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Gutierrezia sarothrae",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 25,
+      "model_prediction_sha256": "df11b4c01040d956c808e760b7a6a172e3b9f93bd69ee634ef36e20b664663cb",
+      "original_geometry_sha256": "e2fc57fdd5401f1ad39b96ff37cdd6de4632e37654767fb201dea52943a121a7",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 8246,
+        "PRESERVED_SPECIMEN": 3954
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Leersia oryzoides",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 26,
+      "model_prediction_sha256": "33d50aee30bec74300017a08baf3bb645f4d1e09aca0077fdf171c2b41af8fd8",
+      "original_geometry_sha256": "0374209e8a91837be7d2ca409cedac28d300765bc2d03dcc435517670eb8cc9d",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 58744,
+        "PRESERVED_SPECIMEN": 2336
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Ligustrum vulgare",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 27,
+      "model_prediction_sha256": "7f8c4476e7a54170743462b1e9bcb4cd61b8fb2aaf28d14bcc1808427dc057ee",
+      "original_geometry_sha256": "01b73bd74bfb63ddea7a8b91bc855422cfb96c56ba47f87e80b40132e6eb9cce",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 548,
+        "PRESERVED_SPECIMEN": 505
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Lumnitzera racemosa",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 28,
+      "model_prediction_sha256": "d5204bd208698238330f5e367c1eaa8ecbf1e7d9eb9ecf71397a77424faa9ec2",
+      "original_geometry_sha256": "2693ae971f82f814b76063389c62e52e1f0b0af8c01a6ccab5ac4e3155006f5a",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 22534,
+        "PRESERVED_SPECIMEN": 6002
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Onoclea sensibilis",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 29,
+      "model_prediction_sha256": "4ccfdab7772e2f2e4dd934eca571e0ab0b0363e3df1d4e8496df0cf621a8537c",
+      "original_geometry_sha256": "fa65f7c6f4e8ff9e45d20ae9564afebfbb35e05180cac5adc35f668e5114a1b2",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 4124,
+        "PRESERVED_SPECIMEN": 247
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Picea obovata",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 30,
+      "model_prediction_sha256": "4e2081e57bf1efc250a620f977955c3bdb05fb5d09963c044c506c38b63397da",
+      "original_geometry_sha256": "6fe6a9ec4e91d7a40e9051c2f88351543610d79f1d8766a22810b291d1101333",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 1449,
+        "PRESERVED_SPECIMEN": 964
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Pinus flexilis",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 31,
+      "model_prediction_sha256": "00f9e1de1a32ec542ba7ffcc676ba55b7a493d7e30ad41cf76739f16f825cbad",
+      "original_geometry_sha256": "bd096aaab3e2fdce895ca9c4f8345c154ee1680d88e17dfe949cf130407ba54f",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 6392,
+        "PRESERVED_SPECIMEN": 2414
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Pinus ponderosa",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 32,
+      "model_prediction_sha256": "cdc7bbe4fac1ac9d4fe4ccf89a26c8d3cf4248505791b7e9ddd34c544866c02c",
+      "original_geometry_sha256": "5dfd165adcd27d8208bc097461c3f7db4775d460aab33e393e96720a4015fc6d",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 2294,
+        "PRESERVED_SPECIMEN": 353
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Pinus sibirica",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 33,
+      "model_prediction_sha256": "a05167b4709b5483d174efbafbdfa4b0d5838c5b264d59f5469201611928a909",
+      "original_geometry_sha256": "60d852db585837e0dd23709fe181b5f9e429c8d54b52ba5982db10cb2fd46c10",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 23904,
+        "PRESERVED_SPECIMEN": 2478
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Pinus strobus",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 3,
+      "index": 34,
+      "model_prediction_sha256": "a930b6499ebc90705dab7fc0261c6cf7c30c39d40049f18b4d34a5e90e4268ac",
+      "original_geometry_sha256": "2d544dd884699022838b2b3ae109e37d6368f2f6a290b3d20a844730a0a37688",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 17465,
+        "PRESERVED_SPECIMEN": 1292
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Polystichum setiferum",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 35,
+      "model_prediction_sha256": "89b3b2508a507128819489b4928ba95d1e5961d48bccd6ad51322b31cf935fc6",
+      "original_geometry_sha256": "5d1c023800b845a10c80d5acffbc0f625d90438885e0d2dc5da448277f8e8dce",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 105766,
+        "PRESERVED_SPECIMEN": 3443
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Populus tremula",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 36,
+      "model_prediction_sha256": "394a80b7e61785309ddaf8de9f52ac60b469fffd3458667979c1ad44222ff1ad",
+      "original_geometry_sha256": "3c8d72d67f941da83d11adf6cbc821f4288a1152be13efc450366016c2eae674",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 43196,
+        "PRESERVED_SPECIMEN": 2401
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Quercus petraea",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 37,
+      "model_prediction_sha256": "68cef58ec9fecf68bb133f14fe7c30524a52ca0aefe9604dc4faa2da4ea531c1",
+      "original_geometry_sha256": "601155a67c73214ea49720932eec3cfeb526adafc3187f1e0118d6e4958fb672",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 532,
+        "PRESERVED_SPECIMEN": 431
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Sonneratia alba",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 38,
+      "model_prediction_sha256": "e95bb1b977012d599e088849dc6682576d95785cd1e23c54968f422fe8601516",
+      "original_geometry_sha256": "42fc50a42f133e1fef267f249b06965515ea68dff7afa4edf068d91fed8dc4d4",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 42127,
+        "PRESERVED_SPECIMEN": 4042
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Sparganium erectum",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 39,
+      "model_prediction_sha256": "0e79c85e010f7c03636baf8cc697fa7087c593f8f7c3ea8235331839d2745c27",
+      "original_geometry_sha256": "cd4216ac23c32c7fc4650d9c190bd174f0bc7f6c0a6b778791bc33a3f69427f2",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 46677,
+        "PRESERVED_SPECIMEN": 2952
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Tilia cordata",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 40,
+      "model_prediction_sha256": "a1e88e48adde8981917b7ee039160646938d333dda476b91364c575cb8121958",
+      "original_geometry_sha256": "52e214d899c686f00daafcfa002da1732367512d34d59b6e58c6f9ea51e11f75",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 12078,
+        "PRESERVED_SPECIMEN": 2109
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Tsuga canadensis",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 41,
+      "model_prediction_sha256": "3b79f1001552832f70bc3c74595fdf4ad7ca0ad7e429ccdf10f4dd6e04ef8fad",
+      "original_geometry_sha256": "68c888011ab830e58f3119f5d983f089aadb57c00c0eeb87b55a00f2ec3ff754",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 1554,
+        "PRESERVED_SPECIMEN": 490
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Tsuga mertensiana",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 42,
+      "model_prediction_sha256": "d53730dab90e7ff0a3235f0ec54df3857ea4861e42ad6210fdc521e1af8cd49d",
+      "original_geometry_sha256": "88c4029d6d374edca6e776d36f39595f24f9f000ad7ae989f93a9b3adfeb6480",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 74222,
+        "PRESERVED_SPECIMEN": 9274
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Veronica arvensis",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 2,
+      "index": 43,
+      "model_prediction_sha256": "93c3b93165a9d3fe052b92d59e299ad654242ce3c0a138b1375d853fa4bb75aa",
+      "original_geometry_sha256": "f42759c8cd12e5899d85b90fb4a9c91d004990f1382b700deeb8ba9923596631",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 82229,
+        "PRESERVED_SPECIMEN": 4164
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Viburnum opulus",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 3,
+      "index": 44,
+      "model_prediction_sha256": "b2fa2dca13a89ed688596ffda68b0d3dcc3a4fd1a84a57a20bc6499d53da3c02",
+      "original_geometry_sha256": "78be50d1627d72e89e094426dd1be810b47ad98f88215cf2b30bd872e0c8628f",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 70609,
+        "PRESERVED_SPECIMEN": 5121
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Viola arvensis",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 45,
+      "model_prediction_sha256": "c0ba4fabede3695092d1498e21bf5f6c57836d16d7644125781d8aeb961461d4",
+      "original_geometry_sha256": "0999ac6e57ec5854b3b6f0e477ec03f981a80583f93ed89931068e433ef4dfbf",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 994,
+        "PRESERVED_SPECIMEN": 539
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Woodwardia fimbriata",
+      "unresolved_fit_cells": 0
+    },
+    {
+      "historical_key_count": 1,
+      "index": 46,
+      "model_prediction_sha256": "9320ca6f5f6361d8bd7775274ba7e52c5f4e6dec188f2011d8d2eed24d0bcf90",
+      "original_geometry_sha256": "28fc888a4d5963ce9120b424de3ba63cc93c9943fcaab2255ddf43f3d07345c5",
+      "procedures": [
+        "all|logit_l2_C0.1_degree1",
+        "all|logit_l2_C1_degree2",
+        "niche_forward|logit_l2_C0.1_degree1",
+        "niche_forward|logit_l2_C1_degree2",
+        "predictive_forward|logit_l2_C0.1_degree1",
+        "predictive_forward|logit_l2_C1_degree2",
+        "vif|logit_l2_C0.1_degree1",
+        "vif|logit_l2_C1_degree2"
+      ],
+      "repaired_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 285,
+        "PRESERVED_SPECIMEN": 329
+      },
+      "score_rows_integrity_verified": 96000,
+      "sealed_fit_cells": 48,
+      "taxon": "Xylocarpus granatum",
+      "unresolved_fit_cells": 0
+    }
+  ]
+}

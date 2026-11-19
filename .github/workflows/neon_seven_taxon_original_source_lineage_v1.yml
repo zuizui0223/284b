@@ -1,0 +1,77 @@
+name: "NEON seven fixed taxa: exact historical GBIF training-source lineage"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'config/neon_seven_taxon_gbif_lineage_v1.json'
+      - 'scripts/audit_neon_seven_taxon_original_source_lineage_v1.py'
+      - 'tests/test_neon_seven_taxon_original_source_lineage_v1.py'
+      - '.github/workflows/neon_seven_taxon_original_source_lineage_v1.yml'
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: neon-original-seven-taxon-model-lineage-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  seven-frozen-model-input-sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 58
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Check source-identity and parity stop rules before raw data access
+        run: python -m unittest discover -s tests -p 'test_neon_seven_taxon_original_source_lineage_v1.py' -v
+      - name: Retrieve seven predeclared original model-fit artifacts and check signed inventories
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p build/neon_original_seven_models
+          python - <<'PY'
+          import csv,hashlib,io,json,os,pathlib,subprocess,zipfile
+          cfg=json.loads(pathlib.Path('config/neon_seven_taxon_gbif_lineage_v1.json').read_text())
+          xs=cfg['taxon_inventory']
+          assert len(xs)==7
+          root=pathlib.Path('build/neon_original_seven_models')
+          for e in xs:
+              path=root/f"fit_{e['original_index']}.zip"
+              with path.open('wb') as out:
+                  subprocess.run(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{e['fit_artifact_id']}/zip"],stdout=out,check=True)
+              b=path.read_bytes()
+              assert "sha256:"+hashlib.sha256(b).hexdigest()==e['fit_artifact_digest'],e['taxon']
+              with zipfile.ZipFile(io.BytesIO(b)) as z:
+                  contract=json.loads(z.read('contract.json'))
+                  assert contract['taxon']==e['taxon'] and contract['taxon_index']==e['original_index']
+                  inventory=list(csv.DictReader(z.read('fit_inventory.csv').decode().splitlines()))
+                  assert len(inventory)==48
+                  print(e['taxon'], "ZIP SHA and signed fit inventory qualified",flush=True)
+          PY
+      - name: Recreate frozen original GBIF source admission and verify each signed 48-model input denominator
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check -q -e './sdmr[cloud,parquet,geo]'
+          python scripts/audit_neon_seven_taxon_original_source_lineage_v1.py \
+            --fit-dir build/neon_original_seven_models \
+            --out results/neon_seven_taxon_original_source_lineage_v1.json
+      - name: Preserve provenance-only aggregate receipt, even on scientific stop
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: neon-seven-original-model-source-lineage
+          path: results/neon_seven_taxon_original_source_lineage_v1.json
+          if-no-files-found: warn
+      - name: Archive aggregated source counts only
+        if: always()
+        run: |
+          if [ ! -f results/neon_seven_taxon_original_source_lineage_v1.json ]; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/neon_seven_taxon_original_source_lineage_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive seven-taxon historical NEON source dataset lineage"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

@@ -1,0 +1,1480 @@
+{
+  "NEON_plant_plot_outcomes_read": false,
+  "completed_and_verified_shards": 8,
+  "empirical_ledger_increment": 0,
+  "fixed_taxon_input_deltas": [
+    {
+      "actual_repaired_raw_present_count": 4668,
+      "expected_repaired_raw_present_count": 4668,
+      "historical_specieskeys": [
+        "63Z5D"
+      ],
+      "original_raw_present_count": 4456,
+      "original_signed_fit_artifact_id": 10090324253,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 933,
+        "PRESERVED_SPECIMEN": 232
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 28,
+        "PRESERVED_SPECIMEN": 5
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 19,
+        "PRESERVED_SPECIMEN": 54
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 961,
+        "PRESERVED_SPECIMEN": 237
+      },
+      "restored_510_only_raw_count": 212,
+      "taxon": "Abies amabilis",
+      "taxon_index": 0
+    },
+    {
+      "actual_repaired_raw_present_count": 25180,
+      "expected_repaired_raw_present_count": 25180,
+      "historical_specieskeys": [
+        "2685361",
+        "8KCY"
+      ],
+      "original_raw_present_count": 23629,
+      "original_signed_fit_artifact_id": 10090599087,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 6566,
+        "PRESERVED_SPECIMEN": 958
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 144,
+        "PRESERVED_SPECIMEN": 32
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 139,
+        "PRESERVED_SPECIMEN": 115
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 6710,
+        "PRESERVED_SPECIMEN": 990
+      },
+      "restored_510_only_raw_count": 1551,
+      "taxon": "Abies grandis",
+      "taxon_index": 1
+    },
+    {
+      "actual_repaired_raw_present_count": 2981,
+      "expected_repaired_raw_present_count": 2981,
+      "historical_specieskeys": [
+        "63Z6H"
+      ],
+      "original_raw_present_count": 2835,
+      "original_signed_fit_artifact_id": 10090598451,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 461,
+        "PRESERVED_SPECIMEN": 294
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 10,
+        "PRESERVED_SPECIMEN": 13
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 3,
+        "PRESERVED_SPECIMEN": 65
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 471,
+        "PRESERVED_SPECIMEN": 307
+      },
+      "restored_510_only_raw_count": 146,
+      "taxon": "Abies magnifica",
+      "taxon_index": 2
+    },
+    {
+      "actual_repaired_raw_present_count": 7157,
+      "expected_repaired_raw_present_count": 7157,
+      "historical_specieskeys": [
+        "2685308",
+        "8KFP"
+      ],
+      "original_raw_present_count": 6836,
+      "original_signed_fit_artifact_id": 10090584236,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 2304,
+        "PRESERVED_SPECIMEN": 408
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 71,
+        "PRESERVED_SPECIMEN": 2
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 66,
+        "PRESERVED_SPECIMEN": 59
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 2375,
+        "PRESERVED_SPECIMEN": 410
+      },
+      "restored_510_only_raw_count": 321,
+      "taxon": "Abies procera",
+      "taxon_index": 3
+    },
+    {
+      "actual_repaired_raw_present_count": 8814,
+      "expected_repaired_raw_present_count": 8814,
+      "historical_specieskeys": [
+        "2685654",
+        "8KG5"
+      ],
+      "original_raw_present_count": 6610,
+      "original_signed_fit_artifact_id": 10090261090,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 1745,
+        "PRESERVED_SPECIMEN": 287
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 101,
+        "PRESERVED_SPECIMEN": 6
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 42,
+        "PRESERVED_SPECIMEN": 54
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 1846,
+        "PRESERVED_SPECIMEN": 293
+      },
+      "restored_510_only_raw_count": 2204,
+      "taxon": "Abies sibirica",
+      "taxon_index": 4
+    },
+    {
+      "actual_repaired_raw_present_count": 62434,
+      "expected_repaired_raw_present_count": 62434,
+      "historical_specieskeys": [
+        "2979000",
+        "8PN2"
+      ],
+      "original_raw_present_count": 59906,
+      "original_signed_fit_artifact_id": 10090461448,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 9575,
+        "PRESERVED_SPECIMEN": 1500
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 207,
+        "PRESERVED_SPECIMEN": 15
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 80,
+        "PRESERVED_SPECIMEN": 144
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 9782,
+        "PRESERVED_SPECIMEN": 1515
+      },
+      "restored_510_only_raw_count": 2528,
+      "taxon": "Acacia melanoxylon",
+      "taxon_index": 5
+    },
+    {
+      "actual_repaired_raw_present_count": 64748,
+      "expected_repaired_raw_present_count": 64748,
+      "historical_specieskeys": [
+        "2873769",
+        "64MF2"
+      ],
+      "original_raw_present_count": 61418,
+      "original_signed_fit_artifact_id": 10091062465,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 13195,
+        "PRESERVED_SPECIMEN": 2460
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 395,
+        "PRESERVED_SPECIMEN": 102
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 248,
+        "PRESERVED_SPECIMEN": 237
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 13590,
+        "PRESERVED_SPECIMEN": 2562
+      },
+      "restored_510_only_raw_count": 3330,
+      "taxon": "Acorus calamus",
+      "taxon_index": 6
+    },
+    {
+      "actual_repaired_raw_present_count": 6916,
+      "expected_repaired_raw_present_count": 6916,
+      "historical_specieskeys": [
+        "659BB"
+      ],
+      "original_raw_present_count": 6262,
+      "original_signed_fit_artifact_id": 10090364587,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 673,
+        "PRESERVED_SPECIMEN": 714
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 45,
+        "PRESERVED_SPECIMEN": 41
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 16,
+        "PRESERVED_SPECIMEN": 53
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 718,
+        "PRESERVED_SPECIMEN": 755
+      },
+      "restored_510_only_raw_count": 654,
+      "taxon": "Aegiceras corniculatum",
+      "taxon_index": 7
+    },
+    {
+      "actual_repaired_raw_present_count": 357935,
+      "expected_repaired_raw_present_count": 357935,
+      "historical_specieskeys": [
+        "2865100",
+        "BSH4"
+      ],
+      "original_raw_present_count": 341168,
+      "original_signed_fit_artifact_id": 10091572132,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 58002,
+        "PRESERVED_SPECIMEN": 4599
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 1061,
+        "PRESERVED_SPECIMEN": 101
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 912,
+        "PRESERVED_SPECIMEN": 319
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 59063,
+        "PRESERVED_SPECIMEN": 4700
+      },
+      "restored_510_only_raw_count": 16767,
+      "taxon": "Alisma plantago-aquatica",
+      "taxon_index": 8
+    },
+    {
+      "actual_repaired_raw_present_count": 11140,
+      "expected_repaired_raw_present_count": 11140,
+      "historical_specieskeys": [
+        "CPP4"
+      ],
+      "original_raw_present_count": 10511,
+      "original_signed_fit_artifact_id": 10090265182,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 1576,
+        "PRESERVED_SPECIMEN": 1106
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 55,
+        "PRESERVED_SPECIMEN": 32
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 6,
+        "PRESERVED_SPECIMEN": 79
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 1631,
+        "PRESERVED_SPECIMEN": 1138
+      },
+      "restored_510_only_raw_count": 629,
+      "taxon": "Ambrosia dumosa",
+      "taxon_index": 9
+    },
+    {
+      "actual_repaired_raw_present_count": 4419,
+      "expected_repaired_raw_present_count": 4419,
+      "historical_specieskeys": [
+        "GWBD"
+      ],
+      "original_raw_present_count": 4002,
+      "original_signed_fit_artifact_id": 10090352681,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 771,
+        "PRESERVED_SPECIMEN": 550
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 37,
+        "PRESERVED_SPECIMEN": 147
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 5,
+        "PRESERVED_SPECIMEN": 73
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 808,
+        "PRESERVED_SPECIMEN": 697
+      },
+      "restored_510_only_raw_count": 417,
+      "taxon": "Artemisia filifolia",
+      "taxon_index": 10
+    },
+    {
+      "actual_repaired_raw_present_count": 6455,
+      "expected_repaired_raw_present_count": 6455,
+      "historical_specieskeys": [
+        "JLBV"
+      ],
+      "original_raw_present_count": 5662,
+      "original_signed_fit_artifact_id": 10090355124,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 924,
+        "PRESERVED_SPECIMEN": 978
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 92,
+        "PRESERVED_SPECIMEN": 62
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 3,
+        "PRESERVED_SPECIMEN": 95
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 1016,
+        "PRESERVED_SPECIMEN": 1040
+      },
+      "restored_510_only_raw_count": 793,
+      "taxon": "Atriplex confertifolia",
+      "taxon_index": 11
+    },
+    {
+      "actual_repaired_raw_present_count": 5123,
+      "expected_repaired_raw_present_count": 5123,
+      "historical_specieskeys": [
+        "688F4"
+      ],
+      "original_raw_present_count": 4881,
+      "original_signed_fit_artifact_id": 10091250607,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 523,
+        "PRESERVED_SPECIMEN": 394
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 17,
+        "PRESERVED_SPECIMEN": 10
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 3,
+        "PRESERVED_SPECIMEN": 63
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 540,
+        "PRESERVED_SPECIMEN": 404
+      },
+      "restored_510_only_raw_count": 242,
+      "taxon": "Atriplex lentiformis",
+      "taxon_index": 12
+    },
+    {
+      "actual_repaired_raw_present_count": 132699,
+      "expected_repaired_raw_present_count": 132699,
+      "historical_specieskeys": [
+        "2864467",
+        "NZ5R"
+      ],
+      "original_raw_present_count": 125548,
+      "original_signed_fit_artifact_id": 10091715117,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 21307,
+        "PRESERVED_SPECIMEN": 2110
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 553,
+        "PRESERVED_SPECIMEN": 38
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 362,
+        "PRESERVED_SPECIMEN": 189
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 21860,
+        "PRESERVED_SPECIMEN": 2148
+      },
+      "restored_510_only_raw_count": 7151,
+      "taxon": "Butomus umbellatus",
+      "taxon_index": 13
+    },
+    {
+      "actual_repaired_raw_present_count": 564882,
+      "expected_repaired_raw_present_count": 564882,
+      "historical_specieskeys": [
+        "2875818",
+        "RG23"
+      ],
+      "original_raw_present_count": 543134,
+      "original_signed_fit_artifact_id": 10092777220,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 51922,
+        "PRESERVED_SPECIMEN": 1964
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 1147,
+        "PRESERVED_SPECIMEN": 54
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 853,
+        "PRESERVED_SPECIMEN": 165
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 53069,
+        "PRESERVED_SPECIMEN": 2018
+      },
+      "restored_510_only_raw_count": 21748,
+      "taxon": "Carpinus betulus",
+      "taxon_index": 14
+    },
+    {
+      "actual_repaired_raw_present_count": 16077,
+      "expected_repaired_raw_present_count": 16077,
+      "historical_specieskeys": [
+        "SYCK"
+      ],
+      "original_raw_present_count": 14511,
+      "original_signed_fit_artifact_id": 10091293138,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 1228,
+        "PRESERVED_SPECIMEN": 521
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 30,
+        "PRESERVED_SPECIMEN": 6
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 16,
+        "PRESERVED_SPECIMEN": 51
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 1258,
+        "PRESERVED_SPECIMEN": 527
+      },
+      "restored_510_only_raw_count": 1566,
+      "taxon": "Ceriops tagal",
+      "taxon_index": 15
+    },
+    {
+      "actual_repaired_raw_present_count": 37878,
+      "expected_repaired_raw_present_count": 37878,
+      "historical_specieskeys": [
+        "2683866",
+        "TJJD"
+      ],
+      "original_raw_present_count": 35650,
+      "original_signed_fit_artifact_id": 10091900042,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 10180,
+        "PRESERVED_SPECIMEN": 947
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 365,
+        "PRESERVED_SPECIMEN": 26
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 165,
+        "PRESERVED_SPECIMEN": 162
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 10545,
+        "PRESERVED_SPECIMEN": 973
+      },
+      "restored_510_only_raw_count": 2228,
+      "taxon": "Chamaecyparis lawsoniana",
+      "taxon_index": 16
+    },
+    {
+      "actual_repaired_raw_present_count": 765120,
+      "expected_repaired_raw_present_count": 765120,
+      "historical_specieskeys": [
+        "3082234",
+        "YGMF"
+      ],
+      "original_raw_present_count": 731190,
+      "original_signed_fit_artifact_id": 10092980506,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 59175,
+        "PRESERVED_SPECIMEN": 2419
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 1371,
+        "PRESERVED_SPECIMEN": 67
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 937,
+        "PRESERVED_SPECIMEN": 196
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 60546,
+        "PRESERVED_SPECIMEN": 2486
+      },
+      "restored_510_only_raw_count": 33930,
+      "taxon": "Cornus sanguinea",
+      "taxon_index": 17
+    },
+    {
+      "actual_repaired_raw_present_count": 5158,
+      "expected_repaired_raw_present_count": 5158,
+      "historical_specieskeys": [
+        "6FNH6"
+      ],
+      "original_raw_present_count": 4687,
+      "original_signed_fit_artifact_id": 10091687659,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 695,
+        "PRESERVED_SPECIMEN": 707
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 49,
+        "PRESERVED_SPECIMEN": 34
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 4,
+        "PRESERVED_SPECIMEN": 67
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 744,
+        "PRESERVED_SPECIMEN": 741
+      },
+      "restored_510_only_raw_count": 471,
+      "taxon": "Ephedra nevadensis",
+      "taxon_index": 18
+    },
+    {
+      "actual_repaired_raw_present_count": 9309,
+      "expected_repaired_raw_present_count": 9309,
+      "historical_specieskeys": [
+        "3BPNJ",
+        "VLXXV"
+      ],
+      "original_raw_present_count": 8981,
+      "original_signed_fit_artifact_id": 10091414304,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 1202,
+        "PRESERVED_SPECIMEN": 424
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 31,
+        "PRESERVED_SPECIMEN": 0
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 7,
+        "PRESERVED_SPECIMEN": 16
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 1233,
+        "PRESERVED_SPECIMEN": 424
+      },
+      "restored_510_only_raw_count": 328,
+      "taxon": "Eucalyptus baxteri",
+      "taxon_index": 19
+    },
+    {
+      "actual_repaired_raw_present_count": 1134,
+      "expected_repaired_raw_present_count": 1134,
+      "historical_specieskeys": [
+        "3BQ97"
+      ],
+      "original_raw_present_count": 1107,
+      "original_signed_fit_artifact_id": 10091393475,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 202,
+        "PRESERVED_SPECIMEN": 113
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 5,
+        "PRESERVED_SPECIMEN": 0
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 8,
+        "PRESERVED_SPECIMEN": 21
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 207,
+        "PRESERVED_SPECIMEN": 113
+      },
+      "restored_510_only_raw_count": 27,
+      "taxon": "Eucalyptus nitens",
+      "taxon_index": 20
+    },
+    {
+      "actual_repaired_raw_present_count": 29723,
+      "expected_repaired_raw_present_count": 29723,
+      "historical_specieskeys": [
+        "3177112",
+        "3BQMN"
+      ],
+      "original_raw_present_count": 28864,
+      "original_signed_fit_artifact_id": 10091848830,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 4333,
+        "PRESERVED_SPECIMEN": 1565
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 46,
+        "PRESERVED_SPECIMEN": 7
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 33,
+        "PRESERVED_SPECIMEN": 76
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 4379,
+        "PRESERVED_SPECIMEN": 1572
+      },
+      "restored_510_only_raw_count": 859,
+      "taxon": "Eucalyptus viminalis",
+      "taxon_index": 21
+    },
+    {
+      "actual_repaired_raw_present_count": 531023,
+      "expected_repaired_raw_present_count": 531023,
+      "historical_specieskeys": [
+        "3169131",
+        "3CGVN"
+      ],
+      "original_raw_present_count": 501867,
+      "original_signed_fit_artifact_id": 10093649988,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 63061,
+        "PRESERVED_SPECIMEN": 2408
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 1991,
+        "PRESERVED_SPECIMEN": 76
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 777,
+        "PRESERVED_SPECIMEN": 243
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 65052,
+        "PRESERVED_SPECIMEN": 2484
+      },
+      "restored_510_only_raw_count": 29156,
+      "taxon": "Euonymus europaeus",
+      "taxon_index": 22
+    },
+    {
+      "actual_repaired_raw_present_count": 476399,
+      "expected_repaired_raw_present_count": 476399,
+      "historical_specieskeys": [
+        "2890040",
+        "6KCC8"
+      ],
+      "original_raw_present_count": 452485,
+      "original_signed_fit_artifact_id": 10093765162,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 52805,
+        "PRESERVED_SPECIMEN": 3805
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 1067,
+        "PRESERVED_SPECIMEN": 102
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 1093,
+        "PRESERVED_SPECIMEN": 299
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 53872,
+        "PRESERVED_SPECIMEN": 3907
+      },
+      "restored_510_only_raw_count": 23914,
+      "taxon": "Geranium dissectum",
+      "taxon_index": 23
+    },
+    {
+      "actual_repaired_raw_present_count": 17829,
+      "expected_repaired_raw_present_count": 17829,
+      "historical_specieskeys": [
+        "3HN2F"
+      ],
+      "original_raw_present_count": 16379,
+      "original_signed_fit_artifact_id": 10092742998,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 2184,
+        "PRESERVED_SPECIMEN": 2706
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 157,
+        "PRESERVED_SPECIMEN": 236
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 8,
+        "PRESERVED_SPECIMEN": 136
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 2341,
+        "PRESERVED_SPECIMEN": 2942
+      },
+      "restored_510_only_raw_count": 1450,
+      "taxon": "Gutierrezia sarothrae",
+      "taxon_index": 24
+    },
+    {
+      "actual_repaired_raw_present_count": 47238,
+      "expected_repaired_raw_present_count": 47238,
+      "historical_specieskeys": [
+        "2702905",
+        "3SX78"
+      ],
+      "original_raw_present_count": 45039,
+      "original_signed_fit_artifact_id": 10093769149,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 8050,
+        "PRESERVED_SPECIMEN": 3658
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 196,
+        "PRESERVED_SPECIMEN": 296
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 367,
+        "PRESERVED_SPECIMEN": 323
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 8246,
+        "PRESERVED_SPECIMEN": 3954
+      },
+      "restored_510_only_raw_count": 2199,
+      "taxon": "Leersia oryzoides",
+      "taxon_index": 25
+    },
+    {
+      "actual_repaired_raw_present_count": 590787,
+      "expected_repaired_raw_present_count": 590787,
+      "historical_specieskeys": [
+        "3172300",
+        "6PYTF"
+      ],
+      "original_raw_present_count": 563644,
+      "original_signed_fit_artifact_id": 10093717205,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 57284,
+        "PRESERVED_SPECIMEN": 2267
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 1460,
+        "PRESERVED_SPECIMEN": 69
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 898,
+        "PRESERVED_SPECIMEN": 289
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 58744,
+        "PRESERVED_SPECIMEN": 2336
+      },
+      "restored_510_only_raw_count": 27143,
+      "taxon": "Ligustrum vulgare",
+      "taxon_index": 26
+    },
+    {
+      "actual_repaired_raw_present_count": 3871,
+      "expected_repaired_raw_present_count": 3871,
+      "historical_specieskeys": [
+        "6435171",
+        "6QQ94"
+      ],
+      "original_raw_present_count": 3686,
+      "original_signed_fit_artifact_id": 10092682728,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 534,
+        "PRESERVED_SPECIMEN": 497
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 14,
+        "PRESERVED_SPECIMEN": 8
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 19,
+        "PRESERVED_SPECIMEN": 52
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 548,
+        "PRESERVED_SPECIMEN": 505
+      },
+      "restored_510_only_raw_count": 185,
+      "taxon": "Lumnitzera racemosa",
+      "taxon_index": 27
+    },
+    {
+      "actual_repaired_raw_present_count": 108484,
+      "expected_repaired_raw_present_count": 108484,
+      "historical_specieskeys": [
+        "2650903",
+        "49L7W"
+      ],
+      "original_raw_present_count": 102110,
+      "original_signed_fit_artifact_id": 10093911421,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 21730,
+        "PRESERVED_SPECIMEN": 5522
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 804,
+        "PRESERVED_SPECIMEN": 480
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 64,
+        "PRESERVED_SPECIMEN": 237
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 22534,
+        "PRESERVED_SPECIMEN": 6002
+      },
+      "restored_510_only_raw_count": 6374,
+      "taxon": "Onoclea sensibilis",
+      "taxon_index": 28
+    },
+    {
+      "actual_repaired_raw_present_count": 12071,
+      "expected_repaired_raw_present_count": 12071,
+      "historical_specieskeys": [
+        "4HQ46",
+        "5284765"
+      ],
+      "original_raw_present_count": 10248,
+      "original_signed_fit_artifact_id": 10092857973,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 3932,
+        "PRESERVED_SPECIMEN": 242
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 192,
+        "PRESERVED_SPECIMEN": 5
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 29,
+        "PRESERVED_SPECIMEN": 46
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 4124,
+        "PRESERVED_SPECIMEN": 247
+      },
+      "restored_510_only_raw_count": 1823,
+      "taxon": "Picea obovata",
+      "taxon_index": 29
+    },
+    {
+      "actual_repaired_raw_present_count": 10705,
+      "expected_repaired_raw_present_count": 10705,
+      "historical_specieskeys": [
+        "4J273"
+      ],
+      "original_raw_present_count": 9935,
+      "original_signed_fit_artifact_id": 10093574924,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 1406,
+        "PRESERVED_SPECIMEN": 935
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 43,
+        "PRESERVED_SPECIMEN": 29
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 6,
+        "PRESERVED_SPECIMEN": 117
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 1449,
+        "PRESERVED_SPECIMEN": 964
+      },
+      "restored_510_only_raw_count": 770,
+      "taxon": "Pinus flexilis",
+      "taxon_index": 30
+    },
+    {
+      "actual_repaired_raw_present_count": 70288,
+      "expected_repaired_raw_present_count": 70288,
+      "historical_specieskeys": [
+        "4J2F3"
+      ],
+      "original_raw_present_count": 63129,
+      "original_signed_fit_artifact_id": 10093630801,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 6235,
+        "PRESERVED_SPECIMEN": 2288
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 157,
+        "PRESERVED_SPECIMEN": 126
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 38,
+        "PRESERVED_SPECIMEN": 180
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 6392,
+        "PRESERVED_SPECIMEN": 2414
+      },
+      "restored_510_only_raw_count": 7159,
+      "taxon": "Pinus ponderosa",
+      "taxon_index": 31
+    },
+    {
+      "actual_repaired_raw_present_count": 13294,
+      "expected_repaired_raw_present_count": 13294,
+      "historical_specieskeys": [
+        "4J2HD",
+        "5284667"
+      ],
+      "original_raw_present_count": 10381,
+      "original_signed_fit_artifact_id": 10094409134,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 2183,
+        "PRESERVED_SPECIMEN": 351
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 111,
+        "PRESERVED_SPECIMEN": 2
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 36,
+        "PRESERVED_SPECIMEN": 46
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 2294,
+        "PRESERVED_SPECIMEN": 353
+      },
+      "restored_510_only_raw_count": 2913,
+      "taxon": "Pinus sibirica",
+      "taxon_index": 32
+    },
+    {
+      "actual_repaired_raw_present_count": 117340,
+      "expected_repaired_raw_present_count": 117340,
+      "historical_specieskeys": [
+        "4J2HY",
+        "5284982"
+      ],
+      "original_raw_present_count": 111898,
+      "original_signed_fit_artifact_id": 10094799278,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 23317,
+        "PRESERVED_SPECIMEN": 2432
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 587,
+        "PRESERVED_SPECIMEN": 46
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 187,
+        "PRESERVED_SPECIMEN": 241
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 23904,
+        "PRESERVED_SPECIMEN": 2478
+      },
+      "restored_510_only_raw_count": 5442,
+      "taxon": "Pinus strobus",
+      "taxon_index": 33
+    },
+    {
+      "actual_repaired_raw_present_count": 138912,
+      "expected_repaired_raw_present_count": 138912,
+      "historical_specieskeys": [
+        "4044517",
+        "BB5QH",
+        "VL7J6"
+      ],
+      "original_raw_present_count": 130658,
+      "original_signed_fit_artifact_id": 10094317009,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 17203,
+        "PRESERVED_SPECIMEN": 1246
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 262,
+        "PRESERVED_SPECIMEN": 46
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 507,
+        "PRESERVED_SPECIMEN": 128
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 17465,
+        "PRESERVED_SPECIMEN": 1292
+      },
+      "restored_510_only_raw_count": 8254,
+      "taxon": "Polystichum setiferum",
+      "taxon_index": 34
+    },
+    {
+      "actual_repaired_raw_present_count": 686992,
+      "expected_repaired_raw_present_count": 686992,
+      "historical_specieskeys": [
+        "3040249",
+        "4LVQY"
+      ],
+      "original_raw_present_count": 657972,
+      "original_signed_fit_artifact_id": 10096564209,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 103715,
+        "PRESERVED_SPECIMEN": 3394
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 2051,
+        "PRESERVED_SPECIMEN": 49
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 1104,
+        "PRESERVED_SPECIMEN": 242
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 105766,
+        "PRESERVED_SPECIMEN": 3443
+      },
+      "restored_510_only_raw_count": 29020,
+      "taxon": "Populus tremula",
+      "taxon_index": 35
+    },
+    {
+      "actual_repaired_raw_present_count": 370959,
+      "expected_repaired_raw_present_count": 370959,
+      "historical_specieskeys": [
+        "2880130",
+        "4R5SK"
+      ],
+      "original_raw_present_count": 358290,
+      "original_signed_fit_artifact_id": 10095120029,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 42816,
+        "PRESERVED_SPECIMEN": 2349
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 380,
+        "PRESERVED_SPECIMEN": 52
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 712,
+        "PRESERVED_SPECIMEN": 171
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 43196,
+        "PRESERVED_SPECIMEN": 2401
+      },
+      "restored_510_only_raw_count": 12669,
+      "taxon": "Quercus petraea",
+      "taxon_index": 36
+    },
+    {
+      "actual_repaired_raw_present_count": 3772,
+      "expected_repaired_raw_present_count": 3772,
+      "historical_specieskeys": [
+        "4Y9T7"
+      ],
+      "original_raw_present_count": 3257,
+      "original_signed_fit_artifact_id": 10095468628,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 494,
+        "PRESERVED_SPECIMEN": 427
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 38,
+        "PRESERVED_SPECIMEN": 4
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 19,
+        "PRESERVED_SPECIMEN": 46
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 532,
+        "PRESERVED_SPECIMEN": 431
+      },
+      "restored_510_only_raw_count": 515,
+      "taxon": "Sonneratia alba",
+      "taxon_index": 37
+    },
+    {
+      "actual_repaired_raw_present_count": 318703,
+      "expected_repaired_raw_present_count": 318703,
+      "historical_specieskeys": [
+        "6Z7P2",
+        "7679536"
+      ],
+      "original_raw_present_count": 302302,
+      "original_signed_fit_artifact_id": 10096333089,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 41407,
+        "PRESERVED_SPECIMEN": 3956
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 720,
+        "PRESERVED_SPECIMEN": 86
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 636,
+        "PRESERVED_SPECIMEN": 197
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 42127,
+        "PRESERVED_SPECIMEN": 4042
+      },
+      "restored_510_only_raw_count": 16401,
+      "taxon": "Sparganium erectum",
+      "taxon_index": 38
+    },
+    {
+      "actual_repaired_raw_present_count": 334027,
+      "expected_repaired_raw_present_count": 334027,
+      "historical_specieskeys": [
+        "3152047",
+        "56WPP"
+      ],
+      "original_raw_present_count": 324851,
+      "original_signed_fit_artifact_id": 10096320711,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 45750,
+        "PRESERVED_SPECIMEN": 2893
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 927,
+        "PRESERVED_SPECIMEN": 59
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 747,
+        "PRESERVED_SPECIMEN": 233
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 46677,
+        "PRESERVED_SPECIMEN": 2952
+      },
+      "restored_510_only_raw_count": 9176,
+      "taxon": "Tilia cordata",
+      "taxon_index": 39
+    },
+    {
+      "actual_repaired_raw_present_count": 67437,
+      "expected_repaired_raw_present_count": 67437,
+      "historical_specieskeys": [
+        "2687182",
+        "59HM6"
+      ],
+      "original_raw_present_count": 64259,
+      "original_signed_fit_artifact_id": 10095143507,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 11776,
+        "PRESERVED_SPECIMEN": 2070
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 302,
+        "PRESERVED_SPECIMEN": 39
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 57,
+        "PRESERVED_SPECIMEN": 175
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 12078,
+        "PRESERVED_SPECIMEN": 2109
+      },
+      "restored_510_only_raw_count": 3178,
+      "taxon": "Tsuga canadensis",
+      "taxon_index": 40
+    },
+    {
+      "actual_repaired_raw_present_count": 9886,
+      "expected_repaired_raw_present_count": 9886,
+      "historical_specieskeys": [
+        "59HMR"
+      ],
+      "original_raw_present_count": 9349,
+      "original_signed_fit_artifact_id": 10095030568,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 1519,
+        "PRESERVED_SPECIMEN": 480
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 35,
+        "PRESERVED_SPECIMEN": 10
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 10,
+        "PRESERVED_SPECIMEN": 72
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 1554,
+        "PRESERVED_SPECIMEN": 490
+      },
+      "restored_510_only_raw_count": 537,
+      "taxon": "Tsuga mertensiana",
+      "taxon_index": 41
+    },
+    {
+      "actual_repaired_raw_present_count": 518617,
+      "expected_repaired_raw_present_count": 518617,
+      "historical_specieskeys": [
+        "3172048",
+        "5B6FX"
+      ],
+      "original_raw_present_count": 493882,
+      "original_signed_fit_artifact_id": 10097402824,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 72691,
+        "PRESERVED_SPECIMEN": 8862
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 1531,
+        "PRESERVED_SPECIMEN": 412
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 1104,
+        "PRESERVED_SPECIMEN": 465
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 74222,
+        "PRESERVED_SPECIMEN": 9274
+      },
+      "restored_510_only_raw_count": 24735,
+      "taxon": "Veronica arvensis",
+      "taxon_index": 42
+    },
+    {
+      "actual_repaired_raw_present_count": 532145,
+      "expected_repaired_raw_present_count": 532145,
+      "historical_specieskeys": [
+        "2888605",
+        "5BCCB"
+      ],
+      "original_raw_present_count": 505293,
+      "original_signed_fit_artifact_id": 10098067701,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 80229,
+        "PRESERVED_SPECIMEN": 4074
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 2000,
+        "PRESERVED_SPECIMEN": 90
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 776,
+        "PRESERVED_SPECIMEN": 287
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 82229,
+        "PRESERVED_SPECIMEN": 4164
+      },
+      "restored_510_only_raw_count": 26852,
+      "taxon": "Viburnum opulus",
+      "taxon_index": 43
+    },
+    {
+      "actual_repaired_raw_present_count": 377534,
+      "expected_repaired_raw_present_count": 377534,
+      "historical_specieskeys": [
+        "5331235",
+        "5BGDQ",
+        "VJT9C"
+      ],
+      "original_raw_present_count": 361176,
+      "original_signed_fit_artifact_id": 10097838411,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 69377,
+        "PRESERVED_SPECIMEN": 5020
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 1232,
+        "PRESERVED_SPECIMEN": 101
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 823,
+        "PRESERVED_SPECIMEN": 308
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 70609,
+        "PRESERVED_SPECIMEN": 5121
+      },
+      "restored_510_only_raw_count": 16358,
+      "taxon": "Viola arvensis",
+      "taxon_index": 44
+    },
+    {
+      "actual_repaired_raw_present_count": 8387,
+      "expected_repaired_raw_present_count": 8387,
+      "historical_specieskeys": [
+        "5C3C6"
+      ],
+      "original_raw_present_count": 8001,
+      "original_signed_fit_artifact_id": 10095822315,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 979,
+        "PRESERVED_SPECIMEN": 526
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 15,
+        "PRESERVED_SPECIMEN": 13
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 3,
+        "PRESERVED_SPECIMEN": 79
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 994,
+        "PRESERVED_SPECIMEN": 539
+      },
+      "restored_510_only_raw_count": 386,
+      "taxon": "Woodwardia fimbriata",
+      "taxon_index": 45
+    },
+    {
+      "actual_repaired_raw_present_count": 2945,
+      "expected_repaired_raw_present_count": 2945,
+      "historical_specieskeys": [
+        "5CKH9"
+      ],
+      "original_raw_present_count": 2826,
+      "original_signed_fit_artifact_id": 10096179329,
+      "original_signed_thinned_n": {
+        "HUMAN_OBSERVATION": 277,
+        "PRESERVED_SPECIMEN": 321
+      },
+      "raw_missing_datasetkey_rows": 0,
+      "repaired_minus_original_thinned_n": {
+        "HUMAN_OBSERVATION": 8,
+        "PRESERVED_SPECIMEN": 8
+      },
+      "repaired_raw_count_parity_passed": true,
+      "repaired_source_datasetkey_count": {
+        "HUMAN_OBSERVATION": 17,
+        "PRESERVED_SPECIMEN": 39
+      },
+      "repaired_thinned_n": {
+        "HUMAN_OBSERVATION": 285,
+        "PRESERVED_SPECIMEN": 329
+      },
+      "restored_510_only_raw_count": 119,
+      "taxon": "Xylocarpus granatum",
+      "taxon_index": 46
+    }
+  ],
+  "original_12_heldout_model_outputs_refitted": false,
+  "original_24_calibration_q95_refitted": false,
+  "original_signed_level_A_0_of_12_unchanged": true,
+  "prespecified_historical_specieskey_assignments": 79,
+  "prespecified_reference_taxa": 47,
+  "reference_envelopes_and_heldout_robustness_tested": false,
+  "schema": "284b.gbif_repaired_reference47_thinning_results.v1",
+  "signed_original_fit_artifact_inputs_verified": 47,
+  "source_mode_input_totals": {
+    "HUMAN_OBSERVATION": {
+      "delta_fraction_of_original": 0.022627717830110194,
+      "delta_source_inputs": 22140,
+      "old_signed_inputs": 978446,
+      "repaired_source_inputs": 1000586,
+      "taxa_with_negative_count_delta": 0,
+      "taxa_with_nonzero_count_delta": 47
+    },
+    "PRESERVED_SPECIMEN": {
+      "delta_fraction_of_original": 0.03687243546755476,
+      "delta_source_inputs": 3244,
+      "old_signed_inputs": 87979,
+      "repaired_source_inputs": 91223,
+      "taxa_with_negative_count_delta": 0,
+      "taxa_with_nonzero_count_delta": 45
+    }
+  },
+  "source_repair_check_against_exact_9705_and_10215_object_manifests": true,
+  "source_restoration_is_not_independent_new_ecological_validation": true,
+  "status": "all_47_original_reference_source_input_parity_and_restoration_qualified",
+  "taxa_with_any_repaired_thinned_input_count_change": 47,
+  "taxa_with_thinned_input_decrease_in_any_mode": 0
+}

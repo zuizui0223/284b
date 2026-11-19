@@ -1,0 +1,231 @@
+{
+  "GBIF_record_identifiers_persisted": false,
+  "NEON_plant_plot_species_outcomes_opened": false,
+  "current_repaired_object_manifest_sha256": "ca0d9844cd6816b4e4d550a0152db489b5e6a4c5129f8700fe2f1d818b954cd2",
+  "empirical_ledger_increment": 0,
+  "external_validation_authorized": false,
+  "historical_level_a_endpoint_unchanged": true,
+  "historical_parquet_objects_not_scanned": 9705,
+  "interpretation": "These are only raw occurrence records present in restored files for frozen specieskeys and basis-of-record modes. They cannot be interpreted as model-admitted/thinned counts, biological presences, or a sensitivity estimate for the original 0/12 source-coherence endpoint.",
+  "known_NEON_datasetkey_rows_inside_restored_files_only": 0,
+  "old_frozen_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "original_model_fit_completeness_comparison_resolved": false,
+  "original_signed_model_admitted_rows_reconstructed": false,
+  "raw_coordinates_persisted": false,
+  "repaired_source_models_refitted": false,
+  "restored_parquet_objects_scanned": 510,
+  "schema": "284b.gbif_restored510_heldout12_source_exposure.v1",
+  "specieskey_mode_raw_row_counts": [
+    {
+      "frozen_specieskey": "8KDX",
+      "modes": {
+        "HUMAN_OBSERVATION": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 445
+        },
+        "PRESERVED_SPECIMEN": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 576
+        }
+      },
+      "taxon": "Abies lasiocarpa",
+      "total_restored_raw_present_occurrence_rows": 1021
+    },
+    {
+      "frozen_specieskey": "GX2B",
+      "modes": {
+        "HUMAN_OBSERVATION": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 2719
+        },
+        "PRESERVED_SPECIMEN": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 414
+        }
+      },
+      "taxon": "Artemisia tridentata",
+      "total_restored_raw_present_occurrence_rows": 3133
+    },
+    {
+      "frozen_specieskey": "JLB9",
+      "modes": {
+        "HUMAN_OBSERVATION": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 684
+        },
+        "PRESERVED_SPECIMEN": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 537
+        }
+      },
+      "taxon": "Atriplex canescens",
+      "total_restored_raw_present_occurrence_rows": 1221
+    },
+    {
+      "frozen_specieskey": "K35N",
+      "modes": {
+        "HUMAN_OBSERVATION": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 318
+        },
+        "PRESERVED_SPECIMEN": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 199
+        }
+      },
+      "taxon": "Avicennia germinans",
+      "total_restored_raw_present_occurrence_rows": 517
+    },
+    {
+      "frozen_specieskey": "K35T",
+      "modes": {
+        "HUMAN_OBSERVATION": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 2160
+        },
+        "PRESERVED_SPECIMEN": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 178
+        }
+      },
+      "taxon": "Avicennia marina",
+      "total_restored_raw_present_occurrence_rows": 2338
+    },
+    {
+      "frozen_specieskey": "39N69",
+      "modes": {
+        "HUMAN_OBSERVATION": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 1636
+        },
+        "PRESERVED_SPECIMEN": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 168
+        }
+      },
+      "taxon": "Encelia farinosa",
+      "total_restored_raw_present_occurrence_rows": 1804
+    },
+    {
+      "frozen_specieskey": "6GSMS",
+      "modes": {
+        "HUMAN_OBSERVATION": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 103
+        },
+        "PRESERVED_SPECIMEN": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 4
+        }
+      },
+      "taxon": "Eucalyptus delegatensis",
+      "total_restored_raw_present_occurrence_rows": 107
+    },
+    {
+      "frozen_specieskey": "3BPZ6",
+      "modes": {
+        "HUMAN_OBSERVATION": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 5953
+        },
+        "PRESERVED_SPECIMEN": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 173
+        }
+      },
+      "taxon": "Eucalyptus globulus",
+      "total_restored_raw_present_occurrence_rows": 6126
+    },
+    {
+      "frozen_specieskey": "3RXYC",
+      "modes": {
+        "HUMAN_OBSERVATION": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 264
+        },
+        "PRESERVED_SPECIMEN": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 178
+        }
+      },
+      "taxon": "Laguncularia racemosa",
+      "total_restored_raw_present_occurrence_rows": 442
+    },
+    {
+      "frozen_specieskey": "6NYVX",
+      "modes": {
+        "HUMAN_OBSERVATION": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 945
+        },
+        "PRESERVED_SPECIMEN": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 206
+        }
+      },
+      "taxon": "Larix laricina",
+      "total_restored_raw_present_occurrence_rows": 1151
+    },
+    {
+      "frozen_specieskey": "47SYY",
+      "modes": {
+        "HUMAN_OBSERVATION": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 64
+        },
+        "PRESERVED_SPECIMEN": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 32
+        }
+      },
+      "taxon": "Nothofagus antarctica",
+      "total_restored_raw_present_occurrence_rows": 96
+    },
+    {
+      "frozen_specieskey": "V5FNY",
+      "modes": {
+        "HUMAN_OBSERVATION": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 38
+        },
+        "PRESERVED_SPECIMEN": {
+          "restored_raw_known_NEON_voucher_rows": 0,
+          "restored_raw_missing_datasetkey_rows": 0,
+          "restored_raw_present_occurrence_rows": 23
+        }
+      },
+      "taxon": "Nothofagus betuloides",
+      "total_restored_raw_present_occurrence_rows": 61
+    }
+  ],
+  "status": "restored_510_focal_occurrence_exposure_scanned",
+  "taxa_predeclared": 12,
+  "taxa_with_any_restored_raw_present_rows": 12,
+  "totals_by_source_mode": {
+    "HUMAN_OBSERVATION": 15329,
+    "PRESERVED_SPECIMEN": 2688
+  }
+}

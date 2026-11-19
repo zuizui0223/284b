@@ -1,0 +1,80 @@
+{
+  "schema": "284b.neon_historical_model_source_lineage7.v1",
+  "status": "FROZEN_META_AUDIT_OF_ORIGINAL_INPUTS_NO_NEON_PLOT_OUTCOMES",
+  "objective": "Reconstruct frozen seven-taxon 2026-08-01 model input source lines and identify direct NEON-voucher dataset rows after admission/thinning",
+  "original_GBIF_source_date": "2026-08-01",
+  "original_parquet_objects": 9705,
+  "recovered_object_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "recovery_receipt": "results/neon_aug_gbif_missing20_recovery_v1.json",
+  "original_source_model_script": "scripts/run_same_target_layer1_baseline_fit_taxon.py",
+  "original_sdmr_commit": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+  "original_source_modes": [
+    "PRESERVED_SPECIMEN",
+    "HUMAN_OBSERVATION"
+  ],
+  "original_grid_thinning_degrees": 0.05,
+  "exact_species_inventory_source": "config/neon_external_validation_preflight_v1.json",
+  "source_original_signed_model_archive_metadata": "config/target_identity_controls_v1.json in PR73",
+  "known_NEON_voucher_datasetkey": "3fed506c-d04f-4cd4-b373-bd602572f39b",
+  "original_first_taxon_pilot_result": "results/neon_original_gbif_historical_replay_v2.json",
+  "taxon_inventory": [
+    {
+      "taxon": "Artemisia tridentata",
+      "specieskey": "GX2B",
+      "original_index": 0,
+      "fit_artifact_id": 10089523542,
+      "fit_artifact_digest": "sha256:43ae62899e3a335a00b3ee666f534aee02cfaf9cab517df13d9eb542092350c8"
+    },
+    {
+      "taxon": "Atriplex canescens",
+      "specieskey": "JLB9",
+      "original_index": 1,
+      "fit_artifact_id": 10089524564,
+      "fit_artifact_digest": "sha256:adc169b9691c921d73667c24f8a4546a2da5c2f0b3a83b46b80070691f451261"
+    },
+    {
+      "taxon": "Encelia farinosa",
+      "specieskey": "39N69",
+      "original_index": 2,
+      "fit_artifact_id": 10089527320,
+      "fit_artifact_digest": "sha256:c0d643ecd7a63c544d311e1ace73018e1631de3ea3966ce5519dd348eab49ad1"
+    },
+    {
+      "taxon": "Avicennia germinans",
+      "specieskey": "K35N",
+      "original_index": 3,
+      "fit_artifact_id": 10089523408,
+      "fit_artifact_digest": "sha256:8e89cad47c2fbbf27e7df696a067639118857ae31a8c2960c4cb3fc7a99fbb7b"
+    },
+    {
+      "taxon": "Laguncularia racemosa",
+      "specieskey": "3RXYC",
+      "original_index": 5,
+      "fit_artifact_id": 10089527180,
+      "fit_artifact_digest": "sha256:1e65a04d9610e64f5dd0b46c34a811d1c72d8cacf4559431657c89c121155d78"
+    },
+    {
+      "taxon": "Abies lasiocarpa",
+      "specieskey": "8KDX",
+      "original_index": 9,
+      "fit_artifact_id": 10089528003,
+      "fit_artifact_digest": "sha256:0c2ecba01f9f2868f713f29639412c7b3f9e2c981d2ebe0d0958d9c444720cda"
+    },
+    {
+      "taxon": "Larix laricina",
+      "specieskey": "6NYVX",
+      "original_index": 11,
+      "fit_artifact_id": 10089524000,
+      "fit_artifact_digest": "sha256:51aa2f517ea8951a0cf94fca214defcad30301e97b505d338ddfcef9322cec67"
+    }
+  ],
+  "success_condition": "All 7 taxa reconstruct exact signed per-source n_presence_thinned from fit_inventory.csv and pass existing source quality/collision logic",
+  "on_failure": "FAILED_SOURCE_PARITY_STOP_no_contamination_inference_for_failing_taxa",
+  "on_any_known_NEON_rows": "KNOWN_NEON_SOURCE_ROW_DEPENDENCY_PRESENT_no_unqualified_external_independence",
+  "on_no_known_NEON_rows": "SINGLE_DATASETKEY_NOT_FOUND_other_publication_and_site_time_overlap_unresolved",
+  "output": "aggregate counts only; no source record IDs, coordinates, date, NEON plot labels, model refit or species reselect",
+  "no_NEON_plant_outcomes_read": true,
+  "no_species_replacement": true,
+  "empirical_ledger_increment": 0,
+  "original_LevelA_endpoint_unchanged": true
+}

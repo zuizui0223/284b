@@ -1,0 +1,24 @@
+{
+  "NEON_plant_outcomes_read": false,
+  "centers_np_array_SHA256": "5bddba6273b409e4732c7d1f713cf737209f9c7c4290f0de12c31d7aea4675d2",
+  "ecological_prediction_scores_opened": false,
+  "empirical_ledger_increment": 0,
+  "historical_9705_S3_objects_used": true,
+  "historical_snapshot_object_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "model_training_or_refitting_performed": false,
+  "original_LevelA_endpoint_unchanged": true,
+  "original_frozen_comparison_frame_SHA256_by_M": {
+    "150": "87ed7254cb0fd21f996ead64ed95e51f92d64021d145b2c50b092c227c06c578",
+    "300": "4b07eafa24a70643d0b21eaddd82d52514affd3797ad75349a28a6419cc347c0",
+    "500": "6dfb33886ea8c5e795646d3cd229cdb19df49568392f74cb8ea977eddb0760cc"
+  },
+  "original_historical_source_thinned_counts": {
+    "HUMAN_OBSERVATION": 6566,
+    "PRESERVED_SPECIMEN": 958
+  },
+  "original_signed_12block_centers_SHA256": "9eb19bf125fdd06c5e2b9ef901c869c23db6cd9aa88feb1305dffed79ff37f7e",
+  "original_source_blind_geometry_cells": 7244,
+  "recomputed_centers_SHA256": "9eb19bf125fdd06c5e2b9ef901c869c23db6cd9aa88feb1305dffed79ff37f7e",
+  "schema": "284b.gbif_original_reference_block_centers_reconstruction_pilot.v1",
+  "status": "historical_Abies_grandis_reference_center_hash_reconstructed"
+}

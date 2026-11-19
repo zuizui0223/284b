@@ -1,0 +1,70 @@
+{
+  "schema": "284b.neon_original_frame_site_distance_proxy.v1",
+  "status": "METADATA_ONLY_NO_NEON_PLOT_OR_TAXON_RECORDS",
+  "original_heldout_source": "same_target_cross_source_reproducibility_heldout12_core19_v0_4",
+  "geographical_reference": "results/neon_site_geography_preflight_v1.json",
+  "original_frame_zip_provenance_source": "config/target_identity_controls_v1.json from PR73",
+  "historical_frozen_taxa": [
+    {
+      "taxon": "Artemisia tridentata",
+      "original_index": 0,
+      "frame_artifact_id": 10065445666,
+      "frame_artifact_digest": "sha256:85b9f7e349ca07ba007d43b72ef5a7ab8524688039b9737b4034508b8f3f4bc5"
+    },
+    {
+      "taxon": "Atriplex canescens",
+      "original_index": 1,
+      "frame_artifact_id": 10065911006,
+      "frame_artifact_digest": "sha256:d47397f738a04e8e04e8bd3e16c5204cec287e1896d232a977d5c3abbf4438c1"
+    },
+    {
+      "taxon": "Encelia farinosa",
+      "original_index": 2,
+      "frame_artifact_id": 10066129063,
+      "frame_artifact_digest": "sha256:f8c8bd870823430f64abb35fca7013c1caeff4277e88a81e41b78073643f85f5"
+    },
+    {
+      "taxon": "Avicennia germinans",
+      "original_index": 3,
+      "frame_artifact_id": 10066112150,
+      "frame_artifact_digest": "sha256:da04b69a4b4b76af8ac897812c28eeaabee5b17fb48b791d1541884d4e9eddb2"
+    },
+    {
+      "taxon": "Laguncularia racemosa",
+      "original_index": 5,
+      "frame_artifact_id": 10067156409,
+      "frame_artifact_digest": "sha256:65013de94aa486767a4f27a27e3df8735982dc036977866a37a383f7a9683566"
+    },
+    {
+      "taxon": "Abies lasiocarpa",
+      "original_index": 9,
+      "frame_artifact_id": 10069664366,
+      "frame_artifact_digest": "sha256:a1da21a899b8039ccb8754243627fd31fc0009e518762c0f5b33dcd785ea5d62"
+    },
+    {
+      "taxon": "Larix laricina",
+      "original_index": 11,
+      "frame_artifact_id": 10069910761,
+      "frame_artifact_digest": "sha256:b54a49dacb364ae2ae7c646ebed17937c5b82ec5c220453b1e995fc50a9d044c"
+    }
+  ],
+  "M_km": [
+    150,
+    300,
+    500
+  ],
+  "distance_cutoffs_km": [
+    10,
+    25,
+    50,
+    100
+  ],
+  "primary_distance_cutoff_km": 25,
+  "meaning": "NEON site centroid nearest geodesic distance to one of the 2000 original source-blind climate-evaluation points for the target taxon and M. Does not establish exact accessible area, training domain or any species presence at NEON site.",
+  "independence_and_species_outcomes_unresolved": true,
+  "minimum_independent_NEON_sites_for_further_screen": 3,
+  "explicit_stop": "Do not use distance thresholds to change predeclared seven taxa or infer NEON plant detections. If fewer than three proximate sites per taxon, spatial support screen is unresolved and no independent biological validation authorized.",
+  "no_model_refitting": true,
+  "no_species_labels_read": true,
+  "empirical_ledger_increment": 0
+}

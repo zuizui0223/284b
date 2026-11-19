@@ -1,0 +1,54 @@
+name: GBIF 59 fixed taxa source-balance synthesis
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'scripts/audit_gbif_repaired_59taxa_source_balance_v1.py'
+      - 'tests/test_gbif_repaired_59taxa_source_balance_v1.py'
+      - '.github/workflows/gbif_repaired_59taxa_source_balance_v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: gbif-59taxon-source-only-neon-branch
+  cancel-in-progress: false
+jobs:
+  verify-and-archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test source audits and scientific fail-closed controls
+        run: python -m unittest discover -s tests -p 'test_gbif_repaired_59taxa_source_balance_v1.py' -v
+      - name: Recalculate 59-taxon source balance without model scores or species outcomes
+        run: |
+          python scripts/audit_gbif_repaired_59taxa_source_balance_v1.py \
+            --out-json results/gbif_repaired_59taxa_source_balance_v1.json \
+            --out-csv results/gbif_repaired_59taxa_source_balance_cells_v1.csv
+      - name: Verify no new empirical endpoint and correct fixed denominators
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          x=json.loads(pathlib.Path('results/gbif_repaired_59taxa_source_balance_v1.json').read_text())
+          t=x['panels']['combined']
+          assert t['taxa']==59 and t['taxa_with_any_source_increment_at_least_5pct']==13
+          assert t['human_to_specimen_ratio_up']==34 and t['human_to_specimen_ratio_down']==25
+          assert x['repaired_model_predictions_read'] is False
+          assert x['q95_reference_read'] is False
+          assert x['independent_biological_validation_performed'] is False
+          assert x['empirical_ledger_increment']==0
+          PY
+      - name: Commit checked taxon-level summary only, no raw occurrences
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_59taxa_source_balance_v1.json \
+                  results/gbif_repaired_59taxa_source_balance_cells_v1.csv
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive SHA-verified 59-taxon GBIF source-mode restoration summary"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

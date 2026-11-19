@@ -1,0 +1,78 @@
+{
+  "schema": "284b.gbif_repaired_heldout12_refit_launch.v1",
+  "status": "ALL_12_SIGNED_ORIGINAL_HELDOUT_GEOMETRIES_VERIFIED_SOURCE_FITS_ONLY",
+  "original_heldout_taxa": 12,
+  "historical_geometry_run_id": 44454068403,
+  "historical_geometry_run_sha": "710ef58700ca077ce569ae537575730e1f707ec5",
+  "geometry_complete_sha256": "aeddef8cc43568416a0224ea623ba6329b6e3038a267de4b960cc3af2ef8424e",
+  "historical_source_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "repaired_source_manifest_sha256": "ca0d9844cd6816b4e4d550a0152db489b5e6a4c5129f8700fe2f1d818b954cd2",
+  "signed_original_geometry_artifacts": {
+    "0": {
+      "id": 14497394476,
+      "digest": "sha256:5de3efad6e99110c70be9c1759261d990648e2618df7a2753fae063564f1df5c"
+    },
+    "1": {
+      "id": 14497723933,
+      "digest": "sha256:87bfe71edc613605cf402292d67b506205b9295f6c6f5b1b7bcc7914abd35597"
+    },
+    "2": {
+      "id": 14499232216,
+      "digest": "sha256:8418f5dca5799b977acfe3e83059f07a8d30d1c698b64bfbac42adf7225ecde7"
+    },
+    "3": {
+      "id": 14499502111,
+      "digest": "sha256:cfd688fb48b7b114e9c04fe85554c7f38c0119c77349606f16249cd18239b478"
+    },
+    "4": {
+      "id": 14500856866,
+      "digest": "sha256:2917bcf3d92c5621839587747409c5de3a15270be448adc42b59884cff95d228"
+    },
+    "5": {
+      "id": 14499749432,
+      "digest": "sha256:d25ee847dfd5abc325b637b042e743b2fffe09697c14de3a3351fbafcbad35fa"
+    },
+    "6": {
+      "id": 14501022751,
+      "digest": "sha256:e7931713c8803989bdae9b8ce510f792e3fd53d484b96308a5caa03c9078f46b"
+    },
+    "7": {
+      "id": 14501199430,
+      "digest": "sha256:944a1ce8940dd60b160230a2f0bc5dcd66b27ba072cba7396c9aa3545be3028f"
+    },
+    "8": {
+      "id": 14502707770,
+      "digest": "sha256:37645633ada2c90e005b366da6b35112bf85e23fa2fe58b24a4e36ac64f37b4b"
+    },
+    "9": {
+      "id": 14502584336,
+      "digest": "sha256:6de18ed99dffcc90ff7c30a36d162522af17202b1f48ea70f8806de1e21d799c"
+    },
+    "10": {
+      "id": 14503867194,
+      "digest": "sha256:065b6267cffe9b8f4a3cfccf2386dc07c7504347e2e2b89fdab8dcee69893530"
+    },
+    "11": {
+      "id": 14504342186,
+      "digest": "sha256:ba259b43ebac3548efc80435ca852089fee3592ad2595c81499af744993134a2"
+    }
+  },
+  "fixed_M_km": [
+    150,
+    300,
+    500
+  ],
+  "fixed_methods": 8,
+  "source_modes": [
+    "PRESERVED_SPECIMEN",
+    "HUMAN_OBSERVATION"
+  ],
+  "expected_source_fit_cells": 576,
+  "paired_source_D_opened": false,
+  "q95_opened": false,
+  "repaired_heldout_final_test_opened": false,
+  "original_historical_empirical_endpoint_unchanged": true,
+  "new_independent_biological_confirmation": false,
+  "empirical_ledger_increment": 0,
+  "note": "Repaired-GBIF independent model-source fitting; do not open 12-taxon paired outcomes or q95 until repaired 47-reference q95 is fully recalibrated"
+}

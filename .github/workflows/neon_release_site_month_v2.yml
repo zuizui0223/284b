@@ -1,0 +1,47 @@
+name: NEON released site-month metadata inventory v2
+on:
+  push:
+    branches:
+      - analysis/neon-external-truth-preflight-20261115
+    paths:
+      - 'config/neon_external_metadata_dependency_gate_v2.json'
+      - 'scripts/neon_release_site_month_inventory_v2.py'
+      - 'tests/test_neon_release_site_month_v2.py'
+      - '.github/workflows/neon_release_site_month_v2.yml'
+permissions:
+  contents: write
+concurrency:
+  group: neon-release-v2-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  release-month-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test no-label site/month parser
+        run: python -m unittest discover -s tests -p 'test_neon_release_site_month_v2.py' -v
+      - name: Check frozen product endpoint and release month availability only
+        run: |
+          python scripts/neon_release_site_month_inventory_v2.py \
+            --out results/neon_release_site_month_inventory_v2.json
+      - name: Retain metadata receipt even if API identity changes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: neon-release-metadata-v2
+          path: results/neon_release_site_month_inventory_v2.json
+          if-no-files-found: warn
+      - name: Commit only source-verified metadata receipt (no plot files)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/neon_release_site_month_inventory_v2.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Freeze NEON release site/month availability provenance"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

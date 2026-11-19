@@ -1,0 +1,194 @@
+name: "Refit all 12 frozen heldout source models on repaired GBIF, pairing closed"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths: ['config/gbif_repaired_heldout12_refit_launch_v1.json']
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: gbif-repaired-heldout12-source-fit-without-pairing
+  cancel-in-progress: false
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    outputs:
+      geometry_run: ${{ steps.gate.outputs.geometry_run }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - id: gate
+        name: Require all 12 signed historical centers and unchanged 48-cell science
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p 'test_gbif_repaired_heldout12_fixed_original_centers_v1.py' -v
+          python -m unittest discover -s tests -p 'test_gbif_repaired_heldout12_source_fits_aggregate_v1.py' -v
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess
+          launch=json.loads(pathlib.Path('config/gbif_repaired_heldout12_refit_launch_v1.json').read_text())
+          raw=pathlib.Path('results/gbif_original_heldout12_geometry_complete_v1.json').read_bytes()
+          geo=json.loads(raw)
+          manifest=json.loads(pathlib.Path('config/gbif_original_heldout12_geometry_manifest_v1.json').read_text())
+          original_source=json.loads(pathlib.Path('results/gbif_repaired_heldout12_thinning_v1.json').read_text())
+          assert launch['status']=='ALL_12_SIGNED_ORIGINAL_HELDOUT_GEOMETRIES_VERIFIED_SOURCE_FITS_ONLY'
+          assert launch['original_heldout_taxa']==12
+          assert launch['geometry_complete_sha256']==hashlib.sha256(raw).hexdigest()
+          assert geo['status']=='ALL_12_ORIGINAL_SIGNED_HELDOUT_GEOMETRIES_VERIFIED_NO_REPAIRED_MODELS'
+          assert geo['original_heldout_geometry_exactly_reproduced']==12
+          assert geo['historical_source_manifest_sha256']==manifest['original_source_manifest_sha256']
+          assert geo['repaired_source_heldout_model_refits_completed']==0
+          assert original_source['taxa_qualified_repaired_raw_parity']==12
+          assert not launch['paired_source_D_opened'] and not launch['q95_opened']
+          assert not launch['repaired_heldout_final_test_opened'] and launch['empirical_ledger_increment']==0
+          rid=launch['historical_geometry_run_id']
+          run=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{rid}"],text=True))
+          assert run['status']=='completed' and run['conclusion']=='success'
+          assert run['head_branch']=='analysis/neon-external-truth-preflight-20261115'
+          assert run['head_sha']==launch['historical_geometry_run_sha']
+          arts=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{rid}/artifacts?per_page=100"],text=True))['artifacts']
+          names={f'gbif-original-heldout12-geometry-taxon-{i}':str(i) for i in range(12)}
+          xs=[a for a in arts if a['name'] in names]
+          assert len(xs)==12 and len({x['name'] for x in xs})==12
+          assert all(not x['expired'] and x['digest'] for x in xs)
+          assert {names[x['name']]:{'id':x['id'],'digest':x['digest']} for x in xs}==launch['signed_original_geometry_artifacts']
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as f:
+              f.write(f'geometry_run={rid}\n')
+          print('All 12 source-blind geometries signed; repaired source refitting authorized without paired D')
+          PY
+  heldout-source-fit:
+    needs: authorize
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        taxon_index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install original pinned model fit package and CHELSA manifest
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check -q -e './sdmr[cloud,parquet,geo]'
+      - uses: actions/download-artifact@v4
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.geometry_run }}
+          name: gbif-original-heldout12-geometry-taxon-${{ matrix.taxon_index }}
+          path: old_geometry
+      - name: Download exact signed historical 2000-row core19 M comparison frames
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAXON_INDEX: ${{ matrix.taxon_index }}
+        run: |
+          set -euo pipefail
+          mkdir -p original_frames
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess,zipfile
+          i=int(os.environ['TAXON_INDEX'])
+          m=json.loads(pathlib.Path('config/gbif_original_heldout12_geometry_manifest_v1.json').read_text())
+          e=m['entries'][i]
+          original=json.loads(pathlib.Path(f'old_geometry/heldout_geometry_ref_{i}.json').read_text())
+          source=json.loads(pathlib.Path('results/gbif_repaired_heldout12_thinning_v1.json').read_text())['per_taxon_source_mode_result'][i]
+          assert original['taxon_index']==i and original['taxon']==e['taxon']==source['taxon']
+          assert original['historical_specieskey']==e['historical_specieskey']==source['original_specieskey']
+          assert original['status']=='ORIGINAL_SIGNED_HELDOUT_GEOMETRY_EXACTLY_REPRODUCED'
+          assert hashlib.sha256(pathlib.Path('old_geometry/original_heldout_centers.npy').read_bytes()).hexdigest()==original['center_npy_sha256']
+          assert source['original_fit_artifact_id']==e['original_fit_artifact_id']
+          archive='/tmp/original_heldout_core19_frame.zip'
+          with open(archive,'wb') as f:
+              subprocess.run(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{e['original_qualification_artifact_id']}/zip"],stdout=f,check=True)
+          assert 'sha256:'+hashlib.sha256(pathlib.Path(archive).read_bytes()).hexdigest()==e['original_qualification_artifact_digest']
+          with zipfile.ZipFile(archive) as z:z.extractall('original_frames')
+          receipt=json.loads(pathlib.Path('original_frames/receipt.json').read_text())
+          assert receipt['taxon']==e['taxon'] and receipt['taxon_index']==i
+          assert receipt['common_block_centers_sha256']==original['original_center_sha256']
+          assert str(receipt['specieskey'])==e['historical_specieskey']
+          print('All original signed source frames and historical centers match')
+          PY
+      - name: Refit frozen 48 source cells from restored 10215-object GBIF source, pairing closed
+        env:
+          TAXON_INDEX: ${{ matrix.taxon_index }}
+          SDMR_RASTER_LAYER_JOBS: '2'
+        run: |
+          python scripts/fit_gbif_repaired_heldout12_fixed_original_centers_v1.py \
+            --panel heldout \
+            --taxon-index "$TAXON_INDEX" \
+            --core19-frame-dir original_frames \
+            --historical-centers-npy old_geometry/original_heldout_centers.npy \
+            --historical-centers-receipt "old_geometry/heldout_geometry_ref_${TAXON_INDEX}.json" \
+            --chelsa-manifest sdmr/configs/chelsa_v2_1_plant_candidates.csv \
+            --output-dir fit
+      - name: Require no source-paired or reference-ceiling computation
+        run: |
+          python - <<'PY'
+          import json
+          c=json.load(open('fit/contract.json'))
+          assert c['result_version']=='284b.gbif_repaired_heldout12_fixed_old_centers_fit_v1'
+          assert c['panel']=='heldout' and c['expected_fit_cells']==48
+          assert c['sealed_fit_cells']+c['unresolved_fit_cells']==48
+          assert c['original_signed_comparison_frames_unchanged']
+          assert c['background_rows_resampled_during_refit'] is False
+          for key in ('paired_discordance_computed','reference_ceiling_opened_or_read',
+                      'heldout_pairing_opened','process_knockout_computed','counts_as_empirical_conclusion'):
+              assert c[key] is False
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gbif-repaired-heldout12-fit-taxon-${{ matrix.taxon_index }}
+          path: fit/
+          retention-days: 45
+          if-no-files-found: warn
+  aggregate:
+    needs: [authorize, heldout-source-fit]
+    if: always() && needs.authorize.result == 'success' && needs.heldout-source-fit.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install model-score Parquet integrity libraries
+        run: python -m pip install -q numpy pandas pyarrow
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: gbif-repaired-heldout12-fit-taxon-*
+          path: repaired_source_models
+      - name: Require 12 original taxon models and all 576 frozen source-specific fit states
+        run: |
+          python scripts/aggregate_gbif_repaired_heldout12_source_fits_v1.py \
+            --manifest config/gbif_original_heldout12_geometry_manifest_v1.json \
+            --geometry results/gbif_original_heldout12_geometry_complete_v1.json \
+            --source results/gbif_repaired_heldout12_thinning_v1.json \
+            --fits-root repaired_source_models \
+            --out results/gbif_repaired_heldout12_fit_audit_v1.json
+      - name: Archive source-specific heldout fits, not paired scientific outcomes
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open('results/gbif_repaired_heldout12_fit_audit_v1.json'))
+          assert x['heldout_taxa_verified']==12 and x['source_fit_cells_expected']==576
+          assert x['source_fit_cells_sealed']+x['source_fit_cells_unresolved']==576
+          assert x['reference_q95_opened'] is False and x['heldout12_paired_discordance_opened'] is False
+          assert x['empirical_ledger_increment']==0 and x['submission_status']=='HOLD'
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_heldout12_fit_audit_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive restored-source model-fit audit for all original 12 heldout taxa"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

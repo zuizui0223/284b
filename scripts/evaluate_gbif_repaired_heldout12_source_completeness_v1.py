@@ -115,6 +115,23 @@ def load_qualified_heldout(root,fit_audit):
         output[i]=(c,f.parent)
     return [output[i] for i in range(12)]
 
+def assess_original_cell_coverage(original_open,repaired_open,attention_taxa):
+    """Prespecify coverage of all 283 original opened cells, not just 0 exceedances."""
+    original_open=set(original_open);repaired_open=set(repaired_open)
+    _require(len(original_open)==283,"Historical signed original endpoint must open 283 unique cells")
+    _require(all(isinstance(k,tuple) and len(k)==3 for k in original_open|repaired_open),
+             "Historical/repaired paired-cell keys must be (taxon, M, procedure)")
+    lost=original_open-repaired_open
+    gained=repaired_open-original_open
+    robust=(not attention_taxa and not lost)
+    status=("historical_0of12_not_robust_to_repaired_source"
+            if attention_taxa else (
+                "historical_0of12_robust_to_repaired_source" if not lost
+                else "repaired_source_no_attention_but_original_283_cell_coverage_decreased"
+            ))
+    return {"status":status,"robust":robust,"lost":lost,"gained":gained}
+
+
 def main():
     import pandas as pd
     from scripts import evaluate_same_target_heldout_final_finite_frame_repair as reviewed
@@ -183,16 +200,14 @@ def main():
     repaired_keys=set(tuple(r) for r in scores[key_columns].itertuples(index=False,name=None))
     _require(len(original_keys)==288 and original_keys==repaired_keys,
              "Original heldout taxon × procedure × M universe cannot change")
-    original_open={
-        tuple(r) for r in historical_scores.loc[
-            historical_scores["paired_prediction_surface_opened"].astype(bool),key_columns
-        ].itertuples(index=False,name=None)
-    }
-    repaired_open={
-        tuple(r) for r in scores.loc[
-            scores["paired_prediction_surface_opened"].astype(bool),key_columns
-        ].itertuples(index=False,name=None)
-    }
+    def opened_keys(frame):
+        values=frame["paired_prediction_surface_opened"].astype(str).str.strip().str.lower()
+        _require(values.isin(["true","false"]).all(),"Prediction opening flags must be explicit booleans")
+        return {
+            tuple(r) for r in frame.loc[values.eq("true"),key_columns].itertuples(index=False,name=None)
+        }
+    original_open=opened_keys(historical_scores)
+    repaired_open=opened_keys(scores)
     _require(len(original_open)==283 and len(repaired_open)==int(base["paired_prediction_surfaces_opened_cells"]),
              "Historical original open-cell cardinality or repaired opened count changed")
     lost_original_open=original_open-repaired_open
@@ -219,8 +234,9 @@ def main():
     ].unique().tolist())
     _require(set(alerts).issubset({c["taxon"] for c,_ in models}),"Attention taxa outside frozen 12")
 
-    full_comparability=(len(lost_original_open)==0)
-    robust_to_source_completeness=(len(alerts)==0 and full_comparability)
+    coverage=assess_original_cell_coverage(original_open,repaired_open,alerts)
+    full_comparability=(len(coverage["lost"])==0)
+    robust_to_source_completeness=coverage["robust"]
     base.update({
       "result_version":FINAL_RESULT,
       "terminal_class":"postfreeze_source_completeness_sensitivity",
@@ -256,13 +272,7 @@ def main():
       "submission_status":"HOLD_FOR_SENSITIVITY_REVIEW",
       "claim_strength":"retrospective_upstream_source_completeness_robustness_not_new_independent_biological_confirmation",
     })
-    base["status"]=(
-        "historical_0of12_not_robust_to_repaired_source"
-        if alerts else (
-            "historical_0of12_robust_to_repaired_source"
-            if full_comparability else "repaired_source_no_attention_but_original_283_cell_coverage_decreased"
-        )
-    )
+    base["status"]=coverage["status"]
     base["final_endpoint_fingerprint"]=hashlib.sha256(
         (base["cells_sha256"]+base["reference_summary_sha256"]+
          base["reference_table_sha256"]+historical["final_endpoint_fingerprint"]).encode("utf-8")

@@ -1,0 +1,217 @@
+{
+  "schema": "284b.gbif_repaired_reference47_refit_launch.v1",
+  "status": "EXACT_47_OLD_GEOMETRIES_VERIFIED_AUTHORIZE_REPAIRED_SOURCE_REFITS",
+  "original_reference_taxa": 47,
+  "original_geometry_result_run_id": 44447154218,
+  "original_geometry_run_sha": "a311571281ef51c07b707796656450e39f42722c",
+  "original_geometry_completion_sha256": "bb4f221884af9f4b4800adb1f0267c91d1e2b5f05b5e4f867ecc35f4824b554a",
+  "historical_source_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "restored_GBIF_source_manifest_sha256": "ca0d9844cd6816b4e4d550a0152db489b5e6a4c5129f8700fe2f1d818b954cd2",
+  "original_geometry_artifacts": {
+    "0": {
+      "id": 14493729897,
+      "digest": "sha256:644840a0f4af7c4db5606ae4c57a335ce4eb8edcbbb1ba7d30067a7903e2f94b"
+    },
+    "1": {
+      "id": 14494183097,
+      "digest": "sha256:d2cd2e98de1163e66d7115747eada278f7d52494b45325b2c041213e27f320b8"
+    },
+    "2": {
+      "id": 14495110648,
+      "digest": "sha256:4d4cc7290b67addc5ae092ce0128f640d3a3b04b3c4a8d8a4edfe4f5ce11dd4c"
+    },
+    "3": {
+      "id": 14494622477,
+      "digest": "sha256:329a20a9d7c2dfbd0a152e4af15412dec2e2dc91267329f61c1220dfdfc9e338"
+    },
+    "4": {
+      "id": 14495130533,
+      "digest": "sha256:feba4751a17b119cd038a74f059b4a1e0f31f11f2d8b5691ec70131d3b79b92e"
+    },
+    "5": {
+      "id": 14493838436,
+      "digest": "sha256:7be4d87cc58c240baa0194d418d4cdca40b25310d60194665c030cc73eba0e58"
+    },
+    "6": {
+      "id": 14496261792,
+      "digest": "sha256:f3b08e6d386e4ebb34f94e71f74225d5db984661afed47399e93a2c1be5568e1"
+    },
+    "7": {
+      "id": 14496297639,
+      "digest": "sha256:e64f60cd8b4fea8f731fb55cf486999c30c69440910c20d550a62538a0240334"
+    },
+    "8": {
+      "id": 14495149966,
+      "digest": "sha256:1e02a882a141944712fad971db5b4e399f14fa0f3fb1031539ae5a03db4b158b"
+    },
+    "9": {
+      "id": 14496770904,
+      "digest": "sha256:f166133cc7b6c9f1ff500ce1176094a55841d18fcd994076ad4c088b30a876d2"
+    },
+    "10": {
+      "id": 14495682565,
+      "digest": "sha256:bdac3156e55a0ff7698bb8a4ee07dc061102852db1143c31531f365de3f4ca25"
+    },
+    "11": {
+      "id": 14496060799,
+      "digest": "sha256:1791956855daad5f3c52458fbf3f356c5360b7308e42e57dd24e43c1167e0ac9"
+    },
+    "12": {
+      "id": 14496428245,
+      "digest": "sha256:1e5501f08cabdcc8fbec9ddcda045546dee30b2822932be610fb42928ac3bb2b"
+    },
+    "13": {
+      "id": 14496757165,
+      "digest": "sha256:376115042cbfb726219781f12a475767497591231c5581a224194b99ac19bbca"
+    },
+    "14": {
+      "id": 14496439360,
+      "digest": "sha256:0463afcc3bcc994dcd8946b600861e67fa7d8bcad5d94361407b5407ac544795"
+    },
+    "15": {
+      "id": 14497223117,
+      "digest": "sha256:6ebbecd767d482050453d01e4e25eb3b0cf906794a836e66ce29ba931ccb3b58"
+    },
+    "16": {
+      "id": 14497891517,
+      "digest": "sha256:94e1b8fc68b47fb397d8c0b60ce6106dda42e6d66cba4257f8884a90ba1aa299"
+    },
+    "17": {
+      "id": 14498251603,
+      "digest": "sha256:827f83814dd8d9a500b8e077e6fb58f0ff2af01ec10f32f5d1701b00a46c1ea8"
+    },
+    "18": {
+      "id": 14496874697,
+      "digest": "sha256:64428994d08db1db1a8882c90a929f882981f281837a03e85323194810262d40"
+    },
+    "19": {
+      "id": 14496769909,
+      "digest": "sha256:efbd0255f64796aebc864df891ce7515ab1caa91f894bddfabdad9ddc2f5836c"
+    },
+    "20": {
+      "id": 14498856181,
+      "digest": "sha256:bb6b8484293f40dadb69c9d98eaf04e8f353bb28b1a6f785eacd8b4d8fff0682"
+    },
+    "21": {
+      "id": 14498837502,
+      "digest": "sha256:8ef5622ac135bad4780e85d70d773d89fcf6e73146338ee289baa86cf0904d5e"
+    },
+    "22": {
+      "id": 14498238539,
+      "digest": "sha256:aff557d4bf883147e78197a2ccb69ce4a8d2488bb30967ec41a85ad53ef4e5ec"
+    },
+    "23": {
+      "id": 14499460829,
+      "digest": "sha256:fdb4b92bba3e746754d32d861bef08eea75d0e4bde9bff8b66a9a609f93efca7"
+    },
+    "24": {
+      "id": 14498859198,
+      "digest": "sha256:caed03111c648d0dfab4222d5586068af2e72930bf3078a42ed71f94e14eb9f5"
+    },
+    "25": {
+      "id": 14499736510,
+      "digest": "sha256:5b9d64a8873c46d48a7aeb410ba3dc35a8457c3d8ac16dec4912d8d4f0d16987"
+    },
+    "26": {
+      "id": 14500605852,
+      "digest": "sha256:0ba3034de09895c164fe4b8cce2307d08d70eca3c32649de26e49ef4f819327d"
+    },
+    "27": {
+      "id": 14499823890,
+      "digest": "sha256:c78a81c00b4931ffffea18c0f68b7c3cd4ed38a2c514b455243d5bb3f32ff38e"
+    },
+    "28": {
+      "id": 14499173903,
+      "digest": "sha256:9d908b2e2d06db57f12bf4481e770608a875864896a0b5f0128bf5cf3b1e7251"
+    },
+    "29": {
+      "id": 14500475502,
+      "digest": "sha256:cf65035dd70a5a6e1f9248ec2e03602c00f1804f52bc9066f715df510704f8a4"
+    },
+    "30": {
+      "id": 14500023006,
+      "digest": "sha256:e632f6a9ff565f94e7ec91eab82ca74d82d26b133344c85e41d1155e3523dcac"
+    },
+    "31": {
+      "id": 14500024119,
+      "digest": "sha256:bfbf933383345248094b1a018e4c7066406ff46504a1dba4fb2c0deaf3f56d43"
+    },
+    "32": {
+      "id": 14501905462,
+      "digest": "sha256:99663b8a57600ef6cf560f9a6551c07d2202d98af0c61c002a74b2eb1223a556"
+    },
+    "33": {
+      "id": 14500568971,
+      "digest": "sha256:3cdb7fe62bcd49db778ad145b733814ff4369f6c9817e81cf715028d942b41a7"
+    },
+    "34": {
+      "id": 14500243922,
+      "digest": "sha256:bc451e717d659bcbb7657a7229751eb41979ed0b26fe7bae19135cedfc8fac23"
+    },
+    "35": {
+      "id": 14501067713,
+      "digest": "sha256:04a0664db4e65626061ccbfbf87b036fe5c520c1cb0bb967a40014c314f7096d"
+    },
+    "36": {
+      "id": 14501411065,
+      "digest": "sha256:09e2edc451d7476d50115994b8ebfd5637059139062cdb1090c5c630b7b99bec"
+    },
+    "37": {
+      "id": 14501635747,
+      "digest": "sha256:f937fd6cf9cf75667b8ff784025485efcd04f846db08210a4c95c36850a0ec3b"
+    },
+    "38": {
+      "id": 14502365849,
+      "digest": "sha256:1cbc2ca21c8e4b42f95f507924760439ac160fed4cff70794a80aa47a9e36222"
+    },
+    "39": {
+      "id": 14502200319,
+      "digest": "sha256:5ae3af205e940511278b68a35251d2264f7d307b7792525674901094f181c10b"
+    },
+    "40": {
+      "id": 14501966842,
+      "digest": "sha256:114aefe319eb580b526ae093cac152652b19f488c8427f6374d4b62ad185c3e6"
+    },
+    "41": {
+      "id": 14503180128,
+      "digest": "sha256:fdf294efc3baf7508f2c8d1018542c91dd5ecd9461f8da13f9356f3842f896ab"
+    },
+    "42": {
+      "id": 14503116412,
+      "digest": "sha256:36b9b47dd4ce39c54734d64efc6421a36e5354d5a57384419090ab9892656898"
+    },
+    "43": {
+      "id": 14502442073,
+      "digest": "sha256:db8f3b8625774b27002dbe1735ffebdc21e6f6a06b622241bc1a9f29e2f6bbaa"
+    },
+    "44": {
+      "id": 14502707623,
+      "digest": "sha256:eb164292a5458d5e7bd3cbebfcbaa90a0e1189a6ffac5a509661318c1f978fb0"
+    },
+    "45": {
+      "id": 14502138393,
+      "digest": "sha256:1f566bdee7c09f641cf5437158018d13244be65a3c332659a40d73d24374b2cc"
+    },
+    "46": {
+      "id": 14503074748,
+      "digest": "sha256:0e23a1c2f7cfc84beeb7da94e45ece398c926e93e96d26857edec21b206c79fe"
+    }
+  },
+  "fixed_M_km": [
+    150,
+    300,
+    500
+  ],
+  "source_modes": [
+    "PRESERVED_SPECIMEN",
+    "HUMAN_OBSERVATION"
+  ],
+  "fixed_methods": 8,
+  "expected_source_fit_cells": 2256,
+  "paired_source_D_opened": false,
+  "reference_q95_opened": false,
+  "heldout12_opened": false,
+  "new_independent_biological_confirmation": false,
+  "empirical_ledger_increment": 0,
+  "note": "Original 47 geometry SHA verified; fit 2,256 repaired-source source-mode cells; no q95 or heldout comparison at this stage"
+}

@@ -30,6 +30,12 @@ Thus the manuscript can be read without any failed or unopened ecological candid
 
 `manuscript/LEVEL_A_SHORT_REPORT_V0_1.md` remains an independent Ecology Report fallback if the invited Ecology Letters route is not pursued.
 
+## Integrated Supporting Information and coauthor review
+
+The complete S1–S11 SI, including both 12-taxon (historical/restored) and 24-configuration restored-q95 tables, mathematical proof and source repair qualification, is now `manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_COMPLETE_SI_V1.md`. The original source-completeness-only SI remains a signed evidence module. The coauthor decision memo is `manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_COAUTHOR_DECISION_MEMO_20261123.md`; it requests explicit signoff on **coverage-limited** inference without retrospectively changing `robust=false`.
+
+All four vector manuscript figures and 173-mm print preflight have passed. The remaining figure-specific check is actual placement in the compiled journal reviewer/proof document.
+
 ## Current signed scientific source and submission gate
 
 - Original signed Level A: `results/product_b_same_target_core19_v0_4_heldout_final_receipt.json` (historical 0/12, 283/288).
@@ -47,8 +53,8 @@ Thus the manuscript can be read without any failed or unopened ecological candid
 - acknowledgements/funding/conflicts;
 - permanent archive DOI;
 - final journal-form AI disclosure;
-- final rendered figures;
+- final compiled submission PDF/portal proof (standalone four figures are already rendered and print-size inspected);
 - explicit coauthor sign-off on the exact source-completeness limitation and the conditional strength of the invited Ecology Letters claim;
-- complete source-repair supporting-information table and final journal formatting.
+- final journal formatting, complete-SI upload/numbering proof and coauthor scientific approval.
 
 No new ecological endpoint hunting is required for this manuscript.

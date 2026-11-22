@@ -33,7 +33,7 @@
     "coauthor review and explicit scientific signoff of coverage-limited 0/12 source-repair sensitivity",
     "human author metadata, affiliations, CRediT, correspondence, and author approval",
     "permanent archive DOI",
-    "final journal-width / minimum-lettering proof and complete M1+M2 Supporting Information assembly",
+    "complete M1+M2 Supporting Information assembly and final compiled manuscript/portal proof",
     "final journal formatting/word count/reference validation and possible blind-review derivative",
     "policy-aligned AI-use and conflict/funding statements",
     "invitation reference/date and no-simultaneous-submission confirmation"
@@ -80,12 +80,12 @@
   },
   "source_completeness_supporting_information": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_SOURCE_COMPLETENESS_SI_V1.md",
   "figure_package_20261122": {
-    "source_head_sha": "382bb0bb65d94b746d7d2a93a5b7eb3e87b78bf4",
-    "workflow_run_id": 45032223808,
-    "workflow_url": "https://github.com/zuizui0223/284b/actions/runs/45032223808",
-    "artifact_id": 14758595402,
+    "source_head_sha": "54d47342ac122ff7ef87b0866bdb8b88dec7ffc2",
+    "workflow_run_id": 45032824094,
+    "workflow_url": "https://github.com/zuizui0223/284b/actions/runs/45032824094",
+    "artifact_id": 14758348052,
     "artifact_name": "invited-m1-m2-figures-restored-v2",
-    "artifact_sha256": "4ac5980a12f57201bb9659c9061c73d24ca389a26ecfb3c67c9bd2792b2dfdaa",
+    "artifact_sha256": "2a97feb9e090c39f49bdba7560cbeec421a306c52af2d673a9b5ebd13fe10aea",
     "files": 12,
     "figures": 4,
     "formats": [
@@ -95,12 +95,19 @@
     ],
     "rendering_success": true,
     "visual_layout_check_completed": true,
-    "journal_final_width_proof_completed": false,
+    "journal_final_width_proof_completed": true,
     "complete_supplement_assembled": false,
     "authorship_approval": false,
     "source_repair_strict_robustness": false,
     "additional_independent_empirical_endpoints": 0,
     "captions": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_FIGURE_CAPTIONS_V1.md",
-    "qa": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_FIGURE_QA_20261122.md"
+    "qa": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_FIGURE_QA_20261122.md",
+    "standalone_173mm_vector_min_font_pt": {
+      "figure1": 7.056,
+      "figure2": 6.004,
+      "figure3": 6.096,
+      "figure4": 6.118
+    },
+    "final_compiled_submission_proof_completed": false
   }
 }

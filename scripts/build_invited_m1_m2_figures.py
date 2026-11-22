@@ -288,9 +288,9 @@ def fig3_invalidity(out,invalid):
     ax2.plot(a,1-a,color=BLUE,lw=2)
     ax2.scatter([a1,a0],[1-a1,1-a0],s=50,zorder=4,
                 color=[GOLD,INK],edgecolor="white",linewidth=0.8)
-    ax2.text(.055, .18, "Compatible keys: a₁=.70  →  +.30",
+    ax2.text(.055, .18, "a₁=.70  →  ΔFPR=.30",
              color=GOLD, fontsize=9.0, transform=ax2.transAxes)
-    ax2.text(.055, .08, "True violations: a₀=.90  →  +.10",
+    ax2.text(.055, .08, "a₀=.90  →  ΔTPR=.10",
              color=INK, fontsize=9.0, transform=ax2.transAxes)
     ax2.set(xlim=(0,1.02),ylim=(0,1.05),xlabel="Valid-key fraction  a",
             ylabel="Exact increment  1 − a")

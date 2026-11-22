@@ -74,7 +74,9 @@
       "sensitivity_terminal": "results/gbif_repaired_heldout12_sensitivity_v1.json",
       "sensitivity_cells": "results/gbif_repaired_heldout12_sensitivity_cells_v1.csv",
       "matched_score_drift": "results/gbif_repaired_heldout12_postterminal_score_drift_v1.json",
-      "cv_adequacy_switches": "results/gbif_repaired_heldout12_postterminal_cv_switch_v1.json"
+      "cv_adequacy_switches": "results/gbif_repaired_heldout12_postterminal_cv_switch_v1.json",
+      "supporting_information": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_SOURCE_COMPLETENESS_SI_V1.md"
     }
-  }
+  },
+  "source_completeness_supporting_information": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_SOURCE_COMPLETENESS_SI_V1.md"
 }

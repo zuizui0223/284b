@@ -32,7 +32,8 @@
 - [ ] Final reference formatting verified.
 - [ ] Figures rendered and visually inspected.
 - [ ] Figure accessibility / alt text completed.
-- [ ] Supplement assembled only from evidence needed by the M1+M2 paper.
+- [x] Signed source-completeness sensitivity Supporting Information draft prepared: `manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_SOURCE_COMPLETENESS_SI_V1.md` (59 fitted taxa, 24 thresholds, 288 keyed heldout cells, four adequacy flips, 282/283 original-cell retention).
+- [ ] Assemble and journal-format the **complete** M1+M2 supplement (including M1 theorem/benchmark materials) and verify its consistency with the new source-completeness section.
 - [ ] Anonymous/review manuscript generated if required by the current portal.
 
 ## Reproducibility

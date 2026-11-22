@@ -1,0 +1,57 @@
+name: "Audit signed repaired Level A terminal 288-cell coverage transitions"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'scripts/audit_gbif_repaired_heldout12_postterminal_coverage_v1.py'
+      - 'tests/test_gbif_repaired_heldout12_postterminal_coverage_v1.py'
+      - '.github/workflows/gbif_repaired_heldout12_postterminal_coverage_v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: gbif-restore-20260801-postterminal-288-coverage-audit
+  cancel-in-progress: false
+jobs:
+  audit-postterminal-without-reopening-source-paired-outcomes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify 283 historical opened cell keys against 285 restored source outcomes
+        run: |
+          python -m unittest discover -s tests -p 'test_gbif_repaired_heldout12_postterminal_coverage_v1.py' -v
+          python scripts/audit_gbif_repaired_heldout12_postterminal_coverage_v1.py \
+            --historical results/product_b_same_target_core19_v0_4_heldout_final_receipt.json \
+            --restored results/gbif_repaired_heldout12_sensitivity_v1.json \
+            --restored-cells results/gbif_repaired_heldout12_sensitivity_cells_v1.csv \
+            --reference results/gbif_repaired_reference47_q95_summary_v1.json \
+            --out results/gbif_repaired_heldout12_postterminal_coverage_audit_v1.json
+      - name: Archive exact original/repaired key transition without promoting scientific claims
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          x=json.loads(pathlib.Path('results/gbif_repaired_heldout12_postterminal_coverage_audit_v1.json').read_text())
+          assert x['historical_opened_cells']==283
+          assert x['restored_opened_cells']==285
+          assert x['original_opened_retained']==282 and x['original_opened_lost']==1
+          assert x['newly_opened_restored_cells']==3
+          assert x['q95_exceeding_restored_opened_cells']==0
+          assert x['q95_recalibrated_reference_cells']==24
+          assert x['closest_signed_restored_cell']['discordance_minus_q95']<0
+          assert x['full_original_cell_coverage_preserved'] is False
+          assert x['historical_0_of_12_source_completeness_fully_robust'] is False
+          assert x['empirical_ledger_increment']==0
+          assert x['submission_status']=='HOLD_FOR_SENSITIVITY_REVIEW'
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_heldout12_postterminal_coverage_audit_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive exact original 283 vs restored 285 heldout source-coverage audit"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

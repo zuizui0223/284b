@@ -1,0 +1,112 @@
+name: "Explain four signed restored-source Level A adequacy switches from original folds"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'scripts/audit_gbif_repaired_heldout12_postterminal_cv_switch_v1.py'
+      - 'tests/test_gbif_repaired_heldout12_postterminal_cv_switch_v1.py'
+      - '.github/workflows/gbif_repaired_heldout12_postterminal_cv_switch_v1.yml'
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: gbif-20260801-12heldout-four-adequacy-switches
+  cancel-in-progress: false
+jobs:
+  signed-source-cv-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify frozen four-fold adequacy gate and signed four changed cells
+        env:
+          PYTHONPATH: '.:legacy/pre_level_a_focus'
+        run: |
+          python -m unittest discover -s tests -p 'test_gbif_repaired_heldout12_postterminal_cv_switch_v1.py' -v
+      - name: Acquire only original and restored fit ZIPs for three terminal flip taxa
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p old_fit new_fit
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess,zipfile
+          repo=os.environ['GITHUB_REPOSITORY']
+          m=json.loads(pathlib.Path('config/gbif_original_heldout12_geometry_manifest_v1.json').read_text())
+          old=json.loads(pathlib.Path('results/product_b_same_target_core19_v0_4_heldout_final_receipt.json').read_text())
+          terminal=json.loads(pathlib.Path('results/gbif_repaired_heldout12_sensitivity_v1.json').read_text())
+          coverage=json.loads(pathlib.Path('results/gbif_repaired_heldout12_postterminal_coverage_audit_v1.json').read_text())
+          assert coverage['historical_endpoint_fingerprint']==old['final_endpoint_fingerprint']
+          assert coverage['restored_endpoint_fingerprint']==terminal['final_endpoint_fingerprint']
+          names={r['taxon'] for r in coverage['transition_cells']}
+          indices=sorted(x['index'] for x in m['entries'] if x['taxon'] in names)
+          assert indices==[6,8,11],indices
+          prior_rid=34439487385
+          source_rid=terminal['source_manifest']['heldout12_fit_run_id']
+          assert source_rid==44480087256
+          run=json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/actions/runs/{source_rid}'],text=True))
+          assert run['status']=='completed' and run['conclusion']=='success'
+          source_arts=json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/actions/runs/{source_rid}/artifacts?per_page=100'],text=True))['artifacts']
+          for i in indices:
+              e=m['entries'][i]
+              original_id=e['original_fit_artifact_id']
+              original_digest=e['original_fit_artifact_digest']
+              repaired=terminal['source_manifest']['heldout12_fit_artifacts'][str(i)]
+              hit=[a for a in source_arts if a['name']==f'gbif-repaired-heldout12-fit-taxon-{i}']
+              assert len(hit)==1 and not hit[0]['expired']
+              assert hit[0]['id']==repaired['id'] and hit[0]['digest']==repaired['digest']
+              for label,ident,digest,root in [
+                  ('original',original_id,original_digest,pathlib.Path('old_fit')/str(i)),
+                  ('repaired',repaired['id'],repaired['digest'],pathlib.Path('new_fit')/str(i))
+              ]:
+                  root.mkdir(parents=True,exist_ok=True)
+                  zip_path=f'/tmp/gbif_{label}_fit_{i}.zip'
+                  with open(zip_path,'wb') as f:
+                      subprocess.run(['gh','api',f'repos/{repo}/actions/artifacts/{ident}/zip'],stdout=f,check=True)
+                  assert 'sha256:'+hashlib.sha256(pathlib.Path(zip_path).read_bytes()).hexdigest()==digest
+                  with zipfile.ZipFile(zip_path) as z:z.extractall(root)
+                  assert (root/'contract.json').is_file() and (root/'outer_cv_fold_metrics.csv').is_file()
+          print('3 historical taxa x original/restored SHA-signed CV fit ZIPs verified without opening predictions')
+          PY
+      - name: Reapply original four-fold presence-rank adequacy rule only for the four signed transitions
+        env:
+          PYTHONPATH: '.:legacy/pre_level_a_focus'
+        run: |
+          python scripts/audit_gbif_repaired_heldout12_postterminal_cv_switch_v1.py \
+            --coverage results/gbif_repaired_heldout12_postterminal_coverage_audit_v1.json \
+            --historical results/product_b_same_target_core19_v0_4_heldout_final_receipt.json \
+            --repaired results/gbif_repaired_heldout12_sensitivity_v1.json \
+            --source-audit results/gbif_repaired_heldout12_thinning_v1.json \
+            --manifest config/gbif_original_heldout12_geometry_manifest_v1.json \
+            --old-fit-root old_fit \
+            --new-fit-root new_fit \
+            --out results/gbif_repaired_heldout12_postterminal_cv_switch_v1.json
+      - name: Archive only signed CV flip reasons; keep historical and restored outcome receipts untouched
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          s=json.loads(pathlib.Path('results/gbif_repaired_heldout12_postterminal_cv_switch_v1.json').read_text())
+          assert s['status']=='SIGNED_4_CELL_SOURCE_ADEQUACY_TRANSITIONS_EXPLAINED_NO_SCIENCE_CHANGED'
+          assert s['paired_cells_with_changed_evaluability']==4
+          assert s['source_specific_adequacy_state_flips']==4
+          assert s['original_opened_lost']==1 and s['newly_restored_opened']==3
+          assert s['frozen_adequacy_science']=={
+              'outer_folds':4,'chance_auc':0.5,'minimum_auc_margin':0.01,'auc_sem_multiplier':1}
+          assert s['terminal_result_changed_or_reopened'] is False
+          assert s['model_retrained_or_procedure_reselected'] is False
+          assert s['repaired_0_of_12_coverage_fully_robust'] is False
+          assert s['independent_biological_evidence'] is False and s['empirical_ledger_increment']==0
+          assert s['submission_status']=='HOLD_FOR_SENSITIVITY_REVIEW'
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_heldout12_postterminal_cv_switch_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Explain four fixed source-adequacy flips using original signed outer CV folds"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

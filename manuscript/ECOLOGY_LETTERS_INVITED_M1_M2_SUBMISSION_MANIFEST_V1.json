@@ -34,7 +34,7 @@
     "human author metadata, affiliations, CRediT, correspondence, and author approval",
     "permanent archive DOI",
     "coauthor review of integrated M1+M2 SI and final journal-formatted/compiled manuscript and portal proof",
-    "final journal formatting/word count/reference validation and possible blind-review derivative",
+    "final publisher-formatted word-count/references/citations verification, Supporting Information export and possible blind-review derivative",
     "policy-aligned AI-use and conflict/funding statements",
     "invitation reference/date and no-simultaneous-submission confirmation"
   ],
@@ -127,5 +127,28 @@
     "coauthor_review_only": true,
     "final_journal_format_approved": false
   },
-  "coauthor_scientific_decision_memo": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_COAUTHOR_DECISION_MEMO_20261123.md"
+  "coauthor_scientific_decision_memo": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_COAUTHOR_DECISION_MEMO_20261123.md",
+  "journal_source_preflight_20261123": {
+    "guidance": "https://onlinelibrary.wiley.com/page/journal/14610248/homepage/ForAuthors.html",
+    "audit": "docs/EL_METHOD_JOURNAL_PREFLIGHT_20261123.md",
+    "source_abstract_words": 135,
+    "abstract_limit": 150,
+    "source_main_text_words_approx": 2392,
+    "method_main_word_limit": 5000,
+    "main_figures": 4,
+    "main_tables": 0,
+    "main_boxes": 0,
+    "main_display_limit": 6,
+    "running_title_chars": 29,
+    "running_title_limit_exclusive": 45,
+    "keywords": 8,
+    "reference_entries": 9,
+    "complete_SI_sections": 11,
+    "complete_SI_tables": 2,
+    "formatting_status": "SOURCE_PREFLIGHT_WITHIN_QUANTITATIVE_LIMITS_NOT_FINAL_PORTAL_PROOF",
+    "publisher_format_approved": false,
+    "doi_present": false,
+    "author_approval_received": false,
+    "corrected_source_coverage_strictly_robust": false
+  }
 }

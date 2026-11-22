@@ -29,7 +29,8 @@
 
 - [x] Abstract guarded at <=150 words by CI.
 - [x] Planned display count <=6.
-- [ ] Final main-text word count verified on the submission derivative.
+- [x] Provisional source Markdown count audited against Method limits (abstract 135/150, sections 1–7 2,392/5,000, 4/6 main displays; 9 references; 8 keywords, running title 29 characters); see `docs/EL_METHOD_JOURNAL_PREFLIGHT_20261123.md`.
+- [ ] Final manuscript-format word counts and title-page numbers reconfirmed from the submitted derivative.
 - [ ] Final reference formatting verified.
 - [x] Four primary figures rendered to PDF/SVG/PNG, integrity checked and visually inspected at original output size; overlaps fixed after first render ([figure QA receipt](ECOLOGY_LETTERS_INVITED_M1_M2_FIGURE_QA_20261122.md), CI run 45032223808).
 - [x] Figure captions and accessibility/alt text drafted for all four displays (`manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_FIGURE_CAPTIONS_V1.md`).

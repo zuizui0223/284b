@@ -41,6 +41,7 @@ class ReviewBundleGateTests(unittest.TestCase):
             payload=bundle.collect_payloads(ROOT,figures)
             self.assertEqual(len([x for x in payload if x.startswith("figures/") and x.endswith((".pdf",".png",".svg"))]),12)
             self.assertIn("BUNDLE_MANIFEST.json",payload)
+            self.assertIn("docs/EL_METHOD_JOURNAL_PREFLIGHT_20261123.md",payload)
             self.assertIn("REVIEW_ONLY.txt",payload)
             index=json.loads(payload["BUNDLE_MANIFEST.json"])
             self.assertEqual(index["submission_status"],"HOLD_FOR_SENSITIVITY_REVIEW")

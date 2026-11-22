@@ -1,0 +1,71 @@
+{
+  "closest_signed_restored_cell": {
+    "M_km": 500,
+    "discordance": 0.32332433328085197,
+    "discordance_minus_q95": -0.01691124139093081,
+    "procedure": "predictive_forward|logit_l2_C0.1_degree1",
+    "q95": 0.3402355746717828,
+    "taxon": "Eucalyptus globulus"
+  },
+  "empirical_ledger_increment": 0,
+  "full_original_cell_coverage_preserved": false,
+  "historical_0_of_12_source_completeness_fully_robust": false,
+  "historical_endpoint_fingerprint": "80465bdefd484a8e9d5adcdbd792820ff1716c2b589ff9ad2a278c6c9494646c",
+  "historical_opened_cells": 283,
+  "newly_opened_restored_cells": 3,
+  "original_opened_lost": 1,
+  "original_opened_retained": 282,
+  "originally_unresolved_cells": 5,
+  "postfreeze_source_repair_is_not_independent_new_biological_evidence": true,
+  "q95_exceeding_restored_opened_cells": 0,
+  "q95_recalibrated_reference_cells": 24,
+  "restored_endpoint_fingerprint": "87b92c461bfbae117a473ac12ce673517878dfbc4b87316d7b8cddc91eadcf48",
+  "restored_opened_cells": 285,
+  "restored_terminal_cells_sha256": "365d37c29b799b804da03550f1d7b1681277a2a676457269e02f6dd2308df20b",
+  "schema": "284b.gbif_repaired_heldout12_postterminal_coverage_audit.v1",
+  "status": "POSTTERMINAL_EXACT_288_CELL_COVERAGE_AUDITED_NO_INDEPENDENT_REPLICATION",
+  "still_unresolved_restored_cells": 3,
+  "submission_status": "HOLD_FOR_SENSITIVITY_REVIEW",
+  "transition_cells": [
+    {
+      "M_km": 150,
+      "human_observation_adequate": true,
+      "preserved_specimen_adequate": false,
+      "procedure": "niche_forward|logit_l2_C0.1_degree1",
+      "restored_pair_state": "paired_crosscheck_unresolved",
+      "restored_reasons": "one_or_both_source_answers_inadequate;preserved_specimen_answer_inadequate_or_missing",
+      "taxon": "Nothofagus antarctica",
+      "transition": "original_open_lost"
+    },
+    {
+      "M_km": 150,
+      "human_observation_adequate": true,
+      "preserved_specimen_adequate": true,
+      "procedure": "niche_forward|logit_l2_C0.1_degree1",
+      "restored_pair_state": "paired_crosscheck_consistent",
+      "restored_reasons": "",
+      "taxon": "Eucalyptus globulus",
+      "transition": "restored_newly_open"
+    },
+    {
+      "M_km": 300,
+      "human_observation_adequate": true,
+      "preserved_specimen_adequate": true,
+      "procedure": "niche_forward|logit_l2_C0.1_degree1",
+      "restored_pair_state": "paired_crosscheck_consistent",
+      "restored_reasons": "",
+      "taxon": "Larix laricina",
+      "transition": "restored_newly_open"
+    },
+    {
+      "M_km": 150,
+      "human_observation_adequate": true,
+      "preserved_specimen_adequate": true,
+      "procedure": "niche_forward|logit_l2_C1_degree2",
+      "restored_pair_state": "paired_crosscheck_consistent",
+      "restored_reasons": "",
+      "taxon": "Nothofagus antarctica",
+      "transition": "restored_newly_open"
+    }
+  ]
+}

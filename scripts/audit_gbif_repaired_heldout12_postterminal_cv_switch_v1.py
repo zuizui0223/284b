@@ -65,6 +65,13 @@ def audit(coverage:dict,historical:dict,repaired:dict,source_audit:dict,manifest
     require(manifest.get("frozen_taxon_count")==12 and len(manifest.get("entries",[]))==12
             and source_audit.get("taxa_qualified_repaired_raw_parity")==12,
             "Original 12 taxon and source input populations differ")
+    original_geometry=json.loads(
+        (ROOT/"results/gbif_original_heldout12_geometry_complete_v1.json").read_text(encoding="utf-8")
+    )
+    require(original_geometry.get("status")=="ALL_12_ORIGINAL_SIGNED_HELDOUT_GEOMETRIES_VERIFIED_NO_REPAIRED_MODELS"
+            and original_geometry.get("original_heldout_geometry_exactly_reproduced")==12
+            and len(original_geometry.get("taxa",[]))==12,
+            "Signed original 12-taxon center geometry receipt not verified")
     settings=json.loads(FIT_CONTRACT.read_text(encoding="utf-8"))["prediction_adequacy"]
     require(settings["outer_folds"]==4 and settings["chance_auc"]==0.5
             and settings["minimum_auc_margin"]==0.01
@@ -96,7 +103,9 @@ def audit(coverage:dict,historical:dict,repaired:dict,source_audit:dict,manifest
                 and oc["taxon_index"]==nc["taxon_index"]==idx
                 and oc["specieskey"]==nc["specieskey"]==entry["historical_specieskey"]
                 and oc["core19_frame_sha256_by_M"]==nc["core19_frame_sha256_by_M"]
-                and nc["original_12_block_centers_sha256"]==oc["original_12_block_centers_sha256"],
+                and oc["core19_preflight_receipt_sha256"]==nc["core19_preflight_receipt_sha256"]
+                and original_geometry["taxa"][idx]["taxon"]==taxon
+                and nc["original_12_block_centers_sha256"]==original_geometry["taxa"][idx]["original_center_sha256"],
                 "Historical/restored fit ZIPs did not hold the same source, taxon, spatial centers and frozen M rows")
         originals=load_folds(old_dir/"outer_cv_fold_metrics.csv")
         restorations=load_folds(new_dir/"outer_cv_fold_metrics.csv")

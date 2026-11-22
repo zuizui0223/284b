@@ -1,0 +1,206 @@
+{
+  "schema": "284b.gbif_repaired_reference47_preD_launch.v1",
+  "status": "SIGNED_REPAIRED_REFERENCE47_FITS_VERIFIED_PREFLIGHT_PRE_D_ONLY",
+  "reference47_fit_run_id": 44480047903,
+  "reference47_fit_run_sha": "9a62427e212f1e63c8abc96813aa773b3796e3eb",
+  "reference_taxa": 47,
+  "reference_fit_cells": 2256,
+  "source_fit_artifacts": {
+    "0": {
+      "id": 14510289388,
+      "digest": "sha256:ced82cd30d977565f1a95bb79c2743a8249fc6979cbb91c264b641ea6b8d8dce"
+    },
+    "1": {
+      "id": 14509762851,
+      "digest": "sha256:7e3d4203f87317aa914e9befd6c2ad718e53a92df5b2cb523cbb31e6b44be15f"
+    },
+    "2": {
+      "id": 14510942091,
+      "digest": "sha256:e87b22e666b4c7749b12582272d450744813c85ef290ab8925c224c83cde5560"
+    },
+    "3": {
+      "id": 14510013252,
+      "digest": "sha256:fcb9755d132738eb61554a4cbbd5037d01622b3a48510bbe6a271169ae60b34d"
+    },
+    "4": {
+      "id": 14511715852,
+      "digest": "sha256:8f67e385bb89beabc29603be83421e2a9e121674da8057ead581801e7166f5f8"
+    },
+    "5": {
+      "id": 14512982295,
+      "digest": "sha256:a397939fc2497acb5baf0172e528f40cd2f8c3e02474f18cf8c444b07c39b167"
+    },
+    "6": {
+      "id": 14514352082,
+      "digest": "sha256:2274cf9712c69f16f9d85fb444b392d759528d98b6c100c516fe2dc593027dc0"
+    },
+    "7": {
+      "id": 14514596373,
+      "digest": "sha256:d4e4afa7e902cc3918b010f4638dd0891cf452475b03599828abd6c4ac606204"
+    },
+    "8": {
+      "id": 14518392436,
+      "digest": "sha256:5cf99303791138906722d845e221022f97e7f3f1d3a83e5dbc4233aa3811b04d"
+    },
+    "9": {
+      "id": 14514731667,
+      "digest": "sha256:53a8de0a5b3217e9a7ba4122d4ee4c379006bae7bd763f932d6e41885fa81e83"
+    },
+    "10": {
+      "id": 14515683062,
+      "digest": "sha256:71cce4c5a1f886e889d7fbef898ce45d37620d8b998af0be2bf61ce7ad9b6fb4"
+    },
+    "11": {
+      "id": 14517427291,
+      "digest": "sha256:d4e70ee37771eefb35f648295d0fc47c91337beb5c2f4c1f8e148ae234bab6bc"
+    },
+    "12": {
+      "id": 14516533130,
+      "digest": "sha256:b0134d64096283027f7e799d2370a3508f92a64ee059c24ec29bb21670ac3bee"
+    },
+    "13": {
+      "id": 14519255923,
+      "digest": "sha256:0ad298f4c1e10b3888ee4b8d091ecefffda86b23c294d04118b4be4bc143d3a8"
+    },
+    "14": {
+      "id": 14520073303,
+      "digest": "sha256:6dd1d0418970e20426bfff0bd64c19e87a1fea85dea497267094fec7f7c8d5f9"
+    },
+    "15": {
+      "id": 14522420037,
+      "digest": "sha256:7cedba4673433e6e2fc069ca232310730cf26a0e24e9c182ce19520160c10344"
+    },
+    "16": {
+      "id": 14523831005,
+      "digest": "sha256:f3645f8796c47bbd3b6f7224eb49f3ea21e09d502ca3721c6ee3084f24e91a86"
+    },
+    "17": {
+      "id": 14524953219,
+      "digest": "sha256:10480d2af7340658951cc460efaac1f84284358e4c857de461fee5a577befa5f"
+    },
+    "18": {
+      "id": 14522735010,
+      "digest": "sha256:66c4d86d4c400142f5b4c231df8ec7d28e5d45e4cd793cbaf7d512295972ef2d"
+    },
+    "19": {
+      "id": 14522759891,
+      "digest": "sha256:c86ff97722720a3be2f563d46efb82f993c6ea0fb0cc4cba6f5e9451e5c44bd4"
+    },
+    "20": {
+      "id": 14523689896,
+      "digest": "sha256:05208e26e607e95df2af4635aef16edb4b7164274c4265a2e3029a984d0c1bf3"
+    },
+    "21": {
+      "id": 14526407049,
+      "digest": "sha256:29b470635ae5c87dde7794723a0a971918221668c2210e0deaa9c8440bb986a9"
+    },
+    "22": {
+      "id": 14533255288,
+      "digest": "sha256:6725968420e0dc74f50a43e98f98e8a90b9df599cb960b68f73b22459a161849"
+    },
+    "23": {
+      "id": 14532548107,
+      "digest": "sha256:a460ba2afe8cc8621849345981f0ef67543f4ec394aa79240cbf5cf27b2f374d"
+    },
+    "24": {
+      "id": 14527981936,
+      "digest": "sha256:09e93b3e12731ff52e474bb7edec1aa77dcd2311eb4e6829e43e6c1bf59f1725"
+    },
+    "25": {
+      "id": 14529052709,
+      "digest": "sha256:8e7b96a36f89f056549c2b78baa6cc07e0346cb232347eecbc6f03dcf53b092b"
+    },
+    "26": {
+      "id": 14533608204,
+      "digest": "sha256:ead904f366296ab2393ad789fd45899286c69057f1d79179988fbaa6c17af826"
+    },
+    "27": {
+      "id": 14531755703,
+      "digest": "sha256:248baefcbe37b631d98714be3ed40824249e5cacc73fc4aad2f24121bfcbe89e"
+    },
+    "28": {
+      "id": 14534282856,
+      "digest": "sha256:d72285e0b3b59dce0cc6340c7a4c102f6c35ccc5fc5a9ef8268af20f3eec7b04"
+    },
+    "29": {
+      "id": 14533798676,
+      "digest": "sha256:70ed90c9596f5f5ab9d73c2359364cd7336de78c789e609da38dba86e687c101"
+    },
+    "30": {
+      "id": 14536736588,
+      "digest": "sha256:a10291a69175536a249adee4a41d7fe8f59dc54fa6db55cc7049074804b25719"
+    },
+    "31": {
+      "id": 14537971381,
+      "digest": "sha256:bb9a632a965c2722c405970f940358c44269227585f2364b902deca9f1b050d6"
+    },
+    "32": {
+      "id": 14538402481,
+      "digest": "sha256:5d2a27708eb791958df1892ff85723a17e97eb99d8e54e034b0ac24b5e55bd04"
+    },
+    "33": {
+      "id": 14540257998,
+      "digest": "sha256:738c9350d2f2f24e9b1a7b78ff186b79ec382289de8e8704f85c9bbb8e234187"
+    },
+    "34": {
+      "id": 14537853693,
+      "digest": "sha256:d269e8359367d71b3a5a5d10e84f47b85702336fa7a9099dba2bdc61b4182d4c"
+    },
+    "35": {
+      "id": 14548706022,
+      "digest": "sha256:c330256335b065bca2278d20be01e4311862f8f225743f5ee198e1dc9e570c3d"
+    },
+    "36": {
+      "id": 14542402819,
+      "digest": "sha256:b7cc73e6b3ccf5466517231b1560ff043f9fae30e79d78ff919f80a0e5ff65fc"
+    },
+    "37": {
+      "id": 14543402997,
+      "digest": "sha256:56bfd27ba797d4ace0374099defce7209bb6cc92e8ab31ccaca8eccfb884e87e"
+    },
+    "38": {
+      "id": 14543763324,
+      "digest": "sha256:b5e97fe013adcd1ac3cebe4a5a4ae2f5cea416fd5cb43c2562bda9aa5644ab10"
+    },
+    "39": {
+      "id": 14549571956,
+      "digest": "sha256:5664d1d687a9871401dceaeca9e565d9d77e7945d66653b3856709f5a1872cf9"
+    },
+    "40": {
+      "id": 14551260045,
+      "digest": "sha256:333458a4fd43bfbb64a312a0d80506349ef3af6bd345530d6e5693ee55acdeab"
+    },
+    "41": {
+      "id": 14550355129,
+      "digest": "sha256:daa5b623cff42425f96d4516bdd5193e1f54c51892e62d410ec1b43e587034cc"
+    },
+    "42": {
+      "id": 14553533614,
+      "digest": "sha256:3e07e2ce75a87bcccab83658ccc3d9f1c7e5d84c0227852f5481ff6a490a729f"
+    },
+    "43": {
+      "id": 14557382321,
+      "digest": "sha256:d14e8c3f90b2c86cc4a1b535dc61022c76c3fa0271891b2e984339a8a1be1991"
+    },
+    "44": {
+      "id": 14555909934,
+      "digest": "sha256:c130f5a0667c4a1766e9897d3f1b72176fafc9236060b774bb913cdf0bfd5653"
+    },
+    "45": {
+      "id": 14552950987,
+      "digest": "sha256:1e4e24baeb56a9f687694f02cdbaca09e0885a43b653437a17f22b45f370d8ff"
+    },
+    "46": {
+      "id": 14553374621,
+      "digest": "sha256:01fb635f72be1b5d3efa40aed059d1464fa97ee56fe195455bd83e47d69c3fa8"
+    }
+  },
+  "fit_audit_sha256": "ec947a1999e357bdab35c8b928369a393404c6ce9e3e9b21187b7e971ee32c7e",
+  "reference_cells": 24,
+  "minimum_distinct_taxa_per_cell": 30,
+  "reference_q95_opened": false,
+  "heldout12_opened": false,
+  "empirical_ledger_increment": 0,
+  "note": "Open adequacy eligibility only, not source-paired Schoener D or q95; no independent biological endpoint.",
+  "source_arm": "repaired_2026-08-01_10215_parquet_files"
+}

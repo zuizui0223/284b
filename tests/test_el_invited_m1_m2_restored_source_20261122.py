@@ -23,6 +23,7 @@ HISTORICAL = ROOT / "results/product_b_same_target_core19_v0_4_heldout_final_rec
 RESTORED = ROOT / "results/gbif_repaired_heldout12_sensitivity_v1.json"
 REFERENCE = ROOT / "results/gbif_repaired_reference47_q95_summary_v1.json"
 CV_AUDIT = ROOT / "results/gbif_repaired_heldout12_postterminal_cv_switch_v1.json"
+SOURCE_SI = ROOT / "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_SOURCE_COMPLETENESS_SI_V1.md"
 
 
 class InvitedManuscriptRestoredSourceGuard(unittest.TestCase):
@@ -38,6 +39,7 @@ class InvitedManuscriptRestoredSourceGuard(unittest.TestCase):
         cls.restored=json.loads(RESTORED.read_text(encoding="utf-8"))
         cls.reference=json.loads(REFERENCE.read_text(encoding="utf-8"))
         cls.cv=json.loads(CV_AUDIT.read_text(encoding="utf-8"))
+        cls.source_si=SOURCE_SI.read_text(encoding="utf-8")
 
     def test_primary_original_heldout_endpoint_is_not_replaced(self):
         old=self.historical
@@ -100,6 +102,30 @@ class InvitedManuscriptRestoredSourceGuard(unittest.TestCase):
         self.assertIn("full original-283-cell retention condition failed",self.manuscript)
         self.assertIn("individual source-paired discordance or q95 values sometimes shifted appreciably",
                       self.manuscript)
+
+    def test_source_completeness_supporting_information_is_signed_and_coverage_limited(self):
+        m=self.manifest
+        self.assertEqual(
+            m["source_completeness_supporting_information"],
+            "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_SOURCE_COMPLETENESS_SI_V1.md"
+        )
+        self.assertTrue((ROOT/m["source_completeness_supporting_information"]).is_file())
+        for phrase in (
+            "2,832/2,832",
+            "1,033",
+            "**282 of the original 283 evaluable cells remained evaluable**",
+            "0/12",
+            "**not** satisfied",
+            "0.50698",
+            "0.49447",
+            "retrospective",
+            "not a new field survey",
+        ):
+            self.assertIn(phrase,self.source_si,phrase)
+        self.assertIn(self.historical["final_endpoint_fingerprint"],self.source_si)
+        self.assertIn(self.restored["final_endpoint_fingerprint"],self.source_si)
+        self.assertIn("one lost",self.source_si)
+        self.assertIn("three original",self.source_si)
 
     def test_abstract_stays_invited_method_length_safe(self):
         match=re.search(r"## Abstract\n\n(.*?)\n\n## 1\.",self.manuscript,re.S)

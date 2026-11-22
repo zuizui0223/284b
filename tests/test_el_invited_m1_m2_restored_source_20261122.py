@@ -111,9 +111,9 @@ class InvitedManuscriptRestoredSourceGuard(unittest.TestCase):
         )
         self.assertTrue((ROOT/m["source_completeness_supporting_information"]).is_file())
         for phrase in (
-            "2,832/2,832",
+            "2,832 fitted models",
             "1,033",
-            "**282 of the original 283 evaluable cells remained evaluable**",
+            "282 of the original 283 evaluable cells remained evaluable",
             "0/12",
             "**not** satisfied",
             "0.50698",

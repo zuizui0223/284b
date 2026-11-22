@@ -212,7 +212,7 @@ def fig2_level_a(out, audit, empirical, repaired, coverage, restored_ratios):
     ax.invert_yaxis()
     ax.grid(axis="x", lw=0.7, color=GRID)
     ax.set_axisbelow(True)
-    ax.legend(loc="lower left", frameon=False, fontsize=9.1)
+    ax.legend(loc="upper left", bbox_to_anchor=(.02, .995), frameon=False, fontsize=9.1)
     ax.set_title("A   Same 12 taxa, two source versions", loc="left",
                  fontsize=11, fontweight="bold", pad=12)
     ax.text(1.0, 0.01, "q95 ceiling", fontsize=9.0, ha="right",
@@ -278,23 +278,19 @@ def fig3_invalidity(out,invalid):
         ax.bar([0,1],items,color=[BLUE,GOLD],width=0.56)
         ax.set_xticks([0,1],["Gate","Force 0"])
         ax.set_ylim(0,1.10)
-        ax.set_title(heading,fontsize=10.5,pad=9)
+        ax.set_title(f"{heading}\nIncrement (zero − gate): +{delta:.2f}", fontsize=10.4, pad=13)
         ax.yaxis.grid(True,color=GRID,lw=0.7)
         ax.set_axisbelow(True)
         for i,v in enumerate(items):
             ax.text(i,v+0.035,f"{v:.3f}",ha="center",fontsize=9)
-        ax.text(0.5,1.04,f"Increment  +{delta:.2f}",
-                ha="center",fontsize=9,fontweight="bold",transform=ax.transAxes)
     a=np.linspace(0,1,201)
     ax2.plot(a,1-a,color=BLUE,lw=2)
     ax2.scatter([a1,a0],[1-a1,1-a0],s=50,zorder=4,
                 color=[GOLD,INK],edgecolor="white",linewidth=0.8)
-    ax2.annotate(r"$1-a_1=0.30$",(a1,1-a1),xytext=(0.09,0.52),
-                textcoords="axes fraction",fontsize=9,
-                arrowprops={"arrowstyle":"-","color":GOLD})
-    ax2.annotate(r"$1-a_0=0.10$",(a0,1-a0),xytext=(0.48,0.37),
-                textcoords="axes fraction",fontsize=9,
-                arrowprops={"arrowstyle":"-","color":INK})
+    ax2.text(.055, .18, "Compatible keys: a₁=.70  →  +.30",
+             color=GOLD, fontsize=9.0, transform=ax2.transAxes)
+    ax2.text(.055, .08, "True violations: a₀=.90  →  +.10",
+             color=INK, fontsize=9.0, transform=ax2.transAxes)
     ax2.set(xlim=(0,1.02),ylim=(0,1.05),xlabel="Valid-key fraction  a",
             ylabel="Exact increment  1 − a")
     ax2.set_title("Class-specific invalid mass",fontsize=10.5,pad=9)

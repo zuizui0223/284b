@@ -13,6 +13,9 @@ on:
       - 'scripts/build_el_invited_review_bundle_v1.py'
       - 'tests/test_el_invited_complete_si_20261123.py'
       - 'tests/test_el_invited_review_bundle_20261123.py'
+      - 'tests/test_el_invited_journal_preflight_20261123.py'
+      - 'docs/EL_METHOD_JOURNAL_PREFLIGHT_20261123.md'
+      - 'manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_TITLE_PAGE_V1.md'
       - '.github/workflows/invited-m1-m2-figures.yml'
   workflow_dispatch:
 
@@ -38,6 +41,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_el_invited_complete_si_20261123.py'
           python -m unittest discover -s tests -p 'test_el_invited_review_bundle_20261123.py'
+          python -m unittest discover -s tests -p 'test_el_invited_journal_preflight_20261123.py'
           python scripts/build_el_invited_review_bundle_v1.py --figures-dir build/invited_m1_m2_figures --output build/284b_EcologyLetters_M1_M2_REVIEW_ONLY_20261123.zip
       - uses: actions/upload-artifact@v4
         with:

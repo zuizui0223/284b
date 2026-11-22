@@ -82,7 +82,6 @@ def restored_sources(audit, empirical):
     assert repaired["paired_prediction_surfaces_opened_cells"] == 285
     assert repaired["paired_prediction_surfaces_kept_closed_cells"] == 3
     assert repaired["repaired_heldout_taxa_with_attention"] == 0
-    assert coverage["historical_opened_retained"] if "historical_opened_retained" in coverage else True
     assert coverage["original_opened_retained"] == 282
     assert coverage["original_opened_lost"] == 1
     assert coverage["newly_opened_restored_cells"] == 3
@@ -378,14 +377,18 @@ def main():
     assert len(generated)==12
     (out/"FIGURE_README.md").write_text(
        "# Invited Ecology Letters M1+M2 figure package\n\n"
-       "Four authored figures in PDF, SVG and 300-dpi PNG are derived from the "
-       "frozen Level-A empirical receipt, Reviewer-2 structure audit and invalid-state "
-       "mathematical audit. Figure 4 retains the documented FDF parameters "
-       "(q=.8, sp=.99, π_all=.1) and contrasts equal with class-specific validity "
-       "as analytic illustrations, not empirical estimates.\n\n"
-       "Independent biological n=12 taxa. The 283 evaluable cells are repeated "
-       "sensitivity diagnostics, not independent replicates. The nearest-rank q95 "
-       "reference envelope is not a nominal 95% predictive interval.\n",
+       "Four figures (PDF/SVG/300-dpi PNG) are rebuilt from the original signed "
+       "Level-A endpoint and the separately audited retrospective repaired-GBIF "
+       "288-cell sensitivity, plus the independent 24 q95 reference cells and M1 mathematics.\n\n"
+       "Original 283/288 versus restored 285/288 evaluable; only 282 of the original "
+       "283 opened cells remained opened, so full-retention robustness is FALSE. "
+       "Both arms had 0/12 taxa above their own reference envelopes; they are "
+       "not independent biological replications.\n\n"
+       "Figure 4 uses q=.80, sp=.99 and unconditional pi=.10 with equal validity, "
+       "a1=.70/a0=.90 and a1=.90/a0=.70 as analytical illustrations only. "
+       "The 288 diagnostics are within-taxon repeated settings, not independent "
+       "biological replicates. Empirical nearest-rank q95 is not a nominal "
+       "95% prediction interval.\n",
        encoding="utf-8"
     )
     print("\n".join(generated))

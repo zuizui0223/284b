@@ -45,6 +45,10 @@ All four vector manuscript figures and 173-mm print preflight have passed. The r
 - **Do not** alter thresholds or choose new taxa/procedures to make the original 283/283 retention condition pass. That outcome is a documented data-completeness limitation.
 - The retrospective repair produces **zero** additional independent ecological results and is not the final author decision to submit.
 
+## Journal-format preflight
+
+The current Method draft is within the journal's preliminary source-text limits (abstract 135 words; main sections 1–7 about 2,392 words; four main figures, eight keywords, nine references), and running title is 29 characters. See `docs/EL_METHOD_JOURNAL_PREFLIGHT_20261123.md` for the counting method and official journal requirements. **This does not establish final journal-formatted readiness.** The final reviewer PDF, published-as-supplied Supporting Information format, archive DOI, conflict/funding metadata and author agreement remain outstanding.
+
 ## Remaining human/admin blockers
 
 - author list/order;

@@ -63,7 +63,7 @@ Selecting only valid keys can improve or worsen the composition of the evaluated
 - Implementation: scripts/relation_endpoint_contract.py, function qualified_violation_false_discovery_fraction.
 - Regression tests: tests/test_m1_fdf_validity_asymmetry_20261122.py; asserts both asymmetric cases, equal-validity invariance, conditional-prevalence equivalence, undefined zero-call case, input bounds, and original 1-a1/1-a0 identities.
 - Submission surfaces corrected: invited Method manuscript Section 4/5, claim ledger EL7, Figure 4 plan, active M1 structural note and submission-readiness gate.
-- The analytic correction **does not** change q95, original/resored GBIF fits, heldout 283/288 and 0/12, restored 285/288 and 0/12, the one originally eligible cell lost (282/283 retained), or the historical empirical-ledger count of 1.
+- The analytic correction **does not** change q95, original/restored GBIF fits, heldout 283/288 and 0/12, restored 285/288 and 0/12, the one originally eligible cell lost (282/283 retained), or the historical empirical-ledger count of 1.
 - It **does not** make a field estimate of state-dependent observability, independently validate ecological interactions or authorize Level-C conclusions.
 - The inviting journal's coauthors must still review the mathematical statement and the separately coverage-limited source-completeness sensitivity before submission; status remains HOLD_FOR_SENSITIVITY_REVIEW.
 

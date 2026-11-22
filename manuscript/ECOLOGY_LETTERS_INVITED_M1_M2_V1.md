@@ -111,13 +111,13 @@ A representative frozen audit with `a1=0.70`, `a0=0.90`, `q=0.95` and `sp=0.99` 
 
 Observation-process qualification answers whether a negative state is admissible. It does not determine whether a called violation is likely to be true.
 
-Let `pi` be the prevalence of true biological violations. Among qualified valid keys,
+Let `pi = P(F=false)` be the **unconditional prevalence** of true biological violations across all candidate keys. Because only valid keys may produce gated violation calls, the unconditional probability of a false call is `(1-pi)a1(1-q)` and that of a true call is `pi a0 sp`. Among *issued qualified violation calls*, the false-discovery fraction is therefore
 
-`FDF = (1-pi)(1-q) / [(1-pi)(1-q) + pi sp]`.
+`FDF = (1-pi)a1(1-q) / [(1-pi)a1(1-q) + pi a0 sp]`,
 
-The valid-key fraction cancels. Thus preserving invalid keys as unresolved prevents invalid-state mass from entering the endpoint, but the reliability of a positive violation call still depends on the base rate and on later replication or aggregation rules.
+provided the denominator is positive; when no qualified violation calls can occur, FDF is undefined, not zero. **Validity cancels only if `a1=a0>0`.** Equivalently, the shorter expression `(1-pi_valid)(1-q) / [(1-pi_valid)(1-q) + pi_valid sp]` holds if `pi_valid=P(F=false | valid key)` is explicitly the violation prevalence *among valid keys*. In general `pi_valid = pi a0 / [(1-pi)a1 + pi a0]` (when that denominator is positive); selection on validity can change this prevalence.
 
-For example, with `pi=0.10`, `q=0.80` and `sp=0.99`, the false-discovery fraction is approximately 0.645. A measurement gate can therefore be necessary for admissible hard inference without being sufficient for endpoint-level evidentiary reliability.
+With equal positive valid-key fractions, `pi=0.10`, `q=0.80`, `sp=0.99` gives `FDF=0.645` as in the original illustrative case. For **unequal** fractions, keeping the same unconditional `pi`, `q` and `sp`, `a1=0.70, a0=0.90` gives `FDF=0.586`, whereas `a1=0.90, a0=0.70` gives `FDF=0.700`. These are exact illustrative calculations, not estimated ecological frequencies. A measurement gate is necessary for admissible negative inference but cannot by itself guarantee reliable endpoint attribution; both the base rate and class-dependent observability matter.
 
 ## 6. Discussion
 

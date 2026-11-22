@@ -1,0 +1,76 @@
+{
+  "schema": "284b.gbif_repaired_heldout12_final_sensitivity_launch.v1",
+  "status": "SIGNED_REPAIRED_REFERENCE47_Q95_AND_HELDOUT12_AUTHORIZE_SOURCE_SENSITIVITY_ONCE",
+  "endpoint_id": "gbif_20260801_restored510_historical_levelA_source_sensitivity_v1",
+  "original_12taxon_universe_frozen": true,
+  "original_24_reference_cells_frozen": true,
+  "new_independent_ecological_confirmation": false,
+  "empirical_ledger_increment": 0,
+  "one_shot": true,
+  "M_or_taxa_reselection_allowed": false,
+  "reference_summary_sha256": "68ee700d73a96efafa07c19e902b7e0ffba1e95fcc3e43ae95b6ed4feeb32ab1",
+  "reference_table_sha256": "6ae208b3739fb77c3a6dac282b8f998d8dc80b5867c87f9f29cd56e83edba558",
+  "reference_fit_audit_sha256": "ec947a1999e357bdab35c8b928369a393404c6ce9e3e9b21187b7e971ee32c7e",
+  "heldout_fit_audit_sha256": "d3a2b9fa6777f499f1ec687639ef8f78a1bc22ab305e20310ce0447ef901f6aa",
+  "reference_q95_run_id": 45013001115,
+  "reference_q95_run_sha": "8bcd6170123216f1ba11414ad45a237c972ea11c",
+  "reference_q95_artifact_id": 14751200454,
+  "reference_q95_artifact_digest": "sha256:d6d71f9d79569a50729304bfbbf4777949129dda8b1bd3964c5eebca5bb21887",
+  "heldout12_fit_run_id": 44480087256,
+  "heldout12_fit_run_sha": "d3d0c27b7c0ed6536e96d79265b68016f969e1fd",
+  "heldout12_fit_artifacts": {
+    "0": {
+      "id": 14510468186,
+      "digest": "sha256:6b3fe9452ea1ced132c67e71784c35e84631d3fdcb8814db869c179b4c27d450"
+    },
+    "1": {
+      "id": 14509574233,
+      "digest": "sha256:f072322e44dfea6338f41cfa225e81a58013dfec12a6eb57da5c2cf375a35fa7"
+    },
+    "2": {
+      "id": 14511194597,
+      "digest": "sha256:924c270afc63e0e2a585b6a51e88a590f7ca0868c65f57286fda739694f940c2"
+    },
+    "3": {
+      "id": 14513933694,
+      "digest": "sha256:ffcd351e94a1b4be8ed8a08950035b4add1ffc650a7015f062b992b46f90d764"
+    },
+    "4": {
+      "id": 14516640567,
+      "digest": "sha256:d54a570cc774ec812aa585e19af05757d14301433563dadd2b4e974a24cd36e9"
+    },
+    "5": {
+      "id": 14519340593,
+      "digest": "sha256:0679c22da534d79ed297aafd42215f30bafb3f073cbddc6963148512e647eca1"
+    },
+    "6": {
+      "id": 14519052338,
+      "digest": "sha256:aa108f26693eae2b6f42f1d5a2cb03897d65e4f50b9132dcd9b0ba069dc391a3"
+    },
+    "7": {
+      "id": 14521455656,
+      "digest": "sha256:71d964e487049a8ecd0312257da49a3233404b739051d94f726a4cf128777681"
+    },
+    "8": {
+      "id": 14523437232,
+      "digest": "sha256:2b9015c2546d0cca2475200b14b13a10b1e4e02aa08b241af140d6cf94b18d51"
+    },
+    "9": {
+      "id": 14525794949,
+      "digest": "sha256:8be84a4c708b4a004cce9f7e71deed8cdc54a469fe4069d2adb89b269ca16337"
+    },
+    "10": {
+      "id": 14526252109,
+      "digest": "sha256:d917cb2f53c1d1864615a33145e953c89a83ffbb453d156a5d694272370a8cdc"
+    },
+    "11": {
+      "id": 14533106303,
+      "digest": "sha256:ea193fd97c06ebb0b7aeb14ddc27682813b722b25f1f7dd1e1b521a8af367665"
+    }
+  },
+  "original_final_artifact_id": 10137399646,
+  "original_final_artifact_digest": "sha256:c44b250aaa512d564418b2973a8d56c03bf9a800e9a6d89dbfc3d7a40ce4b27a",
+  "original_historical_endpoint_fingerprint": "80465bdefd484a8e9d5adcdbd792820ff1716c2b589ff9ad2a278c6c9494646c",
+  "original_historical_283_cells_sha256": "d9194ea416dcc3bbae339167e271d3cbcd522327b41fe573325770a94bd90b0d",
+  "opened_result_interpretation": "retrospective original 9705 -> repaired 10215 source-completeness sensitivity; do not count as new independent biological result"
+}

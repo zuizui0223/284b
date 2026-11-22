@@ -103,7 +103,7 @@ Therefore
 
 `TPR_zero - TPR_gated = 1-a0`.
 
-These are exact algebraic identities. When validity is class-independent (`a1=a0=a`), both increments equal `1-a`. The apparent gain in sensitivity obtained by zero collapsing is therefore purchased by a precisely quantified increase in unsupported calls; with state-dependent validity, the two increments are indexed by their own invalid-state masses.
+These are exact algebraic identities for rates **per original latent biological class**, with unresolved keys contributing no gated violation call (not treated as known biological negatives). The rates are not conditional error rates among classified keys. When validity is class-independent (`a1=a0=a`), both increments equal `1-a`. The apparent gain in sensitivity obtained by zero collapsing is therefore purchased by a precisely quantified increase in unsupported calls; with state-dependent validity, the two increments are indexed by their own invalid-state masses.
 
 A representative frozen audit with `a1=0.70`, `a0=0.90`, `q=0.95` and `sp=0.99` gives false-violation rate 0.035 under gating and 0.335 under zero collapsing, while apparent true-violation sensitivity rises from 0.891 to 0.991.
 

@@ -50,12 +50,11 @@ Message: added decisiveness is not free.
 
 ## Figure 4 — Qualification versus reliability
 
-Plot FDF against true violation prevalence for representative q/sp combinations.
+Plot qualified-call FDF against **unconditional** true-violation prevalence `pi` using the exact class-dependent formula `(1-pi)a1(1-q)/[(1-pi)a1(1-q)+pi a0 sp]`, distinguishing equal-validity and asymmetric-validity cases; omit zero-call/undefined configurations.
 
-Mark:
-`pi=.10, q=.80, sp=.99 -> FDF≈.645`.
+At `pi=.10, q=.80, sp=.99`, mark equal-validity FDF≈.645 (for any `a1=a0>0`) and asymmetric examples `.586` (`a1=.70,a0=.90`) and `.700` (`a1=.90,a0=.70`). Never silently generalize the equal-validity line to differing `a1/a0`.
 
-Message: admissible measurement is distinct from reliable endpoint-level attribution; aggregation/replication remains a separate layer.
+Message: admissible measurement is distinct from reliable endpoint attribution; validity selection can change the composition of the qualified set, and aggregation/replication remains a separate layer.
 
 ## Supporting information
 

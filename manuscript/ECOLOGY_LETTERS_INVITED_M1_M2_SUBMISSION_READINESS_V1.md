@@ -36,7 +36,9 @@
 - [x] Standalone 173-mm vector PDF print-size preflight and minimal lettering verified (7.06/6.00/6.10/6.12 pt for Figures 1–4); overlap-free proof inspected. This is not the compiled journal proof.
 - [ ] Final figures placed and verified inside the compiled submission manuscript / portal-generated reviewer PDF.
 - [x] Signed source-completeness sensitivity Supporting Information draft prepared: `manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_SOURCE_COMPLETENESS_SI_V1.md` (59 fitted taxa, 24 thresholds, 288 keyed heldout cells, four adequacy flips, 282/283 original-cell retention).
-- [ ] Assemble and journal-format the **complete** M1+M2 supplement (including M1 theorem/benchmark materials) and verify its consistency with the new source-completeness section.
+- [x] Integrate the complete M1+M2 Supporting Information into one review draft, including M1 theorem/FDF, 8,748-case analytic benchmark, 12-species source-version Table S1, 24 restored-q95 Table S2 and GBIF coverage-limited terminal: `manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_COMPLETE_SI_V1.md`.
+- [x] Run automated section/table/provenance guards for this integrated SI (`tests/test_el_invited_complete_si_20261123.py`).
+- [ ] Final journal-specific typography, numbering and upload/portal formatting of the integrated SI confirmed by authors.
 - [ ] Anonymous/review manuscript generated if required by the current portal.
 
 ## Reproducibility
@@ -46,7 +48,8 @@
 - [x] Exact invalid-state scripts/results retained.
 - [x] CI guard blocks Level-C leakage and pseudoreplication language.
 - [x] SHA-verified provenance for the historical empirical endpoint and the separate retrospective source-repair sensitivity retained.
-- [ ] Final manuscript+supplement claims, source-version evidence labels and 0/12 conditional wording reviewed against signed terminal receipts.
+- [x] Automated manuscript+supplement source-version labels, 12 taxon ratios, restored 24 reference q95 values, 288-key eligibility, M1 identities and 0/12 conditional wording crosschecked against signed terminal receipts.
+- [ ] Human scientific verification of final manuscript and supplement interpretation (coauthor decision memo `manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_COAUTHOR_DECISION_MEMO_20261123.md`).
 - [ ] Permanent versioned archive DOI minted.
 - [ ] Archive identity pinned in title page / Open Research Statement.
 

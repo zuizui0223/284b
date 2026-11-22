@@ -33,7 +33,7 @@
     "coauthor review and explicit scientific signoff of coverage-limited 0/12 source-repair sensitivity",
     "human author metadata, affiliations, CRediT, correspondence, and author approval",
     "permanent archive DOI",
-    "complete M1+M2 Supporting Information assembly and final compiled manuscript/portal proof",
+    "coauthor review of integrated M1+M2 SI and final journal-formatted/compiled manuscript and portal proof",
     "final journal formatting/word count/reference validation and possible blind-review derivative",
     "policy-aligned AI-use and conflict/funding statements",
     "invitation reference/date and no-simultaneous-submission confirmation"
@@ -96,7 +96,7 @@
     "rendering_success": true,
     "visual_layout_check_completed": true,
     "journal_final_width_proof_completed": true,
-    "complete_supplement_assembled": false,
+    "complete_supplement_assembled": true,
     "authorship_approval": false,
     "source_repair_strict_robustness": false,
     "additional_independent_empirical_endpoints": 0,
@@ -109,5 +109,23 @@
       "figure4": 6.118
     },
     "final_compiled_submission_proof_completed": false
-  }
+  },
+  "complete_supporting_information": {
+    "path": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_COMPLETE_SI_V1.md",
+    "revision": "2026-11-23",
+    "sections": 11,
+    "historical_taxon_table_rows": 12,
+    "restored_reference_q95_table_rows": 24,
+    "original_model_heldout_evaluable": 283,
+    "repaired_model_heldout_evaluable": 285,
+    "original_evaluable_retained": 282,
+    "strict_original_cell_coverage_robust": false,
+    "math_invalid_state_and_qualified_fdf_included": true,
+    "analytic_scenario_count": 8748,
+    "independent_biological_endpoint_increment": 0,
+    "source_matched_test": "tests/test_el_invited_complete_si_20261123.py",
+    "coauthor_review_only": true,
+    "final_journal_format_approved": false
+  },
+  "coauthor_scientific_decision_memo": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_COAUTHOR_DECISION_MEMO_20261123.md"
 }

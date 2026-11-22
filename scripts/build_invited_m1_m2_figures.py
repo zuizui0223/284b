@@ -196,7 +196,7 @@ def fig2_level_a(out, audit, empirical, repaired, coverage, restored_ratios):
     assert len(names) == 12 and np.max(original) < 1 and np.max(restored) < 1
 
     fig, (ax, ax2) = plt.subplots(
-        1, 2, figsize=(11.5, 5.9),
+        1, 2, figsize=(9.5, 5.9),
         gridspec_kw={"width_ratios": [2.35, 1.2]},
     )
     for row_y, a, b in zip(y, original, restored):
@@ -251,11 +251,12 @@ def fig2_level_a(out, audit, empirical, repaired, coverage, restored_ratios):
     fig.suptitle("Figure 2  |  Cross-source consistency after repairing GBIF completeness",
                  fontsize=13.0, fontweight="bold", x=.06, ha="left")
     fig.text(.065, .018,
-             "No reference-envelope exceedance in either input arm (0/12 taxa); "
-             "283/288 vs 285/288 evaluable. Original coverage retained only 282/283: "
-             "strict full-retention robustness FAILED.\n"
-             "Same taxa and procedures; repaired q95 was recalibrated independently. "
-             "Dots are taxon maxima from repeated cells, not independent replications.",
+             "Neither source version exceeded q95 (0/12 taxa). Historical: "
+             "283/288 evaluable; restored: 285/288 evaluable.\n"
+             "Only 282/283 original evaluable cells retained: strict full-retention "
+             "robustness FAILED.\n"
+             "The same 12 taxa were refitted and q95 recalibrated; markers are "
+             "repeated-cell maxima, not independent replications.",
              fontsize=8.7, color=MUTED, ha="left", linespacing=1.35)
     fig.subplots_adjust(left=.17, right=.98, top=.79, bottom=.18, wspace=.48)
     save(fig, out / "figure2_level_a")
@@ -268,7 +269,7 @@ def fig3_invalidity(out,invalid):
     a0=float(p["a0"]);a1=float(p["a1"])
     assert abs((r["zero_false_violation_rate"]-r["gated_false_violation_rate"])-(1-a1))<1e-10
     assert abs((r["zero_true_violation_sensitivity"]-r["gated_true_violation_sensitivity"])-(1-a0))<1e-10
-    fig,(ax0,ax1,ax2)=plt.subplots(1,3,figsize=(11.6,3.9),gridspec_kw={"width_ratios":[1,1,1.35]})
+    fig,(ax0,ax1,ax2)=plt.subplots(1,3,figsize=(9.6,4.1),gridspec_kw={"width_ratios":[1,1,1.35]})
     for ax,heading,items,delta in [
       (ax0,"False violations",[
         float(r["gated_false_violation_rate"]),float(r["zero_false_violation_rate"])],1-a1),
@@ -298,8 +299,8 @@ def fig3_invalidity(out,invalid):
     fig.suptitle("Figure 3  |  The exact cost of treating invalid keys as biological zero",
                  x=0.06,ha="left",fontsize=13,fontweight="bold")
     fig.text(0.06,0.008,
-        "State-dependent frozen example: a₁=0.70, a₀=0.90, q=0.95, specificity=0.99. "
-        "The increments are analytic identities, not estimated causal effects.",
+        "Frozen analytic example: a₁=0.70, a₀=0.90, q=0.95, specificity=0.99.\n"
+        "The increments are exact class-dependent identities, not estimated causal effects.",
         fontsize=8.5,color=MUTED)
     fig.tight_layout(rect=[0,0.09,1,0.88],w_pad=2.7)
     save(fig,out/"figure3_invalidity")

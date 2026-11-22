@@ -1,6 +1,6 @@
 {
   "schema": "284b.ecology_letters_invited_m1_m2_submission_manifest.v1",
-  "status": "scientifically_ready_human_metadata_and_rendering_pending",
+  "status": "HOLD_FOR_SENSITIVITY_REVIEW",
   "target": "Ecology Letters",
   "article_type": "Method",
   "manuscript": "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_V1.md",
@@ -16,7 +16,9 @@
     "diagnostics_prespecified": 288,
     "diagnostics_evaluable": 283,
     "diagnostics_unresolved": 5,
-    "taxa_with_envelope_exceedance": 0
+    "taxa_with_envelope_exceedance": 0,
+    "level_a_original_historical_source_parquet_objects": 9705,
+    "historical_endpoint_fingerprint": "80465bdefd484a8e9d5adcdbd792820ff1716c2b589ff9ad2a278c6c9494646c"
   },
   "excluded_from_focal_submission": [
     "Level-C candidate systems",
@@ -28,10 +30,51 @@
   ],
   "fallback": "manuscript/LEVEL_A_SHORT_REPORT_V0_1.md",
   "remaining_blockers": [
-    "human author metadata",
+    "coauthor review and explicit scientific signoff of coverage-limited 0/12 source-repair sensitivity",
+    "human author metadata, affiliations, CRediT, correspondence, and author approval",
     "permanent archive DOI",
-    "final rendered figures",
-    "final journal formatting",
-    "final policy-aligned disclosures"
-  ]
+    "rendered and visually reviewed final main figures and necessary supplement",
+    "final journal formatting/word count/reference validation and possible blind-review derivative",
+    "policy-aligned AI-use and conflict/funding statements",
+    "invitation reference/date and no-simultaneous-submission confirmation"
+  ],
+  "postfreeze_repaired_GBIF_source_sensitivity": {
+    "classification": "repaired_source_no_attention_but_original_283_cell_coverage_decreased",
+    "interpretation": "Taxon-level no-exceedance recurs; original 283-evaluable-cell coverage not completely retained; retrospective non-independent source-completeness sensitivity only.",
+    "source_parquet_objects_repaired": 10215,
+    "source_parquet_objects_restored": 510,
+    "original_frozen_reference_taxa": 47,
+    "original_frozen_heldout_taxa": 12,
+    "reference_source_model_cells_sealed": 2256,
+    "heldout_source_model_cells_sealed": 576,
+    "model_cells_unresolved": 0,
+    "recalibrated_q95_reference_cells_frozen": 24,
+    "recalibrated_q95_reference_cells_unresolved": 0,
+    "eligible_reference_paired_cells": 1033,
+    "reference_paired_cells_expected": 1128,
+    "original_heldout_comparison_cells": 288,
+    "historical_evaluable": 283,
+    "historical_unresolved": 5,
+    "repaired_evaluable": 285,
+    "repaired_unresolved": 3,
+    "historical_evaluable_retained": 282,
+    "historical_evaluable_lost": 1,
+    "historical_unresolved_newly_evaluable": 3,
+    "q95_exceeding_repaired_heldout_taxa": 0,
+    "strict_full_historical_283_cell_retention_robust": false,
+    "original_historical_endpoint_replaced": false,
+    "additional_independent_biological_endpoints": 0,
+    "manuscript_human_scientific_signoff_required": true,
+    "repaired_sensitivity_endpoint_fingerprint": "87b92c461bfbae117a473ac12ce673517878dfbc4b87316d7b8cddc91eadcf48",
+    "audit_paths": {
+      "manuscript_ready_interpretation": "docs/GBIF_REPAIRED_LEVEL_A_TERMINAL_DECISION_20261122.md",
+      "reference_fit_audit": "results/gbif_repaired_reference47_fit_audit_v1.json",
+      "heldout_fit_audit": "results/gbif_repaired_heldout12_fit_audit_v1.json",
+      "q95_reference": "results/gbif_repaired_reference47_q95_summary_v1.json",
+      "sensitivity_terminal": "results/gbif_repaired_heldout12_sensitivity_v1.json",
+      "sensitivity_cells": "results/gbif_repaired_heldout12_sensitivity_cells_v1.csv",
+      "matched_score_drift": "results/gbif_repaired_heldout12_postterminal_score_drift_v1.json",
+      "cv_adequacy_switches": "results/gbif_repaired_heldout12_postterminal_cv_switch_v1.json"
+    }
+  }
 }

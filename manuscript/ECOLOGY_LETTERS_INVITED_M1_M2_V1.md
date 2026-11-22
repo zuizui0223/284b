@@ -30,7 +30,7 @@ A relation endpoint contains four scientific commitments fixed before focal open
 
 For same-target cross-source reproducibility, the relation is a calibrated soft-coherence statement. Both answers refer to the same target and comparison frame, and the opening rule compares source discordance with a prospectively calibrated empirical envelope.
 
-For a hard directional relation, a contradiction requires a positive antecedent and an identified negative consequent on the same valid key. If the negative state is not identified, the endpoint remains unresolved. This distinction is not a new estimator; it is a rule for what existing estimators and observations are allowed to imply jointly.
+For a hard directional relation, a contradiction requires a positive antecedent and an identified negative consequent on the same valid key. If the negative state is not identified, the endpoint remains unresolved. This distinction is not a new estimator; it is a rule for what existing estimators and observations are allowed to imply jointly (Fig. 1).
 
 ## 3. Positive empirical closure across biodiversity data sources
 
@@ -66,7 +66,7 @@ Under these separately recalibrated thresholds, **285 of 288 held-out cells were
 
 The lost cell was *Nothofagus antarctica* at 150 km under `niche_forward|logit_l2_C0.1_degree1`. Its preserved-specimen mean outer-fold presence rank increased (0.6045 to 0.6105), but its standard error also increased (0.0975 to 0.1160), lowering mean minus SEM from 0.5070 to 0.4945 across the unchanged 0.50 adequacy boundary. The three newly evaluable cells were explained by corresponding source-specific adequacy-bound crossings. Across the **282 comparisons evaluable in both source versions**, median repaired-minus-original discordance `1−D` was **+0.00070** (range −0.09646 to +0.17331); the median change across 24 q95 thresholds was **+0.00027** (range −0.07180 to +0.04700). These medians do not imply universally small cell-wise changes. The restored panel's closest observed discordance remained below q95 by **0.01691**, for *Eucalyptus globulus* at 500 km.
 
-This analysis does **not** constitute a new independent biological replication: it refits the same frozen taxon panel after repairing input provenance. The original signed 283/288, 0/12 endpoint is retained unchanged, and the restored-source result is reported as a distinct coverage-limited sensitivity finding. No adequacy threshold, taxon, procedure, accessible-area radius or reference rule was changed to recover the lost cell.
+This analysis does **not** constitute a new independent biological replication: it refits the same frozen taxon panel after repairing input provenance. The original signed 283/288, 0/12 endpoint is retained unchanged, and the restored-source result is reported as a distinct coverage-limited sensitivity finding. No adequacy threshold, taxon, procedure, accessible-area radius or reference rule was changed to recover the lost cell. The taxon-level source-version maxima and exact 288-key eligibility transitions are displayed in Fig. 2.
 
 ## 4. Exact consequence of deleting the unresolved state
 
@@ -105,7 +105,7 @@ Therefore
 
 These are exact algebraic identities for rates **per original latent biological class**, with unresolved keys contributing no gated violation call (not treated as known biological negatives). The rates are not conditional error rates among classified keys. When validity is class-independent (`a1=a0=a`), both increments equal `1-a`. The apparent gain in sensitivity obtained by zero collapsing is therefore purchased by a precisely quantified increase in unsupported calls; with state-dependent validity, the two increments are indexed by their own invalid-state masses.
 
-A representative frozen audit with `a1=0.70`, `a0=0.90`, `q=0.95` and `sp=0.99` gives false-violation rate 0.035 under gating and 0.335 under zero collapsing, while apparent true-violation sensitivity rises from 0.891 to 0.991.
+A representative frozen audit with `a1=0.70`, `a0=0.90`, `q=0.95` and `sp=0.99` gives false-violation rate 0.035 under gating and 0.335 under zero collapsing, while apparent true-violation sensitivity rises from 0.891 to 0.991 (Fig. 3).
 
 ## 5. Qualification is not endpoint reliability
 
@@ -117,7 +117,7 @@ Let `pi = P(F=false)` be the **unconditional prevalence** of true biological vio
 
 provided the denominator is positive; when no qualified violation calls can occur, FDF is undefined, not zero. **Validity cancels only if `a1=a0>0`.** Equivalently, the shorter expression `(1-pi_valid)(1-q) / [(1-pi_valid)(1-q) + pi_valid sp]` holds if `pi_valid=P(F=false | valid key)` is explicitly the violation prevalence *among valid keys*. In general `pi_valid = pi a0 / [(1-pi)a1 + pi a0]` (when that denominator is positive); selection on validity can change this prevalence.
 
-With equal positive valid-key fractions, `pi=0.10`, `q=0.80`, `sp=0.99` gives `FDF=0.645` as in the original illustrative case. For **unequal** fractions, keeping the same unconditional `pi`, `q` and `sp`, `a1=0.70, a0=0.90` gives `FDF=0.586`, whereas `a1=0.90, a0=0.70` gives `FDF=0.700`. These are exact illustrative calculations, not estimated ecological frequencies. A measurement gate is necessary for admissible negative inference but cannot by itself guarantee reliable endpoint attribution; both the base rate and class-dependent observability matter.
+With equal positive valid-key fractions, `pi=0.10`, `q=0.80`, `sp=0.99` gives `FDF=0.645` as in the original illustrative case. For **unequal** fractions, keeping the same unconditional `pi`, `q` and `sp`, `a1=0.70, a0=0.90` gives `FDF=0.586`, whereas `a1=0.90, a0=0.70` gives `FDF=0.700`. These are exact illustrative calculations, not estimated ecological frequencies. A measurement gate is necessary for admissible negative inference but cannot by itself guarantee reliable endpoint attribution; both the base rate and class-dependent observability matter (Fig. 4).
 
 ## 6. Discussion
 

@@ -32,6 +32,7 @@ SOURCES = (
     "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_SUBMISSION_MANIFEST_V1.json",
     "manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_HANDOFF_V1.md",
     "docs/M1_CLASS_DEPENDENT_FDF_AUDIT_20261122.md",
+    "docs/EL_METHOD_JOURNAL_PREFLIGHT_20261123.md",
     "docs/GBIF_REPAIRED_LEVEL_A_TERMINAL_DECISION_20261122.md",
     "results/product_b_same_target_core19_v0_4_heldout_final_receipt.json",
     "results/reviewer2_level_a_structure_audit_v0_1.json",
@@ -79,11 +80,17 @@ def verify_scientific_gate(root: Path) -> dict:
         raise RuntimeError("Not a HOLD branch. Refuse to produce review-only bundle.")
     sf = m["postfreeze_repaired_GBIF_source_sensitivity"]
     si = m["complete_supporting_information"]
+    jp = m["journal_source_preflight_20261123"]
     if (sf["strict_full_historical_283_cell_retention_robust"] is not False or
         sf["additional_independent_biological_endpoints"] != 0 or
         si["strict_original_cell_coverage_robust"] is not False or
         si["independent_biological_endpoint_increment"] != 0 or
         si["sections"] != 11 or
+        jp["source_abstract_words"] > jp["abstract_limit"] or
+        jp["source_main_text_words_approx"] > jp["method_main_word_limit"] or
+        jp["publisher_format_approved"] is not False or
+        jp["doi_present"] is not False or
+        jp["author_approval_received"] is not False or
         not si["coauthor_review_only"] or
         m["figure_package_20261122"]["authorship_approval"] is not False):
         raise RuntimeError("Scientific status is not the frozen coverage-limited HOLD.")

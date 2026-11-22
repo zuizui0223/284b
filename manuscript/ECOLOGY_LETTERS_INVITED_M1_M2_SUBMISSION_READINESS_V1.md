@@ -17,7 +17,8 @@
 - [x] 283 evaluable cells are not presented as independent n.
 - [x] Five unresolved cells remain unresolved.
 - [x] Exact identities use class-specific `a1` and `a0`; `1-a` is only the equal-validity corollary.
-- [x] FDF is separated from observation-validity qualification.
+- [x] FDF is separated from observation-validity qualification; the invited manuscript uses the class-specific `a1/a0` general formula for unconditional prevalence, and restricts the old validity-cancelling example to equal positive validity.
+- [ ] Coauthors verify the corrected FDF definition, undefined zero-call edge case and Figure 4 against the mathematical audit before scientific signoff.
 - [x] Level-C candidate systems are excluded from the focal manuscript.
 - [x] Claim ledger exists.
 - [x] Four-item figure plan exists.

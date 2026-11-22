@@ -21,7 +21,7 @@ The empirical ledger remains **1 historical independent heldout endpoint**. The 
 | EL4 | exact analytic | `FPR_zero - FPR_gated = 1-a1`. |
 | EL5 | exact analytic | `TPR_zero - TPR_gated = 1-a0`. |
 | EL6 | exact analytic | If `a1=a0=a`, both increments equal `1-a`. |
-| EL7 | exact analytic | Process qualification does not control endpoint false-discovery fraction; at `pi=.10,q=.80,sp=.99`, FDF is approximately .645. |
+| EL7 | exact analytic | For unconditional `pi=P(F=false)`, qualified-call FDF is `(1-pi)a1(1-q)/[(1-pi)a1(1-q)+pi a0 sp]` (when any call can occur); only equal positive validity fractions cancel. The `pi=.10,q=.80,sp=.99` example gives FDF≈.645 **under equal validity**; asymmetric cases yield ≈.586 (`a1=.70,a0=.90`) or ≈.700 (`a1=.90,a0=.70`). This is analytic, not field evidence. |
 | EL8 | synthesis | Preserving unresolved states can prevent unsupported negatives without preventing positive closure when the required evidence is present. |
 | EL9 | post-freeze sensitivity, not independent replication | After restoration of 510 GBIF Parquet objects (9,705 to 10,215), 47 reference + 12 heldout taxa were refitted across 2,832 source-specific model cells; 0 of 2,832 fitted cells remained unresolved. |
 | EL10 | post-freeze sensitivity | All 24 prespecified reference q95 thresholds were recalibrated under the unchanged >=30-adequate-reference-taxa rule; 1,033/1,128 reference paired cells were eligible. |

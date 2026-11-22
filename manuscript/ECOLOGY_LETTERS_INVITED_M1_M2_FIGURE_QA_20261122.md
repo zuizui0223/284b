@@ -4,7 +4,7 @@
 
 ## Rendered package
 
-- GitHub Actions figure run: [45032824094](https://github.com/zuizui0223/284b/actions/runs/45032223808), **success** on branch head `54d47342ac122ff7ef87b0866bdb8b88dec7ffc2`.
+- GitHub Actions figure run: [45032824094](https://github.com/zuizui0223/284b/actions/runs/45032824094), **success** on branch head `54d47342ac122ff7ef87b0866bdb8b88dec7ffc2`.
 - Artifact ID: `14758348052`, `invited-m1-m2-figures-restored-v2`, ZIP digest `sha256:2a97feb9e090c39f49bdba7560cbeec421a306c52af2d673a9b5ebd13fe10aea`.
 - Contents: figures 1–4 in each of **PDF, SVG, and 300 dpi PNG** (12 plot files), plus `FIGURE_README.md`. Archive ZIP integrity test passed and all 13 entries were present.
 - Output builder: `scripts/build_invited_m1_m2_figures.py`. Reproducible contract tests: `tests/test_invited_m1_m2_figures.py`; dedicated figure CI `.github/workflows/invited-m1-m2-figures.yml`.

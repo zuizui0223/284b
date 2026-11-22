@@ -33,7 +33,8 @@
 - [ ] Final reference formatting verified.
 - [x] Four primary figures rendered to PDF/SVG/PNG, integrity checked and visually inspected at original output size; overlaps fixed after first render ([figure QA receipt](ECOLOGY_LETTERS_INVITED_M1_M2_FIGURE_QA_20261122.md), CI run 45032223808).
 - [x] Figure captions and accessibility/alt text drafted for all four displays (`manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_FIGURE_CAPTIONS_V1.md`).
-- [ ] Journal-target width and final minimum lettering size verified after placement in the actual submission layout.
+- [x] Standalone 173-mm vector PDF print-size preflight and minimal lettering verified (7.06/6.00/6.10/6.12 pt for Figures 1–4); overlap-free proof inspected. This is not the compiled journal proof.
+- [ ] Final figures placed and verified inside the compiled submission manuscript / portal-generated reviewer PDF.
 - [x] Signed source-completeness sensitivity Supporting Information draft prepared: `manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_SOURCE_COMPLETENESS_SI_V1.md` (59 fitted taxa, 24 thresholds, 288 keyed heldout cells, four adequacy flips, 282/283 original-cell retention).
 - [ ] Assemble and journal-format the **complete** M1+M2 supplement (including M1 theorem/benchmark materials) and verify its consistency with the new source-completeness section.
 - [ ] Anonymous/review manuscript generated if required by the current portal.

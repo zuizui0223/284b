@@ -1,0 +1,259 @@
+{
+  "GBIF_occurrence_identifiers_saved": false,
+  "NEON_plot_species_outcomes_read": false,
+  "historical_47taxon_reference_q95_recomputed": false,
+  "historical_47taxon_source_prediction_fits_recomputed": false,
+  "historical_reference_group_taxa": 47,
+  "historical_specieskey_values": 79,
+  "interpretation": "Raw restored-source exposure of 47 fixed reference taxa, not model-admitted counts or q95 reference calibration sensitivity.",
+  "known_NEON_datasetkey_in_restored_reference_rows": {},
+  "new_empirical_conclusion_count": 0,
+  "original_level_a_endpoint_unchanged": true,
+  "original_parquet_objects_not_scanned": 9705,
+  "raw_restored_present_counts_by_source": {
+    "HUMAN_OBSERVATION": 335772,
+    "PRESERVED_SPECIMEN": 19058
+  },
+  "restored_october_parquet_objects_scanned": 510,
+  "schema": "284b.gbif_restored510_successor_reference47_exposure.v1",
+  "source_reference_file": "results/product_b_same_target_successor_source_mode_sampling_v0_1.json",
+  "status": "restored_files_scanned_for_frozen_47_reference_taxa",
+  "taxa_with_raw_restored_present_rows": 47,
+  "taxon_level_raw_restored_counts": [
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 212,
+      "taxon": "Abies amabilis"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 1551,
+      "taxon": "Abies grandis"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 146,
+      "taxon": "Abies magnifica"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 321,
+      "taxon": "Abies procera"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 2204,
+      "taxon": "Abies sibirica"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 2528,
+      "taxon": "Acacia melanoxylon"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 3330,
+      "taxon": "Acorus calamus"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 654,
+      "taxon": "Aegiceras corniculatum"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 16767,
+      "taxon": "Alisma plantago-aquatica"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 629,
+      "taxon": "Ambrosia dumosa"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 417,
+      "taxon": "Artemisia filifolia"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 793,
+      "taxon": "Atriplex confertifolia"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 242,
+      "taxon": "Atriplex lentiformis"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 7151,
+      "taxon": "Butomus umbellatus"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 21748,
+      "taxon": "Carpinus betulus"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 1566,
+      "taxon": "Ceriops tagal"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 2228,
+      "taxon": "Chamaecyparis lawsoniana"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 33930,
+      "taxon": "Cornus sanguinea"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 471,
+      "taxon": "Ephedra nevadensis"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 328,
+      "taxon": "Eucalyptus baxteri"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 27,
+      "taxon": "Eucalyptus nitens"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 859,
+      "taxon": "Eucalyptus viminalis"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 29156,
+      "taxon": "Euonymus europaeus"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 23914,
+      "taxon": "Geranium dissectum"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 1450,
+      "taxon": "Gutierrezia sarothrae"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 2199,
+      "taxon": "Leersia oryzoides"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 27143,
+      "taxon": "Ligustrum vulgare"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 185,
+      "taxon": "Lumnitzera racemosa"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 6374,
+      "taxon": "Onoclea sensibilis"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 1823,
+      "taxon": "Picea obovata"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 770,
+      "taxon": "Pinus flexilis"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 7159,
+      "taxon": "Pinus ponderosa"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 2913,
+      "taxon": "Pinus sibirica"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 5442,
+      "taxon": "Pinus strobus"
+    },
+    {
+      "historical_key_count": 3,
+      "raw_restored_present_rows": 8254,
+      "taxon": "Polystichum setiferum"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 29020,
+      "taxon": "Populus tremula"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 12669,
+      "taxon": "Quercus petraea"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 515,
+      "taxon": "Sonneratia alba"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 16401,
+      "taxon": "Sparganium erectum"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 9176,
+      "taxon": "Tilia cordata"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 3178,
+      "taxon": "Tsuga canadensis"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 537,
+      "taxon": "Tsuga mertensiana"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 24735,
+      "taxon": "Veronica arvensis"
+    },
+    {
+      "historical_key_count": 2,
+      "raw_restored_present_rows": 26852,
+      "taxon": "Viburnum opulus"
+    },
+    {
+      "historical_key_count": 3,
+      "raw_restored_present_rows": 16358,
+      "taxon": "Viola arvensis"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 386,
+      "taxon": "Woodwardia fimbriata"
+    },
+    {
+      "historical_key_count": 1,
+      "raw_restored_present_rows": 119,
+      "taxon": "Xylocarpus granatum"
+    }
+  ]
+}

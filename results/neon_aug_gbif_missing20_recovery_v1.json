@@ -1,0 +1,50 @@
+{
+  "GBIF_occurrence_rows_read": false,
+  "NEON_datasetkey_training_overlap_still_unresolved": true,
+  "added_file_first_5": [
+    "occurrence/2026-08-01/occurrence.parquet/000020",
+    "occurrence/2026-08-01/occurrence.parquet/000040",
+    "occurrence/2026-08-01/occurrence.parquet/000060",
+    "occurrence/2026-08-01/occurrence.parquet/000080",
+    "occurrence/2026-08-01/occurrence.parquet/000100"
+  ],
+  "added_file_last_5": [
+    "occurrence/2026-08-01/occurrence.parquet/010120",
+    "occurrence/2026-08-01/occurrence.parquet/010140",
+    "occurrence/2026-08-01/occurrence.parquet/010160",
+    "occurrence/2026-08-01/occurrence.parquet/010180",
+    "occurrence/2026-08-01/occurrence.parquet/010200"
+  ],
+  "added_file_last_modified_range": {
+    "max": "2026-10-23T15:42:18.000Z",
+    "min": "2026-10-23T15:41:19.000Z"
+  },
+  "candidate_added_divisible_by_20_count": 510,
+  "candidate_historical_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "candidate_historical_object_count": 9706,
+  "candidate_historical_parquet_count": 9705,
+  "current_manifest_sha256": "ca0d9844cd6816b4e4d550a0152db489b5e6a4c5129f8700fe2f1d818b954cd2",
+  "current_object_count": 10216,
+  "direct_NEON_plant_observations_read": false,
+  "empirical_ledger_increment": 0,
+  "expected_historical_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "external_validation_authorized": false,
+  "filename_divisible_by_20_matches_gbif_issue609": true,
+  "historical_file_last_modified_range": {
+    "max": "2026-08-01T16:53:03.000Z",
+    "min": "2026-08-01T16:33:01.000Z"
+  },
+  "interpretation": "Only if the frozen full-object ETag/size/LastModified manifest SHA256 matches can we identify an exact original object set. The newer files cannot be assumed to have been in the original study. A full model input reconstruction is still necessary before training-overlap claims.",
+  "original_metadata_audit_date": "2026-09-04",
+  "original_metadata_audit_run_id": 33869400385,
+  "original_thinned_presence_reconstruction_still_unresolved": true,
+  "restored_file_counts_by_modulo20": {
+    "mod0": 510,
+    "other": 9705
+  },
+  "schema": "284b.gbif_2026_08_snapshot_recovered_missing20.v1",
+  "source_reproducibility_issue_is_external_public_S3_snapshot_change": true,
+  "status": "historical_9705_parquet_manifest_exactly_recovered",
+  "unknown_object_keys": [],
+  "upstream_incident_url": "https://github.com/gbif/occurrence/issues/609"
+}

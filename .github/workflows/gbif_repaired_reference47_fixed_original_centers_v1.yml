@@ -1,0 +1,197 @@
+name: "Refit 47 signed reference taxa on repaired GBIF with original spatial geometry"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths: ['config/gbif_repaired_reference47_refit_launch_v1.json']
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: gbif-repaired-reference47-full-source-refit
+  cancel-in-progress: false
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    outputs:
+      geometry_run: ${{ steps.gate.outputs.geometry_run }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - id: gate
+        name: Require exactly 47 signed original geometries before any repaired source fit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p 'test_gbif_repaired_reference47_fixed_original_centers_v1.py' -v
+          python -m unittest discover -s tests -p 'test_gbif_repaired_reference47_source_fits_aggregate_v1.py' -v
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess
+          launch=json.loads(pathlib.Path('config/gbif_repaired_reference47_refit_launch_v1.json').read_text())
+          geometry=json.loads(pathlib.Path('results/gbif_original_reference47_geometry_complete_v1.json').read_text())
+          m=json.loads(pathlib.Path('config/gbif_original_reference47_geometry_manifest_v1.json').read_text())
+          source=json.loads(pathlib.Path('results/gbif_repaired_reference47_thinning_v1.json').read_text())
+          assert launch['status']=='EXACT_47_OLD_GEOMETRIES_VERIFIED_AUTHORIZE_REPAIRED_SOURCE_REFITS'
+          assert launch['original_reference_taxa']==47
+          assert launch['original_geometry_completion_sha256']==hashlib.sha256(pathlib.Path('results/gbif_original_reference47_geometry_complete_v1.json').read_bytes()).hexdigest()
+          assert launch['original_geometry_result_run_id']>0
+          assert geometry['status']=='ALL_47_ORIGINAL_SIGNED_REFERENCE_GEOMETRIES_VERIFIED_NO_MODELS'
+          assert geometry['reference_taxa_original_geometry_exactly_reproduced']==47
+          assert geometry['historical_source_manifest_sha256']==m['original_source_manifest_sha256']
+          assert geometry['repaired_source_reference_model_refits_completed']==0
+          assert geometry['calibration_reference_q95_opened'] is False
+          assert source['prespecified_reference_taxa']==47 and source['completed_and_verified_shards']==8
+          assert launch['paired_source_D_opened'] is False and launch['reference_q95_opened'] is False
+          assert launch['heldout12_opened'] is False and launch['empirical_ledger_increment']==0
+          rid=launch['original_geometry_result_run_id']
+          run=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{rid}"],text=True))
+          assert run['status']=='completed' and run['conclusion']=='success'
+          assert run['head_branch']=='analysis/neon-external-truth-preflight-20261115'
+          assert run['head_sha']==launch['original_geometry_run_sha']
+          arts=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{rid}/artifacts?per_page=100"],text=True))['artifacts']
+          expected={f'gbif-original-reference47-centers-taxon-{i}':i for i in range(47)}
+          matched=[a for a in arts if a['name'] in expected]
+          assert len(matched)==47 and len({a['name'] for a in matched})==47
+          assert all(not a['expired'] and a['digest'] for a in matched)
+          assert {str(expected[a['name']]):{"id":a['id'],"digest":a['digest']} for a in matched}==launch['original_geometry_artifacts']
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as h:h.write(f'geometry_run={rid}\n')
+          print('47 exact source-blind original geometries and their 47 artifact ZIP digests verified')
+          PY
+
+  fit-original-reference-taxonomy:
+    needs: authorize
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        taxon_index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46]
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install frozen original model implementation and parquets
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check -q -e './sdmr[cloud,parquet,geo]'
+      - uses: actions/download-artifact@v4
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.authorize.outputs.geometry_run }}
+          name: gbif-original-reference47-centers-taxon-${{ matrix.taxon_index }}
+          path: original_centers
+      - name: Fetch original signed core19 qualification ZIP and verify fixed reference identity
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAXON_INDEX: ${{ matrix.taxon_index }}
+        run: |
+          set -euo pipefail
+          mkdir -p original_frame
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess,zipfile
+          i=int(os.environ['TAXON_INDEX'])
+          m=json.loads(pathlib.Path('config/gbif_original_reference47_geometry_manifest_v1.json').read_text())
+          launch=json.loads(pathlib.Path('config/gbif_repaired_reference47_refit_launch_v1.json').read_text())
+          entry=m['entries'][i]
+          source=json.loads(pathlib.Path('results/gbif_repaired_reference47_thinning_v1.json').read_text())['fixed_taxon_input_deltas'][i]
+          old=json.loads(pathlib.Path(f'original_centers/geometry_ref_{i}.json').read_text())
+          assert entry['index']==source['taxon_index']==old['taxon_index']==i
+          assert entry['taxon']==old['taxon']==source['taxon']
+          assert entry['historical_specieskeys']==source['historical_specieskeys']==old['historical_specieskeys']
+          assert old['original_center_sha256']==old['reconstructed_center_sha256']
+          assert old['status']=='ORIGINAL_SIGNED_REFERENCE_GEOMETRY_EXACTLY_REPRODUCED'
+          assert old['center_npy_sha256']==hashlib.sha256(pathlib.Path('original_centers/reference_centers.npy').read_bytes()).hexdigest()
+          assert source['repaired_raw_count_parity_passed'] is True
+          assert launch['original_geometry_artifacts'][str(i)]['id']>0
+          raw='/tmp/original_core19_reference_frame.zip'
+          with open(raw,'wb') as f:
+              subprocess.run(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{entry['original_qualification_artifact_id']}/zip"],stdout=f,check=True)
+          assert 'sha256:'+hashlib.sha256(pathlib.Path(raw).read_bytes()).hexdigest()==entry['original_qualification_artifact_digest']
+          with zipfile.ZipFile(raw) as z:z.extractall('original_frame')
+          pre=json.loads(pathlib.Path('original_frame/receipt.json').read_text())
+          assert pre['common_block_centers_sha256']==old['original_center_sha256']
+          assert pre['taxon']==entry['taxon'] and pre['taxon_index']==i
+          assert pre['historical_specieskeys']==entry['historical_specieskeys']
+          print('original taxon, 12 spatial centers, frozen evaluation rows and restored source inputs verified')
+          PY
+      - name: Fit original 48 cells against exactly repaired 10215-object source on signed old centers
+        env:
+          SDMR_RASTER_LAYER_JOBS: '2'
+          TAXON_INDEX: ${{ matrix.taxon_index }}
+        run: |
+          python scripts/fit_gbif_repaired_reference47_fixed_original_centers_v1.py \
+            --panel successor \
+            --taxon-index "$TAXON_INDEX" \
+            --core19-frame-dir original_frame \
+            --historical-centers-npy original_centers/reference_centers.npy \
+            --historical-centers-receipt "original_centers/geometry_ref_${TAXON_INDEX}.json" \
+            --chelsa-manifest sdmr/configs/chelsa_v2_1_plant_candidates.csv \
+            --output-dir fit
+      - name: Audit sealed model metadata without opening cross-source D or q95
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          c=json.loads(pathlib.Path('fit/contract.json').read_text())
+          assert c['result_version']=='284b.gbif_repaired_reference47_fixed_old_centers_fit_v1'
+          assert c['panel']=='successor' and c['expected_fit_cells']==48
+          assert c['sealed_fit_cells']+c['unresolved_fit_cells']==48
+          assert c['original_signed_comparison_frames_unchanged'] is True
+          assert c['background_rows_resampled_during_refit'] is False
+          for k in ('paired_discordance_computed','reference_ceiling_opened_or_read','heldout_pairing_opened','counts_as_empirical_conclusion'):
+              assert c[k] is False
+          PY
+      - name: Archive source-specific models and prediction surfaces for independent post-fit audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gbif-repaired-reference47-fit-taxon-${{ matrix.taxon_index }}
+          path: fit/
+          retention-days: 45
+          if-no-files-found: warn
+
+  aggregate:
+    needs: [authorize, fit-original-reference-taxonomy]
+    if: always() && needs.authorize.result == 'success' && needs.fit-original-reference-taxonomy.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install Parquet source integrity audit
+        run: python -m pip install -q pandas numpy pyarrow
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: gbif-repaired-reference47-fit-taxon-*
+          path: reference_fits
+      - name: Fail closed if 47 taxa, 2256 fit cells or 2000-row score integrity not satisfied
+        run: |
+          python scripts/aggregate_gbif_repaired_reference47_source_fits_v1.py \
+            --manifest config/gbif_original_reference47_geometry_manifest_v1.json \
+            --geometry results/gbif_original_reference47_geometry_complete_v1.json \
+            --source-audit results/gbif_repaired_reference47_thinning_v1.json \
+            --fits-root reference_fits \
+            --out results/gbif_repaired_reference47_fit_audit_v1.json
+      - name: Archive source-refit only; no q95 or heldout claims
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          r=json.loads(pathlib.Path('results/gbif_repaired_reference47_fit_audit_v1.json').read_text())
+          assert r['reference_taxa_verified']==47 and r['fit_cells_expected']==2256
+          assert r['calibration_24_q95_opened'] is False
+          assert r['heldout12_paired_discordance_opened'] is False
+          assert r['submission_status']=='HOLD' and r['empirical_ledger_increment']==0
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_reference47_fit_audit_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive integrity-audited repaired source refits for all 47 references"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

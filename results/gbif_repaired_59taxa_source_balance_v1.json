@@ -1,0 +1,93 @@
+{
+  "NEON_plot_species_outcomes_read": false,
+  "empirical_ledger_increment": 0,
+  "independent_biological_validation_performed": false,
+  "input_receipt_sha256": {
+    "heldout": "414ecc7fd9289573cc75a15301d40844e720d75f2503d6610a5983c2458147f0",
+    "reference": "179c587228c94bfbede077cef0a7b668374f9249f62d5c32693213097b5f758d"
+  },
+  "interpretation": "Source-specific changes in spatially-thinned admitted model inputs, not ecological predictions or source agreement.",
+  "original_taxa_fixed": true,
+  "panels": {
+    "combined": {
+      "human_to_specimen_ratio_down": 25,
+      "human_to_specimen_ratio_equal": 0,
+      "human_to_specimen_ratio_up": 34,
+      "max_specimen_gain_pct": 26.7272727273,
+      "max_specimen_gain_taxon": "Artemisia filifolia",
+      "per_mode": {
+        "human": {
+          "increment": 23088,
+          "original": 1010173,
+          "repaired": 1033261,
+          "taxon_equal_weight_median_increment_pct": 2.5180433039,
+          "weighted_increment_pct": 2.2855491089
+        },
+        "specimen": {
+          "increment": 3724,
+          "original": 103633,
+          "repaired": 107357,
+          "taxon_equal_weight_median_increment_pct": 2.2137079608,
+          "weighted_increment_pct": 3.5934499628
+        }
+      },
+      "taxa": 59,
+      "taxa_with_any_source_increment_at_least_5pct": 13
+    },
+    "heldout": {
+      "human_to_specimen_ratio_down": 4,
+      "human_to_specimen_ratio_equal": 0,
+      "human_to_specimen_ratio_up": 8,
+      "max_specimen_gain_pct": 5.0260610573,
+      "max_specimen_gain_taxon": "Atriplex canescens",
+      "per_mode": {
+        "human": {
+          "increment": 948,
+          "original": 31727,
+          "repaired": 32675,
+          "taxon_equal_weight_median_increment_pct": 2.3637305911,
+          "weighted_increment_pct": 2.9879913008
+        },
+        "specimen": {
+          "increment": 480,
+          "original": 15654,
+          "repaired": 16134,
+          "taxon_equal_weight_median_increment_pct": 2.0399610296,
+          "weighted_increment_pct": 3.0663089306
+        }
+      },
+      "taxa": 12,
+      "taxa_with_any_source_increment_at_least_5pct": 2
+    },
+    "reference": {
+      "human_to_specimen_ratio_down": 21,
+      "human_to_specimen_ratio_equal": 0,
+      "human_to_specimen_ratio_up": 26,
+      "max_specimen_gain_pct": 26.7272727273,
+      "max_specimen_gain_taxon": "Artemisia filifolia",
+      "per_mode": {
+        "human": {
+          "increment": 22140,
+          "original": 978446,
+          "repaired": 1000586,
+          "taxon_equal_weight_median_increment_pct": 2.5487046994,
+          "weighted_increment_pct": 2.262771783
+        },
+        "specimen": {
+          "increment": 3244,
+          "original": 87979,
+          "repaired": 91223,
+          "taxon_equal_weight_median_increment_pct": 2.4714828897,
+          "weighted_increment_pct": 3.6872435468
+        }
+      },
+      "taxa": 47,
+      "taxa_with_any_source_increment_at_least_5pct": 11
+    }
+  },
+  "q95_reference_read": false,
+  "raw_occurrences_read": false,
+  "repaired_model_predictions_read": false,
+  "schema": "284b.gbif_repaired_59taxa_source_balance.v1",
+  "status": "VERIFIED_SOURCE_ONLY_NO_MODEL_OR_ECOLOGICAL_OUTCOME"
+}

@@ -1,0 +1,73 @@
+{
+  "schema": "284b.neon_cross_site_evaluation_contract.v2",
+  "written": "2026-11-15",
+  "versioning_note": "Separate post-release-metadata design revision, prior to any NEON taxon/plot outcome opening. Original seven-taxon v1 eligibility and Level-A reference unmodified.",
+  "status": "DESIGN_READY_BUT_NOT_AUTHORIZED__GBIF_SOURCE_LINEAGE_AND_PLOT_COMPLETENESS_UNKNOWN",
+  "parent_v1": "config/neon_external_validation_preflight_v1.json",
+  "historical_level_a_endpoint": "same_target_cross_source_reproducibility_heldout12_core19_v0_4",
+  "NEON_release": "RELEASE-2026",
+  "NEON_product": "DP1.10058.001",
+  "NEON_release_doi": "10.48443/9g4s-hq52",
+  "fixed_taxa_from_v1": [
+    "Artemisia tridentata",
+    "Atriplex canescens",
+    "Encelia farinosa",
+    "Avicennia germinans",
+    "Laguncularia racemosa",
+    "Abies lasiocarpa",
+    "Larix laricina"
+  ],
+  "outcome_years_inclusive": [
+    2020,
+    2024
+  ],
+  "spatial_reference": "NEON 400 m2 plot centers, nest within NEON site; CHELSA bio1-bio19 ~1km climatologies; identical predictor pixels may occur for multiple plots",
+  "planned_unit": "site-aggregated proportion of completed plot-bouts with focal species detected",
+  "planned_computation": {
+    "plot_aggregation": "Within site, keep one predeclared most recent qualifying full 400m2 plot-bout per plotID; latest completion determined by data-availability/QC only, never focal-taxon presence",
+    "complete_bout": "Must satisfy 6 x 1 m2, 6 x 10 m2, 4 x 100 m2, matched site/plot/event/bout, and sampling/taxonomy quality gates as in scripts/neon_complete_bout_gate_v1.py",
+    "species_label": "detected if taxon precisely resolved in complete 400m2 survey; protocol-conditional non-detection otherwise only if completed and taxonomically identifiable",
+    "site_score": "For each source-specific frozen SDM, median relative suitability across sites' admitted plot centroids, not the sample of 2000 original model background points",
+    "site_response": "detection plot fraction = number of admitted plots detecting focal species / number of admitted complete plots",
+    "primary_statistic": "site-level Kendall tau-b of frozen SDM site score against site detection fraction, computed separately for PRESERVED_SPECIMEN and HUMAN_OBSERVATION",
+    "secondary_statistic": "per-taxon difference in tau-b between two source-specific SDMs; when both predictions are equally inaccurate, same-target cross-source coherence is not ecological correctness",
+    "additional_diagnostics": "site-level predictor vector uniqueness, between-site score variance, climate-extrapolation, site-level uncertainty, source-specific outcome independence, and complete site-year effort",
+    "no_species_inference_from_NEON_missing_site": "not surveyed/unresolved",
+    "no_species_absence_claim": "non-detection is protocol-conditional on completed plot only",
+    "avoid_pseudoreplication": "site is independent geographic unit; 400m2 plots and bout-years nested within site, and 24 procedure×M cells repeated within taxa",
+    "primary_reporting_unit": "taxon (up to seven), with site-level replication reported per taxon"
+  },
+  "unchanged_v1_eligibility": {
+    "min_sites_per_taxon": 3,
+    "min_complete_positive_plot_keys": 10,
+    "min_complete_nondetection_plot_keys": 10,
+    "min_evaluable_taxa": 3,
+    "no_replacement_of_taxa": true,
+    "stop_on_inadequate_gates": true
+  },
+  "extra_score_identifiability_requirements": [
+    "At least three distinct site-level CHELSA climate predictor vectors for each taxon within declared spatial predictor transport domain",
+    "Each source-specific fitted model has nonconstant predicted relative suitability across independent admitted sites; otherwise source-specific tau-b unestimable",
+    "If fewer than five sites for a taxon, descriptive ranks only, no nominal significance claim",
+    "If no site-level variation in plot detection fractions, rank test unestimable not a negative or positive ecological conclusion"
+  ],
+  "source_overlap_barrier": {
+    "status": "unresolved",
+    "original_snapshot": "2026-08-01",
+    "known_NEON_voucher_datasetkey": "3fed506c-d04f-4cd4-b373-bd602572f39b",
+    "source_lineage_pilot_run": 43711770502,
+    "if_any_proven_training_row_overlap": "do not claim independent validation of that frozen model against NEON without a separately versioned, leakage-clean refit and new heldout panel",
+    "if_zero_key_overlap": "still require occurrenceID, dates, coordinates, and republished-dataset crosswalk; no automatic independence claim"
+  },
+  "forbidden": [
+    "Read NEON plant species detections before source-lineage acceptance and separate authorization",
+    "Choose favorable NEON sites or taxa from observed species labels",
+    "Interpret missing or absent plot rows as biological zero",
+    "Use original Level-A source-discordance q95 as NEON predictive-accuracy threshold",
+    "Use all 400m2 plot-bouts as independent macroclimate replicates",
+    "Treat site-centroid proximity to sample comparison background points as formal species area accessibility",
+    "Interpret non-significant site-level correlation as evidence that a biological interaction is absent"
+  ],
+  "empirical_ledger_increment": 0,
+  "independent_field_result_obtained": false
+}

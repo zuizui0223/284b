@@ -1,0 +1,115 @@
+name: "Recalibrate 24 reference q95 cells from repaired GBIF, no heldout"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths: ['config/gbif_repaired_reference47_q95_launch_v1.json']
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: gbif-repaired-reference47-q95-only
+  cancel-in-progress: false
+jobs:
+  calibrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - id: gate
+        name: Confirm signed 47 fits, frozen 24-cell pre-D n>=30 and exact artifact run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p 'test_gbif_repaired_reference47_q95_v1.py' -v
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess
+          launch=json.loads(pathlib.Path('config/gbif_repaired_reference47_q95_launch_v1.json').read_text())
+          fbytes=pathlib.Path('results/gbif_repaired_reference47_fit_audit_v1.json').read_bytes()
+          pbytes=pathlib.Path('results/gbif_repaired_reference47_preD_feasibility_v1.json').read_bytes()
+          fit=json.loads(fbytes);feas=json.loads(pbytes)
+          assert launch['status']=='REPAIRED_REFERENCE47_PRED_SIGNED_AUTHORIZE_24_Q95_ONLY'
+          assert launch['fit_audit_sha256']==hashlib.sha256(fbytes).hexdigest()
+          assert launch['preD_sha256']==hashlib.sha256(pbytes).hexdigest()
+          assert fit['status']=='ALL_47_REPAIRED_REFERENCE_SOURCE_FITS_INTEGRITY_VERIFIED_NO_Q95'
+          assert fit['calibration_24_q95_opened'] is False and fit['heldout12_paired_discordance_opened'] is False
+          assert feas['reference_cells_expected']==feas['reference_cells_authorized_to_open_discordance']==24
+          assert feas['reference_cells_unresolved_pre_discordance']==0
+          assert feas['minimum_eligible_taxa_per_procedure_M']==30
+          assert feas['paired_prediction_surfaces_read'] is False
+          assert launch['heldout12_opened'] is False and launch['empirical_ledger_increment']==0
+          rid=launch['reference47_fit_run_id']
+          run=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{rid}"],text=True))
+          assert run['status']=='completed' and run['conclusion']=='success'
+          assert run['head_sha']==launch['reference47_fit_run_sha']
+          assert run['head_branch']=='analysis/neon-external-truth-preflight-20261115'
+          arts=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{rid}/artifacts?per_page=100"],text=True))['artifacts']
+          labels={f'gbif-repaired-reference47-fit-taxon-{i}':str(i) for i in range(47)}
+          chosen=[a for a in arts if a['name'] in labels]
+          assert len(chosen)==47 and len({a['name'] for a in chosen})==47
+          assert all(not a['expired'] and a['digest'] for a in chosen)
+          assert {labels[a['name']]:{'id':a['id'],'digest':a['digest']} for a in chosen}==launch['source_fit_artifacts']
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as out:
+              out.write(f'fit_run_id={rid}\n')
+          print('Strict 24 q95 calibration gate authorized from repaired-source pre-D only')
+          PY
+      - name: Install existing reference-calibration dependencies
+        run: python -m pip install -q numpy pandas pyarrow
+      - uses: actions/download-artifact@v4
+        with:
+          repository: zuizui0223/284b
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.gate.outputs.fit_run_id }}
+          pattern: gbif-repaired-reference47-fit-taxon-*
+          path: reference_fits
+          digest-mismatch: error
+      - name: Calibrate original nearest-rank q95 without reading any heldout result
+        env:
+          PYTHONPATH: '.:legacy/pre_level_a_focus'
+        run: |
+          python scripts/calibrate_gbif_repaired_reference47_q95_v1.py \
+            --fit-root reference_fits \
+            --fit-audit results/gbif_repaired_reference47_fit_audit_v1.json \
+            --preD results/gbif_repaired_reference47_preD_feasibility_v1.json \
+            --out-cells results/gbif_repaired_reference47_pairing_cells_v1.csv \
+            --out-reference results/gbif_repaired_reference47_q95_ceiling_v1.csv \
+            --out-summary results/gbif_repaired_reference47_q95_summary_v1.json
+      - name: Require exactly 24 frozen reference thresholds and zero heldout claims
+        run: |
+          python - <<'PY'
+          import csv,json
+          s=json.load(open('results/gbif_repaired_reference47_q95_summary_v1.json'))
+          assert s['result_version']=='284b.gbif_repaired_reference47_q95_calibration.v1'
+          assert s['reference_cells_expected']==s['reference_cells_frozen']==24
+          assert s['reference_cells_unresolved']==0 and s['full_reference_matrix_available'] is True
+          assert s['minimum_distinct_calibration_taxa_per_reference_cell']==30
+          assert s['reference_quantile']==0.95 and s['quantile_method']=='nearest_rank'
+          assert s['heldout_12_paired_discordance_read'] is False
+          assert s['heldout12_repaired_source_outcomes_opened'] is False
+          assert s['empirical_ledger_increment']==0 and s['submission_status']=='HOLD'
+          assert len(list(csv.DictReader(open('results/gbif_repaired_reference47_q95_ceiling_v1.csv'))))==24
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gbif-repaired-reference47-24q95-no-heldout
+          path: |
+            results/gbif_repaired_reference47_pairing_cells_v1.csv
+            results/gbif_repaired_reference47_q95_ceiling_v1.csv
+            results/gbif_repaired_reference47_q95_summary_v1.json
+          retention-days: 45
+          if-no-files-found: error
+      - name: Commit restored-source calibration only, not a new biological endpoint
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_reference47_pairing_cells_v1.csv
+          git add results/gbif_repaired_reference47_q95_ceiling_v1.csv
+          git add results/gbif_repaired_reference47_q95_summary_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive strict 24 q95 thresholds recalibrated from repaired reference47"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

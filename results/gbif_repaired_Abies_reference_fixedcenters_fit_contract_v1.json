@@ -1,0 +1,79 @@
+{
+  "GBIF_source_arm": "repaired_2026-08-01_10215_parquet_files",
+  "M_km": [
+    150,
+    300,
+    500
+  ],
+  "M_selected_from_outcome": false,
+  "active_predictor_count": 19,
+  "active_predictors": [
+    "bio1",
+    "bio2",
+    "bio3",
+    "bio4",
+    "bio5",
+    "bio6",
+    "bio7",
+    "bio8",
+    "bio9",
+    "bio10",
+    "bio11",
+    "bio12",
+    "bio13",
+    "bio14",
+    "bio15",
+    "bio16",
+    "bio17",
+    "bio18",
+    "bio19"
+  ],
+  "added_restored_510_source_objects_included": true,
+  "all_prediction_scores_finite_for_sealed_cells": true,
+  "background_rows_resampled_during_refit": false,
+  "claim_strength": "postfreeze_repaired_source_reference_index1_fixed_original_centers_fit_pilot_only_no_q95_or_pairing",
+  "core19_contract_version": "product_b_same_target_core19_requalification_v0.4",
+  "core19_frame_sha256_by_M": {
+    "150": "87ed7254cb0fd21f996ead64ed95e51f92d64021d145b2c50b092c227c06c578",
+    "300": "4b07eafa24a70643d0b21eaddd82d52514affd3797ad75349a28a6419cc347c0",
+    "500": "6dfb33886ea8c5e795646d3cd229cdb19df49568392f74cb8ea977eddb0760cc"
+  },
+  "core19_preflight_receipt_sha256": "53f469f54bd5f1416e2abe5a43057a561cc94c880d4aba9e2ab8e88c2a1005d9",
+  "counts_as_empirical_conclusion": false,
+  "errors": [],
+  "expected_fit_cells": 48,
+  "heldout_pairing_opened": false,
+  "historical_key_count": 2,
+  "historical_specieskeys": [
+    "2685361",
+    "8KCY"
+  ],
+  "new_independent_holdout_or_biological_confirmation": false,
+  "original_12_block_centers_sha256": "9eb19bf125fdd06c5e2b9ef901c869c23db6cd9aa88feb1305dffed79ff37f7e",
+  "original_signed_comparison_frames_unchanged": true,
+  "paired_discordance_computed": false,
+  "panel": "successor",
+  "posthoc_prediction_row_drop_used": false,
+  "prediction_surface_sha256": "5f7bff07e1b06c75cba1058a19b02b57f40c101eaaf4ca55c7560b452bbc5566",
+  "prediction_surfaces_sealed": true,
+  "procedure_count": 8,
+  "procedure_selected_from_outcome": false,
+  "process_knockout_computed": false,
+  "reference_ceiling_opened_or_read": false,
+  "repaired_source_thinned_presence_count": {
+    "HUMAN_OBSERVATION": 6710,
+    "PRESERVED_SPECIMEN": 990
+  },
+  "result_version": "284b.gbif_repaired_Abies_reference_fixed_old_centers_fit_v1",
+  "row_identity_serialization": "scalar_metadata_columns_only",
+  "same_frozen_core19_background_rows_used_for_both_sources": true,
+  "sealed_fit_cells": 48,
+  "source_modes": [
+    "PRESERVED_SPECIMEN",
+    "HUMAN_OBSERVATION"
+  ],
+  "taxon": "Abies grandis",
+  "taxon_index": 1,
+  "taxon_replaced": false,
+  "unresolved_fit_cells": 0
+}

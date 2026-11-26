@@ -1,0 +1,398 @@
+{
+  "GBIF_source_independence_verified": false,
+  "NEON_plot_coordinates_opened": false,
+  "domain_counts": {
+    "D01": 2,
+    "D02": 3,
+    "D03": 3,
+    "D04": 2,
+    "D05": 3,
+    "D06": 3,
+    "D07": 3,
+    "D08": 3,
+    "D09": 3,
+    "D10": 3,
+    "D11": 2,
+    "D12": 1,
+    "D13": 2,
+    "D14": 2,
+    "D15": 1,
+    "D16": 2,
+    "D17": 3,
+    "D18": 2,
+    "D19": 3,
+    "D20": 1
+  },
+  "empirical_ledger_increment": 0,
+  "external_validation_authorized": false,
+  "interpretation": "A product-wide set of site centroids is available. Model rank identifiability on NEON plots and species-specific survey eligibility are still unknown; site centroid distance is not itself predictor contrast.",
+  "metadata_raw_sha256": "216a8a9cad82e42d8bd48889aac551cb54ecc4a432700ee79ccc546b393aeed5",
+  "metadata_url": "https://data.neonscience.org/api/v0/sites?release=RELEASE-2026",
+  "min_site_centroid_distance_km": 1.696504995276264,
+  "pairwise_site_distances_count": 1081,
+  "product_site_count": 47,
+  "raw_data_and_plant_labels_opened": false,
+  "released_product_site_count": 47,
+  "schema": "284b.neon_site_geography_preflight.v1",
+  "site_centroid_pairs_below_10km": 2,
+  "site_centroid_pairs_below_1km": 0,
+  "site_centroid_pairs_below_50km": 9,
+  "site_centroid_reference": {
+    "ABBY": {
+      "domainCode": "D16",
+      "siteLatitude": 45.762439,
+      "siteLongitude": -122.330317,
+      "siteType": "GRADIENT",
+      "stateCode": "WA"
+    },
+    "BARR": {
+      "domainCode": "D18",
+      "siteLatitude": 71.28241,
+      "siteLongitude": -156.61936,
+      "siteType": "GRADIENT",
+      "stateCode": "AK"
+    },
+    "BART": {
+      "domainCode": "D01",
+      "siteLatitude": 44.063889,
+      "siteLongitude": -71.287375,
+      "siteType": "GRADIENT",
+      "stateCode": "NH"
+    },
+    "BLAN": {
+      "domainCode": "D02",
+      "siteLatitude": 39.033698,
+      "siteLongitude": -78.041788,
+      "siteType": "GRADIENT",
+      "stateCode": "VA"
+    },
+    "BONA": {
+      "domainCode": "D19",
+      "siteLatitude": 65.15401,
+      "siteLongitude": -147.50258,
+      "siteType": "CORE",
+      "stateCode": "AK"
+    },
+    "CLBJ": {
+      "domainCode": "D11",
+      "siteLatitude": 33.40123,
+      "siteLongitude": -97.57,
+      "siteType": "CORE",
+      "stateCode": "TX"
+    },
+    "CPER": {
+      "domainCode": "D10",
+      "siteLatitude": 40.815536,
+      "siteLongitude": -104.745591,
+      "siteType": "CORE",
+      "stateCode": "CO"
+    },
+    "DCFS": {
+      "domainCode": "D09",
+      "siteLatitude": 47.16165,
+      "siteLongitude": -99.10656,
+      "siteType": "GRADIENT",
+      "stateCode": "ND"
+    },
+    "DEJU": {
+      "domainCode": "D19",
+      "siteLatitude": 63.88112,
+      "siteLongitude": -145.75136,
+      "siteType": "GRADIENT",
+      "stateCode": "AK"
+    },
+    "DELA": {
+      "domainCode": "D08",
+      "siteLatitude": 32.541727,
+      "siteLongitude": -87.803877,
+      "siteType": "GRADIENT",
+      "stateCode": "AL"
+    },
+    "DSNY": {
+      "domainCode": "D03",
+      "siteLatitude": 28.12505,
+      "siteLongitude": -81.43619,
+      "siteType": "GRADIENT",
+      "stateCode": "FL"
+    },
+    "GRSM": {
+      "domainCode": "D07",
+      "siteLatitude": 35.68896,
+      "siteLongitude": -83.50195,
+      "siteType": "GRADIENT",
+      "stateCode": "TN"
+    },
+    "GUAN": {
+      "domainCode": "D04",
+      "siteLatitude": 17.96955,
+      "siteLongitude": -66.8687,
+      "siteType": "CORE",
+      "stateCode": "PR"
+    },
+    "HARV": {
+      "domainCode": "D01",
+      "siteLatitude": 42.53691,
+      "siteLongitude": -72.17265,
+      "siteType": "CORE",
+      "stateCode": "MA"
+    },
+    "HEAL": {
+      "domainCode": "D19",
+      "siteLatitude": 63.875798,
+      "siteLongitude": -149.213347,
+      "siteType": "GRADIENT",
+      "stateCode": "AK"
+    },
+    "JERC": {
+      "domainCode": "D03",
+      "siteLatitude": 31.194839,
+      "siteLongitude": -84.468623,
+      "siteType": "GRADIENT",
+      "stateCode": "GA"
+    },
+    "JORN": {
+      "domainCode": "D14",
+      "siteLatitude": 32.590694,
+      "siteLongitude": -106.842542,
+      "siteType": "GRADIENT",
+      "stateCode": "NM"
+    },
+    "KONA": {
+      "domainCode": "D06",
+      "siteLatitude": 39.110446,
+      "siteLongitude": -96.612935,
+      "siteType": "GRADIENT",
+      "stateCode": "KS"
+    },
+    "KONZ": {
+      "domainCode": "D06",
+      "siteLatitude": 39.100774,
+      "siteLongitude": -96.563075,
+      "siteType": "CORE",
+      "stateCode": "KS"
+    },
+    "LAJA": {
+      "domainCode": "D04",
+      "siteLatitude": 18.021261,
+      "siteLongitude": -67.076889,
+      "siteType": "GRADIENT",
+      "stateCode": "PR"
+    },
+    "LENO": {
+      "domainCode": "D08",
+      "siteLatitude": 31.853861,
+      "siteLongitude": -88.161181,
+      "siteType": "GRADIENT",
+      "stateCode": "AL"
+    },
+    "MLBS": {
+      "domainCode": "D07",
+      "siteLatitude": 37.378314,
+      "siteLongitude": -80.524847,
+      "siteType": "GRADIENT",
+      "stateCode": "VA"
+    },
+    "MOAB": {
+      "domainCode": "D13",
+      "siteLatitude": 38.248283,
+      "siteLongitude": -109.388273,
+      "siteType": "GRADIENT",
+      "stateCode": "UT"
+    },
+    "NIWO": {
+      "domainCode": "D13",
+      "siteLatitude": 40.05425,
+      "siteLongitude": -105.58237,
+      "siteType": "CORE",
+      "stateCode": "CO"
+    },
+    "NOGP": {
+      "domainCode": "D09",
+      "siteLatitude": 46.76972,
+      "siteLongitude": -100.91535,
+      "siteType": "GRADIENT",
+      "stateCode": "ND"
+    },
+    "OAES": {
+      "domainCode": "D11",
+      "siteLatitude": 35.410599,
+      "siteLongitude": -99.058779,
+      "siteType": "GRADIENT",
+      "stateCode": "OK"
+    },
+    "ONAQ": {
+      "domainCode": "D15",
+      "siteLatitude": 40.177599,
+      "siteLongitude": -112.452452,
+      "siteType": "CORE",
+      "stateCode": "UT"
+    },
+    "ORNL": {
+      "domainCode": "D07",
+      "siteLatitude": 35.964128,
+      "siteLongitude": -84.282588,
+      "siteType": "CORE",
+      "stateCode": "TN"
+    },
+    "OSBS": {
+      "domainCode": "D03",
+      "siteLatitude": 29.689282,
+      "siteLongitude": -81.993431,
+      "siteType": "CORE",
+      "stateCode": "FL"
+    },
+    "PUUM": {
+      "domainCode": "D20",
+      "siteLatitude": 19.55309,
+      "siteLongitude": -155.31731,
+      "siteType": "CORE",
+      "stateCode": "HI"
+    },
+    "RMNP": {
+      "domainCode": "D10",
+      "siteLatitude": 40.275903,
+      "siteLongitude": -105.545955,
+      "siteType": "GRADIENT",
+      "stateCode": "CO"
+    },
+    "SCBI": {
+      "domainCode": "D02",
+      "siteLatitude": 38.892925,
+      "siteLongitude": -78.139494,
+      "siteType": "CORE",
+      "stateCode": "VA"
+    },
+    "SERC": {
+      "domainCode": "D02",
+      "siteLatitude": 38.890131,
+      "siteLongitude": -76.560014,
+      "siteType": "GRADIENT",
+      "stateCode": "MD"
+    },
+    "SJER": {
+      "domainCode": "D17",
+      "siteLatitude": 37.10878,
+      "siteLongitude": -119.73228,
+      "siteType": "CORE",
+      "stateCode": "CA"
+    },
+    "SOAP": {
+      "domainCode": "D17",
+      "siteLatitude": 37.03337,
+      "siteLongitude": -119.26219,
+      "siteType": "GRADIENT",
+      "stateCode": "CA"
+    },
+    "SRER": {
+      "domainCode": "D14",
+      "siteLatitude": 31.91068,
+      "siteLongitude": -110.83549,
+      "siteType": "CORE",
+      "stateCode": "AZ"
+    },
+    "STEI": {
+      "domainCode": "D05",
+      "siteLatitude": 45.50894,
+      "siteLongitude": -89.58637,
+      "siteType": "GRADIENT",
+      "stateCode": "WI"
+    },
+    "STER": {
+      "domainCode": "D10",
+      "siteLatitude": 40.461894,
+      "siteLongitude": -103.02929,
+      "siteType": "GRADIENT",
+      "stateCode": "CO"
+    },
+    "TALL": {
+      "domainCode": "D08",
+      "siteLatitude": 32.95047,
+      "siteLongitude": -87.393259,
+      "siteType": "CORE",
+      "stateCode": "AL"
+    },
+    "TEAK": {
+      "domainCode": "D17",
+      "siteLatitude": 37.00583,
+      "siteLongitude": -119.00602,
+      "siteType": "GRADIENT",
+      "stateCode": "CA"
+    },
+    "TOOL": {
+      "domainCode": "D18",
+      "siteLatitude": 68.66109,
+      "siteLongitude": -149.37047,
+      "siteType": "CORE",
+      "stateCode": "AK"
+    },
+    "TREE": {
+      "domainCode": "D05",
+      "siteLatitude": 45.49369,
+      "siteLongitude": -89.58571,
+      "siteType": "GRADIENT",
+      "stateCode": "WI"
+    },
+    "UKFS": {
+      "domainCode": "D06",
+      "siteLatitude": 39.040431,
+      "siteLongitude": -95.19215,
+      "siteType": "GRADIENT",
+      "stateCode": "KS"
+    },
+    "UNDE": {
+      "domainCode": "D05",
+      "siteLatitude": 46.23391,
+      "siteLongitude": -89.537254,
+      "siteType": "CORE",
+      "stateCode": "MI"
+    },
+    "WOOD": {
+      "domainCode": "D09",
+      "siteLatitude": 47.1282,
+      "siteLongitude": -99.241334,
+      "siteType": "CORE",
+      "stateCode": "ND"
+    },
+    "WREF": {
+      "domainCode": "D16",
+      "siteLatitude": 45.82049,
+      "siteLongitude": -121.95191,
+      "siteType": "CORE",
+      "stateCode": "WA"
+    },
+    "YELL": {
+      "domainCode": "D12",
+      "siteLatitude": 44.95348,
+      "siteLongitude": -110.53914,
+      "siteType": "CORE",
+      "stateCode": "WY"
+    }
+  },
+  "state": "site_centroid_metadata_confirmed",
+  "state_counts": {
+    "AK": 5,
+    "AL": 3,
+    "AZ": 1,
+    "CA": 3,
+    "CO": 4,
+    "FL": 2,
+    "GA": 1,
+    "HI": 1,
+    "KS": 3,
+    "MA": 1,
+    "MD": 1,
+    "MI": 1,
+    "ND": 3,
+    "NH": 1,
+    "NM": 1,
+    "OK": 1,
+    "PR": 2,
+    "TN": 2,
+    "TX": 1,
+    "UT": 2,
+    "VA": 3,
+    "WA": 2,
+    "WI": 2,
+    "WY": 1
+  }
+}

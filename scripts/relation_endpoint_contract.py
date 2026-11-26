@@ -246,3 +246,48 @@ def hard_rule_operating_characteristics(
         "invalid_mass_if_function_present": 1.0 - a1,
         "invalid_mass_if_function_absent": 1.0 - a0,
     }
+
+
+def qualified_violation_false_discovery_fraction(
+    *,
+    violation_prevalence: float,
+    valid_if_function_present: float,
+    valid_if_function_absent: float,
+    key_sensitivity: float,
+    specificity: float,
+) -> float | None:
+    """FDF among qualified violation calls, with state-dependent validity.
+
+    F=true: biologically compatible function; F=false: true violation.
+    violation_prevalence is P(F=false) across ALL candidate keys, not
+    conditional on a valid key. key_sensitivity q is P(call function
+    present | F=true, valid); specificity sp is P(call function absent
+    | F=false, valid). A violation is called only on a valid observation key.
+
+    P(false violation call) = (1-pi)*a1*(1-q)
+    P(true violation call)  = pi*a0*sp.
+
+    FDF = P(false call) / P(any violation call). Return None if the
+    denominator is zero (no qualified violation call is possible).
+    The shorter formula omitting a1/a0 holds only if a1=a0>0, or
+    when pi is redefined as P(F=false | valid), which this API does not do.
+    """
+    for name, value in (
+        ("violation_prevalence", violation_prevalence),
+        ("valid_if_function_present", valid_if_function_present),
+        ("valid_if_function_absent", valid_if_function_absent),
+        ("key_sensitivity", key_sensitivity),
+        ("specificity", specificity),
+    ):
+        if not 0.0 <= value <= 1.0:
+            raise ValueError(f"{name} must be in [0, 1]")
+
+    pi = violation_prevalence
+    a1 = valid_if_function_present
+    a0 = valid_if_function_absent
+    q = key_sensitivity
+    sp = specificity
+    false_calls = (1.0 - pi) * a1 * (1.0 - q)
+    true_calls = pi * a0 * sp
+    total_calls = false_calls + true_calls
+    return false_calls / total_calls if total_calls > 0.0 else None

@@ -1,0 +1,147 @@
+name: "Reproduce signed original 12 heldout spatial geometries without models"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths: ['config/gbif_original_heldout12_geometry_scaleout_v1.json']
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: gbif-original-heldout12-geometry-only
+  cancel-in-progress: false
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Require successful signed single-taxon heldout geometry replay
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p 'test_gbif_original_heldout12_geometry_v1.py' -v
+          python -m unittest discover -s tests -p 'test_gbif_original_heldout12_geometry_aggregate_v1.py' -v
+          python - <<'PY'
+          import json,os,pathlib,subprocess
+          d=json.loads(pathlib.Path('config/gbif_original_heldout12_geometry_scaleout_v1.json').read_text())
+          p=json.loads(pathlib.Path('results/gbif_original_heldout12_geometry_pilot_index0_v1.json').read_text())
+          old=json.loads(pathlib.Path('results/gbif_original_centers_Artemisia_v1.json').read_text())
+          m=json.loads(pathlib.Path('config/gbif_original_heldout12_geometry_manifest_v1.json').read_text())
+          assert d['status']=='HELDOUT12_ORIGINAL_GEOMETRY_PORTABILITY_PILOT_VERIFIED_ONLY'
+          assert d['original_heldout_taxa']==12 and d['pilot_taxon_index']==0
+          assert d['pilot_centers_npy_sha256']==p['center_npy_sha256']==old['centers_np_array_SHA256']
+          assert p['original_center_sha256']==p['reconstructed_center_sha256']==old['recomputed_centers_SHA256']
+          assert p['historical_specieskey']==m['entries'][0]['historical_specieskey']=='GX2B'
+          assert not d['repaired_model_fitting_authorized'] and not d['reference_q95_authorized'] and not d['repaired_heldout_outcomes_authorized']
+          assert d['empirical_ledger_increment']==0
+          rid=d['pilot_run_id']
+          run=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{rid}"],text=True))
+          assert run['status']=='completed' and run['conclusion']=='success'
+          assert run['head_sha']==d['pilot_run_sha']
+          assert run['head_branch']=='analysis/neon-external-truth-preflight-20261115'
+          arts=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{rid}/artifacts?per_page=100"],text=True))['artifacts']
+          a=[x for x in arts if x['name']=='gbif-original-heldout12-geometry-portable-index0']
+          assert len(a)==1 and not a[0]['expired']
+          assert a[0]['id']==d['pilot_artifact_id'] and a[0]['digest']==d['pilot_artifact_digest']
+          PY
+  original-12-geometries:
+    needs: authorize
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        taxon_index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install original source and spatial implementation
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check -q -e './sdmr[cloud,parquet,geo]'
+      - name: Download exactly signed original heldout preflight and fitted model ZIPs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAXON_INDEX: ${{ matrix.taxon_index }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess
+          i=int(os.environ['TAXON_INDEX'])
+          m=json.loads(pathlib.Path('config/gbif_original_heldout12_geometry_manifest_v1.json').read_text())
+          e=m['entries'][i]
+          assert e['index']==i and len(m['entries'])==12
+          for idkey,digestkey,path in (
+             ('original_qualification_artifact_id','original_qualification_artifact_digest','/tmp/heldout_frame.zip'),
+             ('original_fit_artifact_id','original_fit_artifact_digest','/tmp/heldout_fit.zip'),
+          ):
+              with open(path,'wb') as o:
+                  subprocess.run(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{e[idkey]}/zip"],stdout=o,check=True)
+              if 'sha256:'+hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()!=e[digestkey]:
+                  raise RuntimeError('Historical 12-heldout artifact digest mismatch')
+          print('signed heldout source/model ZIPs verified',i,e['taxon'])
+          PY
+      - name: Recompute 12 original centers on exact frozen 9705-object source
+        env:
+          TAXON_INDEX: ${{ matrix.taxon_index }}
+        run: |
+          mkdir -p out
+          python scripts/reconstruct_original_heldout12_centers_v1.py \
+            --taxon-index "$TAXON_INDEX" \
+            --frame-zip /tmp/heldout_frame.zip \
+            --fit-zip /tmp/heldout_fit.zip \
+            --out-centers out/original_heldout_centers.npy \
+            --out-json "out/heldout_geometry_ref_${TAXON_INDEX}.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gbif-original-heldout12-geometry-taxon-${{ matrix.taxon_index }}
+          path: out/
+          retention-days: 45
+          if-no-files-found: warn
+  aggregate:
+    needs: [authorize, original-12-geometries]
+    if: always() && needs.authorize.result == 'success' && needs.original-12-geometries.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: gbif-original-heldout12-geometry-taxon-*
+          path: original_heldout12_arrays
+      - name: Require exactly 12 original signed 12-block centers and M-frame hashes
+        run: |
+          python scripts/aggregate_gbif_original_heldout12_geometry_v1.py \
+            --manifest config/gbif_original_heldout12_geometry_manifest_v1.json \
+            --receipts-root original_heldout12_arrays \
+            --out results/gbif_original_heldout12_geometry_complete_v1.json
+      - name: Archive original heldout geometry only with zero ecological claims
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open('results/gbif_original_heldout12_geometry_complete_v1.json'))
+          assert x['original_heldout_geometry_exactly_reproduced']==12
+          assert x['repaired_source_heldout_model_refits_completed']==0
+          assert x['repaired_47_reference_q95_calibrated'] is False
+          assert x['repaired_12_heldout_paired_outcomes_opened'] is False
+          assert x['empirical_ledger_increment']==0 and x['submission_status']=='HOLD'
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_original_heldout12_geometry_complete_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive 12 original heldout signed spatial geometries"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

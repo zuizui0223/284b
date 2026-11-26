@@ -1,0 +1,117 @@
+name: "Abies reference restored GBIF within-source prediction drift (no q95)"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths: ['config/gbif_repaired_Abies_reference_drift_launch_v1.json']
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: gbif-Abies-reference-within-source-drift
+  cancel-in-progress: false
+jobs:
+  verify-original-versus-repaired-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install score verification dependencies
+        run: python -m pip install -q numpy pandas pyarrow
+      - name: Validate TV metric and non-paired scientific guard
+        run: |
+          python -m unittest discover -s integration_tests -p 'test_gbif_repaired_Abies_reference_single_source_drift_v1.py' -v
+      - name: Verify exact signed original and repaired Abies fit archives
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p repaired_archive
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess,zipfile
+          launch=json.loads(pathlib.Path('config/gbif_repaired_Abies_reference_drift_launch_v1.json').read_text())
+          assert launch['status']=='ABIES_REFERENCE_SOURCE_SELF_TV_ONLY_NO_PAIRING'
+          assert launch['taxon']=='Abies grandis' and launch['reference_taxon_index']==1
+          assert launch['original_fit_artifact_id']==10090599087
+          assert launch['original_fit_artifact_digest']=='sha256:9a817480d8f023246fe3dc9fedee01a6bf4e95a05418d854937610d78e58c99b'
+          assert launch['repaired_fit_run_id']==44301719578
+          assert launch['repaired_fit_artifact_id']==14430189873
+          assert launch['repaired_fit_artifact_digest']=='sha256:eb395940567baa498669b0cb2e5f3a0b62417d0fe44296729dcf7fe5c83fafce'
+          assert launch['paired_D_opened'] is False and launch['q95_opened'] is False
+          assert launch['heldout12_opened'] is False and launch['empirical_ledger_increment']==0
+          run=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{launch['repaired_fit_run_id']}"],text=True))
+          assert run['status']=='completed' and run['conclusion']=='success'
+          assert run['head_sha']==launch['repaired_fit_run_sha']
+          assert run['head_branch']=='analysis/neon-external-truth-preflight-20261115'
+          arts=json.loads(subprocess.check_output(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{run['id']}/artifacts?per_page=100"],text=True))['artifacts']
+          a=[x for x in arts if x['name']=='gbif-repaired-Abies-reference-fixed-old-geometry-fit']
+          assert len(a)==1 and not a[0]['expired']
+          assert a[0]['id']==launch['repaired_fit_artifact_id']
+          assert a[0]['digest']==launch['repaired_fit_artifact_digest']
+          for name,artifact_id,digest in (
+              ('/tmp/Abies_original_fit.zip',launch['original_fit_artifact_id'],launch['original_fit_artifact_digest']),
+              ('/tmp/Abies_repaired_fit.zip',launch['repaired_fit_artifact_id'],launch['repaired_fit_artifact_digest']),
+          ):
+              with open(name,'wb') as out:
+                  subprocess.run(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{artifact_id}/zip"],stdout=out,check=True)
+              sha='sha256:'+hashlib.sha256(pathlib.Path(name).read_bytes()).hexdigest()
+              assert sha==digest,(artifact_id,sha)
+          with zipfile.ZipFile('/tmp/Abies_repaired_fit.zip') as z:
+              z.extractall('repaired_archive')
+          found=list(pathlib.Path('repaired_archive').rglob('contract.json'))
+          assert len(found)==1,found
+          path=found[0].parent
+          for f in ('fit_inventory.csv','sealed_prediction_surfaces.parquet'):
+              assert (path/f).is_file(),f
+          c=json.loads(found[0].read_text())
+          committed=json.loads(pathlib.Path('results/gbif_repaired_Abies_reference_fixedcenters_fit_contract_v1.json').read_text())
+          assert c==committed
+          assert c['taxon']=='Abies grandis' and c['sealed_fit_cells']==48 and c['unresolved_fit_cells']==0
+          pathlib.Path('/tmp/Abies_repaired_fit_dir.txt').write_text(str(path.resolve()))
+          print('Signed original and repaired fit arrays verified')
+          PY
+      - name: Compute normalized same-source total variation on original 2000 row IDs only
+        run: |
+          mkdir -p results
+          python scripts/audit_gbif_repaired_Abies_reference_single_source_drift_v1.py \
+            --original-fit-zip /tmp/Abies_original_fit.zip \
+            --repaired-dir "$(cat /tmp/Abies_repaired_fit_dir.txt)" \
+            --out-json results/gbif_repaired_Abies_reference_single_source_drift_v1.json \
+            --out-csv results/gbif_repaired_Abies_reference_single_source_drift_cells_v1.csv
+      - name: Require zero independent biological and reference q95 claims
+        run: |
+          python - <<'PY'
+          import csv,json
+          x=json.load(open('results/gbif_repaired_Abies_reference_single_source_drift_v1.json'))
+          assert x['status']=='reference_one_taxon_within_source_prediction_drift_only'
+          assert x['taxon']=='Abies grandis' and x['original_reference_taxon_index']==1
+          assert x['source_cells_expected']==48
+          assert x['source_cells_safely_comparable']+x['unresolved_source_cells']==48
+          assert x['cross_source_paired_discordance_computed'] is False
+          assert x['paired_source_reference_discordance_opened'] is False
+          assert x['repaired_47taxon_q95_calibrated'] is False
+          assert x['full_repaired_12taxon_endpoint_opened'] is False
+          assert x['empirical_ledger_increment']==0
+          assert len(list(csv.DictReader(open('results/gbif_repaired_Abies_reference_single_source_drift_cells_v1.csv'))))==48
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gbif-repaired-Abies-reference-source-self-TV-no-q95
+          path: |
+            results/gbif_repaired_Abies_reference_single_source_drift_v1.json
+            results/gbif_repaired_Abies_reference_single_source_drift_cells_v1.csv
+          retention-days: 45
+          if-no-files-found: error
+      - name: Archive only source-version technical pilot outcomes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_Abies_reference_single_source_drift_v1.json
+          git add results/gbif_repaired_Abies_reference_single_source_drift_cells_v1.csv
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive Abies repaired-source within-mode prediction sensitivity without q95"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

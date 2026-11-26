@@ -1,0 +1,118 @@
+{
+  "common_cell_discordance_restored_minus_original": {
+    "maximum": 0.17330914213825,
+    "median": 0.0006981078552285025,
+    "minimum": -0.09645665634940936,
+    "n": 282,
+    "negative_count": 113,
+    "positive_count": 169,
+    "zero_with_tolerance_1e_12_count": 0
+  },
+  "common_cell_q95_margin_restored_minus_original": {
+    "maximum": 0.19430070860195087,
+    "median": 0.0007439019385936663,
+    "minimum": -0.1106729248581485,
+    "n": 282,
+    "negative_count": 131,
+    "positive_count": 151,
+    "zero_with_tolerance_1e_12_count": 0
+  },
+  "common_opened_cells": 282,
+  "empirical_ledger_increment": 0,
+  "historical_endpoint_fingerprint": "80465bdefd484a8e9d5adcdbd792820ff1716c2b589ff9ad2a278c6c9494646c",
+  "historical_opened_cells": 283,
+  "historical_signed_24_q95_sha256": "10759c6e0ffc70ff403c0eabd9c7ce30765ebbf1ce6403fa29562a7c7bb2b039",
+  "historical_signed_288_cell_sha256": "d9194ea416dcc3bbae339167e271d3cbcd522327b41fe573325770a94bd90b0d",
+  "nearest_restored_q95_margin": {
+    "M_km": 500,
+    "discordance_minus_q95": -0.01691124139093081,
+    "procedure": "predictive_forward|logit_l2_C0.1_degree1",
+    "taxon": "Eucalyptus globulus"
+  },
+  "original_opened_lost": 1,
+  "original_reference_q95_thresholds": 24,
+  "per_taxon_common_cell_discordance_delta_median": [
+    {
+      "median_restored_minus_original": 0.003013551402534953,
+      "n_common_cells": 24,
+      "taxon": "Abies lasiocarpa"
+    },
+    {
+      "median_restored_minus_original": -0.0006910160505700369,
+      "n_common_cells": 24,
+      "taxon": "Artemisia tridentata"
+    },
+    {
+      "median_restored_minus_original": -0.003858791152216823,
+      "n_common_cells": 24,
+      "taxon": "Atriplex canescens"
+    },
+    {
+      "median_restored_minus_original": 0.0034310914310648477,
+      "n_common_cells": 24,
+      "taxon": "Avicennia germinans"
+    },
+    {
+      "median_restored_minus_original": 0.001129205964851665,
+      "n_common_cells": 24,
+      "taxon": "Avicennia marina"
+    },
+    {
+      "median_restored_minus_original": -4.95552061564597e-05,
+      "n_common_cells": 24,
+      "taxon": "Encelia farinosa"
+    },
+    {
+      "median_restored_minus_original": 0.0005934978816853342,
+      "n_common_cells": 24,
+      "taxon": "Eucalyptus delegatensis"
+    },
+    {
+      "median_restored_minus_original": 0.003517057390670153,
+      "n_common_cells": 22,
+      "taxon": "Eucalyptus globulus"
+    },
+    {
+      "median_restored_minus_original": -0.0017187242861523844,
+      "n_common_cells": 24,
+      "taxon": "Laguncularia racemosa"
+    },
+    {
+      "median_restored_minus_original": 0.0006655502362852284,
+      "n_common_cells": 22,
+      "taxon": "Larix laricina"
+    },
+    {
+      "median_restored_minus_original": 0.003743786031637608,
+      "n_common_cells": 22,
+      "taxon": "Nothofagus antarctica"
+    },
+    {
+      "median_restored_minus_original": 0.0022096171634551354,
+      "n_common_cells": 24,
+      "taxon": "Nothofagus betuloides"
+    }
+  ],
+  "postfreeze_source_repair_is_independent_replication": false,
+  "reference_q95_restored_minus_original": {
+    "maximum": 0.04700186202801648,
+    "median": 0.0002748118398445687,
+    "minimum": -0.07180026163720366,
+    "n": 24,
+    "negative_count": 12,
+    "positive_count": 12,
+    "zero_with_tolerance_1e_12_count": 0
+  },
+  "repaired_reference_q95_thresholds": 24,
+  "restored_endpoint_fingerprint": "87b92c461bfbae117a473ac12ce673517878dfbc4b87316d7b8cddc91eadcf48",
+  "restored_newly_evaluable": 3,
+  "restored_opened_cells": 285,
+  "restored_q95_exceedances": 0,
+  "restored_signed_24_q95_sha256": "6ae208b3739fb77c3a6dac282b8f998d8dc80b5867c87f9f29cd56e83edba558",
+  "restored_signed_288_cell_sha256": "365d37c29b799b804da03550f1d7b1681277a2a676457269e02f6dd2308df20b",
+  "robustness_does_not_pass_full_283_cell_coverage_rule": true,
+  "schema": "284b.gbif_repaired_heldout12_postterminal_model_score_threshold_drift.v1",
+  "scientific_model_or_q95_recalculated_in_this_audit": false,
+  "status": "SHA_VERIFIED_PAIRED_DISCORDANCE_AND_Q95_SOURCE_VERSION_DRIFT_DESCRIPTIVE_ONLY",
+  "submission_status": "HOLD_FOR_SENSITIVITY_REVIEW"
+}

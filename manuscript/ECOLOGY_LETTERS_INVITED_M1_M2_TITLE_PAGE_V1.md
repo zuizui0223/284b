@@ -14,6 +14,15 @@
 
 **Keywords:** ecological inference; identifiability; observation process; cross-source reproducibility; model adequacy; preregistration; biodiversity data; uncertainty
 
+**Provisional abstract word count:** 135 (limit 150)  
+**Provisional main-text word count (sections 1–7):** 2,392 (Method limit 5,000)  
+**References:** 9  
+**Figures:** 4; **main-text tables:** 0; **text boxes:** 0  
+**Supporting Information:** 11 sections, 2 supporting tables  
+**Running title:** 29 characters (limit <45)  
+
+*Counts are reproducible estimates from the 2026-11-23 source Markdown. Confirm/update from the final formatted manuscript before sending; see `docs/EL_METHOD_JOURNAL_PREFLIGHT_20261123.md`.*
+
 ## Canonical scientific files
 
 - manuscript: `manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_V1.md`

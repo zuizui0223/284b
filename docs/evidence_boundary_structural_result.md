@@ -25,13 +25,15 @@ The frozen state-dependent audit gives a representative example with `a1=0.70`, 
 
 ## Qualification does not control false discovery
 
-For biological violation prevalence `pi`, a qualified process with sensitivity `q` and specificity `sp` can still have false-discovery fraction
+Let `pi=P(F=false)` denote unconditional true-violation prevalence over all keys. If observation validity differs by latent class, the false-discovery fraction among **qualified violation calls** is
 
-`FDF = (1-pi)(1-q) / [(1-pi)(1-q) + pi*sp]`.
+`FDF = (1-pi)*a1*(1-q) / [(1-pi)*a1*(1-q) + pi*a0*sp]`,
 
-At `pi=0.10`, `q=0.80`, and `sp=0.99`, `FDF ≈ 0.645`.
+provided the denominator is positive. If no qualified violation calls can occur, FDF is **undefined**, not zero. The shorter form `(1-pi)*(1-q) / [(1-pi)*(1-q) + pi*sp]` applies for equal positive validity fractions (`a1=a0>0`). Alternatively the shorter form always applies when `pi` is **redefined** as prevalence among valid keys, rather than prevalence among all keys.
 
-Therefore a measurement gate can authorize whether a negative state is admissible without guaranteeing that a called violation is reliable on its own. Replication or aggregation rules remain a separate evidentiary layer.
+For the equal-validity illustrative case, `pi=0.10`, `q=0.80`, and `sp=0.99` give `FDF≈0.645`. With the same unconditional prevalence and response characteristics but `a1=0.70, a0=0.90`, FDF is ≈0.586; reversing validities (`a1=0.90, a0=0.70`) gives ≈0.700. These are exact structural examples, **not** frequencies estimated from field data.
+
+Thus an observation gate can authorize whether a negative is admissible without ensuring that a called violation is reliable. Class-dependent observation validity can also change the prevalence composition of the qualified set. Replication or aggregation remains a separate evidentiary layer.
 
 ## Scope
 

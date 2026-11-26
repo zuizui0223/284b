@@ -1,0 +1,111 @@
+{
+  "schema": "284b.neon_external_metadata_and_dependency_gate.v2",
+  "revision_date": "2026-11-15",
+  "scope": "metadata_only_no_species_records_no_NEON_outcomes",
+  "parent_contract": "config/neon_external_validation_preflight_v1.json",
+  "parent_receipt": "results/neon_external_metadata_preflight_v1.json",
+  "fixed_release": {
+    "product_code": "DP1.10058.001",
+    "label": "RELEASE-2026",
+    "doi": "10.48443/9g4s-hq52",
+    "publication_date": "2026-01-23",
+    "official_page": "https://data.neonscience.org/data-products/DP1.10058.001/RELEASE-2026",
+    "expected_date_range": [
+      "2013-06",
+      "2024-12"
+    ],
+    "expected_site_count": 47,
+    "metadata_endpoint": "https://data.neonscience.org/api/v0/products/DP1.10058.001?release=RELEASE-2026",
+    "original_metadata_sha256": "623e78f46fc8fad3622275555954caea8f10e1dc582c67de34940d927b68fb41"
+  },
+  "observational_design": {
+    "primary_interval": [
+      "2020-01",
+      "2024-12"
+    ],
+    "primary_unit": "one complete 400m2 plotID × eventID × boutNumber; nested within NEON site",
+    "required_tables": [
+      "div_1m2Data",
+      "div_10m2Data100m2Data"
+    ],
+    "required_subplots_on_full_post_2019_bout": {
+      "1m2": 6,
+      "10m2": 6,
+      "100m2": 4
+    },
+    "explicit_time_exclusions": [
+      "2026 collection suspended",
+      "pre-2020 completeness flags absent"
+    ],
+    "admissible_negative": "protocol-qualified no focal taxon detection within completely observed 400m2 plot-bout; NOT regional absence",
+    "quality_fields": [
+      "samplingImpractical",
+      "biophysicalCriteria",
+      "targetTaxaPresent",
+      "eventID",
+      "plotID",
+      "siteID",
+      "subplotID",
+      "taxonID",
+      "taxonRank",
+      "identificationQualifier",
+      "identificationHistoryID"
+    ],
+    "samplingImpractical_accepted": "OK",
+    "biophysicalCriteria_accepted": "OK - no known exceptions",
+    "logic": [
+      "All 16 required nested post-2019 subplots must have documentary sampling evidence; duplicates cannot substitute for missing subplots",
+      "Absent larger-subplot table, any plot lacking a complete 400m2 survey is UNRESOLVED, not negative",
+      "Use data-product aggregation logic of pinned NEONScience/neonPlants stackPlantPresence, never naive direct joins",
+      "Nested 1m2 detections propagate into 10m2 and 100m2; larger scales list newly encountered taxa only",
+      "Exact species identification or defensibly resolved current accepted concept required; sensitive taxon redactions and morphospecies codes unresolved",
+      "Multiple records for the same eventID and species may be duplicated; retain event-level unique detection",
+      "NEON survey non-detection and regional SDM occurrence are different spatial scales; external metric only tests relative plot-level detection ranking"
+    ],
+    "public_code_reference": {
+      "repo": "NEONScience/neonPlants",
+      "commit": "d90c5fb75d22bc0334750ad57fccc1c1d2915459",
+      "file": "R/stackPlantPresence.R"
+    },
+    "protocol_reference": "https://data.neonscience.org/api/v0/documents/quick-start-guides/NEON.QSG.DP1.10058.001v2?fallback=html&inline=true"
+  },
+  "independence_risk": {
+    "identified_public_GBIF_dataset": {
+      "title": "NEON Biorepository Terrestrial Plant Collection (Herbarium Vouchers)",
+      "datasetKey": "3fed506c-d04f-4cd4-b373-bd602572f39b",
+      "official_url": "https://www.gbif.org/dataset/3fed506c-d04f-4cd4-b373-bd602572f39b",
+      "note": "Candidate contamination route, not evidence that any frozen model used these occurrences"
+    },
+    "original_GBIF_snapshot_date": "2026-08-01",
+    "original_model_code": "scripts/run_same_target_layer1_baseline_fit_taxon.py",
+    "original_source_fields": [
+      "datasetkey",
+      "gbifid",
+      "occurrenceid",
+      "catalognumber",
+      "eventdate",
+      "basisofrecord",
+      "decimallatitude",
+      "decimallongitude",
+      "specieskey"
+    ],
+    "raw_source_identifiers_persisted": false,
+    "required_before_claiming_independence": [
+      "Reinspect exact original GBIF 2026-08-01 snapshot source records admitted to source-model likelihood after thinning and cross-mode deduplication",
+      "Compare datasetKey, occurrenceID/catalogNumber, event date and coordinates to NEON plot and voucher provenance; exclude or report any possible overlap",
+      "If source membership cannot be reconstructed with the identical frozen filtering, mark external independence unresolved",
+      "Evaluate temporal/spatial dependence even when datasetKey differs, including shared herbarium duplicate records",
+      "Do not refit the previously frozen held-out models and label the retrofitted result as the original confirmatory endpoint"
+    ],
+    "independence_status": "unresolved_historical_training_row_lineage_not_retained"
+  },
+  "stop_rules": {
+    "no_NEON_taxon_outcome_read": true,
+    "no_NEON_species_counts": true,
+    "no_data_file_download": true,
+    "do_not_reselect_seven_taxa": true,
+    "minimum_three_evaluable_taxa_unchanged": true,
+    "if_release_or_site_inventory_drifts": "record_metadata_drift_and_STOP_before_biological_outcomes",
+    "empirical_ledger_increment": 0
+  }
+}

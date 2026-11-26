@@ -1,0 +1,37 @@
+{
+  "schema": "284b.neon_site_geography_preflight.v1",
+  "status": "PREDECLARED_SITE_METADATA_ONLY_NO_NEON_SPECIES_OUTCOMES",
+  "created_at_utc": "2026-11-15",
+  "site_metadata_url": "https://data.neonscience.org/api/v0/sites?release=RELEASE-2026",
+  "site_inventory_source": "results/neon_release_site_month_inventory_v2.json",
+  "site_inventory_expected": 47,
+  "site_code_filter": "exact published DP1.10058.001 site codes; do not select sites by species presence",
+  "data_allowed": [
+    "siteCode",
+    "siteLatitude",
+    "siteLongitude",
+    "stateCode",
+    "domainCode",
+    "siteType",
+    "siteName"
+  ],
+  "excluded": [
+    "plotCoordinates",
+    "taxonID",
+    "scientificName",
+    "presence",
+    "nonDetection",
+    "samplingEvents"
+  ],
+  "fixed_taxa_source": "config/neon_external_validation_preflight_v1.json",
+  "predictor_source": "CHELSA V2.1 bioclim core19 ~1km climate grids",
+  "plot_area_m2": 400,
+  "proposed_primary_scale": "cross_site_macroclimate_ranking_only",
+  "old_within_site_ranking_status": "NOT_IDENTIFIABLE_UNLESS_AT_LEAST_TWO_DISTINCT_CLIMATE_PREDICTOR_VECTORS_ACROSS_TEST_PLOTS",
+  "pairwise_site_distance_note": "site centroid distances are a source metadata proxy; do not infer plot-level climate resolution or model score independence",
+  "independent_biological_replication": "site and taxon",
+  "if_site_coordinates_missing": "METADATA_UNRESOLVED_STOP",
+  "no_data_files_or_species_labels_accessed": true,
+  "NEON_training_provenance_unresolved": true,
+  "empirical_ledger_increment": 0
+}

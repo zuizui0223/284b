@@ -1,0 +1,27 @@
+{
+  "schema": "284b.gbif_repaired_Abies_reference_source_self_drift_launch.v1",
+  "status": "ABIES_REFERENCE_SOURCE_SELF_TV_ONLY_NO_PAIRING",
+  "taxon": "Abies grandis",
+  "reference_taxon_index": 1,
+  "historical_specieskeys": [
+    "2685361",
+    "8KCY"
+  ],
+  "original_fit_artifact_id": 10090599087,
+  "original_fit_artifact_digest": "sha256:9a817480d8f023246fe3dc9fedee01a6bf4e95a05418d854937610d78e58c99b",
+  "repaired_fit_run_id": 44301719578,
+  "repaired_fit_run_sha": "df7f3b1725e2db730742e9dbaeb21e4b8b3acc11",
+  "repaired_fit_artifact_id": 14430189873,
+  "repaired_fit_artifact_digest": "sha256:eb395940567baa498669b0cb2e5f3a0b62417d0fe44296729dcf7fe5c83fafce",
+  "original_12_block_centers_sha256": "9eb19bf125fdd06c5e2b9ef901c869c23db6cd9aa88feb1305dffed79ff37f7e",
+  "source_modes": [
+    "PRESERVED_SPECIMEN",
+    "HUMAN_OBSERVATION"
+  ],
+  "source_fit_cells": 48,
+  "paired_D_opened": false,
+  "q95_opened": false,
+  "heldout12_opened": false,
+  "independent_biological_confirmation": false,
+  "empirical_ledger_increment": 0
+}

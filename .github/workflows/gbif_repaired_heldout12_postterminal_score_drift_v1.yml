@@ -1,0 +1,103 @@
+name: "Audit old vs restored Level A heldout discordance and 24 q95 shifts"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'scripts/audit_gbif_repaired_heldout12_postterminal_score_drift_v1.py'
+      - 'tests/test_gbif_repaired_heldout12_postterminal_score_drift_v1.py'
+      - '.github/workflows/gbif_repaired_heldout12_postterminal_score_drift_v1.yml'
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: gbif-original-versus-restored-heldout12-signed-score-drift
+  cancel-in-progress: false
+jobs:
+  signed-postterminal-score-drift:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test source-version comparison is descriptive and fails closed
+        run: |
+          python -m unittest discover -s tests -p 'test_gbif_repaired_heldout12_postterminal_score_drift_v1.py' -v
+      - name: Verify and retrieve original signed 288-cell and 24-q95 artifact ZIPs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p signed_original_cells signed_original_reference
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess,zipfile
+          repo=os.environ['GITHUB_REPOSITORY']
+          old=json.loads(pathlib.Path('results/product_b_same_target_core19_v0_4_heldout_final_receipt.json').read_text())
+          final=json.loads(pathlib.Path('results/gbif_repaired_heldout12_sensitivity_v1.json').read_text())
+          targets=[
+            (old['final_run_id'],old['final_artifact']['id'],
+             old['final_artifact']['name'],old['final_artifact']['digest'],
+             '/tmp/signed_original_heldout_final.zip','signed_original_cells',
+             'core19_heldout_final_cells.csv',old['cells_sha256']),
+            (old['reference']['run_id'],old['reference']['artifact_id'],
+             'product-b-core19-v0-4-2-reference',old['reference']['artifact_digest'],
+             '/tmp/signed_original_reference_q95.zip','signed_original_reference',
+             'core19_reference_ceiling.csv',old['reference_table_sha256']),
+          ]
+          assert final['historical_endpoint_fingerprint']==old['final_endpoint_fingerprint']
+          assert final['historical_signed_288_cells_sha256']==old['cells_sha256']
+          for run_id,id_,label,digest,path,directory,leaf,expected in targets:
+              run=json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/actions/runs/{run_id}'],text=True))
+              assert run['status']=='completed' and run['conclusion']=='success'
+              arts=json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/actions/runs/{run_id}/artifacts?per_page=100'],text=True))['artifacts']
+              art=[a for a in arts if a['name']==label]
+              assert len(art)==1 and art[0]['id']==id_ and art[0]['digest']==digest and not art[0]['expired']
+              with open(path,'wb') as f:
+                  subprocess.run(['gh','api',f'repos/{repo}/actions/artifacts/{id_}/zip'],stdout=f,check=True)
+              assert 'sha256:'+hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()==digest
+              with zipfile.ZipFile(path) as z:
+                  z.extractall(directory)
+              files=list(pathlib.Path(directory).rglob(leaf))
+              assert len(files)==1,(leaf,files)
+              assert hashlib.sha256(files[0].read_bytes()).hexdigest()==expected
+              pathlib.Path('/tmp/'+leaf+'.txt').write_text(str(files[0].resolve()))
+          print('Original signed 288-cell and 24-q95 tables match original endpoint SHA')
+          PY
+      - name: Measure reference cutoff shifts and matched heldout score drift, no models rerun
+        run: |
+          python scripts/audit_gbif_repaired_heldout12_postterminal_score_drift_v1.py \
+            --old-receipt results/product_b_same_target_core19_v0_4_heldout_final_receipt.json \
+            --new-receipt results/gbif_repaired_heldout12_sensitivity_v1.json \
+            --old-cells "$(cat /tmp/core19_heldout_final_cells.csv.txt)" \
+            --new-cells results/gbif_repaired_heldout12_sensitivity_cells_v1.csv \
+            --old-reference "$(cat /tmp/core19_reference_ceiling.csv.txt)" \
+            --new-reference results/gbif_repaired_reference47_q95_ceiling_v1.csv \
+            --out results/gbif_repaired_heldout12_postterminal_score_drift_v1.json
+      - name: Preserve source sensitivity and no evidence recount
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          x=json.loads(pathlib.Path('results/gbif_repaired_heldout12_postterminal_score_drift_v1.json').read_text())
+          assert x['status']=='SHA_VERIFIED_PAIRED_DISCORDANCE_AND_Q95_SOURCE_VERSION_DRIFT_DESCRIPTIVE_ONLY'
+          assert x['common_opened_cells']==282
+          assert x['historical_opened_cells']==283 and x['restored_opened_cells']==285
+          assert x['restored_q95_exceedances']==0
+          assert x['reference_q95_restored_minus_original']['n']==24
+          assert x['common_cell_discordance_restored_minus_original']['n']==282
+          assert x['nearest_restored_q95_margin']['discordance_minus_q95']<0
+          assert x['robustness_does_not_pass_full_283_cell_coverage_rule'] is True
+          assert x['scientific_model_or_q95_recalculated_in_this_audit'] is False
+          assert x['postfreeze_source_repair_is_independent_replication'] is False
+          assert x['empirical_ledger_increment']==0
+          assert x['submission_status']=='HOLD_FOR_SENSITIVITY_REVIEW'
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_heldout12_postterminal_score_drift_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive SHA-checked 282 matched old/repaired paired-D and 24 q95 drift"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

@@ -1,0 +1,48 @@
+name: Verify repaired GBIF scale-out technical pilots
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'scripts/verify_gbif_repaired_scaleout_pilots_v1.py'
+      - 'tests/test_gbif_repaired_scaleout_pilots_v1.py'
+      - '.github/workflows/gbif_repaired_scaleout_pilot_gate_v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: gbif-repaired-scaleout-pilot-gate
+  cancel-in-progress: false
+jobs:
+  pilot-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify signed pilot receipts and fail-closed mutations
+        run: python -m unittest discover -s tests -p 'test_gbif_repaired_scaleout_pilots_v1.py' -v
+      - name: Materialize scale-out pilot gate (not full refit authorization)
+        run: |
+          python scripts/verify_gbif_repaired_scaleout_pilots_v1.py \
+            --out results/gbif_repaired_scaleout_pilot_gate_v1.json
+      - name: Confirm hold and archive receipt
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path("results/gbif_repaired_scaleout_pilot_gate_v1.json")
+          x=json.loads(p.read_text())
+          assert x["status"]=="PILOTS_PASS_FULL_59_REFIT_NOT_YET_COMPLETE"
+          assert x["submission_status"]=="HOLD"
+          assert x["empirical_ledger_increment"]==0
+          assert x["q95_recalibrated"] is False
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_repaired_scaleout_pilot_gate_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive signed repaired-GBIF pilot scale-out gate"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

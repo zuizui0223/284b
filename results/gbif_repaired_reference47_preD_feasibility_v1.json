@@ -1,0 +1,246 @@
+{
+  "active_predictor_count": 19,
+  "active_predictors": [
+    "bio1",
+    "bio2",
+    "bio3",
+    "bio4",
+    "bio5",
+    "bio6",
+    "bio7",
+    "bio8",
+    "bio9",
+    "bio10",
+    "bio11",
+    "bio12",
+    "bio13",
+    "bio14",
+    "bio15",
+    "bio16",
+    "bio17",
+    "bio18",
+    "bio19"
+  ],
+  "candidate_pair_cells": 1128,
+  "claim_strength": "core19_reference_pre_discordance_feasibility_only_not_empirical_evidence",
+  "core19_contract_version": "product_b_same_target_core19_requalification_v0.4",
+  "counts_as_empirical_conclusion": false,
+  "empirical_ledger_increment": 0,
+  "heldout12_repaired_sensitivity_opened": false,
+  "heldout_12_paired_discordance_read": false,
+  "minimum_eligible_taxa_per_procedure_M": 30,
+  "model_science_or_adequacy_changed": false,
+  "new_independent_biological_confirmation": false,
+  "paired_prediction_surfaces_read": false,
+  "procedure_or_M_selected_from_outcome": false,
+  "process_knockout_opened": false,
+  "provenance_adapter_changed_scientific_feasibility_body": false,
+  "reference_ceiling_computed": false,
+  "reference_cells": [
+    {
+      "M_km": 150,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 41,
+      "minimum_required_taxa": 30,
+      "procedure": "all|logit_l2_C0.1_degree1",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 150,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 45,
+      "minimum_required_taxa": 30,
+      "procedure": "all|logit_l2_C1_degree2",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 150,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 35,
+      "minimum_required_taxa": 30,
+      "procedure": "niche_forward|logit_l2_C0.1_degree1",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 150,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 45,
+      "minimum_required_taxa": 30,
+      "procedure": "niche_forward|logit_l2_C1_degree2",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 150,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 36,
+      "minimum_required_taxa": 30,
+      "procedure": "predictive_forward|logit_l2_C0.1_degree1",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 150,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 44,
+      "minimum_required_taxa": 30,
+      "procedure": "predictive_forward|logit_l2_C1_degree2",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 150,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 38,
+      "minimum_required_taxa": 30,
+      "procedure": "vif|logit_l2_C0.1_degree1",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 150,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 44,
+      "minimum_required_taxa": 30,
+      "procedure": "vif|logit_l2_C1_degree2",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 300,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 43,
+      "minimum_required_taxa": 30,
+      "procedure": "all|logit_l2_C0.1_degree1",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 300,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 47,
+      "minimum_required_taxa": 30,
+      "procedure": "all|logit_l2_C1_degree2",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 300,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 41,
+      "minimum_required_taxa": 30,
+      "procedure": "niche_forward|logit_l2_C0.1_degree1",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 300,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 46,
+      "minimum_required_taxa": 30,
+      "procedure": "niche_forward|logit_l2_C1_degree2",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 300,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 41,
+      "minimum_required_taxa": 30,
+      "procedure": "predictive_forward|logit_l2_C0.1_degree1",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 300,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 46,
+      "minimum_required_taxa": 30,
+      "procedure": "predictive_forward|logit_l2_C1_degree2",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 300,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 41,
+      "minimum_required_taxa": 30,
+      "procedure": "vif|logit_l2_C0.1_degree1",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 300,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 47,
+      "minimum_required_taxa": 30,
+      "procedure": "vif|logit_l2_C1_degree2",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 500,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 44,
+      "minimum_required_taxa": 30,
+      "procedure": "all|logit_l2_C0.1_degree1",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 500,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 47,
+      "minimum_required_taxa": 30,
+      "procedure": "all|logit_l2_C1_degree2",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 500,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 39,
+      "minimum_required_taxa": 30,
+      "procedure": "niche_forward|logit_l2_C0.1_degree1",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 500,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 46,
+      "minimum_required_taxa": 30,
+      "procedure": "niche_forward|logit_l2_C1_degree2",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 500,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 42,
+      "minimum_required_taxa": 30,
+      "procedure": "predictive_forward|logit_l2_C0.1_degree1",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 500,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 47,
+      "minimum_required_taxa": 30,
+      "procedure": "predictive_forward|logit_l2_C1_degree2",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 500,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 42,
+      "minimum_required_taxa": 30,
+      "procedure": "vif|logit_l2_C0.1_degree1",
+      "state": "reference_discordance_opening_authorized"
+    },
+    {
+      "M_km": 500,
+      "discordance_opening_authorized": true,
+      "eligible_distinct_taxa_pre_discordance": 46,
+      "minimum_required_taxa": 30,
+      "procedure": "vif|logit_l2_C1_degree2",
+      "state": "reference_discordance_opening_authorized"
+    }
+  ],
+  "reference_cells_authorized_to_open_discordance": 24,
+  "reference_cells_expected": 24,
+  "reference_cells_unresolved_pre_discordance": 0,
+  "reference_q95_recalibrated": false,
+  "repaired_GBIF_source_arm": "repaired_2026-08-01_10215_parquet_files",
+  "repaired_source_fit_audit_sha256": "ec947a1999e357bdab35c8b928369a393404c6ce9e3e9b21187b7e971ee32c7e",
+  "repaired_source_fit_cells": 2256,
+  "repaired_source_fit_taxa": 47,
+  "result_version": "284b.gbif_repaired_reference47_preD_feasibility.v1",
+  "sampling_pass_taxa": 47,
+  "schoener_d_computed": false,
+  "submission_status": "HOLD",
+  "taxa_replaced_after_outcome": false
+}

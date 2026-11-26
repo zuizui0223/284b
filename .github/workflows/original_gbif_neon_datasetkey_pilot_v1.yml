@@ -1,0 +1,72 @@
+name: Original GBIF snapshot NEON datasetKey provenance pilot
+on:
+  push:
+    branches:
+      - analysis/neon-external-truth-preflight-20261115
+    paths:
+      - 'config/original_gbif_neon_datasetkey_pilot_v1.json'
+      - 'scripts/audit_original_gbif_neon_datasetkey_pilot_v1.py'
+      - 'tests/test_original_gbif_neon_datasetkey_pilot_v1.py'
+      - '.github/workflows/original_gbif_neon_datasetkey_pilot_v1.yml'
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: original-gbif-neon-datasetkey-pilot-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  immutable-source-pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify source-only mapping tests
+        run: python -m unittest discover -s tests -p 'test_original_gbif_neon_datasetkey_pilot_v1.py' -v
+      - name: Verify signed historical model-fit source counts (no raw model scores)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/10089523542/zip" > /tmp/284b_original_model_taxon0.zip
+          python - <<'PY'
+          import csv, hashlib, io, json, pathlib, zipfile
+          cfg=json.loads(pathlib.Path('config/original_gbif_neon_datasetkey_pilot_v1.json').read_text())
+          raw=pathlib.Path('/tmp/284b_original_model_taxon0.zip').read_bytes()
+          assert 'sha256:'+hashlib.sha256(raw).hexdigest()==cfg['pilot']['original_signed_core19_model_artifact_digest']
+          with zipfile.ZipFile(io.BytesIO(raw)) as z:
+              inventory=list(csv.DictReader(z.read('fit_inventory.csv').decode().splitlines()))
+              assert len(inventory)==48
+              for source,count in cfg['pilot']['expected_thinned_model_presence_counts'].items():
+                  vals={int(r['n_presence_thinned']) for r in inventory if r['source']==source}
+                  assert vals=={count},(source,vals)
+          print("Signed original presence denominators verified")
+          PY
+      - name: Install frozen GBIF snapshot and taxonomy/geometry dependencies
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check --quiet -e './sdmr[cloud,parquet,geo]'
+      - name: Reconstruct original admitted and thinned model source, aggregate datasetKey only
+        run: |
+          python scripts/audit_original_gbif_neon_datasetkey_pilot_v1.py \
+            --out results/neon_original_gbif_datasetkey_pilot_v1.json
+      - name: Retain aggregate audit receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: neon-original-gbif-datasetkey-pilot
+          path: results/neon_original_gbif_datasetkey_pilot_v1.json
+          if-no-files-found: warn
+      - name: Commit only aggregate record-provenance counts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/neon_original_gbif_datasetkey_pilot_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Audit original GBIF model NEON datasetKey lineage without record disclosure"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

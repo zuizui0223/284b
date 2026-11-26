@@ -1,0 +1,128 @@
+{
+  "M_selected_from_heldout_outcome": false,
+  "attention_required_is_biological_falsification": false,
+  "cells_sha256": "365d37c29b799b804da03550f1d7b1681277a2a676457269e02f6dd2308df20b",
+  "claim_strength": "retrospective_upstream_source_completeness_robustness_not_new_independent_biological_confirmation",
+  "comparison_to_historical_original": "original original-source 0/12 vs repaired source-retrospective sensitivity",
+  "counts_as_empirical_conclusion": false,
+  "counts_as_empirical_evidence": false,
+  "do_not_recount_same_endpoint": true,
+  "empirical_ledger_increment": 0,
+  "endpoint_id": "gbif_20260801_restored510_historical_levelA_source_sensitivity_v1",
+  "final_endpoint_fingerprint": "87b92c461bfbae117a473ac12ce673517878dfbc4b87316d7b8cddc91eadcf48",
+  "full_original_283_cell_evaluability_preserved": false,
+  "heldout_cells_audited": 288,
+  "heldout_cells_expected": 288,
+  "heldout_fit_result_version": "284b.gbif_repaired_heldout12_fixed_old_centers_fit_v1",
+  "heldout_taxa": 12,
+  "heldout_taxa_replaced": false,
+  "historical_endpoint_fingerprint": "80465bdefd484a8e9d5adcdbd792820ff1716c2b589ff9ad2a278c6c9494646c",
+  "historical_endpoint_id": "same_target_cross_source_reproducibility_heldout12_core19_v0_4",
+  "historical_heldout_opened_cells": 283,
+  "historical_heldout_taxa_with_attention": 0,
+  "historical_original_opened_cells_lost": 1,
+  "historical_original_opened_cells_lost_keys": [
+    {
+      "M_km": 150,
+      "procedure": "niche_forward|logit_l2_C0.1_degree1",
+      "taxon": "Nothofagus antarctica"
+    }
+  ],
+  "historical_original_opened_cells_retained": 282,
+  "historical_result_replaced": false,
+  "historical_signed_288_cells_sha256": "d9194ea416dcc3bbae339167e271d3cbcd522327b41fe573325770a94bd90b0d",
+  "historical_source_arm": "original_2026-08-01_9705_parquet_files",
+  "newly_evaluable_repaired_cells": 3,
+  "opened_at_utc": "2026-11-22T10:35:57.989374+00:00",
+  "paired_crosscheck_attention_required": 0,
+  "paired_crosscheck_calibration_unresolved": 0,
+  "paired_crosscheck_consistent": 285,
+  "paired_crosscheck_unresolved": 3,
+  "paired_prediction_surfaces_kept_closed_cells": 3,
+  "paired_prediction_surfaces_opened_cells": 285,
+  "postfreeze_heldout_fit_audit_sha256": "d3a2b9fa6777f499f1ec687639ef8f78a1bc22ab305e20310ce0447ef901f6aa",
+  "postfreeze_reference_fit_audit_sha256": "ec947a1999e357bdab35c8b928369a393404c6ce9e3e9b21187b7e971ee32c7e",
+  "postfreeze_reference_summary_sha256": "68ee700d73a96efafa07c19e902b7e0ffba1e95fcc3e43ae95b6ed4feeb32ab1",
+  "postfreeze_reference_table_sha256": "6ae208b3739fb77c3a6dac282b8f998d8dc80b5867c87f9f29cd56e83edba558",
+  "procedure_selected_from_heldout_outcome": false,
+  "process_knockout_opened": false,
+  "reference_cells_frozen": 24,
+  "reference_cells_unresolved": 0,
+  "reference_derived_from_heldout_taxa": false,
+  "reference_result_version": "284b.gbif_repaired_reference47_q95_calibration.v1",
+  "reference_summary_sha256": "68ee700d73a96efafa07c19e902b7e0ffba1e95fcc3e43ae95b6ed4feeb32ab1",
+  "reference_table_sha256": "6ae208b3739fb77c3a6dac282b8f998d8dc80b5867c87f9f29cd56e83edba558",
+  "repaired_heldout_taxa_with_attention": 0,
+  "repaired_heldout_taxa_with_attention_names": [],
+  "result_version": "284b.gbif_repaired_source_completeness_heldout12_sensitivity.v1",
+  "source_arm": "repaired_2026-08-01_10215_parquet_files",
+  "source_completeness_0_of_12_robust": false,
+  "source_completeness_is_new_independent_replication": false,
+  "source_manifest": {
+    "endpoint": "gbif_20260801_restored510_historical_levelA_source_sensitivity_v1",
+    "heldout12_fit_artifacts": {
+      "0": {
+        "digest": "sha256:6b3fe9452ea1ced132c67e71784c35e84631d3fdcb8814db869c179b4c27d450",
+        "id": 14510468186
+      },
+      "1": {
+        "digest": "sha256:f072322e44dfea6338f41cfa225e81a58013dfec12a6eb57da5c2cf375a35fa7",
+        "id": 14509574233
+      },
+      "10": {
+        "digest": "sha256:d917cb2f53c1d1864615a33145e953c89a83ffbb453d156a5d694272370a8cdc",
+        "id": 14526252109
+      },
+      "11": {
+        "digest": "sha256:ea193fd97c06ebb0b7aeb14ddc27682813b722b25f1f7dd1e1b521a8af367665",
+        "id": 14533106303
+      },
+      "2": {
+        "digest": "sha256:924c270afc63e0e2a585b6a51e88a590f7ca0868c65f57286fda739694f940c2",
+        "id": 14511194597
+      },
+      "3": {
+        "digest": "sha256:ffcd351e94a1b4be8ed8a08950035b4add1ffc650a7015f062b992b46f90d764",
+        "id": 14513933694
+      },
+      "4": {
+        "digest": "sha256:d54a570cc774ec812aa585e19af05757d14301433563dadd2b4e974a24cd36e9",
+        "id": 14516640567
+      },
+      "5": {
+        "digest": "sha256:0679c22da534d79ed297aafd42215f30bafb3f073cbddc6963148512e647eca1",
+        "id": 14519340593
+      },
+      "6": {
+        "digest": "sha256:aa108f26693eae2b6f42f1d5a2cb03897d65e4f50b9132dcd9b0ba069dc391a3",
+        "id": 14519052338
+      },
+      "7": {
+        "digest": "sha256:71d964e487049a8ecd0312257da49a3233404b739051d94f726a4cf128777681",
+        "id": 14521455656
+      },
+      "8": {
+        "digest": "sha256:2b9015c2546d0cca2475200b14b13a10b1e4e02aa08b241af140d6cf94b18d51",
+        "id": 14523437232
+      },
+      "9": {
+        "digest": "sha256:8be84a4c708b4a004cce9f7e71deed8cdc54a469fe4069d2adb89b269ca16337",
+        "id": 14525794949
+      }
+    },
+    "heldout12_fit_run_id": 44480087256,
+    "historical_endpoint_replaced": false,
+    "independent_biological_replication": false,
+    "original_final_artifact_digest": "sha256:c44b250aaa512d564418b2973a8d56c03bf9a800e9a6d89dbfc3d7a40ce4b27a",
+    "original_final_artifact_id": 10137399646,
+    "original_historical_source_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+    "process_knockout_opened": false,
+    "reference_q95_artifact_digest": "sha256:d6d71f9d79569a50729304bfbbf4777949129dda8b1bd3964c5eebca5bb21887",
+    "reference_q95_artifact_id": 14751200454,
+    "reference_q95_run_id": 45013001115,
+    "repaired_source_manifest": "2026-08-01_10215_parquet_objects"
+  },
+  "status": "repaired_source_no_attention_but_original_283_cell_coverage_decreased",
+  "submission_status": "HOLD_FOR_SENSITIVITY_REVIEW",
+  "terminal_class": "postfreeze_source_completeness_sensitivity"
+}

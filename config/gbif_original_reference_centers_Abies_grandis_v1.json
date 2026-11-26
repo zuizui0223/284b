@@ -1,0 +1,38 @@
+{
+  "schema": "284b.gbif_original_reference_centers_Abies_grandis_pilot.v1",
+  "status": "PREDECLARED_OLD_REFERENCE_SPATIAL_CENTER_RECONSTRUCTION_NO_MODELS",
+  "panel": "successor",
+  "original_taxon": "Abies grandis",
+  "original_index": 1,
+  "original_historical_specieskeys": [
+    "2685361",
+    "8KCY"
+  ],
+  "original_signed_fit_artifact_id": 10090599087,
+  "original_signed_fit_digest": "sha256:79db81b175f7dc91443ed27f1e3bb73ba42d9b27bdf6ba8973da361e128bd55a",
+  "original_signed_qualification_artifact_id": 10066646765,
+  "original_signed_qualification_digest": "sha256:3f0cc137181e28bef5190ebad7cac41aebdcd633a8def8eaf539ac5bf923b09b",
+  "original_model_thinned_presence": {
+    "PRESERVED_SPECIMEN": 958,
+    "HUMAN_OBSERVATION": 6566
+  },
+  "original_12block_centers_sha256": "9eb19bf125fdd06c5e2b9ef901c869c23db6cd9aa88feb1305dffed79ff37f7e",
+  "original_common_pooled_cells": 7244,
+  "frozen_M_comparison_frame_sha256": {
+    "150": "87ed7254cb0fd21f996ead64ed95e51f92d64021d145b2c50b092c227c06c578"
+  },
+  "original_parquet_object_count": 9705,
+  "original_full_object_metadata_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "source_mode_thinning_degrees": 0.05,
+  "source_model_impl": "scripts/run_same_target_successor_layer1_fit_taxon.py",
+  "sdmr_commit": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+  "M_km": [
+    150,
+    300,
+    500
+  ],
+  "comparison_rows_each": 2000,
+  "new_predictive_result_opened": false,
+  "q95_reference_calibration_opened": false,
+  "new_empirical_endpoint_count": 0
+}

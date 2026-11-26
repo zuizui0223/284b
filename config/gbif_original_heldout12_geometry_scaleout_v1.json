@@ -1,0 +1,24 @@
+{
+  "schema": "284b.gbif_original_heldout12_geometry_scaleout_authorization.v1",
+  "status": "HELDOUT12_ORIGINAL_GEOMETRY_PORTABILITY_PILOT_VERIFIED_ONLY",
+  "original_heldout_taxa": 12,
+  "pilot_taxon_index": 0,
+  "pilot_run_id": 44449915431,
+  "pilot_run_sha": "5eac7363eee52beaa36d59a10722bd31e3ee0af8",
+  "pilot_artifact_id": 14495848411,
+  "pilot_artifact_digest": "sha256:843bc3e30f2fac32d3c6e9d65999937d32a5910e3219ca95c6306221c1473883",
+  "pilot_centers_npy_sha256": "e44a82ad12803d547f8e401ad87f87f30fd9a477aff4b24f0d9d05886545e704",
+  "original_source_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "frozen_historical_specieskeys_count": 12,
+  "original_comparison_M_km": [
+    150,
+    300,
+    500
+  ],
+  "original_comparison_rows_each": 2000,
+  "repaired_model_fitting_authorized": false,
+  "reference_q95_authorized": false,
+  "repaired_heldout_outcomes_authorized": false,
+  "empirical_ledger_increment": 0,
+  "claim": "source-only original 9705-Parquet geometry reconstruction for original frozen 12 taxa; not repaired-GBIF ecological evidence"
+}

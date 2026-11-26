@@ -1,0 +1,57 @@
+name: Invited M1+M2 manuscript figures
+on:
+  pull_request:
+    paths:
+      - 'scripts/build_invited_m1_m2_figures.py'
+      - 'tests/test_invited_m1_m2_figures.py'
+      - 'results/gbif_repaired_heldout12_sensitivity_cells_v1.csv'
+      - 'results/gbif_repaired_reference47_q95_ceiling_v1.csv'
+      - 'manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_FIGURE_CAPTIONS_V1.md'
+      - 'manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_COMPLETE_SI_V1.md'
+      - 'manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_SUBMISSION_MANIFEST_V1.json'
+      - 'manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_COAUTHOR_DECISION_MEMO_20261123.md'
+      - 'scripts/build_el_invited_review_bundle_v1.py'
+      - 'tests/test_el_invited_complete_si_20261123.py'
+      - 'tests/test_el_invited_review_bundle_20261123.py'
+      - 'tests/test_el_invited_journal_preflight_20261123.py'
+      - 'docs/EL_METHOD_JOURNAL_PREFLIGHT_20261123.md'
+      - 'manuscript/ECOLOGY_LETTERS_INVITED_M1_M2_TITLE_PAGE_V1.md'
+      - '.github/workflows/invited-m1-m2-figures.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  figures:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install figure/test dependencies
+        run: python -m pip install matplotlib numpy pytest
+      - name: Verify frozen sources and figure output
+        run: python -m pytest -q tests/test_invited_m1_m2_figures.py
+      - name: Build manuscript figures
+        run: |
+          python scripts/build_invited_m1_m2_figures.py --output-dir build/invited_m1_m2_figures
+      - name: Build coauthor review bundle (HOLD, not submission)
+        run: |
+          python -m unittest discover -s tests -p 'test_el_invited_complete_si_20261123.py'
+          python -m unittest discover -s tests -p 'test_el_invited_review_bundle_20261123.py'
+          python -m unittest discover -s tests -p 'test_el_invited_journal_preflight_20261123.py'
+          python scripts/build_el_invited_review_bundle_v1.py --figures-dir build/invited_m1_m2_figures --output build/284b_EcologyLetters_M1_M2_REVIEW_ONLY_20261123.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: invited-m1-m2-coauthor-review-20261123
+          path: build/284b_EcologyLetters_M1_M2_REVIEW_ONLY_20261123.zip
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: invited-m1-m2-figures-restored-v2
+          path: build/invited_m1_m2_figures/
+          if-no-files-found: error
+          retention-days: 30

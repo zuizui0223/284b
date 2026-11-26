@@ -1,0 +1,726 @@
+{
+  "schema": "284b.gbif_repaired_source_reference47_thinning_contract.v1",
+  "status": "FROZEN_SOURCE_INPUT_AUDIT_NOT_MODEL_REFIT",
+  "original_taxa_prespecified": 47,
+  "frozen_taxon_inventory_source": "results/product_b_same_target_successor_source_mode_sampling_v0_1.json",
+  "frozen_fitted_artifact_run_id": 34314390923,
+  "fitting_method": "original scripts/run_same_target_successor_layer1_fit_taxon.py source rules",
+  "pinned_sdmr_commit": "9d2a45b56408cde8a4af41722538d0086c532cc9",
+  "original_S3_snapshot_date": "2026-08-01",
+  "original_parquet_objects": 9705,
+  "repaired_parquet_objects": 10215,
+  "repaired_source_manifest_sha256": "ca0d9844cd6816b4e4d550a0152db489b5e6a4c5129f8700fe2f1d818b954cd2",
+  "historical_source_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "restored_file_rule": "510 original missing filenames divisible by 20, see source recovery receipt",
+  "restored_reference_record_source": "results/gbif_restored510_reference47_exposure_v1.json",
+  "modes": [
+    "PRESERVED_SPECIMEN",
+    "HUMAN_OBSERVATION"
+  ],
+  "original_source_quality_uncertainty_max_m": 10000,
+  "original_source_grid_degrees": 0.05,
+  "fixed_shards": 8,
+  "shard_membership_rule": "index modulo 8",
+  "all_47_references_unchanged": true,
+  "no_panel_replacement": true,
+  "compare_original_signed_fit_inventory_counts": true,
+  "source_raw_total_sum_check_for_each_taxon": true,
+  "full_q95_reference_recalibration": false,
+  "model_refit_performed": false,
+  "no_NEON_plot_outcomes_read": true,
+  "no_biological_endpoint_opened": true,
+  "original_LevelA_unmodified": true,
+  "empirical_ledger_increment": 0,
+  "taxon_fit_entries": [
+    {
+      "index": 0,
+      "taxon": "Abies amabilis",
+      "historical_specieskeys": [
+        "63Z5D"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 989,
+        "HUMAN_OBSERVATION": 3467
+      },
+      "restored_raw_total_all_modes": 212,
+      "signed_original_fit_artifact_id": 10090324253,
+      "signed_original_fit_artifact_digest": "sha256:79db81b175f7dc91443ed27f1e3bb73ba42d9b27bdf6ba8973da361e128bd55a"
+    },
+    {
+      "index": 1,
+      "taxon": "Abies grandis",
+      "historical_specieskeys": [
+        "2685361",
+        "8KCY"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 3580,
+        "HUMAN_OBSERVATION": 20049
+      },
+      "restored_raw_total_all_modes": 1551,
+      "signed_original_fit_artifact_id": 10090599087,
+      "signed_original_fit_artifact_digest": "sha256:9a817480d8f023246fe3dc9fedee01a6bf4e95a05418d854937610d78e58c99b"
+    },
+    {
+      "index": 2,
+      "taxon": "Abies magnifica",
+      "historical_specieskeys": [
+        "63Z6H"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 1295,
+        "HUMAN_OBSERVATION": 1540
+      },
+      "restored_raw_total_all_modes": 146,
+      "signed_original_fit_artifact_id": 10090598451,
+      "signed_original_fit_artifact_digest": "sha256:55f9d8523d268ccda25a650dd686fd00df1b02b14107b487a622dd4e319c90b2"
+    },
+    {
+      "index": 3,
+      "taxon": "Abies procera",
+      "historical_specieskeys": [
+        "2685308",
+        "8KFP"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 1299,
+        "HUMAN_OBSERVATION": 5537
+      },
+      "restored_raw_total_all_modes": 321,
+      "signed_original_fit_artifact_id": 10090584236,
+      "signed_original_fit_artifact_digest": "sha256:3948a30cc2c811041ae8ca03cbc195e25eaa6b2da40522821c779f1072d13251"
+    },
+    {
+      "index": 4,
+      "taxon": "Abies sibirica",
+      "historical_specieskeys": [
+        "2685654",
+        "8KG5"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 1042,
+        "HUMAN_OBSERVATION": 5568
+      },
+      "restored_raw_total_all_modes": 2204,
+      "signed_original_fit_artifact_id": 10090261090,
+      "signed_original_fit_artifact_digest": "sha256:5da04ec03a8a0d012598774f64c0e706734876fd382e71a6b18ef3c80ece54db"
+    },
+    {
+      "index": 5,
+      "taxon": "Acacia melanoxylon",
+      "historical_specieskeys": [
+        "2979000",
+        "8PN2"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 4560,
+        "HUMAN_OBSERVATION": 55346
+      },
+      "restored_raw_total_all_modes": 2528,
+      "signed_original_fit_artifact_id": 10090461448,
+      "signed_original_fit_artifact_digest": "sha256:e408e13f41e5cd79a8e2458d70e9d17e9ac55907f1182acc7e2bdf70f4239bbb"
+    },
+    {
+      "index": 6,
+      "taxon": "Acorus calamus",
+      "historical_specieskeys": [
+        "2873769",
+        "64MF2"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 9620,
+        "HUMAN_OBSERVATION": 51798
+      },
+      "restored_raw_total_all_modes": 3330,
+      "signed_original_fit_artifact_id": 10091062465,
+      "signed_original_fit_artifact_digest": "sha256:a4416290623e6ee5be835038e32cf40a103eff49bae64d10b8c5ccf285a78455"
+    },
+    {
+      "index": 7,
+      "taxon": "Aegiceras corniculatum",
+      "historical_specieskeys": [
+        "659BB"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 2923,
+        "HUMAN_OBSERVATION": 3339
+      },
+      "restored_raw_total_all_modes": 654,
+      "signed_original_fit_artifact_id": 10090364587,
+      "signed_original_fit_artifact_digest": "sha256:af447afcbcbf6ce0b138e8a30c5890c0edc51131434454e2d5650b2288131597"
+    },
+    {
+      "index": 8,
+      "taxon": "Alisma plantago-aquatica",
+      "historical_specieskeys": [
+        "2865100",
+        "BSH4"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 13992,
+        "HUMAN_OBSERVATION": 327176
+      },
+      "restored_raw_total_all_modes": 16767,
+      "signed_original_fit_artifact_id": 10091572132,
+      "signed_original_fit_artifact_digest": "sha256:bd8eea1a474cd8f66166524f01f8b8284cf7ad440c740074822c4800643c5b25"
+    },
+    {
+      "index": 9,
+      "taxon": "Ambrosia dumosa",
+      "historical_specieskeys": [
+        "CPP4"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 3538,
+        "HUMAN_OBSERVATION": 6973
+      },
+      "restored_raw_total_all_modes": 629,
+      "signed_original_fit_artifact_id": 10090265182,
+      "signed_original_fit_artifact_digest": "sha256:5aeea329d555c2ce9ed1dfc7503094e93ae7e87c49fd54d322b042dc8bf72e3b"
+    },
+    {
+      "index": 10,
+      "taxon": "Artemisia filifolia",
+      "historical_specieskeys": [
+        "GWBD"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 2066,
+        "HUMAN_OBSERVATION": 1936
+      },
+      "restored_raw_total_all_modes": 417,
+      "signed_original_fit_artifact_id": 10090352681,
+      "signed_original_fit_artifact_digest": "sha256:2de06a7cb95e18945495d07de890e1f12345bffa4c0657788a42cda8f395e4b2"
+    },
+    {
+      "index": 11,
+      "taxon": "Atriplex confertifolia",
+      "historical_specieskeys": [
+        "JLBV"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 3694,
+        "HUMAN_OBSERVATION": 1968
+      },
+      "restored_raw_total_all_modes": 793,
+      "signed_original_fit_artifact_id": 10090355124,
+      "signed_original_fit_artifact_digest": "sha256:60f3bf3696711af34673581f4749659c4f6ffdae8b50801d88658c80ed8b7813"
+    },
+    {
+      "index": 12,
+      "taxon": "Atriplex lentiformis",
+      "historical_specieskeys": [
+        "688F4"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 1694,
+        "HUMAN_OBSERVATION": 3187
+      },
+      "restored_raw_total_all_modes": 242,
+      "signed_original_fit_artifact_id": 10091250607,
+      "signed_original_fit_artifact_digest": "sha256:a877b4671f6249afd3b65117d0056b6d5a05a5ef3348b6e33df44335a884898e"
+    },
+    {
+      "index": 13,
+      "taxon": "Butomus umbellatus",
+      "historical_specieskeys": [
+        "2864467",
+        "NZ5R"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 7450,
+        "HUMAN_OBSERVATION": 118098
+      },
+      "restored_raw_total_all_modes": 7151,
+      "signed_original_fit_artifact_id": 10091715117,
+      "signed_original_fit_artifact_digest": "sha256:193c50a33ffc1fc28834126429ecbb8884161c9ba0adcc0367325810e1507780"
+    },
+    {
+      "index": 14,
+      "taxon": "Carpinus betulus",
+      "historical_specieskeys": [
+        "2875818",
+        "RG23"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 8822,
+        "HUMAN_OBSERVATION": 534312
+      },
+      "restored_raw_total_all_modes": 21748,
+      "signed_original_fit_artifact_id": 10092777220,
+      "signed_original_fit_artifact_digest": "sha256:e6cfae39b7e6c7fc08ac10a1b243c866f3f4638c10fd9c2480bab7b76f25e4d4"
+    },
+    {
+      "index": 15,
+      "taxon": "Ceriops tagal",
+      "historical_specieskeys": [
+        "SYCK"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 2256,
+        "HUMAN_OBSERVATION": 12255
+      },
+      "restored_raw_total_all_modes": 1566,
+      "signed_original_fit_artifact_id": 10091293138,
+      "signed_original_fit_artifact_digest": "sha256:a9fa877465c9fd844c3b24ddd3ed5ab33dbff6e4cd1c0e55f5c28d6ef6a11901"
+    },
+    {
+      "index": 16,
+      "taxon": "Chamaecyparis lawsoniana",
+      "historical_specieskeys": [
+        "2683866",
+        "TJJD"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 4318,
+        "HUMAN_OBSERVATION": 31332
+      },
+      "restored_raw_total_all_modes": 2228,
+      "signed_original_fit_artifact_id": 10091900042,
+      "signed_original_fit_artifact_digest": "sha256:70a215a14fc122dea195678021155a64624c1ec1d3eead24dde9f9ae8b2f5192"
+    },
+    {
+      "index": 17,
+      "taxon": "Cornus sanguinea",
+      "historical_specieskeys": [
+        "3082234",
+        "YGMF"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 8903,
+        "HUMAN_OBSERVATION": 722287
+      },
+      "restored_raw_total_all_modes": 33930,
+      "signed_original_fit_artifact_id": 10092980506,
+      "signed_original_fit_artifact_digest": "sha256:ddb9c6c2ff441a0e0a180d00da05f3dcb2d8e17314b4f00ab316e8b545532f4d"
+    },
+    {
+      "index": 18,
+      "taxon": "Ephedra nevadensis",
+      "historical_specieskeys": [
+        "6FNH6"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 2648,
+        "HUMAN_OBSERVATION": 2039
+      },
+      "restored_raw_total_all_modes": 471,
+      "signed_original_fit_artifact_id": 10091687659,
+      "signed_original_fit_artifact_digest": "sha256:93916c393a396d3886851d98f11bbf2c06f451a6cf19eb2719c8d4dbdadcec96"
+    },
+    {
+      "index": 19,
+      "taxon": "Eucalyptus baxteri",
+      "historical_specieskeys": [
+        "3BPNJ",
+        "VLXXV"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 1528,
+        "HUMAN_OBSERVATION": 7453
+      },
+      "restored_raw_total_all_modes": 328,
+      "signed_original_fit_artifact_id": 10091414304,
+      "signed_original_fit_artifact_digest": "sha256:c23326b1545952d37b1a37af5409fcbfc132ec72fa48c55f06033e991793eeb2"
+    },
+    {
+      "index": 20,
+      "taxon": "Eucalyptus nitens",
+      "historical_specieskeys": [
+        "3BQ97"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 446,
+        "HUMAN_OBSERVATION": 661
+      },
+      "restored_raw_total_all_modes": 27,
+      "signed_original_fit_artifact_id": 10091393475,
+      "signed_original_fit_artifact_digest": "sha256:1b25c311bb15139dead6a11c13d716c9aed101d84e8e2f4c2cfd1e03cb73b4f8"
+    },
+    {
+      "index": 21,
+      "taxon": "Eucalyptus viminalis",
+      "historical_specieskeys": [
+        "3177112",
+        "3BQMN"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 5242,
+        "HUMAN_OBSERVATION": 23622
+      },
+      "restored_raw_total_all_modes": 859,
+      "signed_original_fit_artifact_id": 10091848830,
+      "signed_original_fit_artifact_digest": "sha256:da9d5296bc601d50c869ef69e92eab0ac56a416b51c06be0f08700d4cb356019"
+    },
+    {
+      "index": 22,
+      "taxon": "Euonymus europaeus",
+      "historical_specieskeys": [
+        "3169131",
+        "3CGVN"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 8960,
+        "HUMAN_OBSERVATION": 492907
+      },
+      "restored_raw_total_all_modes": 29156,
+      "signed_original_fit_artifact_id": 10093649988,
+      "signed_original_fit_artifact_digest": "sha256:969e5c0b79f933780ba956b640c52a639b4c306ac47898c86a79c7646cd61158"
+    },
+    {
+      "index": 23,
+      "taxon": "Geranium dissectum",
+      "historical_specieskeys": [
+        "2890040",
+        "6KCC8"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 12425,
+        "HUMAN_OBSERVATION": 440060
+      },
+      "restored_raw_total_all_modes": 23914,
+      "signed_original_fit_artifact_id": 10093765162,
+      "signed_original_fit_artifact_digest": "sha256:6cb1a87790a50bc467d0f9f042b2cee73332382e416b2832e52b390e2ce11e92"
+    },
+    {
+      "index": 24,
+      "taxon": "Gutierrezia sarothrae",
+      "historical_specieskeys": [
+        "3HN2F"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 9226,
+        "HUMAN_OBSERVATION": 7153
+      },
+      "restored_raw_total_all_modes": 1450,
+      "signed_original_fit_artifact_id": 10092742998,
+      "signed_original_fit_artifact_digest": "sha256:22d2a73d8f8223ecf6b47269f229942c7640dfee949fc832fd2ccfa3fa65c5fe"
+    },
+    {
+      "index": 25,
+      "taxon": "Leersia oryzoides",
+      "historical_specieskeys": [
+        "2702905",
+        "3SX78"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 13883,
+        "HUMAN_OBSERVATION": 31156
+      },
+      "restored_raw_total_all_modes": 2199,
+      "signed_original_fit_artifact_id": 10093769149,
+      "signed_original_fit_artifact_digest": "sha256:943b08e9cf50d4170f76d8a30f206633d2ada9120dd68373db51ac21c64a867c"
+    },
+    {
+      "index": 26,
+      "taxon": "Ligustrum vulgare",
+      "historical_specieskeys": [
+        "3172300",
+        "6PYTF"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 7586,
+        "HUMAN_OBSERVATION": 556058
+      },
+      "restored_raw_total_all_modes": 27143,
+      "signed_original_fit_artifact_id": 10093717205,
+      "signed_original_fit_artifact_digest": "sha256:a680ebb27c8f5a942ce5b2788b2db499a3783e0ef476b85a6ab98e7f09e2169c"
+    },
+    {
+      "index": 27,
+      "taxon": "Lumnitzera racemosa",
+      "historical_specieskeys": [
+        "6435171",
+        "6QQ94"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 1795,
+        "HUMAN_OBSERVATION": 1891
+      },
+      "restored_raw_total_all_modes": 185,
+      "signed_original_fit_artifact_id": 10092682728,
+      "signed_original_fit_artifact_digest": "sha256:fb249d1d96762a776fca94eea348fa99340a4ec2a9aa3c1f492c44eba5bda2fa"
+    },
+    {
+      "index": 28,
+      "taxon": "Onoclea sensibilis",
+      "historical_specieskeys": [
+        "2650903",
+        "49L7W"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 18163,
+        "HUMAN_OBSERVATION": 83947
+      },
+      "restored_raw_total_all_modes": 6374,
+      "signed_original_fit_artifact_id": 10093911421,
+      "signed_original_fit_artifact_digest": "sha256:706f167e63d6f0be4fd32e12cc6ab308486a1c00c0880ceb4ec5bcc9c61162f4"
+    },
+    {
+      "index": 29,
+      "taxon": "Picea obovata",
+      "historical_specieskeys": [
+        "4HQ46",
+        "5284765"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 752,
+        "HUMAN_OBSERVATION": 9496
+      },
+      "restored_raw_total_all_modes": 1823,
+      "signed_original_fit_artifact_id": 10092857973,
+      "signed_original_fit_artifact_digest": "sha256:1839133a1fe6ebf6b84739902e1eaf380cdad4c5ebed2039ff19bb58654b25b5"
+    },
+    {
+      "index": 30,
+      "taxon": "Pinus flexilis",
+      "historical_specieskeys": [
+        "4J273"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 4647,
+        "HUMAN_OBSERVATION": 5288
+      },
+      "restored_raw_total_all_modes": 770,
+      "signed_original_fit_artifact_id": 10093574924,
+      "signed_original_fit_artifact_digest": "sha256:76e06278793fac185bbfb98f667f009c25aa6c45a69c3c3ed9f7c5850ff1c949"
+    },
+    {
+      "index": 31,
+      "taxon": "Pinus ponderosa",
+      "historical_specieskeys": [
+        "4J2F3"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 19261,
+        "HUMAN_OBSERVATION": 43868
+      },
+      "restored_raw_total_all_modes": 7159,
+      "signed_original_fit_artifact_id": 10093630801,
+      "signed_original_fit_artifact_digest": "sha256:dd41b5e3095531754b89fea7ea43eeae47943607634a3dbe5d533e99eedd4db1"
+    },
+    {
+      "index": 32,
+      "taxon": "Pinus sibirica",
+      "historical_specieskeys": [
+        "4J2HD",
+        "5284667"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 794,
+        "HUMAN_OBSERVATION": 9587
+      },
+      "restored_raw_total_all_modes": 2913,
+      "signed_original_fit_artifact_id": 10094409134,
+      "signed_original_fit_artifact_digest": "sha256:f7118d2817552378f53a3cf8e4a2c45a3ff42835a647db6e391fd0208a7a282d"
+    },
+    {
+      "index": 33,
+      "taxon": "Pinus strobus",
+      "historical_specieskeys": [
+        "4J2HY",
+        "5284982"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 8713,
+        "HUMAN_OBSERVATION": 103185
+      },
+      "restored_raw_total_all_modes": 5442,
+      "signed_original_fit_artifact_id": 10094799278,
+      "signed_original_fit_artifact_digest": "sha256:e422ed815bee242bb4b0b5e5e6618ae9a4c5d507d2d6493b9abf1df642f6ff83"
+    },
+    {
+      "index": 34,
+      "taxon": "Polystichum setiferum",
+      "historical_specieskeys": [
+        "4044517",
+        "BB5QH",
+        "VL7J6"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 9588,
+        "HUMAN_OBSERVATION": 121070
+      },
+      "restored_raw_total_all_modes": 8254,
+      "signed_original_fit_artifact_id": 10094317009,
+      "signed_original_fit_artifact_digest": "sha256:4b2a0037a3b05c06cfeaeacfa18cece47e72baff93b0fc2147c10fc19342308d"
+    },
+    {
+      "index": 35,
+      "taxon": "Populus tremula",
+      "historical_specieskeys": [
+        "3040249",
+        "4LVQY"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 12800,
+        "HUMAN_OBSERVATION": 645172
+      },
+      "restored_raw_total_all_modes": 29020,
+      "signed_original_fit_artifact_id": 10096564209,
+      "signed_original_fit_artifact_digest": "sha256:9d3606c4ead9aad93cf04fb55df3748a3358f691020bf159228981925d4fdc2b"
+    },
+    {
+      "index": 36,
+      "taxon": "Quercus petraea",
+      "historical_specieskeys": [
+        "2880130",
+        "4R5SK"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 10482,
+        "HUMAN_OBSERVATION": 347808
+      },
+      "restored_raw_total_all_modes": 12669,
+      "signed_original_fit_artifact_id": 10095120029,
+      "signed_original_fit_artifact_digest": "sha256:caa1e57165629d9f092365dab3b518aeb48f642a24b2156346b8af453df961db"
+    },
+    {
+      "index": 37,
+      "taxon": "Sonneratia alba",
+      "historical_specieskeys": [
+        "4Y9T7"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 1854,
+        "HUMAN_OBSERVATION": 1403
+      },
+      "restored_raw_total_all_modes": 515,
+      "signed_original_fit_artifact_id": 10095468628,
+      "signed_original_fit_artifact_digest": "sha256:29240d261899eb555151e183c5e9c2ce1462d373ba63b8d7a5e61d13a343fbb1"
+    },
+    {
+      "index": 38,
+      "taxon": "Sparganium erectum",
+      "historical_specieskeys": [
+        "6Z7P2",
+        "7679536"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 11913,
+        "HUMAN_OBSERVATION": 290389
+      },
+      "restored_raw_total_all_modes": 16401,
+      "signed_original_fit_artifact_id": 10096333089,
+      "signed_original_fit_artifact_digest": "sha256:8a6289f3cd926ddfcf7d957e013430d6dbbbc9182e5384d4010765df9067642f"
+    },
+    {
+      "index": 39,
+      "taxon": "Tilia cordata",
+      "historical_specieskeys": [
+        "3152047",
+        "56WPP"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 11416,
+        "HUMAN_OBSERVATION": 313435
+      },
+      "restored_raw_total_all_modes": 9176,
+      "signed_original_fit_artifact_id": 10096320711,
+      "signed_original_fit_artifact_digest": "sha256:eed8e95efee320cab80ba4ef3c63e46153209e42aa92fba32d44d8a7a8498627"
+    },
+    {
+      "index": 40,
+      "taxon": "Tsuga canadensis",
+      "historical_specieskeys": [
+        "2687182",
+        "59HM6"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 6953,
+        "HUMAN_OBSERVATION": 57306
+      },
+      "restored_raw_total_all_modes": 3178,
+      "signed_original_fit_artifact_id": 10095143507,
+      "signed_original_fit_artifact_digest": "sha256:a8b76733576a2954b1967f14081eaa85bbb997d1413b6e8a254366e5ebff8770"
+    },
+    {
+      "index": 41,
+      "taxon": "Tsuga mertensiana",
+      "historical_specieskeys": [
+        "59HMR"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 2252,
+        "HUMAN_OBSERVATION": 7097
+      },
+      "restored_raw_total_all_modes": 537,
+      "signed_original_fit_artifact_id": 10095030568,
+      "signed_original_fit_artifact_digest": "sha256:d79ee87420fb5c053d67edbcd54e20f3a1303734b61ac43134be7659249f7958"
+    },
+    {
+      "index": 42,
+      "taxon": "Veronica arvensis",
+      "historical_specieskeys": [
+        "3172048",
+        "5B6FX"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 24681,
+        "HUMAN_OBSERVATION": 469201
+      },
+      "restored_raw_total_all_modes": 24735,
+      "signed_original_fit_artifact_id": 10097402824,
+      "signed_original_fit_artifact_digest": "sha256:a9e8716ffb4f6a734770cbfbecdeb06d685a54c52a7b9b44e4cc91c4a177ced0"
+    },
+    {
+      "index": 43,
+      "taxon": "Viburnum opulus",
+      "historical_specieskeys": [
+        "2888605",
+        "5BCCB"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 12964,
+        "HUMAN_OBSERVATION": 492329
+      },
+      "restored_raw_total_all_modes": 26852,
+      "signed_original_fit_artifact_id": 10098067701,
+      "signed_original_fit_artifact_digest": "sha256:2d708d5719eef9ea265f6959ba44b1c1f53af82ce483e3cab067b9d3afbfc7ae"
+    },
+    {
+      "index": 44,
+      "taxon": "Viola arvensis",
+      "historical_specieskeys": [
+        "5331235",
+        "5BGDQ",
+        "VJT9C"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 15883,
+        "HUMAN_OBSERVATION": 345293
+      },
+      "restored_raw_total_all_modes": 16358,
+      "signed_original_fit_artifact_id": 10097838411,
+      "signed_original_fit_artifact_digest": "sha256:41406af7f5455cde6f7ce759dd0863f40d41a9107042f05b97cf27519cbcc9a0"
+    },
+    {
+      "index": 45,
+      "taxon": "Woodwardia fimbriata",
+      "historical_specieskeys": [
+        "5C3C6"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 2440,
+        "HUMAN_OBSERVATION": 5561
+      },
+      "restored_raw_total_all_modes": 386,
+      "signed_original_fit_artifact_id": 10095822315,
+      "signed_original_fit_artifact_digest": "sha256:6990dfe898b3d144aff35da0df53772fdff12f342a6df32e67af6e0002dba34e"
+    },
+    {
+      "index": 46,
+      "taxon": "Xylocarpus granatum",
+      "historical_specieskeys": [
+        "5CKH9"
+      ],
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 1795,
+        "HUMAN_OBSERVATION": 1031
+      },
+      "restored_raw_total_all_modes": 119,
+      "signed_original_fit_artifact_id": 10096179329,
+      "signed_original_fit_artifact_digest": "sha256:92e02ec379fc6a78985df14bb24e2a5b3a21671987f4905cff278271eb919a3c"
+    }
+  ]
+}

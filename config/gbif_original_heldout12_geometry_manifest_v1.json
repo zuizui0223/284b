@@ -1,0 +1,229 @@
+{
+  "schema": "284b.gbif_original_heldout12_frozen_geometry_inputs.v1",
+  "status": "PREDECLARED_HELDOUT12_ORIGINAL_GEOMETRY_ONLY",
+  "original_qualification_run_id": 34245807165,
+  "original_qualification_head_sha": "cdb4875f9a92c48ca1db4494c30c7b0766c85a55",
+  "original_fit_run_id": 34314390923,
+  "original_source_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+  "original_source_object_count": 9705,
+  "frozen_taxon_count": 12,
+  "fixed_M_km": [
+    150,
+    300,
+    500
+  ],
+  "comparison_rows_per_M": 2000,
+  "original_thinning_degrees": 0.05,
+  "original_12taxon_historical_endpoint_unchanged": true,
+  "full_repaired_model_refit": false,
+  "q95_computed": false,
+  "heldout_scores_opened": false,
+  "neon_field_outcomes_opened": false,
+  "empirical_ledger_increment": 0,
+  "entries": [
+    {
+      "index": 0,
+      "taxon": "Artemisia tridentata",
+      "historical_specieskey": "GX2B",
+      "original_qualification_artifact_id": 10065445666,
+      "original_qualification_artifact_digest": "sha256:85b9f7e349ca07ba007d43b72ef5a7ab8524688039b9737b4034508b8f3f4bc5",
+      "original_fit_artifact_id": 10089523542,
+      "original_fit_artifact_digest": "sha256:43ae62899e3a335a00b3ee666f534aee02cfaf9cab517df13d9eb542092350c8",
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 11420,
+        "HUMAN_OBSERVATION": 15775
+      },
+      "original_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 4516,
+        "PRESERVED_SPECIMEN": 3285
+      }
+    },
+    {
+      "index": 1,
+      "taxon": "Atriplex canescens",
+      "historical_specieskey": "JLB9",
+      "original_qualification_artifact_id": 10065911006,
+      "original_qualification_artifact_digest": "sha256:d47397f738a04e8e04e8bd3e16c5204cec287e1896d232a977d5c3abbf4438c1",
+      "original_fit_artifact_id": 10089524564,
+      "original_fit_artifact_digest": "sha256:adc169b9691c921d73667c24f8a4546a2da5c2f0b3a83b46b80070691f451261",
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 10038,
+        "HUMAN_OBSERVATION": 10447
+      },
+      "original_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 2990,
+        "PRESERVED_SPECIMEN": 2686
+      }
+    },
+    {
+      "index": 2,
+      "taxon": "Encelia farinosa",
+      "historical_specieskey": "39N69",
+      "original_qualification_artifact_id": 10066129063,
+      "original_qualification_artifact_digest": "sha256:f8c8bd870823430f64abb35fca7013c1caeff4277e88a81e41b78073643f85f5",
+      "original_fit_artifact_id": 10089527320,
+      "original_fit_artifact_digest": "sha256:c0d643ecd7a63c544d311e1ace73018e1631de3ea3966ce5519dd348eab49ad1",
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 4330,
+        "HUMAN_OBSERVATION": 29271
+      },
+      "original_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 2590,
+        "PRESERVED_SPECIMEN": 1259
+      }
+    },
+    {
+      "index": 3,
+      "taxon": "Avicennia germinans",
+      "historical_specieskey": "K35N",
+      "original_qualification_artifact_id": 10066112150,
+      "original_qualification_artifact_digest": "sha256:da04b69a4b4b76af8ac897812c28eeaabee5b17fb48b791d1541884d4e9eddb2",
+      "original_fit_artifact_id": 10089523408,
+      "original_fit_artifact_digest": "sha256:8e89cad47c2fbbf27e7df696a067639118857ae31a8c2960c4cb3fc7a99fbb7b",
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 7327,
+        "HUMAN_OBSERVATION": 27771
+      },
+      "original_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 1474,
+        "PRESERVED_SPECIMEN": 1253
+      }
+    },
+    {
+      "index": 4,
+      "taxon": "Avicennia marina",
+      "historical_specieskey": "K35T",
+      "original_qualification_artifact_id": 10066036790,
+      "original_qualification_artifact_digest": "sha256:54fc36d2fa50a59dda44fd7c7f2e0040a23094a8db4efc321db36225299299ac",
+      "original_fit_artifact_id": 10089527674,
+      "original_fit_artifact_digest": "sha256:b02cc60deae3ecc7fb0a5d3929cdce846a5620680e0884852fc30eccdce21de2",
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 4702,
+        "HUMAN_OBSERVATION": 27230
+      },
+      "original_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 3021,
+        "PRESERVED_SPECIMEN": 1118
+      }
+    },
+    {
+      "index": 5,
+      "taxon": "Laguncularia racemosa",
+      "historical_specieskey": "3RXYC",
+      "original_qualification_artifact_id": 10067156409,
+      "original_qualification_artifact_digest": "sha256:65013de94aa486767a4f27a27e3df8735982dc036977866a37a383f7a9683566",
+      "original_fit_artifact_id": 10089527180,
+      "original_fit_artifact_digest": "sha256:1e65a04d9610e64f5dd0b46c34a811d1c72d8cacf4559431657c89c121155d78",
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 6616,
+        "HUMAN_OBSERVATION": 25648
+      },
+      "original_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 1450,
+        "PRESERVED_SPECIMEN": 1365
+      }
+    },
+    {
+      "index": 6,
+      "taxon": "Nothofagus antarctica",
+      "historical_specieskey": "47SYY",
+      "original_qualification_artifact_id": 10068744077,
+      "original_qualification_artifact_digest": "sha256:52fcbfda4279e23fa1f3b70e0799d0a4e526c33b68c20c096d0a754c68d60e7c",
+      "original_fit_artifact_id": 10089528001,
+      "original_fit_artifact_digest": "sha256:718c80bf6a54d4ce486d1c5d3c28505a78810246324320efdb063b432642f64e",
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 1138,
+        "HUMAN_OBSERVATION": 1262
+      },
+      "original_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 495,
+        "PRESERVED_SPECIMEN": 182
+      }
+    },
+    {
+      "index": 7,
+      "taxon": "Nothofagus betuloides",
+      "historical_specieskey": "V5FNY",
+      "original_qualification_artifact_id": 10068506170,
+      "original_qualification_artifact_digest": "sha256:1732964bc43131122b5a6fc7b5920a46abfcc03d4f2bfc30d76e99b00990f0b7",
+      "original_fit_artifact_id": 10089528842,
+      "original_fit_artifact_digest": "sha256:0f260f330e8c6d6b202b56988b0201e196ba474accb1cce21b5c3062dc30e459",
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 592,
+        "HUMAN_OBSERVATION": 786
+      },
+      "original_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 235,
+        "PRESERVED_SPECIMEN": 91
+      }
+    },
+    {
+      "index": 8,
+      "taxon": "Eucalyptus globulus",
+      "historical_specieskey": "3BPZ6",
+      "original_qualification_artifact_id": 10069068890,
+      "original_qualification_artifact_digest": "sha256:c519e277275cc39f420972c73655a1576fd75c58e173ed57a3a69a4289f7a091",
+      "original_fit_artifact_id": 10089526766,
+      "original_fit_artifact_digest": "sha256:b5af301b632d8cbe50a7916a2f55e438c004b352b0dbe9c2bcf43f486037ff2f",
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 5040,
+        "HUMAN_OBSERVATION": 138308
+      },
+      "original_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 5595,
+        "PRESERVED_SPECIMEN": 1164
+      }
+    },
+    {
+      "index": 9,
+      "taxon": "Abies lasiocarpa",
+      "historical_specieskey": "8KDX",
+      "original_qualification_artifact_id": 10069664366,
+      "original_qualification_artifact_digest": "sha256:a1da21a899b8039ccb8754243627fd31fc0009e518762c0f5b33dcd785ea5d62",
+      "original_fit_artifact_id": 10089528003,
+      "original_fit_artifact_digest": "sha256:0c2ecba01f9f2868f713f29639412c7b3f9e2c981d2ebe0d0958d9c444720cda",
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 5112,
+        "HUMAN_OBSERVATION": 8538
+      },
+      "original_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 2471,
+        "PRESERVED_SPECIMEN": 1056
+      }
+    },
+    {
+      "index": 10,
+      "taxon": "Eucalyptus delegatensis",
+      "historical_specieskey": "6GSMS",
+      "original_qualification_artifact_id": 10068956619,
+      "original_qualification_artifact_digest": "sha256:79ab021f6f8251a177e3d6c6cc431432044d41317229220344bdd82f19a77695",
+      "original_fit_artifact_id": 10089523860,
+      "original_fit_artifact_digest": "sha256:39c77c6cac5375f77ee3f280bd5a0c62c0a84c9aaeb845f0b19c981b905d81b5",
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 575,
+        "HUMAN_OBSERVATION": 2372
+      },
+      "original_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 551,
+        "PRESERVED_SPECIMEN": 176
+      }
+    },
+    {
+      "index": 11,
+      "taxon": "Larix laricina",
+      "historical_specieskey": "6NYVX",
+      "original_qualification_artifact_id": 10069910761,
+      "original_qualification_artifact_digest": "sha256:b54a49dacb364ae2ae7c646ebed17937c5b82ec5c220453b1e995fc50a9d044c",
+      "original_fit_artifact_id": 10089524000,
+      "original_fit_artifact_digest": "sha256:51aa2f517ea8951a0cf94fca214defcad30301e97b505d338ddfcef9322cec67",
+      "original_raw_by_mode": {
+        "PRESERVED_SPECIMEN": 5906,
+        "HUMAN_OBSERVATION": 18622
+      },
+      "original_source_thinned_counts": {
+        "HUMAN_OBSERVATION": 6339,
+        "PRESERVED_SPECIMEN": 2019
+      }
+    }
+  ]
+}

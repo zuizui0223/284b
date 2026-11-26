@@ -1,0 +1,103 @@
+name: "Replay signed original reference47 geometry with index-1 portable pilot"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'config/gbif_original_reference47_geometry_manifest_v1.json'
+      - 'scripts/reconstruct_original_reference47_centers_v1.py'
+      - 'tests/test_gbif_original_reference47_geometry_v1.py'
+      - '.github/workflows/gbif_original_reference47_geometry_pilot_v1.yml'
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: gbif-original-reference47-geometry-portability-pilot
+  cancel-in-progress: false
+jobs:
+  original-reference-geometry-portability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate all 47 frozen signed reference identities and fail-closed guards
+        run: |
+          python -m unittest discover -s tests -p 'test_gbif_original_reference47_geometry_v1.py' -v
+          python -m py_compile scripts/reconstruct_original_reference47_centers_v1.py
+      - name: Install unchanged original historical processing
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check -q -e './sdmr[cloud,parquet,geo]'
+      - name: Acquire exact signed original Abies preflight and fit ZIPs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess
+          m=json.loads(pathlib.Path('config/gbif_original_reference47_geometry_manifest_v1.json').read_text())
+          e=m['entries'][1]
+          assert e['taxon']=='Abies grandis' and e['index']==1
+          for key,digest,path in [
+              ('original_qualification_artifact_id','original_qualification_artifact_digest','/tmp/ref_original_frame.zip'),
+              ('original_fit_artifact_id','original_fit_artifact_digest','/tmp/ref_original_fit.zip'),
+          ]:
+              with open(path,'wb') as f:
+                  subprocess.run(['gh','api',f"repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{e[key]}/zip"],stdout=f,check=True)
+              actual='sha256:'+hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()
+              if actual!=e[digest]:
+                  raise RuntimeError(f'Original signed ZIP digest mismatch for {key}: {actual}')
+          print('both original reference ZIP digests independently verified')
+          PY
+      - name: Replay original reference Abies geometry with generalized 47-taxon code
+        run: |
+          python scripts/reconstruct_original_reference47_centers_v1.py \
+            --taxon-index 1 \
+            --frame-zip /tmp/ref_original_frame.zip \
+            --fit-zip /tmp/ref_original_fit.zip \
+            --out-centers results/reference47_geometry_pilot/Abies_grandis.npy \
+            --out-json results/gbif_original_reference47_geometry_pilot_index1_v1.json
+      - name: Require exact reproduction of independently certified 2026-11-17 Abies geometry
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib
+          p=pathlib.Path('results/gbif_original_reference47_geometry_pilot_index1_v1.json')
+          v=json.loads(p.read_text())
+          old=json.loads(pathlib.Path('results/gbif_original_reference_Abies_grandis_centers_v1.json').read_text())
+          assert v['status']=='ORIGINAL_SIGNED_REFERENCE_GEOMETRY_EXACTLY_REPRODUCED'
+          assert v['taxon_index']==1 and v['taxon']=='Abies grandis'
+          assert v['original_center_sha256']==v['reconstructed_center_sha256']==old['recomputed_centers_SHA256']
+          assert v['original_common_pooled_geometry_cells']==old['original_source_blind_geometry_cells']==7244
+          assert v['original_comparison_frame_sha256_by_M']==old['original_frozen_comparison_frame_SHA256_by_M']
+          assert v['original_source_thinned_counts']==old['original_historical_source_thinned_counts']
+          assert v['historical_source_manifest_sha256']==old['historical_snapshot_object_manifest_sha256']
+          assert v['center_npy_sha256']==hashlib.sha256(pathlib.Path('results/reference47_geometry_pilot/Abies_grandis.npy').read_bytes()).hexdigest()
+          assert v['model_refit_performed'] is False and v['reference_q95_computed'] is False
+          assert v['heldout12_opened'] is False and v['empirical_ledger_increment']==0
+          print('generalized reference index1 geometry matches independent SHA-pinned original')
+          PY
+      - name: Preserve original reference center array and metadata
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gbif-reference47-geometry-portable-index1-pilot
+          path: |
+            results/reference47_geometry_pilot/Abies_grandis.npy
+            results/gbif_original_reference47_geometry_pilot_index1_v1.json
+          retention-days: 45
+          if-no-files-found: warn
+      - name: Archive signed portability receipt without altering original endpoints
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_original_reference47_geometry_pilot_index1_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive exact original reference47 geometry portability pilot"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

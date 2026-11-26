@@ -1,0 +1,70 @@
+name: "Reconstruct Artemisia original pre-repair 12-block spatial geometry"
+on:
+  push:
+    branches: [analysis/neon-external-truth-preflight-20261115]
+    paths:
+      - 'config/gbif_original_centers_reconstruction_pilot_v1.json'
+      - 'scripts/reconstruct_original_gbif_center_pilot_v1.py'
+      - 'integration_tests/test_gbif_original_centers_pilot_v1.py'
+      - '.github/workflows/gbif_original_centers_pilot_v1.yml'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: gbif-9705-original-Artemisia-centers-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  reproduce-geometry-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 58
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Clone pinned original modelling implementation and dependencies
+        run: |
+          git clone --quiet https://github.com/zuizui0223/sdmr.git sdmr
+          git -C sdmr checkout --quiet 9d2a45b56408cde8a4af41722538d0086c532cc9
+          python -m pip install --disable-pip-version-check -q -e './sdmr[cloud,parquet,geo]'
+      - name: Validate center-hash algorithm and original frozen source identity
+        run: python -m unittest discover -s integration_tests -p 'test_gbif_original_centers_pilot_v1.py' -v
+      - name: Download SHA-pinned original heldout qualification (not model outcomes)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/10065445666/zip" > /tmp/Artemisia_original_core19_qualification.zip
+          python - <<'PY'
+          import hashlib,json,pathlib
+          cfg=json.loads(pathlib.Path('config/gbif_original_centers_reconstruction_pilot_v1.json').read_text())
+          b=pathlib.Path('/tmp/Artemisia_original_core19_qualification.zip').read_bytes()
+          assert 'sha256:'+hashlib.sha256(b).hexdigest()==cfg['preflight_frame_artifact_digest']
+          print('Original 2000-row frame ZIP SHA verified')
+          PY
+      - name: Reproduce 9705-file source-blind pooled geometry and 12 spatial centers
+        run: |
+          python scripts/reconstruct_original_gbif_center_pilot_v1.py \
+            --frame-zip /tmp/Artemisia_original_core19_qualification.zip \
+            --out-centers results/geometry_pilot/Artemisia_original_centers.npy \
+            --out-json results/gbif_original_centers_Artemisia_v1.json
+      - name: Retain derived centers only as provenance artifact (not main)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Artemisia-historical-block-centers-pilot
+          path: |
+            results/geometry_pilot/Artemisia_original_centers.npy
+            results/gbif_original_centers_Artemisia_v1.json
+          if-no-files-found: warn
+      - name: Commit only metadata attestation, NOT model outcomes or derived centers
+        if: always()
+        run: |
+          if [ ! -f results/gbif_original_centers_Artemisia_v1.json ]; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/gbif_original_centers_Artemisia_v1.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Archive verified original source-blind spatial centers SHA only"
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

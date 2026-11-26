@@ -1,0 +1,84 @@
+{
+  "schema": "284b.gbif_missing20_restoration_sensitivity_protocol.v1",
+  "freeze_date": "2026-11-16",
+  "status": "DESIGN_FROZEN_NOT_EXECUTION_AUTHORIZED",
+  "purpose": "Assess whether 284b Level A 12-taxon source agreement survives restoration of the 510 originally absent GBIF source parquet objects, without mutating the prospectively frozen September-2026 experiment.",
+  "original_endpoint": "same_target_cross_source_reproducibility_heldout12_core19_v0_4",
+  "historical_snapshot": {
+    "doi": "10.15468/dl.fs3btq",
+    "date": "2026-08-01",
+    "parquet_count": 9705,
+    "full_object_manifest_sha256": "1b5b2dde8a23e78beafac1d122830e0552c2fbdac4086e9d9d8c161814a7163e",
+    "observed_freeze_date": "2026-09-04"
+  },
+  "repaired_snapshot": {
+    "date_prefix": "2026-08-01",
+    "parquet_count": 10215,
+    "full_object_manifest_sha256": "ca0d9844cd6816b4e4d550a0152db489b5e6a4c5129f8700fe2f1d818b954cd2",
+    "restored_parquet_count": 510,
+    "restored_filename_rule": "six-digit numeric basenames exactly divisible by 20",
+    "restored_object_LastModified_interval_UTC": [
+      "2026-10-23T15:41:19Z",
+      "2026-10-23T15:42:18Z"
+    ],
+    "source": "results/neon_aug_gbif_missing20_recovery_v1.json",
+    "historical_source_reconstructed_via_exact_manifest_filter": true
+  },
+  "independent_frozen_panels": {
+    "calibration_taxa": 47,
+    "calibration_source": "results/product_b_same_target_successor_source_mode_sampling_v0_1.json, exactly 47 passed, 79 fixed historical specieskeys",
+    "heldout_taxa": 12,
+    "heldout_source": "registry/product_b_same_target_source_identity_pass_taxa_v0_1.csv",
+    "heldout_already_opened_at_2026_09": true,
+    "no_taxon_replacement_or_selection": true,
+    "no_reference_taxon_filtering_using_restored_source_counts": true
+  },
+  "unchanged_science": {
+    "source_modes": [
+      "PRESERVED_SPECIMEN",
+      "HUMAN_OBSERVATION"
+    ],
+    "predictor_selection": "CHELSA V2.1 core-climate bio1..bio19",
+    "M_km": [
+      150,
+      300,
+      500
+    ],
+    "procedures": 8,
+    "qualification_before_paired_discordance": true,
+    "reference_quantile": 0.95,
+    "quantile_method": "nearest_rank",
+    "reference_calibration_unit": "procedure x M",
+    "minimum_distinct_adequate_reference_taxa_per_cell": 30,
+    "all_24_cells_reported": true,
+    "unresolved_qualifications_never_zero_imputed": true
+  },
+  "staged_gates": {
+    "G0": "exact original and repaired S3 manifest hashes verified",
+    "G1": "reproduce original source thinned input denominators and confirm no historical source-row identity drift, including original Artemisia 3285 and 4516 counts",
+    "G2": "quantify restored raw source-record exposure in all predeclared taxa and identify whether source modes are differentially affected",
+    "G3": "full repaired-source refit of all 47+12 original taxon inventories, no replacement or favourable procedure/area subset",
+    "G4": "recalibrate a newly versioned 24-cell reference using the original 47 taxa and new adequacy gates",
+    "G5": "evaluate all 12 original heldout taxa against the new reference once, report 288 cell states (including unresolved), no candidate swapping",
+    "G6": "compare paired old vs repaired taxon-level max-to-q95 ratio and reference shift, detect whether 0/12 pass persists or not"
+  },
+  "primary_robustness_reporting": [
+    "Count of the 12 heldout taxa with any new q95 envelope exceedance vs original 0/12",
+    "Number of evaluable/attention_required/unresolved procedure x M heldout cells",
+    "Per-taxon change in max observed / calibrated envelope ratio (taxon is independent unit)",
+    "Reference q95 shifts by each of 24 procedure x M cells",
+    "Differential source-mode changes in admitted and spatially thinned input records"
+  ],
+  "prohibitions": [
+    "Do not reinterpret the repaired-source run as new independent holdout taxa",
+    "Do not reuse old q95 as a nominal alpha or 95% predictive bound",
+    "Do not alter fixed taxa, procedures, M or predictor universe after restored counts are visible",
+    "Do not claim biological truth or source-independent external accuracy from source coherence",
+    "Do not modify the original signed 0/12 empirical endpoint",
+    "If any required 24 reference cells lacks 30 adequate taxa, STOP and report unresolved rather than removing cells"
+  ],
+  "submission_impact": "Ecology Letters M1+M2 manuscript cannot claim robustness to repaired public GBIF directory before a distinct versioned repaired-source sensitivity conclusion or explicit editor-agreed limitation.",
+  "current_empirical_ledger_increment": 0,
+  "final_signed_endpoint_if_authorized": "gbif_202608_missing20_repaired_source_heldout12_core19_sensitivity_v1",
+  "final_claim_strength": "retrospective_source_completeness_robustness_only_not_independent_ecological_truth"
+}

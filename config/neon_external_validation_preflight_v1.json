@@ -1,0 +1,67 @@
+{
+  "schema": "284b.neon_external_validation_preflight.v1",
+  "status": "SOURCE_METADATA_ONLY_NO_ECOLOGICAL_LABELS_OPENED",
+  "created_at_utc": "2026-11-15",
+  "objective": "Test whether source-specific same-target SDM predictions are informative about independently standardized field plot presence, rather than merely agreeing with one another",
+  "parent_level_a_endpoint": "same_target_cross_source_reproducibility_heldout12_core19_v0_4",
+  "parent_empirical_ledger_increment": 0,
+  "public_source": {
+    "provider": "National Ecological Observatory Network (NEON)",
+    "product_code": "DP1.10058.001",
+    "product_name": "Plant presence and percent cover",
+    "product_page": "https://data.neonscience.org/data-products/DP1.10058.001",
+    "release": "RELEASE-2026",
+    "api_metadata_url": "https://data.neonscience.org/api/v0/products/DP1.10058.001?release=RELEASE-2026",
+    "backup_api_metadata_url": "https://data.neonscience.org/api/v0/releases/RELEASE-2026/products/DP1.10058.001",
+    "proposed_date_interval": "2013-06_to_2024-12",
+    "package": "basic",
+    "raw_data_download_authorized": false,
+    "api_token_required_for_some_download_endpoints": true,
+    "public_site_count_to_verify": false,
+    "release_doi_to_verify": null,
+    "year2026_collection_status": "suspended_as_documented_by_provider"
+  },
+  "focal_taxa_predeclared_from_existing_heldout_for_US_range_only": [
+    "Artemisia tridentata",
+    "Atriplex canescens",
+    "Encelia farinosa",
+    "Avicennia germinans",
+    "Laguncularia racemosa",
+    "Abies lasiocarpa",
+    "Larix laricina"
+  ],
+  "eligibility_rules_prelabel": {
+    "native_or_present_in_neon_geography": "fixed_geographical_domain_pre-screen_not_based_on_NEON_observed_species",
+    "no_replacement_after_metadata_or_biological_results": true,
+    "complete_plot_survey_required": true,
+    "taxonomic_concept_currently_accepted_exact_or_resolved": true,
+    "two_source_models_must_be_frozen_and_verifiable": true,
+    "minimum_independent_sites_per_evaluable_taxon": 3,
+    "minimum_positive_complete_plot_keys": 10,
+    "minimum_negative_complete_plot_keys": 10,
+    "if_fewer_than_three_taxa_evaluable": "STOP_EXTERNAL_VALIDATION_UNESTIMABLE",
+    "unit_of_independent_replication": "taxon_and_NEON_site_not_subplots_or_repeated_site_years",
+    "missing_complete_survey_evidence": "UNRESOLVED_NOT_ABSENCE",
+    "NEON_non_detection": "plot_scale_non_detection_only_not_species_absence_from_region",
+    "spatial_transport": "frozen_model_score_evaluation_requires_usable_predictors_and_explicit_extrapolation_diagnostics",
+    "model_source_independence": "audit_original_GBIF_dataset_keys_against_NEON_raw_record_provenance; if_not_certifiable_label_dependency_unresolved"
+  },
+  "success_estimand_if_qualified": {
+    "unit": "NEON_plot_bout_nested_within_site_and_taxon",
+    "comparison": "independent_SOURCE_SPECIFIC_SDM_prediction_rank_against_NEON_plot_presence_or_non_detection",
+    "target": "plot_scale_detection_ranking_not_true_absence_or_causal_mechanism",
+    "metric": "site_blocked_rank_metric_calibrated_at_taxon_level",
+    "source_comparison": "PRESERVED_SPECIMEN_vs_HUMAN_OBSERVATION_with_identical_NEON_comparison_keys",
+    "no_third_source_truth_assumption": true,
+    "no_use_of_original_q95_as_new_external_accuracy_threshold": true,
+    "no_focal_level_c_process_knockout": true
+  },
+  "negative_guardrails": [
+    "No NEON species detections or absences may be read before metadata and source provenance acceptance",
+    "Do not tune taxa or thresholds after viewing NEON labels",
+    "Do not claim plot-scale non-detection is identified biological nonexistence",
+    "Do not claim independent validation if NEON records occur in original GBIF fitting data and cannot be excluded",
+    "Stop rather than replace unestimable focal taxa",
+    "NEON product availability metadata is not proof of any focal taxon's sample size"
+  ]
+}

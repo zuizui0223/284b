@@ -1,0 +1,127 @@
+{
+  "schema": "284b.niche_demographic_divergence.common_pair_audit.v1",
+  "disposition": "full_regional_sign_reversal_not_retained_under_same_pairs_and_same_niche_reference",
+  "workflow_run_id": 45940879055,
+  "job_id": 140314640679,
+  "execution_commit": "e8e43b665cbb958b3005c82abadbaaf70b238da4",
+  "artifact_id": 15173061456,
+  "artifact_sha256": "4b2351ac756b408b664ba962b42b07527b5df8f129dc8645c173efc9cc210b45",
+  "result": {
+    "status": "postoutcome_descriptive_audit",
+    "source_hashes_verified": 25,
+    "original_full_region_slopes_reproduced": true,
+    "common_pairs": 27,
+    "common_species": 12,
+    "pooled_reference_plots": 7732,
+    "pooled_climate_bins": 20,
+    "regions": {
+      "appalachia": {
+        "common_pair_rows": 2216,
+        "common_pair_plots": 894,
+        "regional_D_regional_J": {
+          "slope_per_0_1_D": -0.009002950369139931,
+          "plots": 502,
+          "pair_plot_rows": 1824,
+          "blocks": 40,
+          "conditional_spatial_block_bootstrap_95": [
+            -0.021994090194611723,
+            0.010813117718945834
+          ],
+          "bootstrap_fits": 500,
+          "status": "exploratory_descriptive"
+        },
+        "common_D_regional_J": {
+          "slope_per_0_1_D": -0.026124795627773485,
+          "plots": 502,
+          "pair_plot_rows": 1824,
+          "blocks": 40,
+          "conditional_spatial_block_bootstrap_95": [
+            -0.04693944490752302,
+            -0.009770491750127308
+          ],
+          "bootstrap_fits": 500,
+          "status": "exploratory_descriptive"
+        },
+        "common_D_common_J": {
+          "slope_per_0_1_D": -0.019227206849000707,
+          "plots": 502,
+          "pair_plot_rows": 1824,
+          "blocks": 40,
+          "conditional_spatial_block_bootstrap_95": [
+            -0.03732427967140755,
+            -0.00100846310708104
+          ],
+          "bootstrap_fits": 500,
+          "status": "exploratory_descriptive"
+        },
+        "basal_area_common_D_regional_J": {
+          "slope_per_0_1_D": 0.011148644070017878,
+          "plots": 502,
+          "pair_plot_rows": 1824,
+          "blocks": 40,
+          "conditional_spatial_block_bootstrap_95": [
+            -0.022536850361697783,
+            0.04418233661082421
+          ],
+          "bootstrap_fits": 500,
+          "status": "exploratory_descriptive"
+        }
+      },
+      "great_lakes": {
+        "common_pair_rows": 1974,
+        "common_pair_plots": 809,
+        "regional_D_regional_J": {
+          "slope_per_0_1_D": -0.019738399325370637,
+          "plots": 421,
+          "pair_plot_rows": 1586,
+          "blocks": 56,
+          "conditional_spatial_block_bootstrap_95": [
+            -0.04124492903318448,
+            0.0019448828078064248
+          ],
+          "bootstrap_fits": 500,
+          "status": "exploratory_descriptive"
+        },
+        "common_D_regional_J": {
+          "slope_per_0_1_D": 0.0023110828395527545,
+          "plots": 421,
+          "pair_plot_rows": 1586,
+          "blocks": 56,
+          "conditional_spatial_block_bootstrap_95": [
+            -0.02756240810919505,
+            0.03287199610190521
+          ],
+          "bootstrap_fits": 500,
+          "status": "exploratory_descriptive"
+        },
+        "common_D_common_J": {
+          "slope_per_0_1_D": -0.003796558366331951,
+          "plots": 421,
+          "pair_plot_rows": 1586,
+          "blocks": 56,
+          "conditional_spatial_block_bootstrap_95": [
+            -0.03407287654688809,
+            0.029167448505400744
+          ],
+          "bootstrap_fits": 500,
+          "status": "exploratory_descriptive"
+        },
+        "basal_area_common_D_regional_J": {
+          "slope_per_0_1_D": 0.04298010615304611,
+          "plots": 421,
+          "pair_plot_rows": 1586,
+          "blocks": 56,
+          "conditional_spatial_block_bootstrap_95": [
+            0.018484444531986412,
+            0.07325042067753985
+          ],
+          "bootstrap_fits": 500,
+          "status": "exploratory_descriptive"
+        }
+      }
+    },
+    "new_confirmatory_endpoints": 0,
+    "regional_D_rank_correlation_shared_pairs": 0.10989010989010989,
+    "interpretation": "Retrospective matched-pair and common climatic-reference sensitivity. Same species pairs and common D remove two sources of heterogeneity, not all site or sampling confounding. Spatial bootstrap conditional on estimated niches."
+  }
+}

@@ -1,0 +1,1959 @@
+{
+  "schema": "284b.stage_structured_temporal_forecast.v1",
+  "status": "exploratory_geographically_recurrent_juvenile_stock_forecast_gain_hidden_turnover_not_robust",
+  "workflow_run_id": 45941515338,
+  "execution_commit": "aa05ca19e0a3e0073be5ee97e22db7cb2432b68f",
+  "source_hashes_verified": 37,
+  "artifact_zip_hashes_verified": true,
+  "forecast_plots": 4544,
+  "species_plot_rows": 17860,
+  "unique_species_codes": 106,
+  "stable_plots": 3099,
+  "new_confirmatory_endpoints": 0,
+  "postoutcome_audit": "All primary MSE and stable stratum MSE reproduced from per-block plot-equal loss sums; 2000 fixed-seed jointly resampled spatial blocks within each region. Exploratory conditional intervals, not independent confirmatory inference.",
+  "regions": {
+    "northeast": {
+      "job_id": 140316670758,
+      "artifact_id": 15173380970,
+      "artifact_sha256": "559810b15ffaa5c2b20365c7aaf8819abbd80f41da327b3add78b804ba88f556",
+      "summary": {
+        "status": "exploratory_three_census_forecast",
+        "new_confirmatory_endpoints": 0,
+        "region": "northeast",
+        "hashes_verified": 13,
+        "state_audits": [
+          {
+            "state": "ME",
+            "design_eligible_visits": 13217,
+            "complete_area_visits": 7945,
+            "invalid_live_or_missing_status_visits_excluded": 0,
+            "valid_visits": 7945,
+            "reference_plots_with_climate": 1065,
+            "forecast_triples": 724,
+            "eligible_forecast_plots": 659,
+            "species_plot_rows": 2784,
+            "adult_stems_t1": 21824,
+            "ambiguous_later_links": 0,
+            "identified_promoted_stems": 372,
+            "identified_baseline_adult_statuses": 23410
+          },
+          {
+            "state": "NH",
+            "design_eligible_visits": 3135,
+            "complete_area_visits": 2065,
+            "invalid_live_or_missing_status_visits_excluded": 0,
+            "valid_visits": 2065,
+            "reference_plots_with_climate": 302,
+            "forecast_triples": 194,
+            "eligible_forecast_plots": 189,
+            "species_plot_rows": 819,
+            "adult_stems_t1": 6423,
+            "ambiguous_later_links": 0,
+            "identified_promoted_stems": 63,
+            "identified_baseline_adult_statuses": 6781
+          },
+          {
+            "state": "VT",
+            "design_eligible_visits": 2967,
+            "complete_area_visits": 1950,
+            "invalid_live_or_missing_status_visits_excluded": 0,
+            "valid_visits": 1950,
+            "reference_plots_with_climate": 298,
+            "forecast_triples": 203,
+            "eligible_forecast_plots": 197,
+            "species_plot_rows": 798,
+            "adult_stems_t1": 5826,
+            "ambiguous_later_links": 0,
+            "identified_promoted_stems": 53,
+            "identified_baseline_adult_statuses": 6176
+          }
+        ],
+        "forecast_rows": 4401,
+        "forecast_plots": 1045,
+        "forecast_species": 44,
+        "results": {
+          "primary_fit": {
+            "status": "cross_validated_descriptive",
+            "species": 44,
+            "folds": 5
+          },
+          "primary": {
+            "plots": 1045,
+            "rows": 4401,
+            "blocks": 28,
+            "mean_squared_errors": {
+              "zero": 0.05431857034242453,
+              "A": 0.04707838595435695,
+              "S": 0.044186513342010375,
+              "H": 0.04426309336943792,
+              "E": 0.04540283933835983,
+              "L": 0.04456305786166601
+            },
+            "comparisons": {
+              "zero_to_A": {
+                "baseline_mse": 0.05431857034242453,
+                "augmented_mse": 0.04707838595435695,
+                "mse_reduction": 0.007240184388067582,
+                "percent_reduction": 13.329114412300296,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.005234194075625215,
+                  0.009241336057637826
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  10.58125245535725,
+                  15.842679011469025
+                ]
+              },
+              "A_to_S": {
+                "baseline_mse": 0.04707838595435695,
+                "augmented_mse": 0.044186513342010375,
+                "mse_reduction": 0.002891872612346573,
+                "percent_reduction": 6.142675781515275,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.0017491068847277599,
+                  0.003928442432332932
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  4.106607699847394,
+                  7.625232053388324
+                ]
+              },
+              "A_to_H": {
+                "baseline_mse": 0.04707838595435695,
+                "augmented_mse": 0.04426309336943792,
+                "mse_reduction": 0.002815292584919027,
+                "percent_reduction": 5.980010843295449,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.0015776920164300757,
+                  0.003966712447043079
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  3.7553760139845656,
+                  7.683964459520278
+                ]
+              },
+              "S_to_H": {
+                "baseline_mse": 0.044186513342010375,
+                "augmented_mse": 0.04426309336943792,
+                "mse_reduction": -0.00007658002742754605,
+                "percent_reduction": -0.17331086260372008,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0001801845479291003,
+                  0.00003185068113247286
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -0.41627627284512164,
+                  0.06943753269954069
+                ]
+              },
+              "A_to_E": {
+                "baseline_mse": 0.04707838595435695,
+                "augmented_mse": 0.04540283933835983,
+                "mse_reduction": 0.0016755466159971213,
+                "percent_reduction": 3.5590570535310695,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.000741245649750905,
+                  0.00263389092463683
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  1.692559220958473,
+                  5.291249375385787
+                ]
+              },
+              "A_to_L": {
+                "baseline_mse": 0.04707838595435695,
+                "augmented_mse": 0.04456305786166601,
+                "mse_reduction": 0.0025153280926909355,
+                "percent_reduction": 5.342851165563696,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.001650283951675128,
+                  0.0034240860968450556
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  3.930273790111081,
+                  6.6663426609927345
+                ]
+              },
+              "E_to_L": {
+                "baseline_mse": 0.04540283933835983,
+                "augmented_mse": 0.04456305786166601,
+                "mse_reduction": 0.0008397814766938141,
+                "percent_reduction": 1.849623259099353,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.00012432523172516323,
+                  0.0018846244578479543
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -0.3024791068732053,
+                  3.951434953891577
+                ]
+              }
+            }
+          },
+          "stable_adult_subset": {
+            "plots": 721,
+            "rows": 3095,
+            "blocks": 27,
+            "mean_squared_errors": {
+              "zero": 0.04370924102637511,
+              "A": 0.03957451388020994,
+              "S": 0.038155999490499797,
+              "H": 0.0381930702153913,
+              "E": 0.038732759628524877,
+              "L": 0.03835277431631619
+            },
+            "comparisons": {
+              "zero_to_A": {
+                "baseline_mse": 0.04370924102637511,
+                "augmented_mse": 0.03957451388020994,
+                "mse_reduction": 0.004134727146165175,
+                "percent_reduction": 9.459617804093623,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.002460003404947776,
+                  0.00565127130442685
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  5.96314583218159,
+                  12.362937878704432
+                ]
+              },
+              "A_to_S": {
+                "baseline_mse": 0.03957451388020994,
+                "augmented_mse": 0.038155999490499797,
+                "mse_reduction": 0.0014185143897101418,
+                "percent_reduction": 3.5844139336844756,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.000678056240492614,
+                  0.002286336291497563
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  1.8075283252640897,
+                  5.733810386174096
+                ]
+              },
+              "A_to_H": {
+                "baseline_mse": 0.03957451388020994,
+                "augmented_mse": 0.0381930702153913,
+                "mse_reduction": 0.0013814436648186407,
+                "percent_reduction": 3.4907407049905936,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.0006149213702411058,
+                  0.002268430264451937
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  1.5164402873048544,
+                  5.8385557121371745
+                ]
+              },
+              "S_to_H": {
+                "baseline_mse": 0.038155999490499797,
+                "augmented_mse": 0.0381930702153913,
+                "mse_reduction": -0.00003707072489150115,
+                "percent_reduction": -0.09715569081274136,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0001714324836329809,
+                  0.00008018523737715064
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -0.4258036999304106,
+                  0.21724025135698466
+                ]
+              },
+              "A_to_E": {
+                "baseline_mse": 0.03957451388020994,
+                "augmented_mse": 0.038732759628524877,
+                "mse_reduction": 0.0008417542516850618,
+                "percent_reduction": 2.127010970325522,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.00006637523820081708,
+                  0.0017581938278947887
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -0.15702968789017227,
+                  4.681004687051162
+                ]
+              },
+              "A_to_L": {
+                "baseline_mse": 0.03957451388020994,
+                "augmented_mse": 0.03835277431631619,
+                "mse_reduction": 0.0012217395638937506,
+                "percent_reduction": 3.087187798672385,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.0004490692821800749,
+                  0.001995419643404625
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  1.1425720940767852,
+                  5.070900789146003
+                ]
+              },
+              "E_to_L": {
+                "baseline_mse": 0.038732759628524877,
+                "augmented_mse": 0.03835277431631619,
+                "mse_reduction": 0.0003799853122086888,
+                "percent_reduction": 0.9810437362403873,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0007094124058063887,
+                  0.0015650229991660612
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -1.9248468728583485,
+                  3.7019068550852494
+                ]
+              }
+            }
+          },
+          "state_specific": {
+            "ME": {
+              "plots": 659,
+              "rows": 2784,
+              "blocks": 19,
+              "mean_squared_errors": {
+                "zero": 0.06311499126000751,
+                "A": 0.05439564252125272,
+                "S": 0.050603554029653185,
+                "H": 0.05071574834627457,
+                "E": 0.05241470706572138,
+                "L": 0.050893052097254685
+              },
+              "comparisons": {
+                "A_to_H": {
+                  "baseline_mse": 0.05439564252125272,
+                  "augmented_mse": 0.05071574834627457,
+                  "mse_reduction": 0.003679894174978153,
+                  "percent_reduction": 6.765053236645556,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    0.0025627464612192627,
+                    0.005147044169961786
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    4.969076325149265,
+                    8.964359299438794
+                  ]
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.050603554029653185,
+                  "augmented_mse": 0.05071574834627457,
+                  "mse_reduction": -0.00011219431662138485,
+                  "percent_reduction": -0.22171232588849407,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.0002907045668145396,
+                    0.00003963280712892041
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.6213470791071222,
+                    0.0795275415667453
+                  ]
+                }
+              }
+            },
+            "NH": {
+              "plots": 189,
+              "rows": 819,
+              "blocks": 9,
+              "mean_squared_errors": {
+                "zero": 0.037415514711310445,
+                "A": 0.03144936157771618,
+                "S": 0.030185961094076702,
+                "H": 0.03010789903746334,
+                "E": 0.02998579258126374,
+                "L": 0.030570277527440164
+              },
+              "comparisons": {
+                "A_to_H": {
+                  "baseline_mse": 0.03144936157771618,
+                  "augmented_mse": 0.03010789903746334,
+                  "mse_reduction": 0.001341462540252844,
+                  "percent_reduction": 4.265468273299873,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.0004888172616026244,
+                    0.0029906698800459507
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -1.1033370076701734,
+                    10.26376945832351
+                  ]
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.030185961094076702,
+                  "augmented_mse": 0.03010789903746334,
+                  "mse_reduction": 0.00007806205661336357,
+                  "percent_reduction": 0.25860384690113924,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.000028251509667491815,
+                    0.00038112883512470783
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.10387500563567638,
+                    0.9060723438161951
+                  ]
+                }
+              }
+            },
+            "VT": {
+              "plots": 197,
+              "rows": 798,
+              "blocks": 7,
+              "mean_squared_errors": {
+                "zero": 0.0411096166855381,
+                "A": 0.037595205901569055,
+                "S": 0.03615237406131419,
+                "H": 0.03625818016643202,
+                "E": 0.03673786981937451,
+                "L": 0.036812648125197814
+              },
+              "comparisons": {
+                "A_to_H": {
+                  "baseline_mse": 0.037595205901569055,
+                  "augmented_mse": 0.03625818016643202,
+                  "mse_reduction": 0.0013370257351370332,
+                  "percent_reduction": 3.5563729552049925
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.03615237406131419,
+                  "augmented_mse": 0.03625818016643202,
+                  "mse_reduction": -0.00010580610511783106,
+                  "percent_reduction": -0.29266710102740306
+                }
+              }
+            }
+          },
+          "mean_coef_H": {
+            "early_stock": {
+              "mean": 0.04521912984289932,
+              "minimum": 0.03456843991328347,
+              "maximum": 0.05979342160660552
+            },
+            "late_stock": {
+              "mean": 0.10250450438361214,
+              "minimum": 0.08971215315389498,
+              "maximum": 0.10875633312779158
+            },
+            "early_history": {
+              "mean": -0.009189137030546057,
+              "minimum": -0.017331851872936423,
+              "maximum": 0.008762737249799498
+            },
+            "late_history": {
+              "mean": 0.023585743365882542,
+              "minimum": 0.01383212575703513,
+              "maximum": 0.03732634945709565
+            }
+          },
+          "cohort_accounting": {
+            "t1_eligible_adult_stems": 34073,
+            "t2_eligible_species_adult_stems": 36032,
+            "identified_sapling_promotions": 373,
+            "baseline_adults_with_explicit_later_status": 33980,
+            "baseline_adults_dead_or_removed_explicitly": 2520,
+            "complete_link_species_plot_rows": 4351,
+            "stable_adult_plots": 721
+          },
+          "future_without_identified_promotions": {
+            "fit_status": "cross_validated_descriptive",
+            "metrics": {
+              "plots": 1045,
+              "rows": 4401,
+              "blocks": 28,
+              "mean_squared_errors": {
+                "zero": 0.052309236655467675,
+                "A": 0.045797807980459466,
+                "S": 0.043884117408625425,
+                "H": 0.043946778905602335
+              },
+              "comparisons": {
+                "A_to_S": {
+                  "baseline_mse": 0.045797807980459466,
+                  "augmented_mse": 0.043884117408625425,
+                  "mse_reduction": 0.001913690571834041,
+                  "percent_reduction": 4.178563682896253,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    0.0011057790967978452,
+                    0.0027932250396392817
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    2.621914169075474,
+                    5.571084691408493
+                  ]
+                },
+                "A_to_H": {
+                  "baseline_mse": 0.045797807980459466,
+                  "augmented_mse": 0.043946778905602335,
+                  "mse_reduction": 0.0018510290748571315,
+                  "percent_reduction": 4.041741638916232,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    0.000946348003173533,
+                    0.0027127385170323073
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    2.323340570307495,
+                    5.4984604050761
+                  ]
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.043884117408625425,
+                  "augmented_mse": 0.043946778905602335,
+                  "mse_reduction": -0.00006266149697690959,
+                  "percent_reduction": -0.142788554668741,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.00025793028220616785,
+                    0.0001083068149910268
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.590464943990727,
+                    0.2358769021664276
+                  ]
+                }
+              }
+            }
+          },
+          "linked_loss": {
+            "fit_status": "cross_validated_descriptive",
+            "metrics": {
+              "plots": 1042,
+              "rows": 4348,
+              "blocks": 28,
+              "mean_squared_errors": {
+                "zero": 0.017981569672801533,
+                "A": 0.01584530003549349,
+                "S": 0.01586185431636545,
+                "H": 0.015869256549396287
+              },
+              "comparisons": {
+                "A_to_S": {
+                  "baseline_mse": 0.01584530003549349,
+                  "augmented_mse": 0.01586185431636545,
+                  "mse_reduction": -0.000016554280871959592,
+                  "percent_reduction": -0.10447439199559481,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.00003984596292933443,
+                    0.000010334029553536825
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.26284498294962766,
+                    0.06366151294291555
+                  ]
+                },
+                "A_to_H": {
+                  "baseline_mse": 0.01584530003549349,
+                  "augmented_mse": 0.015869256549396287,
+                  "mse_reduction": -0.000023956513902797377,
+                  "percent_reduction": -0.1511900301612135,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.00005131921108627248,
+                    0.000007295037994024917
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.32395332947798006,
+                    0.04223160921721474
+                  ]
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.01586185431636545,
+                  "augmented_mse": 0.015869256549396287,
+                  "mse_reduction": -0.000007402233030837785,
+                  "percent_reduction": -0.04666688322310803,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.000027079863548077412,
+                    0.00001376817395794125
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.17741910541927877,
+                    0.08933724751297262
+                  ]
+                }
+              }
+            }
+          },
+          "climate_stage_reference": {
+            "reference": {
+              "reference_plots": 1657,
+              "bins": 10,
+              "species": 21
+            },
+            "fit_status": "cross_validated_descriptive",
+            "metrics": {
+              "plots": 1027,
+              "rows": 4195,
+              "blocks": 28,
+              "mean_squared_errors": {
+                "zero": 0.05350210791153663,
+                "H": 0.0432910157692378,
+                "HC": 0.04334930879860135
+              },
+              "comparisons": {
+                "H_to_HC": {
+                  "baseline_mse": 0.0432910157692378,
+                  "augmented_mse": 0.04334930879860135,
+                  "mse_reduction": -0.000058293029363547244,
+                  "percent_reduction": -0.1346538729289178,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.00012067682870896406,
+                    -0.00001304564562049988
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.2849542296539424,
+                    -0.031016728661085492
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "limitations": "Size-class composition, not reproductive maturity or climate causation; count losses limited to explicit links; block bootstrap conditional on fitted predictors and regional species set."
+      },
+      "postoutcome_stability_contrast": {
+        "S": {
+          "stable": {
+            "plots": 721,
+            "percent_reduction": 3.5844139336844623,
+            "percent_ci": [
+              1.6049761924375188,
+              5.916009908213675
+            ],
+            "absolute_mse_reduction": 0.0014185143897101366
+          },
+          "changing": {
+            "plots": 324,
+            "percent_reduction": 9.675223155227004,
+            "percent_ci": [
+              6.218086224837454,
+              13.01729460498445
+            ],
+            "absolute_mse_reduction": 0.0061705493979048245
+          },
+          "changing_minus_stable_percent_points": 6.090809221542541,
+          "joint_block_bootstrap_95_percent_points": [
+            1.5018477006160946,
+            10.588875748821085
+          ],
+          "changing_minus_stable_absolute_mse": 0.004752035008194688,
+          "joint_block_bootstrap_95_absolute_mse": [
+            0.002041967851968847,
+            0.007635122730435485
+          ]
+        },
+        "H": {
+          "stable_percent_reduction": 3.490740704990603,
+          "changing_percent_reduction": 9.417291783471233,
+          "changing_minus_stable_percent_points": 5.92655107848063,
+          "joint_block_bootstrap_95_percent_points": [
+            1.132562841647163,
+            10.619294772365732
+          ],
+          "changing_minus_stable_absolute_mse": 0.004624605313286715,
+          "joint_block_bootstrap_95_absolute_mse": [
+            0.0018609390002250021,
+            0.007635388720570689
+          ]
+        }
+      }
+    },
+    "appalachia": {
+      "job_id": 140316671008,
+      "artifact_id": 15172457838,
+      "artifact_sha256": "a934913145d8d7579bede13f59eb8665585b42597b52802f9f88750d768a6c6d",
+      "summary": {
+        "status": "exploratory_three_census_forecast",
+        "new_confirmatory_endpoints": 0,
+        "region": "appalachia",
+        "hashes_verified": 13,
+        "state_audits": [
+          {
+            "state": "PA",
+            "design_eligible_visits": 10260,
+            "complete_area_visits": 5082,
+            "invalid_live_or_missing_status_visits_excluded": 0,
+            "valid_visits": 5082,
+            "reference_plots_with_climate": 845,
+            "forecast_triples": 529,
+            "eligible_forecast_plots": 503,
+            "species_plot_rows": 2044,
+            "adult_stems_t1": 13172,
+            "ambiguous_later_links": 0,
+            "identified_promoted_stems": 128,
+            "identified_baseline_adult_statuses": 14257
+          },
+          {
+            "state": "WV",
+            "design_eligible_visits": 6158,
+            "complete_area_visits": 3444,
+            "invalid_live_or_missing_status_visits_excluded": 0,
+            "valid_visits": 3444,
+            "reference_plots_with_climate": 604,
+            "forecast_triples": 304,
+            "eligible_forecast_plots": 294,
+            "species_plot_rows": 1306,
+            "adult_stems_t1": 7244,
+            "ambiguous_later_links": 0,
+            "identified_promoted_stems": 64,
+            "identified_baseline_adult_statuses": 8111
+          },
+          {
+            "state": "VA",
+            "design_eligible_visits": 13213,
+            "complete_area_visits": 6414,
+            "invalid_live_or_missing_status_visits_excluded": 0,
+            "valid_visits": 6414,
+            "reference_plots_with_climate": 904,
+            "forecast_triples": 582,
+            "eligible_forecast_plots": 545,
+            "species_plot_rows": 2387,
+            "adult_stems_t1": 13807,
+            "ambiguous_later_links": 0,
+            "identified_promoted_stems": 154,
+            "identified_baseline_adult_statuses": 16377
+          }
+        ],
+        "forecast_rows": 5737,
+        "forecast_plots": 1342,
+        "forecast_species": 87,
+        "results": {
+          "primary_fit": {
+            "status": "cross_validated_descriptive",
+            "species": 87,
+            "folds": 5
+          },
+          "primary": {
+            "plots": 1342,
+            "rows": 5737,
+            "blocks": 44,
+            "mean_squared_errors": {
+              "zero": 0.05596304102199299,
+              "A": 0.051599808781372616,
+              "S": 0.050025441004040945,
+              "H": 0.05007697256787103,
+              "E": 0.050315341026307754,
+              "L": 0.05084623768355246
+            },
+            "comparisons": {
+              "zero_to_A": {
+                "baseline_mse": 0.05596304102199299,
+                "augmented_mse": 0.051599808781372616,
+                "mse_reduction": 0.0043632322406203725,
+                "percent_reduction": 7.7966317786513075,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.001892498133838331,
+                  0.0069068012504406315
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  3.407563282633319,
+                  11.989269878716442
+                ]
+              },
+              "A_to_S": {
+                "baseline_mse": 0.051599808781372616,
+                "augmented_mse": 0.050025441004040945,
+                "mse_reduction": 0.0015743677773316714,
+                "percent_reduction": 3.0511116504369946,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.0007112936574107321,
+                  0.0024904448754825568
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  1.4468419214783235,
+                  4.5221943935432884
+                ]
+              },
+              "A_to_H": {
+                "baseline_mse": 0.051599808781372616,
+                "augmented_mse": 0.05007697256787103,
+                "mse_reduction": 0.001522836213501584,
+                "percent_reduction": 2.951243908584645,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.0006985141364248686,
+                  0.0023672514319695004
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  1.307955651424001,
+                  4.539378005633395
+                ]
+              },
+              "S_to_H": {
+                "baseline_mse": 0.050025441004040945,
+                "augmented_mse": 0.05007697256787103,
+                "mse_reduction": -0.00005153156383008728,
+                "percent_reduction": -0.10301071374048391,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0002135633886386278,
+                  0.00011381751950773047
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -0.4272884363399159,
+                  0.20686265763166237
+                ]
+              },
+              "A_to_E": {
+                "baseline_mse": 0.051599808781372616,
+                "augmented_mse": 0.050315341026307754,
+                "mse_reduction": 0.0012844677550648623,
+                "percent_reduction": 2.4892878198582618,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.0005921548481215781,
+                  0.001893054764209804
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  1.18126545402013,
+                  3.5693881479973277
+                ]
+              },
+              "A_to_L": {
+                "baseline_mse": 0.051599808781372616,
+                "augmented_mse": 0.05084623768355246,
+                "mse_reduction": 0.0007535710978201562,
+                "percent_reduction": 1.460414516288272,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.00016954722313543242,
+                  0.0013455138268460782
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  0.32655476228294816,
+                  2.51389462168529
+                ]
+              },
+              "E_to_L": {
+                "baseline_mse": 0.050315341026307754,
+                "augmented_mse": 0.05084623768355246,
+                "mse_reduction": -0.000530896657244706,
+                "percent_reduction": -1.0551387438020596,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0010457306679017868,
+                  -0.000007488166735379245
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -2.081763618565577,
+                  -0.01451735244410147
+                ]
+              }
+            }
+          },
+          "stable_adult_subset": {
+            "plots": 971,
+            "rows": 4185,
+            "blocks": 44,
+            "mean_squared_errors": {
+              "zero": 0.04365588759231247,
+              "A": 0.04070362556956918,
+              "S": 0.04014323612936848,
+              "H": 0.040170507759858046,
+              "E": 0.04005459472934626,
+              "L": 0.040711800456275045
+            },
+            "comparisons": {
+              "zero_to_A": {
+                "baseline_mse": 0.04365588759231247,
+                "augmented_mse": 0.04070362556956918,
+                "mse_reduction": 0.0029522620227432905,
+                "percent_reduction": 6.7625747306147215,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.00023929249141391021,
+                  0.006051064724129742
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -0.5829559100936592,
+                  12.900107902057767
+                ]
+              },
+              "A_to_S": {
+                "baseline_mse": 0.04070362556956918,
+                "augmented_mse": 0.04014323612936848,
+                "mse_reduction": 0.0005603894402006968,
+                "percent_reduction": 1.376755589604418,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0005128250965916396,
+                  0.0016779203010293883
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -1.235872851025436,
+                  3.6208906732254684
+                ]
+              },
+              "A_to_H": {
+                "baseline_mse": 0.04070362556956918,
+                "augmented_mse": 0.040170507759858046,
+                "mse_reduction": 0.0005331178097111311,
+                "percent_reduction": 1.3097550949114969,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0004804303300916332,
+                  0.0014472541625153265
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -1.1804566460419972,
+                  3.444895686809292
+                ]
+              },
+              "S_to_H": {
+                "baseline_mse": 0.04014323612936848,
+                "augmented_mse": 0.040170507759858046,
+                "mse_reduction": -0.000027271630489565657,
+                "percent_reduction": -0.0679358046812124,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0001423256858533775,
+                  0.00008365605130873516
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -0.36265275957487986,
+                  0.19887980486751133
+                ]
+              },
+              "A_to_E": {
+                "baseline_mse": 0.04070362556956918,
+                "augmented_mse": 0.04005459472934626,
+                "mse_reduction": 0.0006490308402229139,
+                "percent_reduction": 1.594528327983004,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.00015345178612319798,
+                  0.001422885401858793
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -0.3779504785522435,
+                  3.158675197226395
+                ]
+              },
+              "A_to_L": {
+                "baseline_mse": 0.04070362556956918,
+                "augmented_mse": 0.040711800456275045,
+                "mse_reduction": -0.000008174886705868134,
+                "percent_reduction": -0.020083927639064757,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0006005837195488096,
+                  0.0005601252342004296
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -1.443055109440733,
+                  1.2984825122683796
+                ]
+              },
+              "E_to_L": {
+                "baseline_mse": 0.04005459472934626,
+                "augmented_mse": 0.040711800456275045,
+                "mse_reduction": -0.000657205726928782,
+                "percent_reduction": -1.6407748758153728,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0011850942766608206,
+                  -0.000033236090357028275
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -3.02474091952999,
+                  -0.08915504666712958
+                ]
+              }
+            }
+          },
+          "state_specific": {
+            "PA": {
+              "plots": 503,
+              "rows": 2044,
+              "blocks": 20,
+              "mean_squared_errors": {
+                "zero": 0.06181657638091481,
+                "A": 0.054222544059644905,
+                "S": 0.052936557068086414,
+                "H": 0.052949575714562075,
+                "E": 0.052996969164104575,
+                "L": 0.05381815637459035
+              },
+              "comparisons": {
+                "A_to_H": {
+                  "baseline_mse": 0.054222544059644905,
+                  "augmented_mse": 0.052949575714562075,
+                  "mse_reduction": 0.0012729683450828297,
+                  "percent_reduction": 2.3476735869909793,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.0005690517285642639,
+                    0.002374168510175082
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.8684964202215568,
+                    4.64755188102921
+                  ]
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.052936557068086414,
+                  "augmented_mse": 0.052949575714562075,
+                  "mse_reduction": -0.000013018646475661255,
+                  "percent_reduction": -0.02459292254106518,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.00015554479844135207,
+                    0.00010632239852096509
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.27256093678276083,
+                    0.2032076140403381
+                  ]
+                }
+              }
+            },
+            "VA": {
+              "plots": 545,
+              "rows": 2387,
+              "blocks": 22,
+              "mean_squared_errors": {
+                "zero": 0.060701415055771625,
+                "A": 0.058606992065369595,
+                "S": 0.056206748707318864,
+                "H": 0.0562549371259439,
+                "E": 0.0569162237110081,
+                "L": 0.057112317540349414
+              },
+              "comparisons": {
+                "A_to_H": {
+                  "baseline_mse": 0.058606992065369595,
+                  "augmented_mse": 0.0562549371259439,
+                  "mse_reduction": 0.002352054939425696,
+                  "percent_reduction": 4.01326677336083,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    0.001033143378538208,
+                    0.004126715635167979
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    1.9782202411260892,
+                    6.234311435585047
+                  ]
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.056206748707318864,
+                  "augmented_mse": 0.0562549371259439,
+                  "mse_reduction": -0.000048188418625035034,
+                  "percent_reduction": -0.08573422183866733,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.0004039228872045795,
+                    0.00027364658335289176
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.7379266492157739,
+                    0.44031441127616877
+                  ]
+                }
+              }
+            },
+            "WV": {
+              "plots": 294,
+              "rows": 1306,
+              "blocks": 13,
+              "mean_squared_errors": {
+                "zero": 0.03716459838952009,
+                "A": 0.03412310560195317,
+                "S": 0.0335863114853289,
+                "H": 0.033709931523873395,
+                "E": 0.03349105525598974,
+                "L": 0.03414593624291848
+              },
+              "comparisons": {
+                "A_to_H": {
+                  "baseline_mse": 0.03412310560195317,
+                  "augmented_mse": 0.033709931523873395,
+                  "mse_reduction": 0.0004131740780797741,
+                  "percent_reduction": 1.21083374678571,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.0009482772308101602,
+                    0.0015637827798367224
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -2.578725150942646,
+                    4.374095545160204
+                  ]
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.0335863114853289,
+                  "augmented_mse": 0.033709931523873395,
+                  "mse_reduction": -0.00012362003854449188,
+                  "percent_reduction": -0.36806673039548066,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.0005174813058519783,
+                    0.000215812691131028
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -1.758615387841453,
+                    0.6026135719566941
+                  ]
+                }
+              }
+            }
+          },
+          "mean_coef_H": {
+            "early_stock": {
+              "mean": 0.06672454079892962,
+              "minimum": 0.06030766290626672,
+              "maximum": 0.071844636958738
+            },
+            "late_stock": {
+              "mean": 0.0797217129882951,
+              "minimum": 0.06845442779637147,
+              "maximum": 0.09310354454404556
+            },
+            "early_history": {
+              "mean": 0.0020077006107603475,
+              "minimum": -0.005707382989335474,
+              "maximum": 0.009022329652196539
+            },
+            "late_history": {
+              "mean": 0.03213328432081693,
+              "minimum": 0.01109171045143371,
+              "maximum": 0.06673848157734674
+            }
+          },
+          "cohort_accounting": {
+            "t1_eligible_adult_stems": 34223,
+            "t2_eligible_species_adult_stems": 33908,
+            "identified_sapling_promotions": 211,
+            "baseline_adults_with_explicit_later_status": 34022,
+            "baseline_adults_dead_or_removed_explicitly": 2671,
+            "complete_link_species_plot_rows": 5596,
+            "stable_adult_plots": 971
+          },
+          "future_without_identified_promotions": {
+            "fit_status": "cross_validated_descriptive",
+            "metrics": {
+              "plots": 1342,
+              "rows": 5737,
+              "blocks": 44,
+              "mean_squared_errors": {
+                "zero": 0.0545214904458246,
+                "A": 0.05047106625773509,
+                "S": 0.049309810394285385,
+                "H": 0.049345292540744524
+              },
+              "comparisons": {
+                "A_to_S": {
+                  "baseline_mse": 0.05047106625773509,
+                  "augmented_mse": 0.049309810394285385,
+                  "mse_reduction": 0.0011612558634497075,
+                  "percent_reduction": 2.3008348139895616,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    0.0004907808696507972,
+                    0.001796125477931869
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    1.063794518680744,
+                    3.3784106974922414
+                  ]
+                },
+                "A_to_H": {
+                  "baseline_mse": 0.05047106625773509,
+                  "augmented_mse": 0.049345292540744524,
+                  "mse_reduction": 0.0011257737169905677,
+                  "percent_reduction": 2.2305328586515327,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    0.00042166474104734527,
+                    0.0018833019500560542
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    0.868643046851129,
+                    3.449404463185114
+                  ]
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.049309810394285385,
+                  "augmented_mse": 0.049345292540744524,
+                  "mse_reduction": -0.00003548214645913983,
+                  "percent_reduction": -0.0719575803991571,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.0001849406265005847,
+                    0.00009950974932687153
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.36959318396028207,
+                    0.19270653117821998
+                  ]
+                }
+              }
+            }
+          },
+          "linked_loss": {
+            "fit_status": "cross_validated_descriptive",
+            "metrics": {
+              "plots": 1329,
+              "rows": 5583,
+              "blocks": 44,
+              "mean_squared_errors": {
+                "zero": 0.02214898810900904,
+                "A": 0.020271684630409605,
+                "S": 0.02026382054170815,
+                "H": 0.02027899307651712
+              },
+              "comparisons": {
+                "A_to_S": {
+                  "baseline_mse": 0.020271684630409605,
+                  "augmented_mse": 0.02026382054170815,
+                  "mse_reduction": 0.00000786408870145569,
+                  "percent_reduction": 0.0387934641093358,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.000017359282569225486,
+                    0.000034536848013149816
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.08801037023785183,
+                    0.16807760122450757
+                  ]
+                },
+                "A_to_H": {
+                  "baseline_mse": 0.020271684630409605,
+                  "augmented_mse": 0.02027899307651712,
+                  "mse_reduction": -0.00000730844610751652,
+                  "percent_reduction": -0.036052485231311764,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.000041025541629135356,
+                    0.00002583570620623757
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.1990150582735647,
+                    0.12327812663617904
+                  ]
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.02026382054170815,
+                  "augmented_mse": 0.02027899307651712,
+                  "mse_reduction": -0.00001517253480897221,
+                  "percent_reduction": -0.07487499594532647,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.000029636251674345483,
+                    -0.0000015537357345206867
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.15065918733475656,
+                    -0.00784498729972502
+                  ]
+                }
+              }
+            }
+          },
+          "climate_stage_reference": {
+            "reference": {
+              "reference_plots": 2346,
+              "bins": 13,
+              "species": 32
+            },
+            "fit_status": "cross_validated_descriptive",
+            "metrics": {
+              "plots": 1290,
+              "rows": 5020,
+              "blocks": 44,
+              "mean_squared_errors": {
+                "zero": 0.04790443012626067,
+                "H": 0.04025544392918984,
+                "HC": 0.040262837122533465
+              },
+              "comparisons": {
+                "H_to_HC": {
+                  "baseline_mse": 0.04025544392918984,
+                  "augmented_mse": 0.040262837122533465,
+                  "mse_reduction": -0.000007393193343627202,
+                  "percent_reduction": -0.01836569820626493,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.000018618359215523636,
+                    0.00000222767462353765
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.04736547040566359,
+                    0.005375242669053238
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "limitations": "Size-class composition, not reproductive maturity or climate causation; count losses limited to explicit links; block bootstrap conditional on fitted predictors and regional species set."
+      },
+      "postoutcome_stability_contrast": {
+        "S": {
+          "stable": {
+            "plots": 971,
+            "percent_reduction": 1.3767555896043966,
+            "percent_ci": [
+              -1.0098628212496081,
+              3.452419590380275
+            ],
+            "absolute_mse_reduction": 0.000560389440200688
+          },
+          "changing": {
+            "plots": 371,
+            "percent_reduction": 5.27747958436187,
+            "percent_ci": [
+              2.83781931349782,
+              7.912751526920371
+            ],
+            "absolute_mse_reduction": 0.004228203263461533
+          },
+          "changing_minus_stable_percent_points": 3.900723994757473,
+          "joint_block_bootstrap_95_percent_points": [
+            0.30151821761278397,
+            7.639600024448619
+          ],
+          "changing_minus_stable_absolute_mse": 0.0036678138232608447,
+          "joint_block_bootstrap_95_absolute_mse": [
+            0.0013634245214563761,
+            0.006021960349392632
+          ]
+        },
+        "H": {
+          "stable_percent_reduction": 1.3097550949114904,
+          "changing_percent_reduction": 5.133908721731387,
+          "changing_minus_stable_percent_points": 3.8241536268198963,
+          "joint_block_bootstrap_95_percent_points": [
+            0.2347795087648382,
+            7.5788189013041904
+          ],
+          "changing_minus_stable_absolute_mse": 0.0035800595630371586,
+          "joint_block_bootstrap_95_absolute_mse": [
+            0.0012352243756384737,
+            0.00592492295022378
+          ]
+        }
+      }
+    },
+    "great_lakes": {
+      "job_id": 140316671016,
+      "artifact_id": 15172427983,
+      "artifact_sha256": "9150af6d4d354a9b7946b90a4cd023a58f6818e1c4003a739d00bf1d285de022",
+      "summary": {
+        "status": "exploratory_three_census_forecast",
+        "new_confirmatory_endpoints": 0,
+        "region": "great_lakes",
+        "hashes_verified": 13,
+        "state_audits": [
+          {
+            "state": "MI",
+            "design_eligible_visits": 17821,
+            "complete_area_visits": 9126,
+            "invalid_live_or_missing_status_visits_excluded": 0,
+            "valid_visits": 9126,
+            "reference_plots_with_climate": 2114,
+            "forecast_triples": 741,
+            "eligible_forecast_plots": 627,
+            "species_plot_rows": 2378,
+            "adult_stems_t1": 21857,
+            "ambiguous_later_links": 0,
+            "identified_promoted_stems": 248,
+            "identified_baseline_adult_statuses": 24393
+          },
+          {
+            "state": "WI",
+            "design_eligible_visits": 21396,
+            "complete_area_visits": 8755,
+            "invalid_live_or_missing_status_visits_excluded": 0,
+            "valid_visits": 8755,
+            "reference_plots_with_climate": 1531,
+            "forecast_triples": 892,
+            "eligible_forecast_plots": 747,
+            "species_plot_rows": 2755,
+            "adult_stems_t1": 21201,
+            "ambiguous_later_links": 0,
+            "identified_promoted_stems": 382,
+            "identified_baseline_adult_statuses": 23900
+          },
+          {
+            "state": "MN",
+            "design_eligible_visits": 26119,
+            "complete_area_visits": 12020,
+            "invalid_live_or_missing_status_visits_excluded": 0,
+            "valid_visits": 12020,
+            "reference_plots_with_climate": 1752,
+            "forecast_triples": 1130,
+            "eligible_forecast_plots": 783,
+            "species_plot_rows": 2589,
+            "adult_stems_t1": 22707,
+            "ambiguous_later_links": 0,
+            "identified_promoted_stems": 383,
+            "identified_baseline_adult_statuses": 27304
+          }
+        ],
+        "forecast_rows": 7722,
+        "forecast_plots": 2157,
+        "forecast_species": 66,
+        "results": {
+          "primary_fit": {
+            "status": "cross_validated_descriptive",
+            "species": 66,
+            "folds": 5
+          },
+          "primary": {
+            "plots": 2157,
+            "rows": 7722,
+            "blocks": 84,
+            "mean_squared_errors": {
+              "zero": 0.08272346786335123,
+              "A": 0.0772284057578525,
+              "S": 0.07469798022394364,
+              "H": 0.07444480444972594,
+              "E": 0.07545560150127884,
+              "L": 0.07485526038014034
+            },
+            "comparisons": {
+              "zero_to_A": {
+                "baseline_mse": 0.08272346786335123,
+                "augmented_mse": 0.0772284057578525,
+                "mse_reduction": 0.00549506210549873,
+                "percent_reduction": 6.642688281124627,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.0026896650054532675,
+                  0.008297856891262946
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  3.204342674581963,
+                  9.73080255100972
+                ]
+              },
+              "A_to_S": {
+                "baseline_mse": 0.0772284057578525,
+                "augmented_mse": 0.07469798022394364,
+                "mse_reduction": 0.0025304255339088644,
+                "percent_reduction": 3.2765476757903595,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.0013755253731822681,
+                  0.0037326973128313967
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  1.9222764281957754,
+                  4.586648771313535
+                ]
+              },
+              "A_to_H": {
+                "baseline_mse": 0.0772284057578525,
+                "augmented_mse": 0.07444480444972594,
+                "mse_reduction": 0.0027836013081265626,
+                "percent_reduction": 3.6043749457349494,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.0017101978970505962,
+                  0.004040963438012187
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  2.3495332677927734,
+                  4.817964401869857
+                ]
+              },
+              "S_to_H": {
+                "baseline_mse": 0.07469798022394364,
+                "augmented_mse": 0.07444480444972594,
+                "mse_reduction": 0.0002531757742176982,
+                "percent_reduction": 0.3389325567554575,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.0000024356426058205906,
+                  0.0004917435399180438
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  0.0032886321211021436,
+                  0.634119286814289
+                ]
+              },
+              "A_to_E": {
+                "baseline_mse": 0.0772284057578525,
+                "augmented_mse": 0.07545560150127884,
+                "mse_reduction": 0.001772804256573668,
+                "percent_reduction": 2.2955339284514635,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.0008769625248193821,
+                  0.0026887470405501635
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  1.2580786079365003,
+                  3.3432940282715222
+                ]
+              },
+              "A_to_L": {
+                "baseline_mse": 0.0772284057578525,
+                "augmented_mse": 0.07485526038014034,
+                "mse_reduction": 0.0023731453777121603,
+                "percent_reduction": 3.072891838727179,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.0016217783428055645,
+                  0.003297854471768699
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  2.193818361152386,
+                  3.979379724991566
+                ]
+              },
+              "E_to_L": {
+                "baseline_mse": 0.07545560150127884,
+                "augmented_mse": 0.07485526038014034,
+                "mse_reduction": 0.0006003411211384924,
+                "percent_reduction": 0.7956216757854851,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0000012883598238877558,
+                  0.001219125688895578
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -0.0018797428919379326,
+                  1.521556386165788
+                ]
+              }
+            }
+          },
+          "stable_adult_subset": {
+            "plots": 1407,
+            "rows": 4952,
+            "blocks": 82,
+            "mean_squared_errors": {
+              "zero": 0.06276888440421784,
+              "A": 0.060517402264648926,
+              "S": 0.06042176344578015,
+              "H": 0.06034954075596118,
+              "E": 0.06047273998104247,
+              "L": 0.060413263846801665
+            },
+            "comparisons": {
+              "zero_to_A": {
+                "baseline_mse": 0.06276888440421784,
+                "augmented_mse": 0.060517402264648926,
+                "mse_reduction": 0.002251482139568911,
+                "percent_reduction": 3.586939868279099,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  0.00044235366607571063,
+                  0.004153977410178206
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  0.6961475245903636,
+                  6.267007437443358
+                ]
+              },
+              "A_to_S": {
+                "baseline_mse": 0.060517402264648926,
+                "augmented_mse": 0.06042176344578015,
+                "mse_reduction": 0.00009563881886877346,
+                "percent_reduction": 0.15803523497346253,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0006056223476830813,
+                  0.0009340499698350311
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -1.0331719429892625,
+                  1.5129164840502767
+                ]
+              },
+              "A_to_H": {
+                "baseline_mse": 0.060517402264648926,
+                "augmented_mse": 0.06034954075596118,
+                "mse_reduction": 0.00016786150868774302,
+                "percent_reduction": 0.277377254155205,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.000668990003101228,
+                  0.0010907715360950875
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -1.0966030583153603,
+                  1.6481720447257344
+                ]
+              },
+              "S_to_H": {
+                "baseline_mse": 0.06042176344578015,
+                "augmented_mse": 0.06034954075596118,
+                "mse_reduction": 0.00007222268981896957,
+                "percent_reduction": 0.11953092015227104,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.00021184342586788902,
+                  0.00032025104974268905
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -0.3448438012454686,
+                  0.534839022034021
+                ]
+              },
+              "A_to_E": {
+                "baseline_mse": 0.060517402264648926,
+                "augmented_mse": 0.06047273998104247,
+                "mse_reduction": 0.00004466228360645863,
+                "percent_reduction": 0.07380072827836495,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0007076197264316718,
+                  0.0007729834959259472
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -1.158129892592522,
+                  1.2541849309819504
+                ]
+              },
+              "A_to_L": {
+                "baseline_mse": 0.060517402264648926,
+                "augmented_mse": 0.060413263846801665,
+                "mse_reduction": 0.00010413841784726041,
+                "percent_reduction": 0.1720801190240325,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0006286869021953079,
+                  0.0008145941739878658
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -1.0650210442523165,
+                  1.2250068108598324
+                ]
+              },
+              "E_to_L": {
+                "baseline_mse": 0.06047273998104247,
+                "augmented_mse": 0.060413263846801665,
+                "mse_reduction": 0.00005947613424080178,
+                "percent_reduction": 0.09835197521965582,
+                "conditional_block_bootstrap_95_mse_reduction": [
+                  -0.0007193558278589227,
+                  0.0007197723445359225
+                ],
+                "conditional_block_bootstrap_95_percent_reduction": [
+                  -1.1387162146792658,
+                  1.1909930748400979
+                ]
+              }
+            }
+          },
+          "state_specific": {
+            "MI": {
+              "plots": 627,
+              "rows": 2378,
+              "blocks": 32,
+              "mean_squared_errors": {
+                "zero": 0.07854176566878243,
+                "A": 0.07232068273492702,
+                "S": 0.07177052949074104,
+                "H": 0.07150074229197488,
+                "E": 0.07231866332026546,
+                "L": 0.07134021087125797
+              },
+              "comparisons": {
+                "A_to_H": {
+                  "baseline_mse": 0.07232068273492702,
+                  "augmented_mse": 0.07150074229197488,
+                  "mse_reduction": 0.0008199404429521384,
+                  "percent_reduction": 1.1337565022130953,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.00046392140323630243,
+                    0.00223884963539882
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.7454365125228776,
+                    2.8713348171992092
+                  ]
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.07177052949074104,
+                  "augmented_mse": 0.07150074229197488,
+                  "mse_reduction": 0.00026978719876616375,
+                  "percent_reduction": 0.37590247791186826,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.0001029769296035549,
+                    0.0007082219778520325
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.15615784858031137,
+                    0.8064228302064105
+                  ]
+                }
+              }
+            },
+            "MN": {
+              "plots": 783,
+              "rows": 2589,
+              "blocks": 37,
+              "mean_squared_errors": {
+                "zero": 0.09871763632220891,
+                "A": 0.08939666297413927,
+                "S": 0.08572788798740495,
+                "H": 0.08544030697533402,
+                "E": 0.08638924015320178,
+                "L": 0.0862893967499764
+              },
+              "comparisons": {
+                "A_to_H": {
+                  "baseline_mse": 0.08939666297413927,
+                  "augmented_mse": 0.08544030697533402,
+                  "mse_reduction": 0.0039563559988052555,
+                  "percent_reduction": 4.4256193320658435,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    0.0018964424599712173,
+                    0.0058683438733006
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    2.160112423553006,
+                    6.487499093461171
+                  ]
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.08572788798740495,
+                  "augmented_mse": 0.08544030697533402,
+                  "mse_reduction": 0.00028758101207093656,
+                  "percent_reduction": 0.3354579458590974,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.0001713069710125839,
+                    0.0007504522336455992
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.2053016519327861,
+                    0.8910440489440284
+                  ]
+                }
+              }
+            },
+            "WI": {
+              "plots": 747,
+              "rows": 2755,
+              "blocks": 27,
+              "mean_squared_errors": {
+                "zero": 0.06946843891115458,
+                "A": 0.0685930602893408,
+                "S": 0.06559368816360607,
+                "H": 0.06539051863360654,
+                "E": 0.06662805287348729,
+                "L": 0.0658204642147958
+              },
+              "comparisons": {
+                "A_to_H": {
+                  "baseline_mse": 0.0685930602893408,
+                  "augmented_mse": 0.06539051863360654,
+                  "mse_reduction": 0.0032025416557342617,
+                  "percent_reduction": 4.668900384711264,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    0.0014412722246810563,
+                    0.005013921968868356
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    2.696704845946203,
+                    6.308362327040883
+                  ]
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.06559368816360607,
+                  "augmented_mse": 0.06539051863360654,
+                  "mse_reduction": 0.00020316952999953342,
+                  "percent_reduction": 0.30973945159598415,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.00024095061078075649,
+                    0.0005419181234782326
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.3713852008672835,
+                    0.8537088332737978
+                  ]
+                }
+              }
+            }
+          },
+          "mean_coef_H": {
+            "early_stock": {
+              "mean": 0.04587399692283604,
+              "minimum": 0.04103914749405316,
+              "maximum": 0.04885802125987015
+            },
+            "late_stock": {
+              "mean": 0.09127734081264054,
+              "minimum": 0.08499110410169629,
+              "maximum": 0.10184750627174696
+            },
+            "early_history": {
+              "mean": -0.054170145077009735,
+              "minimum": -0.06428120194678712,
+              "maximum": -0.04726200522928179
+            },
+            "late_history": {
+              "mean": 0.05060588471525064,
+              "minimum": 0.04698696350028113,
+              "maximum": 0.05478388364796947
+            }
+          },
+          "cohort_accounting": {
+            "t1_eligible_adult_stems": 65765,
+            "t2_eligible_species_adult_stems": 67617,
+            "identified_sapling_promotions": 610,
+            "baseline_adults_with_explicit_later_status": 65278,
+            "baseline_adults_dead_or_removed_explicitly": 5525,
+            "complete_link_species_plot_rows": 7496,
+            "stable_adult_plots": 1407
+          },
+          "future_without_identified_promotions": {
+            "fit_status": "cross_validated_descriptive",
+            "metrics": {
+              "plots": 2157,
+              "rows": 7722,
+              "blocks": 84,
+              "mean_squared_errors": {
+                "zero": 0.0801174560596734,
+                "A": 0.07506960995253317,
+                "S": 0.07344964498839565,
+                "H": 0.07318084610265553
+              },
+              "comparisons": {
+                "A_to_S": {
+                  "baseline_mse": 0.07506960995253317,
+                  "augmented_mse": 0.07344964498839565,
+                  "mse_reduction": 0.0016199649641375213,
+                  "percent_reduction": 2.1579504211648786,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    0.0008045497982119103,
+                    0.002442309458468151
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    1.077516606845453,
+                    3.1672403644648974
+                  ]
+                },
+                "A_to_H": {
+                  "baseline_mse": 0.07506960995253317,
+                  "augmented_mse": 0.07318084610265553,
+                  "mse_reduction": 0.0018887638498776421,
+                  "percent_reduction": 2.516016602553171,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    0.0009496580376424109,
+                    0.0028562428867969945
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    1.363587614468308,
+                    3.63989993832786
+                  ]
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.07344964498839565,
+                  "augmented_mse": 0.07318084610265553,
+                  "mse_reduction": 0.0002687988857401208,
+                  "percent_reduction": 0.36596349210753637,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    0.000028923443464818165,
+                    0.0005226429932004702
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    0.039348115174510645,
+                    0.7273731494778946
+                  ]
+                }
+              }
+            }
+          },
+          "linked_loss": {
+            "fit_status": "cross_validated_descriptive",
+            "metrics": {
+              "plots": 2120,
+              "rows": 7461,
+              "blocks": 84,
+              "mean_squared_errors": {
+                "zero": 0.024714472933077544,
+                "A": 0.022000816671695095,
+                "S": 0.022016058753544905,
+                "H": 0.021998600886975105
+              },
+              "comparisons": {
+                "A_to_S": {
+                  "baseline_mse": 0.022000816671695095,
+                  "augmented_mse": 0.022016058753544905,
+                  "mse_reduction": -0.000015242081849810296,
+                  "percent_reduction": -0.06927961846716275,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.00003000932231763957,
+                    -0.000003023231012380535
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.13431311504266724,
+                    -0.013984561422848252
+                  ]
+                },
+                "A_to_H": {
+                  "baseline_mse": 0.022000816671695095,
+                  "augmented_mse": 0.021998600886975105,
+                  "mse_reduction": 0.0000022157847199902325,
+                  "percent_reduction": 0.010071374863283715,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.000038291135229002295,
+                    0.000043269234116331887
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.1789032343092561,
+                    0.19732345726788367
+                  ]
+                },
+                "S_to_H": {
+                  "baseline_mse": 0.022016058753544905,
+                  "augmented_mse": 0.021998600886975105,
+                  "mse_reduction": 0.00001745786656980053,
+                  "percent_reduction": 0.07929605732447256,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.000026931436994963128,
+                    0.00005704141617668053
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.12311301906943295,
+                    0.2596536631070421
+                  ]
+                }
+              }
+            }
+          },
+          "climate_stage_reference": {
+            "reference": {
+              "reference_plots": 5386,
+              "bins": 9,
+              "species": 33
+            },
+            "fit_status": "cross_validated_descriptive",
+            "metrics": {
+              "plots": 2124,
+              "rows": 7510,
+              "blocks": 81,
+              "mean_squared_errors": {
+                "zero": 0.08082101283846697,
+                "H": 0.07147680129625786,
+                "HC": 0.07146666480763253
+              },
+              "comparisons": {
+                "H_to_HC": {
+                  "baseline_mse": 0.07147680129625786,
+                  "augmented_mse": 0.07146666480763253,
+                  "mse_reduction": 0.000010136488625328566,
+                  "percent_reduction": 0.014181508463584895,
+                  "conditional_block_bootstrap_95_mse_reduction": [
+                    -0.0000443200117663414,
+                    0.00007543915332868843
+                  ],
+                  "conditional_block_bootstrap_95_percent_reduction": [
+                    -0.06278658791343246,
+                    0.10827182269692028
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "limitations": "Size-class composition, not reproductive maturity or climate causation; count losses limited to explicit links; block bootstrap conditional on fitted predictors and regional species set."
+      },
+      "postoutcome_stability_contrast": {
+        "S": {
+          "stable": {
+            "plots": 1407,
+            "percent_reduction": 0.1580352349734968,
+            "percent_ci": [
+              -1.2071748120313643,
+              1.4918448810984282
+            ],
+            "absolute_mse_reduction": 0.00009563881886879422
+          },
+          "changing": {
+            "plots": 750,
+            "percent_reduction": 6.537299617310442,
+            "percent_ci": [
+              4.63971818961463,
+              8.47940019223473
+            ],
+            "absolute_mse_reduction": 0.007098085411324083
+          },
+          "changing_minus_stable_percent_points": 6.379264382336945,
+          "joint_block_bootstrap_95_percent_points": [
+            4.0631081897474335,
+            8.649673720116661
+          ],
+          "changing_minus_stable_absolute_mse": 0.007002446592455289,
+          "joint_block_bootstrap_95_absolute_mse": [
+            0.00460980131957235,
+            0.009453114739735785
+          ]
+        },
+        "H": {
+          "stable_percent_reduction": 0.2773772541552519,
+          "changing_percent_reduction": 7.083121427634418,
+          "changing_minus_stable_percent_points": 6.805744173479166,
+          "joint_block_bootstrap_95_percent_points": [
+            4.547463353491273,
+            9.166809243830825
+          ],
+          "changing_minus_stable_absolute_mse": 0.007522867663186031,
+          "joint_block_bootstrap_95_absolute_mse": [
+            0.00514192224344418,
+            0.010022999007659097
+          ]
+        }
+      }
+    }
+  }
+}

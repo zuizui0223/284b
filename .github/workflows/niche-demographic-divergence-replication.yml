@@ -1,0 +1,32 @@
+name: Niche demographic divergence geographic replication
+on:
+  push:
+    branches: [analysis/niche-demographic-divergence-20261127]
+    paths: ['scripts/niche_demographic_divergence_fia_replication.py', '.github/workflows/niche-demographic-divergence-replication.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  replicate:
+    strategy:
+      fail-fast: false
+      matrix:
+        region: [great_lakes, appalachia]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pandas numpy requests rasterio
+      - run: |
+          mkdir -p build/niche-divergence
+          python scripts/niche_demographic_divergence_fia_replication.py --region ${{ matrix.region }} --data build/fia-raw --out build/niche-divergence
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: niche-demographic-replication-${{ matrix.region }}
+          path: build/niche-divergence/
+          if-no-files-found: warn
+          retention-days: 30

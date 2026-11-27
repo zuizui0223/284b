@@ -1,0 +1,122 @@
+{
+  "OH_PLOT.zip": {
+    "sha256": "6a680e0667d0aa682abc484f833c6e9bf2998b40a5fc48b96abeeb47ed66d86f",
+    "bytes": 642528,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/OH_PLOT.zip"
+  },
+  "OH_COND.zip": {
+    "sha256": "de203d0914c3e56431460fa8b01b759d8d306dcfb7006d53706e62d199ece18e",
+    "bytes": 1067322,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/OH_COND.zip"
+  },
+  "OH_SUBPLOT.zip": {
+    "sha256": "5056907cb9816db81c973f64f7f8dcbebb4918b97d73e64ce4922de40d84be73",
+    "bytes": 732490,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/OH_SUBPLOT.zip"
+  },
+  "OH_TREE.zip": {
+    "sha256": "0d8718afcf50350a8f649e6356b53bf75b775fc121b4b20a4aa00a2cff8ebbc6",
+    "bytes": 30473831,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/OH_TREE.zip"
+  },
+  "IN_PLOT.zip": {
+    "sha256": "387755cc12edf09a138dbc4fa3f5c7900119a22c3e2d88d386abfdf57fe8b723",
+    "bytes": 954356,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/IN_PLOT.zip"
+  },
+  "IN_COND.zip": {
+    "sha256": "7c039eeee1385593aa043e15c3730d11609dd63ef20004fa398ce38026198c5b",
+    "bytes": 1306188,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/IN_COND.zip"
+  },
+  "IN_SUBPLOT.zip": {
+    "sha256": "afc862e25d1cd2e367202f13e41fcb30d4623a85d5779ee119d22eadfcb335ee",
+    "bytes": 765110,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/IN_SUBPLOT.zip"
+  },
+  "IN_TREE.zip": {
+    "sha256": "34fa56b843736f6c8b3df522140d8b9e12dc3948b4b3104cbf2fcd92c9552d9b",
+    "bytes": 29601239,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/IN_TREE.zip"
+  },
+  "IL_PLOT.zip": {
+    "sha256": "5ed0ac337c600dbbd87101f51c2882a4b4f97aeef5b3fc0326b48bc3d7d1bb55",
+    "bytes": 1079993,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/IL_PLOT.zip"
+  },
+  "IL_COND.zip": {
+    "sha256": "ed59bdaee15eb3282475da0db4b5d77152add9e8b25312c5f7bdd84ebf61a9ec",
+    "bytes": 1290405,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/IL_COND.zip"
+  },
+  "IL_SUBPLOT.zip": {
+    "sha256": "63ef2a930a0a50166c7e5cc8814db84143fab52f2ec3b1c57a4cc263208aa583",
+    "bytes": 927461,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/IL_SUBPLOT.zip"
+  },
+  "IL_TREE.zip": {
+    "sha256": "0d6ad537d056d053e112af3721e4ee7b3edc2f06c3684dd90a06ca1c9e9cfdbc",
+    "bytes": 21684265,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/IL_TREE.zip"
+  },
+  "KY_PLOT.zip": {
+    "sha256": "aecaf7ccaacd310a31c4be9efb3b2e15dd86e1a91e8a33e6ba7a13cc8066eaf2",
+    "bytes": 707573,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/KY_PLOT.zip"
+  },
+  "KY_COND.zip": {
+    "sha256": "c494ce6b4f9e784aca66f4f0335400013b2e01356414081d479d9674f89206a3",
+    "bytes": 1452557,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/KY_COND.zip"
+  },
+  "KY_SUBPLOT.zip": {
+    "sha256": "59afe087940b15aafa42e2d58bbd1def7f127c279ee064b85727e6e35ef7855e",
+    "bytes": 730948,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/KY_SUBPLOT.zip"
+  },
+  "KY_TREE.zip": {
+    "sha256": "4e4a9d482a7cdc469089bf8a327043796a6bbfee3d1305c7c33ee5c69168882c",
+    "bytes": 46141277,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/KY_TREE.zip"
+  },
+  "TN_PLOT.zip": {
+    "sha256": "220dc526fd09f8c18bef8f891599cd8b4d65af4076bbfdab8fcd7392b2f30504",
+    "bytes": 1007154,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/TN_PLOT.zip"
+  },
+  "TN_COND.zip": {
+    "sha256": "2666911ab079c7d330f5e6d119ac5e7d2e8ab6853e26018d5d68b13943efa06a",
+    "bytes": 2118849,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/TN_COND.zip"
+  },
+  "TN_SUBPLOT.zip": {
+    "sha256": "66046f7c40f7191365605564309669a1e8d522ad6c9f30659433eef663816e20",
+    "bytes": 1408633,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/TN_SUBPLOT.zip"
+  },
+  "TN_TREE.zip": {
+    "sha256": "a51628ef262a2106fa145aac292ac7b1e42bce5c0296f256c35637a2ac040b0a",
+    "bytes": 75718515,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/TN_TREE.zip"
+  },
+  "NC_PLOT.zip": {
+    "sha256": "970c2c73ccdab052f3b3d4764b20da3ce6f5374409a44a1a082756b304a2efcb",
+    "bytes": 1618239,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/NC_PLOT.zip"
+  },
+  "NC_COND.zip": {
+    "sha256": "12620d1d5b3991b5c17ec680972040c1fa68b1853cb9386b5fa0bf0de25884f3",
+    "bytes": 3259293,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/NC_COND.zip"
+  },
+  "NC_SUBPLOT.zip": {
+    "sha256": "3cdb137db9e09f4e4aee4b239b8dec0231ffe68ca1b6c4c62587d0de2fa97787",
+    "bytes": 3148495,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/NC_SUBPLOT.zip"
+  },
+  "NC_TREE.zip": {
+    "sha256": "dc8ca29ff82593cfb3fc0976302cb927c18f8bfcc1180e35977bcd23f49d2107",
+    "bytes": 113894212,
+    "url": "https://apps.fs.usda.gov/fia/datamart/CSV/NC_TREE.zip"
+  }
+}

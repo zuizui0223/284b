@@ -1,0 +1,347 @@
+{
+  "schema": "284b.niche_demographic_divergence.geographic_replication.v1",
+  "workflow_run_id": 45940587044,
+  "execution_commit": "46afbf8ada1f672529329edba0f9a8bbf7315c36",
+  "disposition": "uniform_positive_hypothesis_not_supported_regional_sign_reversal_needs_common_pair_common_niche_audit",
+  "independent_new_confirmatory_endpoints": 0,
+  "regions": {
+    "appalachia": {
+      "job_id": 140313726327,
+      "artifact_id": 15172861099,
+      "artifact_sha256": "59ee9465791dc194f7aeb1f1f67ec23fb5327c6186d986943808d3d685219474",
+      "summary": {
+        "status": "exploratory_pilot_not_confirmatory",
+        "independent_new_confirmatory_endpoints": 0,
+        "source_state_audits": [
+          {
+            "state": "PA",
+            "qualified_visits_preclimate": 5082,
+            "qualified_visits": 5082,
+            "reference_plots": 845,
+            "validation_intervals": 470,
+            "admitted_live_adult_stems": 47835,
+            "unique_ref_response_keys": 0
+          },
+          {
+            "state": "WV",
+            "qualified_visits_preclimate": 3444,
+            "qualified_visits": 3444,
+            "reference_plots": 604,
+            "validation_intervals": 355,
+            "admitted_live_adult_stems": 34737,
+            "unique_ref_response_keys": 0
+          },
+          {
+            "state": "VA",
+            "qualified_visits_preclimate": 6414,
+            "qualified_visits": 6414,
+            "reference_plots": 904,
+            "validation_intervals": 664,
+            "admitted_live_adult_stems": 64007,
+            "unique_ref_response_keys": 0
+          }
+        ],
+        "reference_eligible_plots": 2346,
+        "reference_climate_bins": 13,
+        "reference_species": 47,
+        "validation_intervals": 1489,
+        "evaluation_plots": 1384,
+        "evaluation_species": 47,
+        "pair_plot_rows": 10728,
+        "pair_summary_n_shared_ge20": 136,
+        "opposite_count_fraction_unadjusted": 0.07307979120059657,
+        "primary_within_plot": {
+          "slope_per_0_1_D": 0.006524307844870464,
+          "plots": 1193,
+          "pair_plot_rows": 10537,
+          "blocks": 44,
+          "conditional_spatial_block_bootstrap_95": [
+            0.001799017623356975,
+            0.011216676651127362
+          ],
+          "bootstrap_fits": 500,
+          "status": "exploratory_descriptive"
+        },
+        "basal_area_sensitivity": {
+          "slope_per_0_1_D": 0.013662966414157506,
+          "plots": 1193,
+          "pair_plot_rows": 10537,
+          "blocks": 44,
+          "conditional_spatial_block_bootstrap_95": [
+            0.004970845523412712,
+            0.022156271858350323
+          ],
+          "bootstrap_fits": 500,
+          "status": "exploratory_descriptive"
+        },
+        "raw_occurrence_D_sensitivity": {
+          "slope_per_0_1_D": 0.0074480691613352515,
+          "plots": 1193,
+          "pair_plot_rows": 10537,
+          "blocks": 44,
+          "conditional_spatial_block_bootstrap_95": [
+            0.002216977633093726,
+            0.011747369645303585
+          ],
+          "bootstrap_fits": 500,
+          "status": "exploratory_descriptive"
+        },
+        "state_specific": {
+          "PA": {
+            "slope_per_0_1_D": 0.004037698386028004,
+            "plots": 371,
+            "pair_plot_rows": 2911,
+            "blocks": 20,
+            "status": "exploratory_descriptive"
+          },
+          "WV": {
+            "slope_per_0_1_D": 0.007154482564442084,
+            "plots": 306,
+            "pair_plot_rows": 2896,
+            "blocks": 13,
+            "status": "exploratory_descriptive"
+          },
+          "VA": {
+            "slope_per_0_1_D": 0.005996466429404022,
+            "plots": 516,
+            "pair_plot_rows": 4730,
+            "blocks": 22,
+            "status": "exploratory_descriptive"
+          }
+        },
+        "leave_one_species_out": {
+          "110.0": 0.006718977148172301,
+          "126.0": 0.007425537603071836,
+          "129.0": 0.006910169363823129,
+          "131.0": 0.005893098064201826,
+          "132.0": 0.006086564824084505,
+          "261.0": 0.007395516001984007,
+          "315.0": 0.005991898521173052,
+          "316.0": 0.0055671713940005085,
+          "318.0": 0.005911854246422615,
+          "332.0": 0.006801399006592421,
+          "341.0": 0.007213532670604946,
+          "356.0": 0.006947754421275852,
+          "371.0": 0.006043375267935492,
+          "372.0": 0.005897550597401312,
+          "391.0": 0.006347936192145221,
+          "402.0": 0.00658383231822379,
+          "403.0": 0.006898850294378488,
+          "407.0": 0.006908146664459715,
+          "409.0": 0.00629142666342716,
+          "491.0": 0.00660495750514106,
+          "531.0": 0.00669202063149054,
+          "541.0": 0.006693370834195637,
+          "544.0": 0.005669048997925804,
+          "591.0": 0.0067480972268185715,
+          "602.0": 0.006472665946684531,
+          "611.0": 0.005947103865651931,
+          "621.0": 0.007809721304025071,
+          "651.0": 0.006659754369687807,
+          "68.0": 0.005764207934418837,
+          "693.0": 0.005253141764182674,
+          "701.0": 0.006293497298296601,
+          "711.0": 0.006883400463449377,
+          "731.0": 0.006610603489979965,
+          "743.0": 0.006276820394097944,
+          "762.0": 0.004606960194476786,
+          "802.0": 0.007173598897103757,
+          "806.0": 0.005209464220034263,
+          "812.0": 0.006263708848987859,
+          "832.0": 0.007025011411136001,
+          "833.0": 0.006978642745105879,
+          "835.0": 0.006382792090497882,
+          "837.0": 0.007400929644100356,
+          "901.0": 0.007396489353874283,
+          "931.0": 0.006948375401209999,
+          "951.0": 0.006795354872025351,
+          "972.0": 0.006458341950290488,
+          "975.0": 0.006666673962818434
+        },
+        "note": "No actual climate exposure measured; adult sample counts, not whole-state abundance. Exploratory, plot-conditioned slope; bootstrap conditional on reference estimates; pairs share plots and species."
+      },
+      "marginal_null": {
+        "status": "descriptive_marginal_null_not_p_value",
+        "unique_species_plot_observations": 5789,
+        "strata": 330,
+        "fraction_movable": 0.9918811539125928,
+        "observed_slope_per_0_1_D": 0.0065243078448704505,
+        "null_slope_median": 0.0013271840036168919,
+        "null_slope_95_range": [
+          -0.004390959433141716,
+          0.006996273556674739
+        ],
+        "observed_minus_null_median": 0.005197123841253559,
+        "observed_opposition_rate_within_plot_rows": 0.07165227294296289,
+        "null_opposition_rate_median": 0.07943437411027807,
+        "replicates": 499,
+        "interpretation": "Preserves per-species state/baseline-count class marginal changes and pair membership; no claim of spatial exchangeability or causality."
+      }
+    },
+    "great_lakes": {
+      "job_id": 140313726603,
+      "artifact_id": 15172955539,
+      "artifact_sha256": "69a2adcb5fce4f7eab90f11b42a7768ef25d3799cde57f7060164c07ef03f933",
+      "summary": {
+        "status": "exploratory_pilot_not_confirmatory",
+        "independent_new_confirmatory_endpoints": 0,
+        "source_state_audits": [
+          {
+            "state": "MI",
+            "qualified_visits_preclimate": 9126,
+            "qualified_visits": 9126,
+            "reference_plots": 2114,
+            "validation_intervals": 684,
+            "admitted_live_adult_stems": 109196,
+            "unique_ref_response_keys": 0
+          },
+          {
+            "state": "WI",
+            "qualified_visits_preclimate": 8755,
+            "qualified_visits": 8755,
+            "reference_plots": 1531,
+            "validation_intervals": 694,
+            "admitted_live_adult_stems": 75987,
+            "unique_ref_response_keys": 0
+          },
+          {
+            "state": "MN",
+            "qualified_visits_preclimate": 12020,
+            "qualified_visits": 12020,
+            "reference_plots": 1752,
+            "validation_intervals": 1222,
+            "admitted_live_adult_stems": 101563,
+            "unique_ref_response_keys": 0
+          }
+        ],
+        "reference_eligible_plots": 5386,
+        "reference_climate_bins": 9,
+        "reference_species": 39,
+        "validation_intervals": 2600,
+        "evaluation_plots": 1973,
+        "evaluation_species": 39,
+        "pair_plot_rows": 10556,
+        "pair_summary_n_shared_ge20": 148,
+        "opposite_count_fraction_unadjusted": 0.12675255778704056,
+        "primary_within_plot": {
+          "slope_per_0_1_D": -0.015913724320846843,
+          "plots": 1446,
+          "pair_plot_rows": 10029,
+          "blocks": 79,
+          "conditional_spatial_block_bootstrap_95": [
+            -0.024402121140162405,
+            -0.0073906949356149785
+          ],
+          "bootstrap_fits": 500,
+          "status": "exploratory_descriptive"
+        },
+        "basal_area_sensitivity": {
+          "slope_per_0_1_D": -0.016131341436403997,
+          "plots": 1446,
+          "pair_plot_rows": 10029,
+          "blocks": 79,
+          "conditional_spatial_block_bootstrap_95": [
+            -0.02790757677099711,
+            -0.004175616278134134
+          ],
+          "bootstrap_fits": 500,
+          "status": "exploratory_descriptive"
+        },
+        "raw_occurrence_D_sensitivity": {
+          "slope_per_0_1_D": -0.005129536873252541,
+          "plots": 1446,
+          "pair_plot_rows": 10029,
+          "blocks": 79,
+          "conditional_spatial_block_bootstrap_95": [
+            -0.013516989375437254,
+            0.004352838728739475
+          ],
+          "bootstrap_fits": 500,
+          "status": "exploratory_descriptive"
+        },
+        "state_specific": {
+          "MI": {
+            "slope_per_0_1_D": -0.020735958870768796,
+            "plots": 456,
+            "pair_plot_rows": 3378,
+            "blocks": 30,
+            "status": "exploratory_descriptive"
+          },
+          "WI": {
+            "slope_per_0_1_D": -0.00363871431612792,
+            "plots": 422,
+            "pair_plot_rows": 3077,
+            "blocks": 26,
+            "status": "exploratory_descriptive"
+          },
+          "MN": {
+            "slope_per_0_1_D": -0.02229393915727326,
+            "plots": 568,
+            "pair_plot_rows": 3574,
+            "blocks": 35,
+            "status": "exploratory_descriptive"
+          }
+        },
+        "leave_one_species_out": {
+          "105.0": -0.015505884972221022,
+          "12.0": -0.01629238110334395,
+          "125.0": -0.012922798709079177,
+          "129.0": -0.014269522076849325,
+          "241.0": -0.015696790112309008,
+          "261.0": -0.016230423243949618,
+          "313.0": -0.016087512919374672,
+          "316.0": -0.012656116566583145,
+          "317.0": -0.015472157566642645,
+          "318.0": -0.015058178454216815,
+          "371.0": -0.01593869618649592,
+          "375.0": -0.013451191057564477,
+          "402.0": -0.016622163167085275,
+          "407.0": -0.016663441899577684,
+          "462.0": -0.016929182541120778,
+          "531.0": -0.01635867778507989,
+          "541.0": -0.012955349488334886,
+          "543.0": -0.018388196742843265,
+          "544.0": -0.018132237430836595,
+          "602.0": -0.016155891744903842,
+          "68.0": -0.015997275811591837,
+          "701.0": -0.015991428469470364,
+          "71.0": -0.016593010175235203,
+          "741.0": -0.014676495964061216,
+          "742.0": -0.016225957800552034,
+          "743.0": -0.016345693791136224,
+          "746.0": -0.015643441459463028,
+          "762.0": -0.01554980076783211,
+          "802.0": -0.017964137479347494,
+          "804.0": -0.01569200544678368,
+          "809.0": -0.016315633595183628,
+          "823.0": -0.01623658454833865,
+          "833.0": -0.015282520080119247,
+          "837.0": -0.01717032689798443,
+          "94.0": -0.017793912776828253,
+          "95.0": -0.01643819940896972,
+          "951.0": -0.015830799892735083,
+          "972.0": -0.012508848087874135,
+          "975.0": -0.016719135042315612
+        },
+        "note": "No actual climate exposure measured; adult sample counts, not whole-state abundance. Exploratory, plot-conditioned slope; bootstrap conditional on reference estimates; pairs share plots and species."
+      },
+      "marginal_null": {
+        "status": "descriptive_marginal_null_not_p_value",
+        "unique_species_plot_observations": 6947,
+        "strata": 302,
+        "fraction_movable": 0.9968331653951346,
+        "observed_slope_per_0_1_D": -0.01591372432084682,
+        "null_slope_median": -0.009833255032028212,
+        "null_slope_95_range": [
+          -0.017311474550808337,
+          -0.0021833732080570973
+        ],
+        "observed_minus_null_median": -0.006080469288818606,
+        "observed_opposition_rate_within_plot_rows": 0.12384086150164524,
+        "null_opposition_rate_median": 0.1473726194037292,
+        "replicates": 499,
+        "interpretation": "Preserves per-species state/baseline-count class marginal changes and pair membership; no claim of spatial exchangeability or causality."
+      }
+    }
+  }
+}
